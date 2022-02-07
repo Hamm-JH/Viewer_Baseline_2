@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -293,8 +293,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 682087681}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -5}
+  m_LocalRotation: {x: -0.12856941, y: 0.8713985, z: -0.33879533, w: -0.33068448}
+  m_LocalPosition: {x: 8.875675, y: 16.724142, z: 14.780922}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 902421343}
@@ -444,40 +444,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3993b25edfd3e54469c9de55e7a29e61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _core:
-    m_platform: 49
-    m_graphicMode: 0
-    m_cameraMode: 48
-    mainCam: {fileID: 682087683}
-    m_rootInput: {fileID: 1914530468}
-    m_inputsource: []
-    m_camera: []
-  _content:
-    _content: {fileID: 0}
-  _data:
-    mouseData:
-      dragBoundary: 1.5
-      dragInvert: {x: 1, y: -1}
-      focusInvert: 1
-      clickBtnIndex: 0
-      dragBtnIndex: 1
-      bMaxOffsetDistance: 2000
-      bOrbitSpeed: 15
-      bPanSpeed: 0.5
-      bZoomSpeed: 10
-    keyboardData:
-      keyFront: 119
-      keyBack: 115
-      keyLeft: 97
-      keyRight: 100
-      keyUp: 101
-      keyDown: 113
-      keyBoost: 304
-    cameraData:
-      bMaxOffsetDistance: 2000
-      bOrbitSpeed: 15
-      bPanSpeed: 0.5
-      bZoomSpeed: 10
   cameraExecuteEvents:
     mouseData:
       dragBoundary: 0
@@ -555,6 +521,40 @@ MonoBehaviour:
         m_Calls: []
   inputCallback:
     main: {fileID: 0}
+  _core:
+    m_platform: 49
+    m_graphicMode: 0
+    m_cameraMode: 48
+    mainCam: {fileID: 682087683}
+    m_rootInput: {fileID: 1914530468}
+    m_inputsource: []
+    m_camera: []
+  _content:
+    _content: {fileID: 0}
+  _data:
+    mouseData:
+      dragBoundary: 1.5
+      dragInvert: {x: 1, y: -1}
+      focusInvert: 1
+      clickBtnIndex: 0
+      dragBtnIndex: 1
+      bMaxOffsetDistance: 2000
+      bOrbitSpeed: 15
+      bPanSpeed: 0.5
+      bZoomSpeed: 10
+    keyboardData:
+      keyFront: 119
+      keyBack: 115
+      keyLeft: 97
+      keyRight: 100
+      keyUp: 101
+      keyDown: 113
+      keyBoost: 304
+    cameraData:
+      bMaxOffsetDistance: 2000
+      bOrbitSpeed: 15
+      bPanSpeed: 0.5
+      bZoomSpeed: 10
 --- !u!1 &1245156187
 GameObject:
   m_ObjectHideFlags: 0

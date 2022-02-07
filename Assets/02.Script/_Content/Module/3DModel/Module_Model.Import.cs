@@ -19,6 +19,25 @@ namespace Module.Model
 			_model.transform.SetParent(root.transform);
 
 			Model = _model;
+
+			Transform[] children = _model.transform.GetComponentsInChildren<Transform>();
+
+			SetChildren(children);
+		}
+
+		private void SetChildren(Transform[] children)
+		{
+			Material mat = Resources.Load<Material>("Outlines");
+
+			foreach(Transform tr in children)
+			{
+				MeshRenderer render;
+				if(tr.TryGetComponent<MeshRenderer>(out render))
+				{
+					render.material = mat;
+				}
+			}
+
 		}
 	}
 }
