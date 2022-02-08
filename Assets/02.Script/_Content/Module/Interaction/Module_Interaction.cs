@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace Module.Interaction
 {
+	using UnityEngine.UI;
+
 	/// <summary>
 	/// 상호작용 처리 모듈
 	/// 3D, UI
@@ -15,6 +17,7 @@ namespace Module.Interaction
 		public int ID { get => id; set => id = value; }
 
 		public Canvas rootCanvas;
+		public GraphicRaycaster grRaycaster;
 
 		void Start()
 		{

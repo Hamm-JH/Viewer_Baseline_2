@@ -24,10 +24,10 @@ namespace Platform.Feature.Camera
 		}
 
 		//public Data m_data;
-		[SerializeField] CameraMode camMode;
+		[SerializeField] CameraModes camMode;
 		[SerializeField] CameraEvents cameraEvents;
 
-		public CameraMode CamMode
+		public CameraModes CamMode
 		{ 
 			get => camMode; 
 			set
@@ -59,7 +59,7 @@ namespace Platform.Feature.Camera
 		/// 카메라 모드 변경
 		/// </summary>
 		/// <param name="_mode"></param>
-		protected abstract void ChangeCameraMode(CameraMode _mode);
+		protected abstract void ChangeCameraMode(CameraModes _mode);
 
 		public abstract void SetData(Data _camData);
 

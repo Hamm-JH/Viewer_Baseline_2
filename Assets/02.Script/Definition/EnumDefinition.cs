@@ -81,4 +81,16 @@ namespace Definition
 		NotDef = -1,
 		InputAction = 0,
 	}
+
+	public enum UIEventType
+	{
+		Toggle_ViewMode = 0x10,
+		Toggle_ViewMode_ISO = 0x11,
+		Toggle_ViewMode_TOP = 0x12,
+		Toggle_ViewMode_SIDE = 0x13,
+		Toggle_ViewMode_BOTTOM = 0x14,
+
+
+		Fit_Center = 0x50,
+	}
 }

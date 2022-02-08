@@ -11,6 +11,11 @@ namespace View
 	public interface IInteractable
 	{
 		/// <summary>
+		/// 선택된 객체
+		/// </summary>
+		GameObject Target { get; }
+
+		/// <summary>
 		/// 인스턴스 선택
 		/// </summary>
 		void OnSelect();

@@ -33,6 +33,11 @@ namespace Management
 		/// </summary>
 		[SerializeField] CoreData _data;
 
+		public ContentManager Content
+		{
+			get => _content.Content;
+		}
+
 		// Start is called before the first frame update
 		void Start()
 		{

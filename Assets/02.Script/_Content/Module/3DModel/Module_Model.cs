@@ -11,10 +11,14 @@ namespace Module.Model
 	public partial class Module_Model : MonoBehaviour, IModule
 	{
 		protected int id = (int)Definition.ModuleID.AModel;
-		[SerializeField] private GameObject model;
-
 		public int ID { get => id; set => id = value; }
+
+
+		[SerializeField] private GameObject model;
+		[SerializeField] private Bounds centerBounds;
+
 		protected GameObject Model { get => model; set => model=value; }
+		public Bounds CenterBounds { get => centerBounds; }
 
 		void Start()
 		{

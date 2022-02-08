@@ -113,7 +113,7 @@ namespace Management
 		/// </summary>
 		/// <param name="_mode"></param>
 		/// <param name="_cameraExecuteEvents"></param>
-		public void InitCameraResource(CameraMode _mode, Events.CameraEvents _cameraExecuteEvents)
+		public void InitCameraResource(CameraModes _mode, Events.CameraEvents _cameraExecuteEvents)
 		{
 			Camera main = _core.MainCam;
 			SetCamera<FreeCamera>(main, _cameraExecuteEvents);

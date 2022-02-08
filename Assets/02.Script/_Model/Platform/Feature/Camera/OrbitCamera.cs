@@ -11,12 +11,12 @@ namespace Platform.Feature.Camera
 		/// 카메라 모드 변경
 		/// </summary>
 		/// <param name="_mode"></param>
-		protected override void ChangeCameraMode(CameraMode _mode)
+		protected override void ChangeCameraMode(CameraModes _mode)
 		{
-			if(_mode == CameraMode.ORBIT_ISO
-				|| _mode == CameraMode.ORBIT_Top
-				|| _mode == CameraMode.ORBIT_Side
-				|| _mode == CameraMode.ORBIT_Bottom)
+			if(_mode == CameraModes.ORBIT_ISO
+				|| _mode == CameraModes.ORBIT_Top
+				|| _mode == CameraModes.ORBIT_Side
+				|| _mode == CameraModes.ORBIT_Bottom)
 			{
 				this.enabled = true;
 			}

@@ -12,7 +12,7 @@ namespace Definition.Control
 	/// <summary>
 	/// (모델? 컨트롤? 뷰?) 카메라 회전 모드 정의
 	/// </summary>
-	public enum CameraMode
+	public enum CameraModes
 	{
 		NotDefine = -1,			// 정의되지 않음
 		ORBIT_ISO = 0x10,		// 궤도 정사영 모드

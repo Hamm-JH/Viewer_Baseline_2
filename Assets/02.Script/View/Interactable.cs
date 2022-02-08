@@ -1,14 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace View
 {
-	public abstract class Interactable_3D : MonoBehaviour, IInteractable
+	public abstract class Interactable : MonoBehaviour, IInteractable
 	{
+		public abstract GameObject Target { get; }
+
 		/// <summary>
-		/// ÀÎ½ºÅÏ½º ¼±ÅÃ½Ã ½ÇÇà
+		/// ì¸ìŠ¤í„´ìŠ¤ ì„ íƒì‹œ ì‹¤í–‰
 		/// </summary>
 		public abstract void OnSelect();
 		//{
@@ -16,7 +18,7 @@ namespace View
 		//}
 
 		/// <summary>
-		/// ÀÎ½ºÅÏ½º ¼±ÅÃ ÇØÁ¦½Ã ½ÇÇà
+		/// ì¸ìŠ¤í„´ìŠ¤ ì„ íƒ í•´ì œì‹œ ì‹¤í–‰
 		/// </summary>
 		public abstract void OnDeselect();
 		//{
