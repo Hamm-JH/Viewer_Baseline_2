@@ -26,6 +26,8 @@ namespace Definition.Data
 		[SerializeField] CameraModes m_cameraMode;
 		[SerializeField] Camera mainCam;
 
+		[SerializeField] string modelURI;
+
 		public PlatformCode _Platform
 		{ 
 			get => m_platform;
@@ -51,6 +53,8 @@ namespace Definition.Data
 		}
 
 		public Camera MainCam { get => mainCam; set => mainCam=value; }
+
+		public string ModelURI { get => modelURI; set => modelURI=value; }
 
 		#endregion
 
@@ -84,6 +88,7 @@ namespace Definition.Data
 
 		public List<ICamera> Cameras { get => m_camera; set => m_camera=value; }
 		
+
 
 
 
@@ -138,7 +143,7 @@ namespace Definition.Data
 			CameraMode = _modes;
 		}
 
-		public void SetCameraPosition(Bounds centerBounds, Canvas rootCanvas)
+		public void SetCameraPosition(Bounds centerBounds, Canvas rootCanvas, UIEventType eventType)
 		{
 			Vector3 center = centerBounds.center;
 			Vector3 size = centerBounds.size;
@@ -148,7 +153,7 @@ namespace Definition.Data
 				m_cameraPoint.transform.position = center;
 
 				mainCam.transform.localPosition = default(Vector3);
-				mainCam.transform.rotation = Quaternion.Euler(45, 45, 0);
+				mainCam.transform.rotation = Quaternion.Euler(Angle.Set(eventType));
 
 				// 스크린 비율계산
 				float ratio = 0f;

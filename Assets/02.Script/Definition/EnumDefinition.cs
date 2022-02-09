@@ -93,4 +93,9 @@ namespace Definition
 
 		Fit_Center = 0x50,
 	}
+
+	public enum MaterialType
+	{
+		Default1 = 0x10
+	}
 }

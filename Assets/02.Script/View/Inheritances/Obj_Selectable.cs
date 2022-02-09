@@ -19,7 +19,7 @@ namespace View
 			MeshRenderer render;
 			if (gameObject.TryGetComponent<MeshRenderer>(out render))
 			{
-				render.material.SetColor("_BaseColor", Color.white);
+				render.material.SetColor("_Color", Color.white);
 			}
 		}
 
@@ -30,7 +30,7 @@ namespace View
 			MeshRenderer render;
 			if(gameObject.TryGetComponent<MeshRenderer>(out render))
 			{
-				render.material.SetColor("_BaseColor", Color.green);
+				render.material.SetColor("_Color", Color.green);
 			}
 		}
 	}

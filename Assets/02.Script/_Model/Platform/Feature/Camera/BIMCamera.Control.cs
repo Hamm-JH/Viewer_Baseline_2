@@ -33,7 +33,16 @@ namespace Platform.Feature.Camera
                 return;
 			}
 
-            targetPosition = target.position + targetOffset;
+            MeshRenderer render;
+            if(target.TryGetComponent<MeshRenderer>(out render))
+			{
+                targetPosition = render.bounds.center;
+			}
+            else
+			{
+                targetPosition = target.position;
+			}
+            //targetPosition = target.position + targetOffset;
 
             if(btn == 0)
 			{

@@ -142,14 +142,6 @@ namespace Management
 				main.cameraExecuteEvents.selectEvent.Invoke(_selected3D);
 			}
 
-			
-			// 3D, UI객체 선택 확인
-			// 1개일 경우 - 선택된 객체의 클릭 이벤트 전달
-			// 2개일 경우 - 3D 또는 UI중에 한 객체의 이벤트 전달
-			
-
-			// 카메라에 이벤트 전달
-			//main.cameraExecuteEvents.clickEvent.Invoke(_mousePos);
 		}
 
 		public void Method_ClickDebug(Vector3 _mousePosition)

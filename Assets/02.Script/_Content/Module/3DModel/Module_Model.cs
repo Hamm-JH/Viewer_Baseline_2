@@ -28,9 +28,9 @@ namespace Module.Model
 		/// <summary>
 		/// 모델 받아오기
 		/// </summary>
-		public void OnImport()
+		public void OnImport(string URI)
 		{
-			InImport();
+			InImport(URI);
 		}
 
 		/// <summary>

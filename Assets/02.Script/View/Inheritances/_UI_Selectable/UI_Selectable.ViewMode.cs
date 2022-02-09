@@ -18,6 +18,7 @@ namespace View
 		private void Event_Toggle_ViewMode(UIEventType _eventType)
 		{
 			MainManager.Instance.UpdateCameraMode(_eventType);
+			ContentManager.Instance.SetCameraCenterPosition(_eventType);
 		}
 	}
 }

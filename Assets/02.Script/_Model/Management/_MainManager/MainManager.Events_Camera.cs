@@ -20,9 +20,9 @@ namespace Management
 			_core.SetCameraMode(_eventType);
 		}
 
-		public void SetCameraPosition(Bounds centerBounds, Canvas rootCanvas)
+		public void SetCameraPosition(Bounds centerBounds, Canvas rootCanvas, UIEventType eventType = UIEventType.Toggle_ViewMode_ISO)
 		{
-			_core.SetCameraPosition(centerBounds, rootCanvas);
+			_core.SetCameraPosition(centerBounds, rootCanvas, eventType);
 		}
 	}
 }

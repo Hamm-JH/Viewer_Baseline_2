@@ -4,26 +4,49 @@ using UnityEngine;
 
 namespace Module.Model
 {
+	using Definition;
 	using Management;
 	
 	public partial class Module_Model : MonoBehaviour, IModule
 	{
-		private void InImport()
+		private void InImport(string URI)
 		{
+			StartImport(URI, OnComplete);
+
+			//GameObject _model = Instantiate(debugPrefab);
+
+			//GameObject root = new GameObject("root");
+			//root.transform.position = default(Vector3);
+			//root.transform.rotation = Quaternion.identity;
+
+			//Debug.LogError("여기서 이후에 웹 요청으로 GLTF 불러올 예정");
+
+			////------
+
+			//_model.transform.SetParent(root.transform);
+
+			//Model = _model;
+
+			//Transform[] children = _model.transform.GetComponentsInChildren<Transform>();
+
+			//SetChildren(children);
+
+			//ContentManager.Instance.SetCameraCenterPosition();
+		}
+
+		private void OnComplete(GameObject _model)
+		{
+			Model = _model;
+			//---
+
 			GameObject root = new GameObject("root");
 			root.transform.position = default(Vector3);
 			root.transform.rotation = Quaternion.identity;
 
-			Debug.LogError("여기서 이후에 웹 요청으로 GLTF 불러올 예정");
+			Model.transform.SetParent(root.transform);
 
-			GameObject _model = Instantiate(debugPrefab);
 
-			_model.transform.SetParent(root.transform);
-
-			Model = _model;
-
-			Transform[] children = _model.transform.GetComponentsInChildren<Transform>();
-
+			Transform[] children = Model.transform.GetComponentsInChildren<Transform>();
 			SetChildren(children);
 
 			ContentManager.Instance.SetCameraCenterPosition();
@@ -38,7 +61,7 @@ namespace Module.Model
 
 		private void SetChildren_Material(Transform[] children)
 		{
-			Material mat = Resources.Load<Material>("Outlines");
+			Material mat = Materials.Set(MaterialType.Default1);
 
 			foreach (Transform tr in children)
 			{

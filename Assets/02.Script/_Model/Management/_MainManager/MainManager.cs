@@ -38,6 +38,11 @@ namespace Management
 			get => _content.Content;
 		}
 
+		public string ModelURI
+		{
+			get => _core.ModelURI;
+		}
+
 		// Start is called before the first frame update
 		void Start()
 		{

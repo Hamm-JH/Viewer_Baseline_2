@@ -26,7 +26,7 @@ namespace Management
 					break;
 
 				case Definition.PlatformCode.PC_Viewer1:
-					model.OnImport();
+					model.OnImport(MainManager.Instance.ModelURI);
 					break;
 			}
 		}
