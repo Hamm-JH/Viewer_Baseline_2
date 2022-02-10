@@ -98,4 +98,20 @@ namespace Definition
 	{
 		Default1 = 0x10
 	}
+
+	public enum PrefabType
+	{
+		Decal = 0x10,
+
+	}
+
+	public enum LayerNames
+	{
+		Default = 0,
+		TransparentFX = 1,
+
+		Water = 4,
+		UI = 5,
+		DecalPoint = 6
+	}
 }
