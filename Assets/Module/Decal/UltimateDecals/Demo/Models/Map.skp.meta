@@ -1,0 +1,238 @@
+fileFormatVersion: 2
+guid: fa69f02a005c12d4ab347703f2582182
+SketchUpImporter:
+  generateBackFace: 0
+  mergeCoplanarFaces: 0
+  selectedNodes: 000000000100000002000000030000000400000005000000
+  assetHash:
+    serializedVersion: 2
+    Hash: c8f3c9aa357a9cdc1b8c79b427c1bb79
+  longitude: -105.242139
+  latitude: 40.018309
+  northCorrection: -0
+  fileUnit: 0
+  sketchUpImportData:
+    defaultCamera:
+      position: {x: 37.644238, y: 7.2478576, z: 15.986817}
+      lookAt: {x: 89.7578, y: -17.183046, z: 22.065908}
+      up: {x: 0.41928092, y: 0.9065381, z: 0.048909474}
+      fov: 35
+      aspectRatio: 0
+      orthoSize: 1
+      isPerspective: 1
+    scenes: []
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Group 2
+    100004: Sand
+    100006: Group 4
+    400000: //RootNode
+    400002: Group 2
+    400004: Sand
+    400006: Group 4
+    2100000: '[Roofing_Shingles_Variable]'
+    2100002: '[Roofing_Slate_Dark]'
+    2100004: '[Roofing_Metal_Standing_Seam_Red]'
+    2100006: '[Roofing_Tile_Spanish]'
+    2100008: '[Groundcover_Sand_Smooth]'
+    2100010: _defaultMat
+    2100012: '[Roofing_Slate_Rounded]'
+    2100014: '[Metal_Steel_Textured]'
+    2100016: '[Fencing_Chain_Link]'
+    2300000: //RootNode
+    2300002: Group 2
+    2300004: Sand
+    2300006: Group 4
+    3300000: //RootNode
+    3300002: Group 2
+    3300004: Sand
+    3300006: Group 4
+    4300000: Mesh Map
+    4300002: Mesh Group 2
+    4300004: Mesh Sand
+    4300006: Mesh Group 4
+    6400000: //RootNode
+    6400002: Group 2
+    6400004: Sand
+    6400006: Group 4
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[Asphalt_New]'
+    second: {fileID: 2100000, guid: f238ae0bdb8d5724d8270c25e43883d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[Fencing_Chain_Link]'
+    second: {fileID: 2100000, guid: 259088535f114d945bebb1c000807865, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[Groundcover_Sand_Smooth]'
+    second: {fileID: 2100000, guid: 9e9e8f9bfd9fc2749888e47b54385f17, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[Metal_Panel]'
+    second: {fileID: 2100000, guid: 0ca5f96db5afe9741b912b204d786a62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[Metal_Steel_Textured]'
+    second: {fileID: 2100000, guid: 1397312c59317a8478c6d6dab7f87962, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[Roofing_Metal_Standing_Seam_Red]'
+    second: {fileID: 2100000, guid: 867b5c8711c72794b94de2d1db7da982, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[Roofing_Shingles_Variable]'
+    second: {fileID: 2100000, guid: 331548a7a238b774db61668c09ca216c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[Roofing_Slate_Dark]'
+    second: {fileID: 2100000, guid: 12c40dc02f61735488a2e998155d2afb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[Roofing_Tile_Spanish]'
+    second: {fileID: 2100000, guid: 40298d181c351934ba0295c28d3ffba6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[Stone_Brushed_Khaki]'
+    second: {fileID: 2100000, guid: b12426bd76f814b4a8dcdb58bdba7a1c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: '[dark-sketch-stone]'
+    second: {fileID: 2100000, guid: 5de7559c5c8194f4c9fbaf65fd6a0cc6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _defaultMat
+    second: {fileID: 2100000, guid: 5de7559c5c8194f4c9fbaf65fd6a0cc6, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Asphalt_New
+    second: {fileID: 2800000, guid: 7233ec593f371b14aa5359a561810da9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fencing_Chain_Link
+    second: {fileID: 2800000, guid: 6048f216ef278924ea6b2b4f8875a28f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Groundcover_Sand_Smooth
+    second: {fileID: 2800000, guid: ae56e059e5811b34da71fb2f8ba65a1f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal_Steel_Textured
+    second: {fileID: 2800000, guid: 3fa0c0d1cfab9ad4da49731bc2bb747c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Roofing_Metal_Standing_Seam_Red
+    second: {fileID: 2800000, guid: 1b0229cc7d1c82c43b91e0a021809fbf, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Roofing_Tile_Spanish
+    second: {fileID: 2800000, guid: 134a9336fba6a4143b635b53d8af6866, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Stone_Brushed_Khaki
+    second: {fileID: 2800000, guid: a3ce4141682cc1e428959313e65c5464, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dark-sketch-stone
+    second: {fileID: 2800000, guid: e06334b810821104b8f715cb4340e0a2, type: 3}
+  materials:
+    importMaterials: 1
+    materialName: 2
+    materialSearch: 0
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.0254
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 137
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

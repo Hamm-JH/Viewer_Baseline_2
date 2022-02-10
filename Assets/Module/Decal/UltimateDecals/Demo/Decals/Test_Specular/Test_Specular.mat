@@ -1,0 +1,179 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Test_Specular
+  m_Shader: {fileID: 4800000, guid: edf91f91fc48be2419b7c1584af1c68e, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 2000
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 44a55af91ab5043439143675d872fccc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap2:
+        m_Texture: {fileID: 2800000, guid: 44a55af91ab5043439143675d872fccc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Height:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 3e7ac5f2599089148bc2dfddbbce47bb, type: 3}
+        m_Scale: {x: 2, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex2:
+        m_Texture: {fileID: 2800000, guid: 3e7ac5f2599089148bc2dfddbbce47bb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 2800000, guid: b1b8b003d93c25c4ebe478a40ba63c18, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalClipNoise:
+        m_Texture: {fileID: 2800000, guid: 618839d3790040f4eae1aea346710148, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SMSR:
+        m_Texture: {fileID: 2800000, guid: b61c5fdccd6dadc44a9d1658685d2112, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ScreenSpaceShadowmapTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SeparateSR:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecularSmoothness:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlbedoControl: 1
+    - _AlbedoOpacity: 0
+    - _AlphaCutout: 0
+    - _AlphaHeight: 0
+    - _AngleLimit: 39
+    - _AngleSmoothing: 0.157
+    - _AtlasIndex: 0
+    - _AtlasRandomOffset: 0
+    - _AtlasX: 1
+    - _AtlasY: 1
+    - _Blend: 1
+    - _Blend0: 1
+    - _Blend1: 1
+    - _Blend2: 1
+    - _Blend3: 1
+    - _BumpScale: 1
+    - _ColorLerp: 0
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 10
+    - _DstBlend0: 10
+    - _DstBlend1: 10
+    - _DstBlend2: 10
+    - _DstBlend3: 10
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _HeightFade: 0.05
+    - _HeightMax: 0
+    - _HeightMin: 1
+    - _HeightSmoothing: 0
+    - _HeightThreshold: 0
+    - _Intensity: 1
+    - _InvertHeight: 0
+    - _Lifetime: 0
+    - _LifetimePow: 1
+    - _Lit: 1
+    - _MaskNormal: 1.56
+    - _MaskSmoothing: 0.5
+    - _MaskThreshold: 0.5
+    - _Metallic: 0
+    - _MipBias: 0
+    - _Mode: 0
+    - _NormalK: 0.472
+    - _NormalLerp: 1
+    - _NormalScale: 1
+    - _NormalSmooth: 0.34
+    - _NormalSmoothEdge: 1
+    - _Occlusion: 1
+    - _OcclusionStrength: 1
+    - _Parallax: 0
+    - _SM: 1
+    - _SR: 1
+    - _Smoothness: 0.86
+    - _SmoothnessTextureChannel: 0
+    - _Specular: 1
+    - _SpecularHighlights: 1
+    - _SrcBlend: 5
+    - _SrcBlend0: 5
+    - _SrcBlend1: 5
+    - _SrcBlend2: 5
+    - _SrcBlend3: 5
+    - _StencilMask: 0
+    - _StencilMode: 0
+    - _StencilRef: 0
+    - _UVSec: 0
+    - _Workflow: 2
+    - _WorkflowMetallic: 1
+    - _WorkflowRoughness: 0
+    - _WorkflowSeparateSR: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _AtlasData: {r: 1, g: 1, b: 0, a: 0}
+    - _BlendingFactors: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FadeData: {r: 0, g: 0, b: 0, a: 0}
+    - _OriginPos: {r: 0, g: 0, b: 0, a: 1}
+    - _ScaleOffset: {r: 1, g: 1, b: 0, a: 0}
+    - _TintColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Workflow: {r: 0, g: 0, b: 0, a: 0}
