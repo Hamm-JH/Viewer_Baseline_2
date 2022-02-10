@@ -12,26 +12,6 @@ namespace Module.Model
 		private void InImport(string URI)
 		{
 			StartImport(URI, OnComplete);
-
-			//GameObject _model = Instantiate(debugPrefab);
-
-			//GameObject root = new GameObject("root");
-			//root.transform.position = default(Vector3);
-			//root.transform.rotation = Quaternion.identity;
-
-			//Debug.LogError("여기서 이후에 웹 요청으로 GLTF 불러올 예정");
-
-			////------
-
-			//_model.transform.SetParent(root.transform);
-
-			//Model = _model;
-
-			//Transform[] children = _model.transform.GetComponentsInChildren<Transform>();
-
-			//SetChildren(children);
-
-			//ContentManager.Instance.SetCameraCenterPosition();
 		}
 
 		private void OnComplete(GameObject _model)
