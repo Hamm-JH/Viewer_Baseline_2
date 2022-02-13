@@ -107,11 +107,11 @@ namespace Management
 		public void OnClick(Vector3 _mousePos)
 		{
 			//Debug.Log($"OnClick method");
+			RaycastHit _hit = default(RaycastHit);
 
 			GameObject _selected3D = null;
-			//GameObject _selectedUI = null;
 
-			_selected3D = Get_GameObject3D(_mousePos);
+			_selected3D = Get_GameObject3D(_mousePos, out _hit);
 
 			List<RaycastResult> results = Get_GameObjectUI(_mousePos);
 
@@ -129,8 +129,13 @@ namespace Management
 					View.IInteractable interactable;
 					if(_selected3D.TryGetComponent<View.IInteractable>(out interactable))
 					{
+						// 데이터 할당
+						interactable.Hit = _hit;
+
 						//Debug.Log(interactable.Target.name);
 						EventManager.Instance.OnEvent(new Events.EventData(interactable));
+
+						main.cameraExecuteEvents.selectEvent.Invoke(_selected3D);
 					}
 				}
 				else
@@ -139,7 +144,6 @@ namespace Management
 				}
 
 				//Debug.Log(_selected3D.name);
-				main.cameraExecuteEvents.selectEvent.Invoke(_selected3D);
 			}
 
 		}
@@ -149,20 +153,22 @@ namespace Management
 			Debug.Log($"Method click debug : {_mousePosition}");
 		}
 
-		private GameObject Get_GameObject3D(Vector3 _mousePos)
+		private GameObject Get_GameObject3D(Vector3 _mousePos, out RaycastHit _hitPoint)
 		{
 			GameObject obj = null;
 
 			// 3D 선택
 			RaycastHit _hit;
 			Ray _ray = main.MainCamera.ScreenPointToRay(_mousePos);
-			if (Physics.Raycast(_ray, out _hit, 100))
+			if (Physics.Raycast(_ray, out _hit))
 			{
 				obj = _hit.collider.gameObject;
+				_hitPoint = _hit;
 				return obj;
 			}
 			else
 			{
+				_hitPoint = default(RaycastHit);
 				return obj;
 			}
 		}

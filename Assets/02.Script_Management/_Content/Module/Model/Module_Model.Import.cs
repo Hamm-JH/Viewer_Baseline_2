@@ -29,7 +29,10 @@ namespace Module.Model
 			Transform[] children = Model.transform.GetComponentsInChildren<Transform>();
 			SetChildren(children);
 
-			ContentManager.Instance.SetCameraCenterPosition();
+			InitializeObjectTunnel(root);
+
+			//ContentManager.Instance.SetCameraCenterPosition();
+			
 		}
 
 		private void SetChildren(Transform[] children)

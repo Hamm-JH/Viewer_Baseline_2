@@ -12,6 +12,7 @@ namespace Management.Events
 		public EventData(IInteractable _target)
 		{
 			target = _target;
+			
 		}
 
 		public static bool IsEqual(EventData A, EventData B)

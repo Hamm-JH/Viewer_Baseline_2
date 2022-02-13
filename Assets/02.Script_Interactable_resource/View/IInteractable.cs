@@ -16,6 +16,11 @@ namespace View
 		GameObject Target { get; }
 
 		/// <summary>
+		/// 클릭, 터치 지점
+		/// </summary>
+		RaycastHit Hit { get; set; }
+
+		/// <summary>
 		/// 인스턴스 선택
 		/// </summary>
 		void OnSelect();

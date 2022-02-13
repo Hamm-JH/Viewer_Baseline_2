@@ -96,7 +96,8 @@ namespace Definition
 
 	public enum MaterialType
 	{
-		Default1 = 0x10
+		Default1 = 0x10,
+		ObjDefault1 = 0x99,
 	}
 
 	public enum PrefabType
@@ -113,5 +114,36 @@ namespace Definition
 		Water = 4,
 		UI = 5,
 		DecalPoint = 6
+	}
+
+	//----- Test
+
+	/// <summary>
+	/// 객체의 타입 (Material 할당용)
+	/// </summary>
+	public enum TunnelObjectType
+	{
+		Null = -1,
+		// 기타
+		ETC_EmergencyCall,
+		ETC_fireplug,
+		ETC_EmergencyExit,
+		ETC_IndicatorLight1,
+		ETC_IndicatorLight2,
+
+		MAIN_Drain,
+		MAIN_Cover,
+		MAIN_Paving,
+		MAIN_SideWall,
+		MAIN_Ceiling,
+		MAIN_CorrugatedSteel,
+
+		LIGHT,
+
+		JET,
+
+		WALL_CentralReservation,
+		WALL_Gate,
+		WALL_Slope
 	}
 }

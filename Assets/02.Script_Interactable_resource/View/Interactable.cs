@@ -7,7 +7,12 @@ namespace View
 {
 	public abstract class Interactable : MonoBehaviour, IInteractable
 	{
+		private RaycastHit hit;
+
 		public abstract GameObject Target { get; }
+		public RaycastHit Hit { get => hit; set => hit = value; }
+
+
 
 		/// <summary>
 		/// 인스턴스 선택시 실행
