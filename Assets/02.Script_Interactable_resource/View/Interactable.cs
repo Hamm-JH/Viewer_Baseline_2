@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Definition;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,8 +12,6 @@ namespace View
 
 		public abstract GameObject Target { get; }
 		public RaycastHit Hit { get => hit; set => hit = value; }
-
-
 
 		/// <summary>
 		/// 인스턴스 선택시 실행

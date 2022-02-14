@@ -23,5 +23,20 @@ namespace Management
 		{
 			Debug.Log("OnUpdate");
 		}
+
+		private void Awake()
+		{
+			cacheDownObj = null;
+		}
+
+		private void OnEnable()
+		{
+			cacheDownObj = null;
+		}
+
+		private void OnDisable()
+		{
+			cacheDownObj = null;
+		}
 	}
 }

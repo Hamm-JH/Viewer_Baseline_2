@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 namespace View
 {
+	using Definition;
+
 	/// <summary>
 	/// 상호작용 가능한 객체들이 상속받아야할 인터페이스
 	/// </summary>

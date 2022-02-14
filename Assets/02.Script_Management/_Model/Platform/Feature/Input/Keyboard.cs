@@ -112,7 +112,7 @@ namespace Platform.Feature._Input
 
 			if(keyCodes.Count != 0)
 			{
-				m_InputEvents.keyEvent.Invoke(keyCodes);
+				m_InputEvents.keyEvent.Invoke(Definition.InputEventType.Input_key, keyCodes);
 			}
 		}
 

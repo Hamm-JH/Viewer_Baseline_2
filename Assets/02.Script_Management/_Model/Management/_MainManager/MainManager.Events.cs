@@ -30,13 +30,13 @@ namespace Management
 		/// </summary>
 		/// <param name="_type"></param>
 		/// <param name="_action"></param>
-		public void Event_Add(MainEventType _type, object _action)
+		public void Event_Add(InputEventType _type, object _action)
 		{
 			bool isAssignFailed = false;
 
-			if (_type == MainEventType.Input_click)
+			if (_type == InputEventType.Input_click)
 			{
-				UnityAction<Vector3> unityAction = _action as UnityAction<Vector3>;
+				UnityAction<InputEventType, int, Vector3> unityAction = _action as UnityAction<InputEventType, int, Vector3>;
 
 				if (unityAction != null)
 				{
@@ -44,9 +44,9 @@ namespace Management
 				}
 				else isAssignFailed = true;
 			}
-			else if (_type == MainEventType.Input_drag)
+			else if (_type == InputEventType.Input_drag)
 			{
-				UnityAction<int, Vector2> unityAction = _action as UnityAction<int, Vector2>;
+				UnityAction<InputEventType, int, Vector2> unityAction = _action as UnityAction<InputEventType, int, Vector2>;
 
 				if (unityAction != null)
 				{
@@ -54,9 +54,9 @@ namespace Management
 				}
 				else isAssignFailed = true;
 			}
-			else if (_type == MainEventType.Input_focus)
+			else if (_type == InputEventType.Input_focus)
 			{
-				UnityAction<Vector3, float> unityAction = _action as UnityAction<Vector3, float>;
+				UnityAction<InputEventType, Vector3, float> unityAction = _action as UnityAction<InputEventType, Vector3, float>;
 
 				if (unityAction != null)
 				{
@@ -64,9 +64,9 @@ namespace Management
 				}
 				else isAssignFailed = true;
 			}
-			else if (_type == MainEventType.Input_key)
+			else if (_type == InputEventType.Input_key)
 			{
-				UnityAction<List<KeyCode>> unityAction = _action as UnityAction<List<KeyCode>>;
+				UnityAction<InputEventType, List<KeyCode>> unityAction = _action as UnityAction<InputEventType, List<KeyCode>>;
 
 				if (unityAction != null)
 				{
@@ -86,13 +86,13 @@ namespace Management
 		/// </summary>
 		/// <param name="_type"></param>
 		/// <param name="_action"></param>
-		public void Event_Update(MainEventType _type, object _action)
+		public void Event_Update(InputEventType _type, object _action)
 		{
 			bool isAssignFailed = false;
 
-			if (_type == MainEventType.Input_click)
+			if (_type == InputEventType.Input_click)
 			{
-				UnityAction<Vector3> unityAction = _action as UnityAction<Vector3>;
+				UnityAction<InputEventType, int, Vector3> unityAction = _action as UnityAction<InputEventType, int, Vector3>;
 
 				if (unityAction != null)
 				{
@@ -101,9 +101,9 @@ namespace Management
 				}
 				else isAssignFailed = true;
 			}
-			else if (_type == MainEventType.Input_drag)
+			else if (_type == InputEventType.Input_drag)
 			{
-				UnityAction<int, Vector2> unityAction = _action as UnityAction<int, Vector2>;
+				UnityAction<InputEventType, int, Vector2> unityAction = _action as UnityAction<InputEventType, int, Vector2>;
 
 				if (unityAction != null)
 				{
@@ -112,9 +112,9 @@ namespace Management
 				}
 				else isAssignFailed = true;
 			}
-			else if (_type == MainEventType.Input_focus)
+			else if (_type == InputEventType.Input_focus)
 			{
-				UnityAction<Vector3, float> unityAction = _action as UnityAction<Vector3, float>;
+				UnityAction<InputEventType, Vector3, float> unityAction = _action as UnityAction<InputEventType, Vector3, float>;
 
 				if (unityAction != null)
 				{
@@ -123,9 +123,9 @@ namespace Management
 				}
 				else isAssignFailed = true;
 			}
-			else if (_type == MainEventType.Input_key)
+			else if (_type == InputEventType.Input_key)
 			{
-				UnityAction<List<KeyCode>> unityAction = _action as UnityAction<List<KeyCode>>;
+				UnityAction<InputEventType, List<KeyCode>> unityAction = _action as UnityAction<InputEventType, List<KeyCode>>;
 
 				if (unityAction != null)
 				{
@@ -146,13 +146,13 @@ namespace Management
 		/// </summary>
 		/// <param name="_type"></param>
 		/// <param name="_action"></param>
-		public void Event_Delete(MainEventType _type, object _action)
+		public void Event_Delete(InputEventType _type, object _action)
 		{
 			bool isAssignFailed = false;
 
-			if (_type == MainEventType.Input_click)
+			if (_type == InputEventType.Input_click)
 			{
-				UnityAction<Vector3> unityAction = _action as UnityAction<Vector3>;
+				UnityAction<InputEventType, int, Vector3> unityAction = _action as UnityAction<InputEventType, int, Vector3>;
 
 				if (unityAction != null)
 				{
@@ -160,9 +160,9 @@ namespace Management
 				}
 				else isAssignFailed = true;
 			}
-			else if (_type == MainEventType.Input_drag)
+			else if (_type == InputEventType.Input_drag)
 			{
-				UnityAction<int, Vector2> unityAction = _action as UnityAction<int, Vector2>;
+				UnityAction<InputEventType, int, Vector2> unityAction = _action as UnityAction<InputEventType, int, Vector2>;
 
 				if (unityAction != null)
 				{
@@ -170,9 +170,9 @@ namespace Management
 				}
 				else isAssignFailed = true;
 			}
-			else if (_type == MainEventType.Input_focus)
+			else if (_type == InputEventType.Input_focus)
 			{
-				UnityAction<Vector3, float> unityAction = _action as UnityAction<Vector3, float>;
+				UnityAction<InputEventType, Vector3, float> unityAction = _action as UnityAction<InputEventType, Vector3, float>;
 
 				if (unityAction != null)
 				{
@@ -180,9 +180,9 @@ namespace Management
 				}
 				else isAssignFailed = true;
 			}
-			else if (_type == MainEventType.Input_key)
+			else if (_type == InputEventType.Input_key)
 			{
-				UnityAction<List<KeyCode>> unityAction = _action as UnityAction<List<KeyCode>>;
+				UnityAction<InputEventType, List<KeyCode>> unityAction = _action as UnityAction<InputEventType, List<KeyCode>>;
 
 				if (unityAction != null)
 				{
@@ -201,21 +201,21 @@ namespace Management
 		/// 이벤트의 모든 액션 삭제
 		/// </summary>
 		/// <param name="_type"></param>
-		public void Event_DeleteAll(MainEventType _type)
+		public void Event_DeleteAll(InputEventType _type)
 		{
-			if (_type == MainEventType.Input_click)
+			if (_type == InputEventType.Input_click)
 			{
 				inputEvents.clickEvent.RemoveAllListeners();
 			}
-			else if (_type == MainEventType.Input_drag)
+			else if (_type == InputEventType.Input_drag)
 			{
 				inputEvents.dragEvent.RemoveAllListeners();
 			}
-			else if (_type == MainEventType.Input_focus)
+			else if (_type == InputEventType.Input_focus)
 			{
 				inputEvents.focusEvent.RemoveAllListeners();
 			}
-			else if (_type == MainEventType.Input_key)
+			else if (_type == InputEventType.Input_key)
 			{
 				inputEvents.keyEvent.RemoveAllListeners();
 			}

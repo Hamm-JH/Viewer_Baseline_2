@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Management.Events
 {
+	using Definition;
 	using Platform.Feature._Input;
 	using UnityEngine.Events;
 
@@ -16,42 +17,41 @@ namespace Management.Events
 	{
 		public InputEvents(Mouse.Data _mouse, Keyboard.Data _keyboard)
 		{
-			this.clickEvent = new UnityEvent<Vector3>();
-			this.dragEvent = new UnityEvent<int, Vector2>();
-			this.focusEvent = new UnityEvent<Vector3, float>();
-			this.keyEvent = new UnityEvent<List<KeyCode>>();
+			this.clickEvent = new UnityEvent<InputEventType, int, Vector3>();
+			this.dragEvent = new UnityEvent<InputEventType, int, Vector2>();
+			this.focusEvent = new UnityEvent<InputEventType, Vector3, float>();
+			this.keyEvent = new UnityEvent<InputEventType, List<KeyCode>>();
 
 			MouseData = _mouse;
 			KeyboardData = _keyboard;
 		}
 
 		/// <summary>
-		/// Main // 클릭 이벤트
-		/// Vec3 :: 마우스 클릭 위치
-		/// // GameObject :: 클릭된 대상
-		/// // Definition.ObjectType :: 객체유형 (Object, UI)
+		/// InputEventType	:: 이벤트 형식
+		/// int				:: 버튼(마우스) 번호
+		/// Vector3			:: 클릭(터치) 위치
 		/// </summary>
-		public UnityEvent<Vector3> clickEvent;
-		//public UnityEvent<Definition.ObjectType, GameObject> clickEvent;
+		public UnityEvent<InputEventType, int, Vector3> clickEvent;
 
 		/// <summary>
-		/// Main // 드래그 이벤트
-		/// int :: 마우스 버튼
-		/// Vec2 :: 드래그 정도
+		/// InputEventType	:: 이벤트 형식
+		/// int				:: 버튼(마우스) 번호
+		/// Vector2			:: 드래그 정도
 		/// </summary>
-		public UnityEvent<int, Vector2> dragEvent;
+		public UnityEvent<InputEventType, int, Vector2> dragEvent;
 
 		/// <summary>
-		/// Main // 포커스 이벤트
-		/// Vec3 :: 포커스 위치
-		/// float :: 포커스 정도
+		/// InputEventType	:: 이벤트 형식
+		/// Vector3			:: 포커스 위치
+		/// float			:: 포커스 정도
 		/// </summary>
-		public UnityEvent<Vector3, float> focusEvent;
+		public UnityEvent<InputEventType, Vector3, float> focusEvent;
 
 		/// <summary>
-		/// Main // 키 입력 이벤트
+		/// InputEventType	:: 이벤트 형식
+		/// List[KeyCode]	:: 키 리스트
 		/// </summary>
-		public UnityEvent<List<KeyCode>> keyEvent;
+		public UnityEvent<InputEventType, List<KeyCode>> keyEvent;
 
 		~InputEvents()
 		{

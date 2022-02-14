@@ -52,7 +52,9 @@ namespace Definition
 
 		AWebAPI = 0x30,
 		API_Front = 0x31,
-		API_Back = 0x32
+		API_Back = 0x32,
+
+		ALayer = 0x40,
 	}
 
 	/// <summary>
@@ -67,13 +69,29 @@ namespace Definition
 	/// <summary>
 	/// MainManager :: 주 관리자에서 이벤트 변수에 접근할 때 사용하는 코드
 	/// </summary>
-	public enum MainEventType
+	public enum InputEventType
 	{
 		NotDef = -1,
 		Input_click,
+		
+		/// <summary>
+		/// 입력 관리코드에서 버튼 눌렀을때
+		/// </summary>
+		Input_clickDown,
+
+		/// <summary>
+		/// 입력 관리코드에서 드래그함 & 버튼 손뗐을때
+		/// </summary>
+		Input_clickFailureUp,
+
+		/// <summary>
+		/// 입력 관리코드에서 드래그X & 버튼 손뗐을때
+		/// </summary>
+		Input_clickSuccessUp,
+
 		Input_drag,
 		Input_focus,
-		Input_key
+		Input_key,
 	}
 
 	public enum ManagerActionIndex

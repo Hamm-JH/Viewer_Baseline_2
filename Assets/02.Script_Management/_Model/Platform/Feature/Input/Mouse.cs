@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 
 namespace Platform.Feature._Input
 {
+	using Definition;
+
 	public partial class Mouse : IInput
 	{
 		#region Pre-defined 사전 정의
@@ -120,6 +122,12 @@ namespace Platform.Feature._Input
 			{
 				onClick = true;     // 클릭 시작
 				deltaDistance = default(Vector2);
+
+				// 클릭 다운 이벤트
+				if(btnIndex == 0)
+				{
+					SetClickEvent(InputEventType.Input_clickDown, btnIndex, Input.mousePosition);
+				}
 			}
 			else if(Input.GetMouseButton(btnIndex))
 			{
@@ -143,7 +151,7 @@ namespace Platform.Feature._Input
 					{
 						// 좌클릭 드래그 실행 btnIndex : 0
 						// 우클릭 드래그 실행 btnIndex : 1
-						m_InputEvents.dragEvent.Invoke(btnIndex, mouseDelta);
+						m_InputEvents.dragEvent.Invoke(InputEventType.Input_drag, btnIndex, mouseDelta);
 
 						// *** 우클릭 드래그 이벤트 실행
 						//if(btnIndex == 1)
@@ -157,15 +165,37 @@ namespace Platform.Feature._Input
 			{
 				//Debug.Log($"moused delta magnitude : {deltaDistance.magnitude}");
 
+				bool clickable = false;
+
 				// 드래그 이동거리합 > (드래그 : 클릭 경계) * 1 배수 -> 클릭 이벤트
 				if(deltaDistance.magnitude < defData.dragBoundary)
 				{
-					// *** 좌클릭 이벤트 실행
-					if(btnIndex == 0)
-					{
-						m_InputEvents.clickEvent.Invoke(Input.mousePosition);
-					}
+					clickable = true;
 				}
+				// 드래그 실행함 : 클릭 실패 이벤트
+				else
+				{
+					clickable = false;
+				}
+
+				SetClickEvent(
+					clickable ? InputEventType.Input_clickSuccessUp : InputEventType.Input_clickFailureUp,
+					btnIndex,
+					Input.mousePosition);
+
+				//switch (btnIndex)
+				//{
+				//	case 0:
+				//		SetClickEvent(
+				//			clickable ? InputEventType.Input_clickSuccessUp : InputEventType.Input_clickFailureUp, 
+				//			btnIndex,
+				//			Input.mousePosition);
+				//		break;
+
+				//	case 1:
+				//		// 클릭 중지 이벤트
+				//		break;
+				//}
 
 				// 초기화
 				onClick = false;
@@ -182,11 +212,15 @@ namespace Platform.Feature._Input
 			if (scrollDelta.magnitude != 0)
 			{
 				// *** 포커스 이벤트 실행
-				m_InputEvents.focusEvent.Invoke(Input.mousePosition, scrollDelta.y);
+				m_InputEvents.focusEvent.Invoke(InputEventType.Input_focus, Input.mousePosition, scrollDelta.y);
 			}
 		}
 
 		#endregion
 
+		private void SetClickEvent(InputEventType type, int btn, Vector3 pos)
+		{
+			m_InputEvents.clickEvent.Invoke(type, btn, pos);
+		}
 	}
 }
