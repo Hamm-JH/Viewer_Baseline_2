@@ -55,15 +55,8 @@ namespace Definition
 		API_Back = 0x32,
 
 		ALayer = 0x40,
-	}
 
-	/// <summary>
-	/// Control.Input :: 입력 이벤트, clickEvent의 선택된 객체유형 정의
-	/// </summary>
-	public enum ObjectType
-	{
-		Object,
-		UI
+		AUI = 0x50,
 	}
 
 	/// <summary>
@@ -117,6 +110,9 @@ namespace Definition
 		Default1 = 0x10,
 		Selected1 = 0x20,
 		
+		UI_Default = 0x30,
+		UI_Highlight = 0x31,
+
 	}
 
 	public enum MaterialType
@@ -170,5 +166,12 @@ namespace Definition
 		WALL_CentralReservation,
 		WALL_Gate,
 		WALL_Slope
+	}
+
+	public enum LayerCode
+	{
+		DefaultMove = 0x10,
+		SelectObject = 0x11,
+		DrawPoint = 0x12,
 	}
 }

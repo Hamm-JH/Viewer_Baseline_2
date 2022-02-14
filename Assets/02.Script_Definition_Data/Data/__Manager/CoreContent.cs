@@ -15,5 +15,10 @@ namespace Definition.Data
 		[SerializeField] ContentManager _content;
 
 		public ContentManager Content { get => _content; set => _content=value; }
+
+		/// <summary>
+		/// 컨텐츠 영역에서 컨텐츠 씬의 상태를 관리하는 레이어 코드
+		/// </summary>
+		public List<LayerCode> LayerCodes { get => _content.LayerCodes; }
 	}
 }

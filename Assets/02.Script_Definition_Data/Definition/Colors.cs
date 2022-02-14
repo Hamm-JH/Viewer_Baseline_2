@@ -19,6 +19,14 @@ namespace Definition
 				case ColorType.Selected1:
 					color = new Color(0x00/255f, 0xff/255f, 0x00/255f, 1);
 					break;
+
+				case ColorType.UI_Default:
+					color = new Color(0x55/255f, 0x55/255f, 0x55/255f, 1);
+					break;
+
+				case ColorType.UI_Highlight:
+					color = new Color(0xff/255f, 0xff/255f, 0x00/255f, 1);
+					break;
 			}
 
 			return color;

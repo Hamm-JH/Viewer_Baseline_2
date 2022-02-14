@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace Management
 {
+	using Definition;
+
 	public partial class ContentManager : IManager<ContentManager>
 	{
 		/// <summary>
@@ -13,6 +15,14 @@ namespace Management
 		{
 			// 컨텐츠 관리자 전달
 			MainManager.Instance.SetContentManager(this, OnUpdate_System);
+
+			LayerCodes.Add(LayerCode.DefaultMove);
+			LayerUpdate(LayerCodes);
+		}
+
+		private void LayerUpdate(List<LayerCode> _codes)
+		{
+			m_uiList.ForEach(x => x.Set(_codes));
 		}
 
 		private void OnUpdate_System(Definition.Data.CoreManagement _cData)
