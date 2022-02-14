@@ -284,7 +284,9 @@ namespace Module.Model
 
 				if(x.TryGetComponent<MeshRenderer>(out render))
 				{
-					render.material = Materials.Set(MaterialType.ObjDefault1);
+					Material mat = Materials.Set(MaterialType.ObjDefault1);
+					mat.color = Colors.Set(ColorType.Default1);
+					render.material = mat;
 				}
 
 				x.AddComponent<MeshCollider>();

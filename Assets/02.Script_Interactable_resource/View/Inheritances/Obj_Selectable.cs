@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 namespace View
 {
+	using Definition;
+
 	public class Obj_Selectable : Interactable
 	{
 		public override GameObject Target
@@ -19,7 +21,7 @@ namespace View
 			MeshRenderer render;
 			if (gameObject.TryGetComponent<MeshRenderer>(out render))
 			{
-				render.material.SetColor("_Color", Color.white);
+				render.material.SetColor("_Color", Colors.Set(ColorType.Default1));
 			}
 		}
 
@@ -30,7 +32,7 @@ namespace View
 			MeshRenderer render;
 			if(gameObject.TryGetComponent<MeshRenderer>(out render))
 			{
-				render.material.SetColor("_Color", Color.green);
+				render.material.SetColor("_Color", Colors.Set(ColorType.Selected1));
 			}
 		}
 	}

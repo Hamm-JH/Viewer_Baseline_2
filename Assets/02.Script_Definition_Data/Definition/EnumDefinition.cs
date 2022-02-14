@@ -94,6 +94,13 @@ namespace Definition
 		Fit_Center = 0x50,
 	}
 
+	public enum ColorType
+	{
+		Default1 = 0x10,
+		Selected1 = 0x20,
+		
+	}
+
 	public enum MaterialType
 	{
 		Default1 = 0x10,
