@@ -110,9 +110,26 @@ namespace Management
 		{
 			//Debug.Log($"OnClick method");
 
+			// 아래 내용을 EventManager에서 처리
+			// 필요 데이터
+			// InputEventType
+			// 이벤트 정보 (_mousePos) / 필터링은 여기서 진행
+			// 
 			if (type == InputEventType.Input_clickDown) { }				// 클릭 누르기 상태
 			else if (type == InputEventType.Input_clickFailureUp) { }	// 클릭 실패 상태
 			else if (type == InputEventType.Input_clickSuccessUp) { }	// 클릭 성공 상태
+
+			// 필터링 (추후 변수 추출)
+			if(btn == 0)
+			{
+				EventManager.Instance.OnEvent(new Events.EventData_Input(
+						_eventType: type,
+						_btn: btn,
+						_mousePos: _mousePos,
+						_camera: main.MainCamera,
+						_graphicRaycaster: main.Content._GrRaycaster
+						));
+			}
 
 			// 클릭 성공은 좌클릭만 받음
 			// 
@@ -135,9 +152,12 @@ namespace Management
 					interactable.Hit = _hit;
 
 					//Debug.Log(interactable.Target.name);
-					EventManager.Instance.OnEvent(new Events.EventData(
-						_target: interactable,
-						_mainEventType: type
+					EventManager.Instance.OnEvent(new Events.EventData_Input(
+						_eventType: type,
+						_btn: btn,
+						_mousePos: _mousePos,
+						_camera: main.MainCamera,
+						_graphicRaycaster: main.Content._GrRaycaster
 						));
 
 					main.cameraExecuteEvents.selectEvent.Invoke(_selected3D);
@@ -145,10 +165,10 @@ namespace Management
 			}
 			else
 			{
-				EventManager.Instance.OnEvent(new Events.EventData(
-					_target: null,
-					_mainEventType: type
-					));
+				//EventManager.Instance.OnEvent(new Events.EventData_Input(
+				//	_target: null,
+				//	_mainEventType: type
+				//	));
 			}
 			{
 				//// 마우스에 걸린 UI가 하나 이상일 경우

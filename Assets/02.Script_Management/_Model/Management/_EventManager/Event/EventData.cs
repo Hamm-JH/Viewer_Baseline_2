@@ -7,10 +7,13 @@ namespace Management.Events
 	using Definition;
 	using View;
 
-	public class EventData
+	/// <summary>
+	/// 접근 데이터와 데이터에 접근하기 위한 메서드 원형 선언
+	/// </summary>
+	public abstract class EventData
 	{
-		private IInteractable m_element;
-		private InputEventType m_eventType;
+		protected IInteractable m_element;
+		protected InputEventType m_eventType;
 
 		/// <summary>
 		/// 상호작용 가능한 요소
@@ -22,13 +25,27 @@ namespace Management.Events
 		/// </summary>
 		public InputEventType EventType { get => m_eventType; set => m_eventType=value; }
 
-		public EventData(IInteractable _target, InputEventType _mainEventType)
+		//public EventData() { }
+
+		//public EventData(IInteractable _target, InputEventType _mainEventType)
+		//{
+		//	Element = _target;
+		//	EventType = _mainEventType;
+		//}
+
+		/// <summary>
+		/// 이벤트 처리 메서드
+		/// </summary>
+		public abstract void OnProcess(GameObject _cObj);
+
+		/// <summary>
+		/// 이벤트 내부처리 완료후 외부 이벤트 발산처리
+		/// </summary>
+		public void Do()
 		{
-			Element = _target;
-			EventType = _mainEventType;
+
 		}
-
-
+		
 		public static bool IsEqual(EventData A, EventData B)
 		{
 			if(A.Element.Target == B.Element.Target)

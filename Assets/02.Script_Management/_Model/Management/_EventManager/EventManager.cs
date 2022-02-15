@@ -16,48 +16,82 @@ namespace Management
 
 		public void OnEvent(EventData currEvent)
 		{
-			if (currEvent.EventType == Definition.InputEventType.Input_clickDown
-				|| currEvent.EventType == Definition.InputEventType.Input_clickFailureUp) return;
-
 			// 선택된 이벤트 상태가 없는 경우, 아무 동작을 수행하지 않는 더미 인스턴스를 생성한다.
 			if(selectedEvent == null)
 			{
-				selectedEvent = new EventData(null, Definition.InputEventType.NotDef);
+				selectedEvent = new EventData_Empty();
 			}
 
-			// 이전에 선택된 대상이 없을 경우
-			if (selectedEvent.Element == null)
+			// 현재 발생한 이벤트가 동작을 필요로 하지 않는 이벤트일 경우가 있다.
+			// 이 경우를 필터링한다.
+			if (!IsEventCanDoit(currEvent)) return;
+
+			// 받아온 이벤트의 내부처리 메서드를 시행
+			// 내부에 연산 결과로 내부의 interactable 인터페이스 상속 인스턴스 업데이트됨.
+			// 추후 전달 데이터가 늘어나면 새로 내부 클래스 작성하기
+			currEvent.OnProcess(cacheDownObj);
+
+			// 이벤트 실행
+			DoEvent(selectedEvent, currEvent);
+		}
+
+		/// <summary>
+		/// 받은 EventData 인스턴스의 이벤트 타입이 실행 가능한 이벤트 타입인지 확인한다.
+		/// </summary>
+		/// <param name="_curr"> 실행 가능성 파악해야할 EventData </param>
+		/// <returns> 실행 가능할시 true, 실행 불가능시 false</returns>
+		private bool IsEventCanDoit(EventData _curr)
+		{
+			bool result = true;
+
+			switch(_curr.EventType)
 			{
-				if(currEvent.Element != null)
+				case Definition.InputEventType.NotDef:
+				//case Definition.InputEventType.Input_clickFailureUp:
+					result = false;
+					break;
+			}
+
+			return result;
+		}
+
+		private void DoEvent(EventData _selected, EventData _curr)
+		{
+			// 이전 이벤트 데이터와 현재 이벤트 데이터의 상태를 확인한다.
+			// 이전 이벤트의 Element가 없다면
+			// -> 현재 이벤트만 확인
+			if (_selected.Element == null)
+			{
+				// 현재 이벤트의 Element가 null이 아닐경우
+				// 현재 이벤트를 이전 이벤트로 이전하고 업데이트
+				if (_curr.Element != null)
 				{
-					UpdateNewEvent(currEvent);
+					UpdateNewEvent(_curr);
 				}
 				return;
 			}
 
-			//Debug.Log(1);
+			// _selected.Element == null인 상태는 모두 필터링됨
 
-
-			if (currEvent.Element == null)
+			// 내부처리 결과에도 _curr.Element가 null인 경우 이전 이벤트 데이터 처리를 해제한다.
+			if(_curr.Element == null)
 			{
-				DeselectEvent(selectedEvent);
+				DeselectEvent(_selected);
 				return;
 			}
 
-			//Debug.Log("");
-
-			DeselectEvent(selectedEvent);
-			UpdateNewEvent(currEvent);
+			// 남은 경우의 수 : _selected, _curr 둘다 Element가 존재함
+			DeselectEvent(_selected);
+			UpdateNewEvent(_curr);
 		}
 
 		/// <summary>
 		/// 선택 이벤트 실행구간
+		/// 특정 이벤트는 이전 이벤트 영역으로 이전되지 않는다. (즉발성)
 		/// </summary>
 		/// <param name="currEvent"></param>
 		private void UpdateNewEvent(EventData currEvent)
 		{
-			selectedEvent = currEvent;
-
 			// 마우스 클릭 다운 단계
 			if(selectedEvent.EventType == Definition.InputEventType.Input_clickDown)
 			{
@@ -67,6 +101,8 @@ namespace Management
 			else if(selectedEvent.EventType == Definition.InputEventType.Input_clickSuccessUp)
 			{
 				selectedEvent.Element.OnSelect();
+				cacheDownObj = null;
+				selectedEvent = currEvent;
 			}
 			// 마우스 클릭 끝 (불가능함)
 			else if(selectedEvent.EventType == Definition.InputEventType.Input_clickFailureUp)
@@ -81,27 +117,15 @@ namespace Management
 		/// <param name="selectedEvent"></param>
 		private void DeselectEvent(EventData selectedEvent)
 		{
-			if (selectedEvent.EventType == Definition.InputEventType.NotDef) return;		// 정의되지 않은 이벤트 패스
-
-			// 마우스 클릭 다운 단계
-			if (selectedEvent.EventType == Definition.InputEventType.Input_clickDown)
-			{
-				//cacheDownObj = selectedEvent.Element.Target;
-			}
 			// 마우스 클릭 끝 (가능함)
-			else if (selectedEvent.EventType == Definition.InputEventType.Input_clickSuccessUp)
+			if (selectedEvent.EventType == Definition.InputEventType.Input_clickSuccessUp)
 			{
 				//selectedEvent.Element.OnSelect();
 				selectedEvent.Element.OnDeselect();
-			}
-			// 마우스 클릭 끝 (불가능함)
-			else if (selectedEvent.EventType == Definition.InputEventType.Input_clickFailureUp)
-			{
-				//cacheDownObj = null;
+				selectedEvent = null;
 			}
 
 
-			selectedEvent = null;
 		}
 	}
 }
