@@ -124,10 +124,10 @@ namespace Platform.Feature._Input
 				deltaDistance = default(Vector2);
 
 				// 클릭 다운 이벤트
-				if(btnIndex == 0)
-				{
-					SetClickEvent(InputEventType.Input_clickDown, btnIndex, Input.mousePosition);
-				}
+				SetClickEvent(InputEventType.Input_clickDown, btnIndex, Input.mousePosition);
+				//if(btnIndex == 0)
+				//{
+				//}
 			}
 			else if(Input.GetMouseButton(btnIndex))
 			{
@@ -178,6 +178,8 @@ namespace Platform.Feature._Input
 					clickable = false;
 				}
 
+				Debug.Log($"clickable : {clickable}, btnIndex : {btnIndex}");
+
 				SetClickEvent(
 					clickable ? InputEventType.Input_clickSuccessUp : InputEventType.Input_clickFailureUp,
 					btnIndex,
@@ -220,6 +222,7 @@ namespace Platform.Feature._Input
 
 		private void SetClickEvent(InputEventType type, int btn, Vector3 pos)
 		{
+			//Debug.Log($"type : {type.ToString()}, pos : {pos}");
 			m_InputEvents.clickEvent.Invoke(type, btn, pos);
 		}
 	}

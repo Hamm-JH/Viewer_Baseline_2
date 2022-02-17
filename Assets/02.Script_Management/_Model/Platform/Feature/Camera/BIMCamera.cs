@@ -32,7 +32,7 @@ namespace Platform.Feature.Camera
 			if (!this.enabled) return;
 			if(_target != null)
 			{
-				Debug.Log($"In bim camera onselect : name {_target.name}");
+				//Debug.Log($"In bim camera onselect : name {_target.name}");
 				target = _target.transform;
 			}
 			else
@@ -45,13 +45,13 @@ namespace Platform.Feature.Camera
 		public override void OnClick(Vector3 mousePos)
 		{
 			if (!this.enabled) return;
-			Debug.Log($"In bim camera onclick : pos {mousePos}");
+			//Debug.Log($"In bim camera onclick : pos {mousePos}");
 		}
 
 		public override void OnDrag(int btn, Vector2 delta)
 		{
 			if (!this.enabled) return;
-			Debug.Log($"In bim camera ondrag : delta {delta}");
+			//Debug.Log($"In bim camera ondrag : delta {delta}");
 
 			InDrag(btn, delta);
 		}
@@ -59,7 +59,7 @@ namespace Platform.Feature.Camera
 		public override void OnFocus(Vector3 mousePos, float delta)
 		{
 			if (!this.enabled) return;
-			Debug.Log($"In bim camera onfocus : pos {mousePos}, delta {delta}");
+			//Debug.Log($"In bim camera onfocus : pos {mousePos}, delta {delta}");
 
 			InFocus(mousePos, delta);
 		}

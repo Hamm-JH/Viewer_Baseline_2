@@ -108,18 +108,7 @@ namespace Management
 		/// <param name="_mousePos"></param>
 		public void OnClick(InputEventType type, int btn, Vector3 _mousePos)
 		{
-			//Debug.Log($"OnClick method");
-
-			// 아래 내용을 EventManager에서 처리
-			// 필요 데이터
-			// InputEventType
-			// 이벤트 정보 (_mousePos) / 필터링은 여기서 진행
-			// 
-			if (type == InputEventType.Input_clickDown) { }				// 클릭 누르기 상태
-			else if (type == InputEventType.Input_clickFailureUp) { }	// 클릭 실패 상태
-			else if (type == InputEventType.Input_clickSuccessUp) { }	// 클릭 성공 상태
-
-			// 필터링 (추후 변수 추출)
+			// 필터링 (__추후 변수 추출)
 			if(btn == 0)
 			{
 				EventManager.Instance.OnEvent(new Events.EventData_Input(
@@ -127,50 +116,54 @@ namespace Management
 						_btn: btn,
 						_mousePos: _mousePos,
 						_camera: main.MainCamera,
-						_graphicRaycaster: main.Content._GrRaycaster
+						_graphicRaycaster: main.Content._GrRaycaster,
+						_event: main.cameraExecuteEvents.selectEvent
 						));
 			}
 
-			// 클릭 성공은 좌클릭만 받음
-			// 
-
-			GameObject _selected3D = null;
-			RaycastHit _hit = default(RaycastHit);
-
-			Get_Collect3DObject(_mousePos, out _selected3D, out _hit);
-
-			//_selected3D = Get_GameObject3D(_mousePos, out _hit);
-			//List<RaycastResult> results = Get_GameObjectUI(_mousePos);
-
-			if(_selected3D != null)
 			{
-				// 상호작용 가능 객체가 있는지 판단
-				View.IInteractable interactable;
-				if (_selected3D.TryGetComponent<View.IInteractable>(out interactable))
-				{
-					// 데이터 할당
-					interactable.Hit = _hit;
+				// 클릭 성공은 좌클릭만 받음
+				// 
 
-					//Debug.Log(interactable.Target.name);
-					EventManager.Instance.OnEvent(new Events.EventData_Input(
-						_eventType: type,
-						_btn: btn,
-						_mousePos: _mousePos,
-						_camera: main.MainCamera,
-						_graphicRaycaster: main.Content._GrRaycaster
-						));
+				//GameObject _selected3D = null;
+				//RaycastHit _hit = default(RaycastHit);
 
-					main.cameraExecuteEvents.selectEvent.Invoke(_selected3D);
-				}
-			}
-			else
-			{
-				//EventManager.Instance.OnEvent(new Events.EventData_Input(
-				//	_target: null,
-				//	_mainEventType: type
-				//	));
-			}
-			{
+				//Get_Collect3DObject(_mousePos, out _selected3D, out _hit);
+
+				////_selected3D = Get_GameObject3D(_mousePos, out _hit);
+				////List<RaycastResult> results = Get_GameObjectUI(_mousePos);
+
+				//if (_selected3D != null)
+				//{
+				//	// 상호작용 가능 객체가 있는지 판단
+				//	View.IInteractable interactable;
+				//	if (_selected3D.TryGetComponent<View.IInteractable>(out interactable))
+				//	{
+				//		// 데이터 할당
+				//		interactable.Hit = _hit;
+
+				//		//Debug.Log(interactable.Target.name);
+				//		EventManager.Instance.OnEvent(new Events.EventData_Input(
+				//			_eventType: type,
+				//			_btn: btn,
+				//			_mousePos: _mousePos,
+				//			_camera: main.MainCamera,
+				//			_graphicRaycaster: main.Content._GrRaycaster
+				//			));
+
+				//		main.cameraExecuteEvents.selectEvent.Invoke(_selected3D);
+				//	}
+				//}
+				//else
+				//{
+				//	//EventManager.Instance.OnEvent(new Events.EventData_Input(
+				//	//	_target: null,
+				//	//	_mainEventType: type
+				//	//	));
+				//}
+
+				//--------------------------------
+
 				//// 마우스에 걸린 UI가 하나 이상일 경우
 				//if (results.Count != 0)
 				//{
@@ -263,83 +256,11 @@ namespace Management
 
 				//}
 			}
-
 		}
 
 		public void Method_ClickDebug(InputEventType type, int btn, Vector3 _mousePos)
 		{
 			Debug.Log($"Method click debug : {_mousePos}");
-		}
-
-		/// <summary>
-		/// UI를 건드렸을 경우를 제외한, 3D 객체 선택상태인지 확인한다.
-		/// </summary>
-		/// <param name="_mousePos"></param>
-		/// <param name="obj"></param>
-		/// <param name="_hit"></param>
-		private void Get_Collect3DObject(Vector3 _mousePos, out GameObject obj, out RaycastHit _hit)
-		{
-			obj = null;
-
-			//RaycastHit _hit = default(RaycastHit);
-			GameObject _selected3D = Get_GameObject3D(_mousePos, out _hit);
-			List<RaycastResult> results = Get_GameObjectUI(_mousePos);
-
-			if(results.Count != 0)
-			{
-
-			}
-			else
-			{
-				if(_selected3D != null)
-				{
-					obj = _selected3D;
-				}
-			}
-		}
-
-		/// <summary>
-		/// 3D 객체를 마우스 위치에서 가져옴
-		/// </summary>
-		/// <param name="_mousePos"></param>
-		/// <param name="_hitPoint"></param>
-		/// <returns></returns>
-		private GameObject Get_GameObject3D(Vector3 _mousePos, out RaycastHit _hitPoint)
-		{
-			GameObject obj = null;
-
-			// 3D 선택
-			RaycastHit _hit;
-			Ray _ray = main.MainCamera.ScreenPointToRay(_mousePos);
-			if (Physics.Raycast(_ray, out _hit))
-			{
-				obj = _hit.collider.gameObject;
-				_hitPoint = _hit;
-				return obj;
-			}
-			else
-			{
-				_hitPoint = default(RaycastHit);
-				return obj;
-			}
-		}
-
-		/// <summary>
-		/// UI 객체를 마우스 위치에서 가져옴
-		/// </summary>
-		/// <param name="_mousePos"></param>
-		/// <returns></returns>
-		private List<RaycastResult> Get_GameObjectUI(Vector3 _mousePos)
-		{
-			List<RaycastResult> results = new List<RaycastResult>();
-
-			// UI 선택
-			PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
-			pointerEventData.position = _mousePos;
-
-			main.Content._GrRaycaster.Raycast(pointerEventData, results);
-
-			return results;
 		}
 
 #endregion
@@ -352,10 +273,15 @@ namespace Management
 		/// <param name="_delta"></param>
 		public void OnDrag(InputEventType type, int btn, Vector2 _delta)
 		{
-			//Debug.Log($"OnDrag method");
-
 			// 카메라의 드래그 이벤트 실행
-			main.cameraExecuteEvents.dragEvent.Invoke(btn, _delta);
+			EventManager.Instance.OnEvent(new Events.EventData_Input(
+				_eventType: type,
+				_btn: btn,
+				_delta: _delta,
+				_camera: main.MainCamera, 
+				_grRaycaster: main.Content._GrRaycaster,
+				_event: main.cameraExecuteEvents.dragEvent
+				));
 		}
 
 		public void Method_DragDebug(InputEventType type, int btn, Vector2 delta)
@@ -375,7 +301,15 @@ namespace Management
 		public void OnFocus(InputEventType type, Vector3 _focus, float _delta)
 		{
 			// 카메라의 포커스 이벤트 실행
-			main.cameraExecuteEvents.focusEvent.Invoke(_focus, _delta);
+			EventManager.Instance.OnEvent(new Events.EventData_Input(
+				_eventType: type,
+				_focus: _focus,
+				_delta: _delta,
+				_camera: main.MainCamera,
+				_grRaycaster: main.Content._GrRaycaster,
+				_event: main.cameraExecuteEvents.focusEvent
+				));
+			//main.cameraExecuteEvents.focusEvent.Invoke(_focus, _delta);
 		}
 
 		public void Method_FocusDebug(InputEventType type, Vector3 focus, float delta)
@@ -394,7 +328,13 @@ namespace Management
 		public void OnKey(InputEventType type, List<KeyCode> _kCode)
 		{
 			// 키 입력 이벤트 실행
-			main.cameraExecuteEvents.keyEvent.Invoke(_kCode);
+			EventManager.Instance.OnEvent(new Events.EventData_Input(
+				_eventType: type,
+				_kCode: _kCode,
+				_camera: main.MainCamera,
+				_grRaycaster: main.Content._GrRaycaster,
+				_event: main.cameraExecuteEvents.keyEvent
+				));
 		}
 
 		public void Method_KeyDebug(InputEventType type, List<KeyCode> key)

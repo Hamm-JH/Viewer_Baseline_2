@@ -17,5 +17,10 @@ namespace Management.Events
 		{
 			Debug.Log("OnProcess Empty");
 		}
+
+		public override void DoEvent()
+		{
+			Debug.Log("DoEvent Empty");
+		}
 	}
 }

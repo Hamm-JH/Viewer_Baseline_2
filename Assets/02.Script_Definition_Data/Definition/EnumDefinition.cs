@@ -65,7 +65,6 @@ namespace Definition
 	public enum InputEventType
 	{
 		NotDef = -1,
-		Input_click,
 		
 		/// <summary>
 		/// 입력 관리코드에서 버튼 눌렀을때
@@ -82,8 +81,19 @@ namespace Definition
 		/// </summary>
 		Input_clickSuccessUp,
 
+		/// <summary>
+		/// 드래그 입력
+		/// </summary>
 		Input_drag,
+
+		/// <summary>
+		/// 포커스 입력
+		/// </summary>
 		Input_focus,
+
+		/// <summary>
+		/// 키 입력
+		/// </summary>
 		Input_key,
 	}
 
@@ -93,6 +103,45 @@ namespace Definition
 		InputAction = 0,
 	}
 
+	/// <summary>
+	/// 이벤트 상태코드 결과
+	/// </summary>
+	public enum Status
+	{
+		/// <summary>
+		/// 이벤트 처리 이전 단계
+		/// </summary>
+		Ready = 0,
+
+		/// <summary>
+		/// 선택해제 진행
+		/// </summary>
+		Drop = 0x10,
+
+		/// <summary>
+		/// 업데이트, 선택해제 진행
+		/// </summary>
+		Pass = 0x11,
+
+		/// <summary>
+		/// 업데이트만 진행
+		/// </summary>
+		Update = 0x12,
+
+		/// <summary>
+		/// 다음 단계를 진행하지 않는 단계
+		/// </summary>
+		Skip = 0x13,
+
+		/// <summary>
+		/// 이벤트 진행에 오류가 발생한 상태
+		/// </summary>
+		Error = 0x90,
+	}
+
+	/// <summary>
+	/// UI에서 이벤트에 반응할때의 분기를 결정
+	/// </summary>
 	public enum UIEventType
 	{
 		Toggle_ViewMode = 0x10,

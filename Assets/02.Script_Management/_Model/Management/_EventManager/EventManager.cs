@@ -72,17 +72,44 @@ namespace Management
 			}
 
 			// _selected.Element == null인 상태는 모두 필터링됨
-
-			// 내부처리 결과에도 _curr.Element가 null인 경우 이전 이벤트 데이터 처리를 해제한다.
-			if(_curr.Element == null)
+			
+			// 이벤트 코드 :: Drop의 경우 deselect event만 수행
+			// 이벤트 코드 :: Skip의 경우 (clickDown) update new event만 수행
+			// 이벤트 코드 :: Pass의 경우 update new event, deselect event 둘 다 수행
+			switch(_curr.StatusCode)
 			{
-				DeselectEvent(_selected);
-				return;
+				case Definition.Status.Drop:
+					DeselectEvent(_selected);
+					break;
+
+				case Definition.Status.Pass:
+					DeselectEvent(_selected);
+					UpdateNewEvent(_curr);
+					break;
+
+				case Definition.Status.Update:
+					UpdateNewEvent(_curr);
+					break;
+
+				case Definition.Status.Skip:
+					break;
 			}
 
-			// 남은 경우의 수 : _selected, _curr 둘다 Element가 존재함
-			DeselectEvent(_selected);
-			UpdateNewEvent(_curr);
+			// 내부처리 결과에도 _curr.Element가 null인 경우 이전 이벤트 데이터 처리를 해제한다.
+			//if(_curr.Element == null)
+			//{
+			//	//Debug.Log(_curr.Element.Equals(null));
+			//	DeselectEvent(_selected);
+			//	return;
+			//}
+
+			//if(_curr.EventType != Definition.InputEventType.Input_clickDown)
+			//{
+			//	// 남은 경우의 수 : _selected, _curr 둘다 Element가 존재함
+			//	Debug.Log($"***** {_curr.EventType.ToString()}");
+			//	DeselectEvent(_selected);
+			//	UpdateNewEvent(_curr);
+			//}
 		}
 
 		/// <summary>
@@ -93,22 +120,31 @@ namespace Management
 		private void UpdateNewEvent(EventData currEvent)
 		{
 			// 마우스 클릭 다운 단계
-			if(selectedEvent.EventType == Definition.InputEventType.Input_clickDown)
+			if(currEvent.EventType == Definition.InputEventType.Input_clickDown)
 			{
-				cacheDownObj = selectedEvent.Element.Target;
+				cacheDownObj = currEvent.Element.Target;
 			}
 			// 마우스 클릭 끝 (가능함)
-			else if(selectedEvent.EventType == Definition.InputEventType.Input_clickSuccessUp)
+			else if(currEvent.EventType == Definition.InputEventType.Input_clickSuccessUp)
 			{
-				selectedEvent.Element.OnSelect();
+				currEvent.Element.OnSelect();
+				currEvent.DoEvent();
+				//MainManager.Instance.cameraExecuteEvents.selectEvent.Invoke(currEvent.Element.Target);	// 마우스 클릭 성공시 실행 (객체 선택 모드)
 				cacheDownObj = null;
 				selectedEvent = currEvent;
 			}
 			// 마우스 클릭 끝 (불가능함)
-			else if(selectedEvent.EventType == Definition.InputEventType.Input_clickFailureUp)
+			else if(currEvent.EventType == Definition.InputEventType.Input_clickFailureUp)
 			{
 				cacheDownObj = null;
 			}
+			else if(currEvent.EventType == Definition.InputEventType.Input_drag
+				|| currEvent.EventType == Definition.InputEventType.Input_focus
+				|| currEvent.EventType == Definition.InputEventType.Input_key)
+			{
+				currEvent.DoEvent();
+			}
+
 		}
 
 		/// <summary>
@@ -117,6 +153,7 @@ namespace Management
 		/// <param name="selectedEvent"></param>
 		private void DeselectEvent(EventData selectedEvent)
 		{
+
 			// 마우스 클릭 끝 (가능함)
 			if (selectedEvent.EventType == Definition.InputEventType.Input_clickSuccessUp)
 			{

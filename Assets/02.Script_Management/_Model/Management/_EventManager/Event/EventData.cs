@@ -14,6 +14,7 @@ namespace Management.Events
 	{
 		protected IInteractable m_element;
 		protected InputEventType m_eventType;
+		private Status status;
 
 		/// <summary>
 		/// 상호작용 가능한 요소
@@ -24,6 +25,11 @@ namespace Management.Events
 		/// 발생한 이벤트의 형식
 		/// </summary>
 		public InputEventType EventType { get => m_eventType; set => m_eventType=value; }
+
+		/// <summary>
+		/// 이벤트 처리 결과
+		/// </summary>
+		public Status StatusCode { get => status; set => status=value; }
 
 		//public EventData() { }
 
@@ -41,10 +47,7 @@ namespace Management.Events
 		/// <summary>
 		/// 이벤트 내부처리 완료후 외부 이벤트 발산처리
 		/// </summary>
-		public void Do()
-		{
-
-		}
+		public abstract void DoEvent();
 		
 		public static bool IsEqual(EventData A, EventData B)
 		{

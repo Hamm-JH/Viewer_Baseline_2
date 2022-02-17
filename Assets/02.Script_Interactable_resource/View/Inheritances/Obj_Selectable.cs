@@ -16,7 +16,7 @@ namespace View
 
 		public override void OnDeselect()
 		{
-			Debug.Log($"OnDeselect : {this.name}");
+			//Debug.Log($"OnDeselect : {this.name}");
 
 			MeshRenderer render;
 			if (gameObject.TryGetComponent<MeshRenderer>(out render))
@@ -27,7 +27,7 @@ namespace View
 
 		public override void OnSelect()
 		{
-			Debug.Log($"OnSelect : {this.name}");
+			//Debug.Log($"OnSelect : {this.name}");
 
 			MeshRenderer render;
 			if(gameObject.TryGetComponent<MeshRenderer>(out render))

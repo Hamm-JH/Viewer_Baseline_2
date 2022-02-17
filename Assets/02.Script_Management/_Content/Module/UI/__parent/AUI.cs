@@ -6,6 +6,7 @@ namespace Module.UI
 {
 	using Definition;
 
+	[System.Serializable]
 	public abstract class AUI : MonoBehaviour, IModule
 	{
 		protected int id = (int)Definition.ModuleID.AUI;
