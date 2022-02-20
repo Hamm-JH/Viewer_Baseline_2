@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Module.Interaction
 {
+	using Definition;
 	using UnityEngine.UI;
 
 	/// <summary>
@@ -12,7 +13,7 @@ namespace Module.Interaction
 	/// </summary>
 	public partial class Module_Interaction : MonoBehaviour, IModule
 	{
-		protected int id = (int)Definition.ModuleID.AInteraction;
+		protected int id = (int)Definition.ModuleID.Interaction;
 
 		public int ID { get => id; set => id = value; }
 
@@ -22,6 +23,11 @@ namespace Module.Interaction
 		void Start()
 		{
 			Debug.Log($"{this.name} start");
+		}
+
+		public void OnStart(FunctionCode _code)
+		{
+			Debug.Log($"{this.GetType()} OnStart");
 		}
 	}
 }

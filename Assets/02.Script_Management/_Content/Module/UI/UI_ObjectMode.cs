@@ -8,12 +8,12 @@ namespace Module.UI
 {
 	public class UI_ObjectMode : AUI
 	{
-		public override void Set(List<LayerCode> _codes)
-		{
-			LayerCode code = _codes.FindAll(x =>
-				x == LayerCode.DefaultMove ||
-				x == LayerCode.DrawPoint ||
-				x == LayerCode.SelectObject).First();
-		}
+		//public override void Set(List<LayerCode> _codes)
+		//{
+		//	LayerCode code = _codes.FindAll(x =>
+		//		x == LayerCode.DefaultMove ||
+		//		x == LayerCode.DrawPoint ||
+		//		x == LayerCode.SelectObject).First();
+		//}
 	}
 }

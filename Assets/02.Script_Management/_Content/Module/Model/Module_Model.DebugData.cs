@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace Module.Model
 {
+	using Definition;
+
 	/// <summary>
 	/// 템플릿
 	/// </summary>

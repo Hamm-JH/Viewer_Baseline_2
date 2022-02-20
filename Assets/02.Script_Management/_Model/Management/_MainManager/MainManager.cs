@@ -16,34 +16,30 @@ namespace Management
 	/// </summary>
 	public partial class MainManager : IManager<MainManager>
 	{
+		/// <summary>
+		/// 시스템 주 관리 데이터
+		/// </summary>
+		[Header("Data management core")]
 		[SerializeField] CoreManagement _core;
 
-		public Camera MainCamera
-		{
-			get => _core.MainCam;
-		}
-
 		/// <summary>
-		/// 요구된 사항에 따라 새로 생성된 씬의 주요 데이터를 저장하는 코드
+		/// 컨텐츠 씬 데이터 관리
 		/// </summary>
+		[Header("managed content data")]
 		[SerializeField] CoreContent _content;
 
 		/// <summary>
 		/// 프로그램 시작시 초기화를 위해 필요한 데이터 모음
 		/// </summary>
+		[Header("Dataset from start sequence")]
 		[SerializeField] CoreData _data;
 
-		public ContentManager Content
-		{
-			get => _content.Content;
-		}
 
-		/// <summary>
-		/// 0215
-		/// </summary>
-		public List<LayerCode> LayerCodes
+		#region 주 관리자에서 요청할 데이터를 프로퍼티로 전달하는 구간
+
+		public Camera MainCamera
 		{
-			get => _content.LayerCodes;
+			get => _core.MainCam;
 		}
 
 		public string ModelURI
@@ -51,14 +47,21 @@ namespace Management
 			get => _core.ModelURI;
 		}
 
-		// Start is called before the first frame update
-		void Start()
+		public ContentManager Content
 		{
-			DontDestroyOnLoad(this);
-			
-			OnCreate();
+			get => _content.Content;
 		}
+		/// <summary>
+		/// 0215
+		/// </summary>
+		//public List<LayerCode> LayerCodes
+		//{
+		//	get => _content.LayerCodes;
+		//}
 
-		
+
+		#endregion
+
+
 	}
 }

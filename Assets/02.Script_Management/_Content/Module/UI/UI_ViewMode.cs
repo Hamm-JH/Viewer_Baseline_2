@@ -7,9 +7,9 @@ namespace Module.UI
 {
 	public class UI_ViewMode : AUI
 	{
-		public override void Set(List<LayerCode> _codes)
-		{
-			Debug.LogError("UI_ViewMode not set");
-		}
+		//public override void Set(List<LayerCode> _codes)
+		//{
+		//	Debug.LogError("UI_ViewMode not set");
+		//}
 	}
 }

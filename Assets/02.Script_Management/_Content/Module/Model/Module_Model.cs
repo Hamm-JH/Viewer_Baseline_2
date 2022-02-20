@@ -4,13 +4,15 @@ using UnityEngine;
 
 namespace Module.Model
 {
+	using Definition;
+
 	/// <summary>
 	/// 모델 처리 모듈 
 	/// Import, Export
 	/// </summary>
 	public partial class Module_Model : MonoBehaviour, IModule
 	{
-		protected int id = (int)Definition.ModuleID.AModel;
+		protected int id = (int)Definition.ModuleID.Model;
 		public int ID { get => id; set => id = value; }
 
 
@@ -19,6 +21,11 @@ namespace Module.Model
 
 		protected GameObject Model { get => model; set => model=value; }
 		public Bounds CenterBounds { get => centerBounds; }
+
+		public void OnStart(FunctionCode _code)
+		{
+			throw new System.NotImplementedException();
+		}
 
 		void Start()
 		{

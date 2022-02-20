@@ -13,6 +13,14 @@ namespace Management
 
 	public partial class MainManager : IManager<MainManager>
 	{
+		// Start is called before the first frame update
+		void Start()
+		{
+			DontDestroyOnLoad(this);
+
+			OnCreate();
+		}
+
 		/// <summary>
 		/// 주관리자가 생성될때 실행
 		/// </summary>

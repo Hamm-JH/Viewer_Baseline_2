@@ -6,6 +6,12 @@ namespace Management
 {
 	public partial class ContentManager : IManager<ContentManager>
 	{
+		// Start is called before the first frame update
+		void Start()
+		{
+			OnCreate();
+		}
+
 		/// <summary>
 		/// 컨텐츠 관리자가 생성될때 실행
 		/// </summary>

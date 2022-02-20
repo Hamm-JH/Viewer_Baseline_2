@@ -7,9 +7,9 @@ namespace Module.UI
 {
 	public class UI_FitCenterMode : AUI
 	{
-		public override void Set(List<LayerCode> _codes)
-		{
-			Debug.LogError("UI_FitCenterMode not set");
-		}
+		//public override void Set(List<LayerCode> _codes)
+		//{
+		//	Debug.LogError("UI_FitCenterMode not set");
+		//}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Definition;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,9 +11,14 @@ namespace Module.WebAPI
 	/// </summary>
 	public partial class Module_WebAPI : MonoBehaviour, IModule
 	{
-		protected int id = (int)Definition.ModuleID.AWebAPI;
+		protected int id = (int)Definition.ModuleID.WebAPI;
 
 		public int ID { get => id; set => id = value; }
+
+		public void OnStart(FunctionCode _code)
+		{
+			throw new System.NotImplementedException();
+		}
 
 		void Start()
 		{

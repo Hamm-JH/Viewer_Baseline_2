@@ -133,35 +133,45 @@ namespace Management.Events
 					return;
 
 				case InputEventType.Input_clickSuccessUp:
-					Debug.Log(EventType.ToString());
-					GameObject selected3D = null;
-					RaycastHit hit = default(RaycastHit);
-
-					Get_Collect3DObject(m_clickPosition, out selected3D, out hit);
-
-					if(selected3D != null)
+					// 객체 선택 단계에선 code :: pass, drop
 					{
-						IInteractable interactable;
-						if(selected3D.TryGetComponent<IInteractable>(out interactable))
+						Debug.Log(EventType.ToString());
+						GameObject selected3D = null;
+						RaycastHit hit = default(RaycastHit);
+
+						Get_Collect3DObject(m_clickPosition, out selected3D, out hit);
+
+						if(selected3D != null)
 						{
-							Element = interactable;
-							StatusCode = Status.Pass;
-							return;
+							IInteractable interactable;
+							if(selected3D.TryGetComponent<IInteractable>(out interactable))
+							{
+								Element = interactable;
+								StatusCode = Status.Pass;
+								return;
+							}
 						}
+						Element = null;
+						StatusCode = Status.Drop;
 					}
-					Element = null;
-					StatusCode = Status.Drop;
+					// 데칼 배치 단계에선 code :: pass, drop
 					break;
 
 				case InputEventType.Input_drag:
+					// 객체 선택 단계에선 code :: Update
+					// 데칼 배치 단계에선 code :: Update
 					StatusCode = Status.Update;
 					break;
 
 				case InputEventType.Input_focus:
+					// 객체 선택 단계에선 code :: Update
+					// 데칼 배치 단계에선 code :: Update
 					StatusCode = Status.Update;
 					break;
 
 				case InputEventType.Input_key:
+					// 객체 선택 단계에선 code :: Update
+					// 데칼 배치 단계에선 code :: Update
 					StatusCode = Status.Update;
 					break;
 			}

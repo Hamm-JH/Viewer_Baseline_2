@@ -1,3 +1,4 @@
+using Definition;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ namespace Module.Layer
 {
 	public abstract class ALayer : MonoBehaviour, IModule
 	{
-		protected int id = (int)Definition.ModuleID.ALayer;
+		protected int id = (int)Definition.ModuleID.Func_Selection;
 		public int ID { get => id; set => id = value; }
 
 		/// <summary>
@@ -29,5 +30,10 @@ namespace Module.Layer
 		/// 레이어 제거시 실행
 		/// </summary>
 		public abstract void LayerOut();
+
+		public void OnStart(FunctionCode _code)
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

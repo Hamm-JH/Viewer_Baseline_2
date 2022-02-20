@@ -42,21 +42,46 @@ namespace Definition
 	public enum ModuleID
 	{
 		NotDef = -1,
-		AModel = 0x10,
+		/// <summary>
+		/// Code :: 모델
+		/// </summary>
+		Model = 0x10,
+
+		/// <summary>
+		/// Code :: 상호작용 ???
+		/// </summary>
+		Interaction = 0x20,
+
+		/// <summary>
+		/// Code :: 웹 상호작용
+		/// </summary>
+		WebAPI = 0x30,
+
+		/// <summary>
+		/// Code :: 기능, 선택
+		/// </summary>
+		Func_Selection = 0x40,
+
+		/// <summary>
+		/// Code :: UI 속성
+		/// </summary>
+		Prop_UI = 0x50,
+	}
+
+	public enum FunctionCode
+	{
 		Model_Import = 0x11,
 		Model_Export = 0x12,
 
-		AInteraction = 0x20,
 		Interaction_3D = 0x21,
 		Interaction_UI = 0x22,
-
-		AWebAPI = 0x30,
+		
 		API_Front = 0x31,
 		API_Back = 0x32,
 
-		ALayer = 0x40,
-
-		AUI = 0x50,
+		Select_DefaultMove = 0x41,
+		Select_SelectObject = 0x42,
+		Select_DrawPoint = 0x43,
 	}
 
 	/// <summary>
@@ -217,10 +242,5 @@ namespace Definition
 		WALL_Slope
 	}
 
-	public enum LayerCode
-	{
-		DefaultMove = 0x10,
-		SelectObject = 0x11,
-		DrawPoint = 0x12,
-	}
+	
 }

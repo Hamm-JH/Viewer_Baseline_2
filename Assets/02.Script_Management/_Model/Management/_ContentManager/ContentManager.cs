@@ -17,8 +17,8 @@ namespace Management
 		public Module_WebAPI webAPI;
 		public Module_Interaction interaction;
 
-		private List<LayerCode> m_layerCodes;
-		public List<LayerCode> LayerCodes { get => m_layerCodes; set => m_layerCodes=value; }
+		//private List<LayerCode> m_layerCodes;
+		//public List<LayerCode> LayerCodes { get => m_layerCodes; set => m_layerCodes=value; }
 
 		[SerializeField] List<AUI> m_uiList;
 
@@ -32,10 +32,5 @@ namespace Management
 			get => interaction.grRaycaster;
 		}
 
-		// Start is called before the first frame update
-		void Start()
-		{
-			OnCreate();
-		}
 	}
 }
