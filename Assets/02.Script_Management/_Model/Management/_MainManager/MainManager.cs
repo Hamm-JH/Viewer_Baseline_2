@@ -51,14 +51,6 @@ namespace Management
 		{
 			get => _content.Content;
 		}
-		/// <summary>
-		/// 0215
-		/// </summary>
-		//public List<LayerCode> LayerCodes
-		//{
-		//	get => _content.LayerCodes;
-		//}
-
 
 		#endregion
 

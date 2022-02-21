@@ -16,7 +16,7 @@ namespace Management
 		public void SetCameraCenterPosition(UIEventType eventType = UIEventType.Toggle_ViewMode_ISO)
 		{
 			Bounds _b = _CenterBounds;
-			Canvas _canvas = interaction.rootCanvas;
+			Canvas _canvas = _Canvas;
 
 			MainManager.Instance.SetCameraPosition(_b, _canvas, eventType);
 		}

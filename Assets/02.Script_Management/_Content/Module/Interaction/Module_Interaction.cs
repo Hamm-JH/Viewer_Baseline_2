@@ -13,17 +13,46 @@ namespace Module.Interaction
 	/// </summary>
 	public partial class Module_Interaction : AModule
 	{
-		public Canvas rootCanvas;
-		public GraphicRaycaster grRaycaster;
+		[SerializeField] private Canvas rootCanvas;
 
-		//public override void OnCreate(ModuleID _id, FunctionCode _code)
-		//{
-		//	Debug.Log($"{this.GetType()} OnStart");
-		//}
+		[SerializeField] private GraphicRaycaster grRaycaster;
 
-		public override void Run()
+		public Canvas RootCanvas { get => rootCanvas; set => rootCanvas=value; }
+		public GraphicRaycaster GrRaycaster { get => grRaycaster; set => grRaycaster=value; }
+
+		private void Start()
+		{
+			OnCreate(ModuleID.Interaction, FunctionCode.Interaction_UI);
+			InitCanvas();
+		}
+
+		public override void OnCreate(ModuleID _id, FunctionCode _code)
+		{
+			base.OnCreate(_id, _code);
+			InitCanvas();
+		}
+
+		private void InitCanvas()
+		{
+			if(RootCanvas == null)
+			{
+				GameObject canvasObj = new GameObject("RootCanvas", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
+				Canvas canvas = canvasObj.GetComponent<Canvas>();
+				GraphicRaycaster grRaycaster = canvasObj.GetComponent<GraphicRaycaster>();
+
+				canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+
+				RootCanvas = canvas;
+				GrRaycaster = grRaycaster;
+			}
+		}
+
+		public override void OnStart()
 		{
 			Debug.LogError($"{this.GetType().ToString()} Run");
+
+			// TODO 0222 컨텐츠 관리자에서 주관리자로 플랫폼 코드 요청, 플랫폼 코드 기반 불러오는 방식으로 변경
+			GameObject ui = Instantiate<GameObject>(Resources.Load<GameObject>("UI/TestView0221"), RootCanvas.transform);
 		}
 	}
 }

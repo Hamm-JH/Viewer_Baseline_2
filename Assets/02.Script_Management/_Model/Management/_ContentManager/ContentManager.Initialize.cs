@@ -35,32 +35,15 @@ namespace Management
 			// 3. 각 모듈에 기능 실행 (Do) 진행
 			// 4. 각 모듈에서 필요 데이터 알아서 가져가기
 
-			//Debug.LogError("시스템에서 필수 데이터를 받아옴. 이후 작업 필요");
-			//Debug.Log($"{_cManagement.GetType()}");
-			//Debug.Log($"{_cData.GetType()}");
-
-			//List<GameObject> objs = new List<GameObject>();
-
-			//switch (_cManagement._Platform)
-			//{
-			//	case Definition.PlatformCode.PC_Maker1:
-			//		model.OnExport();
-			//		break;
-
-			//	case Definition.PlatformCode.PC_Viewer1:
-			//		model.OnImport(MainManager.Instance.ModelURI);
-			//		break;
-			//}
-
 			// 1. 모듈 리스트 생성
 			List<AModule> mods = CreateModules(_cData.ModuleLists, _cData.FunctionCodes);
-			Modules = mods;
+			Modules.AddRange(mods);
 
 			// 2. 모듈 부모배치
-			SetParentModules(mods);
+			SetParentModules(Modules);
 
 			// 3. 모듈 시작
-			InitModules(mods);
+			InitModules(Modules);
 		}
 
 		/// <summary>
@@ -108,7 +91,7 @@ namespace Management
 		/// <param name="_module"></param>
 		private void InitModule(AModule _module)
 		{
-			_module.Run();
+			_module.OnStart();
 		}
 	}
 }

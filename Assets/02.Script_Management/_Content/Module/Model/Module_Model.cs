@@ -19,11 +19,6 @@ namespace Module.Model
 		protected GameObject Model { get => model; set => model=value; }
 		public Bounds CenterBounds { get => centerBounds; }
 
-		void Start()
-		{
-			Debug.Log($"{this.name} started");
-		}
-
 		/// <summary>
 		/// 모델 받아오기
 		/// </summary>
@@ -45,9 +40,9 @@ namespace Module.Model
 		//	m_currentFunction = _code;
 		//}
 
-		public override void Run()
+		public override void OnStart()
 		{
-			Debug.LogError($"{this.GetType().ToString()} Run");
+			//Debug.LogError($"{this.GetType().ToString()} Run");
 
 			if(Function == FunctionCode.Model_Import)
 			{

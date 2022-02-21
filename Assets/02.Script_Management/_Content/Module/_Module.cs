@@ -66,8 +66,12 @@ namespace Module
 			}
 			else if(_module == ModuleID.Func_Selection)
 			{
-				mod = _obj.AddComponent<WebAPI.Module_WebAPI>();
+				mod = _obj.AddComponent<Function.Module_FuncSelection>();
 				//_obj.AddComponent<>
+			}
+			else if(_module == ModuleID.Graphic)
+			{
+				mod = _obj.AddComponent<Graphic.Module_Graphic>();
 			}
 			else
 			{

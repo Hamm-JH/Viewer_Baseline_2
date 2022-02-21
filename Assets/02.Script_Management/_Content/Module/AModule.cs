@@ -29,6 +29,6 @@ namespace Module
 		/// <summary>
 		/// functionCode에 따라 모듈 실행
 		/// </summary>
-		public abstract void Run();
+		public abstract void OnStart();
 	}
 }

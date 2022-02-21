@@ -14,9 +14,9 @@ namespace Management
 
 	public partial class ContentManager : IManager<ContentManager>
 	{
-		public Module_Model model;
-		public Module_WebAPI webAPI;
-		public Module_Interaction interaction;
+		//public Module_Model model;
+		//public Module_WebAPI webAPI;
+		//public Module_Interaction interaction;
 
 		//private List<LayerCode> m_layerCodes;
 		//public List<LayerCode> LayerCodes { get => m_layerCodes; set => m_layerCodes=value; }
@@ -44,12 +44,20 @@ namespace Management
 
 		public Canvas _Canvas
 		{
-			get => interaction.rootCanvas;
+			get
+			{
+				Module_Interaction mod = (Module_Interaction)Modules.Find(x => x.ID == ModuleID.Interaction);
+				return mod.RootCanvas;
+			}
 		}
 
 		public GraphicRaycaster _GrRaycaster
 		{
-			get => interaction.grRaycaster;
+			get
+			{
+				Module_Interaction mod = (Module_Interaction)Modules.Find(x => x.ID == ModuleID.Interaction);
+				return mod.GrRaycaster;
+			}
 		}
 
 	}

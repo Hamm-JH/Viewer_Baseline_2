@@ -63,6 +63,11 @@ namespace Definition
 		Func_Selection = 0x40,
 
 		/// <summary>
+		/// Code :: 그래픽
+		/// </summary>
+		Graphic = 0x50,
+
+		/// <summary>
 		/// Code :: UI 속성
 		/// </summary>
 		Prop_UI = 0x50,
@@ -84,6 +89,8 @@ namespace Definition
 		Select_DefaultMove = 0x41,
 		Select_SelectObject = 0x42,
 		Select_DrawPoint = 0x43,
+
+		Graphic = 0x51,
 	}
 
 	/// <summary>
