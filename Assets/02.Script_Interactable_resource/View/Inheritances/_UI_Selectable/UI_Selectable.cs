@@ -46,6 +46,7 @@ namespace View
 		{
 			switch(_eventType)
 			{
+				case UIEventType.Toggle:
 				case UIEventType.Toggle_ViewMode:
 					Event_Toggle_ViewMode();
 					break;

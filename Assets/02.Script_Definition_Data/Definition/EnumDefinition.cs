@@ -171,11 +171,16 @@ namespace Definition
 	/// </summary>
 	public enum UIEventType
 	{
-		Toggle_ViewMode = 0x10,
-		Toggle_ViewMode_ISO = 0x11,
-		Toggle_ViewMode_TOP = 0x12,
-		Toggle_ViewMode_SIDE = 0x13,
-		Toggle_ViewMode_BOTTOM = 0x14,
+		/// <summary>
+		/// UI 토글
+		/// </summary>
+		Toggle = 0x10,
+
+		Toggle_ViewMode = 0x11,
+		Toggle_ViewMode_ISO = 0x12,
+		Toggle_ViewMode_TOP = 0x13,
+		Toggle_ViewMode_SIDE = 0x14,
+		Toggle_ViewMode_BOTTOM = 0x15,
 
 
 		Fit_Center = 0x50,
