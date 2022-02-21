@@ -9,20 +9,16 @@ namespace Module.WebAPI
 	/// 웹 API 모듈
 	/// Front, Back
 	/// </summary>
-	public partial class Module_WebAPI : MonoBehaviour, IModule
+	public partial class Module_WebAPI : AModule
 	{
-		protected int id = (int)Definition.ModuleID.WebAPI;
+		//public override void OnCreate(ModuleID _id, FunctionCode _code)
+		//{
+		//	throw new System.NotImplementedException();
+		//}
 
-		public int ID { get => id; set => id = value; }
-
-		public void OnStart(FunctionCode _code)
+		public override void Run()
 		{
-			throw new System.NotImplementedException();
-		}
-
-		void Start()
-		{
-			Debug.Log($"{this.name} start");
+			Debug.LogError($"{this.GetType().ToString()} Run");
 		}
 	}
 }

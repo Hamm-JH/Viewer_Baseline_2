@@ -7,7 +7,7 @@ namespace Module.WebAPI
 	/// <summary>
 	/// 템플릿
 	/// </summary>
-	public partial class Module_WebAPI : MonoBehaviour, IModule
+	public partial class Module_WebAPI : AModule
 	{
 		
 	}

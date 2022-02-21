@@ -70,6 +70,8 @@ namespace Definition
 
 	public enum FunctionCode
 	{
+		Null = -1,
+
 		Model_Import = 0x11,
 		Model_Export = 0x12,
 

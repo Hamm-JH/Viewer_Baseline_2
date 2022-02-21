@@ -7,7 +7,7 @@ namespace Module.Model
 	using Definition;
 	using Management;
 	
-	public partial class Module_Model : MonoBehaviour, IModule
+	public partial class Module_Model : AModule
 	{
 		private void InImport(string URI)
 		{

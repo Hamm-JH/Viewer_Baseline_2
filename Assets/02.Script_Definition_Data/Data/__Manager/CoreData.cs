@@ -22,5 +22,11 @@ namespace Definition.Data
 
 		[SerializeField] ICamera.Data cameraData;
 		public ICamera.Data CameraData { get => cameraData; set => cameraData=value; }
+
+		[SerializeField] List<ModuleID> m_moduleList;
+		[SerializeField] List<FunctionCode> m_functionCode;
+
+		public List<ModuleID> ModuleLists { get => m_moduleList; set => m_moduleList=value; }
+		public List<FunctionCode> FunctionCodes { get => m_functionCode; set => m_functionCode=value; }
 	}
 }

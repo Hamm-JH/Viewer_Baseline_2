@@ -12,7 +12,7 @@ namespace Module.Model
 	/// Piglet import module
 	/// Reference : RuntimeImportBehaviour.cs
 	/// </summary>
-	public partial class Module_Model : MonoBehaviour, IModule
+	public partial class Module_Model : AModule
 	{
 		/// <summary>
 		/// The currently running glTF import task.

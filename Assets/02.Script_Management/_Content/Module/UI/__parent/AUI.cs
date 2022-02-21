@@ -9,10 +9,13 @@ namespace Module.UI
 	[System.Serializable]
 	public abstract class AUI : MonoBehaviour, IModule
 	{
-		protected int id = (int)Definition.ModuleID.Prop_UI;
-		public int ID { get => id; set => id = value; }
+		protected ModuleID id = Definition.ModuleID.Prop_UI;
+		protected FunctionCode m_currentFunction;
 
-		public void OnStart(FunctionCode _code)
+		public ModuleID ID { get => id; set => id = value; }
+		public FunctionCode Function { get => m_currentFunction; set => m_currentFunction = value; }
+
+		public void OnCreate(ModuleID _id, FunctionCode _code)
 		{
 			throw new System.NotImplementedException();
 		}

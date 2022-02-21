@@ -8,7 +8,7 @@ namespace Module.Interaction
 	/// <summary>
 	/// 템플릿
 	/// </summary>
-	public partial class Module_Interaction : MonoBehaviour, IModule
+	public partial class Module_Interaction : AModule
 	{
 		
 	}

@@ -9,8 +9,8 @@ namespace Module.Model
 	/// <summary>
 	/// 템플릿
 	/// </summary>
-	public partial class Module_Model : MonoBehaviour, IModule
+	public partial class Module_Model : AModule
 	{
-		public GameObject debugPrefab;
+		//public GameObject debugPrefab;
 	}
 }

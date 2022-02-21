@@ -11,8 +11,16 @@ namespace Module
 	/// </summary>
 	public interface IModule
 	{
-		public int ID { get; set; }
+		/// <summary>
+		/// 모듈의 ID
+		/// </summary>
+		public ModuleID ID { get; set; }
 
-		void OnStart(FunctionCode _code);
+		/// <summary>
+		/// 모듈의 현재 기능
+		/// </summary>
+		public FunctionCode Function { get; set; }
+
+		void OnCreate(ModuleID _id, FunctionCode _code);
 	}
 }

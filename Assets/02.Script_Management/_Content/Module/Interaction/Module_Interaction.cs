@@ -11,23 +11,19 @@ namespace Module.Interaction
 	/// 상호작용 처리 모듈
 	/// 3D, UI
 	/// </summary>
-	public partial class Module_Interaction : MonoBehaviour, IModule
+	public partial class Module_Interaction : AModule
 	{
-		protected int id = (int)Definition.ModuleID.Interaction;
-
-		public int ID { get => id; set => id = value; }
-
 		public Canvas rootCanvas;
 		public GraphicRaycaster grRaycaster;
 
-		void Start()
-		{
-			Debug.Log($"{this.name} start");
-		}
+		//public override void OnCreate(ModuleID _id, FunctionCode _code)
+		//{
+		//	Debug.Log($"{this.GetType()} OnStart");
+		//}
 
-		public void OnStart(FunctionCode _code)
+		public override void Run()
 		{
-			Debug.Log($"{this.GetType()} OnStart");
+			Debug.LogError($"{this.GetType().ToString()} Run");
 		}
 	}
 }

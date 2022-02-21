@@ -5,9 +5,12 @@ using UnityEngine;
 namespace Management
 {
 	using Definition;
+	using Module;
 
 	public partial class ContentManager : IManager<ContentManager>
 	{
+		
+
 		/// <summary>
 		/// 컨텐츠 관리자가 시작될때 초기화 실행
 		/// </summary>
@@ -22,27 +25,90 @@ namespace Management
 		//	m_uiList.ForEach(x => x.Set(_codes));
 		//}
 
-		private void OnUpdate_System(Definition.Data.CoreManagement _cData)
+		private void OnUpdate_System(Definition.Data.CoreManagement _cManagement, Definition.Data.CoreData _cData)
 		{
 			// CoreManagement, CoreData를 받아온다.
 			// 생성할 모듈, 기능 목록을 받아서 초기화 수행한다.
 
 			// 1. 모듈 생성, 컨텐츠 관리자 자식에 할당
-			// 2. 생성된 모듈에 기능코드 할당
+			// 2. 생성된 모듈에 기능코드 할당 
 			// 3. 각 모듈에 기능 실행 (Do) 진행
 			// 4. 각 모듈에서 필요 데이터 알아서 가져가기
-			Debug.LogError("시스템에서 필수 데이터를 받아옴. 이후 작업 필요");
 
-			switch(_cData._Platform)
+			//Debug.LogError("시스템에서 필수 데이터를 받아옴. 이후 작업 필요");
+			//Debug.Log($"{_cManagement.GetType()}");
+			//Debug.Log($"{_cData.GetType()}");
+
+			//List<GameObject> objs = new List<GameObject>();
+
+			//switch (_cManagement._Platform)
+			//{
+			//	case Definition.PlatformCode.PC_Maker1:
+			//		model.OnExport();
+			//		break;
+
+			//	case Definition.PlatformCode.PC_Viewer1:
+			//		model.OnImport(MainManager.Instance.ModelURI);
+			//		break;
+			//}
+
+			// 1. 모듈 리스트 생성
+			List<AModule> mods = CreateModules(_cData.ModuleLists, _cData.FunctionCodes);
+			Modules = mods;
+
+			// 2. 모듈 부모배치
+			SetParentModules(mods);
+
+			// 3. 모듈 시작
+			InitModules(mods);
+		}
+
+		/// <summary>
+		/// 모듈 리스트 생성
+		/// </summary>
+		/// <param name="_modules"></param>
+		/// <param name="_functions"></param>
+		/// <returns></returns>
+		private List<AModule> CreateModules(List<ModuleID> _modules, List<FunctionCode> _functions)
+		{
+			List<AModule> mods = new List<AModule>();
+
+			_Module.Create_List(_modules, _functions, out mods);
+
+			return mods;
+		}
+
+		/// <summary>
+		/// 모듈 리스트에 등록된 모듈 부모배치
+		/// </summary>
+		/// <param name="_modules"></param>
+		private void SetParentModules(List<AModule> _modules)
+		{
+			foreach(AModule mod in _modules)
 			{
-				case Definition.PlatformCode.PC_Maker1:
-					model.OnExport();
-					break;
-
-				case Definition.PlatformCode.PC_Viewer1:
-					model.OnImport(MainManager.Instance.ModelURI);
-					break;
+				mod.transform.SetParent(this.transform);
 			}
+		}
+
+		/// <summary>
+		/// 모듈 리스트 요소별 동작 시작
+		/// </summary>
+		/// <param name="_modules"></param>
+		private void InitModules(List<AModule> _modules)
+		{
+			foreach(AModule mod in _modules)
+			{
+				InitModule(mod);
+			}
+		}
+
+		/// <summary>
+		/// 모듈 리스트 단일 요소 동작 시작
+		/// </summary>
+		/// <param name="_module"></param>
+		private void InitModule(AModule _module)
+		{
+			_module.Run();
 		}
 	}
 }

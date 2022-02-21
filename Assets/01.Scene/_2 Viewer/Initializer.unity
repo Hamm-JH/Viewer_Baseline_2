@@ -529,6 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5598f998bb783c94b976099d4cbf84d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cacheDownObj: {fileID: 0}
 --- !u!1 &902421342
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,16 +653,17 @@ MonoBehaviour:
         m_Calls: []
   inputCallback:
     main: {fileID: 0}
+    cache: {fileID: 0}
   _core:
+    mainCam: {fileID: 682087683}
+    m_camera: []
+    m_inputsource: []
+    m_rootInput: {fileID: 1914530468}
+    m_cameraPoint: {fileID: 32494251}
     m_platform: 49
     m_graphicMode: 16
     m_cameraMode: 48
-    mainCam: {fileID: 682087683}
     modelURI: http://wesmart.synology.me:45001/3dmodel/20211202-00000283.gltf
-    m_rootInput: {fileID: 1914530468}
-    m_cameraPoint: {fileID: 32494251}
-    m_inputsource: []
-    m_camera: []
   _content:
     _content: {fileID: 0}
   _data:
@@ -688,6 +690,8 @@ MonoBehaviour:
       bOrbitSpeed: 15
       bPanSpeed: 0.5
       bZoomSpeed: 10
+    m_moduleList: 10000000
+    m_functionCode: 11000000
 --- !u!1 &1245156187
 GameObject:
   m_ObjectHideFlags: 0

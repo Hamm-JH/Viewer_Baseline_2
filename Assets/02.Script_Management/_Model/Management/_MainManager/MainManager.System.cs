@@ -55,11 +55,11 @@ namespace Management
 			Debug.Log("OnUpdate");
 		}
 
-		public void SetContentManager(ContentManager content, UnityAction<CoreManagement> callback)
+		public void SetContentManager(ContentManager content, UnityAction<CoreManagement, CoreData> callback)
 		{
 			_content.Content = content;
 
-			callback.Invoke(_core);
+			callback.Invoke(_core, _data);
 		}
 
 		private void OnDestroy()

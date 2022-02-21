@@ -11,10 +11,10 @@ namespace Module.Model
 	/// <summary>
 	/// 템플릿
 	/// </summary>
-	public partial class Module_Model : MonoBehaviour, IModule
+	public partial class Module_Model : AModule
 	{
 		[Header("_Tunnel")]
-		public GameObject trashCan;
+		//public GameObject trashCan;
 
 		public List<GameObject> Segments;
 		public List<GameObject> lines;
@@ -345,7 +345,7 @@ namespace Module.Model
 				// 일반 정의되지 않은 객체에 서브메쉬가 존재하는 경우
 				if (!isInSubMesh)
 				{
-					obj.GetChild(i).SetParent(trashCan.transform);
+					//obj.GetChild(i).SetParent(trashCan.transform);
 				}
 				else
 				{

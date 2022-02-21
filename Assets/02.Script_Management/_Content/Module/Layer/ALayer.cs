@@ -5,10 +5,8 @@ using UnityEngine;
 
 namespace Module.Layer
 {
-	public abstract class ALayer : MonoBehaviour, IModule
+	public abstract class ALayer : AModule
 	{
-		protected int id = (int)Definition.ModuleID.Func_Selection;
-		public int ID { get => id; set => id = value; }
 
 		/// <summary>
 		/// 레이어 첫 생성시 실행
@@ -31,7 +29,7 @@ namespace Module.Layer
 		/// </summary>
 		public abstract void LayerOut();
 
-		public void OnStart(FunctionCode _code)
+		public override void OnCreate(ModuleID _id, FunctionCode _code)
 		{
 			throw new System.NotImplementedException();
 		}
