@@ -19,7 +19,7 @@ namespace Management
 					break;
 
 				case PlatformCode.PC_Viewer1:
-					sceneName = SceneName.PC_Viewer;
+					sceneName = SceneName.Viewer;
 					break;
 			}
 

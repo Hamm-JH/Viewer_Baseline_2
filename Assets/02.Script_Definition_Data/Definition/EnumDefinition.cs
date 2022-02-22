@@ -35,7 +35,7 @@ namespace Definition
 	{
 		NotDef = -1,
 		Maker = 0x00,
-		PC_Viewer = 0x01,
+		Viewer = 0x01,
 
 	}
 

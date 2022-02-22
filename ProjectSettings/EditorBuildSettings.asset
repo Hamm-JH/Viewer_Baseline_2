@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/01.Scene/_1 Initializer/Initializer.unity
     guid: 47045276f93f50a42b2348ee3a010da9
   - enabled: 1
-    path: Assets/01.Scene/_2 Viewer/Maker.unity
-    guid: 28cb91a06a26ee34883502a0f9442377
-  - enabled: 1
-    path: Assets/01.Scene/_2 Viewer/PC_Viewer.unity
+    path: Assets/01.Scene/_2 Viewer/Viewer.unity
     guid: 2d5380bbd65ee87439878cecb732aaa9
   m_configObjects: {}
