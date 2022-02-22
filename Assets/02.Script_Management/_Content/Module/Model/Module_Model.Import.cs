@@ -24,12 +24,29 @@ namespace Module.Model
 			root.transform.rotation = Quaternion.identity;
 
 			Model.transform.SetParent(root.transform);
+			PlatformCode platform = MainManager.Instance.Platform;
+			if (platform == PlatformCode.PC_Viewer_Tunnel)
+			{
+				
+			}
+			else if (platform == PlatformCode.PC_Viewer_Bridge)
+			{
+				Model.transform.localScale = new Vector3(0.001f, 0.001f, 0.001f);
+			}
 
 
 			Transform[] children = Model.transform.GetComponentsInChildren<Transform>();
 			SetChildren(children);
 
-			InitializeObjectTunnel(root);
+			// TODO 0223
+			if(platform == PlatformCode.PC_Viewer_Tunnel)
+			{
+				InitializeObjectTunnel(root);
+			}
+			else if(platform == PlatformCode.PC_Viewer_Bridge)
+			{
+				InitializeObjectBridge(root);
+			}
 
 			//ContentManager.Instance.SetCameraCenterPosition();
 			

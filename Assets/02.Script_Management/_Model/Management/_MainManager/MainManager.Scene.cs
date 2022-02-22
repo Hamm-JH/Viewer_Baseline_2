@@ -18,7 +18,8 @@ namespace Management
 					sceneName = SceneName.Maker;
 					break;
 
-				case PlatformCode.PC_Viewer1:
+				case PlatformCode.PC_Viewer_Tunnel:
+				case PlatformCode.PC_Viewer_Bridge:
 					sceneName = SceneName.Viewer;
 					break;
 			}

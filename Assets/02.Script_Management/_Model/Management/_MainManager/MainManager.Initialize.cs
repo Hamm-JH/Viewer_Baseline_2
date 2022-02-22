@@ -9,6 +9,7 @@ namespace Management
 	using Platform.Feature._Input;
 	using Definition;
 	using Definition.Control;
+	using Definition.Data;
 
 	public partial class MainManager : IManager<MainManager>
 	{
@@ -31,8 +32,9 @@ namespace Management
 			//CameraMode input_camMode = CameraMode.BIM_ISO;
 
 			// 마우스 데이터 (기본값)
-			float dragBoundary = 1.5f;
+			//float dragBoundary = 1.5f;
 
+			_data = _templateDatas[m_templateIndex];
 
 			//-------------------------------------------- 초기화
 
@@ -42,6 +44,8 @@ namespace Management
 			//_core.CameraMode = input_camMode;
 
 			//-------------------------------------------- 다음 단계
+
+			yield return new WaitForEndOfFrame();
 
 			callback.Invoke();
 			yield break;
@@ -54,6 +58,8 @@ namespace Management
 
 		private void SetSystemInstance()
 		{
+			InitCoreData(_data);
+
 			// 입력 인스턴스 초기화
 			InitInputResource(_core._Platform);
 
@@ -66,6 +72,12 @@ namespace Management
 		#endregion
 
 		#region 1 입력 초기화
+
+		private void InitCoreData(CoreData _data)
+		{
+			_core._Platform = _data.Platform;
+			_core.GraphicMode = _data.Graphic;
+		}
 
 		/// <summary>
 		/// 입력 인스턴스 할당코드 모음
@@ -88,6 +100,7 @@ namespace Management
 			}
 			else if (platformIndex == 2)        // mobile
 			{
+				// TODO Input Mobile
 				Debug.LogError("아직 Mobile 코드가 작성되지 않았습니다. 작성 후 업데이트 필요함.");
 			}
 		}

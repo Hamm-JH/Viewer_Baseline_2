@@ -11,12 +11,16 @@ namespace Definition
 	public enum PlatformCode
 	{
 		NotDef = -1,
+
 		WebGL_Template1 = 0x10,
 		WebGL_Template2 = 0x11,
+
 		Mobile_Template1 = 0x20,
 		Mobile_Template2 = 0x21,
+
 		PC_Maker1 = 0x30,
-		PC_Viewer1 = 0x31,
+		PC_Viewer_Tunnel = 0x31,
+		PC_Viewer_Bridge = 0x32,
 	}
 
 	public enum GraphicCode
@@ -193,10 +197,23 @@ namespace Definition
 		OrthoView_Orthogonal = 0x31,
 		OrthoView_Perspective = 0x32,
 
+		Mode_Hide = 0x41,
+		Mode_Isolate = 0x42,
+
 		Fit_Center = 0x50,
 
 		Slider_Model_Transparency = 0x100,
 		Slider_Icon_Scale = 0x101,
+	}
+
+	/// <summary>
+	/// 객체의 토글 방식
+	/// </summary>
+	public enum ToggleType
+	{
+		ALL = 0x00,
+		Hide = 0x01,
+		Isolate = 0x02,
 	}
 
 	public enum ColorType

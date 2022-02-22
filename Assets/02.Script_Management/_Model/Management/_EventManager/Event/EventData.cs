@@ -11,6 +11,7 @@ namespace Management.Events
 	/// <summary>
 	/// 접근 데이터와 데이터에 접근하기 위한 메서드 원형 선언
 	/// </summary>
+	[System.Serializable]
 	public abstract class EventData
 	{
 		protected IInteractable m_element;

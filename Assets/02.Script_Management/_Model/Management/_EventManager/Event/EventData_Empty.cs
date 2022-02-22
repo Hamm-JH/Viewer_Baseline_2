@@ -6,6 +6,7 @@ namespace Management.Events
 {
 	using Definition;
 
+	[System.Serializable]
 	public class EventData_Empty : EventData
 	{
 		public EventData_Empty()

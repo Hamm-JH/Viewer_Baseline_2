@@ -11,15 +11,17 @@ namespace Management
 	/// </summary>
 	public partial class EventManager : IManager<EventManager>
 	{
-		[SerializeField] EventData selectedEvent;
+		[SerializeField] EventData m_selectedEvent;
 		[SerializeField] GameObject cacheDownObj;
+
+		public EventData SelectedEvent { get => m_selectedEvent; set => m_selectedEvent=value; }
 
 		public void OnEvent(EventData currEvent)
 		{
 			// 선택된 이벤트 상태가 없는 경우, 아무 동작을 수행하지 않는 더미 인스턴스를 생성한다.
-			if(selectedEvent == null)
+			if(SelectedEvent == null)
 			{
-				selectedEvent = new EventData_Empty();
+				SelectedEvent = new EventData_Empty();
 			}
 
 			// 현재 발생한 이벤트가 동작을 필요로 하지 않는 이벤트일 경우가 있다.
@@ -32,7 +34,7 @@ namespace Management
 			currEvent.OnProcess(cacheDownObj);
 
 			// 이벤트 실행
-			DoEvent(selectedEvent, currEvent);
+			DoEvent(SelectedEvent, currEvent);
 		}
 
 		/// <summary>
@@ -132,7 +134,7 @@ namespace Management
 				{
 					cacheDownObj = currEvent.Element.Target;
 				}
-				selectedEvent = currEvent;
+				SelectedEvent = currEvent;
 			}
 			// 마우스 클릭 끝 (가능함)
 			else if(currEvent.EventType == Definition.InputEventType.Input_clickSuccessUp)
@@ -141,18 +143,18 @@ namespace Management
 				currEvent.DoEvent();
 				//MainManager.Instance.cameraExecuteEvents.selectEvent.Invoke(currEvent.Element.Target);	// 마우스 클릭 성공시 실행 (객체 선택 모드)
 				cacheDownObj = null;
-				selectedEvent = currEvent;
+				SelectedEvent = currEvent;
 			}
 			// 마우스 클릭 끝 (불가능함)
 			else if(currEvent.EventType == Definition.InputEventType.Input_clickFailureUp)
 			{
 				cacheDownObj = null;
-				if(selectedEvent.EventType == Definition.InputEventType.Input_clickDown)
+				if(SelectedEvent.EventType == Definition.InputEventType.Input_clickDown)
 				{
-					if(selectedEvent != null)
+					if(SelectedEvent != null)
 					{
-						DeselectEvent(selectedEvent);
-						selectedEvent = null;
+						DeselectEvent(SelectedEvent);
+						SelectedEvent = null;
 					}
 				}
 			}
@@ -164,8 +166,8 @@ namespace Management
 			else if(currEvent.EventType == Definition.InputEventType.Input_drag)
 			{
 				// 이전 이벤트가 clickDown이고, UI를 눌렀었는가?
-				if (selectedEvent.EventType == Definition.InputEventType.Input_clickDown &&
-					selectedEvent.Results.Count > 0) { }
+				if (SelectedEvent.EventType == Definition.InputEventType.Input_clickDown &&
+					SelectedEvent.Results.Count > 0) { }
 				// 위의 조건이 아닐 경우
 				else
 				{

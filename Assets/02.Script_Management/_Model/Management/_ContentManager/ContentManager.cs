@@ -42,6 +42,26 @@ namespace Management
 			}
 		}
 
+		[SerializeField] List<GameObject> m_modelObjects;
+
+		public List<GameObject> _ModelObjects
+		{
+			get
+			{
+				if(m_modelObjects == null)
+				{
+					Module_Model mod = (Module_Model)Modules.Find(x => x.ID == ModuleID.Model);
+					m_modelObjects = mod.ModelObjects;
+				}
+				if(m_modelObjects.Count == 0)
+				{
+					Module_Model mod = (Module_Model)Modules.Find(x => x.ID == ModuleID.Model);
+					m_modelObjects = mod.ModelObjects;
+				}
+				return m_modelObjects;
+			}
+		}
+
 		/// <summary>
 		/// UI 메인 캔버스 반환
 		/// </summary>

@@ -60,6 +60,74 @@ namespace Management
 			}
 		}
 
+		public void Set_Model_Transparency(float _value)
+		{
+			foreach(GameObject obj in _ModelObjects)
+			{
+				MeshRenderer render;
+				if(obj.TryGetComponent<MeshRenderer>(out render))
+				{
+					Material mat = render.material;
+					Color colr = mat.color;
+					render.material.SetColor("_Color", new Color(colr.r, colr.g, colr.b, _value));
+				}
+			}
+		}
+
+		public void Toggle_ModelObject(ToggleType type)
+		{
+			// TODO 0223 1순위
+			Events.EventData eData = EventManager.Instance.SelectedEvent;
+
+			if(eData.Element == null)
+			{
+				Debug.LogError("EventData is null");
+				return;
+			}
+			if(eData.Element.Target == null)
+			{
+				Debug.LogError("EventData Object is null");
+				return;
+			}
+
+			GameObject selected = EventManager.Instance.SelectedEvent.Element.Target;
+
+			bool isHide = false;
+			switch(type)
+			{
+				case ToggleType.Hide:	isHide = true;	break;
+				case ToggleType.Isolate:isHide = false;	break;
+			}
+
+			foreach(GameObject obj in _ModelObjects)
+			{
+				bool isSelctedObject = selected == obj;
+
+				float alpha = 0.1f;
+				// 이 객체가 맞음, 숨겨야됨			true true -> alpha = 0.1
+				// 이 객체가 맞음, 제외 숨겨야됨	true false -> alpha = 1
+				// 이 객체 아님, 숨겨야됨			false true -> alpha = 1
+				// 이 객체 아님, 제외 숨겨야됨		false false -> alpha = 0.1
+
+				if(isSelctedObject)
+				{
+					alpha = isHide ? 0.1f : 1f;
+				}
+				else
+				{
+					alpha = isHide ? 1f : 0.1f;
+				}
+
+				MeshRenderer render;
+				if(obj.TryGetComponent<MeshRenderer>(out render))
+				{
+					Material mat = render.material;
+					Color colr = mat.color;
+					render.material.SetColor("_Color", new Color(colr.r, colr.g, colr.b, alpha));
+				}
+			}
+		}
+
 		public void Function_ToggleOrthoView(bool _isOrthogonal)
 		{
 			MainManager.Instance.MainCamera.orthographic = _isOrthogonal;

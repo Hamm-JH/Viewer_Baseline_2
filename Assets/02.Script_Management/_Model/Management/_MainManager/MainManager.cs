@@ -34,6 +34,9 @@ namespace Management
 		[Header("Dataset from start sequence")]
 		[SerializeField] CoreData _data;
 
+		[Header("Dataset test template")]
+		[SerializeField] int m_templateIndex;
+		[SerializeField] List<CoreData> _templateDatas;
 
 		#region 주 관리자에서 요청할 데이터를 프로퍼티로 전달하는 구간
 
@@ -44,7 +47,7 @@ namespace Management
 
 		public string ModelURI
 		{
-			get => _core.ModelURI;
+			get => _data.ModelURI;
 		}
 
 		public PlatformCode Platform

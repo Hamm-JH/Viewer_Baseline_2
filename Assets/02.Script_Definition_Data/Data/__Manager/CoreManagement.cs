@@ -36,9 +36,6 @@ namespace Definition.Data
 		[SerializeField] PlatformCode m_platform;
 		[SerializeField] GraphicCode m_graphicMode;
 		[SerializeField] CameraModes m_cameraMode;
-		//[SerializeField] Camera mainCam;
-
-		[SerializeField] string modelURI;
 
 		public PlatformCode _Platform
 		{ 
@@ -63,10 +60,6 @@ namespace Definition.Data
 				Cameras.ForEach(x => x.CamMode = value);
 			}
 		}
-
-		//public Camera MainCam { get => mainCam; set => mainCam=value; }
-
-		public string ModelURI { get => modelURI; set => modelURI=value; }
 
 		#endregion
 

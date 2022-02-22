@@ -68,6 +68,11 @@ namespace View
 
 		#region Conditional Branch
 
+		/// <summary>
+		/// Slider Branch
+		/// </summary>
+		/// <param name="_value"></param>
+		/// <param name="_eventType"></param>
 		private void ConditionalBranch(float _value, UIEventType _eventType)
 		{
 			switch(_eventType)
@@ -82,6 +87,10 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// Button Branch
+		/// </summary>
+		/// <param name="_eventType"></param>
 		private void ConditionalBranch(UIEventType _eventType)
 		{
 			switch(_eventType)
@@ -104,6 +113,14 @@ namespace View
 
 				case UIEventType.OrthoView_Perspective:
 					Event_ToggleOrthoView(false);
+					break;
+
+				case UIEventType.Mode_Hide:
+					Event_Mode_Hide();
+					break;
+
+				case UIEventType.Mode_Isolate:
+					Event_Mode_Isolate();
 					break;
 
 				case UIEventType.Fit_Center:

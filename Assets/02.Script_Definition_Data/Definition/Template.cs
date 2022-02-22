@@ -12,7 +12,8 @@ namespace Definition
 
 			switch(_platform)
 			{
-				case PlatformCode.PC_Viewer1:
+				case PlatformCode.PC_Viewer_Tunnel:
+				case PlatformCode.PC_Viewer_Bridge:
 					obj = Resources.Load<GameObject>("UI/TestView0221");
 					break;
 			}

@@ -18,7 +18,8 @@ namespace Module.Model
 
 		public List<GameObject> Segments;
 		public List<GameObject> lines;
-		public List<GameObject> modelObjects;
+		
+
 		private List<GameObject> toDelete;
 
 
@@ -31,7 +32,7 @@ namespace Module.Model
 		{
 			Segments = new List<GameObject>();
 			lines = new List<GameObject>();
-			modelObjects = new List<GameObject>();
+			ModelObjects = new List<GameObject>();
 			toDelete = new List<GameObject>();
 
 			//yield break;
@@ -50,7 +51,7 @@ namespace Module.Model
 			yield return new WaitForEndOfFrame();
 
 			//ControlSubMesh(Segments);
-			SetModelObjects(modelObjects);
+			SetModelObjects(ModelObjects);
 
 			//yield break;
 			yield return new WaitForEndOfFrame();
@@ -167,13 +168,13 @@ namespace Module.Model
 				{
 					//Debug.Log("not correct");	// 라인 객체가 아님 (모델 객체들임)
 					string _name = tunnel.GetChild(i).name;
-					if(modelObjects.Find(x => x.name == _name))
+					if(ModelObjects.Find(x => x.name == _name))
 					{
 						toDelete.Add(tunnel.GetChild(i).gameObject);
 					}
 					else
 					{
-						modelObjects.Add(tunnel.GetChild(i).gameObject);   // On/Off용 리스트에 배치
+						ModelObjects.Add(tunnel.GetChild(i).gameObject);   // On/Off용 리스트에 배치
 					}
 				}
 				else

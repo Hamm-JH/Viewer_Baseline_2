@@ -10,6 +10,7 @@ namespace Management.Events
 	using UnityEngine.EventSystems;
 	using UnityEngine.Events;
 
+	[System.Serializable]
 	public class EventData_Input : EventData
 	{
 		public Camera m_camera;

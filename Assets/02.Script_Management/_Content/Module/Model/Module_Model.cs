@@ -15,9 +15,11 @@ namespace Module.Model
 	{
 		[SerializeField] private GameObject model;
 		[SerializeField] private Bounds centerBounds;
+		[SerializeField] private List<GameObject> m_modelObjects;
 
 		protected GameObject Model { get => model; set => model=value; }
 		public Bounds CenterBounds { get => centerBounds; }
+		public List<GameObject> ModelObjects { get => m_modelObjects; set => m_modelObjects=value; }
 
 		/// <summary>
 		/// 모델 받아오기

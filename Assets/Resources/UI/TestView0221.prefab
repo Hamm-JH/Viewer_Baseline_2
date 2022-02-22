@@ -6807,6 +6807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 272014392790181479}
   - component: {fileID: 817728831513735687}
+  - component: {fileID: 916655718709932033}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -6887,6 +6888,21 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &916655718709932033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3031270892168140267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventType: 256
+  childPanel: {fileID: 0}
+  uiFXs: []
 --- !u!1 &3076772843548328252
 GameObject:
   m_ObjectHideFlags: 0
@@ -7996,7 +8012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventType: 16
+  eventType: 66
   childPanel: {fileID: 0}
   uiFXs: []
 --- !u!1 &3076772844853713278
@@ -8285,7 +8301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventType: 16
+  eventType: 65
   childPanel: {fileID: 0}
   uiFXs: []
 --- !u!1 &3076772845355305392
@@ -9410,7 +9426,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uC544\uC774\uCF58 \uD22C\uBA85\uB3C4 "
+  m_Text: "\uC544\uC774\uCF58 \uD06C\uAE30"
 --- !u!1 &3490484599119477483
 GameObject:
   m_ObjectHideFlags: 0
@@ -14222,6 +14238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4291334727508164964}
   - component: {fileID: 4999224494162777432}
+  - component: {fileID: 916655718709932032}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -14302,6 +14319,21 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &916655718709932032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5703503586569999874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventType: 257
+  childPanel: {fileID: 0}
+  uiFXs: []
 --- !u!1 &5712757525273240197
 GameObject:
   m_ObjectHideFlags: 0

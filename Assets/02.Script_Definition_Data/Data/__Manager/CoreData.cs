@@ -13,6 +13,10 @@ namespace Definition.Data
 	[System.Serializable]
 	public class CoreData : IData
 	{
+		[SerializeField] PlatformCode m_platform;
+		[SerializeField] GraphicCode m_graphic;
+		[SerializeField] string m_modelURI;
+
 		[SerializeField] Mouse.Data mouseData;
 		[SerializeField] Keyboard.Data keyboardData;
 
@@ -28,5 +32,12 @@ namespace Definition.Data
 
 		public List<ModuleID> ModuleLists { get => m_moduleList; set => m_moduleList=value; }
 		public List<FunctionCode> FunctionCodes { get => m_functionCode; set => m_functionCode=value; }
+
+
+		//20211202-00000283
+
+		public PlatformCode Platform { get => m_platform; set => m_platform=value; }
+		public GraphicCode Graphic { get => m_graphic; set => m_graphic=value; }
+		public string ModelURI { get => m_modelURI; set => m_modelURI=value; }
 	}
 }
