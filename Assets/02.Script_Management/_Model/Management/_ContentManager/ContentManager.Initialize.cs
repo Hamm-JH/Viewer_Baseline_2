@@ -20,11 +20,11 @@ namespace Management
 			MainManager.Instance.SetContentManager(this, OnUpdate_System);
 		}
 
-		//private void LayerUpdate(List<LayerCode> _codes)
-		//{
-		//	m_uiList.ForEach(x => x.Set(_codes));
-		//}
-
+		/// <summary>
+		/// 주관리자에서 초기화에 필요한 정보를 얻어옴
+		/// </summary>
+		/// <param name="_cManagement"></param>
+		/// <param name="_cData"></param>
 		private void OnUpdate_System(Definition.Data.CoreManagement _cManagement, Definition.Data.CoreData _cData)
 		{
 			// CoreManagement, CoreData를 받아온다.

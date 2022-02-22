@@ -14,6 +14,11 @@ namespace View
 			get => gameObject;
 		}
 
+		public override void OnChangeValue(float _value)
+		{
+			throw new System.NotImplementedException();
+		}
+
 		public override void OnDeselect()
 		{
 			//Debug.Log($"OnDeselect : {this.name}");

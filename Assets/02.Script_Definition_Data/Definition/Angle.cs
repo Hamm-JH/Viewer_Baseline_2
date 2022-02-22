@@ -12,19 +12,19 @@ namespace Definition
 
 			switch(eventType)
 			{
-				case UIEventType.Toggle_ViewMode_ISO:
+				case UIEventType.Viewport_ViewMode_ISO:
 					result = new Vector3(45, 45, 0);
 					break;
 
-				case UIEventType.Toggle_ViewMode_TOP:
+				case UIEventType.Viewport_ViewMode_TOP:
 					result = new Vector3(90, 0, 0);
 					break;
 
-				case UIEventType.Toggle_ViewMode_SIDE:
+				case UIEventType.Viewport_ViewMode_SIDE:
 					result = new Vector3(0, 0, 0);
 					break;
 
-				case UIEventType.Toggle_ViewMode_BOTTOM:
+				case UIEventType.Viewport_ViewMode_BOTTOM:
 					result = new Vector3(-90, 0, 0);
 					break;
 			}

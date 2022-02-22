@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,23 +7,17 @@ namespace Module.UI
 	using Definition;
 
 	[System.Serializable]
-	public abstract class AUI : MonoBehaviour, IModule
+	public abstract class AUI : AModule
 	{
-		protected ModuleID id = Definition.ModuleID.Prop_UI;
-		protected FunctionCode m_currentFunction;
-
-		public ModuleID ID { get => id; set => id = value; }
-		public FunctionCode Function { get => m_currentFunction; set => m_currentFunction = value; }
-
-		public void OnCreate(ModuleID _id, FunctionCode _code)
+		public override void OnCreate(ModuleID _id, FunctionCode _code)
 		{
-			throw new System.NotImplementedException();
+			base.OnCreate(_id, _code);
 		}
 
 		/// <summary>
-		/// ·¹ÀÌ¾î ÄÚµå ±â¹İÀ¸·Î ³»ºÎ µ¥ÀÌÅÍ °»½Å
+		/// í„°ë„ ëª¨ë¸ì—ì„œ ì„ íƒëœ ê°ì²´ì˜ ì •ë³´ë¥¼ ì„¤ì •í•œë‹¤.
 		/// </summary>
-		/// <param name="_codes"></param>
-		//public abstract void Set(List<LayerCode> _codes);
+		/// <param name="selected"></param>
+		public abstract void SetObjectData_Tunnel(GameObject selected);
 	}
 }

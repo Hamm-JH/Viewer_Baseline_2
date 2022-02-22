@@ -67,7 +67,19 @@ namespace Platform.Feature.Camera
 		{
             float scroll = delta;
 
-            transform.position += transform.forward * scroll * zoomSpeed;
+            UnityEngine.Camera cam = this.GetComponent<UnityEngine.Camera>();
+
+            if(cam.orthographic)
+			{
+                // 직교 뷰 크기 포커스 변경
+                this.GetComponent<UnityEngine.Camera>().orthographicSize -= delta;
+			}
+            else
+			{
+                // 투영 뷰 포커스 변경
+                transform.position += transform.forward * scroll * zoomSpeed;
+			}
+
         }
     }
 }

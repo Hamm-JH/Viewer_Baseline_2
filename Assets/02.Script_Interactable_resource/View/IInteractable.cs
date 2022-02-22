@@ -33,5 +33,11 @@ namespace View
 		/// </summary>
 		void OnDeselect();
 
+		/// <summary>
+		/// 인스턴스 값 변경
+		/// :: 슬라이더
+		/// </summary>
+		/// <param name="_value"></param>
+		void OnChangeValue(float _value);
 	}
 }

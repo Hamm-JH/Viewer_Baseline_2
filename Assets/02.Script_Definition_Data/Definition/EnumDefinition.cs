@@ -183,14 +183,20 @@ namespace Definition
 		/// </summary>
 		Toggle = 0x10,
 
-		Toggle_ViewMode = 0x11,
-		Toggle_ViewMode_ISO = 0x12,
-		Toggle_ViewMode_TOP = 0x13,
-		Toggle_ViewMode_SIDE = 0x14,
-		Toggle_ViewMode_BOTTOM = 0x15,
+		Viewport_ViewMode = 0x20,
+		Viewport_ViewMode_ISO = 0x21,
+		Viewport_ViewMode_TOP = 0x22,
+		Viewport_ViewMode_SIDE = 0x23,
+		Viewport_ViewMode_BOTTOM = 0x24,
 
+		OrthoView = 0x30,
+		OrthoView_Orthogonal = 0x31,
+		OrthoView_Perspective = 0x32,
 
 		Fit_Center = 0x50,
+
+		Slider_Model_Transparency = 0x100,
+		Slider_Icon_Scale = 0x101,
 	}
 
 	public enum ColorType

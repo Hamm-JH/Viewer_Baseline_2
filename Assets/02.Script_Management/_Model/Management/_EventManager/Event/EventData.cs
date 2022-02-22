@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Management.Events
 {
 	using Definition;
+	using UnityEngine.EventSystems;
 	using View;
 
 	/// <summary>
@@ -30,6 +31,17 @@ namespace Management.Events
 		/// 이벤트 처리 결과
 		/// </summary>
 		public Status StatusCode { get => status; set => status=value; }
+
+		[Header("Private")]
+		protected GameObject m_selected3D = null;
+		protected RaycastHit m_hit = default(RaycastHit);
+		protected List<RaycastResult> m_results = new List<RaycastResult>();
+
+		public GameObject Selected3D { get => m_selected3D; set => m_selected3D=value; }
+		public RaycastHit Hit { get => m_hit; set => m_hit=value; }
+		public List<RaycastResult> Results { get => m_results; set => m_results=value; }
+
+
 
 		//public EventData() { }
 

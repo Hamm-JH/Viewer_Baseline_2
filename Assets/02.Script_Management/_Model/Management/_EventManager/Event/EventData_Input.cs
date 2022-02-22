@@ -15,6 +15,8 @@ namespace Management.Events
 		public Camera m_camera;
 		public GraphicRaycaster m_graphicRaycaster;
 
+		
+
 		[Header("OnClick")]
 		public Vector3 m_clickPosition;
 		UnityEvent<GameObject> m_clickEvent;
@@ -33,6 +35,8 @@ namespace Management.Events
 		[Header("OnKey")]
 		public List<KeyCode> m_keys;
 		UnityEvent<List<KeyCode>> m_keyEvent;
+
+		
 
 		/// <summary>
 		/// 클릭 이벤트 생성자
@@ -127,7 +131,31 @@ namespace Management.Events
 			switch(EventType)
 			{
 				case InputEventType.Input_clickDown:
-					// 객체 선택 단계에선 code :: skip
+					// 객체 선택 단계에선 code :: pass, skip
+					{
+						Status _success = Status.Update;
+						Status _fail = Status.Update;
+
+						Debug.Log(EventType.ToString());
+						m_selected3D = null;
+						m_hit = default(RaycastHit);
+						m_results = new List<RaycastResult>();
+
+						Get_Collect3DObject(m_clickPosition, out m_selected3D, out m_hit, out m_results);
+
+						if (Selected3D != null)
+						{
+							IInteractable interactable;
+							if (Selected3D.TryGetComponent<IInteractable>(out interactable))
+							{
+								Element = interactable;
+								StatusCode = _success;
+								return;
+							}
+						}
+						Element = null;
+						StatusCode = _fail;
+					}
 					// 데칼 배치 단계에선 code :: skip
 
 					return;
@@ -135,26 +163,49 @@ namespace Management.Events
 				case InputEventType.Input_clickSuccessUp:
 					// 객체 선택 단계에선 code :: pass, drop
 					{
+						Status _success = Status.Pass;
+						Status _fail = Status.Drop;
+
 						Debug.Log(EventType.ToString());
-						GameObject selected3D = null;
-						RaycastHit hit = default(RaycastHit);
+						m_selected3D = null;
+						m_hit = default(RaycastHit);
+						m_results = new List<RaycastResult>();
 
-						Get_Collect3DObject(m_clickPosition, out selected3D, out hit);
+						Get_Collect3DObject(m_clickPosition, out m_selected3D, out m_hit, out m_results);
 
-						if(selected3D != null)
+						if(Selected3D != null)
 						{
 							IInteractable interactable;
-							if(selected3D.TryGetComponent<IInteractable>(out interactable))
+							if(Selected3D.TryGetComponent<IInteractable>(out interactable))
 							{
 								Element = interactable;
-								StatusCode = Status.Pass;
+								// UI에 선택 정보 업데이트
+								//Debug.Log();
+								//for (int i = 0; i < m_clickEvent.GetPersistentEventCount(); i++)
+								//{
+								//	Debug.Log(m_clickEvent.GetPersistentMethodName(i));
+								//}
+
+								//m_clickEvent.GetPersistentMethodName()
+								m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+								m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+								Debug.Log(m_clickEvent.GetPersistentEventCount());
+								StatusCode = _success;
 								return;
 							}
 						}
 						Element = null;
-						StatusCode = Status.Drop;
+						StatusCode = _fail;
 					}
 					// 데칼 배치 단계에선 code :: pass, drop
+					break;
+
+				case InputEventType.Input_clickFailureUp:
+					{
+						// 객체 선택 단계에선 code :: Update
+						// 데칼 배치 단계에선 code :: Update
+						StatusCode = Status.Update;
+					}
 					break;
 
 				case InputEventType.Input_drag:
@@ -214,15 +265,15 @@ namespace Management.Events
 		/// <param name="_mousePos"></param>
 		/// <param name="obj"></param>
 		/// <param name="_hit"></param>
-		private void Get_Collect3DObject(Vector3 _mousePos, out GameObject obj, out RaycastHit _hit)
+		private void Get_Collect3DObject(Vector3 _mousePos, out GameObject obj, out RaycastHit _hit, out List<RaycastResult> _results)
 		{
 			obj = null;
 
 			//RaycastHit _hit = default(RaycastHit);
 			GameObject _selected3D = Get_GameObject3D(_mousePos, out _hit);
-			List<RaycastResult> results = Get_GameObjectUI(_mousePos);
+			_results = Get_GameObjectUI(_mousePos);
 
-			if (results.Count != 0)
+			if (_results.Count != 0)
 			{
 
 			}
@@ -275,6 +326,8 @@ namespace Management.Events
 			pointerEventData.position = _mousePos;
 
 			m_graphicRaycaster.Raycast(pointerEventData, results);
+
+			Debug.Log($"***** raycast count : {results.Count}");
 
 			return results;
 		}

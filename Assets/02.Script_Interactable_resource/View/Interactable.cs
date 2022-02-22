@@ -22,5 +22,7 @@ namespace View
 		/// 인스턴스 선택 해제시 실행
 		/// </summary>
 		public abstract void OnDeselect();
+
+		public abstract void OnChangeValue(float _value);
 	}
 }

@@ -36,10 +36,10 @@ namespace Definition.Data
 
 			switch (_eventType)
 			{
-				case UIEventType.Toggle_ViewMode_ISO: _typeIndex = 0x00; break;
-				case UIEventType.Toggle_ViewMode_TOP: _typeIndex = 0x01; break;
-				case UIEventType.Toggle_ViewMode_SIDE: _typeIndex = 0x02; break;
-				case UIEventType.Toggle_ViewMode_BOTTOM: _typeIndex = 0x03; break;
+				case UIEventType.Viewport_ViewMode_ISO: _typeIndex = 0x00; break;
+				case UIEventType.Viewport_ViewMode_TOP: _typeIndex = 0x01; break;
+				case UIEventType.Viewport_ViewMode_SIDE: _typeIndex = 0x02; break;
+				case UIEventType.Viewport_ViewMode_BOTTOM: _typeIndex = 0x03; break;
 			}
 
 			_modes = (CameraModes)(_modeIndex * 0x10 + _typeIndex);
@@ -75,6 +75,8 @@ namespace Definition.Data
 
 				// size의 반절, * 루트2 만큼 멀어져야 함
 				float distance = Vector3.Distance(center, centerBounds.min);
+
+				mainCam.orthographicSize = distance;
 
 				mainCam.transform.Translate(Vector3.back * distance * 1.4f * (ratio * 0.8f));
 			}

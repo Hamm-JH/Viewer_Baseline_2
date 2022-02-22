@@ -47,6 +47,11 @@ namespace Management
 			get => _core.ModelURI;
 		}
 
+		public PlatformCode Platform
+		{
+			get => _core._Platform;
+		}
+
 		public ContentManager Content
 		{
 			get => _content.Content;

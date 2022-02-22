@@ -15,16 +15,31 @@ namespace View
 			get => gameObject;
 		}
 
+		Button m_btn;
+		Slider m_slider;
+
 		[SerializeField] UIEventType eventType;
 
+		/// <summary>
+		/// 자식 패널 객체
+		/// </summary>
 		[SerializeField] GameObject childPanel;
+
+		/// <summary>
+		/// ui 효과 요소
+		/// </summary>
+		[SerializeField] List<GameObject> uiFXs;
 
 		private void Start()
 		{
-			Button btn;
-			if(gameObject.TryGetComponent<Button>(out btn))
+			if(gameObject.TryGetComponent<Button>(out m_btn))
 			{
-				btn.onClick.AddListener(new UnityAction(OnSelect));
+				m_btn.onClick.AddListener(new UnityAction(OnSelect));
+			}
+
+			if(gameObject.TryGetComponent<Slider>(out m_slider))
+			{
+				m_slider.onValueChanged.AddListener(new UnityAction<float>(OnChangeValue));
 			}
 		}
 
@@ -42,20 +57,53 @@ namespace View
 			ConditionalBranch(eventType);
 		}
 
+		/// <summary>
+		/// 슬라이더 값 변경시 실행
+		/// </summary>
+		/// <param name="_value"></param>
+		public override void OnChangeValue(float _value)
+		{
+			ConditionalBranch(_value, eventType);
+		}
+
+		#region Conditional Branch
+
+		private void ConditionalBranch(float _value, UIEventType _eventType)
+		{
+			switch(_eventType)
+			{
+				case UIEventType.Slider_Model_Transparency:
+					Event_Model_Transparency(_value);
+					break;
+
+				case UIEventType.Slider_Icon_Scale:
+					Event_Icon_Scale(_value);
+					break;
+			}
+		}
+
 		private void ConditionalBranch(UIEventType _eventType)
 		{
 			switch(_eventType)
 			{
 				case UIEventType.Toggle:
-				case UIEventType.Toggle_ViewMode:
+				case UIEventType.Viewport_ViewMode:
 					Event_Toggle_ViewMode();
 					break;
 
-				case UIEventType.Toggle_ViewMode_ISO:
-				case UIEventType.Toggle_ViewMode_TOP:
-				case UIEventType.Toggle_ViewMode_SIDE:
-				case UIEventType.Toggle_ViewMode_BOTTOM:
+				case UIEventType.Viewport_ViewMode_ISO:
+				case UIEventType.Viewport_ViewMode_TOP:
+				case UIEventType.Viewport_ViewMode_SIDE:
+				case UIEventType.Viewport_ViewMode_BOTTOM:
 					Event_Toggle_ViewMode(_eventType);
+					break;
+
+				case UIEventType.OrthoView_Orthogonal:
+					Event_ToggleOrthoView(true);
+					break;
+
+				case UIEventType.OrthoView_Perspective:
+					Event_ToggleOrthoView(false);
 					break;
 
 				case UIEventType.Fit_Center:
@@ -63,5 +111,8 @@ namespace View
 					break;
 			}
 		}
+
+		#endregion
+
 	}
 }

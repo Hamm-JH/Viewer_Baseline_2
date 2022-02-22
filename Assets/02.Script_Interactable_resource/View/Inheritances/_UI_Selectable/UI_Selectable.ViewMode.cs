@@ -12,7 +12,19 @@ namespace View
 	{
 		private void Event_Toggle_ViewMode()
 		{
-			childPanel?.SetActive(!(bool)childPanel.activeSelf);
+
+			if(childPanel != null)
+			{
+				bool toggle = !(bool)childPanel.activeSelf;
+				
+				childPanel.SetActive(toggle);
+
+				foreach(GameObject obj in uiFXs)
+				{
+					obj.SetActive(toggle);
+				}
+			}
+
 		}
 
 		private void Event_Toggle_ViewMode(UIEventType _eventType)

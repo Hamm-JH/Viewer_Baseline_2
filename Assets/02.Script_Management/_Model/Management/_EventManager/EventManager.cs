@@ -62,13 +62,18 @@ namespace Management
 			// -> 현재 이벤트만 확인
 			if (_selected.Element == null)
 			{
-				// 현재 이벤트의 Element가 null이 아닐경우
-				// 현재 이벤트를 이전 이벤트로 이전하고 업데이트
-				if (_curr.Element != null)
+				// 이전 이벤트의 경우가 클릭다운이 아닌 경우에만 실행
+				// (
+				if(_selected.EventType != Definition.InputEventType.Input_clickDown)
 				{
-					UpdateNewEvent(_curr);
+					// 현재 이벤트의 Element가 null이 아닐경우
+					// 현재 이벤트를 이전 이벤트로 이전하고 업데이트
+					if (_curr.Element != null)
+					{
+						UpdateNewEvent(_curr);
+					}
+					return;
 				}
-				return;
 			}
 
 			// _selected.Element == null인 상태는 모두 필터링됨
@@ -122,7 +127,12 @@ namespace Management
 			// 마우스 클릭 다운 단계
 			if(currEvent.EventType == Definition.InputEventType.Input_clickDown)
 			{
-				cacheDownObj = currEvent.Element.Target;
+				// 특정 객체를 클릭한 경우에 실행
+				if(currEvent.Element != null)
+				{
+					cacheDownObj = currEvent.Element.Target;
+				}
+				selectedEvent = currEvent;
 			}
 			// 마우스 클릭 끝 (가능함)
 			else if(currEvent.EventType == Definition.InputEventType.Input_clickSuccessUp)
@@ -137,12 +147,30 @@ namespace Management
 			else if(currEvent.EventType == Definition.InputEventType.Input_clickFailureUp)
 			{
 				cacheDownObj = null;
+				if(selectedEvent.EventType == Definition.InputEventType.Input_clickDown)
+				{
+					if(selectedEvent != null)
+					{
+						DeselectEvent(selectedEvent);
+						selectedEvent = null;
+					}
+				}
 			}
-			else if(currEvent.EventType == Definition.InputEventType.Input_drag
-				|| currEvent.EventType == Definition.InputEventType.Input_focus
+			else if(currEvent.EventType == Definition.InputEventType.Input_focus
 				|| currEvent.EventType == Definition.InputEventType.Input_key)
 			{
 				currEvent.DoEvent();
+			}
+			else if(currEvent.EventType == Definition.InputEventType.Input_drag)
+			{
+				// 이전 이벤트가 clickDown이고, UI를 눌렀었는가?
+				if (selectedEvent.EventType == Definition.InputEventType.Input_clickDown &&
+					selectedEvent.Results.Count > 0) { }
+				// 위의 조건이 아닐 경우
+				else
+				{
+					currEvent.DoEvent();
+				}
 			}
 
 		}
@@ -150,16 +178,31 @@ namespace Management
 		/// <summary>
 		/// 선택 해제 이벤트 실행구간
 		/// </summary>
-		/// <param name="selectedEvent"></param>
-		private void DeselectEvent(EventData selectedEvent)
+		/// <param name="_event"></param>
+		private void DeselectEvent(EventData _event)
 		{
-
+			//if (_event.EventType == Definition.InputEventType.Input_clickDown)
+			//{
+			//	// 특정 객체를 클릭한 경우에 실행
+			//	if (_event.Element != null)
+			//	{
+			//		cacheDownObj = _event.Element.Target;
+			//	}
+			//	//_event = currEvent;
+			//}
 			// 마우스 클릭 끝 (가능함)
-			if (selectedEvent.EventType == Definition.InputEventType.Input_clickSuccessUp)
+			if (_event.EventType == Definition.InputEventType.Input_clickSuccessUp)
 			{
 				//selectedEvent.Element.OnSelect();
-				selectedEvent.Element.OnDeselect();
-				selectedEvent = null;
+				_event.Element.OnDeselect();
+				_event = null;
+			}
+			else if(_event.EventType == Definition.InputEventType.Input_clickFailureUp)
+			{
+				if(_event != null)
+				{
+					
+				}
 			}
 
 

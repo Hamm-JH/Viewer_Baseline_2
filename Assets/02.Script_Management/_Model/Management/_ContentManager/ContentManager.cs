@@ -42,6 +42,9 @@ namespace Management
 			}
 		}
 
+		/// <summary>
+		/// UI 메인 캔버스 반환
+		/// </summary>
 		public Canvas _Canvas
 		{
 			get
@@ -51,12 +54,27 @@ namespace Management
 			}
 		}
 
+		/// <summary>
+		/// UI 메인 캔버스 Graphic Raycaster 반환
+		/// </summary>
 		public GraphicRaycaster _GrRaycaster
 		{
 			get
 			{
 				Module_Interaction mod = (Module_Interaction)Modules.Find(x => x.ID == ModuleID.Interaction);
 				return mod.GrRaycaster;
+			}
+		}
+
+		/// <summary>
+		/// UI 메인 템플릿 인스턴스 반환
+		/// </summary>
+		public AUI _UIInstance
+		{
+			get
+			{
+				Module_Interaction mod = (Module_Interaction)Modules.Find(x => x.ID == ModuleID.Interaction);
+				return mod.UiInstance;
 			}
 		}
 

@@ -5,6 +5,8 @@ using UnityEngine;
 namespace Module.Interaction
 {
 	using Definition;
+	using Management;
+	using Module.UI;
 	using UnityEngine.UI;
 
 	/// <summary>
@@ -13,12 +15,19 @@ namespace Module.Interaction
 	/// </summary>
 	public partial class Module_Interaction : AModule
 	{
+		[Header("UI Elements")]
 		[SerializeField] private Canvas rootCanvas;
-
 		[SerializeField] private GraphicRaycaster grRaycaster;
+
+		[Header("Instances")]
+		[SerializeField] private GameObject m_template;
+		[SerializeField] private AUI m_uiInstance;
 
 		public Canvas RootCanvas { get => rootCanvas; set => rootCanvas=value; }
 		public GraphicRaycaster GrRaycaster { get => grRaycaster; set => grRaycaster=value; }
+
+		public GameObject Template { get => m_template; set => m_template=value; }
+		public AUI UiInstance { get => m_uiInstance; set => m_uiInstance=value; }
 
 		private void Start()
 		{
@@ -51,8 +60,19 @@ namespace Module.Interaction
 		{
 			Debug.LogError($"{this.GetType().ToString()} Run");
 
-			// TODO 0222 컨텐츠 관리자에서 주관리자로 플랫폼 코드 요청, 플랫폼 코드 기반 불러오는 방식으로 변경
-			GameObject ui = Instantiate<GameObject>(Resources.Load<GameObject>("UI/TestView0221"), RootCanvas.transform);
+			// TODO O 0222 컨텐츠 관리자에서 주관리자로 플랫폼 코드 요청, 플랫폼 코드 기반 불러오는 방식으로 변경
+			ContentManager.Instance.RunModule_UIInstantiate(UI_Instantiate);
+		}
+
+		/// <summary>
+		/// 받아온 ui 템플릿을 생성
+		/// </summary>
+		/// <param name="_resource"></param>
+		private void UI_Instantiate(GameObject _resource)
+		{
+			GameObject ui = Instantiate<GameObject>(_resource, RootCanvas.transform);
+			Template = ui;
+			UiInstance = ui.GetComponent<AUI>();
 		}
 	}
 }

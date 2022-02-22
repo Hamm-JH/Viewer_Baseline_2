@@ -108,6 +108,8 @@ namespace Management
 		/// <param name="_mousePos"></param>
 		public void OnClick(InputEventType type, int btn, Vector3 _mousePos)
 		{
+			Debug.Log("OnClick");
+
 			// 필터링 (__추후 변수 추출)
 			if(btn == 0)
 			{
