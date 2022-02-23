@@ -33,8 +33,21 @@ namespace Management
 
 			// 마우스 데이터 (기본값)
 			//float dragBoundary = 1.5f;
+			string _urlQuery = "http://wesmart.synology.me:45001/unity/admin_viewer/index.html?cdTunnel=20211202-00000283"; // 아크터널 ?
+
+			string[] _cdBridge = _urlQuery.Split('=');
+			string __modelURL = "/3dmodel/";
+			_cdBridge = _cdBridge[1].Split('&');
+			string BridgeCode = _cdBridge[0];
+
+			string uri = string.Format($"http://wesmart.synology.me:45001{__modelURL}{BridgeCode}.gltf");
+			//Debug.Log(uri);
+
+			string _modelURI = uri;
+			//string _modelURI = "http://wesmart.synology.me:45001/3dmodel/20211202-00000283.gltf";
 
 			_data = _templateDatas[m_templateIndex];
+			_data.ModelURI = _modelURI;
 
 			//-------------------------------------------- 초기화
 
