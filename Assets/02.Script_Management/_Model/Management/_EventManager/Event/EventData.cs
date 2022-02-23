@@ -23,6 +23,8 @@ namespace Management.Events
 		/// </summary>
 		public IInteractable Element { get => m_element; set => m_element=value; }
 
+		public List<GameObject> objects;
+
 		/// <summary>
 		/// 발생한 이벤트의 형식
 		/// </summary>
@@ -37,10 +39,13 @@ namespace Management.Events
 		protected GameObject m_selected3D = null;
 		protected RaycastHit m_hit = default(RaycastHit);
 		protected List<RaycastResult> m_results = new List<RaycastResult>();
+		// 마우스 버튼 번호
+		protected int m_btn;
 
 		public GameObject Selected3D { get => m_selected3D; set => m_selected3D=value; }
 		public RaycastHit Hit { get => m_hit; set => m_hit=value; }
 		public List<RaycastResult> Results { get => m_results; set => m_results=value; }
+		public int BtnIndex { get => m_btn; set => m_btn=value; }
 
 
 

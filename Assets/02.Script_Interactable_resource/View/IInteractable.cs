@@ -18,6 +18,11 @@ namespace View
 		GameObject Target { get; }
 
 		/// <summary>
+		/// 선택된 객체들
+		/// </summary>
+		List<GameObject> Targets { get; }
+
+		/// <summary>
 		/// 클릭, 터치 지점
 		/// </summary>
 		RaycastHit Hit { get; set; }

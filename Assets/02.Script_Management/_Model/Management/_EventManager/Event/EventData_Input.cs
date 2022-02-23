@@ -16,7 +16,7 @@ namespace Management.Events
 		public Camera m_camera;
 		public GraphicRaycaster m_graphicRaycaster;
 
-		
+		public GameObject m_cache;
 
 		[Header("OnClick")]
 		public Vector3 m_clickPosition;
@@ -24,7 +24,7 @@ namespace Management.Events
 
 
 		[Header("OnDrag")]
-		public int m_btn;
+		//public int m_btn;
 		public Vector2 m_delta;
 		UnityEvent<int, Vector2> m_dragEvent;
 

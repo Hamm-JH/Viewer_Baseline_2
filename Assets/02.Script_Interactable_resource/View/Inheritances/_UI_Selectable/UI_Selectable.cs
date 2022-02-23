@@ -15,6 +15,8 @@ namespace View
 			get => gameObject;
 		}
 
+		public override List<GameObject> Targets => throw new System.NotImplementedException();
+
 		Button m_btn;
 		Slider m_slider;
 

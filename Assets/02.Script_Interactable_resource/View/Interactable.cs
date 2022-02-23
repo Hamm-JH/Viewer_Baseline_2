@@ -13,6 +13,8 @@ namespace View
 		public abstract GameObject Target { get; }
 		public RaycastHit Hit { get => hit; set => hit = value; }
 
+		public abstract List<GameObject> Targets { get; }
+
 		/// <summary>
 		/// 인스턴스 선택시 실행
 		/// </summary>
