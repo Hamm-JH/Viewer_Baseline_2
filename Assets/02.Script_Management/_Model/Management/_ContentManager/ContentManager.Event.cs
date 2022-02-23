@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Management
 {
+	using Management.Events;
 	using UnityEngine.Events;
 
 	public partial class ContentManager : IManager<ContentManager>
@@ -62,6 +63,10 @@ namespace Management
 
 		public void Set_Model_Transparency(float _value)
 		{
+			float boundary = 0.8f;
+
+			bool isOpaque = _value > boundary ? true : false;
+
 			foreach(GameObject obj in _ModelObjects)
 			{
 				MeshRenderer render;
@@ -69,7 +74,34 @@ namespace Management
 				{
 					Material mat = render.material;
 					Color colr = mat.color;
+					bool thisOpaque = colr.a > boundary ? true : false;
+
 					render.material.SetColor("_Color", new Color(colr.r, colr.g, colr.b, _value));
+
+					if(isOpaque && !thisOpaque)
+					{
+						Materials.ToOpaqueMode(render.material);
+					}
+					else if(!isOpaque && thisOpaque)
+					{
+						Materials.ToFadeMode(render.material);
+					}
+				}
+			}
+		}
+
+		public void Reset_ModelObject()
+		{
+			foreach(GameObject obj in _ModelObjects)
+			{
+				MeshRenderer render;
+				if (obj.TryGetComponent<MeshRenderer>(out render))
+				{
+					Material mat = render.material;
+					Color colr = mat.color;
+					render.material.SetColor("_Color", new Color(colr.r, colr.g, colr.b, 1));
+
+					Materials.ToOpaqueMode(render.material);
 				}
 			}
 		}
@@ -77,20 +109,20 @@ namespace Management
 		public void Toggle_ModelObject(ToggleType type)
 		{
 			// TODO 0223 1순위
-			Events.EventData eData = EventManager.Instance.SelectedEvent;
+			Dictionary<InputEventType, EventData> eDatas = EventManager.Instance.SelectedEvents;
 
-			if(eData.Element == null)
+			if(!eDatas.ContainsKey(InputEventType.Input_clickSuccessUp))
 			{
-				Debug.LogError("EventData is null");
+				Debug.LogError("EventData successup is null");
 				return;
 			}
-			if(eData.Element.Target == null)
+			if(eDatas[InputEventType.Input_clickSuccessUp].Element == null)
 			{
-				Debug.LogError("EventData Object is null");
+				Debug.LogError("EventData successup element is null");
 				return;
 			}
 
-			GameObject selected = EventManager.Instance.SelectedEvent.Element.Target;
+			List<GameObject> selecteds = eDatas[InputEventType.Input_clickSuccessUp].Element.Targets;
 
 			bool isHide = false;
 			switch(type)
@@ -101,9 +133,13 @@ namespace Management
 
 			foreach(GameObject obj in _ModelObjects)
 			{
-				bool isSelctedObject = selected == obj;
+				GameObject ifObj = selecteds.Find(x => x == obj);
+
+				bool isSelctedObject = ifObj == null ? false : true;
+				//bool isSelctedObject = selected == obj;
 
 				float alpha = 0.1f;
+				bool thisHide = false;
 				// 이 객체가 맞음, 숨겨야됨			true true -> alpha = 0.1
 				// 이 객체가 맞음, 제외 숨겨야됨	true false -> alpha = 1
 				// 이 객체 아님, 숨겨야됨			false true -> alpha = 1
@@ -112,10 +148,12 @@ namespace Management
 				if(isSelctedObject)
 				{
 					alpha = isHide ? 0.1f : 1f;
+					thisHide = isHide ? true : false;
 				}
 				else
 				{
 					alpha = isHide ? 1f : 0.1f;
+					thisHide = isHide ? false : true;
 				}
 
 				MeshRenderer render;
@@ -124,6 +162,15 @@ namespace Management
 					Material mat = render.material;
 					Color colr = mat.color;
 					render.material.SetColor("_Color", new Color(colr.r, colr.g, colr.b, alpha));
+
+					if(thisHide)
+					{
+						Materials.ToFadeMode(render.material);
+					}
+					else
+					{
+						Materials.ToOpaqueMode(render.material);
+					}
 				}
 			}
 		}

@@ -12,11 +12,11 @@ namespace Management
 	/// </summary>
 	public partial class EventManager : IManager<EventManager>
 	{
-		[SerializeField] EventData m_selectedEvent;
+		//[SerializeField] EventData m_selectedEvent;
 		[SerializeField] Dictionary<InputEventType, EventData> m_selectedEvents;
 		[SerializeField] GameObject cacheDownObj;
 
-		public EventData SelectedEvent { get => m_selectedEvent; set => m_selectedEvent=value; }
+		//public EventData SelectedEvent { get => m_selectedEvent; set => m_selectedEvent=value; }
 		public Dictionary<InputEventType, EventData> SelectedEvents { get => m_selectedEvents; set => m_selectedEvents=value; }
 
 		private void Start()

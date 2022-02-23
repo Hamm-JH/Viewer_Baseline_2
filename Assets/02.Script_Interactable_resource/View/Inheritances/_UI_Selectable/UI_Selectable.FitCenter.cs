@@ -11,6 +11,8 @@ namespace View
 	{
 		public void FitCenter()
 		{
+
+			ContentManager.Instance.Reset_ModelObject();
 			ContentManager.Instance.SetCameraCenterPosition();
 		}
 	}
