@@ -106,73 +106,90 @@ namespace Management
 			}
 		}
 
-		public void Toggle_ModelObject(ToggleType type)
+		public void Toggle_ModelObject(UIEventType _eventType, ToggleType _toggleType)
 		{
-			// TODO 0223 1순위
-			Dictionary<InputEventType, EventData> eDatas = EventManager.Instance.SelectedEvents;
+			EventManager.Instance.OnEvent(new Events.EventData_UI(
+				_eventType: InputEventType.UI_Invoke,
+				_uiEvent: _eventType,
+				_toggle: _toggleType,
+				_modelObj: _ModelObjects
+				));
+			//EventManager.Instance.OnEvent(new Events.EventData_Input(
+			//			_eventType: type,
+			//			_btn: btn,
+			//			_mousePos: _mousePos,
+			//			_camera: main.MainCamera,
+			//			_graphicRaycaster: main.Content._GrRaycaster,
+			//			_event: main.cameraExecuteEvents.selectEvent
+			//			));
 
-			if(!eDatas.ContainsKey(InputEventType.Input_clickSuccessUp))
-			{
-				Debug.LogError("EventData successup is null");
-				return;
-			}
-			if(eDatas[InputEventType.Input_clickSuccessUp].Element == null)
-			{
-				Debug.LogError("EventData successup element is null");
-				return;
-			}
+			return;
 
-			List<GameObject> selecteds = eDatas[InputEventType.Input_clickSuccessUp].Element.Targets;
+			//// TODO 0223 1순위
+			//Dictionary<InputEventType, EventData> eDatas = EventManager.Instance.SelectedEvents;
 
-			bool isHide = false;
-			switch(type)
-			{
-				case ToggleType.Hide:	isHide = true;	break;
-				case ToggleType.Isolate:isHide = false;	break;
-			}
+			//if(!eDatas.ContainsKey(InputEventType.Input_clickSuccessUp))
+			//{
+			//	Debug.LogError("EventData successup is null");
+			//	return;
+			//}
+			//if(eDatas[InputEventType.Input_clickSuccessUp].Element == null)
+			//{
+			//	Debug.LogError("EventData successup element is null");
+			//	return;
+			//}
 
-			foreach(GameObject obj in _ModelObjects)
-			{
-				GameObject ifObj = selecteds.Find(x => x == obj);
+			//List<GameObject> selecteds = eDatas[InputEventType.Input_clickSuccessUp].Element.Targets;
 
-				bool isSelctedObject = ifObj == null ? false : true;
-				//bool isSelctedObject = selected == obj;
+			//bool isHide = false;
+			//switch(_toggleType)
+			//{
+			//	case ToggleType.Hide:	isHide = true;	break;
+			//	case ToggleType.Isolate:isHide = false;	break;
+			//}
 
-				float alpha = 0.1f;
-				bool thisHide = false;
-				// 이 객체가 맞음, 숨겨야됨			true true -> alpha = 0.1
-				// 이 객체가 맞음, 제외 숨겨야됨	true false -> alpha = 1
-				// 이 객체 아님, 숨겨야됨			false true -> alpha = 1
-				// 이 객체 아님, 제외 숨겨야됨		false false -> alpha = 0.1
+			//foreach(GameObject obj in _ModelObjects)
+			//{
+			//	GameObject ifObj = selecteds.Find(x => x == obj);
 
-				if(isSelctedObject)
-				{
-					alpha = isHide ? 0.1f : 1f;
-					thisHide = isHide ? true : false;
-				}
-				else
-				{
-					alpha = isHide ? 1f : 0.1f;
-					thisHide = isHide ? false : true;
-				}
+			//	bool isSelctedObject = ifObj == null ? false : true;
+			//	//bool isSelctedObject = selected == obj;
 
-				MeshRenderer render;
-				if(obj.TryGetComponent<MeshRenderer>(out render))
-				{
-					Material mat = render.material;
-					Color colr = mat.color;
-					render.material.SetColor("_Color", new Color(colr.r, colr.g, colr.b, alpha));
+			//	float alpha = 0.1f;
+			//	bool thisHide = false;
+			//	// 이 객체가 맞음, 숨겨야됨			true true -> alpha = 0.1
+			//	// 이 객체가 맞음, 제외 숨겨야됨	true false -> alpha = 1
+			//	// 이 객체 아님, 숨겨야됨			false true -> alpha = 1
+			//	// 이 객체 아님, 제외 숨겨야됨		false false -> alpha = 0.1
 
-					if(thisHide)
-					{
-						Materials.ToFadeMode(render.material);
-					}
-					else
-					{
-						Materials.ToOpaqueMode(render.material);
-					}
-				}
-			}
+			//	if(isSelctedObject)
+			//	{
+			//		alpha = isHide ? 0.1f : 1f;
+			//		thisHide = isHide ? true : false;
+			//	}
+			//	else
+			//	{
+			//		alpha = isHide ? 1f : 0.1f;
+			//		thisHide = isHide ? false : true;
+			//	}
+
+			//	MeshRenderer render;
+			//	if(obj.TryGetComponent<MeshRenderer>(out render))
+			//	{
+			//		Material mat = render.material;
+			//		Color colr = mat.color;
+			//		render.material.SetColor("_Color", new Color(colr.r, colr.g, colr.b, alpha));
+
+			//		if(thisHide)
+			//		{
+			//			Materials.ToFadeMode(render.material);
+			//		}
+			//		else
+			//		{
+			//			Materials.ToOpaqueMode(render.material);
+			//		}
+			//	}
+			//}
 		}
 
 		public void Function_ToggleOrthoView(bool _isOrthogonal)

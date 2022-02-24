@@ -258,6 +258,11 @@ namespace Management.Events
 			}
 		}
 
+		public override void DoEvent(List<GameObject> _objs)
+		{
+			
+		}
+
 		#region Click - ∞¥√º º±≈√
 
 		/// <summary>
@@ -332,6 +337,10 @@ namespace Management.Events
 
 			return results;
 		}
+
+		
+
+
 
 		#endregion
 	}

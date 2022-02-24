@@ -38,6 +38,8 @@ namespace View
 		/// </summary>
 		void OnDeselect();
 
+		void OnDeselect<T>(T t);
+
 		/// <summary>
 		/// 인스턴스 값 변경
 		/// :: 슬라이더

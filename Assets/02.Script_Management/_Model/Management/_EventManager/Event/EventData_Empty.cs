@@ -23,5 +23,10 @@ namespace Management.Events
 		{
 			Debug.Log("DoEvent Empty");
 		}
+
+		public override void DoEvent(List<GameObject> _objs)
+		{
+			Debug.Log("DoEvent Empty");
+		}
 	}
 }

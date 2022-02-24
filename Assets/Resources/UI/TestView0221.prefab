@@ -4994,7 +4994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_rootUI: {fileID: 0}
   eventType: 50
-  childPanel: {fileID: 0}
+  childPanel: {fileID: 192493818472343939}
   uiFXs: []
 --- !u!1 &2132873745180185439
 GameObject:
@@ -20057,7 +20057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_rootUI: {fileID: 0}
   eventType: 49
-  childPanel: {fileID: 0}
+  childPanel: {fileID: 192493818472343939}
   uiFXs: []
 --- !u!1 &8820608832274816934
 GameObject:

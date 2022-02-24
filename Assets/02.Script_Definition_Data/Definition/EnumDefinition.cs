@@ -133,6 +133,12 @@ namespace Definition
 		/// 키 입력
 		/// </summary>
 		Input_key,
+
+		/// <summary>
+		/// UI에서 발생함
+		/// </summary>
+		UI_Invoke,
+
 	}
 
 	public enum ManagerActionIndex

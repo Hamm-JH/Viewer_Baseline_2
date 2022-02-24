@@ -286,7 +286,7 @@ namespace Module.Model
 				if(x.TryGetComponent<MeshRenderer>(out render))
 				{
 					Material mat = Materials.Set(MaterialType.ObjDefault1);
-					mat.color = Colors.Set(ColorType.Default1);
+					mat.color = Colors.Set(ColorType.Default1, 1);
 					render.material = mat;
 				}
 

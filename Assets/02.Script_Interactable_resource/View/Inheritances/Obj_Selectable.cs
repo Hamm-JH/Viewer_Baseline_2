@@ -7,9 +7,17 @@ namespace View
 {
 	using Definition;
 	using Management;
+	using System;
 
 	public class Obj_Selectable : Interactable
 	{
+		UIEventType _uiEventType;
+
+		private void Start()
+		{
+			_uiEventType = UIEventType.Mode_Isolate;
+		}
+
 		public override GameObject Target
 		{
 			get => gameObject;
@@ -37,15 +45,20 @@ namespace View
 
 		public override void OnDeselect()
 		{
+			
 			//Debug.Log($"OnDeselect : {this.name}");
 			PlatformCode platform = MainManager.Instance.Platform;
+			
+			
 
 			if(platform == PlatformCode.PC_Viewer_Tunnel)
 			{
 				MeshRenderer render;
 				if (gameObject.TryGetComponent<MeshRenderer>(out render))
 				{
-					render.material.SetColor("_Color", Colors.Set(ColorType.Default1));
+					Color colr = render.material.color;
+
+					render.material.SetColor("_Color", Colors.Set(ColorType.Default1, colr.a));
 				}
 			}
 			else if(platform == PlatformCode.PC_Viewer_Bridge)
@@ -53,12 +66,27 @@ namespace View
 				List<GameObject> objs = Targets;
 				foreach(GameObject obj in objs)
 				{
+
 					MeshRenderer render;
 					if (obj.TryGetComponent<MeshRenderer>(out render))
 					{
-						render.material.SetColor("_Color", Colors.Set(ColorType.Default1));
+						Color colr = render.material.color;
+
+						render.material.SetColor("_Color", Colors.Set(ColorType.Default1, colr.a));
 					}
 				}
+			}
+		}
+
+		public override void OnDeselect<T>(T t)
+		{
+			if(typeof(T) == typeof(UIEventType))
+			{
+				UIEventType _type = (UIEventType)Enum.ToObject(typeof(UIEventType), t);
+				
+				_uiEventType = _type;
+
+				OnDeselect();
 			}
 		}
 
@@ -73,7 +101,9 @@ namespace View
 				MeshRenderer render;
 				if (gameObject.TryGetComponent<MeshRenderer>(out render))
 				{
-					render.material.SetColor("_Color", Colors.Set(ColorType.Selected1));
+					Color colr = render.material.color;
+
+					render.material.SetColor("_Color", Colors.Set(ColorType.Selected1, colr.a));
 				}
 			}
 			else if (platform == PlatformCode.PC_Viewer_Bridge)
@@ -84,7 +114,9 @@ namespace View
 					MeshRenderer render;
 					if (obj.TryGetComponent<MeshRenderer>(out render))
 					{
-						render.material.SetColor("_Color", Colors.Set(ColorType.Selected1));
+						Color colr = render.material.color;
+
+						render.material.SetColor("_Color", Colors.Set(ColorType.Selected1, colr.a));
 					}
 				}
 			}

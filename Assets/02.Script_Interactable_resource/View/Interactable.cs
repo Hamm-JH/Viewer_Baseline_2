@@ -25,6 +25,8 @@ namespace View
 		/// </summary>
 		public abstract void OnDeselect();
 
+		public abstract void OnDeselect<T>(T t);
+
 		public abstract void OnChangeValue(float _value);
 	}
 }

@@ -61,6 +61,11 @@ namespace View
 			ConditionalBranch(eventType);
 		}
 
+		public override void OnDeselect<T>(T t)
+		{
+			
+		}
+
 		/// <summary>
 		/// 슬라이더 값 변경시 실행
 		/// </summary>
@@ -119,19 +124,21 @@ namespace View
 
 				case UIEventType.OrthoView_Orthogonal:
 					Event_ToggleOrthoView(true);
+					Event_Toggle_ViewMode();
 					break;
 
 				case UIEventType.OrthoView_Perspective:
 					Event_ToggleOrthoView(false);
+					Event_Toggle_ViewMode();
 					break;
 
 				case UIEventType.Mode_Hide:
-					Event_Mode_Hide();
+					Event_Mode_Hide(_eventType);
 					Event_Toggle_ChildPanel(1);
 					break;
 
 				case UIEventType.Mode_Isolate:
-					Event_Mode_Isolate();
+					Event_Mode_Isolate(_eventType);
 					Event_Toggle_ChildPanel(1);
 					break;
 

@@ -43,26 +43,6 @@ namespace Management
 			currEvent.OnProcess(cacheDownObj);
 
 			DoEvent(SelectedEvents, currEvent);
-
-			////-------------------------------------------------------------------------
-
-			//// 선택된 이벤트 상태가 없는 경우, 아무 동작을 수행하지 않는 더미 인스턴스를 생성한다.
-			//if (SelectedEvent == null)
-			//{
-			//	SelectedEvent = new EventData_Empty();
-			//}
-
-			//// 현재 발생한 이벤트가 동작을 필요로 하지 않는 이벤트일 경우가 있다.
-			//// 이 경우를 필터링한다.
-			//if (!IsEventCanDoit(currEvent)) return;
-
-			//// 받아온 이벤트의 내부처리 메서드를 시행
-			//// 내부에 연산 결과로 내부의 interactable 인터페이스 상속 인스턴스 업데이트됨.
-			//// 추후 전달 데이터가 늘어나면 새로 내부 클래스 작성하기
-			//currEvent.OnProcess(cacheDownObj);
-
-			//// 이벤트 실행
-			//DoEvent(SelectedEvent, currEvent);
 		}
 
 		/// <summary>
@@ -280,57 +260,18 @@ namespace Management
 						_currEvent.DoEvent();
 					}
 					break;
-			}
 
-			{
-				//// 마우스 클릭 다운 단계
-				//if(_currEvent.EventType == Definition.InputEventType.Input_clickDown)
-				//{
-				//	// 특정 객체를 클릭한 경우에 실행
-				//	if(_currEvent.Element != null)
-				//	{
-				//		cacheDownObj = _currEvent.Element.Target;
-				//	}
-				//	SelectedEvent = _currEvent;
-				//}
-				//// 마우스 클릭 끝 (가능함)
-				//else if(_currEvent.EventType == Definition.InputEventType.Input_clickSuccessUp)
-				//{
-				//	_currEvent.Element.OnSelect();
-				//	_currEvent.DoEvent();
-				//	//MainManager.Instance.cameraExecuteEvents.selectEvent.Invoke(currEvent.Element.Target);	// 마우스 클릭 성공시 실행 (객체 선택 모드)
-				//	cacheDownObj = null;
-				//	SelectedEvent = _currEvent;
-				//}
-				//// 마우스 클릭 끝 (불가능함)
-				//else if(_currEvent.EventType == Definition.InputEventType.Input_clickFailureUp)
-				//{
-				//	cacheDownObj = null;
-				//	if(SelectedEvent.EventType == Definition.InputEventType.Input_clickDown)
-				//	{
-				//		if(SelectedEvent != null)
-				//		{
-				//			//DeselectEvent(SelectedEvent);
-				//			SelectedEvent = null;
-				//		}
-				//	}
-				//}
-				//else if(_currEvent.EventType == Definition.InputEventType.Input_focus
-				//	|| _currEvent.EventType == Definition.InputEventType.Input_key)
-				//{
-				//	_currEvent.DoEvent();
-				//}
-				//else if(_currEvent.EventType == Definition.InputEventType.Input_drag)
-				//{
-				//	// 이전 이벤트가 clickDown이고, UI를 눌렀었는가?
-				//	if (SelectedEvent.EventType == Definition.InputEventType.Input_clickDown &&
-				//		SelectedEvent.Results.Count > 0) { }
-				//	// 위의 조건이 아닐 경우
-				//	else
-				//	{
-				//		_currEvent.DoEvent();
-				//	}
-				//}
+				case InputEventType.UI_Invoke:
+					{
+						if (!SelectedEvents.ContainsKey(InputEventType.Input_clickSuccessUp)) return;
+						if (SelectedEvents[InputEventType.Input_clickSuccessUp].Element == null) return;
+
+						_currEvent.DoEvent(SelectedEvents[InputEventType.Input_clickSuccessUp].Element.Targets);
+
+						SelectedEvents[InputEventType.Input_clickSuccessUp].Element.OnDeselect();
+						SelectedEvents.Remove(InputEventType.Input_clickSuccessUp);
+					}
+					break;
 			}
 
 		}
@@ -360,6 +301,9 @@ namespace Management
 				case InputEventType.Input_drag:
 				case InputEventType.Input_focus:
 				case InputEventType.Input_key:
+					break;
+
+				case InputEventType.UI_Invoke:
 					break;
 			}
 		}

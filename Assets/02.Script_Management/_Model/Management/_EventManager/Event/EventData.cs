@@ -35,7 +35,7 @@ namespace Management.Events
 		/// </summary>
 		public Status StatusCode { get => status; set => status=value; }
 
-		[Header("Private")]
+		[Header("Private 3D")]
 		protected GameObject m_selected3D = null;
 		protected RaycastHit m_hit = default(RaycastHit);
 		protected List<RaycastResult> m_results = new List<RaycastResult>();
@@ -47,25 +47,25 @@ namespace Management.Events
 		public List<RaycastResult> Results { get => m_results; set => m_results=value; }
 		public int BtnIndex { get => m_btn; set => m_btn=value; }
 
+		[Header("Private UI")]
+		protected UIEventType m_uiEventType;
+		protected ToggleType m_toggleType;
 
+		public UIEventType UiEventType { get => m_uiEventType; set => m_uiEventType=value; }
+		public ToggleType ToggleType { get => m_toggleType; set => m_toggleType=value; }
 
-		//public EventData() { }
-
-		//public EventData(IInteractable _target, InputEventType _mainEventType)
-		//{
-		//	Element = _target;
-		//	EventType = _mainEventType;
-		//}
 
 		/// <summary>
 		/// 이벤트 처리 메서드
 		/// </summary>
 		public abstract void OnProcess(GameObject _cObj);
 
+
 		/// <summary>
 		/// 이벤트 내부처리 완료후 외부 이벤트 발산처리
 		/// </summary>
 		public abstract void DoEvent();
+		public abstract void DoEvent(List<GameObject> _objs);
 		
 		public static bool IsEqual(EventData A, EventData B)
 		{
