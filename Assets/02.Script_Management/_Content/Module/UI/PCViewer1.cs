@@ -11,6 +11,7 @@ namespace Module.UI
 		[SerializeField] Text m_segment;
 		[SerializeField] Text m_line;
 		[SerializeField] Text m_description;
+		[SerializeField] List<GameObject> childElements_1;
 
 		public override void OnStart()
 		{
@@ -27,6 +28,14 @@ namespace Module.UI
 
 			m_segment.text = seg;
 			m_line.text = line;
+		}
+
+		public override void TogglePanelList(int _index, GameObject _exclusive)
+		{
+			if(_index == 1)
+			{
+				childElements_1.ForEach(x => x.SetActive( (x != _exclusive) ? false : x.activeSelf));
+			}
 		}
 
 		private void SetTunnelData(string name, out string _seg, out string _line)

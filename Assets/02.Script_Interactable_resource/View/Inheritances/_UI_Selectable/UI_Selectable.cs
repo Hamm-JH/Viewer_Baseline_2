@@ -6,6 +6,7 @@ using UnityEngine.Events;
 namespace View
 {
 	using Definition;
+	using Module.UI;
 	using UnityEngine.UI;
 
 	public partial class UI_Selectable : Interactable
@@ -20,6 +21,7 @@ namespace View
 		Button m_btn;
 		Slider m_slider;
 
+		[SerializeField] AUI m_rootUI;
 		[SerializeField] UIEventType eventType;
 
 		/// <summary>
@@ -102,6 +104,12 @@ namespace View
 					Event_Toggle_ViewMode();
 					break;
 
+				case UIEventType.Toggle_ChildPanel1:
+					// ChildPanel 1¹ø Åä±Û
+					Event_Toggle_ChildPanel(1);
+					Event_Toggle_ViewMode();
+					break;
+
 				case UIEventType.Viewport_ViewMode_ISO:
 				case UIEventType.Viewport_ViewMode_TOP:
 				case UIEventType.Viewport_ViewMode_SIDE:
@@ -119,14 +127,17 @@ namespace View
 
 				case UIEventType.Mode_Hide:
 					Event_Mode_Hide();
+					Event_Toggle_ChildPanel(1);
 					break;
 
 				case UIEventType.Mode_Isolate:
 					Event_Mode_Isolate();
+					Event_Toggle_ChildPanel(1);
 					break;
 
 				case UIEventType.Fit_Center:
 					FitCenter();
+					Event_Toggle_ChildPanel(1);
 					break;
 			}
 		}

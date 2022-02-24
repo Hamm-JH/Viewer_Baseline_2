@@ -19,5 +19,11 @@ namespace Module.UI
 		/// </summary>
 		/// <param name="selected"></param>
 		public abstract void SetObjectData_Tunnel(GameObject selected);
+
+		/// <summary>
+		/// 패널 리스트 토글
+		/// </summary>
+		/// <param name="index"></param>
+		public abstract void TogglePanelList(int _index, GameObject _exclusive);
 	}
 }

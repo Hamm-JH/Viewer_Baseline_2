@@ -15,5 +15,10 @@ namespace Module.UI
 		{
 			
 		}
+
+		public override void TogglePanelList(int _index, GameObject _exclusive)
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

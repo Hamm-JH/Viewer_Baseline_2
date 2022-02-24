@@ -2398,6 +2398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 33
   childPanel: {fileID: 0}
   uiFXs: []
@@ -2616,6 +2617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 34
   childPanel: {fileID: 0}
   uiFXs: []
@@ -3589,7 +3591,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventType: 16
+  m_rootUI: {fileID: 3588598658056503368}
+  eventType: 17
   childPanel: {fileID: 6793901857240370975}
   uiFXs: []
 --- !u!1 &1308821426379399648
@@ -4989,6 +4992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 50
   childPanel: {fileID: 0}
   uiFXs: []
@@ -5904,7 +5908,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uC0C8\uB85C\uACE0\uCE68"
+  m_Text: "\uCD08\uAE30\uD654"
 --- !u!1 &2469580046716071475
 GameObject:
   m_ObjectHideFlags: 0
@@ -6758,6 +6762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 16
   childPanel: {fileID: 7779356435026570520}
   uiFXs: []
@@ -6900,6 +6905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 256
   childPanel: {fileID: 0}
   uiFXs: []
@@ -7347,6 +7353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 3588598658056503368}
   eventType: 80
   childPanel: {fileID: 0}
   uiFXs: []
@@ -7798,7 +7805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventType: 16
+  m_rootUI: {fileID: 3588598658056503368}
+  eventType: 17
   childPanel: {fileID: 1989686794448852727}
   uiFXs: []
 --- !u!1 &3076772844535111774
@@ -8012,6 +8020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 3588598658056503368}
   eventType: 66
   childPanel: {fileID: 0}
   uiFXs: []
@@ -8301,6 +8310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 3588598658056503368}
   eventType: 65
   childPanel: {fileID: 0}
   uiFXs: []
@@ -8519,7 +8529,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventType: 16
+  m_rootUI: {fileID: 3588598658056503368}
+  eventType: 17
   childPanel: {fileID: 4164474976014949157}
   uiFXs: []
 --- !u!1 &3076772845508091098
@@ -8658,7 +8669,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventType: 16
+  m_rootUI: {fileID: 3588598658056503368}
+  eventType: 17
   childPanel: {fileID: 192493818472343939}
   uiFXs:
   - {fileID: 2652617632310249347}
@@ -14331,6 +14343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 257
   childPanel: {fileID: 0}
   uiFXs: []
@@ -15225,6 +15238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 16
   childPanel: {fileID: 7001790015856787353}
   uiFXs: []
@@ -17604,6 +17618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 36
   childPanel: {fileID: 0}
   uiFXs: []
@@ -18654,6 +18669,10 @@ MonoBehaviour:
   m_segment: {fileID: 3285888967178078221}
   m_line: {fileID: 2433667907422654952}
   m_description: {fileID: 1989016860715693214}
+  childElements_1:
+  - {fileID: 4164474976014949157}
+  - {fileID: 192493818472343939}
+  - {fileID: 1989686794448852727}
 --- !u!1 &8174032688033073655
 GameObject:
   m_ObjectHideFlags: 0
@@ -20036,6 +20055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 49
   childPanel: {fileID: 0}
   uiFXs: []
@@ -20592,6 +20612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 35
   childPanel: {fileID: 0}
   uiFXs: []

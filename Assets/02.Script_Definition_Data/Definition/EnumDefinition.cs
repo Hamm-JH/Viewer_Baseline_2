@@ -186,6 +186,7 @@ namespace Definition
 		/// UI 토글
 		/// </summary>
 		Toggle = 0x10,
+		Toggle_ChildPanel1 = 0x11,
 
 		Viewport_ViewMode = 0x20,
 		Viewport_ViewMode_ISO = 0x21,

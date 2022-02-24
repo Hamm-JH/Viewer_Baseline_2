@@ -1150,27 +1150,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948872633063551520, guid: 4ca9587740428f74e8e546faa318368b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6948872633063551520, guid: 4ca9587740428f74e8e546faa318368b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6948872633063551520, guid: 4ca9587740428f74e8e546faa318368b, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6948872633063551520, guid: 4ca9587740428f74e8e546faa318368b, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6948872633063551520, guid: 4ca9587740428f74e8e546faa318368b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1920
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6948872633063551520, guid: 4ca9587740428f74e8e546faa318368b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1080
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6948872633063551520, guid: 4ca9587740428f74e8e546faa318368b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1256,6 +1256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 80
   childPanel: {fileID: 0}
   uiFXs: []
@@ -1526,6 +1527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 17
   childPanel: {fileID: 0}
   uiFXs: []
@@ -1589,6 +1591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 16
   childPanel: {fileID: 4957481881958593512}
   uiFXs: []
@@ -1771,6 +1774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 20
   childPanel: {fileID: 0}
   uiFXs: []
@@ -1900,6 +1904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 19
   childPanel: {fileID: 0}
   uiFXs: []
@@ -3321,6 +3326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 17
   childPanel: {fileID: 0}
   uiFXs: []
@@ -3809,6 +3815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 18
   childPanel: {fileID: 0}
   uiFXs: []
@@ -3864,6 +3871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 16
   childPanel: {fileID: 4957481881178830748}
   uiFXs: []
@@ -4569,6 +4577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
   eventType: 18
   childPanel: {fileID: 0}
   uiFXs: []

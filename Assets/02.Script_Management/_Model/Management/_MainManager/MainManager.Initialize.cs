@@ -15,53 +15,9 @@ namespace Management
 	{
 		#region 0-1 데이터 입력 단계
 
-		/// <summary>
-		/// 앱 시작시 데이터 요청
-		/// </summary>
-		/// <returns></returns>
-		private IEnumerator RequestDataset(UnityAction callback)
+		private void RequestDataset(UnityAction<CoreData> action)
 		{
-			yield return new WaitForEndOfFrame();
-
-			//-------------------------------------------- 데이터 요청
-
-			// 시스템 데이터
-			Debug.LogError("서버에서 데이터를 받으면, 데이터를 분배한다.");
-			//PlatformCode platformCode = PlatformCode.PC_Maker1;
-			//GraphicCode graphicCode = GraphicCode.Template00;
-			//CameraMode input_camMode = CameraMode.BIM_ISO;
-
-			// 마우스 데이터 (기본값)
-			//float dragBoundary = 1.5f;
-			string _urlQuery = "http://wesmart.synology.me:45001/unity/admin_viewer/index.html?cdTunnel=20211202-00000283"; // 아크터널 ?
-
-			string[] _cdBridge = _urlQuery.Split('=');
-			string __modelURL = "/3dmodel/";
-			_cdBridge = _cdBridge[1].Split('&');
-			string BridgeCode = _cdBridge[0];
-
-			string uri = string.Format($"http://wesmart.synology.me:45001{__modelURL}{BridgeCode}.gltf");
-			//Debug.Log(uri);
-
-			string _modelURI = uri;
-			//string _modelURI = "http://wesmart.synology.me:45001/3dmodel/20211202-00000283.gltf";
-
-			_data = _templateDatas[m_templateIndex];
-			_data.ModelURI = _modelURI;
-
-			//-------------------------------------------- 초기화
-
-			// 데이터 할당
-			//_core._Platform = platformCode;
-			//_core.GraphicMode = graphicCode;
-			//_core.CameraMode = input_camMode;
-
-			//-------------------------------------------- 다음 단계
-
-			yield return new WaitForEndOfFrame();
-
-			callback.Invoke();
-			yield break;
+			StartCoroutine(_templateDatas[m_templateIndex].Initialize(action));
 		}
 
 
@@ -69,8 +25,16 @@ namespace Management
 
 		#region 0-2 데이터 입력 완료시 실행
 
-		private void SetSystemInstance()
+		private void SetSystemInstance(CoreData _finishedData)
 		{
+			_data = _finishedData;
+
+			// 초기 시작시 이벤트 초기화
+			Event_Initialize();
+
+			// 입력 발생시 실행되는 액션 초기화
+			SetAction(ManagerActionIndex.InputAction);
+
 			InitCoreData(_data);
 
 			// 입력 인스턴스 초기화

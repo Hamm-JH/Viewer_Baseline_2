@@ -30,13 +30,7 @@ namespace Management
 
 			// 설정 데이터값을 요청한다.
 			// 데이터 설정이 끝나면 시스템 인스턴스를 초기화한다.
-			StartCoroutine(RequestDataset(SetSystemInstance));
-
-			// 초기 시작시 이벤트 초기화
-			Event_Initialize();
-
-			// 입력 발생시 실행되는 액션 초기화
-			SetAction(ManagerActionIndex.InputAction);
+			RequestDataset(SetSystemInstance);
 		}
 
 		/// <summary>
