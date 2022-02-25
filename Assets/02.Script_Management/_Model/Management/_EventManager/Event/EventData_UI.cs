@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Management.Events
 {
 	using Definition;
+	using View;
 
 	public class EventData_UI : EventData
 	{
@@ -57,21 +58,10 @@ namespace Management.Events
 								thisHide = isHide ? false : true;
 							}
 
-							MeshRenderer render;
-							if(obj.TryGetComponent<MeshRenderer>(out render))
+							Obj_Selectable selectable;
+							if (obj.TryGetComponent<Obj_Selectable>(out selectable))
 							{
-								Material mat = render.material;
-								Color colr = mat.color;
-								render.material.SetColor("_Color", new Color(colr.r, colr.g, colr.b, alpha));
-
-								if(thisHide)
-								{
-									Materials.ToFadeMode(render.material);
-								}
-								else
-								{
-									Materials.ToOpaqueMode(render.material);
-								}
+								selectable.OnDeselect<UIEventType, bool>(UiEventType, thisHide);
 							}
 						}
 					}

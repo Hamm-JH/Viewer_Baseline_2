@@ -180,23 +180,27 @@ namespace Management.Events
 							if(Selected3D.TryGetComponent<IInteractable>(out interactable))
 							{
 								Element = interactable;
-								// UI에 선택 정보 업데이트
-								//Debug.Log();
-								//for (int i = 0; i < m_clickEvent.GetPersistentEventCount(); i++)
-								//{
-								//	Debug.Log(m_clickEvent.GetPersistentMethodName(i));
-								//}
 
-								//m_clickEvent.GetPersistentMethodName()
 								m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
 								m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-								Debug.Log(m_clickEvent.GetPersistentEventCount());
 								StatusCode = _success;
 								return;
 							}
 						}
-						Element = null;
-						StatusCode = _fail;
+						// 빈 공간을 누른 경우
+						else if(m_results.Count == 0)
+						{
+
+							Element = null;
+							StatusCode = Status.Pass;
+							//StatusCode = _fail;
+						}
+						// UI 객체를 누른 경우 m_results.Count != 0
+						else
+						{
+							Element = null;
+							StatusCode = Status.Skip;
+						}
 					}
 					// 데칼 배치 단계에선 code :: pass, drop
 					break;
@@ -241,7 +245,16 @@ namespace Management.Events
 					break;
 
 				case InputEventType.Input_clickSuccessUp:
-					m_clickEvent.Invoke(Element.Target);
+					// 객체를 올바르게 선택한 경우
+					if(Element != null)
+					{
+						m_clickEvent.Invoke(Element.Target);
+					}
+					// 빈 공간을 선택한 경우
+					else
+					{
+						m_clickEvent.Invoke(null);
+					}
 					break;
 
 				case InputEventType.Input_drag:

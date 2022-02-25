@@ -20,6 +20,8 @@ namespace Module.UI
 
 		public override void SetObjectData_Tunnel(GameObject selected)
 		{
+			if (selected == null) return;
+
 			Debug.LogError($"selected name : {selected.name}");
 			string seg = "";
 			string line = "";

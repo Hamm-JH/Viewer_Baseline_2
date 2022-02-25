@@ -201,25 +201,34 @@ namespace Management
 						// UI 선택시
 						// 3D 선택시
 
-						_currEvent.Element.OnSelect();
-						_currEvent.DoEvent();
-
 						// 클릭다운 개체가 있을 경우
-						if(_sEvents.ContainsKey(InputEventType.Input_clickDown))
+						if (_sEvents.ContainsKey(InputEventType.Input_clickDown))
 						{
 							cacheDownObj = null;
 							_sEvents.Remove(InputEventType.Input_clickDown);
 						}
 
-						// 클릭 성공 개체가 있을 경우
-						if(_sEvents.ContainsKey(InputEventType.Input_clickSuccessUp))
+						// 정상적으로 객체가 선택이 된 경우
+						if (_currEvent.Element != null)
 						{
-							_sEvents[InputEventType.Input_clickSuccessUp] = _currEvent;
+							_currEvent.Element.OnSelect();
+							_currEvent.DoEvent();
+
+							// 클릭 성공 개체가 있을 경우
+							if(_sEvents.ContainsKey(InputEventType.Input_clickSuccessUp))
+							{
+								_sEvents[InputEventType.Input_clickSuccessUp] = _currEvent;
+							}
+							// 클릭 성공 개체가 없을 경우
+							else
+							{
+								_sEvents.Add(InputEventType.Input_clickSuccessUp, _currEvent);
+							}
 						}
-						// 클릭 성공 개체가 없을 경우
+						// 빈 공간을 누른 경우 (UI를 누른 경우의 수는 Status.Drop으로 차단함)
 						else
 						{
-							_sEvents.Add(InputEventType.Input_clickSuccessUp, _currEvent);
+							_currEvent.DoEvent();
 						}
 					}
 					break;

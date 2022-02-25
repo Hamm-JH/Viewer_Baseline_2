@@ -2398,6 +2398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 33
   childPanel: {fileID: 0}
@@ -2617,6 +2618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 34
   childPanel: {fileID: 0}
@@ -3591,6 +3593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 3588598658056503368}
   eventType: 17
   childPanel: {fileID: 6793901857240370975}
@@ -4992,6 +4995,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 50
   childPanel: {fileID: 192493818472343939}
@@ -6762,6 +6766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 16
   childPanel: {fileID: 7779356435026570520}
@@ -6905,6 +6910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 256
   childPanel: {fileID: 0}
@@ -7353,6 +7359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 3588598658056503368}
   eventType: 80
   childPanel: {fileID: 0}
@@ -7805,6 +7812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 3588598658056503368}
   eventType: 17
   childPanel: {fileID: 1989686794448852727}
@@ -8020,6 +8028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 3588598658056503368}
   eventType: 66
   childPanel: {fileID: 0}
@@ -8310,6 +8319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 3588598658056503368}
   eventType: 65
   childPanel: {fileID: 0}
@@ -8529,6 +8539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 3588598658056503368}
   eventType: 17
   childPanel: {fileID: 4164474976014949157}
@@ -8669,6 +8680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 3588598658056503368}
   eventType: 17
   childPanel: {fileID: 192493818472343939}
@@ -14343,6 +14355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 257
   childPanel: {fileID: 0}
@@ -15238,6 +15251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 16
   childPanel: {fileID: 7001790015856787353}
@@ -17618,6 +17632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 36
   childPanel: {fileID: 0}
@@ -20055,6 +20070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 49
   childPanel: {fileID: 192493818472343939}
@@ -20612,6 +20628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 35
   childPanel: {fileID: 0}

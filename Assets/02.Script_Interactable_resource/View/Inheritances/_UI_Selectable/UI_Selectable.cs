@@ -18,6 +18,12 @@ namespace View
 
 		public override List<GameObject> Targets => throw new System.NotImplementedException();
 
+		public override bool IsInteractable 
+		{ 
+			get => m_isInteractable;
+			set => m_isInteractable = value;
+		}
+
 		Button m_btn;
 		Slider m_slider;
 
@@ -62,6 +68,11 @@ namespace View
 		}
 
 		public override void OnDeselect<T>(T t)
+		{
+			
+		}
+
+		public override void OnDeselect<T1, T2>(T1 t1, T2 t2)
 		{
 			
 		}
@@ -148,6 +159,8 @@ namespace View
 					break;
 			}
 		}
+
+		
 
 		#endregion
 
