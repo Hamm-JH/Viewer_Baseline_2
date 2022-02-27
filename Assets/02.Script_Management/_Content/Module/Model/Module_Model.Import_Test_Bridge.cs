@@ -120,7 +120,7 @@ namespace Module.Model
 				// [조건] 분할 문자열이 2개 : (객체명 문자열 1, material 정보 1) 객체가 한 개의 Material을 필요로 하는 경우
 				if (splitObjectString.Length == 2)
 				{
-					selected_objTransforms[i].GetComponent<MeshRenderer>().material = Materials.Set(MaterialType.ObjDefault1);
+					selected_objTransforms[i].GetComponent<MeshRenderer>().material = Materials.Set(MaterialType.Default);
 
 					selected_objTransforms[i].gameObject.AddComponent<MeshCollider>().convex = true;
 					selected_objTransforms[i].gameObject.AddComponent<Obj_Selectable>();
@@ -137,7 +137,7 @@ namespace Module.Model
 					{
 						multiSplitIndex[splitObjectString[0]]++;
 
-						selected_objTransforms[i].GetComponent<MeshRenderer>().material = Materials.Set(MaterialType.ObjDefault1);
+						selected_objTransforms[i].GetComponent<MeshRenderer>().material = Materials.Set(MaterialType.Default);
 
 						selected_objTransforms[i].gameObject.AddComponent<MeshCollider>().convex = true;
 						selected_objTransforms[i].gameObject.AddComponent<Obj_Selectable>();
@@ -155,7 +155,7 @@ namespace Module.Model
 						multiSplitIndex.Add(splitObjectString[0], stringIndex);
 						multiSplitIndex[splitObjectString[0]]++;
 
-						selected_objTransforms[i].GetComponent<MeshRenderer>().material = Materials.Set(MaterialType.ObjDefault1);
+						selected_objTransforms[i].GetComponent<MeshRenderer>().material = Materials.Set(MaterialType.Default);
 
 						selected_objTransforms[i].gameObject.AddComponent<MeshCollider>().convex = true;
 						selected_objTransforms[i].gameObject.AddComponent<Obj_Selectable>();

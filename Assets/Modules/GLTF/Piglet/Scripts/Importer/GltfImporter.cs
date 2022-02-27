@@ -1463,33 +1463,41 @@ namespace Piglet
 					meshRenderer.material = material;
 					break;
 				case RenderPipelineType.URP:
-					var primitive = _root.Meshes[meshIndex].Primitives[primitiveIndex];
-					var alphaMode = primitive.Material.Value.AlphaMode;
-					if (alphaMode == AlphaMode.BLEND)
-					{
-						// Insert a material whose shader only writes
-						// to the Z-buffer (a.k.a. depth buffer).
-						//
-						// This is a compromise/workaround for the
-						// classic problem of Order Independent Transparency (OIT).
-						// For background on this problem, see:
-						// https://forum.unity.com/threads/render-mode-transparent-doesnt-work-see-video.357853/#post-2315934
-						//
-						// The shaders for `RenderPipeline.BuiltIn`
-						// pipeline also address the OIT problem with
-						// a Z-buffer pre-pass. The main difference
-						// with URP is that each shader/material can only perform
-						// one pass, and so we must assign two materials to the
-						// mesh: one for the Z-buffer pre-pass and one for actually
-						// rendering the object.
+					//shaderName = "Shader Graphs/URPMetallicRoughnessOpaque";
+					//shaderName = "Shader Graphs/URPMetallicRoughnessMask";
+					//shaderName = "Shader Graphs/URPMetallicRoughnessBlend";
 
-						var zwrite = _imported.GetZWriteMaterial(true);
-						meshRenderer.materials =
-							new UnityEngine.Material[] { zwrite, material };
-					}
-					else
+					UnityEngine.Material mat = new UnityEngine.Material(Shader.Find("Shader Graphs/URPMetallicRoughnessOpaque"));
+					meshRenderer.material = mat;
 					{
-						meshRenderer.material = material;
+						//var primitive = _root.Meshes[meshIndex].Primitives[primitiveIndex];
+						//var alphaMode = primitive.Material.Value.AlphaMode;
+						//if (alphaMode == AlphaMode.BLEND)
+						//{
+						//	// Insert a material whose shader only writes
+						//	// to the Z-buffer (a.k.a. depth buffer).
+						//	//
+						//	// This is a compromise/workaround for the
+						//	// classic problem of Order Independent Transparency (OIT).
+						//	// For background on this problem, see:
+						//	// https://forum.unity.com/threads/render-mode-transparent-doesnt-work-see-video.357853/#post-2315934
+						//	//
+						//	// The shaders for `RenderPipeline.BuiltIn`
+						//	// pipeline also address the OIT problem with
+						//	// a Z-buffer pre-pass. The main difference
+						//	// with URP is that each shader/material can only perform
+						//	// one pass, and so we must assign two materials to the
+						//	// mesh: one for the Z-buffer pre-pass and one for actually
+						//	// rendering the object.
+
+						//	var zwrite = _imported.GetZWriteMaterial(true);
+						//	meshRenderer.materials =
+						//		new UnityEngine.Material[] { zwrite, material };
+						//}
+						//else
+						//{
+						//	meshRenderer.material = material;
+						//}
 					}
 					break;
 				default:

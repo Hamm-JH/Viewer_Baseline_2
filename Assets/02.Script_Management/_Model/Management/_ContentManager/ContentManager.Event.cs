@@ -108,9 +108,11 @@ namespace Management
 				{
 					Material mat = render.material;
 					Color colr = mat.color;
-					render.material.SetColor("_Color", new Color(colr.r, colr.g, colr.b, 1));
 
-					Materials.ToOpaqueMode(render.material);
+					Materials.Set(render, ColorType.Default1, 1);
+					//render.material.SetColor("_Color", new Color(colr.r, colr.g, colr.b, 1));
+
+					Materials.ToOpaqueMode(render);
 				}
 
 				Obj_Selectable selectable;

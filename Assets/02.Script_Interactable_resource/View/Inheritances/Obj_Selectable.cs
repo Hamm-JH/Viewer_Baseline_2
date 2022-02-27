@@ -73,9 +73,10 @@ namespace View
 				MeshRenderer render;
 				if (gameObject.TryGetComponent<MeshRenderer>(out render))
 				{
-					Color colr = render.material.color;
-
-					render.material.SetColor("_Color", Colors.Set(ColorType.Default1, colr.a));
+					Materials.Set(render, ColorType.Default1, render.material.color.a);
+					
+					//Color colr = render.material.color;
+					//render.material.SetColor("_Color", Colors.Set(ColorType.Default1, colr.a));
 				}
 			}
 			else if(platform == PlatformCode.PC_Viewer_Bridge)
@@ -87,9 +88,10 @@ namespace View
 					MeshRenderer render;
 					if (obj.TryGetComponent<MeshRenderer>(out render))
 					{
-						Color colr = render.material.color;
-
-						render.material.SetColor("_Color", Colors.Set(ColorType.Default1, colr.a));
+						Materials.Set(render, ColorType.Default1, render.material.color.a);
+						
+						//Color colr = render.material.color;
+						//render.material.SetColor("_Color", Colors.Set(ColorType.Default1, colr.a));
 					}
 				}
 			}
@@ -146,15 +148,16 @@ namespace View
 					Color colr = mat.color;
 					bool thisOpaque = colr.a > boundary ? true : false;
 
-					render.material.SetColor("_Color", new Color(colr.r, colr.g, colr.b, _value));
+					Materials.Set(render, ColorType.Default1, _value);
+					//render.material.SetColor("_Color", new Color(colr.r, colr.g, colr.b, _value));
 
 					if (isOpaque && !thisOpaque)
 					{
-						Materials.ToOpaqueMode(render.material);
+						Materials.ToOpaqueMode(render);
 					}
 					else if (!isOpaque && thisOpaque)
 					{
-						Materials.ToFadeMode(render.material);
+						Materials.ToFadeMode(render);
 					}
 				}
 			}
@@ -180,13 +183,15 @@ namespace View
 
 							if (_isHide)
 							{
-								Materials.ToFadeMode(render.material);
-								render.material.SetColor("_Color", Colors.Set(ColorType.Default1, 0.1f));
+								Materials.ToFadeMode(render);
+								Materials.Set(render, ColorType.Default1, 0.1f);
+								//render.material.SetColor("_Color", Colors.Set(ColorType.Default1, 0.1f));
 							}
 							else
 							{
-								Materials.ToOpaqueMode(render.material);
-								render.material.SetColor("_Color", Colors.Set(ColorType.Default1, 1));
+								Materials.ToOpaqueMode(render);
+								Materials.Set(render, ColorType.Default1, 1);
+								//render.material.SetColor("_Color", Colors.Set(ColorType.Default1, 1));
 							}
 
 						}
@@ -214,13 +219,15 @@ namespace View
 
 							if(_isHide)
 							{
-								Materials.ToFadeMode(render.material);
-								render.material.SetColor("_Color", Colors.Set(ColorType.Default1, 0.1f));
+								Materials.ToFadeMode(render);
+								Materials.Set(render, ColorType.Default1, 0.1f);
+								//render.material.SetColor("_Color", Colors.Set(ColorType.Default1, 0.1f));
 							}
 							else
 							{
-								Materials.ToOpaqueMode(render.material);
-								render.material.SetColor("_Color", Colors.Set(ColorType.Default1, 1));
+								Materials.ToOpaqueMode(render);
+								Materials.Set(render, ColorType.Default1, 1);
+								//render.material.SetColor("_Color", Colors.Set(ColorType.Default1, 1));
 							}
 
 						}
@@ -247,16 +254,10 @@ namespace View
 					{
 						Color colr = render.material.color;
 
-						render.material.SetColor("_Color", Colors.Set(ColorType.Selected1, colr.a));
+						Materials.Set(render, ColorType.Selected1, render.material.color.a);
+						//render.material.SetColor("_Color", Colors.Set(ColorType.Selected1, colr.a));
 					}
 				}
-				//MeshRenderer render;
-				//if (gameObject.TryGetComponent<MeshRenderer>(out render))
-				//{
-				//	Color colr = render.material.color;
-
-				//	render.material.SetColor("_Color", Colors.Set(ColorType.Selected1, colr.a));
-				//}
 			}
 			else if (platform == PlatformCode.PC_Viewer_Bridge)
 			{
@@ -268,7 +269,8 @@ namespace View
 					{
 						Color colr = render.material.color;
 
-						render.material.SetColor("_Color", Colors.Set(ColorType.Selected1, colr.a));
+						Materials.Set(render, ColorType.Selected1, render.material.color.a);
+						//render.material.SetColor("_Color", Colors.Set(ColorType.Selected1, colr.a));
 					}
 				}
 			}

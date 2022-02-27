@@ -235,6 +235,8 @@ namespace Definition
 
 	public enum MaterialType
 	{
+		Default = 0x01,
+
 		Default1 = 0x10,
 		ObjDefault1 = 0x99,
 	}
