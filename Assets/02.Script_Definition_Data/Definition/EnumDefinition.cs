@@ -87,6 +87,7 @@ namespace Definition
 		Interaction_3D = 0x21,
 		Interaction_UI = 0x22,
 		
+		API = 0x30,
 		API_Front = 0x31,
 		API_Back = 0x32,
 

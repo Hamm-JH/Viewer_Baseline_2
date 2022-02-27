@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2747876, g: 0.39077058, b: 0.50724125, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -454,6 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d643083dc4f08b14582661baf0c39313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
 --- !u!4 &475374887
 Transform:
   m_ObjectHideFlags: 0
@@ -943,6 +944,49 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3571982668138255868, guid: 7d3e532011e2f7d4aaf0dedd092b74ca, type: 3}
   m_PrefabInstance: {fileID: 764232818}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &856688491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 856688492}
+  - component: {fileID: 856688493}
+  m_Layer: 0
+  m_Name: WebAPI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &856688492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856688491}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7272807275813331565}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &856688493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856688491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 908b2a01ae2d4624c90b564e880c09ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &961884505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,6 +1300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 80
   childPanel: {fileID: 0}
@@ -1527,6 +1572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 17
   childPanel: {fileID: 0}
@@ -1591,6 +1637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 16
   childPanel: {fileID: 4957481881958593512}
@@ -1774,6 +1821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 20
   childPanel: {fileID: 0}
@@ -1904,6 +1952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 19
   childPanel: {fileID: 0}
@@ -3326,6 +3375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 17
   childPanel: {fileID: 0}
@@ -3815,6 +3865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 18
   childPanel: {fileID: 0}
@@ -3871,6 +3922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 16
   childPanel: {fileID: 4957481881178830748}
@@ -4577,6 +4629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8c914be6301746bd51e4c6062b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isInteractable: 0
   m_rootUI: {fileID: 0}
   eventType: 18
   childPanel: {fileID: 0}
@@ -5103,6 +5156,7 @@ MonoBehaviour:
   m_modules:
   - {fileID: 7272807276706612160}
   - {fileID: 332874542}
+  - {fileID: 856688493}
   m_modelObjects: []
 --- !u!4 &7272807275813331565
 Transform:
@@ -5117,6 +5171,7 @@ Transform:
   m_Children:
   - {fileID: 2778157911694002971}
   - {fileID: 332874541}
+  - {fileID: 856688492}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

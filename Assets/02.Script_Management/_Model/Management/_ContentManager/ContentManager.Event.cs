@@ -77,25 +77,6 @@ namespace Management
 				{
 					selectable.OnDeselect<UIEventType, float>(UIEventType.Fit_Center, _value);
 				}
-
-				//MeshRenderer render;
-				//if(obj.TryGetComponent<MeshRenderer>(out render))
-				//{
-				//	Material mat = render.material;
-				//	Color colr = mat.color;
-				//	bool thisOpaque = colr.a > boundary ? true : false;
-
-				//	render.material.SetColor("_Color", new Color(colr.r, colr.g, colr.b, _value));
-
-				//	if(isOpaque && !thisOpaque)
-				//	{
-				//		Materials.ToOpaqueMode(render.material);
-				//	}
-				//	else if(!isOpaque && thisOpaque)
-				//	{
-				//		Materials.ToFadeMode(render.material);
-				//	}
-				//}
 			}
 		}
 

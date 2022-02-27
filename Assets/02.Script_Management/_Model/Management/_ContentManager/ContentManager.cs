@@ -27,8 +27,64 @@ namespace Management
 		/// 모듈 리스트
 		/// </summary>
 		[SerializeField] List<AModule> m_modules;
+		Module_Model m_model;
+		Module_WebAPI m_api;
+		Module_Interaction m_interaction;
 
 		public List<AModule> Modules { get => m_modules; set => m_modules=value; }
+
+		public Module_Model _Model
+		{
+			get
+			{
+				if(m_model == null)
+				{
+					Module_Model mod = (Module_Model)Modules.Find(x => x.ID == ModuleID.Model);
+					if (mod != null) m_model = mod;
+					else
+					{
+						throw new System.Exception("Model is null");
+					}
+				}
+				return m_model;
+			}
+		}
+
+		public Module_WebAPI _API
+		{
+			get
+			{
+				if(m_api == null)
+				{
+					Module_WebAPI mod = (Module_WebAPI)Modules.Find(x => x.ID == ModuleID.WebAPI);
+					if (mod != null) m_api = mod;
+					else
+					{
+						throw new System.Exception("WebAPI is null");
+					}
+				}
+				return m_api;
+			}
+		}
+
+		public Module_Interaction _Interaction
+		{
+			get
+			{
+				if(m_interaction == null)
+				{
+					Module_Interaction mod = (Module_Interaction)Modules.Find(x => x.ID == ModuleID.Interaction);
+					if (mod != null) m_interaction = mod;
+					else
+					{
+						throw new System.Exception("Interaction is null");
+					}
+				}
+				return m_interaction;
+			}
+		}
+
+		List<GameObject> m_modelObjects;
 
 		/// <summary>
 		/// 모델 요소의 중심축 값 반환
@@ -37,12 +93,9 @@ namespace Management
 		{
 			get
 			{
-				Module_Model mod = (Module_Model)Modules.Find(x => x.ID == ModuleID.Model);
-				return mod.CenterBounds;
+				return _Model.CenterBounds;
 			}
 		}
-
-		[SerializeField] List<GameObject> m_modelObjects;
 
 		public List<GameObject> _ModelObjects
 		{
@@ -50,13 +103,11 @@ namespace Management
 			{
 				if(m_modelObjects == null)
 				{
-					Module_Model mod = (Module_Model)Modules.Find(x => x.ID == ModuleID.Model);
-					m_modelObjects = mod.ModelObjects;
+					m_modelObjects = _Model.ModelObjects;
 				}
 				if(m_modelObjects.Count == 0)
 				{
-					Module_Model mod = (Module_Model)Modules.Find(x => x.ID == ModuleID.Model);
-					m_modelObjects = mod.ModelObjects;
+					m_modelObjects = _Model.ModelObjects;
 				}
 				return m_modelObjects;
 			}
@@ -69,8 +120,7 @@ namespace Management
 		{
 			get
 			{
-				Module_Interaction mod = (Module_Interaction)Modules.Find(x => x.ID == ModuleID.Interaction);
-				return mod.RootCanvas;
+				return _Interaction.RootCanvas;
 			}
 		}
 
@@ -81,8 +131,7 @@ namespace Management
 		{
 			get
 			{
-				Module_Interaction mod = (Module_Interaction)Modules.Find(x => x.ID == ModuleID.Interaction);
-				return mod.GrRaycaster;
+				return _Interaction.GrRaycaster;
 			}
 		}
 
@@ -93,8 +142,7 @@ namespace Management
 		{
 			get
 			{
-				Module_Interaction mod = (Module_Interaction)Modules.Find(x => x.ID == ModuleID.Interaction);
-				return mod.UiInstance;
+				return _Interaction.UiInstance;
 			}
 		}
 

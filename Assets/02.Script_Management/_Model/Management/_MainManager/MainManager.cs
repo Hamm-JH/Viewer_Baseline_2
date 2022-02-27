@@ -60,6 +60,11 @@ namespace Management
 			get => _content.Content;
 		}
 
+		public CoreData Data
+		{
+			get => _data;
+		}
+
 		#endregion
 
 

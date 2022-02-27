@@ -24,12 +24,15 @@ namespace Definition
 					{
 						MAT_DEFAULT = Resources.Load<Material>("3D/BltIn_Default");
 						MAT_TRANSPARENT = Resources.Load<Material>("3D/BltIn_Transparent");
+						
 						result = MAT_DEFAULT;
 					}
 					else if (pipeline == RenderPipelineType.URP)
 					{
 						MAT_DEFAULT = Resources.Load<Material>("3D/URP_Default");
 						MAT_TRANSPARENT = Resources.Load<Material>("3D/URP_Transparent");
+						//MAT_DEFAULT = Resources.Load<Material>("3D/URP_Default2");
+						//MAT_TRANSPARENT = Resources.Load<Material>("3D/URP_Transparent2");
 						result = MAT_DEFAULT;
 					}
 					break;

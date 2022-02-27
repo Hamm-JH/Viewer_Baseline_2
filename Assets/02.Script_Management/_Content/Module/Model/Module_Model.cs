@@ -6,6 +6,7 @@ namespace Module.Model
 {
 	using Definition;
 	using Management;
+	using static Module.WebAPI.Module_WebAPI;
 
 	/// <summary>
 	/// 모델 처리 모듈 
@@ -20,6 +21,8 @@ namespace Module.Model
 		protected GameObject Model { get => model; set => model=value; }
 		public Bounds CenterBounds { get => centerBounds; }
 		public List<GameObject> ModelObjects { get => m_modelObjects; set => m_modelObjects=value; }
+
+		
 
 		/// <summary>
 		/// 모델 받아오기
