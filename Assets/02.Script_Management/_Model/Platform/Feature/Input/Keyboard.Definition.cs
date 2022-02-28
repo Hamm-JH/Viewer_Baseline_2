@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Platform.Feature._Input
 {
+	using Definition;
 	using Management.Events;
 
 	public partial class Keyboard : IInput
@@ -15,7 +16,8 @@ namespace Platform.Feature._Input
 		/// <returns></returns>
 		public override bool OnStart(ref InputEvents inputEvents)
 		{
-			keyCodes = new List<KeyCode>();
+			keyCodes = new List<KeyData>();
+			newKeyCodes = new List<KeyData>();
 
 			m_InputEvents = inputEvents;
 

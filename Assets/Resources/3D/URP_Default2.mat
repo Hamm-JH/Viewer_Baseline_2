@@ -116,7 +116,7 @@ Material:
     - _OutlineDepthOffset: 0
     - _OutlineEnabled: 1
     - _OutlineScale: 1
-    - _OutlineWidth: 2.5
+    - _OutlineWidth: 1.21
     - _OverrideLightmapDir: 0
     - _OverrideShadows: 1
     - _OverrideShadowsEnabled: 1

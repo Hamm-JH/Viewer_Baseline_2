@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Platform.Feature.Camera
 {
+	using Definition;
 	using Definition.Control;
 	using Management.Events;
 	using UnityEngine.Events;
@@ -87,7 +88,7 @@ namespace Platform.Feature.Camera
 		/// <summary>
 		/// 키 이벤트 발생시 실행
 		/// </summary>
-		UnityAction<List<KeyCode>> keyAction;
+		UnityAction<List<KeyData>> keyAction;
 
 		/// <summary>
 		/// 선택
@@ -115,7 +116,7 @@ namespace Platform.Feature.Camera
 		/// 키 입력
 		/// </summary>
 		/// <param name="_keys">입력된 키 </param>
-		public abstract void OnKey(List<KeyCode> _key);
+		public abstract void OnKey(List<KeyData> _key);
 		#endregion
 	}
 }

@@ -15,6 +15,7 @@ namespace Management.Events
 	public abstract class EventData
 	{
 		protected IInteractable m_element;
+		protected List<IInteractable> m_elements;
 		protected InputEventType m_eventType;
 		private Status status;
 
@@ -22,6 +23,7 @@ namespace Management.Events
 		/// 상호작용 가능한 요소
 		/// </summary>
 		public IInteractable Element { get => m_element; set => m_element=value; }
+		public List<IInteractable> Elements { get => m_elements; set => m_elements=value; }
 
 		public List<GameObject> objects;
 
@@ -35,6 +37,8 @@ namespace Management.Events
 		/// </summary>
 		public Status StatusCode { get => status; set => status=value; }
 
+		//----------------------------------------------------------------------------------------------
+
 		[Header("Private 3D")]
 		protected GameObject m_selected3D = null;
 		protected RaycastHit m_hit = default(RaycastHit);
@@ -47,12 +51,15 @@ namespace Management.Events
 		public List<RaycastResult> Results { get => m_results; set => m_results=value; }
 		public int BtnIndex { get => m_btn; set => m_btn=value; }
 
+		//----------------------------------------------------------------------------------------------
+
 		[Header("Private UI")]
 		protected UIEventType m_uiEventType;
 		protected ToggleType m_toggleType;
 
 		public UIEventType UiEventType { get => m_uiEventType; set => m_uiEventType=value; }
 		public ToggleType ToggleType { get => m_toggleType; set => m_toggleType=value; }
+		
 
 
 		/// <summary>
@@ -66,6 +73,8 @@ namespace Management.Events
 		/// </summary>
 		public abstract void DoEvent();
 		public abstract void DoEvent(List<GameObject> _objs);
+
+		public abstract void DoEvent(Dictionary<InputEventType, EventData> _sEvents);
 		
 		public static bool IsEqual(EventData A, EventData B)
 		{

@@ -81,13 +81,6 @@ namespace Management
 			onFocusAction += OnFocus;
 			onKeyAction += OnKey;
 
-#if DEBUG_INPUT
-			onClickAction += Method_ClickDebug;
-			onDragAction += Method_DragDebug;
-			onFocusAction += Method_FocusDebug;
-			onKeyAction += Method_KeyDebug;
-#endif
-
 		}
 
 #region Actions
@@ -97,7 +90,7 @@ namespace Management
 		
 		public UnityAction<InputEventType, Vector3, float> onFocusAction;
 		
-		public UnityAction<InputEventType, List<KeyCode>> onKeyAction;
+		public UnityAction<InputEventType, List<KeyData>> onKeyAction;
 #endregion
 
 #region OnClick actions
@@ -124,11 +117,6 @@ namespace Management
 			}
 		}
 
-		public void Method_ClickDebug(InputEventType type, int btn, Vector3 _mousePos)
-		{
-			Debug.Log($"Method click debug : {_mousePos}");
-		}
-
 #endregion
 
 #region OnDrag actions
@@ -148,11 +136,6 @@ namespace Management
 				_grRaycaster: main.Content._GrRaycaster,
 				_event: main.cameraExecuteEvents.dragEvent
 				));
-		}
-
-		public void Method_DragDebug(InputEventType type, int btn, Vector2 delta)
-		{
-			Debug.Log($"Method drag debug : {delta}");
 		}
 
 #endregion
@@ -178,11 +161,6 @@ namespace Management
 			//main.cameraExecuteEvents.focusEvent.Invoke(_focus, _delta);
 		}
 
-		public void Method_FocusDebug(InputEventType type, Vector3 focus, float delta)
-		{
-			Debug.Log($"Method focus debug : {focus}, {delta}");
-		}
-
 #endregion
 
 #region OnKey actions
@@ -191,27 +169,18 @@ namespace Management
 		/// 키 입력
 		/// </summary>
 		/// <param name="_kCode"></param>
-		public void OnKey(InputEventType type, List<KeyCode> _kCode)
+		public void OnKey(InputEventType type, List<KeyData> _kData)
 		{
+			_kData.ForEach(x => Debug.Log($"state : {x.m_keyState.ToString()}, key : {x.m_keyCode.ToString()}"));
+
 			// 키 입력 이벤트 실행
 			EventManager.Instance.OnEvent(new Events.EventData_Input(
 				_eventType: type,
-				_kCode: _kCode,
+				_kData: _kData,
 				_camera: main.MainCamera,
 				_grRaycaster: main.Content._GrRaycaster,
 				_event: main.cameraExecuteEvents.keyEvent
 				));
-		}
-
-		public void Method_KeyDebug(InputEventType type, List<KeyCode> key)
-		{
-			string pressedKeys = "";
-			foreach(KeyCode _key in key)
-			{
-				pressedKeys += $"{_key.ToString()}, ";
-			}
-
-			Debug.Log($"Method key debug : {pressedKeys}");
 		}
 
 #endregion

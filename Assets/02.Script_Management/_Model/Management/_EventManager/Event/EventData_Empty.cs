@@ -28,5 +28,10 @@ namespace Management.Events
 		{
 			Debug.Log("DoEvent Empty");
 		}
+
+		public override void DoEvent(Dictionary<InputEventType, EventData> _sEvents)
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

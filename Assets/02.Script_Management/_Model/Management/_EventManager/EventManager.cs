@@ -26,23 +26,30 @@ namespace Management
 
 		public void OnEvent(EventData currEvent)
 		{
-			// 선택된 이벤트 상태가 없는 경우, 아무 동작을 수행하지 않는 더미 인스턴스를 생성한다.
-			if (SelectedEvents.Count == 0)
+			try
 			{
-				EventData_Empty dummy = new EventData_Empty();
-				SelectedEvents.Add(dummy.EventType, dummy);
+				// 선택된 이벤트 상태가 없는 경우, 아무 동작을 수행하지 않는 더미 인스턴스를 생성한다.
+				if (SelectedEvents.Count == 0)
+				{
+					EventData_Empty dummy = new EventData_Empty();
+					SelectedEvents.Add(dummy.EventType, dummy);
+				}
+
+				// 현재 발생한 이벤트가 동작을 필요로 하지 않는 이벤트일 경우가 있다.
+				// 이 경우를 필터링한다.
+				if (!IsEventCanDoit(currEvent)) return;
+
+				// 받아온 이벤트의 내부처리 메서드를 시행
+				// 내부에 연산 결과로 내부의 interactable 인터페이스 상속 인스턴스 업데이트됨.
+				// 추후 전달 데이터가 늘어나면 새로 내부 클래스 작성하기
+				currEvent.OnProcess(cacheDownObj);
+
+				DoEvent(SelectedEvents, currEvent);
 			}
-
-			// 현재 발생한 이벤트가 동작을 필요로 하지 않는 이벤트일 경우가 있다.
-			// 이 경우를 필터링한다.
-			if (!IsEventCanDoit(currEvent)) return;
-
-			// 받아온 이벤트의 내부처리 메서드를 시행
-			// 내부에 연산 결과로 내부의 interactable 인터페이스 상속 인스턴스 업데이트됨.
-			// 추후 전달 데이터가 늘어나면 새로 내부 클래스 작성하기
-			currEvent.OnProcess(cacheDownObj);
-
-			DoEvent(SelectedEvents, currEvent);
+			catch (System.Exception e)
+			{
+				Debug.LogError($"Event Error :: {e.Message.ToString()}");
+			}
 		}
 
 		/// <summary>
@@ -208,28 +215,66 @@ namespace Management
 							_sEvents.Remove(InputEventType.Input_clickDown);
 						}
 
-						// 정상적으로 객체가 선택이 된 경우
-						if (_currEvent.Element != null)
+						// 다중 선택 조건에 적용되는가?
+						if(isMultiCondition(_sEvents))
 						{
-							_currEvent.Element.OnSelect();
-							_currEvent.DoEvent();
-
-							// 클릭 성공 개체가 있을 경우
-							if(_sEvents.ContainsKey(InputEventType.Input_clickSuccessUp))
+							// 정상적으로 객체가 선택이 된 경우
+							if(_currEvent.Elements != null)
 							{
-								_sEvents[InputEventType.Input_clickSuccessUp] = _currEvent;
+
+								// 클릭 성공 개체가 이미 있을 경우
+								if(_sEvents.ContainsKey(InputEventType.Input_clickSuccessUp))
+								{
+									_currEvent.Elements.ForEach(x => _sEvents[InputEventType.Input_clickSuccessUp].Elements.Add(x));
+									//_sEvents[InputEventType.Input_clickSuccessUp].Elements.Add
+								}
+								// 클릭 성공 개체가 없을 경우
+								else
+								{
+									_sEvents.Add(InputEventType.Input_clickSuccessUp, _currEvent);
+								}
+
+								// 다중 객체의 OnSelect 시행
+								// TODO 0228 :: 일단 단일 객체 이벤트로 대체
+								_sEvents[InputEventType.Input_clickSuccessUp].Elements.ForEach(x => x.OnSelect());
+								_sEvents[InputEventType.Input_clickSuccessUp].DoEvent();
+								//_currEvent.DoEvent();
 							}
-							// 클릭 성공 개체가 없을 경우
+							// 빈 공간을 누른 경우 (UI를 누른 경우의 수는 Status.Drop으로 차단함)
 							else
 							{
-								_sEvents.Add(InputEventType.Input_clickSuccessUp, _currEvent);
+
 							}
 						}
-						// 빈 공간을 누른 경우 (UI를 누른 경우의 수는 Status.Drop으로 차단함)
+						// 단일 선택 상태
 						else
 						{
-							_currEvent.DoEvent();
+							// 정상적으로 객체가 선택이 된 경우
+							if (_currEvent.Elements != null)
+							{
+								// 단일 객체의 OnSelect 시행
+								_currEvent.Elements.ForEach(x => x.OnSelect());
+								// 단일 객체의 cameraEvent 시행
+								_currEvent.DoEvent();
+
+								// 클릭 성공 개체가 있을 경우
+								if(_sEvents.ContainsKey(InputEventType.Input_clickSuccessUp))
+								{
+									_sEvents[InputEventType.Input_clickSuccessUp] = _currEvent;
+								}
+								// 클릭 성공 개체가 없을 경우
+								else
+								{
+									_sEvents.Add(InputEventType.Input_clickSuccessUp, _currEvent);
+								}
+							}
+							// 빈 공간을 누른 경우 (UI를 누른 경우의 수는 Status.Drop으로 차단함)
+							else
+							{
+								_currEvent.DoEvent();
+							}
 						}
+
 					}
 					break;
 
@@ -265,6 +310,30 @@ namespace Management
 
 				case InputEventType.Input_key:
 					{
+						EventData_Input _ev = (EventData_Input)_currEvent;
+
+						// 현재 입력된 키가 1개 이상일 경우
+						if(_ev.m_keys != null && _ev.m_keys.Count != 0)
+						{
+							// 키 데이터 업데이트
+							if(SelectedEvents.ContainsKey(InputEventType.Input_key))
+							{
+								SelectedEvents[InputEventType.Input_key] = _ev;
+							}
+							else
+							{
+								SelectedEvents.Add(InputEventType.Input_key, _ev);
+							}
+						}
+						else
+						{
+							// 기존 저장된 키 지우기
+							if(SelectedEvents.ContainsKey(InputEventType.Input_key))
+							{
+								SelectedEvents.Remove(InputEventType.Input_key);
+							}
+						}
+
 						// 즉발 (Not caching)
 						_currEvent.DoEvent();
 					}
@@ -273,16 +342,48 @@ namespace Management
 				case InputEventType.UI_Invoke:
 					{
 						if (!SelectedEvents.ContainsKey(InputEventType.Input_clickSuccessUp)) return;
-						if (SelectedEvents[InputEventType.Input_clickSuccessUp].Element == null) return;
+						if (SelectedEvents[InputEventType.Input_clickSuccessUp].Elements == null) return;
 
-						_currEvent.DoEvent(SelectedEvents[InputEventType.Input_clickSuccessUp].Element.Targets);
+						_currEvent.DoEvent(_sEvents);
 
-						SelectedEvents[InputEventType.Input_clickSuccessUp].Element.OnDeselect();
+						SelectedEvents[InputEventType.Input_clickSuccessUp].Elements.ForEach(x => x.OnDeselect());
 						SelectedEvents.Remove(InputEventType.Input_clickSuccessUp);
 					}
 					break;
 			}
+		}
 
+
+		/// <summary>
+		/// Click + 다중 선택 조건 확인
+		/// </summary>
+		/// <param name="_sEvents"></param>
+		/// <returns></returns>
+		private bool isMultiCondition(Dictionary<InputEventType, EventData> _sEvents)
+		{
+			bool result = false;
+			List<KeyData> kd = null;
+
+			// 키 입력이 있는 상태인가?
+			if(_sEvents.ContainsKey(InputEventType.Input_key))
+			{
+				EventData_Input _ev = (EventData_Input)_sEvents[InputEventType.Input_key];
+				kd = _ev.m_keys;
+			}
+
+			// 입력 키 존재하는 경우
+			if(kd != null)
+			{
+				KeyCode targetCode = MainManager.Instance.Data.KeyboardData.keyCtrl;
+				
+				// 키 정보중에 LeftCtrl이 존재하는가?
+				if(kd.Find(x => x.m_keyCode == targetCode) != null)
+				{
+					result = true;
+				}
+			}
+
+			return result;
 		}
 
 		/// <summary>
@@ -302,7 +403,7 @@ namespace Management
 						// 이전에 선택했던 개체가 존재하는가?
 						if(_sEvents.ContainsKey(InputEventType.Input_clickSuccessUp))
 						{
-							_sEvents[InputEventType.Input_clickSuccessUp].Element.OnDeselect();
+							_sEvents[InputEventType.Input_clickSuccessUp].Elements.ForEach(x => x.OnDeselect());
 						}
 					}
 					break;

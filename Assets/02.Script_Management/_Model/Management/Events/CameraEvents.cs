@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Management.Events
 {
+	using Definition;
 	using Platform.Feature;
 	using Platform.Feature.Camera;
 	using UnityEngine.Events;
@@ -20,7 +21,7 @@ namespace Management.Events
 			this.clickEvent = new UnityEvent<Vector3>();
 			this.dragEvent = new UnityEvent<int, Vector2>();
 			this.focusEvent = new UnityEvent<Vector3, float>();
-			this.keyEvent = new UnityEvent<List<KeyCode>>();
+			this.keyEvent = new UnityEvent<List<KeyData>>();
 
 			CameraData = _camera;
 		}
@@ -57,6 +58,6 @@ namespace Management.Events
 		/// <summary>
 		/// Main // 키 입력 이벤트
 		/// </summary>
-		public UnityEvent<List<KeyCode>> keyEvent;
+		public UnityEvent<List<KeyData>> keyEvent;
 	}
 }

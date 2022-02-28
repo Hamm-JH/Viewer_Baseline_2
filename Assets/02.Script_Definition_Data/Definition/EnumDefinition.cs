@@ -233,13 +233,29 @@ namespace Definition
 		UI_Highlight = 0x31,
 
 	}
+	
+	// Definition types
 
 	public enum MaterialType
 	{
 		Default = 0x01,
 
 		Default1 = 0x10,
+
+		Issue = 0x20,
+		Issue_dmg = 0x21,
+		Issue_rcv = 0x22,
+
 		ObjDefault1 = 0x99,
+	}
+
+	public enum TextureType
+	{
+		crack = 0x01,
+		baegtae = 0x02,
+		bagli = 0x03,
+		damage = 0x04,
+		segul = 0x05,
 	}
 
 	public enum PrefabType

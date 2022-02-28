@@ -1,3 +1,4 @@
+using Definition;
 using Management;
 using System.Collections;
 using System.Collections.Generic;
@@ -46,6 +47,11 @@ namespace Platform.Feature._Input
 			/// 부스트 키
 			/// </summary>
 			public KeyCode keyBoost;
+
+			/// <summary>
+			/// 컨트롤 키
+			/// </summary>
+			public KeyCode keyCtrl;
 		}
 
 		[SerializeField] Data defData;
@@ -62,58 +68,89 @@ namespace Platform.Feature._Input
 		/// <summary>
 		/// 키 입력 리스트
 		/// </summary>
-		List<KeyCode> keyCodes;
+		List<KeyData> keyCodes;
+		List<KeyData> newKeyCodes;
 
 		#endregion
 
 		#region 키 체크
+
+		private KeyData CheckKeyData(KeyCode _kCode)
+		{
+			if (Input.GetKeyDown(_kCode))
+			{
+				return new KeyData
+				{
+					m_keyState = KeyState.Down,
+					m_keyCode = _kCode
+				};
+			}
+			else if(Input.GetKeyUp(_kCode))
+			{
+				return new KeyData
+				{
+					m_keyState = KeyState.Up,
+					m_keyCode = _kCode
+				};
+			}
+			else if (Input.GetKey(_kCode))
+			{
+				return new KeyData
+				{
+					m_keyState = KeyState.Stay,
+					m_keyCode = _kCode
+				};
+			}
+			else
+			{
+				return null;
+			}
+		}
 
 		/// <summary>
 		/// 키보드 설정 키에 대응하는 이벤트 체크 수행
 		/// </summary>
 		private void KeyCheck()
 		{
-			keyCodes.Clear();
+			newKeyCodes.Clear();
 
-			if(Input.GetKey(defData.keyFront))
+			if(Input.anyKey)
 			{
-				keyCodes.Add(defData.keyFront);
+				KeyData _front = CheckKeyData(defData.keyFront);
+				KeyData _back = CheckKeyData(defData.keyBack);
+				KeyData _left = CheckKeyData(defData.keyLeft);
+				KeyData _right = CheckKeyData(defData.keyRight);
+				KeyData _up = CheckKeyData(defData.keyUp);
+				KeyData _down = CheckKeyData(defData.keyDown);
+				KeyData _boost = CheckKeyData(defData.keyBoost);
+				KeyData _ctrl = CheckKeyData(defData.keyCtrl);
+
+				if (_front != null) newKeyCodes.Add(_front);
+				if (_back != null) newKeyCodes.Add(_back);
+				if (_left != null) newKeyCodes.Add(_left);
+				if (_right != null) newKeyCodes.Add(_right);
+				if (_up != null) newKeyCodes.Add(_up);
+				if (_down != null) newKeyCodes.Add(_down);
+				if (_boost != null) newKeyCodes.Add(_boost);
+				if (_ctrl != null) newKeyCodes.Add(_ctrl);
 			}
 
-			if(Input.GetKey(defData.keyBack))
+			if(newKeyCodes.Count != 0)
 			{
-				keyCodes.Add(defData.keyBack);
+				// clickDown
+				//if(keyCodes.Count == 0) { }
+				
+				// stay
+				m_InputEvents.keyEvent.Invoke(Definition.InputEventType.Input_key, newKeyCodes);
+			}
+			// 이전 키 입력 있었음 && 현재 키 입력 없음 :: ClickUp (모든 키 입력 없는 상태)
+			else if(keyCodes.Count != 0 && newKeyCodes.Count == 0)
+			{
+				m_InputEvents.keyEvent.Invoke(InputEventType.Input_key, null);
 			}
 
-			if(Input.GetKey(defData.keyLeft))
-			{
-				keyCodes.Add(defData.keyLeft);
-			}
-
-			if(Input.GetKey(defData.keyRight))
-			{
-				keyCodes.Add(defData.keyRight);
-			}
-
-			if(Input.GetKey(defData.keyUp))
-			{
-				keyCodes.Add(defData.keyUp);
-			}
-
-			if(Input.GetKey(defData.keyDown))
-			{
-				keyCodes.Add(defData.keyDown);
-			}
-
-			if(Input.GetKey(defData.keyBoost))
-			{
-				keyCodes.Add(defData.keyBoost);
-			}
-
-			if(keyCodes.Count != 0)
-			{
-				m_InputEvents.keyEvent.Invoke(Definition.InputEventType.Input_key, keyCodes);
-			}
+			// 업데이트
+			keyCodes = newKeyCodes;
 		}
 
 		#endregion

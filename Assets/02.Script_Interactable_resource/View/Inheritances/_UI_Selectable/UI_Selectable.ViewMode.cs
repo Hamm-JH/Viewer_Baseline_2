@@ -11,7 +11,7 @@ namespace View
 	public partial class UI_Selectable : Interactable
 	{
 		
-		private void Event_Toggle_ChildPanel(int index)
+		public void Event_Toggle_ChildPanel(int index)
 		{
 			// 자식 객체 토글
 			// 이 인스턴스가 가진 childPanel을 보내 토글 끄기 대상에서 제외한다.

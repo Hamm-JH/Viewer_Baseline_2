@@ -5,6 +5,7 @@ using UnityEngine;
 namespace View
 {
 	using Definition._Issue;
+	using Management;
 
 	public class Issue_Selectable : Interactable
 	{
@@ -12,9 +13,21 @@ namespace View
 
 		public Issue Issue { get => m_issue; set => m_issue=value; }
 
-		public override GameObject Target => throw new System.NotImplementedException();
+		public override GameObject Target => gameObject;
 
-		public override List<GameObject> Targets => throw new System.NotImplementedException();
+		public override List<GameObject> Targets
+		{
+			get
+			{
+				string _name = gameObject.name;
+
+				//List<GameObject> lst = ContentManager.Instance._ModelObjects;
+
+				List<GameObject> result = new List<GameObject>();
+
+				return result;
+			}
+		}
 
 		public override bool IsInteractable { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
@@ -40,7 +53,8 @@ namespace View
 
 		public override void OnSelect()
 		{
-			throw new System.NotImplementedException();
+			// 이슈정보 선택 처리
+			Debug.LogError("Issue Selectable Onselect");
 		}
 	}
 }

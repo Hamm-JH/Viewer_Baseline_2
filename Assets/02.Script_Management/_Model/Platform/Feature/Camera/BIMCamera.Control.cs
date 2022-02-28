@@ -56,7 +56,7 @@ namespace Platform.Feature.Camera
             }
             else if(btn == 1)
 			{
-                Vector3 offset = transform.right * axisX * panSpeed + transform.up * -axisY * panSpeed;
+                Vector3 offset = transform.right * -axisX * panSpeed + transform.up * axisY * panSpeed;
                 Vector3 newTargetOffset = Vector3.ClampMagnitude(targetOffset + offset, maxOffsetDistance);
                 transform.position += newTargetOffset - targetOffset;
                 targetOffset = newTargetOffset;

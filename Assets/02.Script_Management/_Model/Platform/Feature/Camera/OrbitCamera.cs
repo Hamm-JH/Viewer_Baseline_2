@@ -1,3 +1,4 @@
+using Definition;
 using Definition.Control;
 using System.Collections;
 using System.Collections.Generic;
@@ -53,7 +54,7 @@ namespace Platform.Feature.Camera
 			Debug.Log($"In orbit camera onfocus : pos {mousePos}, delta {delta}");
 		}
 
-		public override void OnKey(List<KeyCode> _key)
+		public override void OnKey(List<KeyData> _key)
 		{
 			if (!this.enabled) return;
 			Debug.Log($"In orbit camera onkey : key {_key.ToString()}");

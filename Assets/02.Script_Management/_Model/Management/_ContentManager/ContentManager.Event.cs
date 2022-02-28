@@ -114,6 +114,15 @@ namespace Management
 				));
 		}
 
+		/// <summary>
+		/// 가져온 UI 인스턴스의 특정 레벨의 child 패널을 모두 끈다.
+		/// </summary>
+		/// <param name="index"></param>
+		public void Toggle_ChildTabs(int index)
+		{
+			_Interaction.UiInstance.TogglePanelList(index, null);
+		}
+
 		public void Function_ToggleOrthoView(bool _isOrthogonal)
 		{
 			MainManager.Instance.MainCamera.orthographic = _isOrthogonal;

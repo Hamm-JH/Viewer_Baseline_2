@@ -32,13 +32,59 @@ namespace Management.Events
 				case UIEventType.Mode_Hide:
 				case UIEventType.Mode_Isolate:
 					{
+						//bool isHide = false;
+						//if (UiEventType == UIEventType.Mode_Hide) isHide = true;
+						
+						//foreach(GameObject obj in m_modelObj)
+						//{
+						//	// ¸ðµ¨ ¸®½ºÆ® Áß¿¡¼­ ÇöÀç ¼±ÅÃµÈ ¸ðµ¨¸®½ºÆ®ÀÇ ¿ä¼Ò¿Í °°Àº ¿ä¼Ò°¡ Á¸ÀçÇÏ´Â°¡?
+						//	bool isSelectedModel = _objs.Find(x => x == obj) == null ? false : true;
+
+						//	float alpha = 0.1f;
+						//	bool thisHide = false;
+						//	// ÀÌ °´Ã¼°¡ ¸ÂÀ½, ¼û°Ü¾ßµÊ			true true -> alpha = 0.1
+						//	// ÀÌ °´Ã¼°¡ ¸ÂÀ½, Á¦¿Ü ¼û°Ü¾ßµÊ	true false -> alpha = 1
+						//	// ÀÌ °´Ã¼ ¾Æ´Ô, ¼û°Ü¾ßµÊ			false true -> alpha = 1
+						//	// ÀÌ °´Ã¼ ¾Æ´Ô, Á¦¿Ü ¼û°Ü¾ßµÊ		false false -> alpha = 0.1
+
+						//	if(isSelectedModel)
+						//	{
+						//		alpha = isHide ? 0.1f : 1f;
+						//		thisHide = isHide ? true : false;
+						//	}
+						//	else
+						//	{
+						//		alpha = isHide ? 1f : 0.1f;
+						//		thisHide = isHide ? false : true;
+						//	}
+
+						//	Obj_Selectable selectable;
+						//	if (obj.TryGetComponent<Obj_Selectable>(out selectable))
+						//	{
+						//		selectable.OnDeselect<UIEventType, bool>(UiEventType, thisHide);
+						//	}
+						//}
+					}
+					break;
+			}
+		}
+
+		public override void DoEvent(Dictionary<InputEventType, EventData> _sEvents)
+		{
+			switch(UiEventType)
+			{
+				case UIEventType.Mode_Hide:
+				case UIEventType.Mode_Isolate:
+					{
 						bool isHide = false;
 						if (UiEventType == UIEventType.Mode_Hide) isHide = true;
-						
+
+						List<GameObject> _selected = new List<GameObject>();
+						_sEvents[InputEventType.Input_clickSuccessUp].Elements.ForEach(x => _selected.Add(x.Target));
+
 						foreach(GameObject obj in m_modelObj)
 						{
-							// ¸ðµ¨ ¸®½ºÆ® Áß¿¡¼­ ÇöÀç ¼±ÅÃµÈ ¸ðµ¨¸®½ºÆ®ÀÇ ¿ä¼Ò¿Í °°Àº ¿ä¼Ò°¡ Á¸ÀçÇÏ´Â°¡?
-							bool isSelectedModel = _objs.Find(x => x == obj) == null ? false : true;
+							bool isSelectedModel = _selected.Find(x => x == obj) == null ? false : true;
 
 							float alpha = 0.1f;
 							bool thisHide = false;
@@ -47,7 +93,7 @@ namespace Management.Events
 							// ÀÌ °´Ã¼ ¾Æ´Ô, ¼û°Ü¾ßµÊ			false true -> alpha = 1
 							// ÀÌ °´Ã¼ ¾Æ´Ô, Á¦¿Ü ¼û°Ü¾ßµÊ		false false -> alpha = 0.1
 
-							if(isSelectedModel)
+							if (isSelectedModel)
 							{
 								alpha = isHide ? 0.1f : 1f;
 								thisHide = isHide ? true : false;

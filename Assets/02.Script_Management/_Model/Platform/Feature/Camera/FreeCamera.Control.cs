@@ -2,6 +2,7 @@
 using UnityEngine.InputSystem;
 #endif
 
+using Definition;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -129,41 +130,41 @@ namespace Platform.Feature.Camera
         /// 입력에서 이동값을 입력받는 코드
         /// </summary>
         /// <param name="keys"></param>
-        public void GetInputTranslationDirection(List<KeyCode> keys)
+        public void GetInputTranslationDirection(List<KeyData> keys)
 		{
             Vector3 direction = Vector3.zero;
             bool isBoostPressed = false;
 
             var _kData = CameraEvents.KeyboardData;
 
-            foreach(KeyCode _key in keys)
+            foreach(KeyData _key in keys)
 			{
-                if(_key == _kData.keyBoost)
+                if(_key.m_keyCode == _kData.keyBoost)
 				{
                     isBoostPressed = true;
 				}
 
-                if(_key == _kData.keyFront)
+                if(_key.m_keyCode == _kData.keyFront)
 				{
                     direction += Vector3.forward;
 				}
-                else if(_key == _kData.keyBack)
+                else if(_key.m_keyCode == _kData.keyBack)
 				{
                     direction += Vector3.back;
 				}
-                else if (_key == _kData.keyLeft)
+                else if (_key.m_keyCode == _kData.keyLeft)
                 {
                     direction += Vector3.left;
                 }
-                else if (_key == _kData.keyRight)
+                else if (_key.m_keyCode == _kData.keyRight)
                 {
                     direction += Vector3.right;
                 }
-                else if (_key == _kData.keyDown)
+                else if (_key.m_keyCode == _kData.keyDown)
                 {
                     direction += Vector3.down;
                 }
-                else if (_key == _kData.keyUp)
+                else if (_key.m_keyCode == _kData.keyUp)
                 {
                     direction += Vector3.up;
                 }

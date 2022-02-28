@@ -9,6 +9,7 @@ namespace Management.Events
 	using UnityEngine.UI;
 	using UnityEngine.EventSystems;
 	using UnityEngine.Events;
+	using System.Linq;
 
 	[System.Serializable]
 	public class EventData_Input : EventData
@@ -34,8 +35,8 @@ namespace Management.Events
 		UnityEvent<Vector3, float> m_focusEvent;
 
 		[Header("OnKey")]
-		public List<KeyCode> m_keys;
-		UnityEvent<List<KeyCode>> m_keyEvent;
+		public List<KeyData> m_keys;
+		UnityEvent<List<KeyData>> m_keyEvent;
 
 		
 
@@ -114,16 +115,16 @@ namespace Management.Events
 		/// <param name="_grRaycaster"></param>
 		/// <param name="_event"></param>
 		public EventData_Input(InputEventType _eventType,
-			List<KeyCode> _kCode,
+			List<KeyData> _kData,
 			Camera _camera, GraphicRaycaster _grRaycaster,
-			UnityEvent<List<KeyCode>> _event)
+			UnityEvent<List<KeyData>> _event)
 		{
 			StatusCode = Status.Ready;
 
 			EventType = _eventType;
 			m_camera = _camera;
 			m_graphicRaycaster = _grRaycaster;
-			m_keys = _kCode;
+			m_keys = _kData;
 			m_keyEvent = _event;
 		}
 
@@ -179,6 +180,9 @@ namespace Management.Events
 							IInteractable interactable;
 							if(Selected3D.TryGetComponent<IInteractable>(out interactable))
 							{
+								Elements = new List<IInteractable>();
+								Elements.Add(interactable);
+
 								Element = interactable;
 
 								m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
@@ -190,8 +194,8 @@ namespace Management.Events
 						// 빈 공간을 누른 경우
 						else if(m_results.Count == 0)
 						{
-
 							Element = null;
+							Elements = null;
 							StatusCode = Status.Pass;
 							//StatusCode = _fail;
 						}
@@ -199,6 +203,7 @@ namespace Management.Events
 						else
 						{
 							Element = null;
+							Elements = null;
 							StatusCode = Status.Skip;
 						}
 					}
@@ -228,7 +233,18 @@ namespace Management.Events
 				case InputEventType.Input_key:
 					// 객체 선택 단계에선 code :: Update
 					// 데칼 배치 단계에선 code :: Update
-					StatusCode = Status.Update;
+
+					// KeyData는 동작 구조 파악을 위해 조건을 명시함. 실제 처리는 EventManager에서 처리
+					// KeyData 리스트가 null 또는 0이 아닌 경우
+					if(m_keys != null && m_keys.Count != 0)
+					{
+						StatusCode = Status.Update;
+					}
+					// KeyData 리스트가 null인 경우
+					else
+					{
+						StatusCode = Status.Update;
+					}
 					break;
 			}
 		}
@@ -246,14 +262,16 @@ namespace Management.Events
 
 				case InputEventType.Input_clickSuccessUp:
 					// 객체를 올바르게 선택한 경우
-					if(Element != null)
+					if(Elements != null)
 					{
-						m_clickEvent.Invoke(Element.Target);
+						m_clickEvent.Invoke(Elements.Last().Target);
+						ContentManager.Instance.Toggle_ChildTabs(1);
 					}
 					// 빈 공간을 선택한 경우
 					else
 					{
 						m_clickEvent.Invoke(null);
+						ContentManager.Instance.Toggle_ChildTabs(1);
 					}
 					break;
 
@@ -275,6 +293,43 @@ namespace Management.Events
 		{
 			
 		}
+
+		public override void DoEvent(Dictionary<InputEventType, EventData> _sEvents)
+		{
+			
+		}
+
+		//#region Click + Key - 다중 객체 선택
+
+		//private bool isMultiCondition(Dictionary<InputEventType, EventData> _sEvents)
+		//{
+		//	List<KeyData> kd = null;
+		//	bool result = false;
+
+		//	// Control 누르고 있는 상태인가?
+		//	if (_sEvents.ContainsKey(InputEventType.Input_key))
+		//	{
+		//		EventData_Input _ev = (EventData_Input)_sEvents[InputEventType.Input_key];
+		//		kd = _ev.m_keys;
+		//	}
+
+		//	// 입력 키 존재하는 경우
+		//	if (kd != null)
+		//	{
+		//		KeyCode targetCode = MainManager.Instance.Data.KeyboardData.keyCtrl;
+
+		//		// TODO 0228 MNum
+		//		// 키 정보중에 LeftControl이 존재하는가?
+		//		if (kd.Find(x => x.m_keyCode == targetCode) != null)
+		//		{
+		//			result = true;
+		//		}
+		//	}
+
+		//	return result;
+		//}
+
+		//#endregion
 
 		#region Click - 객체 선택
 
@@ -352,6 +407,8 @@ namespace Management.Events
 		}
 
 		
+
+
 
 
 

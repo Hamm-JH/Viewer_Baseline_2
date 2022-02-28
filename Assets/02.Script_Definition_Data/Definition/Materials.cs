@@ -10,6 +10,10 @@ namespace Definition
 	{
 		static Material MAT_DEFAULT;
 		static Material MAT_TRANSPARENT;
+
+		static Material MAT_ISSUE;
+		static Material MAT_DAMAGE;
+		static Material MAT_RECOVER;
 		
 		public static Material Set(MaterialType type)
 		{
@@ -36,6 +40,50 @@ namespace Definition
 						result = MAT_DEFAULT;
 					}
 					break;
+
+				case MaterialType.Issue:
+					{
+						if(pipeline == RenderPipelineType.BuiltIn)
+						{
+							MAT_ISSUE = Resources.Load<Material>("3D/Issue/BltIn/Issue");
+						}
+						else if(pipeline == RenderPipelineType.URP)
+						{
+							MAT_ISSUE = Resources.Load<Material>("3D/Issue/URP/Issue");
+						}
+						result = MAT_ISSUE;
+					}
+					break;
+
+				case MaterialType.Issue_dmg:
+					{
+						if (pipeline == RenderPipelineType.BuiltIn)
+						{
+							MAT_DAMAGE = Resources.Load<Material>("3D/Issue/BltIn/Issue_dmg");
+						}
+						else if (pipeline == RenderPipelineType.URP)
+						{
+							MAT_DAMAGE = Resources.Load<Material>("3D/Issue/URP/Issue_dmg");
+						}
+						result = MAT_DAMAGE;
+					}
+					break;
+
+				case MaterialType.Issue_rcv:
+					{
+						if (pipeline == RenderPipelineType.BuiltIn)
+						{
+							MAT_RECOVER = Resources.Load<Material>("3D/Issue/BltIn/Issue_rcv");
+						}
+						else if (pipeline == RenderPipelineType.URP)
+						{
+							MAT_RECOVER = Resources.Load<Material>("3D/Issue/URP/Issue_rcv");
+						}
+						result = MAT_RECOVER;
+					}
+					break;
+
+
 
 				case MaterialType.Default1:
 					result = Resources.Load<Material>("3D/DefaultMat");

@@ -20,7 +20,7 @@ namespace Management.Events
 			this.clickEvent = new UnityEvent<InputEventType, int, Vector3>();
 			this.dragEvent = new UnityEvent<InputEventType, int, Vector2>();
 			this.focusEvent = new UnityEvent<InputEventType, Vector3, float>();
-			this.keyEvent = new UnityEvent<InputEventType, List<KeyCode>>();
+			this.keyEvent = new UnityEvent<InputEventType, List<KeyData>>();
 
 			MouseData = _mouse;
 			KeyboardData = _keyboard;
@@ -51,7 +51,7 @@ namespace Management.Events
 		/// InputEventType	:: 이벤트 형식
 		/// List[KeyCode]	:: 키 리스트
 		/// </summary>
-		public UnityEvent<InputEventType, List<KeyCode>> keyEvent;
+		public UnityEvent<InputEventType, List<KeyData>> keyEvent;
 
 		~InputEvents()
 		{
