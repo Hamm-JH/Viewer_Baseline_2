@@ -12,6 +12,7 @@ namespace View
 	public class Obj_Selectable : Interactable
 	{
 		UIEventType _uiEventType;
+		Bounds m_bounds;
 
 		private void Start()
 		{
@@ -51,6 +52,22 @@ namespace View
 				{
 					collider.enabled = value;
 				}
+			}
+		}
+
+		public Bounds Bounds 
+		{ 
+			get
+			{
+				if(m_bounds.size.magnitude < Vector3.one.magnitude * 0.001f)
+				{
+					MeshRenderer render;
+					if(Target.TryGetComponent<MeshRenderer>(out render))
+					{
+						m_bounds = render.bounds;
+					}
+				}
+				return m_bounds;
 			}
 		}
 

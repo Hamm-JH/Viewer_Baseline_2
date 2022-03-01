@@ -5,11 +5,13 @@ using UnityEngine;
 namespace Management
 {
 	using Definition;
+	using Issues;
 	using Module;
 	using Module.Interaction;
 	using Module.Model;
 	using Module.UI;
 	using Module.WebAPI;
+	using System;
 	using UnityEngine.UI;
 
 	public partial class ContentManager : IManager<ContentManager>
@@ -67,6 +69,8 @@ namespace Management
 			}
 		}
 
+		
+
 		public Module_Interaction _Interaction
 		{
 			get
@@ -83,6 +87,8 @@ namespace Management
 				return m_interaction;
 			}
 		}
+
+		
 
 		List<GameObject> m_modelObjects;
 
@@ -112,6 +118,8 @@ namespace Management
 				return m_modelObjects;
 			}
 		}
+
+		
 
 		/// <summary>
 		/// UI 메인 캔버스 반환
@@ -146,5 +154,6 @@ namespace Management
 			}
 		}
 
+		
 	}
 }

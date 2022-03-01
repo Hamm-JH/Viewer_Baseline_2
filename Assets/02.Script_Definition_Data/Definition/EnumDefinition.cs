@@ -246,6 +246,7 @@ namespace Definition
 		Issue_dmg = 0x21,
 		Issue_rcv = 0x22,
 
+		White = 0x91,
 		ObjDefault1 = 0x99,
 	}
 

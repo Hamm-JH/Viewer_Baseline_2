@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2747876, g: 0.39077058, b: 0.50724125, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -332,6 +332,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e489b011943259478950cb31287f5ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &366699289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 366699290}
+  - component: {fileID: 366699291}
+  m_Layer: 0
+  m_Name: Legacy_Web
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &366699290
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366699289}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7272807275813331565}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &366699291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366699289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe9cdb95465a7474db78456e0242bce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRegisterMode: 0
+  isUnderUpdateVersion: 0
 --- !u!1 &401660602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1270,7 +1315,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8146610192838230099, guid: 4ca9587740428f74e8e546faa318368b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ca9587740428f74e8e546faa318368b, type: 3}
@@ -5152,6 +5197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ce25f5adae7c3448cac17657c54e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  legacyWeb: {fileID: 366699291}
   m_uiList: []
   m_modules:
   - {fileID: 7272807276706612160}
@@ -5171,6 +5217,7 @@ Transform:
   - {fileID: 2778157911694002971}
   - {fileID: 332874541}
   - {fileID: 856688492}
+  - {fileID: 366699290}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

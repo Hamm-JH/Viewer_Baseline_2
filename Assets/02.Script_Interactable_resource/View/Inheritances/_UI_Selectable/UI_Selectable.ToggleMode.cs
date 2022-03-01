@@ -13,17 +13,10 @@ namespace View
 		/// <summary>
 		/// 선택한 객체를 비활성화 (반투명)
 		/// </summary>
-		public void Event_Mode_Hide(UIEventType _type)
+		public void Event_Mode_HideIsolate(UIEventType _type)
 		{
-			ContentManager.Instance.Toggle_ModelObject(_type, Definition.ToggleType.Hide);
-		}
-
-		/// <summary>
-		/// 선택한 객체 이외의 객체들을 비활성화
-		/// </summary>
-		public void Event_Mode_Isolate(UIEventType _type)
-		{
-			ContentManager.Instance.Toggle_ModelObject(_type, Definition.ToggleType.Isolate);
+			ToggleType toggle = _type == UIEventType.Mode_Hide ? ToggleType.Hide : ToggleType.Isolate;
+			ContentManager.Instance.Toggle_ModelObject(_type, toggle);
 		}
 	}
 }

@@ -138,7 +138,7 @@ namespace Management.Events
 						Status _success = Status.Update;
 						Status _fail = Status.Update;
 
-						Debug.Log(EventType.ToString());
+						//Debug.Log(EventType.ToString());
 						m_selected3D = null;
 						m_hit = default(RaycastHit);
 						m_results = new List<RaycastResult>();
@@ -168,7 +168,7 @@ namespace Management.Events
 						Status _success = Status.Pass;
 						Status _fail = Status.Drop;
 
-						Debug.Log(EventType.ToString());
+						//Debug.Log(EventType.ToString());
 						m_selected3D = null;
 						m_hit = default(RaycastHit);
 						m_results = new List<RaycastResult>();
@@ -177,19 +177,46 @@ namespace Management.Events
 
 						if(Selected3D != null)
 						{
-							IInteractable interactable;
-							if(Selected3D.TryGetComponent<IInteractable>(out interactable))
+							Obj_Selectable sObj;
+							Issue_Selectable iObj;
+
+							if (Selected3D.TryGetComponent<Obj_Selectable>(out sObj))
 							{
 								Elements = new List<IInteractable>();
-								Elements.Add(interactable);
+								Elements.Add(sObj);
 
-								Element = interactable;
+								Element = sObj;
 
 								m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
 								m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
 								StatusCode = _success;
 								return;
 							}
+							else if (Selected3D.TryGetComponent<Issue_Selectable>(out iObj))
+							{
+								Elements = new List<IInteractable>();
+								Elements.Add(iObj);
+
+								Element = iObj;
+
+								m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+								StatusCode = _success;
+								return;
+							}
+
+							//IInteractable interactable;
+							//if(Selected3D.TryGetComponent<IInteractable>(out interactable))
+							//{
+							//	Elements = new List<IInteractable>();
+							//	Elements.Add(interactable);
+
+							//	Element = interactable;
+
+							//	m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+							//	m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+							//	StatusCode = _success;
+							//	return;
+							//}
 						}
 						// 빈 공간을 누른 경우
 						else if(m_results.Count == 0)
@@ -264,13 +291,29 @@ namespace Management.Events
 					// 객체를 올바르게 선택한 경우
 					if(Elements != null)
 					{
-						m_clickEvent.Invoke(Elements.Last().Target);
-						ContentManager.Instance.Toggle_ChildTabs(1);
+						GameObject obj = Elements.Last().Target;
+
+						Obj_Selectable sObj;
+						Issue_Selectable iObj;
+
+						if(obj.TryGetComponent<Obj_Selectable>(out sObj))
+						{
+							m_clickEvent.Invoke(Elements.Last().Target);
+							ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
+							ContentManager.Instance.Toggle_ChildTabs(1);
+						}
+						else if(obj.TryGetComponent<Issue_Selectable>(out iObj))
+						{
+							m_clickEvent.Invoke(Elements.Last().Target);
+							ContentManager.Instance.OnSelect_Issue(Elements.Last().Target);
+							ContentManager.Instance.Toggle_ChildTabs(1);
+						}
 					}
 					// 빈 공간을 선택한 경우
 					else
 					{
 						m_clickEvent.Invoke(null);
+						ContentManager.Instance.OnSelect_3D(null);
 						ContentManager.Instance.Toggle_ChildTabs(1);
 					}
 					break;
@@ -298,36 +341,6 @@ namespace Management.Events
 		{
 			
 		}
-
-		//#region Click + Key - 다중 객체 선택
-
-		//private bool isMultiCondition(Dictionary<InputEventType, EventData> _sEvents)
-		//{
-		//	List<KeyData> kd = null;
-		//	bool result = false;
-
-		//	// Control 누르고 있는 상태인가?
-		//	if (_sEvents.ContainsKey(InputEventType.Input_key))
-		//	{
-		//		EventData_Input _ev = (EventData_Input)_sEvents[InputEventType.Input_key];
-		//		kd = _ev.m_keys;
-		//	}
-
-		//	// 입력 키 존재하는 경우
-		//	if (kd != null)
-		//	{
-		//		KeyCode targetCode = MainManager.Instance.Data.KeyboardData.keyCtrl;
-
-		//		// TODO 0228 MNum
-		//		// 키 정보중에 LeftControl이 존재하는가?
-		//		if (kd.Find(x => x.m_keyCode == targetCode) != null)
-		//		{
-		//			result = true;
-		//		}
-		//	}
-
-		//	return result;
-		//}
 
 		//#endregion
 
@@ -401,7 +414,7 @@ namespace Management.Events
 
 			m_graphicRaycaster.Raycast(pointerEventData, results);
 
-			Debug.Log($"***** raycast count : {results.Count}");
+			//Debug.Log($"***** raycast count : {results.Count}");
 
 			return results;
 		}

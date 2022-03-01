@@ -144,12 +144,8 @@ namespace View
 					break;
 
 				case UIEventType.Mode_Hide:
-					Event_Mode_Hide(_eventType);
-					Event_Toggle_ChildPanel(1);
-					break;
-
 				case UIEventType.Mode_Isolate:
-					Event_Mode_Isolate(_eventType);
+					Event_Mode_HideIsolate(_eventType);
 					Event_Toggle_ChildPanel(1);
 					break;
 

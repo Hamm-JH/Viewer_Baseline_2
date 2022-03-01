@@ -53,7 +53,7 @@ namespace Module.WebAPI
 					_v.CdBridgeParts	 =  jArr[i].SelectToken("cdTunnelParts").ToString();
 					_v.DcMemberSurface   =	jArr[i].SelectToken("dcDamageMemberSurface").ToString();
 					_v._DcLocation        =	jArr[i].SelectToken("dcLocation").ToString();
-					_v.IssueCode         =	jArr[i].SelectToken("fgDA001").ToString();
+					_v._IssueCode         =	jArr[i].SelectToken("fgDA001").ToString();
 					//_v.DcMemberSurface   = parseString(ParseCode.Surface, jArr[i].SelectToken(JSON.IssueKey.dcDamageMemberSurface.ToString()).ToString());
 					//_v.DcLocation        =      int.Parse(jArr[i].SelectToken(JSON.IssueKey.dcLocation.ToString()).ToString());
 					//_v.IssueCode         =       parseIssueCode(jArr[i].SelectToken(JSON.IssueKey.fgDA001.ToString()).ToString());
@@ -98,7 +98,7 @@ namespace Module.WebAPI
 					_v.CdBridgeParts	= jArr[i].SelectToken("cdTunnelParts").ToString();
 					_v.DcMemberSurface	= jArr[i].SelectToken("dcDamageMemberSurface").ToString();
 					_v._DcLocation		= jArr[i].SelectToken("dcLocation").ToString();
-					_v.IssueCode		= jArr[i].SelectToken("fgDA001").ToString();
+					_v._IssueCode		= jArr[i].SelectToken("fgDA001").ToString();
 					//_v.DcMemberSurface  = parseString(ParseCode.Surface, jArr[i].SelectToken(JSON.IssueKey.dcDamageMemberSurface.ToString()).ToString());
 					//_v.DcLocation       = int.Parse(jArr[i].SelectToken(JSON.IssueKey.dcLocation.ToString()).ToString());
 					//_v.IssueCode        = parseIssueCode(jArr[i].SelectToken(JSON.IssueKey.fgDA001.ToString()).ToString());

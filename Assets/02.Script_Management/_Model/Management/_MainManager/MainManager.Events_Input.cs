@@ -101,7 +101,7 @@ namespace Management
 		/// <param name="_mousePos"></param>
 		public void OnClick(InputEventType type, int btn, Vector3 _mousePos)
 		{
-			Debug.Log("OnClick");
+			//Debug.Log("OnClick");
 
 			// 필터링 (__추후 변수 추출)
 			if(btn == 0)
@@ -171,7 +171,7 @@ namespace Management
 		/// <param name="_kCode"></param>
 		public void OnKey(InputEventType type, List<KeyData> _kData)
 		{
-			_kData.ForEach(x => Debug.Log($"state : {x.m_keyState.ToString()}, key : {x.m_keyCode.ToString()}"));
+			//_kData.ForEach(x => Debug.Log($"state : {x.m_keyState.ToString()}, key : {x.m_keyCode.ToString()}"));
 
 			// 키 입력 이벤트 실행
 			EventManager.Instance.OnEvent(new Events.EventData_Input(

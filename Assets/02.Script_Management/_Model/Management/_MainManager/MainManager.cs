@@ -64,6 +64,7 @@ namespace Management
 		{
 			get => _data;
 		}
+		
 
 		#endregion
 

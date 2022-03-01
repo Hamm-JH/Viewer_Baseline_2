@@ -152,12 +152,6 @@ namespace Platform.Feature._Input
 						// 좌클릭 드래그 실행 btnIndex : 0
 						// 우클릭 드래그 실행 btnIndex : 1
 						m_InputEvents.dragEvent.Invoke(InputEventType.Input_drag, btnIndex, mouseDelta);
-
-						// *** 우클릭 드래그 이벤트 실행
-						//if(btnIndex == 1)
-						//{
-						//	m_InputEvents.dragEvent.Invoke(1, mouseDelta);
-						//}
 					}
 				}
 			}
@@ -178,26 +172,12 @@ namespace Platform.Feature._Input
 					clickable = false;
 				}
 
-				Debug.Log($"clickable : {clickable}, btnIndex : {btnIndex}");
+				//Debug.Log($"clickable : {clickable}, btnIndex : {btnIndex}");
 
 				SetClickEvent(
 					clickable ? InputEventType.Input_clickSuccessUp : InputEventType.Input_clickFailureUp,
 					btnIndex,
 					Input.mousePosition);
-
-				//switch (btnIndex)
-				//{
-				//	case 0:
-				//		SetClickEvent(
-				//			clickable ? InputEventType.Input_clickSuccessUp : InputEventType.Input_clickFailureUp, 
-				//			btnIndex,
-				//			Input.mousePosition);
-				//		break;
-
-				//	case 1:
-				//		// 클릭 중지 이벤트
-				//		break;
-				//}
 
 				// 초기화
 				onClick = false;

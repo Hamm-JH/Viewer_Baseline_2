@@ -26,29 +26,29 @@ namespace Management
 
 		public void OnEvent(EventData currEvent)
 		{
+			// 선택된 이벤트 상태가 없는 경우, 아무 동작을 수행하지 않는 더미 인스턴스를 생성한다.
+			if (SelectedEvents.Count == 0)
+			{
+				EventData_Empty dummy = new EventData_Empty();
+				SelectedEvents.Add(dummy.EventType, dummy);
+			}
+
+			// 현재 발생한 이벤트가 동작을 필요로 하지 않는 이벤트일 경우가 있다.
+			// 이 경우를 필터링한다.
+			if (!IsEventCanDoit(currEvent)) return;
+
+			// 받아온 이벤트의 내부처리 메서드를 시행
+			// 내부에 연산 결과로 내부의 interactable 인터페이스 상속 인스턴스 업데이트됨.
+			// 추후 전달 데이터가 늘어나면 새로 내부 클래스 작성하기
+			currEvent.OnProcess(cacheDownObj);
+
+			DoEvent(SelectedEvents, currEvent);
 			try
 			{
-				// 선택된 이벤트 상태가 없는 경우, 아무 동작을 수행하지 않는 더미 인스턴스를 생성한다.
-				if (SelectedEvents.Count == 0)
-				{
-					EventData_Empty dummy = new EventData_Empty();
-					SelectedEvents.Add(dummy.EventType, dummy);
-				}
-
-				// 현재 발생한 이벤트가 동작을 필요로 하지 않는 이벤트일 경우가 있다.
-				// 이 경우를 필터링한다.
-				if (!IsEventCanDoit(currEvent)) return;
-
-				// 받아온 이벤트의 내부처리 메서드를 시행
-				// 내부에 연산 결과로 내부의 interactable 인터페이스 상속 인스턴스 업데이트됨.
-				// 추후 전달 데이터가 늘어나면 새로 내부 클래스 작성하기
-				currEvent.OnProcess(cacheDownObj);
-
-				DoEvent(SelectedEvents, currEvent);
 			}
 			catch (System.Exception e)
 			{
-				Debug.LogError($"Event Error :: {e.Message.ToString()}");
+				Debug.LogError($"Event Error :: {e.HelpLink.ToString()} {e.Message.ToString()}");
 			}
 		}
 
