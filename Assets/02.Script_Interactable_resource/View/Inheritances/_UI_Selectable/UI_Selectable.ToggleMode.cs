@@ -11,6 +11,14 @@ namespace View
 	public partial class UI_Selectable : Interactable
 	{
 		/// <summary>
+		/// 모든 객체를 다시 켜기
+		/// </summary>
+		public void Event_Mode_ShowAll()
+		{
+			ContentManager.Instance.Reset_ModelObject();
+		}
+
+		/// <summary>
 		/// 선택한 객체를 비활성화 (반투명)
 		/// </summary>
 		public void Event_Mode_HideIsolate(UIEventType _type)

@@ -23,7 +23,9 @@ namespace Management
 		//private List<LayerCode> m_layerCodes;
 		//public List<LayerCode> LayerCodes { get => m_layerCodes; set => m_layerCodes=value; }
 
-		[SerializeField] List<AUI> m_uiList;
+		//[SerializeField] List<AUI> m_uiList;
+
+		#region Modules
 
 		/// <summary>
 		/// 모듈 리스트
@@ -88,9 +90,10 @@ namespace Management
 			}
 		}
 
-		
+		#endregion
 
 		List<GameObject> m_modelObjects;
+		List<GameObject> m_issueObjects;
 
 		/// <summary>
 		/// 모델 요소의 중심축 값 반환
@@ -119,7 +122,21 @@ namespace Management
 			}
 		}
 
-		
+		public List<GameObject> _IssueObjects 
+		{ 
+			get
+			{
+				if(m_issueObjects == null)
+				{
+					m_issueObjects = _Model.IssueObjs;
+				}
+				else if(m_issueObjects.Count == 0)
+				{
+					m_issueObjects = _Model.IssueObjs;
+				}
+				return m_issueObjects;
+			}
+		}
 
 		/// <summary>
 		/// UI 메인 캔버스 반환

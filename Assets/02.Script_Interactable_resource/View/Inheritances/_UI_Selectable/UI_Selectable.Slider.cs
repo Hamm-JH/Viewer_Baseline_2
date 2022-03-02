@@ -28,8 +28,7 @@ namespace View
 		{
 			Debug.Log($"Event_Icon_Scale {_value}");
 
-			// TODO 0223
-
+			ContentManager.Instance.Set_Issue_Scale(_value);
 		}
 	}
 }

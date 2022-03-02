@@ -40,20 +40,20 @@ namespace View
 			}
 		}
 
-		public override bool IsInteractable 
-		{ 
-			get => m_isInteractable; 
-			set
-			{
-				m_isInteractable = value;
+		//public override bool IsInteractable 
+		//{ 
+		//	get => m_isInteractable; 
+		//	set
+		//	{
+		//		m_isInteractable = value;
 
-				MeshCollider collider;
-				if(this.TryGetComponent<MeshCollider>(out collider))
-				{
-					collider.enabled = value;
-				}
-			}
-		}
+		//		MeshCollider collider;
+		//		if(this.TryGetComponent<MeshCollider>(out collider))
+		//		{
+		//			collider.enabled = value;
+		//		}
+		//	}
+		//}
 
 		public Bounds Bounds 
 		{ 
@@ -143,8 +143,14 @@ namespace View
 			{
 				type = (UIEventType)Enum.ToObject(typeof(UIEventType), t1);
 				float value = (float)(object)t2;
+				PlatformCode pCode = MainManager.Instance.Platform;
 
-				OnDeselect_ModelTransparency(MainManager.Instance.Platform, type, value);
+				switch(type)
+				{
+					case UIEventType.Slider_Model_Transparency:
+						OnDeselect_ModelTransparency(pCode, type, value);
+						break;
+				}
 			}
 		}
 
@@ -152,7 +158,8 @@ namespace View
 		{
 			if (!IsInteractable) return;
 
-			if(_uiType == UIEventType.Fit_Center)
+			// 최종 확인
+			if(_uiType == UIEventType.Slider_Model_Transparency)
 			{
 				float boundary = 0.8f;
 
@@ -180,17 +187,29 @@ namespace View
 			}
 		}
 
+		
+
 		private void OnDeselect_3dModel(PlatformCode _platform, UIEventType _uiType, bool _isHide)
 		{
 			if (!IsInteractable) return;
 
 			if(_uiType == UIEventType.Mode_Hide || _uiType == UIEventType.Mode_Isolate)
 			{
+				bool eventHide = _uiType == UIEventType.Mode_Hide ? true : false;
+
 				if (_platform == PlatformCode.PC_Viewer_Tunnel)
 				{
 					List<GameObject> objs = Targets;
 					foreach (GameObject obj in objs)
 					{
+						// Mode_Hide의 경우에는, 숨김 대상 제외하고 다른 객체들은 모두 현재 알파값 가짐
+						// Mode_Hide ? Hide :: 0.1f, NotHide :: alpha
+						// Mode_Isolate의 경우에는, 숨김 대상은 현재 알파값 가짐, 숨김 제외대상은 0.1f
+						// Mode_Isolate ?
+						
+						// 카르노맵 정렬 결과
+						// _isHide :: false인 경우에는 모두 color.a 적용
+						// _isHide :: true인 경우에는 모두 a :: 0.1f 적용
 
 						MeshRenderer render;
 						if (obj.TryGetComponent<MeshRenderer>(out render))
@@ -201,25 +220,26 @@ namespace View
 							if (_isHide)
 							{
 								Materials.ToFadeMode(render);
+
 								Materials.Set(render, ColorType.Default1, 0.1f);
-								//render.material.SetColor("_Color", Colors.Set(ColorType.Default1, 0.1f));
 							}
 							else
 							{
-								Materials.ToOpaqueMode(render);
-								Materials.Set(render, ColorType.Default1, 1);
-								//render.material.SetColor("_Color", Colors.Set(ColorType.Default1, 1));
+								// TODO 매직넘버 투명 경계값 밖으로 빼기
+								if(colr.a > 0.8f)
+								{
+									Materials.ToOpaqueMode(render);
+								}
+								else
+								{
+									Materials.ToFadeMode(render);
+								}
+
+								Materials.Set(render, ColorType.Default1, colr.a);
 							}
 
 						}
 					}
-					//MeshRenderer render;
-					//if (gameObject.TryGetComponent<MeshRenderer>(out render))
-					//{
-					//	Color colr = render.material.color;
-
-					//	render.material.SetColor("_Color", Colors.Set(ColorType.Default1, colr.a));
-					//}
 				}
 				else if (_platform == PlatformCode.PC_Viewer_Bridge)
 				{
@@ -232,19 +252,16 @@ namespace View
 						{
 							Material mat = render.material;
 							Color colr = mat.color;
-							//render.material.SetColor("_Color", Colors.Set(ColorType.Default1, colr.a));
 
 							if(_isHide)
 							{
 								Materials.ToFadeMode(render);
 								Materials.Set(render, ColorType.Default1, 0.1f);
-								//render.material.SetColor("_Color", Colors.Set(ColorType.Default1, 0.1f));
 							}
 							else
 							{
 								Materials.ToOpaqueMode(render);
 								Materials.Set(render, ColorType.Default1, 1);
-								//render.material.SetColor("_Color", Colors.Set(ColorType.Default1, 1));
 							}
 
 						}

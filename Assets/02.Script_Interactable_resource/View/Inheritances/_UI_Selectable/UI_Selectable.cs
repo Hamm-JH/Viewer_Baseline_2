@@ -7,9 +7,11 @@ namespace View
 {
 	using Definition;
 	using Module.UI;
+	using UnityEngine.EventSystems;
 	using UnityEngine.UI;
 
-	public partial class UI_Selectable : Interactable
+	public partial class UI_Selectable : Interactable, 
+		IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 	{
 		public override GameObject Target
 		{
@@ -18,17 +20,18 @@ namespace View
 
 		public override List<GameObject> Targets => throw new System.NotImplementedException();
 
-		public override bool IsInteractable 
-		{ 
-			get => m_isInteractable;
-			set => m_isInteractable = value;
-		}
+		//public override bool IsInteractable 
+		//{ 
+		//	get => m_isInteractable;
+		//	set => m_isInteractable = value;
+		//}
 
 		Button m_btn;
 		Slider m_slider;
 
 		[SerializeField] AUI m_rootUI;
 		[SerializeField] UIEventType eventType;
+		[SerializeField] UniqueUIEventType m_unique;
 
 		/// <summary>
 		/// 자식 패널 객체
@@ -38,19 +41,24 @@ namespace View
 		/// <summary>
 		/// ui 효과 요소
 		/// </summary>
-		[SerializeField] List<GameObject> uiFXs;
+		[SerializeField] List<GameObject> m_uiFXs;
+
+		[SerializeField] List<GameObject> m_uiHoverElements;
 
 		private void Start()
 		{
+			// 버튼이 존재한다면, 버튼의 클릭 이벤트를 Conditional Branch에 연결한다.
 			if(gameObject.TryGetComponent<Button>(out m_btn))
 			{
 				m_btn.onClick.AddListener(new UnityAction(OnSelect));
 			}
 
+			// 슬라이더가 존재한다면, 슬라이더의 슬라이딩 이벤트를 Conditional Branch에 연결한다.
 			if(gameObject.TryGetComponent<Slider>(out m_slider))
 			{
 				m_slider.onValueChanged.AddListener(new UnityAction<float>(OnChangeValue));
 			}
+			//m_btn.
 		}
 
 		public override void OnDeselect()
@@ -115,6 +123,12 @@ namespace View
 		{
 			switch(_eventType)
 			{
+				case UIEventType.View_Home:
+					// 초기 화면으로 복귀
+					Event_View_Home();
+					Event_Toggle_ChildPanel(1);
+					break;
+
 				case UIEventType.Toggle:
 				case UIEventType.Viewport_ViewMode:
 					Event_Toggle_ViewMode();
@@ -143,22 +157,83 @@ namespace View
 					Event_Toggle_ViewMode();
 					break;
 
+					// 객체 모두 다시 켜기
+				case UIEventType.Mode_ShowAll:
+					Event_Mode_ShowAll();
+					Event_Toggle_ChildPanel(1);
+					break;
+
 				case UIEventType.Mode_Hide:
 				case UIEventType.Mode_Isolate:
 					Event_Mode_HideIsolate(_eventType);
 					Event_Toggle_ChildPanel(1);
 					break;
 
-				case UIEventType.Fit_Center:
-					FitCenter();
-					Event_Toggle_ChildPanel(1);
-					break;
+				//case UIEventType.Fit_Center:
+				//	FitCenter();
+				//	Event_Toggle_ChildPanel(1);
+				//	break;
 			}
 		}
 
-		
+
 
 		#endregion
 
+		#region Enable Disable
+
+		private void OnEnable()
+		{
+			m_uiHoverElements.ForEach(x => x.SetActive(false));
+
+			if (m_unique == UniqueUIEventType.SetChild_Highlight)
+			{
+				((Image)m_btn.targetGraphic).sprite = m_btn.spriteState.disabledSprite;
+			}
+		}
+
+		private void OnDisable()
+		{
+			m_uiHoverElements.ForEach(x => x.SetActive(false));
+
+			//if (m_unique == UniqueUIEventType.SetChild_Highlight)
+			//{
+			//	((Image)m_btn.targetGraphic).sprite = m_btn.spriteState.disabledSprite;
+			//}
+		}
+
+		#endregion
+
+		#region Mouse region
+
+		/// <summary>
+		/// UI 제대로 클릭시 발동?
+		/// </summary>
+		/// <param name="eventData"></param>
+		public void OnPointerUp(PointerEventData eventData)
+		{
+			m_uiHoverElements.ForEach(x => x.SetActive(false));
+		}
+
+		/// <summary>
+		/// 마우스 포인터 진입시 발동
+		/// </summary>
+		/// <param name="eventData"></param>
+		public void OnPointerEnter(PointerEventData eventData)
+		{
+			
+			m_uiHoverElements.ForEach(x => x.SetActive(true));
+		}
+
+		/// <summary>
+		/// 마우스 포인터 나가면 발동
+		/// </summary>
+		/// <param name="eventData"></param>
+		public void OnPointerExit(PointerEventData eventData)
+		{
+			m_uiHoverElements.ForEach(x => x.SetActive(false));
+		}
+
+		#endregion
 	}
 }

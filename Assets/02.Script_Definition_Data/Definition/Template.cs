@@ -14,7 +14,8 @@ namespace Definition
 			{
 				case PlatformCode.PC_Viewer_Tunnel:
 				case PlatformCode.PC_Viewer_Bridge:
-					obj = Resources.Load<GameObject>("UI/TestView0221");
+					//obj = Resources.Load<GameObject>("UI/TestView0221");
+					obj = Resources.Load<GameObject>("UI/UITemplate_0302");
 					break;
 			}
 

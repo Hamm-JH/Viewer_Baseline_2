@@ -200,18 +200,29 @@ namespace Definition
 		Viewport_ViewMode_TOP = 0x22,
 		Viewport_ViewMode_SIDE = 0x23,
 		Viewport_ViewMode_BOTTOM = 0x24,
+		
+		/// <summary>
+		/// 보기 :: 홈 
+		/// </summary>
+		View_Home = 0x29,
 
 		OrthoView = 0x30,
 		OrthoView_Orthogonal = 0x31,
 		OrthoView_Perspective = 0x32,
 
+		Mode_ShowAll = 0x40,
 		Mode_Hide = 0x41,
 		Mode_Isolate = 0x42,
 
-		Fit_Center = 0x50,
-
 		Slider_Model_Transparency = 0x100,
 		Slider_Icon_Scale = 0x101,
+	}
+
+	public enum UniqueUIEventType
+	{
+		NotDef = 0x00,
+
+		SetChild_Highlight
 	}
 
 	/// <summary>

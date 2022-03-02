@@ -60,7 +60,15 @@ namespace Platform.Feature._Input
 
 		private void Update()
 		{
-			KeyCheck();
+			try
+			{
+				KeyCheck();
+			}
+			catch
+			{
+				// TODO :: 다른 창으로 사용자가 입력이 넘어갔을때 pause 코드 추가하기
+				Debug.LogError("다른 창 열어두고 다른 짓 하면 이벤트가 튀는 경우가 있음.");
+			}
 		}
 
 		#region fields

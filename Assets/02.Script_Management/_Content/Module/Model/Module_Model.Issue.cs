@@ -10,8 +10,8 @@ namespace Module.Model
 
 	public partial class Module_Model : AModule
 	{
-		[Header("Issue Datas")]
 		private GameObject m_rootIssue;
+		[Header("Issue Datas")]
 		[SerializeField] private List<Issue> m_Dmg;
 		[SerializeField] private List<Issue> m_Rcv;
 

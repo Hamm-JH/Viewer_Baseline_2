@@ -7,10 +7,15 @@ namespace View
 {
 	using Definition;
 	using Management;
+	using UnityEngine.UI;
 
 	public partial class UI_Selectable : Interactable
 	{
-		
+		public void Event_View_Home()
+		{
+			ContentManager.Instance.SetCameraCenterPosition();
+		}
+
 		public void Event_Toggle_ChildPanel(int index)
 		{
 			// 자식 객체 토글
@@ -21,19 +26,19 @@ namespace View
 
 		private void Event_Toggle_ViewMode()
 		{
+			bool toggle = false;
 
-			if(childPanel != null)
+			if (childPanel != null)
 			{
-				bool toggle = !(bool)childPanel.activeSelf;
+				toggle = !(bool)childPanel.activeSelf;
 				
 				childPanel.SetActive(toggle);
 
-				foreach(GameObject obj in uiFXs)
+				foreach(GameObject obj in m_uiFXs)
 				{
 					obj.SetActive(toggle);
 				}
 			}
-
 		}
 
 		private void Event_Toggle_ViewMode(UIEventType _eventType)

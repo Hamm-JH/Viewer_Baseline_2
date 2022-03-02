@@ -66,16 +66,30 @@ namespace Management
 		{
 			_value = 0.1f + _value * 0.9f;
 
-			float boundary = 0.8f;
+			//float boundary = 0.8f;
+			//bool isOpaque = _value > boundary ? true : false;
 
-			bool isOpaque = _value > boundary ? true : false;
-
+			// 모든 3D 모델을 순회한다.
 			foreach(GameObject obj in _ModelObjects)
 			{
 				Obj_Selectable selectable;
 				if (obj.TryGetComponent<Obj_Selectable>(out selectable))
 				{
-					selectable.OnDeselect<UIEventType, float>(UIEventType.Fit_Center, _value);
+					selectable.OnDeselect<UIEventType, float>(UIEventType.Slider_Model_Transparency, _value);
+				}
+			}
+		}
+
+		public void Set_Issue_Scale(float _value)
+		{
+			_value = 0.2f + _value * 0.8f;
+
+			foreach(GameObject obj in _IssueObjects)
+			{
+				Issue_Selectable selectable;
+				if(obj.TryGetComponent<Issue_Selectable>(out selectable))
+				{
+					selectable.OnDeselect<UIEventType, float>(UIEventType.Slider_Icon_Scale, _value);
 				}
 			}
 		}

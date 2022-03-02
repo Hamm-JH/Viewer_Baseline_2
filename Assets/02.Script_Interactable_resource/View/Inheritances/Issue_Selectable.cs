@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace View
 {
+	using Definition;
 	using Definition._Issue;
 	using Management;
 	using System;
@@ -30,7 +31,7 @@ namespace View
 			}
 		}
 
-		public override bool IsInteractable { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		//public override bool IsInteractable { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
 		public override void OnChangeValue(float _value)
 		{
@@ -49,7 +50,36 @@ namespace View
 
 		public override void OnDeselect<T1, T2>(T1 t1, T2 t2)
 		{
+			if (!IsInteractable) return;
 			Debug.Log("Issue OnDeselect");
+
+			UIEventType type;
+
+			if(t1 is UIEventType && t2 is float)
+			{
+				type = (UIEventType)Enum.ToObject(typeof(UIEventType), t1);
+				float value = (float)(object)t2;
+				PlatformCode pCode = MainManager.Instance.Platform;
+
+				switch(type)
+				{
+					case UIEventType.Slider_Icon_Scale:
+						OnDeselect_IssueScale(pCode, type, value);
+						break;
+				}
+			}
+		}
+
+		// 점검정보의 크기를 변경
+		private void OnDeselect_IssueScale(PlatformCode _platform, UIEventType _uiType, float _value)
+		{
+			if (!IsInteractable) return;
+
+			// 최종 확인
+			if (_uiType == UIEventType.Slider_Icon_Scale)
+			{
+				transform.localScale = Vector3.one * _value;
+			}
 		}
 
 		public override void OnSelect()
@@ -57,6 +87,9 @@ namespace View
 			// 이슈정보 선택 처리
 			Debug.LogError("Issue Selectable Onselect");
 		}
+
+
+
 
 		public void SwitchRender(bool isOn)
 		{

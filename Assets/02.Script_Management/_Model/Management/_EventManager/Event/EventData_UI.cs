@@ -32,38 +32,7 @@ namespace Management.Events
 				case UIEventType.Mode_Hide:
 				case UIEventType.Mode_Isolate:
 					{
-						//bool isHide = false;
-						//if (UiEventType == UIEventType.Mode_Hide) isHide = true;
-						
-						//foreach(GameObject obj in m_modelObj)
-						//{
-						//	// 모델 리스트 중에서 현재 선택된 모델리스트의 요소와 같은 요소가 존재하는가?
-						//	bool isSelectedModel = _objs.Find(x => x == obj) == null ? false : true;
 
-						//	float alpha = 0.1f;
-						//	bool thisHide = false;
-						//	// 이 객체가 맞음, 숨겨야됨			true true -> alpha = 0.1
-						//	// 이 객체가 맞음, 제외 숨겨야됨	true false -> alpha = 1
-						//	// 이 객체 아님, 숨겨야됨			false true -> alpha = 1
-						//	// 이 객체 아님, 제외 숨겨야됨		false false -> alpha = 0.1
-
-						//	if(isSelectedModel)
-						//	{
-						//		alpha = isHide ? 0.1f : 1f;
-						//		thisHide = isHide ? true : false;
-						//	}
-						//	else
-						//	{
-						//		alpha = isHide ? 1f : 0.1f;
-						//		thisHide = isHide ? false : true;
-						//	}
-
-						//	Obj_Selectable selectable;
-						//	if (obj.TryGetComponent<Obj_Selectable>(out selectable))
-						//	{
-						//		selectable.OnDeselect<UIEventType, bool>(UiEventType, thisHide);
-						//	}
-						//}
 					}
 					break;
 			}
@@ -79,11 +48,14 @@ namespace Management.Events
 						bool isHide = false;
 						if (UiEventType == UIEventType.Mode_Hide) isHide = true;
 
+						// _selected :: 현재 선택되어있는 객체들
 						List<GameObject> _selected = new List<GameObject>();
 						_sEvents[InputEventType.Input_clickSuccessUp].Elements.ForEach(x => _selected.Add(x.Target));
 
+						// m_modelObj :: 모든 모델객체들
 						foreach(GameObject obj in m_modelObj)
 						{
+							// 반복의 개별객체가 현재 선택된 객체중의 하나인가?
 							bool isSelectedModel = _selected.Find(x => x == obj) == null ? false : true;
 
 							float alpha = 0.1f;

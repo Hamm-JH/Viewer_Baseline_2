@@ -14,7 +14,28 @@ namespace View
 
 		public abstract GameObject Target { get; }
 		public abstract List<GameObject> Targets { get; }
-		public abstract bool IsInteractable { get; set; }
+		//public bool IsInteractable { get; set; }
+
+		public bool IsInteractable
+		{
+			get => m_isInteractable;
+			set
+			{
+				m_isInteractable = value;
+
+				// 만약 해당 객체에 MeshCollider가 존재할 경우, Interactable 코드와 같이 상호작용 상태를 공유한다.
+				MeshCollider collider;
+				if (this.TryGetComponent<MeshCollider>(out collider))
+				{
+					collider.enabled = value;
+				}
+			}
+		}
+
+		private void Start()
+		{
+			IsInteractable = true;
+		}
 
 		/// <summary>
 		/// 인스턴스 선택시 실행
