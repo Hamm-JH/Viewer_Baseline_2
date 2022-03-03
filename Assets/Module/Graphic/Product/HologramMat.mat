@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: URP_Default2
+  m_Name: HologramMat
   m_Shader: {fileID: -6465566751694194690, guid: 186996cef9413024f996ce0c91709566, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -36,7 +36,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _ScrollSpeed: 0
+    - _ScrollSpeed: 0.05
     m_Colors:
     - _FresnelColor: {r: 0, g: 1.2436936, b: 5.3403134, a: 1}
     - _HologramTiling: {r: 64, g: 64, b: 0, a: 0}

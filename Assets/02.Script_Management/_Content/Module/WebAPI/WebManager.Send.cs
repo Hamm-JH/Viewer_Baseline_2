@@ -1,28 +1,14 @@
-﻿using Management;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+using Utilities;
+using Management;
 using View;
-
-public enum SendRequestCode
-{
-    Null,
-    SelectObject,   // 3D 객체 선택
-    SelectIssue,    // 손상/보강 선택
-    SelectObject6Shape, // 6면 객체 선택
-    SelectSurfaceLocation,  // 9면 선택
-
-    InitializeRegisterMode, // 손상 등록 모드
-    SetPinVector,           // 위치벡터 할당
-
-}
+using Definition;
 
 public partial class WebManager : MonoBehaviour
 {
-    private T1 OnParse<T1>(object _v1)
-	{
-        return (T1)_v1;
-	}
 
     public void SendRequest(SendRequestCode _requestCode, params object[] arguments)
     {
@@ -34,7 +20,7 @@ public partial class WebManager : MonoBehaviour
                 {
                     LimitArgument(SendRequestCode.SelectObject.ToString(), 1, arguments);
 
-                    Func_SelectObject(OnParse<GameObject>(arguments[0]));
+                    Func_SelectObject(Parser.Parse<GameObject>(arguments[0]));
                 }
                 break;
 
@@ -43,9 +29,9 @@ public partial class WebManager : MonoBehaviour
                     LimitArgument(SendRequestCode.SelectIssue.ToString(), 3, arguments);
 
                     Func_SelectIssue(
-                        OnParse<string>(arguments[0]),
-                        OnParse<string>(arguments[1]),
-                        OnParse<string>(arguments[2]));
+                        Parser.Parse<string>(arguments[0]),
+                        Parser.Parse<string>(arguments[1]),
+                        Parser.Parse<string>(arguments[2]));
                 }
                 break;
 
@@ -53,7 +39,7 @@ public partial class WebManager : MonoBehaviour
                 {
                     LimitArgument(SendRequestCode.SelectObject6Shape.ToString(), 1, arguments);
 
-                    Func_SelectObject6Shape(OnParse<string>(arguments[0]));
+                    Func_SelectObject6Shape(Parser.Parse<string>(arguments[0]));
                 }
                 break;
 
@@ -63,7 +49,7 @@ public partial class WebManager : MonoBehaviour
                 {
                     LimitArgument(SendRequestCode.SelectSurfaceLocation.ToString(), 1, arguments);
 
-                    Func_SelectSurfaceLocation(OnParse<string>(arguments[0]));
+                    Func_SelectSurfaceLocation(Parser.Parse<string>(arguments[0]));
                 }
                 break;
 

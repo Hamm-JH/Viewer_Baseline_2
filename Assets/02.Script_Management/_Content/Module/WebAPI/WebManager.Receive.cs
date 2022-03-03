@@ -1,30 +1,14 @@
-﻿using Definition;
-using Kino;
+﻿//using Kino;
 using Management;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Definition;
+using Utilities;
 using View;
 
-public enum ReceiveRequestCode
-{
-    Null,
 
-    ResetIssue,         // 손상/보강 리셋
-
-    SelectObject,       // 3D 객체 선택
-    SelectIssue,        // 손상/보강 선택
-    SelectObject6Shape, // 6면 객체 선택
-    SelectSurfaceLocation,  // 9면 선택
-    InformationWidthChange, // 정보창 폭 변경 수신
-
-    //SetIssueStatus,         // 손상 / 보강 상태 변경
-    ChangePinMode,          // PinMode 설정 변경
-    InitializeRegisterMode, // 등록 모드 시작
-    FinishRegisterMode,     // 등록 단계 종료
-
-}
 
 public partial class WebManager : MonoBehaviour
 {
@@ -68,7 +52,7 @@ public partial class WebManager : MonoBehaviour
 
             // T
             case ReceiveRequestCode.InformationWidthChange: // 정보창 폭 변경 수신
-                Func_InformationWidthChange(OnParse<float>(arguments[1]));
+                Func_InformationWidthChange(Parser.Parse<float>(arguments[1]));
                 break;
 
             #endregion
@@ -86,7 +70,7 @@ public partial class WebManager : MonoBehaviour
                 break;
 
             case ReceiveRequestCode.FinishRegisterMode: // 등록 단계 종료
-                Func_FinishRegisterMode(OnParse<bool>(arguments[1]));
+                Func_FinishRegisterMode(Parser.Parse<bool>(arguments[1]));
                 break;
 
                 #endregion
@@ -437,7 +421,6 @@ public partial class WebManager : MonoBehaviour
     private void Func_FinishRegisterMode(bool _value)
 	{
         ContentManager.Instance.ViewSceneStatus = SceneStatus.Ready;
-        Contour contour;
 
         string issueID = "";
 
@@ -461,10 +444,6 @@ public partial class WebManager : MonoBehaviour
             ContentManager.Instance.SetInspectionImage(0);     // 우측 6면 표시 슬라이드 이미지
 
             ContentManager.Instance.Toggle_Issues(IssueVisualizeOption.All_ON);
-            if (Camera.main.TryGetComponent<Contour>(out contour))
-            {
-                contour.enabled = true;
-            }
 
             Debug.Log($"WM ReceiveRequest FinishRegisterMode : issueID {issueID}");
 
@@ -479,11 +458,6 @@ public partial class WebManager : MonoBehaviour
 
                 // 모든 이슈 가시화
                 ContentManager.Instance.Toggle_Issues(IssueVisualizeOption.All_ON);
-
-                if (Camera.main.TryGetComponent<Contour>(out contour))
-                {
-                    contour.enabled = true;
-                }
 
                 //Debug.Log($"WM ReceiveRequest FinishRegisterMode : issueOrderCode {ContentManager.Instance.InputManager.SelectionController.CacheIssueEntity.issueData.IssueOrderCode}");
             }

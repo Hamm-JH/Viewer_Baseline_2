@@ -33,8 +33,11 @@ namespace Definition
 					}
 					else if (pipeline == RenderPipelineType.URP)
 					{
-						MAT_DEFAULT = Resources.Load<Material>("3D/URP_Default");
+						//MAT_DEFAULT = Resources.Load<Material>("3D/URP_Default2");  // 홀로그램
+						MAT_DEFAULT = Resources.Load<Material>("3D/URP_Default");		// 기본
 						MAT_TRANSPARENT = Resources.Load<Material>("3D/URP_Transparent");
+
+
 						//MAT_DEFAULT = Resources.Load<Material>("3D/URP_Default2");
 						//MAT_TRANSPARENT = Resources.Load<Material>("3D/URP_Transparent2");
 						result = MAT_DEFAULT;
@@ -110,6 +113,7 @@ namespace Definition
 			RenderPipelineType pipeline = RenderPipelineUtil.GetRenderPipeline();
 			if (pipeline == RenderPipelineType.URP)
 			{
+				//colrKey = "_MainColor";
 				colrKey = "_BaseColor";
 			}
 			else if (pipeline == RenderPipelineType.BuiltIn)
@@ -132,16 +136,6 @@ namespace Definition
 			Material now = new Material(MAT_DEFAULT);
 			now.color = bColor;
 
-			// 기존 값 넘기기
-			//material.SetOverrideTag("RenderType", "");
-			//material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
-			//material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
-			//material.SetInt("_ZWrite", 1);
-			//material.DisableKeyword("_ALPHATEST_ON");
-			//material.DisableKeyword("_ALPHABLEND_ON");
-			//material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-			//material.renderQueue = -1;
-
 			render.material = now;
 		}
 
@@ -152,16 +146,6 @@ namespace Definition
 
 			Material now = new Material(MAT_TRANSPARENT);
 			now.color = bColor;
-
-			// 기존 값 넘기기
-			//material.SetOverrideTag("RenderType", "Transparent");
-			//material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-			//material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-			//material.SetInt("_ZWrite", 0);
-			//material.DisableKeyword("_ALPHATEST_ON");
-			//material.EnableKeyword("_ALPHABLEND_ON");
-			//material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-			//material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
 
 			render.material = now;
 		}
