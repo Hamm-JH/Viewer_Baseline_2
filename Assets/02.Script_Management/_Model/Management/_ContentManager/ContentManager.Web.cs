@@ -111,7 +111,7 @@ namespace Management
 		}
 
 		// Issue 객체 선택
-		internal void SelectIssueEntity(Transform transform, bool v)
+		internal void SelectIssue(Transform transform, bool v)
 		{
 			throw new NotImplementedException();
 		}

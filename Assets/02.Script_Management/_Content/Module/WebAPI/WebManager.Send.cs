@@ -19,6 +19,10 @@ public enum SendRequestCode
 
 public partial class WebManager : MonoBehaviour
 {
+    private T1 OnParse<T1>(object _v1)
+	{
+        return (T1)_v1;
+	}
 
     public void SendRequest(SendRequestCode _requestCode, params object[] arguments)
     {
@@ -68,10 +72,6 @@ public partial class WebManager : MonoBehaviour
 
     }
 
-    private T1 OnParse<T1>(object _v1)
-	{
-        return (T1)_v1;
-	}
 
     private void LimitArgument(string _codeName, int _limit, object[] _arguments)
 	{
@@ -127,8 +127,8 @@ public partial class WebManager : MonoBehaviour
 #if UNITY_EDITOR
 
 #else
-                    // 프론트에 전달
-                    UnityRequest(arg);
+        // 프론트에 전달
+        UnityRequest(arg);
 #endif
     }
 

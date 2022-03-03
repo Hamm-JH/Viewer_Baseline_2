@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ripple
+  m_Name: Heavy Rain
   m_Shader: {fileID: 4800000, guid: c6fa7349a0791d3408e9d2e2064b1473, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8b12f103a80e77a4286dc286688b0228, type: 3}
+        m_Texture: {fileID: 2800000, guid: abb9994d80071a34db6c47ff380ece0c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -75,6 +75,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmisColor: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TintColor: {r: 0.41085455, g: 0.45207155, b: 0.6374634, a: 1}
+    - _TintColor: {r: 0.35349905, g: 0.39932862, b: 0.5747131, a: 1}
   m_BuildTextureStacks: []

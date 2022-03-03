@@ -118,6 +118,13 @@ namespace Management
 			}
 		}
 
+		public void Reset_IssueObject()
+		{
+			// 기존 Issue Object 리스트 접근, 기존 요소 삭제
+
+			// 다시 리스트 초기화
+		}
+
 		public void Toggle_ModelObject(UIEventType _eventType, ToggleType _toggleType)
 		{
 			EventManager.Instance.OnEvent(new Events.EventData_UI(

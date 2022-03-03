@@ -19,7 +19,7 @@ public enum ReceiveRequestCode
     SelectSurfaceLocation,  // 9면 선택
     InformationWidthChange, // 정보창 폭 변경 수신
 
-    SetIssueStatus,         // 손상 / 보강 상태 변경
+    //SetIssueStatus,         // 손상 / 보강 상태 변경
     ChangePinMode,          // PinMode 설정 변경
     InitializeRegisterMode, // 등록 모드 시작
     FinishRegisterMode,     // 등록 단계 종료
@@ -48,447 +48,460 @@ public partial class WebManager : MonoBehaviour
 
             // Q
             case ReceiveRequestCode.ResetIssue:
-                {
-                    ContentManager.Instance.InitCamPosition();
-                    //ContentManager.Instance.InitCamPosition(ContentManager.Instance.Root3DObject);
-
-                    ContentManager.Instance.SetIssueObject();
-                }   break;
+                Func_ResetIssue();
+                break;
 
             // W
-            case ReceiveRequestCode.SelectObject:            // 3D 객체 선택
-                {
-
-
-                    GameObject selectedObject = GameObject.Find(arguments[1]);
-                    ContentManager.Instance.Select3DObject(selectedObject.transform);  // 웹에서 받은 객체명 기준 3D 객체선택 단계 실행
-
-                    Debug.Log($"WM ReceiveRequest SelectObject : objectName {selectedObject.name}");
-                }   break;
+            case ReceiveRequestCode.SelectObject:   // 3D 객체 선택 (Issue 포함)
+                Func_SelectObject(arguments[1]);
+                break;
 
             // E
-            case ReceiveRequestCode.SelectIssue:
-                {
-                    GameObject damageCode = GameObject.Find(arguments[1]);
-
-                    ContentManager.Instance.SelectIssueEntity(damageCode.transform, false);
-
-                    Debug.Log($"WM ReceiveRequest SelectIssue : issueName {damageCode.name}");
-                }   break;
+            case ReceiveRequestCode.SelectIssue:    // Issue 객체 선택
+                Func_SelectIssue(arguments[1]);
+                break;
 
             // R
             case ReceiveRequestCode.SelectObject6Shape:     // 6면 객체 선택
-                {
-                    //return;
-                    Transform selectObj = ContentManager.Instance.SelectedObject;
-                    Vector3 _angle = selectObj.parent.parent.rotation.eulerAngles;
-
-                    string shapeCode = arguments[1];
-
-                    Debug.Log($"WM ReceiveRequest SelectObject6Shape : shapeCode {shapeCode}");
-
-
-                    // 시점변환 코드 실행
-                    switch (shapeCode)
-                    {
-                        case "Top":
-                        case "TO":
-                            ContentManager.Instance.DirectionAngle(0, _angle);
-                            ContentManager.Instance.DirectionAngle(0, _angle);
-                            //MainCameraController.DirectionAngle(0, _angle);
-                            //ViewCubeCameraController.DirectionAngle(1, _angle);
-                            //ContentManager.Instance.InputManager.SelectionController.CacheIssueEntity.issueData.DcMemberSurface = "Top";
-                            ContentManager.Instance.DcMemberSurface = "Top";
-                            ContentManager.Instance.SetInspectionImage(1);
-                            break;
-
-                        case "Bottom":
-                        case "BO":
-                            ContentManager.Instance.DirectionAngle(1, _angle);
-                            ContentManager.Instance.DirectionAngle(1, _angle);
-                            ContentManager.Instance.DcMemberSurface = "Bottom";
-                            ContentManager.Instance.SetInspectionImage(2);
-                            break;
-
-                        case "Front":
-                        case "FR":
-                            ContentManager.Instance.DirectionAngle(2, _angle);
-                            ContentManager.Instance.DirectionAngle(2, _angle);
-                            ContentManager.Instance.DcMemberSurface = "Front";
-                            ContentManager.Instance.SetInspectionImage(3);
-                            break;
-
-                        case "Back":
-                        case "BA":
-                            ContentManager.Instance.DirectionAngle(3, _angle);
-                            ContentManager.Instance.DirectionAngle(3, _angle);
-                            ContentManager.Instance.DcMemberSurface = "Back";
-                            ContentManager.Instance.SetInspectionImage(4);
-                            break;
-
-                        case "Left":
-                        case "LE":
-                            ContentManager.Instance.DirectionAngle(4, _angle);
-                            ContentManager.Instance.DirectionAngle(4, _angle);
-                            ContentManager.Instance.DcMemberSurface = "Left";
-                            ContentManager.Instance.SetInspectionImage(5);
-                            break;
-
-                        case "Right":
-                        case "RI":
-                            ContentManager.Instance.DirectionAngle(5, _angle);
-                            ContentManager.Instance.DirectionAngle(5, _angle);
-                            ContentManager.Instance.DcMemberSurface = "Right";
-                            ContentManager.Instance.SetInspectionImage(6);
-                            break;
-                    }
-
-                    SendRequest(SendRequestCode.SelectObject6Shape, shapeCode);
-                }
+                Func_Receive_SelectObject6Shape(arguments[1]);
                 break;
 
             // T
             case ReceiveRequestCode.InformationWidthChange: // 정보창 폭 변경 수신
-                {
-                    string widthText = (string)arguments[1];
-                    float width = float.Parse(widthText);
-
-                    ContentManager.Instance.GetRightWebUIWidth(width);
-
-                    Debug.Log($"WM ReceiveRequest InformationWidthChange : width {width}");
-                }
+                Func_InformationWidthChange(OnParse<float>(arguments[1]));
                 break;
 
             #endregion
 
             #region Register step
 
-            // TODO : delete 점검
-            // Y
-            case ReceiveRequestCode.SetIssueStatus: // 손상 / 보강 상태 변경
-                {
-                    string issueCode = (string)arguments[1];
-                    string issueIndex = (string)arguments[2];
-
-                    // TODO : issueCode, issueIndex 확인 필요
-                    ContentManager.Instance.SetIssueCode(issueCode, issueIndex);
-
-                    Debug.Log($"WM ReceiveRequest SetIssueStatus : issueCode {issueCode} , issueIndex {issueIndex}");
-                }
-                break;
-
             // I
             case ReceiveRequestCode.ChangePinMode:  // PinMode 설정 변경
-                {
-                    Issue_Selectable issueEntity = ContentManager.Instance.CacheIssueEntity;
-
-                    Transform currentSelectedObj = ContentManager.Instance.SelectedObject;
-                    MeshRenderer meshRenderer;
-
-                    if (ContentManager.Instance.ViewSceneStatus == SceneStatus.Register)
-                    {
-                        ContentManager.Instance.ViewSceneStatus = SceneStatus.Register_PinMode;
-                        //manager.IsPinMode = true;
-
-                        // skybox 변경
-                        RenderSettings.skybox = ContentManager.Instance.PinModeSkyboxMaterial;
-
-                        // GuideLine On
-                        ContentManager.Instance.SwitchGuideCubeOnOff(true);
-
-                        //Debug.Log(issueEntity.issueData.DcMemberSurface);
-                        //Debug.Log(currentSelectedObj.GetComponent<Obj_Selectable>().Bound);
-
-                        Bounds nB = new Bounds();
-
-                        if (ContentManager.Instance.AppUseCase == UseCase.Bridge
-                            || ContentManager.Instance.AppUseCase == UseCase.Tunnel)
-						{
-                            nB = currentSelectedObj.GetComponent<Obj_Selectable>().Bounds;
-                        }
-
-                        Debug.Log($"_____ {currentSelectedObj.name}");
-                        
-                        bool isEtc = false;
-                        string side = GetSurfaceSide(issueEntity.Issue, out isEtc);
-                        ContentManager.Instance.ChangeCameraDirection(side, nB, currentSelectedObj.parent.parent.localRotation.eulerAngles, isEtc);
-						//manager.UISubManager.GuideLineController.ChangeCameraDirection(issueEntity.issueData.DcMemberSurface, nB, currentSelectedObj.parent.parent.localRotation.eulerAngles);
-
-						// 선택객체 Mat White
-						if (currentSelectedObj.TryGetComponent<MeshRenderer>(out meshRenderer))
-                        {
-                            meshRenderer.material = Materials.Set(MaterialType.White);
-                        }
-                        for (int i = 0; i < currentSelectedObj.childCount; i++)
-                        {
-                            if (currentSelectedObj.GetChild(i).TryGetComponent<MeshRenderer>(out meshRenderer))
-                            {
-                                meshRenderer.material = Materials.Set(MaterialType.White);
-                            }
-                        }
-
-                        // DimViewManager 설정 (선택한 객체만 보이기)
-                        ContentManager.Instance.Toggle_ModelObject(UIEventType.Mode_Isolate, ToggleType.Isolate);
-
-                        // __////////////////
-                        
-                        ViewRotations vr = ViewRotations.Top;
-                        int cubeDir = 0;
-                        int imgIndex = 0;
-
-                        isEtc = false;
-                        side = GetSurfaceSide(issueEntity.Issue, out isEtc);
-                        switch (side)
-                        {
-                            case "Top":
-                                vr = ViewRotations.Top;
-                                cubeDir = 0;
-                                imgIndex = 1;
-                                break;
-
-                            case "Bottom":
-                                vr = ViewRotations.Bottom;
-                                cubeDir = 1;
-                                imgIndex = 2;
-                                break;
-
-                            case "Front":
-                                vr = ViewRotations.Front;
-                                cubeDir = 2;
-                                imgIndex = 3;
-                                break;
-
-                            case "Back":
-                                vr = ViewRotations.Back;
-                                cubeDir = 3;
-                                imgIndex = 4;
-                                break;
-
-                            case "Left":
-                                vr = ViewRotations.Left;
-                                cubeDir = 4;
-                                imgIndex = 5;
-                                break;
-
-                            case "Right":
-                                vr = ViewRotations.Right;
-                                cubeDir = 5;
-                                imgIndex = 6;
-                                break;
-                        }
-
-                        Transform selectObj = ContentManager.Instance.SelectedObject;
-                        Vector3 _angle = selectObj.parent.parent.rotation.eulerAngles;
-
-                        ContentManager.Instance.DirectionAngle(cubeDir, _angle); // 4 left
-                        ContentManager.Instance.DirectionAngle(cubeDir, _angle); // 4
-                    }
-                    else if (ContentManager.Instance.ViewSceneStatus == SceneStatus.Register_PinMode)
-                    {
-                        ContentManager.Instance.ViewSceneStatus = SceneStatus.Register;
-                        //manager.IsPinMode = false;
-
-                        // skybox 변경
-                        RenderSettings.skybox = ContentManager.Instance.DefaultSkyboxMaterial;
-
-                        // GuideLine Off
-                        ContentManager.Instance.SwitchGuideCubeOnOff(false);
-                        // 위치 초기화
-                        //ContentManager.Instance.UISubManager.GuideLineController.transform.position = new Vector3(0, 0, 0);
-
-                        // 선택객체 Mat 객체선택으로 변경
-                        if (currentSelectedObj.TryGetComponent<MeshRenderer>(out meshRenderer))
-                        {
-                            meshRenderer.material = Materials.Set(MaterialType.White);
-                        }
-                        for (int i = 0; i < currentSelectedObj.childCount; i++)
-                        {
-                            if (currentSelectedObj.GetChild(i).TryGetComponent<MeshRenderer>(out meshRenderer))
-                            {
-                                meshRenderer.material = Materials.Set(MaterialType.White);
-                            }
-                        }
-
-                        ViewRotations vr = ViewRotations.Top;
-                        int cubeDir = 0;
-                        int imgIndex = 0;
-
-                        bool isEtc = false;
-                        string side = GetSurfaceSide(issueEntity.Issue, out isEtc);
-                        switch (side)
-                        {
-                            case "Top":
-                                vr = ViewRotations.Top;
-                                cubeDir = 0;
-                                imgIndex = 1;
-                                break;
-
-                            case "Bottom":
-                                vr = ViewRotations.Bottom;
-                                cubeDir = 1;
-                                imgIndex = 2;
-                                break;
-
-                            case "Front":
-                                vr = ViewRotations.Front;
-                                cubeDir = 2;
-                                imgIndex = 3;
-                                break;
-
-                            case "Back":
-                                vr = ViewRotations.Back;
-                                cubeDir = 3;
-                                imgIndex = 4;
-                                break;
-
-                            case "Left":
-                                vr = ViewRotations.Left;
-                                cubeDir = 4;
-                                imgIndex = 5;
-                                break;
-
-                            case "Right":
-                                vr = ViewRotations.Right;
-                                cubeDir = 5;
-                                imgIndex = 6;
-                                break;
-                        }
-
-                        Transform selectObj = ContentManager.Instance.SelectedObject;
-                        Vector3 _angle = selectObj.parent.parent.rotation.eulerAngles;
-
-                        ContentManager.Instance.DirectionAngle(cubeDir, _angle); // 4 left
-                        ContentManager.Instance.DirectionAngle(cubeDir, _angle); // 4
-
-                        //viewmanager.DimSet(manager.InputManager.SelectionController.SelectedObject, vr, true);
-                    }
-                    else
-                    {
-                        Debug.Log($"Invalid access");
-                    }
-                }
+                Func_ChangePinMode();
                 break;
 
             // O
             case ReceiveRequestCode.InitializeRegisterMode: // 등록 모드 시작
-                {
-                    Transform objectTransform = ContentManager.Instance.SelectedObject;
-                    Contour contour;
-
-                    if (ContentManager.Instance.ViewSceneStatus == SceneStatus.Ready)
-                    {
-                        if (objectTransform != null)
-                        {
-                            Debug.Log($"***** WM ReceiveRequest InitializeRegisterMode : objectTransform.name {objectTransform.name}");
-
-                            ContentManager.Instance.ViewSceneStatus = SceneStatus.Register;
-
-
-
-                            // TODO 0104 카메라 세팅 변경
-                            ContentManager.Instance.SetCameraMode(1);
-                            // 위치 줌
-
-                            StartCoroutine(InitRequestMode(objectTransform));
-                        }
-                        else
-                        {
-                            Debug.Log("Object not selected");
-                        }
-                    }
-                }
+                Func_InitializeRegisterMode();
                 break;
 
             case ReceiveRequestCode.FinishRegisterMode: // 등록 단계 종료
-                {
-                    ContentManager.Instance.ViewSceneStatus = SceneStatus.Ready;
-                    Contour contour;
-
-                    string issueID = "";
-
-                    float gizmoScale = 0f;
-
-                    // TODO 0104 카메라 세팅 변경
-                    ContentManager.Instance.SetCameraMode(2);
-
-                    // Dim 비활성화
-                    ContentManager.Instance.Toggle_Dimension(false);
-
-                    for (int i = 0; i < arguments.Length; i++)
-                    {
-                        Debug.Log($"arguments {i} : {(string)arguments[i]}");
-                    }
-
-                    // 변경 이전 버전
-                    if (isUnderUpdateVersion)
-                    {
-                        //========================================
-
-                        ReceiveRequest("ResetIssue");
-
-                        Camera.main.orthographic = false;        // 메인 카메라 3D 변경
-
-                        ContentManager.Instance.SetInspectionImage(0);     // 우측 6면 표시 슬라이드 이미지
-
-                        ContentManager.Instance.Toggle_Issues(IssueVisualizeOption.All_ON);
-                        if (Camera.main.TryGetComponent<Contour>(out contour))
-                        {
-                            contour.enabled = true;
-                        }
-
-                        Debug.Log($"WM ReceiveRequest FinishRegisterMode : issueID {issueID}");
-
-                    }
-                    // 변경 이후 버전 
-                    else
-                    {
-                        BoolValue boolArg;
-                        if (!Enum.TryParse<BoolValue>(arguments[1], out boolArg))
-                        {
-                            Debug.Log($"arguments 2 isnt valid : value -> {(string)arguments[1]}");
-                            return;
-                        }
-
-                        if (boolArg == BoolValue.True)
-                        {
-                            ReceiveRequest("ResetIssue");
-
-                            // 모든 이슈 가시화
-                            ContentManager.Instance.Toggle_Issues(IssueVisualizeOption.All_ON);
-
-                            if (Camera.main.TryGetComponent<Contour>(out contour))
-                            {
-                                contour.enabled = true;
-                            }
-
-                            //Debug.Log($"WM ReceiveRequest FinishRegisterMode : issueOrderCode {ContentManager.Instance.InputManager.SelectionController.CacheIssueEntity.issueData.IssueOrderCode}");
-                        }
-                        else
-                        {
-                            // 등록 취소
-                            Debug.Log($"WM ReceiveRequest FinishRegisterMode : register canceled");
-                        }
-                    }
-
-                    ContentManager.Instance.SetInspectionImage(0);     // 우측 6면 표시 슬라이드 이미지
-
-                    // 2D -> 3D 변환
-                    Camera.main.orthographic = false;        // 메인 카메라 2D 변경
-
-                    // UI 리셋
-                    //ContentManager.Instance.UIManager.OnClickReset();       // TODO : UI 객체 상태 리셋 ?
-
-                    // 캐시정보 리셋
-                    //ContentManager.Instance.InputManager.SelectionController.CacheIssueEntity.Reset();
-
-                    //ContentManager.Instance.SetModel_StartEndPos();
-
-                }
+                Func_FinishRegisterMode(OnParse<bool>(arguments[1]));
                 break;
 
                 #endregion
         }
     }
+
+	#region Functions
+
+	private void Find_3DObject(string _name, out GameObject _obj)
+	{
+        _obj = ContentManager.Instance._ModelObjects.Find(
+            x => x == GameObject.Find(_name));
+	}
+
+    private void Find_IssueObject(string _code, out GameObject _obj)
+	{
+        _obj = ContentManager.Instance._IssueObjects.Find(
+            x => x == GameObject.Find(_code) );
+	}
+
+
+    private void Func_ResetIssue()
+	{
+        ContentManager.Instance.InitCamPosition();
+
+        // Issue 보기상태 복구
+        ContentManager.Instance.Reset_IssueObject();
+    }
+
+    private void Func_SelectObject(string _name)
+	{
+        GameObject obj3D;
+        Find_3DObject(_name, out obj3D);
+
+        GameObject objIssue;
+        Find_IssueObject(_name, out objIssue);
+
+        // 선택 객체 :: 3D 객체인 경우
+        if(obj3D)
+		{
+            // 객체 선택 이벤트를 전달
+            ContentManager.Instance.Select3DObject(obj3D.transform);
+            Debug.Log($"WM ReceiveRequest SelectObject : objectName {obj3D.name}");
+        }
+        // 선택 객체 :: Issue 객체인 경우
+        else if(objIssue)
+		{
+            // 점검정보 선택 이벤트를 전달
+            Debug.LogError("TODO");
+		}
+        
+    }
+
+	private void Func_SelectIssue(string _name)
+	{
+        GameObject issue;
+        Find_IssueObject(_name, out issue);
+
+        if(issue)
+		{
+            ContentManager.Instance.SelectIssue(issue.transform, false);
+		}
+	}
+
+    private void Func_Receive_SelectObject6Shape(string _code)
+	{
+        string shapeCode = _code;
+        Transform selectObj = ContentManager.Instance.SelectedObject;
+        Vector3 _angle = selectObj.parent.parent.rotation.eulerAngles;
+
+        Debug.Log($"WM ReceiveRequest SelectObject6Shape : shapeCode {shapeCode}");
+
+        // 시점변환 코드 실행
+        switch (shapeCode)
+        {
+            case "Top":
+            case "TO":
+                ContentManager.Instance.DirectionAngle(0, _angle);
+                ContentManager.Instance.DcMemberSurface = "Top";
+                ContentManager.Instance.SetInspectionImage(1);
+                break;
+
+            case "Bottom":
+            case "BO":
+                ContentManager.Instance.DirectionAngle(1, _angle);
+                ContentManager.Instance.DcMemberSurface = "Bottom";
+                ContentManager.Instance.SetInspectionImage(2);
+                break;
+
+            case "Front":
+            case "FR":
+                ContentManager.Instance.DirectionAngle(2, _angle);
+                ContentManager.Instance.DcMemberSurface = "Front";
+                ContentManager.Instance.SetInspectionImage(3);
+                break;
+
+            case "Back":
+            case "BA":
+                ContentManager.Instance.DirectionAngle(3, _angle);
+                ContentManager.Instance.DcMemberSurface = "Back";
+                ContentManager.Instance.SetInspectionImage(4);
+                break;
+
+            case "Left":
+            case "LE":
+                ContentManager.Instance.DirectionAngle(4, _angle);
+                ContentManager.Instance.DcMemberSurface = "Left";
+                ContentManager.Instance.SetInspectionImage(5);
+                break;
+
+            case "Right":
+            case "RI":
+                ContentManager.Instance.DirectionAngle(5, _angle);
+                ContentManager.Instance.DcMemberSurface = "Right";
+                ContentManager.Instance.SetInspectionImage(6);
+                break;
+        }
+
+        SendRequest(SendRequestCode.SelectObject6Shape, shapeCode);
+    }
+
+    private void Func_InformationWidthChange(float _value)
+	{
+        float width = _value;
+
+        ContentManager.Instance.GetRightWebUIWidth(width);
+
+        Debug.Log($"WM ReceiveRequest InformationWidthChange : width {width}");
+    }
+
+    private void Func_ChangePinMode()
+	{
+        Issue_Selectable issueEntity = ContentManager.Instance.CacheIssueEntity;
+
+        Transform currentSelectedObj = ContentManager.Instance.SelectedObject;
+        MeshRenderer meshRenderer;
+
+        if (ContentManager.Instance.ViewSceneStatus == SceneStatus.Register)
+        {
+            ContentManager.Instance.ViewSceneStatus = SceneStatus.Register_PinMode;
+            //manager.IsPinMode = true;
+
+            // skybox 변경
+            RenderSettings.skybox = ContentManager.Instance.PinModeSkyboxMaterial;
+
+            // GuideLine On
+            ContentManager.Instance.SwitchGuideCubeOnOff(true);
+
+            //Debug.Log(issueEntity.issueData.DcMemberSurface);
+            //Debug.Log(currentSelectedObj.GetComponent<Obj_Selectable>().Bound);
+
+            Bounds nB = new Bounds();
+
+            if (ContentManager.Instance.AppUseCase == UseCase.Bridge
+                || ContentManager.Instance.AppUseCase == UseCase.Tunnel)
+            {
+                nB = currentSelectedObj.GetComponent<Obj_Selectable>().Bounds;
+            }
+
+            Debug.Log($"_____ {currentSelectedObj.name}");
+
+            bool isEtc = false;
+            string side = GetSurfaceSide(issueEntity.Issue, out isEtc);
+            ContentManager.Instance.ChangeCameraDirection(side, nB, currentSelectedObj.parent.parent.localRotation.eulerAngles, isEtc);
+            //manager.UISubManager.GuideLineController.ChangeCameraDirection(issueEntity.issueData.DcMemberSurface, nB, currentSelectedObj.parent.parent.localRotation.eulerAngles);
+
+            // 선택객체 Mat White
+            if (currentSelectedObj.TryGetComponent<MeshRenderer>(out meshRenderer))
+            {
+                meshRenderer.material = Materials.Set(MaterialType.White);
+            }
+            for (int i = 0; i < currentSelectedObj.childCount; i++)
+            {
+                if (currentSelectedObj.GetChild(i).TryGetComponent<MeshRenderer>(out meshRenderer))
+                {
+                    meshRenderer.material = Materials.Set(MaterialType.White);
+                }
+            }
+
+            // DimViewManager 설정 (선택한 객체만 보이기)
+            ContentManager.Instance.Toggle_ModelObject(UIEventType.Mode_Isolate, ToggleType.Isolate);
+
+            // __////////////////
+
+            ViewRotations vr = ViewRotations.Top;
+            int cubeDir = 0;
+            int imgIndex = 0;
+
+            isEtc = false;
+            side = GetSurfaceSide(issueEntity.Issue, out isEtc);
+            switch (side)
+            {
+                case "Top":
+                    vr = ViewRotations.Top;
+                    cubeDir = 0;
+                    imgIndex = 1;
+                    break;
+
+                case "Bottom":
+                    vr = ViewRotations.Bottom;
+                    cubeDir = 1;
+                    imgIndex = 2;
+                    break;
+
+                case "Front":
+                    vr = ViewRotations.Front;
+                    cubeDir = 2;
+                    imgIndex = 3;
+                    break;
+
+                case "Back":
+                    vr = ViewRotations.Back;
+                    cubeDir = 3;
+                    imgIndex = 4;
+                    break;
+
+                case "Left":
+                    vr = ViewRotations.Left;
+                    cubeDir = 4;
+                    imgIndex = 5;
+                    break;
+
+                case "Right":
+                    vr = ViewRotations.Right;
+                    cubeDir = 5;
+                    imgIndex = 6;
+                    break;
+            }
+
+            Transform selectObj = ContentManager.Instance.SelectedObject;
+            Vector3 _angle = selectObj.parent.parent.rotation.eulerAngles;
+
+            ContentManager.Instance.DirectionAngle(cubeDir, _angle); // 4 left
+            ContentManager.Instance.DirectionAngle(cubeDir, _angle); // 4
+        }
+        else if (ContentManager.Instance.ViewSceneStatus == SceneStatus.Register_PinMode)
+        {
+            ContentManager.Instance.ViewSceneStatus = SceneStatus.Register;
+            //manager.IsPinMode = false;
+
+            // skybox 변경
+            RenderSettings.skybox = ContentManager.Instance.DefaultSkyboxMaterial;
+
+            // GuideLine Off
+            ContentManager.Instance.SwitchGuideCubeOnOff(false);
+            // 위치 초기화
+            //ContentManager.Instance.UISubManager.GuideLineController.transform.position = new Vector3(0, 0, 0);
+
+            // 선택객체 Mat 객체선택으로 변경
+            if (currentSelectedObj.TryGetComponent<MeshRenderer>(out meshRenderer))
+            {
+                meshRenderer.material = Materials.Set(MaterialType.White);
+            }
+            for (int i = 0; i < currentSelectedObj.childCount; i++)
+            {
+                if (currentSelectedObj.GetChild(i).TryGetComponent<MeshRenderer>(out meshRenderer))
+                {
+                    meshRenderer.material = Materials.Set(MaterialType.White);
+                }
+            }
+
+            ViewRotations vr = ViewRotations.Top;
+            int cubeDir = 0;
+            int imgIndex = 0;
+
+            bool isEtc = false;
+            string side = GetSurfaceSide(issueEntity.Issue, out isEtc);
+            switch (side)
+            {
+                case "Top":
+                    vr = ViewRotations.Top;
+                    cubeDir = 0;
+                    imgIndex = 1;
+                    break;
+
+                case "Bottom":
+                    vr = ViewRotations.Bottom;
+                    cubeDir = 1;
+                    imgIndex = 2;
+                    break;
+
+                case "Front":
+                    vr = ViewRotations.Front;
+                    cubeDir = 2;
+                    imgIndex = 3;
+                    break;
+
+                case "Back":
+                    vr = ViewRotations.Back;
+                    cubeDir = 3;
+                    imgIndex = 4;
+                    break;
+
+                case "Left":
+                    vr = ViewRotations.Left;
+                    cubeDir = 4;
+                    imgIndex = 5;
+                    break;
+
+                case "Right":
+                    vr = ViewRotations.Right;
+                    cubeDir = 5;
+                    imgIndex = 6;
+                    break;
+            }
+
+            Transform selectObj = ContentManager.Instance.SelectedObject;
+            Vector3 _angle = selectObj.parent.parent.rotation.eulerAngles;
+
+            ContentManager.Instance.DirectionAngle(cubeDir, _angle); // 4 left
+            ContentManager.Instance.DirectionAngle(cubeDir, _angle); // 4
+
+            //viewmanager.DimSet(manager.InputManager.SelectionController.SelectedObject, vr, true);
+        }
+        else
+        {
+            Debug.Log($"Invalid access");
+        }
+    }
+
+    private void Func_InitializeRegisterMode()
+	{
+        Transform objectTransform = ContentManager.Instance.SelectedObject;
+
+        if (ContentManager.Instance.ViewSceneStatus == SceneStatus.Ready)
+        {
+            if (objectTransform != null)
+            {
+                Debug.Log($"***** WM ReceiveRequest InitializeRegisterMode : objectTransform.name {objectTransform.name}");
+
+                ContentManager.Instance.ViewSceneStatus = SceneStatus.Register;
+
+
+
+                // TODO 0104 카메라 세팅 변경
+                ContentManager.Instance.SetCameraMode(1);
+                // 위치 줌
+
+                StartCoroutine(InitRequestMode(objectTransform));
+            }
+            else
+            {
+                Debug.Log("Object not selected");
+            }
+        }
+    }
+
+    private void Func_FinishRegisterMode(bool _value)
+	{
+        ContentManager.Instance.ViewSceneStatus = SceneStatus.Ready;
+        Contour contour;
+
+        string issueID = "";
+
+        float gizmoScale = 0f;
+
+        // TODO 0104 카메라 세팅 변경
+        ContentManager.Instance.SetCameraMode(2);
+
+        // Dim 비활성화
+        ContentManager.Instance.Toggle_Dimension(false);
+
+        // 변경 이전 버전
+        if (isUnderUpdateVersion)
+        {
+            //========================================
+
+            ReceiveRequest("ResetIssue");
+
+            Camera.main.orthographic = false;        // 메인 카메라 3D 변경
+
+            ContentManager.Instance.SetInspectionImage(0);     // 우측 6면 표시 슬라이드 이미지
+
+            ContentManager.Instance.Toggle_Issues(IssueVisualizeOption.All_ON);
+            if (Camera.main.TryGetComponent<Contour>(out contour))
+            {
+                contour.enabled = true;
+            }
+
+            Debug.Log($"WM ReceiveRequest FinishRegisterMode : issueID {issueID}");
+
+        }
+        // 변경 이후 버전 
+        else
+        {
+
+            if (_value == true)
+            {
+                ReceiveRequest("ResetIssue");
+
+                // 모든 이슈 가시화
+                ContentManager.Instance.Toggle_Issues(IssueVisualizeOption.All_ON);
+
+                if (Camera.main.TryGetComponent<Contour>(out contour))
+                {
+                    contour.enabled = true;
+                }
+
+                //Debug.Log($"WM ReceiveRequest FinishRegisterMode : issueOrderCode {ContentManager.Instance.InputManager.SelectionController.CacheIssueEntity.issueData.IssueOrderCode}");
+            }
+            else
+            {
+                // 등록 취소
+                Debug.Log($"WM ReceiveRequest FinishRegisterMode : register canceled");
+            }
+        }
+
+        ContentManager.Instance.SetInspectionImage(0);     // 우측 6면 표시 슬라이드 이미지
+
+        // 2D -> 3D 변환
+        Camera.main.orthographic = false;        // 메인 카메라 2D 변경
+    }
+
+    #endregion
+
 
 
     private string GetSurfaceSide(Definition._Issue.Issue _data, out bool isEtc)
