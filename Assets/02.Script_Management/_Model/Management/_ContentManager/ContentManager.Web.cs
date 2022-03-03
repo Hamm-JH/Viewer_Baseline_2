@@ -2,61 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SceneStatus
-{
-	EnvironmentVariablesSetting = 0,        // 환경변수 세팅
-	GetGLTF = 1,                            // GLTF 파일 받아오기
-	ObjectInitialize = 2,                   // GLTF 받은 객체 초기화
-	Ready = 3,                              // Viewer Scene 초기화 완료 상태 / 기본 상태
 
-	Register = 4,                           // 손상/보강 등록 상태
-	Register_PinMode = 5,                   // 손상/보강 핀 등록 상태
-	Default = 6,
-	Modified = 7,
-	Delete = 8,
-}
-
-public enum UseCase
-{
-	NotDefined = -1,
-	Bridge = 0,
-	Tunnel = 1
-}
-
-public enum ViewRotations
-{
-	//ALL,
-	Top,
-	Bottom,
-	Front,
-	Back,
-	Left,
-	Right
-}
-
-public enum BoolValue
-{
-	True,
-	False
-}
-
-public enum IssueVisualizeOption
-{
-	All_ON,
-	All_OFF,
-	SelectedTarget
-}
 
 namespace Management
 {
+	using Definition;
 	using Definition._Issue;
-	using Issues;
 	using System;
 	using View;
 
 	public partial class ContentManager : IManager<ContentManager>
 	{
-		[SerializeField] WebManager legacyWeb;
+		//[SerializeField] WebManager legacyWeb;
 
 		/// <summary>
 		/// 3D 객체 선택시 이벤트 발생
@@ -64,7 +21,7 @@ namespace Management
 		/// <param name="_obj"></param>
 		public void OnSelect_3D(GameObject _obj)
 		{
-			legacyWeb.SendRequest(SendRequestCode.SelectObject, _obj);
+			_API.SendRequest(SendRequestCode.SelectObject, _obj);
 		}
 
 		/// <summary>
@@ -76,7 +33,7 @@ namespace Management
 			Issue_Selectable iObj;
 			if (_obj.TryGetComponent<Issue_Selectable>(out iObj))
 			{
-				legacyWeb.SendRequest(SendRequestCode.SelectIssue,
+				_API.SendRequest(SendRequestCode.SelectIssue,
 					iObj.Issue.IssueOrderCode,
 					iObj.Issue.CdBridgeParts,
 					iObj.Issue.YnRecover);

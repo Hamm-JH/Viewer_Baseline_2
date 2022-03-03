@@ -5,7 +5,6 @@ using UnityEngine;
 namespace Management
 {
 	using Definition;
-	using Issues;
 	using Module;
 	using Module.Interaction;
 	using Module.Model;

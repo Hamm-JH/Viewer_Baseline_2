@@ -1,9 +1,15 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Definition
 {
+	public enum IssueType
+	{
+		Null,
+		damage,
+		recover
+	}
 
 	public enum WebType
 	{
@@ -11,16 +17,17 @@ namespace Definition
 		Issue_Rcv = 0x12,
 
 	}
+
     public enum SendRequestCode
     {
         Null,
-        SelectObject,   // 3D °´Ã¼ ¼±ÅÃ
-        SelectIssue,    // ¼Õ»ó/º¸°­ ¼±ÅÃ
-        SelectObject6Shape, // 6¸é °´Ã¼ ¼±ÅÃ
-        SelectSurfaceLocation,  // 9¸é ¼±ÅÃ
+        SelectObject,   // 3D ê°ì²´ ì„ íƒ
+        SelectIssue,    // ì†ìƒ/ë³´ê°• ì„ íƒ
+        SelectObject6Shape, // 6ë©´ ê°ì²´ ì„ íƒ
+        SelectSurfaceLocation,  // 9ë©´ ì„ íƒ
 
-        InitializeRegisterMode, // ¼Õ»ó µî·Ï ¸ğµå
-        SetPinVector,           // À§Ä¡º¤ÅÍ ÇÒ´ç
+        InitializeRegisterMode, // ì†ìƒ ë“±ë¡ ëª¨ë“œ
+        SetPinVector,           // ìœ„ì¹˜ë²¡í„° í• ë‹¹
 
     }
 
@@ -28,18 +35,63 @@ namespace Definition
     {
         Null,
 
-        ResetIssue,         // ¼Õ»ó/º¸°­ ¸®¼Â
+        ResetIssue,         // ì†ìƒ/ë³´ê°• ë¦¬ì…‹
 
-        SelectObject,       // 3D °´Ã¼ ¼±ÅÃ
-        SelectIssue,        // ¼Õ»ó/º¸°­ ¼±ÅÃ
-        SelectObject6Shape, // 6¸é °´Ã¼ ¼±ÅÃ
-        SelectSurfaceLocation,  // 9¸é ¼±ÅÃ
-        InformationWidthChange, // Á¤º¸Ã¢ Æø º¯°æ ¼ö½Å
+        SelectObject,       // 3D ê°ì²´ ì„ íƒ
+        SelectIssue,        // ì†ìƒ/ë³´ê°• ì„ íƒ
+        SelectObject6Shape, // 6ë©´ ê°ì²´ ì„ íƒ
+        SelectSurfaceLocation,  // 9ë©´ ì„ íƒ
+        InformationWidthChange, // ì •ë³´ì°½ í­ ë³€ê²½ ìˆ˜ì‹ 
 
-        //SetIssueStatus,         // ¼Õ»ó / º¸°­ »óÅÂ º¯°æ
-        ChangePinMode,          // PinMode ¼³Á¤ º¯°æ
-        InitializeRegisterMode, // µî·Ï ¸ğµå ½ÃÀÛ
-        FinishRegisterMode,     // µî·Ï ´Ü°è Á¾·á
+        //SetIssueStatus,         // ì†ìƒ / ë³´ê°• ìƒíƒœ ë³€ê²½
+        ChangePinMode,          // PinMode ì„¤ì • ë³€ê²½
+        InitializeRegisterMode, // ë“±ë¡ ëª¨ë“œ ì‹œì‘
+        FinishRegisterMode,     // ë“±ë¡ ë‹¨ê³„ ì¢…ë£Œ
 
     }
+
+	public enum SceneStatus
+	{
+		EnvironmentVariablesSetting = 0,        // í™˜ê²½ë³€ìˆ˜ ì„¸íŒ…
+		GetGLTF = 1,                            // GLTF íŒŒì¼ ë°›ì•„ì˜¤ê¸°
+		ObjectInitialize = 2,                   // GLTF ë°›ì€ ê°ì²´ ì´ˆê¸°í™”
+		Ready = 3,                              // Viewer Scene ì´ˆê¸°í™” ì™„ë£Œ ìƒíƒœ / ê¸°ë³¸ ìƒíƒœ
+
+		Register = 4,                           // ì†ìƒ/ë³´ê°• ë“±ë¡ ìƒíƒœ
+		Register_PinMode = 5,                   // ì†ìƒ/ë³´ê°• í•€ ë“±ë¡ ìƒíƒœ
+		Default = 6,
+		Modified = 7,
+		Delete = 8,
+	}
+
+	public enum UseCase
+	{
+		NotDefined = -1,
+		Bridge = 0,
+		Tunnel = 1
+	}
+
+	public enum ViewRotations
+	{
+		//ALL,
+		Top,
+		Bottom,
+		Front,
+		Back,
+		Left,
+		Right
+	}
+
+	public enum BoolValue
+	{
+		True,
+		False
+	}
+
+	public enum IssueVisualizeOption
+	{
+		All_ON,
+		All_OFF,
+		SelectedTarget
+	}
 }

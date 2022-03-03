@@ -1,0 +1,85 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using UnityEngine;
+
+namespace Module.WebAPI
+{
+	/// <summary>
+	/// 템플릿
+	/// </summary>
+	public partial class Module_WebAPI : AModule
+	{
+		[DllImport("__Internal")]
+		private static extern void UnityRequest(string argument);
+
+
+		private void CheckReceiveInput()
+		{
+			// O 리셋이슈
+			if (Input.GetKeyDown(KeyCode.Q))
+			{
+				//Debug.Log("Q");
+				ReceiveRequest("ResetIssue");
+			}
+			// O 객체선택
+			else if (Input.GetKeyDown(KeyCode.W))
+			{
+				//Debug.Log("W");
+				ReceiveRequest("SelectObject/1,1,M_Ce,천장");
+			}
+			// X 특정 손상정보 선택
+			else if (Input.GetKeyDown(KeyCode.E))
+			{
+				//Debug.Log("E");
+				// TODO 1101 손상 / 보수 / 보강코드 생성시 테스트 가능
+				Debug.LogError("1101 손상 / 보수 / 보강코드 생성시 테스트 가능");
+				//ReceiveRequest("SelectIssue/00000000_00000001");   // 뒤에건 손상 / 보수 / 보강코드
+			}
+			// O 6면 선택
+			else if (Input.GetKeyDown(KeyCode.R))
+			{
+				//Debug.Log("R");
+				//ReceiveRequest("SelectObject6Shape/Top");
+				//ReceiveRequest("SelectObject6Shape/Bottom");
+				//ReceiveRequest("SelectObject6Shape/Front");
+				//ReceiveRequest("SelectObject6Shape/Back");
+				//ReceiveRequest("SelectObject6Shape/Left");
+				ReceiveRequest("SelectObject6Shape/Right");
+			}
+			// O 화면 폭 조정
+			else if (Input.GetKeyDown(KeyCode.T))
+			{
+				//Debug.Log("T");
+				ReceiveRequest("InformationWidthChange/500");
+			}
+			// ? 손상 / 보강 상태 변경
+			else if (Input.GetKeyDown(KeyCode.Y))
+			{
+				//Debug.Log("Y");
+				ReceiveRequest("SetIssueStatus/00000000-00000000/0");
+			}
+			// X 등록 단계에서 핀 설정 모드로 진입
+			else if (Input.GetKeyDown(KeyCode.I))
+			{
+				//Debug.Log("I");
+				ReceiveRequest("ChangePinMode");
+			}
+			// O 등록 모드 시작
+			else if (Input.GetKeyDown(KeyCode.O))
+			{
+				ReceiveRequest("InitializeRegisterMode");
+			}
+			// X 등록 모드 끝내기
+			else if (Input.GetKeyDown(KeyCode.P))
+			{
+				ReceiveRequest("FinishRegisterMode");
+			}
+		}
+
+		private void Update()
+		{
+			CheckReceiveInput();
+		}
+	}
+}
