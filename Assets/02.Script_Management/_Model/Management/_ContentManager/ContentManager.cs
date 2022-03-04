@@ -63,7 +63,7 @@ namespace Management
 					if (mod != null) m_api = mod;
 					else
 					{
-						throw new System.Exception("WebAPI is null");
+						//throw new System.Exception("WebAPI is null");
 					}
 				}
 				return m_api;

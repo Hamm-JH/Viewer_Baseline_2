@@ -21,7 +21,7 @@ namespace Management
 		/// <param name="_obj"></param>
 		public void OnSelect_3D(GameObject _obj)
 		{
-			_API.SendRequest(SendRequestCode.SelectObject, _obj);
+			//_API.SendRequest(SendRequestCode.SelectObject, _obj);
 		}
 
 		/// <summary>

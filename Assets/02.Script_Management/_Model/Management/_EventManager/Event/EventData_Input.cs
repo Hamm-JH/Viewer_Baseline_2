@@ -299,13 +299,14 @@ namespace Management.Events
 						if(obj.TryGetComponent<Obj_Selectable>(out sObj))
 						{
 							m_clickEvent.Invoke(Elements.Last().Target);
-							ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
+							// TODO
+							//ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
 							ContentManager.Instance.Toggle_ChildTabs(1);
 						}
 						else if(obj.TryGetComponent<Issue_Selectable>(out iObj))
 						{
 							m_clickEvent.Invoke(Elements.Last().Target);
-							ContentManager.Instance.OnSelect_Issue(Elements.Last().Target);
+							//ContentManager.Instance.OnSelect_Issue(Elements.Last().Target);
 							ContentManager.Instance.Toggle_ChildTabs(1);
 						}
 					}

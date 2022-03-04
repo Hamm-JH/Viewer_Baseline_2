@@ -7,6 +7,7 @@ using UnityEngine;
 namespace Module.Model
 {
 	using Definition;
+	using Test;
 
 	/// <summary>
 	/// 템플릿
@@ -283,15 +284,24 @@ namespace Module.Model
 			{
 				MeshRenderer render;
 
+				x.AddComponent<View.Obj_Selectable>();
+				MeshCollider coll = x.AddComponent<MeshCollider>();
+
+				IMDrawCode dc = x.AddComponent<IMDrawCode>();
+				dc.Renderers = new List<Renderer>();
+				dc.Colliders = new List<Collider>();
+
 				if(x.TryGetComponent<MeshRenderer>(out render))
 				{
 					Material mat = Materials.Set(MaterialType.Default);
 					mat.color = Colors.Set(ColorType.Default1, 1);
 					render.material = mat;
+					dc.Renderers.Add(render);
 				}
 
-				x.AddComponent<MeshCollider>();
-				x.AddComponent<View.Obj_Selectable>();
+				dc.Colliders.Add(coll);
+				dc.ShowWireframeColliders = true;
+
 			});
 		}
 
