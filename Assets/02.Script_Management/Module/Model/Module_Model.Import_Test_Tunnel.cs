@@ -287,20 +287,20 @@ namespace Module.Model
 				x.AddComponent<View.Obj_Selectable>();
 				MeshCollider coll = x.AddComponent<MeshCollider>();
 
-				IMDrawCode dc = x.AddComponent<IMDrawCode>();
-				dc.Renderers = new List<Renderer>();
-				dc.Colliders = new List<Collider>();
+				//IMDrawCode dc = x.AddComponent<IMDrawCode>();
+				//dc.Renderers = new List<Renderer>();
+				//dc.Colliders = new List<Collider>();
 
 				if(x.TryGetComponent<MeshRenderer>(out render))
 				{
 					Material mat = Materials.Set(MaterialType.Default);
 					mat.color = Colors.Set(ColorType.Default1, 1);
 					render.material = mat;
-					dc.Renderers.Add(render);
+					//dc.Renderers.Add(render);
 				}
 
-				dc.Colliders.Add(coll);
-				dc.ShowWireframeColliders = true;
+				//dc.Colliders.Add(coll);
+				//dc.ShowWireframeColliders = true;
 
 			});
 		}
