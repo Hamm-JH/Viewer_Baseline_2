@@ -29,8 +29,8 @@ namespace Platform.Feature.Camera
 
             if(target == null)
 			{
-                Debug.LogWarning("cam target is null");
-                return;
+				//Debug.LogWarning("cam target is null");
+				return;
 			}
 
             MeshRenderer render;

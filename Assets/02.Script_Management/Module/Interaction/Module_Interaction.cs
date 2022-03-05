@@ -35,12 +35,6 @@ namespace Module.Interaction
 			InitCanvas();
 		}
 
-		//public override void OnCreate(ModuleID _id, FunctionCode _code)
-		//{
-		//	base.OnCreate(_id, _code);
-		//	InitCanvas();
-		//}
-
 		private void InitCanvas()
 		{
 			if(RootCanvas == null)

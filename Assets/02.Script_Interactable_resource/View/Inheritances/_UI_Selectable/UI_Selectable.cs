@@ -20,12 +20,6 @@ namespace View
 
 		public override List<GameObject> Targets => throw new System.NotImplementedException();
 
-		//public override bool IsInteractable 
-		//{ 
-		//	get => m_isInteractable;
-		//	set => m_isInteractable = value;
-		//}
-
 		Button m_btn;
 		Slider m_slider;
 
@@ -33,6 +27,7 @@ namespace View
 		[SerializeField] UIEventType eventType;
 		[SerializeField] UniqueUIEventType m_unique;
 
+		[Header("Linked UI Elements")]
 		/// <summary>
 		/// 자식 패널 객체
 		/// </summary>
@@ -43,7 +38,16 @@ namespace View
 		/// </summary>
 		[SerializeField] List<GameObject> m_uiFXs;
 
+		/// <summary>
+		/// ui 호버링 연결 토글요소
+		/// </summary>
 		[SerializeField] List<GameObject> m_uiHoverElements;
+
+		/// <summary>
+		/// 표면 버튼에 반응하는 변수
+		/// </summary>
+		[Header("Test Values")]
+		[SerializeField] string t_surfaceCode;
 
 		private void Start()
 		{
@@ -70,7 +74,7 @@ namespace View
 
 		public override void OnSelect()
 		{
-			Debug.Log($"OnSelect : {this.name}");
+			//Debug.Log($"OnSelect : {this.name}");
 
 			ConditionalBranch(eventType);
 		}
@@ -169,10 +173,9 @@ namespace View
 					Event_Toggle_ChildPanel(1);
 					break;
 
-				//case UIEventType.Fit_Center:
-				//	FitCenter();
-				//	Event_Toggle_ChildPanel(1);
-				//	break;
+				case UIEventType.Test_Surface:
+					Event_Legacy_ChangeCameraDirection();
+					break;
 			}
 		}
 

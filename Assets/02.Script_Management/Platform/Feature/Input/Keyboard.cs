@@ -67,7 +67,7 @@ namespace Platform.Feature._Input
 			catch
 			{
 				// TODO :: 다른 창으로 사용자가 입력이 넘어갔을때 pause 코드 추가하기
-				Debug.LogError("다른 창 열어두고 다른 짓 하면 이벤트가 튀는 경우가 있음.");
+				//Debug.LogError("다른 창 열어두고 다른 짓 하면 이벤트가 튀는 경우가 있음.");
 				newKeyCodes = new List<KeyData>();
 			}
 		}
@@ -121,9 +121,12 @@ namespace Platform.Feature._Input
 		/// </summary>
 		private void KeyCheck()
 		{
-			newKeyCodes.Clear();
+			//string str = "";
 
-			if(Input.anyKey)
+			//str += "1";
+			newKeyCodes.Clear();
+			//str += "2";
+			if (Input.anyKey)
 			{
 				KeyData _front = CheckKeyData(defData.keyFront);
 				KeyData _back = CheckKeyData(defData.keyBack);
@@ -143,8 +146,8 @@ namespace Platform.Feature._Input
 				if (_boost != null) newKeyCodes.Add(_boost);
 				if (_ctrl != null) newKeyCodes.Add(_ctrl);
 			}
-
-			if(newKeyCodes.Count != 0)
+			//str += "3";
+			if (newKeyCodes.Count != 0)
 			{
 				// clickDown
 				//if(keyCodes.Count == 0) { }
@@ -157,9 +160,11 @@ namespace Platform.Feature._Input
 			{
 				m_InputEvents.keyEvent.Invoke(InputEventType.Input_key, null);
 			}
+			//str += "4";
 
 			// 업데이트
 			keyCodes = newKeyCodes;
+			//Debug.LogWarning(str);
 		}
 
 		#endregion

@@ -211,6 +211,9 @@ namespace Definition
 
 		Slider_Model_Transparency = 0x100,
 		Slider_Icon_Scale = 0x101,
+
+		Test_Surface = 0x110,
+
 	}
 
 	public enum UniqueUIEventType

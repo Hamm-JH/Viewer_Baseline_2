@@ -22,7 +22,8 @@ namespace Module.WebAPI
 
                 case SendRequestCode.SelectObject:      // 객체 선택
                     {
-                        LimitArgument(SendRequestCode.SelectObject.ToString(), 1, arguments);
+                        // null값은 arguments에 안 넘어올수 있음. 그래서 비활성화
+                        //LimitArgument(SendRequestCode.SelectObject.ToString(), 1, arguments);
 
                         Func_SelectObject(Parser.Parse<GameObject>(arguments[0]));
                     }
@@ -76,13 +77,9 @@ namespace Module.WebAPI
         {
             string objectName = "";
 
-            if (ContentManager.Instance.AppUseCase == UseCase.Bridge
-                            || ContentManager.Instance.AppUseCase == UseCase.Tunnel)
+            if (_obj != null)
             {
-                if (_obj != null)
-                {
-                    objectName = _obj.name;
-                }
+                objectName = _obj.name;
             }
 
             List<string> codes = ContentManager.Instance.RequestAvailableSurface();
@@ -104,14 +101,14 @@ namespace Module.WebAPI
             if (_obj != null)
             {
                 //Debug.Log(31);
-                Debug.Log($"SendRequest SelectObject : objectName {_obj.name}");
+                Debug.Log($"[Send.SelectObject] // Arg :: {_obj.name}");
                 arg = string.Format($"SelectObject/{_obj.name}/{code}");
                 Debug.Log(arg);
             }
             else
             {
                 //Debug.Log(32);
-                Debug.Log($"SendRequest SelectObject null");
+                Debug.Log($"[Send.SelectObject] // Arg :: null");
                 arg = string.Format($"SelectObject");
             }
 
@@ -132,7 +129,7 @@ namespace Module.WebAPI
             string issueYnRecover = _ynRecover;
 
             string arg = string.Format($"SelectIssue/{issueOrderCode}/{issuePartName}/{issueYnRecover}");
-            //Debug.Log(arg);
+            Debug.Log($"[Send.SelectIssue] // Arg :: {arg}");
 
 #if UNITY_EDITOR
 
@@ -160,7 +157,7 @@ namespace Module.WebAPI
             }
 
             // TODO 1019 140
-            Debug.Log($"SendRequest SelectObject6Shape : shapeCode {shapeCode}");
+            Debug.Log($"[Send.SelectObject6Shape] : Arg shapeCode {shapeCode}");
             string arg = string.Format("SelectObject6Shape/{0}/{1}", shapeCode, stringResult);
 #if UNITY_EDITOR
 #else

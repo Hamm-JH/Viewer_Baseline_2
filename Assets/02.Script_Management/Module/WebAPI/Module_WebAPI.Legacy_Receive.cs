@@ -142,6 +142,9 @@ namespace Module.WebAPI
 
             Debug.Log($"WM ReceiveRequest SelectObject6Shape : shapeCode {shapeCode}");
 
+            string surfaceCode = "";
+            int imageCode = -1;
+
             // 시점변환 코드 실행
             switch (shapeCode)
             {
@@ -149,42 +152,42 @@ namespace Module.WebAPI
                 case "TO":
                     ContentManager.Instance.DirectionAngle(0, _angle);
                     ContentManager.Instance.DcMemberSurface = "Top";
-                    ContentManager.Instance.SetInspectionImage(1);
+                    //ContentManager.Instance.SetInspectionImage(1);
                     break;
 
                 case "Bottom":
                 case "BO":
                     ContentManager.Instance.DirectionAngle(1, _angle);
                     ContentManager.Instance.DcMemberSurface = "Bottom";
-                    ContentManager.Instance.SetInspectionImage(2);
+                    //ContentManager.Instance.SetInspectionImage(2);
                     break;
 
                 case "Front":
                 case "FR":
                     ContentManager.Instance.DirectionAngle(2, _angle);
                     ContentManager.Instance.DcMemberSurface = "Front";
-                    ContentManager.Instance.SetInspectionImage(3);
+                    //ContentManager.Instance.SetInspectionImage(3);
                     break;
 
                 case "Back":
                 case "BA":
                     ContentManager.Instance.DirectionAngle(3, _angle);
                     ContentManager.Instance.DcMemberSurface = "Back";
-                    ContentManager.Instance.SetInspectionImage(4);
+                    //ContentManager.Instance.SetInspectionImage(4);
                     break;
 
                 case "Left":
                 case "LE":
                     ContentManager.Instance.DirectionAngle(4, _angle);
                     ContentManager.Instance.DcMemberSurface = "Left";
-                    ContentManager.Instance.SetInspectionImage(5);
+                    //ContentManager.Instance.SetInspectionImage(5);
                     break;
 
                 case "Right":
                 case "RI":
                     ContentManager.Instance.DirectionAngle(5, _angle);
                     ContentManager.Instance.DcMemberSurface = "Right";
-                    ContentManager.Instance.SetInspectionImage(6);
+                    //ContentManager.Instance.SetInspectionImage(6);
                     break;
             }
 
@@ -441,7 +444,7 @@ namespace Module.WebAPI
 
                 Camera.main.orthographic = false;        // 메인 카메라 3D 변경
 
-                ContentManager.Instance.SetInspectionImage(0);     // 우측 6면 표시 슬라이드 이미지
+                //ContentManager.Instance.SetInspectionImage(0);     // 우측 6면 표시 슬라이드 이미지
 
                 ContentManager.Instance.Toggle_Issues(IssueVisualizeOption.All_ON);
 
@@ -468,7 +471,7 @@ namespace Module.WebAPI
                 }
             }
 
-            ContentManager.Instance.SetInspectionImage(0);     // 우측 6면 표시 슬라이드 이미지
+            //ContentManager.Instance.SetInspectionImage(0);     // 우측 6면 표시 슬라이드 이미지
 
             // 2D -> 3D 변환
             Camera.main.orthographic = false;        // 메인 카메라 2D 변경
@@ -614,7 +617,7 @@ namespace Module.WebAPI
             ContentManager.Instance.CacheIssueEntity.Issue.CdBridgeParts = objectTransform.name;
             ContentManager.Instance.CacheIssueEntity.Issue.DcMemberSurface = code; // Left
 
-            ContentManager.Instance.SetInspectionImage(imgIndex);     // 우측 6면 표시 슬라이드 이미지
+            //ContentManager.Instance.SetInspectionImage(imgIndex);     // 우측 6면 표시 슬라이드 이미지
                                                                       //ContentManager.Instance.UIManager.OnClickDamagedRegist();       // 카메라 등록전 상태 호출
 
             objectTransform.gameObject.SetActive(false);

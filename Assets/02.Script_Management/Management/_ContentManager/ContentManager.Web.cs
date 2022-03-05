@@ -21,7 +21,7 @@ namespace Management
 		/// <param name="_obj"></param>
 		public void OnSelect_3D(GameObject _obj)
 		{
-			Debug.Log(_obj.name);
+			//Debug.Log(_obj?.name);
 			_API.SendRequest(SendRequestCode.SelectObject, (object)_obj);
 		}
 
@@ -76,12 +76,6 @@ namespace Management
 		
 		// 카메라 각도 변경
 		internal void DirectionAngle(int v, Vector3 angle)
-		{
-			throw new NotImplementedException();
-		}
-
-		// 큐브 이미지 세팅
-		internal void SetInspectionImage(int v)
 		{
 			throw new NotImplementedException();
 		}
@@ -151,7 +145,8 @@ namespace Management
 		{
 			List<string> result = new List<string> { "Crack,1", "Spalling,3" };
 
-			Debug.LogError("GetTargetissues");
+			// TODO 테스트용 더미 데이터
+			//Debug.LogError("GetTargetissues");
 
 			return result;
 		}
