@@ -64,11 +64,6 @@ namespace Module
 			{
 				mod = _obj.AddComponent<WebAPI.Module_WebAPI>();
 			}
-			else if(_module == ModuleID.Func_Selection)
-			{
-				mod = _obj.AddComponent<Function.Module_FuncSelection>();
-				//_obj.AddComponent<>
-			}
 			else if(_module == ModuleID.Graphic)
 			{
 				mod = _obj.AddComponent<Graphic.Module_Graphic>();
@@ -138,16 +133,16 @@ namespace Module
 						return true;
 				}
 			}
-			else if(_module == ModuleID.Func_Selection)
-			{
-				switch(_function)
-				{
-					case FunctionCode.Select_DefaultMove:
-					case FunctionCode.Select_DrawPoint:
-					case FunctionCode.Select_SelectObject:
-						return true;
-				}
-			}
+			//else if(_module == ModuleID.Func_Selection)
+			//{
+			//	switch(_function)
+			//	{
+			//		case FunctionCode.Select_DefaultMove:
+			//		case FunctionCode.Select_DrawPoint:
+			//		case FunctionCode.Select_SelectObject:
+			//			return true;
+			//	}
+			//}
 
 			return result;
 		}

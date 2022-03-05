@@ -300,7 +300,8 @@ namespace Management.Events
 						{
 							m_clickEvent.Invoke(Elements.Last().Target);
 							// TODO
-							//ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
+							Debug.Log(1);
+							ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
 							ContentManager.Instance.Toggle_ChildTabs(1);
 						}
 						else if(obj.TryGetComponent<Issue_Selectable>(out iObj))
@@ -313,6 +314,7 @@ namespace Management.Events
 					// 빈 공간을 선택한 경우
 					else
 					{
+						Debug.Log(2);
 						m_clickEvent.Invoke(null);
 						ContentManager.Instance.OnSelect_3D(null);
 						ContentManager.Instance.Toggle_ChildTabs(1);

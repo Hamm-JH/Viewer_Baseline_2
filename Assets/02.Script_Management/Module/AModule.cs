@@ -20,7 +20,7 @@ namespace Module
 		/// <param name="_id"></param>
 		/// <param name="_code"></param>
 		
-		public virtual void OnCreate(ModuleID _id, FunctionCode _code)
+		public void OnCreate(ModuleID _id, FunctionCode _code)
 		{
 			id = _id;
 			m_currentFunction = _code;

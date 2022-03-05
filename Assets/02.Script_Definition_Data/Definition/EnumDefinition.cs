@@ -62,11 +62,6 @@ namespace Definition
 		WebAPI = 0x30,
 
 		/// <summary>
-		/// Code :: 기능, 선택
-		/// </summary>
-		Func_Selection = 0x40,
-
-		/// <summary>
 		/// Code :: 그래픽
 		/// </summary>
 		Graphic = 0x50,

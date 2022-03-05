@@ -14,6 +14,11 @@ namespace Module.WebAPI
 	/// </summary>
 	public partial class Module_WebAPI : AModule
 	{
+		private void Start()
+		{
+			OnCreate(ModuleID.WebAPI, FunctionCode.API);
+		}
+
 		public override void OnStart()
 		{
 			//Debug.LogError($"{this.GetType().ToString()} Run");

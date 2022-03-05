@@ -9,7 +9,7 @@ namespace Module.UI
 	[System.Serializable]
 	public abstract class AUI : AModule
 	{
-		public override void OnCreate(ModuleID _id, FunctionCode _code)
+		public new void OnCreate(ModuleID _id, FunctionCode _code)
 		{
 			base.OnCreate(_id, _code);
 		}
