@@ -11,6 +11,7 @@ namespace Management
 	using Module.UI;
 	using Module.WebAPI;
 	using System;
+	using System.Linq;
 	using UnityEngine.UI;
 
 	public partial class ContentManager : IManager<ContentManager>
@@ -125,6 +126,22 @@ namespace Management
 					m_issueObjects = _Model.IssueObjs;
 				}
 				return m_issueObjects;
+			}
+		}
+
+		public GameObject _SelectedObj
+		{
+			get
+			{
+				var _events = EventManager.Instance.EventStates;
+				if(_events.ContainsKey(InputEventType.Input_clickSuccessUp))
+				{
+					return _events[InputEventType.Input_clickSuccessUp].Elements.Last().Target;
+				}
+				else
+				{
+					return null;
+				}
 			}
 		}
 

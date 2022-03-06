@@ -16,37 +16,55 @@ namespace Module.WebAPI
 
 		private void CheckReceiveInput()
 		{
+			#region ResetIssue
 			// O 리셋이슈
 			if (Input.GetKeyDown(KeyCode.Q))
 			{
 				//Debug.Log("Q");
 				ReceiveRequest("ResetIssue");
 			}
+			#endregion
+			#region SelectObject
 			// O 객체선택
 			else if (Input.GetKeyDown(KeyCode.W))
 			{
 				//Debug.Log("W");
 				ReceiveRequest("SelectObject/1,1,M_Ce,천장");
 			}
+			#endregion
+			#region SelectIssue
 			// X 특정 손상정보 선택
 			else if (Input.GetKeyDown(KeyCode.E))
 			{
-				//Debug.Log("E");
-				// TODO 1101 손상 / 보수 / 보강코드 생성시 테스트 가능
-				Debug.LogError("1101 손상 / 보수 / 보강코드 생성시 테스트 가능");
-				//ReceiveRequest("SelectIssue/00000000_00000001");   // 뒤에건 손상 / 보수 / 보강코드
+				ReceiveRequest("SelectIssue/20211206-00000039");
 			}
-			// O 6면 선택
-			else if (Input.GetKeyDown(KeyCode.R))
+			#endregion
+			#region 6Shape
+			else if (Input.GetKeyDown(KeyCode.Keypad1))
 			{
-				//Debug.Log("R");
-				//ReceiveRequest("SelectObject6Shape/Top");
-				//ReceiveRequest("SelectObject6Shape/Bottom");
-				//ReceiveRequest("SelectObject6Shape/Front");
-				//ReceiveRequest("SelectObject6Shape/Back");
-				//ReceiveRequest("SelectObject6Shape/Left");
+				ReceiveRequest("SelectObject6Shape/Top");
+			}
+			else if (Input.GetKeyDown(KeyCode.Keypad2))
+			{
+				ReceiveRequest("SelectObject6Shape/Bottom");
+			}
+			else if (Input.GetKeyDown(KeyCode.Keypad3))
+			{
+				ReceiveRequest("SelectObject6Shape/Front");
+			}
+			else if (Input.GetKeyDown(KeyCode.Keypad4))
+			{
+				ReceiveRequest("SelectObject6Shape/Back");
+			}
+			else if (Input.GetKeyDown(KeyCode.Keypad5))
+			{
+				ReceiveRequest("SelectObject6Shape/Left");
+			}
+			else if (Input.GetKeyDown(KeyCode.Keypad6))
+			{
 				ReceiveRequest("SelectObject6Shape/Right");
 			}
+			#endregion
 			// O 화면 폭 조정
 			else if (Input.GetKeyDown(KeyCode.T))
 			{

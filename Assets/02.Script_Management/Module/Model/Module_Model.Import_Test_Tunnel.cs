@@ -38,7 +38,7 @@ namespace Module.Model
 
 			//yield break;
 			yield return null;
-
+			
 			// 1. 모델의 의미없는 메쉬 삭제
 			// 2. 분할 서브메쉬의 경우 메이커에서 서브메쉬 가지고 있는 모델 가지고 데이터 까보기
 			// 3. 서브메쉬 할당 필요한 모델을 메쉬병합
@@ -282,14 +282,18 @@ namespace Module.Model
 		{
 			_objs.ForEach(x =>
 			{
+				MeshFilter mf;
 				MeshRenderer render;
 
 				x.AddComponent<View.Obj_Selectable>();
 				MeshCollider coll = x.AddComponent<MeshCollider>();
 
-				//IMDrawCode dc = x.AddComponent<IMDrawCode>();
-				//dc.Renderers = new List<Renderer>();
-				//dc.Colliders = new List<Collider>();
+				// meshfilter의 메쉬에 들어있는 이름으로 객체명 변환
+				if(x.TryGetComponent<MeshFilter>(out mf))
+				{
+					//string _mName = 
+					x.name = mf.mesh.name.Replace(" Instance", "");
+				}
 
 				if(x.TryGetComponent<MeshRenderer>(out render))
 				{
@@ -297,6 +301,7 @@ namespace Module.Model
 					mat.color = Colors.Set(ColorType.Default1, 1);
 					render.material = mat;
 					//dc.Renderers.Add(render);
+					
 				}
 
 				//dc.Colliders.Add(coll);

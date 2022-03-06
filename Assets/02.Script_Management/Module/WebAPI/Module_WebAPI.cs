@@ -23,10 +23,10 @@ namespace Module.WebAPI
 		{
 			//Debug.LogError($"{this.GetType().ToString()} Run");
 
-			Initialize();
+			InitializeModelIssue();
 		}
 
-		private void Initialize()
+		public void InitializeModelIssue()
 		{
 			CoreData data = MainManager.Instance.Data;
 

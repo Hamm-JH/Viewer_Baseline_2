@@ -24,6 +24,24 @@ namespace Management
 		}
 
 		/// <summary>
+		/// 특정 객체를 중심으로 카메라 각도 변경
+		/// </summary>
+		/// <param name="_obj"></param>
+		/// <param name="_baseAngle"></param>
+		/// <param name="_eType"></param>
+		public void SetCameraCenter(GameObject _obj, Vector3 _baseAngle, UIEventType _eType)
+		{
+			MeshRenderer render;
+			if(_obj.TryGetComponent<MeshRenderer>(out render))
+			{
+				Bounds _b = render.bounds;
+				Canvas _canvas = _Canvas;
+
+				MainManager.Instance.SetCameraPosition(_b, _canvas, _eType, _baseAngle);
+			}
+		}
+
+		/// <summary>
 		/// UI에 객체 선택시의 정보 업데이트
 		/// </summary>
 		/// <param name="selected"></param>
@@ -118,12 +136,7 @@ namespace Management
 			}
 		}
 
-		public void Reset_IssueObject()
-		{
-			// 기존 Issue Object 리스트 접근, 기존 요소 삭제
-
-			// 다시 리스트 초기화
-		}
+		
 
 		public void Toggle_ModelObject(UIEventType _eventType, ToggleType _toggleType)
 		{

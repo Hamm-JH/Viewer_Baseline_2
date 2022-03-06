@@ -101,6 +101,11 @@ namespace Definition
 		NotDef = -1,
 		
 		/// <summary>
+		/// 뷰어 상태코드 정의
+		/// </summary>
+		Statement,
+
+		/// <summary>
 		/// 입력 관리코드에서 버튼 눌렀을때
 		/// </summary>
 		Input_clickDown,
@@ -134,6 +139,16 @@ namespace Definition
 		/// UI에서 발생함
 		/// </summary>
 		UI_Invoke,
+
+		/// <summary>
+		/// 객체 선택 API 이벤트
+		/// </summary>
+		API_SelectObject,
+
+		/// <summary>
+		/// 점검정보 선택 API 이벤트
+		/// </summary>
+		API_SelectIssue,
 
 	}
 
@@ -184,6 +199,8 @@ namespace Definition
 	/// </summary>
 	public enum UIEventType
 	{
+		Null = -1,
+
 		/// <summary>
 		/// UI 토글
 		/// </summary>
@@ -193,8 +210,12 @@ namespace Definition
 		Viewport_ViewMode = 0x20,
 		Viewport_ViewMode_ISO = 0x21,
 		Viewport_ViewMode_TOP = 0x22,
-		Viewport_ViewMode_SIDE = 0x23,
-		Viewport_ViewMode_BOTTOM = 0x24,
+		Viewport_ViewMode_BOTTOM = 0x23,
+		Viewport_ViewMode_SIDE = 0x24,
+		Viewport_ViewMode_SIDE_FRONT = 0x25,
+		Viewport_ViewMode_SIDE_BACK =  0x26,
+		Viewport_ViewMode_SIDE_LEFT = 0x27,
+		Viewport_ViewMode_SIDE_RIGHT = 0x28,
 		
 		/// <summary>
 		/// 보기 :: 홈 

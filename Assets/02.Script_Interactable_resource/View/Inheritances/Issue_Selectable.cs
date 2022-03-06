@@ -41,6 +41,7 @@ namespace View
 		public override void OnDeselect()
 		{
 			Debug.Log("Issue OnDeselect");
+
 		}
 
 		public override void OnDeselect<T>(T t)

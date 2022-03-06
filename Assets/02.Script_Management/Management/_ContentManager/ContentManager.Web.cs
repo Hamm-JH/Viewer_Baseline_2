@@ -8,6 +8,7 @@ namespace Management
 {
 	using Definition;
 	using Definition._Issue;
+	using Management.Events;
 	using System;
 	using View;
 
@@ -42,13 +43,25 @@ namespace Management
 		}
 
 		public UseCase AppUseCase { get; internal set; }
-		public SceneStatus ViewSceneStatus { get; internal set; }
+		//public SceneStatus ViewSceneStatus { get; internal set; }
 		public Transform SelectedObject { get; internal set; }
 		public Issue_Selectable CacheIssueEntity { get; internal set; }
 		public string DcMemberSurface { get; internal set; }
 
 		public Material PinModeSkyboxMaterial { get; internal set; }
 		public Material DefaultSkyboxMaterial { get; internal set; }
+
+		/// <summary>
+		/// 이슈 초기화
+		/// </summary>
+		public void Reset_IssueObject()
+		{
+			// 기존 Issue Object 리스트 접근, 기존 요소 삭제
+			_Model.DeleteIssues();
+
+			// 다시 리스트 초기화
+			_API.InitializeModelIssue();
+		}
 
 		// 캠 위치 초기화
 		internal void InitCamPosition()
@@ -62,19 +75,52 @@ namespace Management
 			throw new NotImplementedException();
 		}
 
-		// 3D 객체 선택
-		internal void Select3DObject(Transform transform)
+		/// <summary>
+		/// 웹에서 3D 객체 선택
+		/// </summary>
+		/// <param name="transform"></param>
+		internal void Select3DObject(GameObject _obj)
 		{
-			throw new NotImplementedException();
+			EventManager.Instance.OnEvent(new EventData_API(
+				InputEventType.API_SelectObject,
+				_obj,
+				MainManager.Instance.cameraExecuteEvents.selectEvent
+				));
 		}
 
-		// Issue 객체 선택
-		internal void SelectIssue(Transform transform, bool v)
+		/// <summary>
+		/// 웹에서 점검정보 선택
+		/// </summary>
+		/// <param name="transform"></param>
+		/// <param name="v"></param>
+		internal void SelectIssue(GameObject _obj, bool _v)
 		{
-			throw new NotImplementedException();
+			EventManager.Instance.OnEvent(new EventData_API(
+				InputEventType.API_SelectIssue,
+				_obj,
+				MainManager.Instance.cameraExecuteEvents.selectEvent
+				));
 		}
 		
 		// 카메라 각도 변경
+
+		// int 코드 필요
+		// string 코드 필요
+		// vector3 베이스 각도 필요
+
+		internal void SetCameraAngle(GameObject _obj, ViewRotations _vCode, Vector3 _baseAngle)
+		{
+			UIEventType uType = Parsers.OnParse(_vCode);
+			// 카메라에 각도변경 지시
+			SetCameraCenter(_obj, _baseAngle, uType);
+
+			// ?
+			//ContentManager.Instance.DcMemberSurface = "Top";
+
+			// ?
+			//ContentManager.Instance.SetInspectionImage(1);
+		}
+
 		internal void DirectionAngle(int v, Vector3 angle)
 		{
 			throw new NotImplementedException();
@@ -83,7 +129,7 @@ namespace Management
 		// 우측 UI창 크기변경
 		internal void GetRightWebUIWidth(float width)
 		{
-			throw new NotImplementedException();
+			Debug.Log($"정보창 UI폭 변경 :: 값 : {width}");
 		}
 
 		// 작업정보 세팅

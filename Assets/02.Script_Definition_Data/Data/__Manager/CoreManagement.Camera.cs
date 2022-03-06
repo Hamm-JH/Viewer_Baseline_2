@@ -47,7 +47,8 @@ namespace Definition.Data
 			CameraMode = _modes;
 		}
 
-		public void SetCameraPosition(Bounds centerBounds, Canvas rootCanvas, UIEventType eventType)
+		public void SetCameraPosition(Bounds centerBounds, Canvas rootCanvas, UIEventType eventType, 
+			Vector3 _baseAngle = default(Vector3))
 		{
 			Vector3 center = centerBounds.center;
 			Vector3 size = centerBounds.size;
@@ -57,7 +58,7 @@ namespace Definition.Data
 				m_cameraPoint.transform.position = center;
 
 				mainCam.transform.localPosition = default(Vector3);
-				mainCam.transform.rotation = Quaternion.Euler(Angle.Set(eventType));
+				mainCam.transform.rotation = Quaternion.Euler(_baseAngle + Angle.Set(eventType));
 
 				// 스크린 비율계산
 				float ratio = 0f;

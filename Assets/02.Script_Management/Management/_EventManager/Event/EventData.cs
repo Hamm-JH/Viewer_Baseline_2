@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Management.Events
 {
 	using Definition;
+	using System.Linq;
 	using UnityEngine.EventSystems;
 	using View;
 
@@ -14,7 +15,7 @@ namespace Management.Events
 	[System.Serializable]
 	public abstract class EventData
 	{
-		protected IInteractable m_element;
+		//protected IInteractable m_element;
 		protected List<IInteractable> m_elements;
 		protected InputEventType m_eventType;
 		private Status status;
@@ -22,7 +23,7 @@ namespace Management.Events
 		/// <summary>
 		/// 상호작용 가능한 요소
 		/// </summary>
-		public IInteractable Element { get => m_element; set => m_element=value; }
+		//public IInteractable Element { get => m_element; set => m_element=value; }
 		public List<IInteractable> Elements { get => m_elements; set => m_elements=value; }
 
 		public List<GameObject> objects;
@@ -78,7 +79,7 @@ namespace Management.Events
 		
 		public static bool IsEqual(EventData A, EventData B)
 		{
-			if(A.Element.Target == B.Element.Target)
+			if(A.Elements.Last().Target == B.Elements.Last().Target)
 			{
 				return true;
 			}

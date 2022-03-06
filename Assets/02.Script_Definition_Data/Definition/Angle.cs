@@ -20,12 +20,28 @@ namespace Definition
 					result = new Vector3(90, 0, 0);
 					break;
 
+				case UIEventType.Viewport_ViewMode_BOTTOM:
+					result = new Vector3(-90, 0, 0);
+					break;
+
 				case UIEventType.Viewport_ViewMode_SIDE:
 					result = new Vector3(0, 0, 0);
 					break;
 
-				case UIEventType.Viewport_ViewMode_BOTTOM:
-					result = new Vector3(-90, 0, 0);
+				case UIEventType.Viewport_ViewMode_SIDE_FRONT:
+					result = new Vector3(0, 0, 0);
+					break;
+
+				case UIEventType.Viewport_ViewMode_SIDE_BACK:
+					result = new Vector3(0, 180, 0);
+					break;
+
+				case UIEventType.Viewport_ViewMode_SIDE_LEFT:
+					result = new Vector3(0, 90, 0);
+					break;
+
+				case UIEventType.Viewport_ViewMode_SIDE_RIGHT:
+					result = new Vector3(0, -90, 0);
 					break;
 			}
 

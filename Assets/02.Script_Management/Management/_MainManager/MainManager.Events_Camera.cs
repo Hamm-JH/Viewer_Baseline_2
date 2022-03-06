@@ -20,9 +20,16 @@ namespace Management
 			_core.SetCameraMode(_eventType);
 		}
 
-		public void SetCameraPosition(Bounds centerBounds, Canvas rootCanvas, UIEventType eventType = UIEventType.Viewport_ViewMode_ISO)
+		public void SetCameraPosition(Bounds centerBounds, Canvas rootCanvas, 
+			UIEventType eventType = UIEventType.Viewport_ViewMode_ISO)
 		{
 			_core.SetCameraPosition(centerBounds, rootCanvas, eventType);
+		}
+
+		public void SetCameraPosition(Bounds _center, Canvas _canvas, UIEventType _eType = UIEventType.Viewport_ViewMode_ISO,
+			Vector3 _baseAngle = default(Vector3))
+		{
+			_core.SetCameraPosition(_center, _canvas, _eType, _baseAngle);
 		}
 	}
 }

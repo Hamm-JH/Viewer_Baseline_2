@@ -48,6 +48,22 @@ namespace Module.Model
 			}
 		}
 
+		#region Delete Issue
+
+		public void DeleteIssues()
+		{
+			DmgData.Clear();
+			RcvData.Clear();
+			DmgObjs.Clear();
+			RcvObjs.Clear();
+			IssueObjs.ForEach(x => Destroy(x));
+			IssueObjs.Clear();
+		}
+
+		#endregion
+
+		#region Get Issue
+
 		public void GetIssue(WebType _webT, List<Issue> _issues)
 		{
 			List<GameObject> _iObjs = new List<GameObject>();
@@ -126,5 +142,8 @@ namespace Module.Model
 		{
 			_iObjs.ForEach(x => _target.Add(x));
 		}
+
+		#endregion
+
 	}
 }

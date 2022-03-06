@@ -11,6 +11,9 @@ namespace Definition
 		recover
 	}
 
+	/// <summary>
+	/// API 호출분기
+	/// </summary>
 	public enum WebType
 	{
 		Issue_Dmg = 0x11,
@@ -18,6 +21,9 @@ namespace Definition
 
 	}
 
+	/// <summary>
+	/// API :: Send 이벤트 코드
+	/// </summary>
     public enum SendRequestCode
     {
         Null,
@@ -31,6 +37,9 @@ namespace Definition
 
     }
 
+	/// <summary>
+	/// API :: Receive 이벤트 코드
+	/// </summary>
     public enum ReceiveRequestCode
     {
         Null,
@@ -64,6 +73,23 @@ namespace Definition
 		Delete = 8,
 	}
 
+	public enum ModuleCode
+	{
+		// 기본 상태는 베이스로 깔림
+		//Default = 
+		
+		/// <summary>
+		/// 점검정보 모듈 (진입시 사용)
+		/// </summary>
+		WorkQueue = 0x10,
+
+		/// <summary>
+		/// 점검정보 - 등록단계
+		/// </summary>
+		Work_Pinmode = 0x11,
+
+	}
+
 	public enum UseCase
 	{
 		NotDefined = -1,
@@ -73,13 +99,13 @@ namespace Definition
 
 	public enum ViewRotations
 	{
-		//ALL,
-		Top,
-		Bottom,
-		Front,
-		Back,
-		Left,
-		Right
+		Null = -1,
+		Top = 0,
+		Bottom = 1,
+		Front = 2,
+		Back = 3,
+		Left = 4,
+		Right = 5,
 	}
 
 	public enum BoolValue

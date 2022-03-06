@@ -23,6 +23,11 @@ namespace Management.Events
 		public Vector3 m_clickPosition;
 		UnityEvent<GameObject> m_clickEvent;
 
+		// API 단에서 선택되었는지를 확인하는 변수
+		bool m_isPassAPI;
+		// API 단에서 선택된 객체
+		GameObject m_inAPISelected;
+		
 
 		[Header("OnDrag")]
 		//public int m_btn;
@@ -56,6 +61,26 @@ namespace Management.Events
 			m_graphicRaycaster = _graphicRaycaster;
 			m_clickPosition = _mousePos;
 			m_clickEvent = _event;
+
+			m_isPassAPI = false;
+		}
+
+		/// <summary>
+		/// API에서 넘겨받은 객체정보로 선택 이벤트를 처리한다.
+		/// </summary>
+		/// <param name="_eventType"></param>
+		/// <param name="_obj"></param>
+		/// <param name="_event"></param>
+		public EventData_Input(InputEventType _eventType,
+			GameObject _obj, UnityEvent<GameObject> _event)
+		{
+			StatusCode = Status.Ready;
+
+			EventType = _eventType;
+			m_inAPISelected = _obj;
+			m_clickEvent = _event;
+
+			m_isPassAPI = true;
 		}
 
 		/// <summary>
@@ -139,6 +164,7 @@ namespace Management.Events
 						Status _fail = Status.Update;
 
 						//Debug.Log(EventType.ToString());
+						Elements = new List<IInteractable>();
 						m_selected3D = null;
 						m_hit = default(RaycastHit);
 						m_results = new List<RaycastResult>();
@@ -150,12 +176,14 @@ namespace Management.Events
 							IInteractable interactable;
 							if (Selected3D.TryGetComponent<IInteractable>(out interactable))
 							{
-								Element = interactable;
+								Elements.Add(interactable);
+								//Element = interactable;
 								StatusCode = _success;
 								return;
 							}
 						}
-						Element = null;
+
+						Elements = null;
 						StatusCode = _fail;
 					}
 					// 데칼 배치 단계에선 code :: skip
@@ -166,72 +194,44 @@ namespace Management.Events
 					// 객체 선택 단계에선 code :: pass, drop
 					{
 						Status _success = Status.Pass;
-						Status _fail = Status.Drop;
+						//Status _fail = Status.Drop;
 
-						//Debug.Log(EventType.ToString());
-						m_selected3D = null;
-						m_hit = default(RaycastHit);
-						m_results = new List<RaycastResult>();
-
-						Get_Collect3DObject(m_clickPosition, out m_selected3D, out m_hit, out m_results);
-
-						if(Selected3D != null)
+						if(m_isPassAPI)
 						{
-							Obj_Selectable sObj;
-							Issue_Selectable iObj;
+							m_selected3D = m_inAPISelected;
 
-							if (Selected3D.TryGetComponent<Obj_Selectable>(out sObj))
+							if(Selected3D != null)
 							{
-								Elements = new List<IInteractable>();
-								Elements.Add(sObj);
-
-								Element = sObj;
-
-								m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-								m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-								StatusCode = _success;
-								return;
+								Func_Input_clickSuccessUp(_success);
 							}
-							else if (Selected3D.TryGetComponent<Issue_Selectable>(out iObj))
-							{
-								Elements = new List<IInteractable>();
-								Elements.Add(iObj);
-
-								Element = iObj;
-
-								m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-								StatusCode = _success;
-								return;
-							}
-
-							//IInteractable interactable;
-							//if(Selected3D.TryGetComponent<IInteractable>(out interactable))
-							//{
-							//	Elements = new List<IInteractable>();
-							//	Elements.Add(interactable);
-
-							//	Element = interactable;
-
-							//	m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-							//	m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-							//	StatusCode = _success;
-							//	return;
-							//}
 						}
-						// 빈 공간을 누른 경우
-						else if(m_results.Count == 0)
-						{
-							Element = null;
-							Elements = null;
-							StatusCode = Status.Pass;
-							//StatusCode = _fail;
-						}
-						// UI 객체를 누른 경우 m_results.Count != 0
 						else
 						{
-							Element = null;
-							Elements = null;
-							StatusCode = Status.Skip;
+							m_selected3D = null;
+							m_hit = default(RaycastHit);
+							m_results = new List<RaycastResult>();
+
+							Get_Collect3DObject(m_clickPosition, out m_selected3D, out m_hit, out m_results);
+
+							if(Selected3D != null)
+							{
+								Func_Input_clickSuccessUp(_success);
+							}
+							// 빈 공간을 누른 경우
+							else if(m_results.Count == 0)
+							{
+								//Element = null;
+								Elements = null;
+								StatusCode = Status.Pass;
+								//StatusCode = _fail;
+							}
+							// UI 객체를 누른 경우 m_results.Count != 0
+							else
+							{
+								//Element = null;
+								Elements = null;
+								StatusCode = Status.Skip;
+							}
 						}
 					}
 					// 데칼 배치 단계에선 code :: pass, drop
@@ -273,6 +273,36 @@ namespace Management.Events
 						StatusCode = Status.Update;
 					}
 					break;
+			}
+		}
+
+		private void Func_Input_clickSuccessUp(Status _success)
+		{
+			Obj_Selectable sObj;
+			Issue_Selectable iObj;
+
+			if (Selected3D.TryGetComponent<Obj_Selectable>(out sObj))
+			{
+				Elements = new List<IInteractable>();
+				Elements.Add(sObj);
+
+				//Element = sObj;
+
+				m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+				m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+				StatusCode = _success;
+				return;
+			}
+			else if (Selected3D.TryGetComponent<Issue_Selectable>(out iObj))
+			{
+				Elements = new List<IInteractable>();
+				Elements.Add(iObj);
+
+				//Element = iObj;
+
+				m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+				StatusCode = _success;
+				return;
 			}
 		}
 
