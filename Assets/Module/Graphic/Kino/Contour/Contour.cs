@@ -99,7 +99,7 @@ namespace Kino
 
         #region Private Properties
 
-        [SerializeField, HideInInspector] Shader _shader;
+        [SerializeField] Shader _shader;
         Material _material;
 
         #endregion
@@ -130,6 +130,7 @@ namespace Kino
 
         void OnRenderImage(RenderTexture source, RenderTexture destination)
         {
+            Debug.Log("************");
             if (_material == null)
             {
                 _material = new Material(_shader);

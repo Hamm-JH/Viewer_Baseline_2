@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UniversalRenderPipelineAsset_Renderer
   m_EditorClassIdentifier: 
   m_RendererFeatures:
-  - {fileID: 11400000, guid: 51c3dd85bb94d404d8897d09e5a67969, type: 2}
+  - {fileID: 11400000, guid: 7679666f5f64d1d469e8b07e7a3ad8d0, type: 2}
   m_RendererFeatureMap: 40f3ad0000000000
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
