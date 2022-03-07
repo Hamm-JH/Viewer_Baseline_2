@@ -10,6 +10,7 @@ namespace Management
 	using Definition._Issue;
 	using Management.Events;
 	using System;
+	using Utilities;
 	using View;
 
 	public partial class ContentManager : IManager<ContentManager>

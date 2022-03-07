@@ -51,7 +51,7 @@ namespace Module.WebAPI
 
                 // T
                 case ReceiveRequestCode.InformationWidthChange: // 정보창 폭 변경 수신
-                    Func_InformationWidthChange(Parser.Parse<float>(arguments[1]));
+                    Func_InformationWidthChange(Parsers.Parse<float>(arguments[1]));
                     break;
 
                 #endregion
@@ -69,7 +69,7 @@ namespace Module.WebAPI
                     break;
 
                 case ReceiveRequestCode.FinishRegisterMode: // 등록 단계 종료
-                    Func_FinishRegisterMode(Parser.Parse<bool>(arguments[1]));
+                    Func_FinishRegisterMode(Parsers.Parse<bool>(arguments[1]));
                     break;
 
                     #endregion

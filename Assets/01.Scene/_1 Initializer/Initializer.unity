@@ -152,10 +152,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_Children:
-  - {fileID: 682087684}
+  m_Children: []
   m_Father: {fileID: 902421343}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &32494253
 SphereCollider:
@@ -189,7 +188,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c1945f2c88a80d44d951c26d064df45f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -393,10 +392,10 @@ Transform:
   m_GameObject: {fileID: 682087681}
   m_LocalRotation: {x: -0.12856942, y: 0.87139857, z: -0.33879536, w: -0.3306845}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 32494252}
-  m_RootOrder: 0
+  m_Father: {fileID: 902421343}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &682087685
 MonoBehaviour:
@@ -576,6 +575,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5598f998bb783c94b976099d4cbf84d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_eStatus:
+    objects: []
+    m_moduleList: 
   cacheDownObj: {fileID: 0}
 --- !u!1 &902421342
 GameObject:
@@ -607,6 +609,7 @@ Transform:
   m_Children:
   - {fileID: 1914530469}
   - {fileID: 843560262}
+  - {fileID: 682087684}
   - {fileID: 32494252}
   m_Father: {fileID: 0}
   m_RootOrder: 0

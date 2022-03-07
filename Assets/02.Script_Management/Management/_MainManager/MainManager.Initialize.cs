@@ -106,18 +106,20 @@ namespace Management
 		public void InitCameraResource(CameraModes _mode, Events.CameraEvents _cameraExecuteEvents)
 		{
 			Camera main = _core.MainCam;
-			SetCamera<FreeCamera>(main, _cameraExecuteEvents);
-			SetCamera<OrbitCamera>(main, _cameraExecuteEvents);
-			SetCamera<BIMCamera>(main, _cameraExecuteEvents);
+			//SetCamera<FreeCamera>(main, _cameraExecuteEvents);
+			//SetCamera<OrbitCamera>(main, _cameraExecuteEvents);
+			SetCamera<BIMCamera>(_core, _cameraExecuteEvents);
 
 			// 코어의 카메라모드 변경으로 모든 카메라의 모드 일괄변경
 			_core.CameraMode = _mode;
 		}
 
-		private void SetCamera<T>(Camera _main, Events.CameraEvents _camEvents) where T : ICamera
+		private void SetCamera<T>(CoreManagement _core, Events.CameraEvents _camEvents) where T : ICamera
 		{
 			T component = null;
-			// 카메라에 해당 카레마가 등록되지 않았다면
+			Camera _main = _core.MainCam;
+			
+			// 카메라에 해당 카메라가 등록되지 않았다면
 			if (!_main.gameObject.TryGetComponent<T>(out component))
 			{
 				component = _main.gameObject.AddComponent<T>();
@@ -128,6 +130,7 @@ namespace Management
 
 			// 카메라에서 연결 대상 메서드 등록
 			component.SetAction(_camEvents);
+			component.Default = _core.CameraPoint;
 		}
 
 		#endregion

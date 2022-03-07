@@ -25,7 +25,7 @@ namespace Module.WebAPI
                         // null값은 arguments에 안 넘어올수 있음. 그래서 비활성화
                         //LimitArgument(SendRequestCode.SelectObject.ToString(), 1, arguments);
 
-                        Func_SelectObject(Parser.Parse<GameObject>(arguments[0]));
+                        Func_SelectObject(Parsers.Parse<GameObject>(arguments[0]));
                     }
                     break;
 
@@ -34,9 +34,9 @@ namespace Module.WebAPI
                         LimitArgument(SendRequestCode.SelectIssue.ToString(), 3, arguments);
 
                         Func_SelectIssue(
-                            Parser.Parse<string>(arguments[0]),
-                            Parser.Parse<string>(arguments[1]),
-                            Parser.Parse<string>(arguments[2]));
+                            Parsers.Parse<string>(arguments[0]),
+                            Parsers.Parse<string>(arguments[1]),
+                            Parsers.Parse<string>(arguments[2]));
                     }
                     break;
 
@@ -44,7 +44,7 @@ namespace Module.WebAPI
                     {
                         LimitArgument(SendRequestCode.SelectObject6Shape.ToString(), 1, arguments);
 
-                        Func_SelectObject6Shape(Parser.Parse<string>(arguments[0]));
+                        Func_SelectObject6Shape(Parsers.Parse<string>(arguments[0]));
                     }
                     break;
 
@@ -54,7 +54,7 @@ namespace Module.WebAPI
                     {
                         LimitArgument(SendRequestCode.SelectSurfaceLocation.ToString(), 1, arguments);
 
-                        Func_SelectSurfaceLocation(Parser.Parse<string>(arguments[0]));
+                        Func_SelectSurfaceLocation(Parsers.Parse<string>(arguments[0]));
                     }
                     break;
 

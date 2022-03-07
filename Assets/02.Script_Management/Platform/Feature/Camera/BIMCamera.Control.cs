@@ -1,4 +1,5 @@
 using Definition.Control;
+using Management;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,22 @@ namespace Platform.Feature.Camera
         public float zoomSpeed = 10f;
         [SerializeField] private Vector3 targetOffset = Vector3.zero;
         [SerializeField] private Vector3 targetPosition;
+        [SerializeField] private float m_distance;
+
+        [SerializeField] public float _Distance
+		{
+            get
+			{
+                if(target)
+				{
+                    return Vector3.Distance(transform.position, target.position);
+				}
+                else
+				{
+                    return Vector3.Distance(transform.position, ContentManager.Instance._CenterBounds.center);
+				}
+			}
+		}
 
         // Use this for initialization
         void Start()
@@ -24,44 +41,72 @@ namespace Platform.Feature.Camera
 
         private void InDrag(int btn, Vector2 delta)
 		{
-            float axisX = delta.x;
-            float axisY = delta.y;
-
+            Transform _target;
             if(target == null)
 			{
-				//Debug.LogWarning("cam target is null");
-				return;
-			}
+                Default.transform.position = ContentManager.Instance._CenterBounds.center;
 
-            MeshRenderer render;
-            if(target.TryGetComponent<MeshRenderer>(out render))
-			{
-                targetPosition = render.bounds.center;
+                _target = Default.transform;
+
+                if(ContentManager.Instance != null)
+				{
+                    targetPosition = ContentManager.Instance._CenterBounds.center;
+				}
+                //Debug.LogWarning("cam target is null");
+                //_target = Default.transform;
+                //_target.position = transform.TransformDirection(Vector3.forward * 10f);
 			}
             else
 			{
-                targetPosition = target.position;
+                _target = target;
+
+                MeshRenderer render;
+                if(_target.TryGetComponent<MeshRenderer>(out render))
+			    {
+                    targetPosition = render.bounds.center;
+			    }
+                else
+			    {
+                    targetPosition = _target.position;
+			    }
 			}
+
+
             //targetPosition = target.position + targetOffset;
+
+            // 일반 BIM mode
+            // 0 : 회전, 1 : 패닝
 
             if(btn == 0)
 			{
-                transform.RotateAround(target.position, Vector3.up, axisX * orbitSpeed);
-
-                float pitchAngle = Vector3.Angle(Vector3.up, transform.forward);
-                float pitchDelta = axisY * orbitSpeed;
-                float newAngle = Mathf.Clamp(pitchAngle + pitchDelta, 0f, 180f);
-                pitchDelta = newAngle - pitchAngle;
-                transform.RotateAround(target.position, transform.right, pitchDelta);
+                OnRotate(targetPosition, delta, orbitSpeed);
             }
             else if(btn == 1)
 			{
-                Vector3 offset = transform.right * -axisX * panSpeed + transform.up * axisY * panSpeed;
-                Vector3 newTargetOffset = Vector3.ClampMagnitude(targetOffset + offset, maxOffsetDistance);
-                transform.position += newTargetOffset - targetOffset;
-                targetOffset = newTargetOffset;
+                OnPanning(targetPosition, delta, panSpeed, targetOffset, maxOffsetDistance);
             }
 		}
+
+        private void OnRotate(Vector3 _tPos, Vector2 _delta, float _orbitSpeed)
+		{
+            transform.RotateAround(_tPos, Vector3.up, _delta.x * _orbitSpeed);
+
+            float pitchAngle = Vector3.Angle(Vector3.up, transform.forward);
+            float pitchDelta = _delta.y * orbitSpeed;
+            float newAngle = Mathf.Clamp(pitchAngle + pitchDelta, 0f, 180f);
+            pitchDelta = newAngle - pitchAngle;
+            transform.RotateAround(_tPos, transform.right, pitchDelta);
+        }
+
+        private void OnPanning(Vector3 _tPos, Vector2 _delta, float _panSpeed, Vector3 _targetOffset, float _maxOffsetDistance)
+		{
+            float distance = _Distance / 10;
+
+            Vector3 offset = transform.right * -_delta.x * _panSpeed * distance + transform.up * _delta.y * _panSpeed * distance;
+            Vector3 newTargetOffset = Vector3.ClampMagnitude(_targetOffset + offset, _maxOffsetDistance);
+            transform.position += newTargetOffset - _targetOffset;
+            _targetOffset = newTargetOffset;
+        }
 
         private void InFocus(Vector3 mousePos, float delta)
 		{

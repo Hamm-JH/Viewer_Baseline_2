@@ -55,7 +55,7 @@ namespace Definition.Data
 
 			// 카메라 위치 정중앙에 두는 경우
 			{
-				m_cameraPoint.transform.position = center;
+				CameraPoint.transform.position = center;
 
 				mainCam.transform.localPosition = default(Vector3);
 				mainCam.transform.rotation = Quaternion.Euler(_baseAngle + Angle.Set(eventType));

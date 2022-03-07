@@ -25,6 +25,7 @@ namespace Platform.Feature.Camera
 		}
 
 		//public Data m_data;
+		[SerializeField] GameObject m_default;
 		[SerializeField] CameraModes camMode;
 		[SerializeField] CameraEvents cameraEvents;
 
@@ -38,6 +39,7 @@ namespace Platform.Feature.Camera
 			}
 		}
 		public CameraEvents CameraEvents { get => cameraEvents; set => cameraEvents=value; }
+		public GameObject Default { get => m_default; set => m_default=value; }
 
 		public void SetAction(CameraEvents _events)
 		{

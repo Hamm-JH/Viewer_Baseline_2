@@ -24,6 +24,7 @@ namespace Definition.Data
 		[SerializeField] GameObject m_rootInput;
 
 		[SerializeField] GameObject m_cameraPoint;
+		public GameObject CameraPoint { get => m_cameraPoint; }
 
 		#endregion
 		
@@ -60,6 +61,7 @@ namespace Definition.Data
 				Cameras.ForEach(x => x.CamMode = value);
 			}
 		}
+
 
 		#endregion
 

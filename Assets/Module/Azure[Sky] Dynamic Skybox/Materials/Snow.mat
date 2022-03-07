@@ -295,7 +295,7 @@ Material:
     - _SpecColor: {r: 0.5882403, g: 0.5882403, b: 0.5882403, a: 0.7}
     - _SpecColor2: {r: 1, g: 1, b: 1, a: 1}
     - _Tan2ObjectMultOffset: {r: 0, g: 0, b: 1, a: 1}
-    - _TintColor: {r: 0.65073276, g: 0.6819582, b: 0.7560277, a: 1}
+    - _TintColor: {r: 0.6512082, g: 0.68239117, b: 0.7563598, a: 1}
     - _TranslucencyColor: {r: 1, g: 1, b: 1, a: 1}
     - _TranslucencyColor2: {r: 1, g: 1, b: 1, a: 1}
     - _UV_Clip_Borders: {r: 0, g: 0, b: 1, a: 1}
