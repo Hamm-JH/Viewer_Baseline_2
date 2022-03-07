@@ -7,6 +7,7 @@ namespace Module.WebAPI
     using Definition;
     using Management;
 	using System;
+	using System.Linq;
 	using Utilities;
 	using View;
 
@@ -76,22 +77,29 @@ namespace Module.WebAPI
             }
         }
 
-        #region Functions
+		#region Functions
 
-        private void Find_3DObject(string _name, out GameObject _obj)
+		#region 3DObject
+		private void Find_3DObject(string _name, out GameObject _obj)
         {
             _obj = ContentManager.Instance._ModelObjects.Find(
                 x => x == GameObject.Find(_name));
         }
+		#endregion
 
-        private void Find_IssueObject(string _code, out GameObject _obj)
+		#region IssueObject
+
+		private void Find_IssueObject(string _code, out GameObject _obj)
         {
             _obj = ContentManager.Instance._IssueObjects.Find(
                 x => x == GameObject.Find(_code));
         }
 
+		#endregion
 
-        private void Func_ResetIssue()
+		#region ResetIssue
+
+		private void Func_ResetIssue()
         {
             //ContentManager.Instance.InitCamPosition();
 
@@ -99,7 +107,11 @@ namespace Module.WebAPI
             ContentManager.Instance.Reset_IssueObject();
         }
 
-        private void Func_SelectObject(string _name)
+		#endregion
+
+		#region SelectObject
+
+		private void Func_SelectObject(string _name)
         {
             GameObject obj3D;
             Find_3DObject(_name, out obj3D);
@@ -112,7 +124,7 @@ namespace Module.WebAPI
             {
                 // 객체 선택 이벤트를 전달
                 ContentManager.Instance.Select3DObject(obj3D);
-                Debug.Log($"WM ReceiveRequest SelectObject : objectName {obj3D.name}");
+                Debug.Log($"[Receive.SelectObject] : objectName {obj3D.name}");
             }
             // 선택 객체 :: Issue 객체인 경우
             else if (objIssue)
@@ -123,7 +135,11 @@ namespace Module.WebAPI
 
         }
 
-        private void Func_SelectIssue(string _name)
+		#endregion
+
+		#region SelectIssue
+
+		private void Func_SelectIssue(string _name)
         {
             GameObject issue;
             Find_IssueObject(_name, out issue);
@@ -146,75 +162,42 @@ namespace Module.WebAPI
                 return;
 			}
 
-            ViewRotations vCode = ViewRotations.Null;
-            Vector3 _angle = selectedObj.transform.parent.parent.rotation.eulerAngles;
+            Cameras.SetCamera(_code);
 
-            Debug.Log($"[Receive.SelectObject6Shape : Arg {_code}, angle : {_angle}");
+            Send6ShapeRequest(_code);
+        }
+
+        private void Send6ShapeRequest(string _code)
+		{
+            ViewRotations vCode = ViewRotations.Null;
 
             // 시점변환 코드 수집
-            vCode = GetStringToViewCode(_code);
+            vCode = Parsers.GetStringToViewCode(_code);
 
             // 코드 변환 결과가 null이 아닐 경우에만 실행
             if (vCode != ViewRotations.Null)
             {
-                ContentManager.Instance.SetCameraAngle(selectedObj, vCode, _angle);
                 SendRequest(SendRequestCode.SelectObject6Shape, _code);
+                Debug.Log($"[Receive.SelectObject6Shape] :: Arg {vCode.ToString()}");
             }
         }
 
-        private ViewRotations GetStringToViewCode(string _value)
-		{
-            ViewRotations result = ViewRotations.Null;
+		#endregion
 
-            switch(_value)
-			{
-                case "Top":
-                case "TO":
-                    result = ViewRotations.Top;
-                    //ContentManager.Instance.DirectionAngle(0, _angle);
-                    //ContentManager.Instance.DcMemberSurface = "Top";
-                    //ContentManager.Instance.SetInspectionImage(1);
-                    break;
+		#region InformationWidthChange
 
-                case "Bottom":
-                case "BO":
-                    result = ViewRotations.Bottom;
-                    break;
-
-                case "Front":
-                case "FR":
-                    result = ViewRotations.Front;
-                    break;
-
-                case "Back":
-                case "BA":
-                    result = ViewRotations.Back;
-                    break;
-
-                case "Left":
-                case "LE":
-                    result = ViewRotations.Left;
-                    break;
-
-                case "Right":
-                case "RI":
-                    result = ViewRotations.Right;
-                    break;
-            }
-
-            return result;
-		}
-
-        private void Func_InformationWidthChange(float _value)
+		private void Func_InformationWidthChange(float _value)
         {
             float width = _value;
 
             ContentManager.Instance.GetRightWebUIWidth(width);
 
-            Debug.Log($"WM ReceiveRequest InformationWidthChange : width {width}");
+            Debug.Log($"[Receive.InformationWidthChange] : width {width}");
         }
 
-        private void Func_ChangePinMode()
+		#endregion
+
+		private void Func_ChangePinMode()
         {
             Issue_Selectable issueEntity = ContentManager.Instance.CacheIssueEntity;
 
@@ -509,12 +492,13 @@ namespace Module.WebAPI
 			{
                 if(obj != null)
 				{
-                    Debug.Log($"[Receive.InitializeRegisterMode : obj name {obj.name}");
+                    Debug.Log($"[Receive.InitializeRegisterMode] : obj name {obj.name}");
 
                     moduleList.Add(ModuleCode.WorkQueue);
 
                     // TODO 0307
-                    ContentManager.Instance.SetCameraMode(1);
+                    ContentManager.Instance.Function_ToggleOrthoView(true);
+                    //ContentManager.Instance.SetCameraMode(1);
 
                     StartCoroutine(InitRequestMode(obj.transform));
                 }
@@ -535,7 +519,8 @@ namespace Module.WebAPI
                 moduleList.Remove(ModuleCode.Work_Pinmode);
 
                 // TODO 0307 카메라 세팅 변경 (기존 참조)
-                ContentManager.Instance.SetCameraMode(2);
+                ContentManager.Instance.Function_ToggleOrthoView(false);
+                //ContentManager.Instance.SetCameraMode(2);
 
                 // TODO 0307 Dim 비활성화
                 ContentManager.Instance.Toggle_Dimension(false);
@@ -596,24 +581,39 @@ namespace Module.WebAPI
         {
             yield return null;
 
-            MeshRenderer renderer;
-            if (objectTransform.TryGetComponent<MeshRenderer>(out renderer))
-            {
-                Bounds b = renderer.bounds;
-                Vector3 centerVector = b.center;
-                float maxValue = Mathf.Max(Mathf.Max(b.size.x, b.size.y), b.size.z);
+            //MeshRenderer renderer;
+            //if (objectTransform.TryGetComponent<MeshRenderer>(out renderer))
+            //{
 
-                // 카메라 거리변경 전달
-                //MainManager.Instance.MainCameraController.targetDistance = maxValue + maxValue / 10 - 2;
+            //    Bounds _b = renderer.bounds;
+            //    Canvas _canvas = ContentManager.Instance._Canvas;
 
-                ContentManager.Instance.ZoomCamera(centerVector, maxValue, false, true);
+            //    Vector3 centerVector = _b.center;
+            //    float maxValue = Mathf.Max(Mathf.Max(_b.size.x, _b.size.y), _b.size.z);
 
-                Camera.main.orthographic = true;        // 메인 카메라 2D 변경
-                Camera.main.orthographicSize = maxValue;
-            }
+            //    //MainManager.Instance.SetCameraPosition(_b, _canvas, UIEventType.Viewport_ViewMode_TOP, )
+            //    // 카메라 거리변경 전달
+            //    //MainManager.Instance.MainCameraController.targetDistance = maxValue + maxValue / 10 - 2;
 
-            // 표면값 전달
+            //    ContentManager.Instance.ZoomCamera(centerVector, maxValue, false, true);
+
+            //    Camera.main.orthographic = true;        // 메인 카메라 2D 변경
+            //    Camera.main.orthographicSize = maxValue;
+            //}
+
+            // 표면값 추출
             List<string> codes = new List<string> { "Top" };
+
+            string _fCode = codes.First();
+
+            Cameras.SetCamera(_fCode);
+
+            // 선택 객체 제외하고 모두 끄기 (Isolate)
+            ContentManager.Instance.Toggle_ModelObject(UIEventType.Mode_Isolate, ToggleType.Isolate);
+
+            yield break;
+
+
             //List<string> codes = Dim.DimScript.Instance.RequestAvailableSurface();
             string code = "";
             int cubeDir = 0;
@@ -713,5 +713,10 @@ namespace Module.WebAPI
 
             yield break;
         }
+
+        
+
+
+        
     }
 }

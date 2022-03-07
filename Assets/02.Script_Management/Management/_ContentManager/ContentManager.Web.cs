@@ -172,7 +172,7 @@ namespace Management
 		// 카메라 모드 변경
 		internal void SetCameraMode(int v)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		// 카메라 줌

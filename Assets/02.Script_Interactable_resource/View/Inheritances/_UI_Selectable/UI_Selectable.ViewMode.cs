@@ -11,6 +11,9 @@ namespace View
 
 	public partial class UI_Selectable : Interactable
 	{
+		/// <summary>
+		/// 모두 보이기
+		/// </summary>
 		public void Event_View_Home()
 		{
 			ContentManager.Instance.SetCameraCenterPosition();

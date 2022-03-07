@@ -13,7 +13,50 @@ namespace Utilities
 			return (T1)_v1;
 		}
 
-		public static UIEventType OnParse(ViewRotations _vCode)
+        public static ViewRotations GetStringToViewCode(string _value)
+        {
+            ViewRotations result = ViewRotations.Null;
+
+            switch (_value)
+            {
+                case "Top":
+                case "TO":
+                    result = ViewRotations.Top;
+                    //ContentManager.Instance.DirectionAngle(0, _angle);
+                    //ContentManager.Instance.DcMemberSurface = "Top";
+                    //ContentManager.Instance.SetInspectionImage(1);
+                    break;
+
+                case "Bottom":
+                case "BO":
+                    result = ViewRotations.Bottom;
+                    break;
+
+                case "Front":
+                case "FR":
+                    result = ViewRotations.Front;
+                    break;
+
+                case "Back":
+                case "BA":
+                    result = ViewRotations.Back;
+                    break;
+
+                case "Left":
+                case "LE":
+                    result = ViewRotations.Left;
+                    break;
+
+                case "Right":
+                case "RI":
+                    result = ViewRotations.Right;
+                    break;
+            }
+
+            return result;
+        }
+
+        public static UIEventType OnParse(ViewRotations _vCode)
 		{
 			UIEventType uType = UIEventType.Null;
 
