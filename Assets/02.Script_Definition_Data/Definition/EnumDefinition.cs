@@ -227,8 +227,15 @@ namespace Definition
 		OrthoView_Perspective = 0x32,
 
 		Mode_ShowAll = 0x40,
+		/// <summary>
+		/// 객체 선택시 Hide, Isolate
+		/// Off가 붙으면 아예 객체를 끈다.
+		/// </summary>
 		Mode_Hide = 0x41,
-		Mode_Isolate = 0x42,
+		Mode_Hide_Off = 0x42,
+		Mode_Isolate = 0x46,
+		Mode_Isolate_Off = 0x47,
+
 
 		Slider_Model_Transparency = 0x100,
 		Slider_Icon_Scale = 0x101,
@@ -251,7 +258,10 @@ namespace Definition
 	{
 		ALL = 0x00,
 		Hide = 0x01,
-		Isolate = 0x02,
+		//Hide_Off = 0x02,
+
+		Isolate = 0x11,
+		//Isolate_Off = 0x12,
 	}
 
 	public enum ColorType

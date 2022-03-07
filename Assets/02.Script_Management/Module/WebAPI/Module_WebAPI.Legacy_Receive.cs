@@ -609,7 +609,7 @@ namespace Module.WebAPI
             Cameras.SetCamera(_fCode);
 
             // 선택 객체 제외하고 모두 끄기 (Isolate)
-            ContentManager.Instance.Toggle_ModelObject(UIEventType.Mode_Isolate, ToggleType.Isolate);
+            ContentManager.Instance.Toggle_ModelObject(UIEventType.Mode_Isolate_Off, ToggleType.Isolate);
 
             yield break;
 

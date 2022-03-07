@@ -129,6 +129,7 @@ namespace View
 			//if (typeof(T1) == typeof(UIEventType))
 			//if(typeof(T2) == typeof(bool))
 
+			// Hide & Isolate Event
 			if(t1 is UIEventType && t2 is bool)
 			{
 				type = (UIEventType)Enum.ToObject(typeof(UIEventType), t1);
@@ -193,9 +194,11 @@ namespace View
 		{
 			if (!IsInteractable) return;
 
-			if(_uiType == UIEventType.Mode_Hide || _uiType == UIEventType.Mode_Isolate)
+			if(_uiType == UIEventType.Mode_Hide || _uiType == UIEventType.Mode_Hide_Off 
+				|| _uiType == UIEventType.Mode_Isolate || _uiType == UIEventType.Mode_Isolate_Off)
 			{
-				bool eventHide = _uiType == UIEventType.Mode_Hide ? true : false;
+				bool eventHide = _uiType == UIEventType.Mode_Hide || _uiType == UIEventType.Mode_Hide_Off
+					? true : false;
 
 				if (_platform == PlatformCode.PC_Viewer_Tunnel)
 				{
@@ -206,10 +209,20 @@ namespace View
 						// Mode_Hide ? Hide :: 0.1f, NotHide :: alpha
 						// Mode_Isolate의 경우에는, 숨김 대상은 현재 알파값 가짐, 숨김 제외대상은 0.1f
 						// Mode_Isolate ?
-						
+
 						// 카르노맵 정렬 결과
 						// _isHide :: false인 경우에는 모두 color.a 적용
 						// _isHide :: true인 경우에는 모두 a :: 0.1f 적용
+
+						float hideValue = 0f;
+						if(_uiType == UIEventType.Mode_Hide_Off || _uiType == UIEventType.Mode_Isolate_Off)
+						{
+							hideValue = 0f;
+						}
+						else
+						{
+							hideValue = 0.1f;
+						}
 
 						MeshRenderer render;
 						if (obj.TryGetComponent<MeshRenderer>(out render))
@@ -221,7 +234,7 @@ namespace View
 							{
 								Materials.ToFadeMode(render);
 
-								Materials.Set(render, ColorType.Default1, 0.1f);
+								Materials.Set(render, ColorType.Default1, hideValue);
 							}
 							else
 							{

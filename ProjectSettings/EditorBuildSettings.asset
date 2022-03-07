@@ -11,22 +11,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scene/_2 Viewer/Viewer.unity
     guid: 2d5380bbd65ee87439878cecb732aaa9
-  - enabled: 1
+  - enabled: 0
     path: Assets/HighlightingSystemDemo/Scenes/01 Welcome.unity
     guid: c382f9f3d6926cb4e921a5e7ec61bc2f
-  - enabled: 1
+  - enabled: 0
     path: Assets/HighlightingSystemDemo/Scenes/02 Colors.unity
     guid: 59e908e3c60bc72468e5b708aa4ccf63
-  - enabled: 1
+  - enabled: 0
     path: Assets/HighlightingSystemDemo/Scenes/03 Transparency.unity
     guid: 1370a1d0ed9beaf43bfc46836a039fb0
-  - enabled: 1
+  - enabled: 0
     path: Assets/HighlightingSystemDemo/Scenes/04 Occlusion.unity
     guid: aba042a47785cb74ba0ea5598bd016c0
-  - enabled: 1
+  - enabled: 0
     path: Assets/HighlightingSystemDemo/Scenes/05 OccluderModes.unity
     guid: 5b66782cc0486db4f833f11916eafa4b
-  - enabled: 1
+  - enabled: 0
     path: Assets/HighlightingSystemDemo/Scenes/06 Scripting.unity
     guid: 57b5feb34ee0c084891bb42b215bc99e
   - enabled: 1

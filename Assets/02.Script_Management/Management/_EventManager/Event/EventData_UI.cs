@@ -43,10 +43,13 @@ namespace Management.Events
 			switch(UiEventType)
 			{
 				case UIEventType.Mode_Hide:
+				case UIEventType.Mode_Hide_Off:
 				case UIEventType.Mode_Isolate:
+				case UIEventType.Mode_Isolate_Off:
 					{
 						bool isHide = false;
-						if (UiEventType == UIEventType.Mode_Hide) isHide = true;
+						if (UiEventType == UIEventType.Mode_Hide
+							|| UiEventType == UIEventType.Mode_Hide_Off) isHide = true;
 
 						// _selected :: 현재 선택되어있는 객체들
 						List<GameObject> _selected = new List<GameObject>();
