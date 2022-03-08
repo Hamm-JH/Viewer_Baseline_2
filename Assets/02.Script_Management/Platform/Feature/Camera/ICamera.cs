@@ -66,6 +66,10 @@ namespace Platform.Feature.Camera
 
 		public abstract void SetData(Data _camData);
 
+		public virtual void ResetData_targetOffset() { }
+
+		public virtual void SetData_MaxOffset(float _value) { }
+
 		#region Actions
 		/// <summary>
 		/// 클릭 - 선택 발생시 실행

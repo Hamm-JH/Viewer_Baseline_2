@@ -137,7 +137,11 @@ namespace Module.Model
 			result.center = center;
 			result.size = size;
 
-			centerBounds = result;
+			CenterBounds = result;
+
+			// 모델의 바운드 값으로 경계를 계산해 넘김
+			MainManager.Instance.ResetCamdata_targetOffset();
+			MainManager.Instance.UpdateCamData_maxOffset(CenterBounds.size.magnitude);
 		}
 	}
 }

@@ -592,7 +592,7 @@ PlayerSettings:
   webGLDecompressionFallback: 1
   scriptingDefineSymbols:
     1: UD_LEGACY
-    13: UD_MOBILE;UD_URP
+    13: UD_MOBILE;UD_URP;URP_OUTLINE
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

@@ -76,14 +76,29 @@ namespace Platform.Feature.Camera
 
             // 일반 BIM mode
             // 0 : 회전, 1 : 패닝
-
+            
             if(btn == 0)
 			{
-                OnRotate(targetPosition, delta, orbitSpeed);
+                if(CamMode == CameraModes.BIM_ISO)
+				{
+                    OnRotate(targetPosition, delta, orbitSpeed);
+				}
             }
             else if(btn == 1)
 			{
-                OnPanning(targetPosition, delta, panSpeed, targetOffset, maxOffsetDistance);
+                if(CamMode == CameraModes.BIM_ISO)
+				{
+                    OnPanning(targetPosition, delta, panSpeed, targetOffset, maxOffsetDistance);
+				}
+                else if (CamMode == CameraModes.BIM_Top ||
+                    CamMode == CameraModes.BIM_Bottom ||
+                    CamMode == CameraModes.BIM_FRONT ||
+                    CamMode == CameraModes.BIM_BACK ||
+                    CamMode == CameraModes.BIM_LEFT ||
+                    CamMode == CameraModes.BIM_RIGHT)
+                {
+                    OnPanning(targetPosition, delta, panSpeed, targetOffset, maxOffsetDistance);
+                }
             }
 		}
 
@@ -105,7 +120,7 @@ namespace Platform.Feature.Camera
             Vector3 offset = transform.right * -_delta.x * _panSpeed * distance + transform.up * _delta.y * _panSpeed * distance;
             Vector3 newTargetOffset = Vector3.ClampMagnitude(_targetOffset + offset, _maxOffsetDistance);
             transform.position += newTargetOffset - _targetOffset;
-            _targetOffset = newTargetOffset;
+            targetOffset = newTargetOffset;
         }
 
         private void InFocus(Vector3 mousePos, float delta)

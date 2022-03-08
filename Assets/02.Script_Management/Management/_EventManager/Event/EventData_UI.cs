@@ -101,7 +101,9 @@ namespace Management.Events
 			switch (UiEventType)
 			{
 				case UIEventType.Mode_Hide:
+				case UIEventType.Mode_Hide_Off:
 				case UIEventType.Mode_Isolate:
+				case UIEventType.Mode_Isolate_Off:
 					StatusCode = Status.Update;
 					break;
 			}

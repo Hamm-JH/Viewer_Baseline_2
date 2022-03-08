@@ -29,5 +29,9 @@ namespace Definition.Control
 		BIM_Top = 0x31,			// BIM 상부 뷰 모드
 		BIM_Side = 0x32,		// BIM 측면 뷰 모드
 		BIM_Bottom = 0x33,		// BIM 하부 뷰 모드
+		BIM_FRONT = 0x34,		// BIM 측전면 뷰 모드
+		BIM_BACK = 0x35,		// BIM 측후면 뷰 모드
+		BIM_LEFT = 0x36,		// BIM 측좌면 뷰 모드
+		BIM_RIGHT = 0x37,		// BIM 측우면 뷰 모드
 	}
 }

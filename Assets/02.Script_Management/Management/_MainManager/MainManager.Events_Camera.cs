@@ -23,6 +23,8 @@ namespace Management
 		public void SetCameraPosition(Bounds centerBounds, Canvas rootCanvas, 
 			UIEventType eventType = UIEventType.Viewport_ViewMode_ISO)
 		{
+			UpdateCameraMode(UIEventType.Viewport_ViewMode_ISO);
+
 			_core.SetCameraPosition(centerBounds, rootCanvas, eventType);
 		}
 
@@ -30,6 +32,24 @@ namespace Management
 			Vector3 _baseAngle = default(Vector3))
 		{
 			_core.SetCameraPosition(_center, _canvas, _eType, _baseAngle);
+		}
+
+		/// <summary>
+		/// 카메라 오프셋값 초기화
+		/// </summary>
+		public void ResetCamdata_targetOffset()
+		{
+			_core.Cameras.ForEach(x => x.ResetData_targetOffset());
+		}
+
+		/// <summary>
+		/// 카메라 패닝 제한거리 설정
+		/// </summary>
+		/// <param name="_value"></param>
+		public void UpdateCamData_maxOffset(float _value)
+		{
+			_value = _value * 0.8f;
+			_core.Cameras.ForEach(x => x.SetData_MaxOffset(_value));
 		}
 	}
 }

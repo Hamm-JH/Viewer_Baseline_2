@@ -6,18 +6,23 @@ using UnityEngine.Events;
 namespace View
 {
 	using Definition;
+	using EPOOutline;
 	using Management;
 	using System;
 
 	public class Obj_Selectable : Interactable
 	{
 		UIEventType _uiEventType;
+		Outlinable m_outlinable;
 		Bounds m_bounds;
 
 		private void Start()
 		{
 			_uiEventType = UIEventType.Mode_Isolate;
 			IsInteractable = true;
+			m_outlinable = gameObject.AddComponent<Outlinable>();
+
+			m_outlinable.AddAllChildRenderersToRenderingList();
 		}
 
 		public override GameObject Target
@@ -40,21 +45,6 @@ namespace View
 			}
 		}
 
-		//public override bool IsInteractable 
-		//{ 
-		//	get => m_isInteractable; 
-		//	set
-		//	{
-		//		m_isInteractable = value;
-
-		//		MeshCollider collider;
-		//		if(this.TryGetComponent<MeshCollider>(out collider))
-		//		{
-		//			collider.enabled = value;
-		//		}
-		//	}
-		//}
-
 		public Bounds Bounds 
 		{ 
 			get
@@ -70,6 +60,11 @@ namespace View
 				return m_bounds;
 			}
 		}
+
+		public Outlinable Outlinable { get => m_outlinable; set => m_outlinable=value; }
+
+		//==========================================================================================
+		//==========================================================================================
 
 		public override void OnChangeValue(float _value)
 		{
@@ -215,13 +210,16 @@ namespace View
 						// _isHide :: true인 경우에는 모두 a :: 0.1f 적용
 
 						float hideValue = 0f;
+						bool isOn = true;
 						if(_uiType == UIEventType.Mode_Hide_Off || _uiType == UIEventType.Mode_Isolate_Off)
 						{
 							hideValue = 0f;
+							isOn = false;
 						}
 						else
 						{
 							hideValue = 0.1f;
+							isOn = true;
 						}
 
 						MeshRenderer render;
@@ -235,6 +233,8 @@ namespace View
 								Materials.ToFadeMode(render);
 
 								Materials.Set(render, ColorType.Default1, hideValue);
+
+								obj.SetActive(isOn);
 							}
 							else
 							{

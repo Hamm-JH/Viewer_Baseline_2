@@ -7,6 +7,7 @@ using UnityEngine;
 namespace Module.Model
 {
 	using Definition;
+	using EPOOutline;
 	using Test;
 
 	/// <summary>
@@ -291,7 +292,6 @@ namespace Module.Model
 				// meshfilter의 메쉬에 들어있는 이름으로 객체명 변환
 				if(x.TryGetComponent<MeshFilter>(out mf))
 				{
-					//string _mName = 
 					x.name = mf.mesh.name.Replace(" Instance", "");
 				}
 
@@ -300,14 +300,11 @@ namespace Module.Model
 					Material mat = Materials.Set(MaterialType.Default);
 					mat.color = Colors.Set(ColorType.Default1, 1);
 					render.material = mat;
-					//dc.Renderers.Add(render);
-					
 				}
 
-				//dc.Colliders.Add(coll);
-				//dc.ShowWireframeColliders = true;
-
 			});
+
+
 		}
 
 		#endregion

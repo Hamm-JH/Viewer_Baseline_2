@@ -72,5 +72,22 @@ namespace Utilities
 
 			return uType;
 		}
+
+        public static Bounds Calculate(GameObject _obj)
+		{
+            Bounds result = default(Bounds);
+
+            MeshRenderer render;
+            if(_obj.TryGetComponent<MeshRenderer>(out render))
+			{
+                result = render.bounds;
+			}
+            else
+			{
+                Debug.LogError("This Object not contains MeshRenderer");
+			}
+
+            return result;
+		}
 	}
 }

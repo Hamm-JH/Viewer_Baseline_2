@@ -40,6 +40,10 @@ namespace Definition.Data
 				case UIEventType.Viewport_ViewMode_TOP: _typeIndex = 0x01; break;
 				case UIEventType.Viewport_ViewMode_SIDE: _typeIndex = 0x02; break;
 				case UIEventType.Viewport_ViewMode_BOTTOM: _typeIndex = 0x03; break;
+				case UIEventType.Viewport_ViewMode_SIDE_FRONT:	_typeIndex = 0x04;	break;
+				case UIEventType.Viewport_ViewMode_SIDE_BACK:	_typeIndex = 0x05;	break;
+				case UIEventType.Viewport_ViewMode_SIDE_LEFT:	_typeIndex = 0x06;	break;
+				case UIEventType.Viewport_ViewMode_SIDE_RIGHT:	_typeIndex = 0x07;	break;
 			}
 
 			_modes = (CameraModes)(_modeIndex * 0x10 + _typeIndex);

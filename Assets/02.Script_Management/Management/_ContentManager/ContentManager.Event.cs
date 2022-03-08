@@ -116,6 +116,8 @@ namespace Management
 		{
 			foreach(GameObject obj in _ModelObjects)
 			{
+				obj.SetActive(true);
+
 				MeshRenderer render;
 				if (obj.TryGetComponent<MeshRenderer>(out render))
 				{
@@ -132,6 +134,8 @@ namespace Management
 				if(obj.TryGetComponent<Obj_Selectable>(out selectable))
 				{
 					selectable.IsInteractable = true;
+
+
 				}
 			}
 		}

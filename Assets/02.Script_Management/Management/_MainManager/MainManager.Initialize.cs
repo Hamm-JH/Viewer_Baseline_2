@@ -108,13 +108,13 @@ namespace Management
 			Camera main = _core.MainCam;
 			//SetCamera<FreeCamera>(main, _cameraExecuteEvents);
 			//SetCamera<OrbitCamera>(main, _cameraExecuteEvents);
-			SetCamera<BIMCamera>(_core, _cameraExecuteEvents);
+			SetCamera<BIMCamera>(_core, _data, _cameraExecuteEvents);
 
 			// 코어의 카메라모드 변경으로 모든 카메라의 모드 일괄변경
 			_core.CameraMode = _mode;
 		}
 
-		private void SetCamera<T>(CoreManagement _core, Events.CameraEvents _camEvents) where T : ICamera
+		private void SetCamera<T>(CoreManagement _core, CoreData _data, Events.CameraEvents _camEvents) where T : ICamera
 		{
 			T component = null;
 			Camera _main = _core.MainCam;
@@ -131,6 +131,7 @@ namespace Management
 			// 카메라에서 연결 대상 메서드 등록
 			component.SetAction(_camEvents);
 			component.Default = _core.CameraPoint;
+			component.SetData(_data.CameraData);
 		}
 
 		#endregion

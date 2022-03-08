@@ -73,10 +73,21 @@ namespace Platform.Feature.Camera
 
 		public override void SetData(Data _camData)
 		{
+			Debug.Log($"***** data : {_camData.bMaxOffsetDistance}");
 			maxOffsetDistance = _camData.bMaxOffsetDistance;
 			orbitSpeed = _camData.bOrbitSpeed;
 			panSpeed = _camData.bPanSpeed;
 			zoomSpeed = _camData.bZoomSpeed;
+		}
+
+		public override void ResetData_targetOffset()
+		{
+			targetOffset = default(Vector3);
+		}
+
+		public override void SetData_MaxOffset(float _value)
+		{
+			maxOffsetDistance = _value;
 		}
 	}
 }

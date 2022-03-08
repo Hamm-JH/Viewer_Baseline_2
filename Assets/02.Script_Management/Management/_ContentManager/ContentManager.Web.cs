@@ -46,7 +46,7 @@ namespace Management
 		public UseCase AppUseCase { get; internal set; }
 		//public SceneStatus ViewSceneStatus { get; internal set; }
 		public Transform SelectedObject { get; internal set; }
-		public Issue_Selectable CacheIssueEntity { get; internal set; }
+		//public Issue_Selectable CacheIssueEntity { get; internal set; }
 		public string DcMemberSurface { get; internal set; }
 
 		public Material PinModeSkyboxMaterial { get; internal set; }
@@ -109,17 +109,15 @@ namespace Management
 		// string 코드 필요
 		// vector3 베이스 각도 필요
 
-		internal void SetCameraAngle(GameObject _obj, ViewRotations _vCode, Vector3 _baseAngle)
+		internal void SetCameraMode(GameObject _obj, ViewRotations _vCode, Vector3 _baseAngle)
 		{
 			UIEventType uType = Parsers.OnParse(_vCode);
+
+			// 카메라에 현재 뷰 모드 업데이트
+			MainManager.Instance.UpdateCameraMode(uType);
+
 			// 카메라에 각도변경 지시
 			SetCameraCenter(_obj, _baseAngle, uType);
-
-			// ?
-			//ContentManager.Instance.DcMemberSurface = "Top";
-
-			// ?
-			//ContentManager.Instance.SetInspectionImage(1);
 		}
 
 		internal void DirectionAngle(int v, Vector3 angle)
@@ -157,11 +155,11 @@ namespace Management
 			throw new NotImplementedException();
 		}
 
-		// 치수선 On/Off
-		internal void Toggle_Dimension(bool _isOn)
-		{
+		// TODO 치수선 On/Off
+		//internal void Toggle_Dimension(bool _isOn)
+		//{
 
-		}
+		//}
 
 		// 점검정보 On/Off
 		internal void Toggle_Issues(IssueVisualizeOption _option)

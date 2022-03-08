@@ -19,7 +19,11 @@ namespace Module.Model
 		[SerializeField] private List<GameObject> m_modelObjects;
 
 		protected GameObject Model { get => model; set => model=value; }
-		public Bounds CenterBounds { get => centerBounds; }
+		public Bounds CenterBounds
+		{ 
+			get => centerBounds; 
+			set => centerBounds = value; 
+		}
 		public List<GameObject> ModelObjects { get => m_modelObjects; set => m_modelObjects=value; }
 
 		

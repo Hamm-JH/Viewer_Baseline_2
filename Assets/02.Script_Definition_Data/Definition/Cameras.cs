@@ -24,7 +24,7 @@ namespace Definition
 
             if (vCode != ViewRotations.Null)
             {
-                ContentManager.Instance.SetCameraAngle(obj, vCode, angle);
+                ContentManager.Instance.SetCameraMode(obj, vCode, angle);
             }
         }
     }

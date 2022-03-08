@@ -177,16 +177,13 @@ namespace Module.WebAPI
 
             //==================================================
 
-            Issue_Selectable issueEntity = ContentManager.Instance.CacheIssueEntity;
             Transform currentSelectedObj = ContentManager.Instance.SelectedObject;
 
-            //manager.UISubManager.GuideLineController.ChangeCameraDirection(issueEntity.issueData.DcMemberSurface, currentSelectedObj.GetComponent<ObjectData>().Bound);
-
-            ContentManager.Instance.CacheIssueEntity.SwitchRender(true);
-
-            string positionVector = string.Format($"{issueEntity.transform.position.x.ToString()},{issueEntity.transform.position.y.ToString()},{issueEntity.transform.position.z.ToString()}");
-            issueEntity.Issue._PositionVector = positionVector;
-
+			//Issue_Selectable issueEntity = ContentManager.Instance.CacheIssueEntity;
+			//ContentManager.Instance.CacheIssueEntity.SwitchRender(true);
+			//string positionVector = string.Format($"{issueEntity.transform.position.x.ToString()},{issueEntity.transform.position.y.ToString()},{issueEntity.transform.position.z.ToString()}");
+            string positionVector = string.Format($"{0.1f},{0.1f},{0.1f}");
+            //issueEntity.Issue._PositionVector = positionVector;
 
             Debug.Log($"SendRequest SelectSurfaceLocation : locationCode {locationCode}, positionVector {positionVector}");
             string arg = string.Format("SelectSurfaceLocation/{0}/{1}", locationCode, positionVector);
