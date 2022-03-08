@@ -86,19 +86,16 @@ namespace Platform.Feature.Camera
             }
             else if(btn == 1)
 			{
-                if(CamMode == CameraModes.BIM_ISO)
-				{
-                    OnPanning(targetPosition, delta, panSpeed, targetOffset, maxOffsetDistance);
-				}
-                else if (CamMode == CameraModes.BIM_Top ||
+                if(CamMode == CameraModes.BIM_ISO ||
+                    CamMode == CameraModes.BIM_Top ||
                     CamMode == CameraModes.BIM_Bottom ||
                     CamMode == CameraModes.BIM_FRONT ||
                     CamMode == CameraModes.BIM_BACK ||
                     CamMode == CameraModes.BIM_LEFT ||
                     CamMode == CameraModes.BIM_RIGHT)
-                {
+				{
                     OnPanning(targetPosition, delta, panSpeed, targetOffset, maxOffsetDistance);
-                }
+				}
             }
 		}
 

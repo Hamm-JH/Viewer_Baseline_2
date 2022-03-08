@@ -199,10 +199,9 @@ namespace Module.WebAPI
 
 		private void Func_ChangePinMode()
         {
-            // TODO do remove
-            //Issue_Selectable issueEntity = ContentManager.Instance.CacheIssueEntity;
+            GameObject obj = ContentManager.Instance._SelectedObj;
 
-            Transform currentSelectedObj = ContentManager.Instance.SelectedObject;
+            //Transform currentSelectedObj = ContentManager.Instance.SelectedObject;
             MeshRenderer meshRenderer;
 
             var moduleList = EventManager.Instance._ModuleList;
@@ -213,26 +212,23 @@ namespace Module.WebAPI
 				{
                     moduleList.Add(ModuleCode.Work_Pinmode);
 
-                    //ContentManager.Instance.ViewSceneStatus = SceneStatus.Register_PinMode;
-
+                    // TODO 0308 Module.Graphic에서 스카이박스 변경 코드 작성
                     // skybox 변경
                     RenderSettings.skybox = ContentManager.Instance.PinModeSkyboxMaterial;
 
+                    // TODO 0308 GuideCube 기존 코드에서 가져와서 구현하기
                     // GuideLine On
                     ContentManager.Instance.SwitchGuideCubeOnOff(true);
 
-                    //Debug.Log(issueEntity.issueData.DcMemberSurface);
-                    //Debug.Log(currentSelectedObj.GetComponent<Obj_Selectable>().Bound);
-
+                    // TODO 0308 아래 코드 최적화
                     Bounds nB = new Bounds();
-
                     if (ContentManager.Instance.AppUseCase == UseCase.Bridge
                         || ContentManager.Instance.AppUseCase == UseCase.Tunnel)
                     {
-                        nB = currentSelectedObj.GetComponent<Obj_Selectable>().Bounds;
+                        nB = obj.GetComponent<Obj_Selectable>().Bounds;
                     }
 
-                    Debug.Log($"_____ {currentSelectedObj.name}");
+                    Debug.Log($"_____ {obj.name}");
 
                     bool isEtc = false;
 
@@ -242,13 +238,13 @@ namespace Module.WebAPI
                     //manager.UISubManager.GuideLineController.ChangeCameraDirection(issueEntity.issueData.DcMemberSurface, nB, currentSelectedObj.parent.parent.localRotation.eulerAngles);
 
                     // 선택객체 Mat White
-                    if (currentSelectedObj.TryGetComponent<MeshRenderer>(out meshRenderer))
+                    if (obj.TryGetComponent<MeshRenderer>(out meshRenderer))
                     {
                         meshRenderer.material = Materials.Set(MaterialType.White);
                     }
-                    for (int i = 0; i < currentSelectedObj.childCount; i++)
+                    for (int i = 0; i < obj.transform.childCount; i++)
                     {
-                        if (currentSelectedObj.GetChild(i).TryGetComponent<MeshRenderer>(out meshRenderer))
+                        if (obj.transform.GetChild(i).TryGetComponent<MeshRenderer>(out meshRenderer))
                         {
                             meshRenderer.material = Materials.Set(MaterialType.White);
                         }
@@ -327,13 +323,13 @@ namespace Module.WebAPI
                     //ContentManager.Instance.UISubManager.GuideLineController.transform.position = new Vector3(0, 0, 0);
 
                     // 선택객체 Mat 객체선택으로 변경
-                    if (currentSelectedObj.TryGetComponent<MeshRenderer>(out meshRenderer))
+                    if (obj.TryGetComponent<MeshRenderer>(out meshRenderer))
                     {
                         meshRenderer.material = Materials.Set(MaterialType.White);
                     }
-                    for (int i = 0; i < currentSelectedObj.childCount; i++)
+                    for (int i = 0; i < obj.transform.childCount; i++)
                     {
-                        if (currentSelectedObj.GetChild(i).TryGetComponent<MeshRenderer>(out meshRenderer))
+                        if (obj.transform.GetChild(i).TryGetComponent<MeshRenderer>(out meshRenderer))
                         {
                             meshRenderer.material = Materials.Set(MaterialType.White);
                         }

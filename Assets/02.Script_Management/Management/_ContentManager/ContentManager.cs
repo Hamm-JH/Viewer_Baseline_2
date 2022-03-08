@@ -6,6 +6,7 @@ namespace Management
 {
 	using Definition;
 	using Module;
+	using Module.Graphic;
 	using Module.Interaction;
 	using Module.Model;
 	using Module.UI;
@@ -25,6 +26,7 @@ namespace Management
 		Module_Model m_model;
 		Module_WebAPI m_api;
 		Module_Interaction m_interaction;
+		Module_Graphic m_graphic;
 
 		public List<AModule> Modules { get => m_modules; set => m_modules=value; }
 
@@ -62,8 +64,6 @@ namespace Management
 			}
 		}
 
-		
-
 		public Module_Interaction _Interaction
 		{
 			get
@@ -78,6 +78,23 @@ namespace Management
 					}
 				}
 				return m_interaction;
+			}
+		}
+
+		public Module_Graphic _Graphic
+		{
+			get
+			{
+				if(m_graphic == null)
+				{
+					Module_Graphic mod = (Module_Graphic)Modules.Find(x => x.ID == ModuleID.Graphic);
+					if (mod != null) m_graphic = mod;
+					else
+					{
+						throw new System.Exception("Graphic is null");
+					}
+				}
+				return m_graphic;
 			}
 		}
 

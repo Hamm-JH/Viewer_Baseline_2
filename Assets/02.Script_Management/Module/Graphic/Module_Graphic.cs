@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,10 +6,10 @@ namespace Module.Graphic
 {
 	using Definition;
 
-	public class Module_Graphic : AModule
+	public partial class Module_Graphic : AModule
 	{
-		// ½ºÄ«ÀÌ ¹Ú½º ±×·¡ÇÈ ÄÁÆ®·Ñ
-		// ÀüÃ¼ ±×·¡ÇÈ Åæ °ü¸®
+		// ìŠ¤ì¹´ì´ ë°•ìŠ¤ ê·¸ë˜í”½ ì»¨íŠ¸ë¡¤
+		// ì „ì²´ ê·¸ë˜í”½ í†¤ ê´€ë¦¬
 
 		// Start is called before the first frame update
 		void Start()
@@ -21,7 +21,7 @@ namespace Module.Graphic
 		{
 			Debug.LogError($"{this.GetType().ToString()} Run");
 			
-			// TODO 0222 : ±×·¡ÇÈ ÅÛÇÃ¸´º° ½ºÅ¸ÀÏ Àû¿ë
+			// TODO 0222 : ê·¸ë˜í”½ í…œí”Œë¦¿ë³„ ìŠ¤íƒ€ì¼ ì ìš©
 		}
 	}
 }
