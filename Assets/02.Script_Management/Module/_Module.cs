@@ -68,6 +68,10 @@ namespace Module
 			{
 				mod = _obj.AddComponent<Graphic.Module_Graphic>();
 			}
+			else if(_module == ModuleID.Item)
+			{
+				mod = _obj.AddComponent<Item.Module_Items>();
+			}
 			else
 			{
 				throw new System.Exception($"Module code not creatable :: id : {_module.ToString()}");
@@ -133,16 +137,14 @@ namespace Module
 						return true;
 				}
 			}
-			//else if(_module == ModuleID.Func_Selection)
-			//{
-			//	switch(_function)
-			//	{
-			//		case FunctionCode.Select_DefaultMove:
-			//		case FunctionCode.Select_DrawPoint:
-			//		case FunctionCode.Select_SelectObject:
-			//			return true;
-			//	}
-			//}
+			else if(_module == ModuleID.Item)
+			{
+				switch(_function)
+				{
+					case FunctionCode.Item_LocationGuide:
+						return true;
+				}
+			}
 
 			return result;
 		}

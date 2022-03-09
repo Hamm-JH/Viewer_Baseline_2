@@ -4,36 +4,35 @@ using UnityEngine;
 
 namespace Definition
 {
-	public static class Positions
+	public static class Scales
 	{
-		public static Vector3 SetLocal(UIEventType _eType)
+		/// <summary>
+		/// 가이드큐브(쿼드 크기변경)
+		/// </summary>
+		/// <param name="_tar"></param>
+		/// <param name="_uType"></param>
+		/// <returns></returns>
+		public static Vector3 SetQuad(GameObject _tar, UIEventType _uType)
 		{
 			Vector3 result = default(Vector3);
 
-			switch(_eType)
+			Vector3 tgScale = _tar.transform.localScale;
+
+			switch(_uType)
 			{
 				case UIEventType.Viewport_ViewMode_TOP:
-					result = new Vector3(-5, 0, 0);
-					break;
-
 				case UIEventType.Viewport_ViewMode_BOTTOM:
-
+					result = new Vector3(tgScale.x, tgScale.z, 1);
 					break;
 
 				case UIEventType.Viewport_ViewMode_SIDE_FRONT:
-
-					break;
-
 				case UIEventType.Viewport_ViewMode_SIDE_BACK:
-
+					result = new Vector3(tgScale.x, tgScale.y, 1);
 					break;
 
 				case UIEventType.Viewport_ViewMode_SIDE_LEFT:
-
-					break;
-
 				case UIEventType.Viewport_ViewMode_SIDE_RIGHT:
-
+					result = new Vector3(tgScale.z, tgScale.y, 1);
 					break;
 			}
 

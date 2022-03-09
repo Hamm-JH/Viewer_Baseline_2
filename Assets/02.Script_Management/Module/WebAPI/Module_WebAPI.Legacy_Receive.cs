@@ -555,28 +555,6 @@ namespace Module.WebAPI
 
             yield return null;
 
-			{
-                //MeshRenderer renderer;
-                //if (objectTransform.TryGetComponent<MeshRenderer>(out renderer))
-                //{
-
-                //    Bounds _b = renderer.bounds;
-                //    Canvas _canvas = ContentManager.Instance._Canvas;
-
-                //    Vector3 centerVector = _b.center;
-                //    float maxValue = Mathf.Max(Mathf.Max(_b.size.x, _b.size.y), _b.size.z);
-
-                //    //MainManager.Instance.SetCameraPosition(_b, _canvas, UIEventType.Viewport_ViewMode_TOP, )
-                //    // 카메라 거리변경 전달
-                //    //MainManager.Instance.MainCameraController.targetDistance = maxValue + maxValue / 10 - 2;
-
-                //    ContentManager.Instance.ZoomCamera(centerVector, maxValue, false, true);
-
-                //    Camera.main.orthographic = true;        // 메인 카메라 2D 변경
-                //    Camera.main.orthographicSize = maxValue;
-                //}
-			}
-
             Bounds bound = Parsers.Calculate(_obj);
             MainManager.Instance.ResetCamdata_targetOffset();
             MainManager.Instance.UpdateCamData_maxOffset(bound.size.magnitude);
@@ -596,104 +574,6 @@ namespace Module.WebAPI
             ContentManager.Instance.Toggle_Issues(IssueVisualizeOption.SelectedTarget);
 
             yield break;
-
-			{
-                //string code = "";
-                //int cubeDir = 0;
-                //int imgIndex = 0;
-
-                //Debug.Log($"***** Dim codes :: ");
-                //for (int i = 0; i < codes.Count; i++)
-                //{
-                //    Debug.Log($"Dim {i} : {codes[i]}");
-                //}
-                //Debug.Log($"***** Code end");
-
-                //Debug.Log($"obj Transform : {objectTransform.name}"); // 객체명
-                //Debug.Log($"obj Transform parent : {objectTransform.parent.name}"); // 32,1
-                //Debug.Log($"obj Transform parent parent : {objectTransform.parent.parent.name}"); // Segment
-                //Debug.Log($"obj Transform parent parent angle : {objectTransform.parent.parent.rotation.eulerAngles}"); // Segment
-
-                //Vector3 _angle = objectTransform.parent.parent.rotation.eulerAngles;
-
-                //if (codes.Count != 0)
-                //{
-                //    code = codes[0];
-
-                //    switch (code)
-                //    {
-                //        case "Top":
-                //            {
-                //                cubeDir = 0;
-                //                imgIndex = 1;
-                //            }
-                //            break;
-
-                //        case "Bottom":
-                //            {
-                //                cubeDir = 1;
-                //                imgIndex = 2;
-                //            }
-                //            break;
-                //        case "Front":
-                //            {
-                //                cubeDir = 2;
-                //                imgIndex = 3;
-                //            }
-                //            break;
-                //        case "Back":
-                //            {
-                //                cubeDir = 3;
-                //                imgIndex = 4;
-                //            }
-                //            break;
-                //        case "Left":
-                //            {
-                //                cubeDir = 4;
-                //                imgIndex = 5;
-                //            }
-                //            break;
-                //        case "Right":
-                //            {
-                //                cubeDir = 5;
-                //                imgIndex = 6;
-                //            }
-                //            break;
-                //    }
-                //}
-                //else
-                //{
-                //    code = "Left";
-                //    cubeDir = 4;
-                //    imgIndex = 4;
-                //}
-                //ContentManager.Instance.CacheIssueEntity.Issue.CdBridge = "model code";
-                //ContentManager.Instance.CacheIssueEntity.Issue.CdBridgeParts = objectTransform.name;
-                //ContentManager.Instance.CacheIssueEntity.Issue.DcMemberSurface = code; // Left
-
-
-
-                //ContentManager.Instance.DirectionAngle(cubeDir, _angle); // 4 left
-                //ContentManager.Instance.DirectionAngle(cubeDir, _angle); // 4
-
-                //if (ContentManager.Instance.AppUseCase == UseCase.Bridge)
-                //{
-                //    ContentManager.Instance.CacheIssueEntity.issueData.CdBridge = ContentManager.Instance.RootObject.transform.name;
-                //}
-                //else if (ContentManager.Instance.AppUseCase == UseCase.Tunnel)
-                //{
-                //    ContentManager.Instance.CacheIssueEntity.issueData.CdBridge = Data.Viewer.Cache.Instance.models.ModelName.name;
-                //}
-
-
-
-                //ContentManager.Instance.SetInspectionImage(imgIndex);     // 우측 6면 표시 슬라이드 이미지
-                                                                          //ContentManager.Instance.UIManager.OnClickDamagedRegist();       // 카메라 등록전 상태 호출
-
-                //objectTransform.gameObject.SetActive(false);
-
-                //yield break;
-			}
         }
 
         private IEnumerator FinishRequestMode()

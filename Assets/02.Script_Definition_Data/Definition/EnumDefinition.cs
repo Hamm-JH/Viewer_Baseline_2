@@ -70,6 +70,11 @@ namespace Definition
 		/// Code :: UI 속성
 		/// </summary>
 		Prop_UI = 0x50,
+
+		/// <summary>
+		/// Item :: 한정목적용 Prefab 관리
+		/// </summary>
+		Item = 0x60,
 	}
 
 	public enum FunctionCode
@@ -91,6 +96,8 @@ namespace Definition
 		Select_DrawPoint = 0x43,
 
 		Graphic = 0x51,
+
+		Item_LocationGuide = 0x61,
 	}
 
 	/// <summary>
