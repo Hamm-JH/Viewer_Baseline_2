@@ -10,6 +10,7 @@ namespace Management.Events
 	using UnityEngine.EventSystems;
 	using UnityEngine.Events;
 	using System.Linq;
+	using Items;
 
 	[System.Serializable]
 	public class EventData_Input : EventData
@@ -153,7 +154,7 @@ namespace Management.Events
 			m_keyEvent = _event;
 		}
 
-		public override void OnProcess(GameObject _cObj)
+		public override void OnProcess(GameObject _cObj, List<ModuleCode> _mList)
 		{
 			switch(EventType)
 			{
@@ -196,41 +197,81 @@ namespace Management.Events
 						Status _success = Status.Pass;
 						//Status _fail = Status.Drop;
 
-						if(m_isPassAPI)
+						// PinMode가 아닌 경우
+						if(!IsInPinMode(_mList))
 						{
-							m_selected3D = m_inAPISelected;
-
-							if(Selected3D != null)
+							if(m_isPassAPI)
 							{
-								Func_Input_clickSuccessUp(_success);
-							}
-						}
-						else
-						{
-							m_selected3D = null;
-							m_hit = default(RaycastHit);
-							m_results = new List<RaycastResult>();
+								m_selected3D = m_inAPISelected;
 
-							Get_Collect3DObject(m_clickPosition, out m_selected3D, out m_hit, out m_results);
-
-							if(Selected3D != null)
-							{
-								Func_Input_clickSuccessUp(_success);
+								if(Selected3D != null)
+								{
+									Func_Input_clickSuccessUp(_success);
+								}
 							}
-							// 빈 공간을 누른 경우
-							else if(m_results.Count == 0)
-							{
-								//Element = null;
-								Elements = null;
-								StatusCode = Status.Pass;
-								//StatusCode = _fail;
-							}
-							// UI 객체를 누른 경우 m_results.Count != 0
 							else
 							{
-								//Element = null;
-								Elements = null;
-								StatusCode = Status.Skip;
+								m_selected3D = null;
+								m_hit = default(RaycastHit);
+								m_results = new List<RaycastResult>();
+
+								Get_Collect3DObject(m_clickPosition, out m_selected3D, out m_hit, out m_results);
+
+								if(Selected3D != null)
+								{
+									Func_Input_clickSuccessUp(_success);
+								}
+								// 빈 공간을 누른 경우
+								else if(m_results.Count == 0)
+								{
+									//Element = null;
+									Elements = null;
+									StatusCode = Status.Pass;
+									//StatusCode = _fail;
+								}
+								// UI 객체를 누른 경우 m_results.Count != 0
+								else
+								{
+									//Element = null;
+									Elements = null;
+									StatusCode = Status.Skip;
+								}
+							}
+						}
+						// PinMode인 경우
+						else
+						{
+							List<RaycastHit> hits;
+							Ray ray = Camera.main.ScreenPointToRay(m_clickPosition);
+
+							// 해당 포인터에서 일직선 상으로 레이캐스트
+							hits = Physics.RaycastAll(ray).ToList();
+							// 레이캐스트 결과가 1개 이상일 경우
+							if (hits.Count != 0)
+							{
+								RaycastHit hit_element = default(RaycastHit);
+								RaycastHit hit_selectable = default(RaycastHit);
+								LocationElement element = null;
+								Obj_Selectable selectable = null;
+
+								hit_element = hits.Find(x => x.collider.gameObject.TryGetComponent<LocationElement>(out element));
+								hit_selectable = hits.Find(x => x.collider.gameObject.TryGetComponent<Obj_Selectable>(out selectable));
+
+								//element = hits.Find(x => x.collider.gameObject.TryGetComponent<LocationElement>(out element)).collider.GetComponent<LocationElement>();
+								//selectable = hits.Find(x => x.collider.TryGetComponent<Obj_Selectable>(out selectable)).collider.GetComponent<Obj_Selectable>();
+
+								// 위치값과 3D 객체가 모두 눌린 경우
+								if (element && selectable)
+								{
+									Debug.Log($"element index : {element.Index + 1}, selectable : {selectable.name}");
+									//Debug.Log($"element : {element.name}, selectable : {selectable.name}");
+
+									GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+									obj.name = "Issue element";
+									obj.transform.position = hit_selectable.point;
+									// TODO 데이터 집어넣고, 캐싱
+								}
+
 							}
 						}
 					}
@@ -274,6 +315,23 @@ namespace Management.Events
 					}
 					break;
 			}
+		}
+
+		/// <summary>
+		/// 모듈코드에서 PinMode가 존재하는가
+		/// </summary>
+		/// <param name="_mList"></param>
+		/// <returns></returns>
+		private bool IsInPinMode(List<ModuleCode> _mList)
+		{
+			bool result = false;
+
+			if(_mList.Contains(ModuleCode.Work_Pinmode))
+			{
+				result = true;
+			}
+
+			return result;
 		}
 
 		private void Func_Input_clickSuccessUp(Status _success)

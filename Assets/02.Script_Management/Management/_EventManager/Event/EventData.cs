@@ -66,7 +66,7 @@ namespace Management.Events
 		/// <summary>
 		/// 이벤트 처리 메서드
 		/// </summary>
-		public abstract void OnProcess(GameObject _cObj);
+		public abstract void OnProcess(GameObject _cObj, List<ModuleCode> _mList);
 
 
 		/// <summary>

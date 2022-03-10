@@ -69,7 +69,7 @@ namespace Management
 			// 받아온 이벤트의 내부처리 메서드를 시행
 			// 내부에 연산 결과로 내부의 interactable 인터페이스 상속 인스턴스 업데이트됨.
 			// 추후 전달 데이터가 늘어나면 새로 내부 클래스 작성하기
-			currEvent.OnProcess(cacheDownObj);
+			currEvent.OnProcess(cacheDownObj, _ModuleList);
 
 			DoEvent(EventStates, currEvent);
 			try

@@ -36,7 +36,7 @@ namespace Management.Events
 
 		
 
-		public override void OnProcess(GameObject _cObj)
+		public override void OnProcess(GameObject _cObj, List<ModuleCode> _mList)
 		{
 			Debug.Log("OnProcess Empty");
 		}

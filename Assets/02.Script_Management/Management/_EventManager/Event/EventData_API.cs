@@ -24,7 +24,7 @@ namespace Management.Events
 			m_clickEvent = _event;
 		}
 
-		public override void OnProcess(GameObject _cObj)
+		public override void OnProcess(GameObject _cObj, List<ModuleCode> _mList)
 		{
 			switch(EventType)
 			{
