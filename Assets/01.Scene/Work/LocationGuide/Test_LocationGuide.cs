@@ -32,6 +32,12 @@ namespace Test
 			SetGuide(target, target.transform.rotation.eulerAngles, uType);
 		}
 
+		/// <summary>
+		/// 개선된 카메라 할당코드
+		/// </summary>
+		/// <param name="_obj"></param>
+		/// <param name="_baseAngle"></param>
+		/// <param name="_uType"></param>
 		public void SetCamera(GameObject _obj, Vector3 _baseAngle, UIEventType _uType)
 		{
 			Vector3 center = default(Vector3);
@@ -55,6 +61,12 @@ namespace Test
 			cam.transform.Translate(Vector3.back * 5f);
 		}
 
+		/// <summary>
+		/// LocationGuide 할당코드
+		/// </summary>
+		/// <param name="_obj"></param>
+		/// <param name="_baseAngle"></param>
+		/// <param name="_uType"></param>
 		public void SetGuide(GameObject _obj, Vector3 _baseAngle, UIEventType _uType)
 		{
 			Vector3 targetPos = target.transform.position;

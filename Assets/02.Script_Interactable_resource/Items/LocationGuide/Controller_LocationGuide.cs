@@ -52,9 +52,6 @@ namespace Items
 			SetCubeLine(setScale);
 		}
 
-
-
-
 		/// <summary>
 		/// 개별 영역의 크기를 조절한다.
 		/// </summary>
