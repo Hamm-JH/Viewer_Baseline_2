@@ -120,10 +120,10 @@ namespace Management
 			SetCameraCenter(_obj, _baseAngle, uType);
 		}
 
-		internal void DirectionAngle(int v, Vector3 angle)
-		{
-			throw new NotImplementedException();
-		}
+		//internal void DirectionAngle(int v, Vector3 angle)
+		//{
+		//	throw new NotImplementedException();
+		//}
 
 		// 우측 UI창 크기변경
 		internal void GetRightWebUIWidth(float width)

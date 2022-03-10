@@ -63,7 +63,8 @@ namespace Definition.Data
 
 				mainCam.transform.position = center;
 				//mainCam.transform.localPosition = default(Vector3);
-				mainCam.transform.rotation = Quaternion.Euler(_baseAngle + Angle.Set(eventType));
+				mainCam.transform.rotation = Quaternion.Euler(_baseAngle/* + Angle.Set(eventType)*/);
+				mainCam.transform.Rotate(Angle.Set(eventType));
 
 				// 스크린 비율계산
 				float ratio = 0f;

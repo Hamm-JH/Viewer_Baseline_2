@@ -1,11 +1,13 @@
+using Management;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Items
 {
+	using Definition;
 
-	public class Controller_LocationGuide : MonoBehaviour
+	public class Controller_LocationGuide : AItem
 	{
 		[SerializeField] List<LocationElement> m_elements;
 
@@ -20,7 +22,38 @@ namespace Items
 		private void Start()
 		{
 			m_elements.ForEach(x => x.GetComponent<MeshRenderer>().material = m_default);
+
+			UpdateState(EventManager.Instance._ModuleList);
 		}
+
+		public override void UpdateState(List<Definition.ModuleCode> _mList)
+		{
+			// 이 아이템은 PinMode일때 동작함
+			gameObject.SetActive(_mList.Contains(ModuleCode.Work_Pinmode));
+		}
+
+		public override void SetGuide(GameObject _target, Vector3 _baseAngle, UIEventType _uType)
+		{
+			Bounds bound = _target.GetComponent<MeshRenderer>().bounds;
+
+			Vector3 targetPos = bound.center;
+			Vector3 targetScale = bound.size;
+			//Vector3 targetPos = _target.transform.position;
+			//Vector3 targetScale = _target.transform.localScale;
+
+			transform.position = targetPos;
+			transform.rotation = Quaternion.Euler(_baseAngle);
+			transform.Rotate(Angle.Set(_uType));
+			transform.Translate(Positions.SetLocal(_target, _uType));
+
+			Vector3 setScale = Scales.SetQuad(_target, _uType);
+			transform.localScale = setScale;
+
+			SetCubeLine(setScale);
+		}
+
+
+
 
 		/// <summary>
 		/// 개별 영역의 크기를 조절한다.

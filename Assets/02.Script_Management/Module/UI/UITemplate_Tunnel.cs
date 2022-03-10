@@ -6,7 +6,7 @@ namespace Module.UI
 {
 	using UnityEngine.UI;
 
-	public class UITemplate_0225 : AUI
+	public class UITemplate_Tunnel : AUI
 	{
 		[SerializeField] Text m_segment;
 		[SerializeField] Text m_line;
@@ -22,7 +22,7 @@ namespace Module.UI
 		{
 			if (selected == null) return;
 
-			Debug.LogError($"selected name : {selected.name}");
+			//Debug.LogError($"selected name : {selected.name}");
 			string seg = "";
 			string line = "";
 

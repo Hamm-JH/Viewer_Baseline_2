@@ -8,6 +8,7 @@ namespace Management
 	using Module;
 	using Module.Graphic;
 	using Module.Interaction;
+	using Module.Item;
 	using Module.Model;
 	using Module.UI;
 	using Module.WebAPI;
@@ -27,6 +28,7 @@ namespace Management
 		Module_WebAPI m_api;
 		Module_Interaction m_interaction;
 		Module_Graphic m_graphic;
+		Module_Items m_items;
 
 		public List<AModule> Modules { get => m_modules; set => m_modules=value; }
 
@@ -98,6 +100,24 @@ namespace Management
 			}
 		}
 
+		public Module_Items _Items 
+		{ 
+			get
+			{
+				if(m_items == null)
+				{
+					Module_Items mod = (Module_Items)Modules.Find(x => x.ID == ModuleID.Item);
+					if (mod != null) m_items = mod;
+					else
+					{
+						throw new Exception("Items module is null");
+					}
+				}
+				return m_items;
+			}
+			
+		}
+
 		#endregion
 
 		List<GameObject> m_modelObjects;
@@ -151,14 +171,32 @@ namespace Management
 			get
 			{
 				var _events = EventManager.Instance.EventStates;
-				if(_events.ContainsKey(InputEventType.Input_clickSuccessUp))
+				// 핀 등록 모드가 아닐땐 SuccessUp 코드에서 대상을 찾는다.
+				if(!EventManager.Instance._ModuleList.Contains(ModuleCode.Work_Pinmode))
 				{
-					return _events[InputEventType.Input_clickSuccessUp].Elements.Last().Target;
+					if(_events.ContainsKey(InputEventType.Input_clickSuccessUp))
+					{
+						return _events[InputEventType.Input_clickSuccessUp].Elements.Last().Target;
+					}
+					else
+					{
+						return null;
+					}
 				}
 				else
 				{
-					return null;
+					return EventManager.Instance._Cache;
 				}
+			}
+		}
+
+		public Vector3 _SelectedAngle
+		{
+			get
+			{
+				GameObject obj = _SelectedObj;
+				// Tunnel
+				return obj.transform.parent.parent.rotation.eulerAngles;
 			}
 		}
 

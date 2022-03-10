@@ -289,36 +289,20 @@ namespace View
 
 			//Debug.Log($"OnSelect : {this.name}");
 
+			// 핀모드엔 색변경 중단
+			if (EventManager.Instance._ModuleList.Contains(ModuleCode.Work_Pinmode)) return;
+
 			PlatformCode platform = MainManager.Instance.Platform;
 
-			if (platform == PlatformCode.PC_Viewer_Tunnel)
+			List<GameObject> objs = Targets;
+			foreach (GameObject obj in objs)
 			{
-				List<GameObject> objs = Targets;
-				foreach (GameObject obj in objs)
+				MeshRenderer render;
+				if (obj.TryGetComponent<MeshRenderer>(out render))
 				{
-					MeshRenderer render;
-					if (obj.TryGetComponent<MeshRenderer>(out render))
-					{
-						Color colr = render.material.color;
+					Color colr = render.material.color;
 
-						Materials.Set(render, ColorType.Selected1, render.material.color.a);
-						//render.material.SetColor("_Color", Colors.Set(ColorType.Selected1, colr.a));
-					}
-				}
-			}
-			else if (platform == PlatformCode.PC_Viewer_Bridge)
-			{
-				List<GameObject> objs = Targets;
-				foreach (GameObject obj in objs)
-				{
-					MeshRenderer render;
-					if (obj.TryGetComponent<MeshRenderer>(out render))
-					{
-						Color colr = render.material.color;
-
-						Materials.Set(render, ColorType.Selected1, render.material.color.a);
-						//render.material.SetColor("_Color", Colors.Set(ColorType.Selected1, colr.a));
-					}
+					Materials.Set(render, ColorType.Selected1, render.material.color.a);
 				}
 			}
 		}

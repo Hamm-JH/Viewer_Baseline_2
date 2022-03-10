@@ -16,9 +16,11 @@ namespace Definition
 		{
 			Vector3 result = default(Vector3);
 
-			Vector3 tgScale = _tar.transform.localScale;
+			Bounds bound = _tar.GetComponent<MeshRenderer>().bounds;
+			Vector3 tgScale = bound.size;
+			//Vector3 tgScale = _tar.transform.localScale;
 
-			switch(_uType)
+			switch (_uType)
 			{
 				case UIEventType.Viewport_ViewMode_TOP:
 				case UIEventType.Viewport_ViewMode_BOTTOM:

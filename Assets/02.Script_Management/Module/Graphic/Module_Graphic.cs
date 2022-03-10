@@ -19,7 +19,7 @@ namespace Module.Graphic
 
 		public override void OnStart()
 		{
-			Debug.LogError($"{this.GetType().ToString()} Run");
+			Debug.LogWarning($"{this.GetType().ToString()} OnStart");
 			
 			// TODO 0222 : 그래픽 템플릿별 스타일 적용
 		}

@@ -26,11 +26,6 @@ namespace Management
 			Debug.Log("OnUpdate");
 		}
 
-		private void Awake()
-		{
-			cacheDownObj = null;
-		}
-
 		private void OnEnable()
 		{
 			cacheDownObj = null;

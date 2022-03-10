@@ -197,13 +197,10 @@ namespace Module.WebAPI
 
 		#endregion
 
+		#region PinMode
+
 		private void Func_ChangePinMode()
         {
-            GameObject obj = ContentManager.Instance._SelectedObj;
-
-            //Transform currentSelectedObj = ContentManager.Instance.SelectedObject;
-            MeshRenderer meshRenderer;
-
             var moduleList = EventManager.Instance._ModuleList;
 
             if (moduleList.Contains(ModuleCode.WorkQueue))
@@ -212,277 +209,45 @@ namespace Module.WebAPI
 				{
                     moduleList.Add(ModuleCode.Work_Pinmode);
 
-                    // TODO 0308 Module.Graphic에서 스카이박스 변경 코드 작성
-                    // skybox 변경
-                    RenderSettings.skybox = ContentManager.Instance.PinModeSkyboxMaterial;
-
-                    // TODO 0308 GuideCube 기존 코드에서 가져와서 구현하기
-                    // GuideLine On
-                    ContentManager.Instance.SwitchGuideCubeOnOff(true);
-
-                    // TODO 0308 아래 코드 최적화
-                    Bounds nB = new Bounds();
-                    if (ContentManager.Instance.AppUseCase == UseCase.Bridge
-                        || ContentManager.Instance.AppUseCase == UseCase.Tunnel)
-                    {
-                        nB = obj.GetComponent<Obj_Selectable>().Bounds;
-                    }
-
-                    Debug.Log($"_____ {obj.name}");
-
-                    bool isEtc = false;
-
-                    // TODO do remove
-                    //string side = GetSurfaceSide(issueEntity.Issue, out isEtc);
-                    //ContentManager.Instance.ChangeCameraDirection(side, nB, currentSelectedObj.parent.parent.localRotation.eulerAngles, isEtc);
-                    //manager.UISubManager.GuideLineController.ChangeCameraDirection(issueEntity.issueData.DcMemberSurface, nB, currentSelectedObj.parent.parent.localRotation.eulerAngles);
-
-                    // 선택객체 Mat White
-                    if (obj.TryGetComponent<MeshRenderer>(out meshRenderer))
-                    {
-                        meshRenderer.material = Materials.Set(MaterialType.White);
-                    }
-                    for (int i = 0; i < obj.transform.childCount; i++)
-                    {
-                        if (obj.transform.GetChild(i).TryGetComponent<MeshRenderer>(out meshRenderer))
-                        {
-                            meshRenderer.material = Materials.Set(MaterialType.White);
-                        }
-                    }
-
-                    // DimViewManager 설정 (선택한 객체만 보이기)
-                    ContentManager.Instance.Toggle_ModelObject(UIEventType.Mode_Isolate, ToggleType.Isolate);
-
-                    // __////////////////
-
-                    ViewRotations vr = ViewRotations.Top;
-                    int cubeDir = 0;
-                    int imgIndex = 0;
-
-                    isEtc = false;
-                    // TODO do remove
-                    //side = GetSurfaceSide(issueEntity.Issue, out isEtc);
-                    //switch (side)
-                    //{
-                    //    case "Top":
-                    //        vr = ViewRotations.Top;
-                    //        cubeDir = 0;
-                    //        imgIndex = 1;
-                    //        break;
-
-                    //    case "Bottom":
-                    //        vr = ViewRotations.Bottom;
-                    //        cubeDir = 1;
-                    //        imgIndex = 2;
-                    //        break;
-
-                    //    case "Front":
-                    //        vr = ViewRotations.Front;
-                    //        cubeDir = 2;
-                    //        imgIndex = 3;
-                    //        break;
-
-                    //    case "Back":
-                    //        vr = ViewRotations.Back;
-                    //        cubeDir = 3;
-                    //        imgIndex = 4;
-                    //        break;
-
-                    //    case "Left":
-                    //        vr = ViewRotations.Left;
-                    //        cubeDir = 4;
-                    //        imgIndex = 5;
-                    //        break;
-
-                    //    case "Right":
-                    //        vr = ViewRotations.Right;
-                    //        cubeDir = 5;
-                    //        imgIndex = 6;
-                    //        break;
-                    //}
-
-                    Transform selectObj = ContentManager.Instance.SelectedObject;
-                    Vector3 _angle = selectObj.parent.parent.rotation.eulerAngles;
-
-                    ContentManager.Instance.DirectionAngle(cubeDir, _angle); // 4 left
-                    ContentManager.Instance.DirectionAngle(cubeDir, _angle); // 4
+                    Toggle_ChangePinMode(true);
 				}
                 else
 				{
                     moduleList.Remove(ModuleCode.Work_Pinmode);
 
-                    //ContentManager.Instance.ViewSceneStatus = SceneStatus.Register;
-                    //manager.IsPinMode = false;
-
-                    // skybox 변경
-                    RenderSettings.skybox = ContentManager.Instance.DefaultSkyboxMaterial;
-
-                    // GuideLine Off
-                    ContentManager.Instance.SwitchGuideCubeOnOff(false);
-                    // 위치 초기화
-                    //ContentManager.Instance.UISubManager.GuideLineController.transform.position = new Vector3(0, 0, 0);
-
-                    // 선택객체 Mat 객체선택으로 변경
-                    if (obj.TryGetComponent<MeshRenderer>(out meshRenderer))
-                    {
-                        meshRenderer.material = Materials.Set(MaterialType.White);
-                    }
-                    for (int i = 0; i < obj.transform.childCount; i++)
-                    {
-                        if (obj.transform.GetChild(i).TryGetComponent<MeshRenderer>(out meshRenderer))
-                        {
-                            meshRenderer.material = Materials.Set(MaterialType.White);
-                        }
-                    }
-
-                    ViewRotations vr = ViewRotations.Top;
-                    int cubeDir = 0;
-                    int imgIndex = 0;
-
-                    bool isEtc = false;
-                    // TODO do remove
-                    //string side = GetSurfaceSide(issueEntity.Issue, out isEtc);
-                    //switch (side)
-                    //{
-                    //    case "Top":
-                    //        vr = ViewRotations.Top;
-                    //        cubeDir = 0;
-                    //        imgIndex = 1;
-                    //        break;
-
-                    //    case "Bottom":
-                    //        vr = ViewRotations.Bottom;
-                    //        cubeDir = 1;
-                    //        imgIndex = 2;
-                    //        break;
-
-                    //    case "Front":
-                    //        vr = ViewRotations.Front;
-                    //        cubeDir = 2;
-                    //        imgIndex = 3;
-                    //        break;
-
-                    //    case "Back":
-                    //        vr = ViewRotations.Back;
-                    //        cubeDir = 3;
-                    //        imgIndex = 4;
-                    //        break;
-
-                    //    case "Left":
-                    //        vr = ViewRotations.Left;
-                    //        cubeDir = 4;
-                    //        imgIndex = 5;
-                    //        break;
-
-                    //    case "Right":
-                    //        vr = ViewRotations.Right;
-                    //        cubeDir = 5;
-                    //        imgIndex = 6;
-                    //        break;
-                    //}
-
-                    Transform selectObj = ContentManager.Instance.SelectedObject;
-                    Vector3 _angle = selectObj.parent.parent.rotation.eulerAngles;
-
-                    ContentManager.Instance.DirectionAngle(cubeDir, _angle); // 4 left
-                    ContentManager.Instance.DirectionAngle(cubeDir, _angle); // 4
-
-                    //viewmanager.DimSet(manager.InputManager.SelectionController.SelectedObject, vr, true);
+                    Toggle_ChangePinMode(false);
                 }
             }
             else
 			{
                 Debug.Log($"Invalid access");
             }
-
-			{
-                //else if (ContentManager.Instance.ViewSceneStatus == SceneStatus.Register_PinMode)
-                //{
-                //    //ContentManager.Instance.ViewSceneStatus = SceneStatus.Register;
-                //    ////manager.IsPinMode = false;
-
-                //    //// skybox 변경
-                //    //RenderSettings.skybox = ContentManager.Instance.DefaultSkyboxMaterial;
-
-                //    //// GuideLine Off
-                //    //ContentManager.Instance.SwitchGuideCubeOnOff(false);
-                //    //// 위치 초기화
-                //    ////ContentManager.Instance.UISubManager.GuideLineController.transform.position = new Vector3(0, 0, 0);
-
-                //    //// 선택객체 Mat 객체선택으로 변경
-                //    //if (currentSelectedObj.TryGetComponent<MeshRenderer>(out meshRenderer))
-                //    //{
-                //    //    meshRenderer.material = Materials.Set(MaterialType.White);
-                //    //}
-                //    //for (int i = 0; i < currentSelectedObj.childCount; i++)
-                //    //{
-                //    //    if (currentSelectedObj.GetChild(i).TryGetComponent<MeshRenderer>(out meshRenderer))
-                //    //    {
-                //    //        meshRenderer.material = Materials.Set(MaterialType.White);
-                //    //    }
-                //    //}
-
-                //    //ViewRotations vr = ViewRotations.Top;
-                //    //int cubeDir = 0;
-                //    //int imgIndex = 0;
-
-                //    //bool isEtc = false;
-                //    //string side = GetSurfaceSide(issueEntity.Issue, out isEtc);
-                //    //switch (side)
-                //    //{
-                //    //    case "Top":
-                //    //        vr = ViewRotations.Top;
-                //    //        cubeDir = 0;
-                //    //        imgIndex = 1;
-                //    //        break;
-
-                //    //    case "Bottom":
-                //    //        vr = ViewRotations.Bottom;
-                //    //        cubeDir = 1;
-                //    //        imgIndex = 2;
-                //    //        break;
-
-                //    //    case "Front":
-                //    //        vr = ViewRotations.Front;
-                //    //        cubeDir = 2;
-                //    //        imgIndex = 3;
-                //    //        break;
-
-                //    //    case "Back":
-                //    //        vr = ViewRotations.Back;
-                //    //        cubeDir = 3;
-                //    //        imgIndex = 4;
-                //    //        break;
-
-                //    //    case "Left":
-                //    //        vr = ViewRotations.Left;
-                //    //        cubeDir = 4;
-                //    //        imgIndex = 5;
-                //    //        break;
-
-                //    //    case "Right":
-                //    //        vr = ViewRotations.Right;
-                //    //        cubeDir = 5;
-                //    //        imgIndex = 6;
-                //    //        break;
-                //    //}
-
-                //    //Transform selectObj = ContentManager.Instance.SelectedObject;
-                //    //Vector3 _angle = selectObj.parent.parent.rotation.eulerAngles;
-
-                //    //ContentManager.Instance.DirectionAngle(cubeDir, _angle); // 4 left
-                //    //ContentManager.Instance.DirectionAngle(cubeDir, _angle); // 4
-
-                //    ////viewmanager.DimSet(manager.InputManager.SelectionController.SelectedObject, vr, true);
-                //}
-                //else
-                //{
-                //    Debug.Log($"Invalid access");
-                //}
-			}
         }
 
-        private void Func_InitializeRegisterMode()
+        private void Toggle_ChangePinMode(bool isMode)
+		{
+            var moduleList = EventManager.Instance._ModuleList;
+
+            List<string> codes = new List<string> { "Top" };
+            string _fCode = codes.First();
+            UIEventType uType = Parsers.OnParse(_fCode);
+
+            if (isMode)
+			{
+                GameObject obj = ContentManager.Instance._SelectedObj;
+                Vector3 angle = ContentManager.Instance._SelectedAngle;
+
+                ContentManager.Instance._Items.SetGuide(obj, angle, uType);
+			}
+
+            ContentManager.Instance._Items.OnUpdateState(moduleList);
+		}
+
+		#endregion
+
+		#region InitializeRegisterMode
+
+		private void Func_InitializeRegisterMode()
         {
             GameObject obj = ContentManager.Instance._SelectedObj;
             //Transform objectTransform = ContentManager.Instance.SelectedObject;
@@ -506,49 +271,6 @@ namespace Module.WebAPI
 			}
         }
 
-        private void Func_FinishRegisterMode()
-        {
-            var moduleList = EventManager.Instance._ModuleList;
-
-            if(moduleList.Contains(ModuleCode.WorkQueue))
-			{
-                moduleList.Remove(ModuleCode.WorkQueue);
-                moduleList.Remove(ModuleCode.Work_Pinmode);
-
-                StartCoroutine(FinishRequestMode());
-            }
-        }
-
-        #endregion
-
-
-
-        private string GetSurfaceSide(Definition._Issue.Issue _data, out bool isEtc)
-        {
-            string result = "";
-            isEtc = false;
-
-            if (_data.CdBridgeParts.Contains("Etc"))
-            {
-                isEtc = true;
-                if (_data.CdBridgeParts.Contains("_R"))
-                {
-                    result = "Back";
-                }
-                // _L로 봄
-                else
-                {
-                    result = "Front";
-                }
-            }
-            else
-            {
-                result = _data.DcMemberSurface;
-            }
-
-            return result;
-        }
-
         private IEnumerator InitRequestMode(GameObject _obj)
         {
             ContentManager.Instance.Function_ToggleOrthoView(true);
@@ -568,6 +290,7 @@ namespace Module.WebAPI
             Cameras.SetCamera(_fCode);
 
             // 선택 객체 제외하고 모두 끄기 (Isolate)
+            ContentManager.Instance.Cache_SelectedObject();
             ContentManager.Instance.Toggle_ModelObject(UIEventType.Mode_Isolate_Off, ToggleType.Isolate);
 
             // 선택된 객체에 해당하는 손상/보강 객체만 표시하기
@@ -576,8 +299,25 @@ namespace Module.WebAPI
             yield break;
         }
 
+        #endregion
+
+        #region FinishRegisterMode
+
+        private void Func_FinishRegisterMode()
+        {
+            var moduleList = EventManager.Instance._ModuleList;
+
+            if(moduleList.Contains(ModuleCode.WorkQueue))
+			{
+                moduleList.Remove(ModuleCode.WorkQueue);
+                moduleList.Remove(ModuleCode.Work_Pinmode);
+
+                StartCoroutine(FinishRequestMode());
+            }
+        }
+
         private IEnumerator FinishRequestMode()
-		{
+        {
             // TODO 0307 카메라 세팅 변경 (기존 참조)
             ContentManager.Instance.Function_ToggleOrthoView(false);
 
@@ -593,15 +333,18 @@ namespace Module.WebAPI
             // TODO 0307 Dim 비활성화
             //ContentManager.Instance.Toggle_Dimension(false);
 
+            ContentManager.Instance.Remove_Cache();
+
             // 이슈 정보 다시 로드
             ReceiveRequest("ResetIssue");
 
 
 
             yield break;
-		}
+        }
 
+        #endregion
 
-        
+        #endregion
     }
 }

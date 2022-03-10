@@ -108,4 +108,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d111dc2a0b22b142804f4d59508b893, type: 3}
   m_Name: NewURPOutlineFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0

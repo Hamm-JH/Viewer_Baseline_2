@@ -38,12 +38,19 @@ namespace Management
 			}
 		}
 
-		private void Start()
+		public GameObject _Cache
 		{
+			get => m_eStatus.Selected_Cache;
+			set => m_eStatus.Selected_Cache = value;
+		}
+
+		private void Awake()
+		{
+			cacheDownObj = null;
+
 			EventStates = new Dictionary<InputEventType, EventData>();
 			m_eStatus = new EventStatement();
 			EventStates.Add(InputEventType.Statement, m_eStatus);
-			//SelectedObjects = new List<EventData>();
 		}
 
 		public void OnEvent(EventData currEvent)

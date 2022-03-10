@@ -18,7 +18,8 @@ namespace Definition
             GameObject obj = ContentManager.Instance._SelectedObj;
 
             ViewRotations vCode = ViewRotations.Null;
-            Vector3 angle = obj.transform.parent.parent.rotation.eulerAngles;
+            Vector3 angle = ContentManager.Instance._SelectedAngle;
+            //Vector3 angle = obj.transform.parent.parent.rotation.eulerAngles;
 
             vCode = Parsers.GetStringToViewCode(_code);
 

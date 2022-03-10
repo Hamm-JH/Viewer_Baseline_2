@@ -14,10 +14,18 @@ namespace Management.Events
 		/// </summary>
 		[SerializeField] List<ModuleCode> m_moduleList;
 
+		[SerializeField] GameObject cache_Pin;
+
 		public List<ModuleCode> ModuleList
 		{ 
 			get => m_moduleList; 
 			set => m_moduleList=value; 
+		}
+
+		public GameObject Selected_Cache
+		{
+			get => cache_Pin;
+			set => cache_Pin = value;
 		}
 
 		public EventStatement()
@@ -25,6 +33,8 @@ namespace Management.Events
 			EventType = InputEventType.Statement;
 			m_moduleList = new List<ModuleCode>();
 		}
+
+		
 
 		public override void OnProcess(GameObject _cObj)
 		{

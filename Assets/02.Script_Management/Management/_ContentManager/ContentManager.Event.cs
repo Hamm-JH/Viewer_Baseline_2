@@ -140,7 +140,21 @@ namespace Management
 			}
 		}
 
-		
+		/// <summary>
+		/// 등록단계에서 캐시 등록
+		/// </summary>
+		public void Cache_SelectedObject()
+		{
+			EventManager.Instance._Cache = ContentManager.Instance._SelectedObj;
+		}
+
+		/// <summary>
+		/// 캐시 삭제
+		/// </summary>
+		public void Remove_Cache()
+		{
+			EventManager.Instance._Cache = null;
+		}
 
 		public void Toggle_ModelObject(UIEventType _eventType, ToggleType _toggleType)
 		{

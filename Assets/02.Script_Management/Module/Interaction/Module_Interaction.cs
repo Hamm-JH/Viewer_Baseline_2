@@ -52,7 +52,7 @@ namespace Module.Interaction
 
 		public override void OnStart()
 		{
-			Debug.LogError($"{this.GetType().ToString()} Run");
+			Debug.LogWarning($"{this.GetType().ToString()} OnStart");
 
 			// TODO O 0222 컨텐츠 관리자에서 주관리자로 플랫폼 코드 요청, 플랫폼 코드 기반 불러오는 방식으로 변경
 			ContentManager.Instance.RunModule_UIInstantiate(UI_Instantiate);

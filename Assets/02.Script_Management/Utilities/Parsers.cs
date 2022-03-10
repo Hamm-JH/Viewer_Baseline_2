@@ -73,6 +73,23 @@ namespace Utilities
 			return uType;
 		}
 
+        public static UIEventType OnParse(string _value)
+		{
+            UIEventType uType = UIEventType.Null;
+
+            switch (_value)
+            {
+                case "Top":     uType = UIEventType.Viewport_ViewMode_TOP; break;
+                case "Bottom":  uType = UIEventType.Viewport_ViewMode_BOTTOM; break;
+                case "Front":   uType = UIEventType.Viewport_ViewMode_SIDE_FRONT; break;
+                case "Back":    uType = UIEventType.Viewport_ViewMode_SIDE_BACK; break;
+                case "Left":    uType = UIEventType.Viewport_ViewMode_SIDE_LEFT; break;
+                case "Right":   uType = UIEventType.Viewport_ViewMode_SIDE_RIGHT; break;
+            }
+
+            return uType;
+		}
+
         public static Bounds Calculate(GameObject _obj)
 		{
             Bounds result = default(Bounds);
