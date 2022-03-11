@@ -273,10 +273,12 @@ namespace Module.WebAPI
 
         private IEnumerator InitRequestMode(GameObject _obj)
         {
+            // 카메라 뷰 Orthogonal
             ContentManager.Instance.Function_ToggleOrthoView(true);
 
             yield return null;
 
+            // 카메라 설정 조정
             Bounds bound = Parsers.Calculate(_obj);
             MainManager.Instance.ResetCamdata_targetOffset();
             MainManager.Instance.UpdateCamData_maxOffset(bound.size.magnitude);

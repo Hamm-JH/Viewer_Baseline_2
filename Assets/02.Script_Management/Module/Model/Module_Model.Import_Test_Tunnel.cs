@@ -60,6 +60,8 @@ namespace Module.Model
 
 			//RemoveTrashCan();
 
+			//yield break;
+
 			ContentManager.Instance.SetCameraCenterPosition();
 
 		}

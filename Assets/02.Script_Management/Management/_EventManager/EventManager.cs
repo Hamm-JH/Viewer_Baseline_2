@@ -40,10 +40,16 @@ namespace Management
 			}
 		}
 
-		public GameObject _Cache
+		public GameObject _CacheObject
 		{
 			get => m_eStatus.CacheObject;
 			set => m_eStatus.CacheObject = value;
+		}
+
+		public GameObject _CachePin
+		{
+			get => m_eStatus.CachePin;
+			set => m_eStatus.CachePin = value;
 		}
 
 		private void Awake()

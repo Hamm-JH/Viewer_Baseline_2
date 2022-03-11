@@ -145,7 +145,9 @@ namespace Management
 		/// </summary>
 		public void Cache_SelectedObject()
 		{
-			EventManager.Instance._Cache = ContentManager.Instance._SelectedObj;
+			GameObject obj = ContentManager.Instance._SelectedObj;
+
+			EventManager.Instance._CacheObject = obj;
 		}
 
 		/// <summary>
@@ -153,7 +155,10 @@ namespace Management
 		/// </summary>
 		public void Remove_Cache()
 		{
-			EventManager.Instance._Cache = null;
+			//EventManager.Instance._CacheObject = null;
+
+			EventManager.Instance._Statement.Destroy_CacheObject();
+			EventManager.Instance._Statement.Destroy_CachePin();
 		}
 
 		public void Toggle_ModelObject(UIEventType _eventType, ToggleType _toggleType)

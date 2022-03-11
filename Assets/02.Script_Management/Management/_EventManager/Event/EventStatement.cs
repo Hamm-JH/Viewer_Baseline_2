@@ -65,12 +65,14 @@ namespace Management.Events
 
 		public void Destroy_CacheObject()
 		{
-			GameObject.Destroy(CacheObject);
+			// 여기 저장된 대상은 모델 객체임
+			//GameObject.Destroy(CacheObject);
 			CacheObject = null;
 		}
 
 		public void Destroy_CachePin()
 		{
+			// 여기 저장된 대상은 Cache Pin 객체
 			GameObject.Destroy(CachePin);
 			CachePin = null;
 		}

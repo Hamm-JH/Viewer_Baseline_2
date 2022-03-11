@@ -8239,7 +8239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_isInteractable: 0
   m_rootUI: {fileID: 8567444609279319568}
-  eventType: 66
+  eventType: 70
   m_unique: 0
   childPanel: {fileID: 0}
   m_uiFXs: []

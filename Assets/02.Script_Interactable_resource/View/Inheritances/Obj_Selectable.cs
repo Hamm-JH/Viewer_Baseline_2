@@ -289,8 +289,9 @@ namespace View
 
 			//Debug.Log($"OnSelect : {this.name}");
 
-			// 핀모드엔 색변경 중단
-			if (EventManager.Instance._ModuleList.Contains(ModuleCode.Work_Pinmode)) return;
+			// 등록 모드 진입 또는 핀모드엔 색변경 중단
+			var _mList = EventManager.Instance._ModuleList;
+			if (_mList.Contains(ModuleCode.WorkQueue) || _mList.Contains(ModuleCode.Work_Pinmode)) return;
 
 			PlatformCode platform = MainManager.Instance.Platform;
 

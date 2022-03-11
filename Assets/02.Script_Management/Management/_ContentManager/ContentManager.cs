@@ -185,7 +185,7 @@ namespace Management
 				}
 				else
 				{
-					return EventManager.Instance._Cache;
+					return EventManager.Instance._CacheObject;
 				}
 			}
 		}
