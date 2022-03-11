@@ -263,12 +263,25 @@ namespace Management.Events
 								// 위치값과 3D 객체가 모두 눌린 경우
 								if (element && selectable)
 								{
+									EventStatement _state = EventManager.Instance._Statement;
+
+									GameObject cache = _state.CachePin;
+
 									Debug.Log($"element index : {element.Index + 1}, selectable : {selectable.name}");
+									if(cache)
+									{
+										cache.transform.position = hit_selectable.point;
+									}
+									else
+									{
+										GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+										obj.name = "Issue element";
+										obj.transform.position = hit_selectable.point;
+
+										_state.CachePin = obj;
+									}
 									//Debug.Log($"element : {element.name}, selectable : {selectable.name}");
 
-									GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-									obj.name = "Issue element";
-									obj.transform.position = hit_selectable.point;
 									// TODO 데이터 집어넣고, 캐싱
 								}
 

@@ -14,7 +14,8 @@ namespace Management.Events
 		/// </summary>
 		[SerializeField] List<ModuleCode> m_moduleList;
 
-		[SerializeField] GameObject cache_Pin;
+		[SerializeField] GameObject m_pinModeObj;
+		[SerializeField] GameObject m_pinModePin;
 
 		public List<ModuleCode> ModuleList
 		{ 
@@ -22,10 +23,16 @@ namespace Management.Events
 			set => m_moduleList=value; 
 		}
 
-		public GameObject Selected_Cache
+		public GameObject CacheObject
 		{
-			get => cache_Pin;
-			set => cache_Pin = value;
+			get => m_pinModeObj;
+			set => m_pinModeObj = value;
+		}
+
+		public GameObject CachePin
+		{
+			get => m_pinModePin;
+			set => m_pinModePin = value;
 		}
 
 		public EventStatement()
@@ -55,5 +62,18 @@ namespace Management.Events
 		{
 			throw new System.NotImplementedException();
 		}
+
+		public void Destroy_CacheObject()
+		{
+			GameObject.Destroy(CacheObject);
+			CacheObject = null;
+		}
+
+		public void Destroy_CachePin()
+		{
+			GameObject.Destroy(CachePin);
+			CachePin = null;
+		}
+
 	}
 }

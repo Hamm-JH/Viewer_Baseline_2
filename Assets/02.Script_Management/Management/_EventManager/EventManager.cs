@@ -30,6 +30,8 @@ namespace Management
 
 		public Dictionary<InputEventType, EventData> EventStates { get => m_EventStates; set => m_EventStates=value; }
 
+		public EventStatement _Statement => m_eStatus;
+
 		public List<ModuleCode> _ModuleList
 		{
 			get
@@ -40,8 +42,8 @@ namespace Management
 
 		public GameObject _Cache
 		{
-			get => m_eStatus.Selected_Cache;
-			set => m_eStatus.Selected_Cache = value;
+			get => m_eStatus.CacheObject;
+			set => m_eStatus.CacheObject = value;
 		}
 
 		private void Awake()
