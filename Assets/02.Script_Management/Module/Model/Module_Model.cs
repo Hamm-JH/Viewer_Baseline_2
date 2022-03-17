@@ -44,11 +44,6 @@ namespace Module.Model
 			InExport();
 		}
 
-		//public override void OnCreate(ModuleID _id, FunctionCode _code)
-		//{
-		//	m_currentFunction = _code;
-		//}
-
 		public override void OnStart()
 		{
 			//Debug.LogError($"{this.GetType().ToString()} Run");

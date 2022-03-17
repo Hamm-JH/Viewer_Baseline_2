@@ -70,6 +70,11 @@ namespace Management
 			// 2 : Mobile
 			// 3 : PC
 
+			// 같은 WebGL이지만 구동되는 기기가 다르면 다른 플랫폼으로 쳐야한다.
+			// :: 플랫폼 코드만으로 해결이 안됨.
+			//if(Platforms.IsPCPlatform(_pCode)) { }
+
+			// TODO 기기 검색코드 작성
 			if (platformIndex == 1 || platformIndex == 3) // webgl
 			{
 				InitSingleInputResource<Platform.Feature._Input.Mouse>("mouse");

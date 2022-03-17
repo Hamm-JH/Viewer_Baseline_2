@@ -79,33 +79,10 @@ namespace View
 			PlatformCode platform = MainManager.Instance.Platform;
 			
 			
-
-			if(platform == PlatformCode.PC_Viewer_Tunnel)
+			MeshRenderer render;
+			if (gameObject.TryGetComponent<MeshRenderer>(out render))
 			{
-				MeshRenderer render;
-				if (gameObject.TryGetComponent<MeshRenderer>(out render))
-				{
-					Materials.Set(render, ColorType.Default1, render.material.color.a);
-					
-					//Color colr = render.material.color;
-					//render.material.SetColor("_Color", Colors.Set(ColorType.Default1, colr.a));
-				}
-			}
-			else if(platform == PlatformCode.PC_Viewer_Bridge)
-			{
-				List<GameObject> objs = Targets;
-				foreach(GameObject obj in objs)
-				{
-
-					MeshRenderer render;
-					if (obj.TryGetComponent<MeshRenderer>(out render))
-					{
-						Materials.Set(render, ColorType.Default1, render.material.color.a);
-						
-						//Color colr = render.material.color;
-						//render.material.SetColor("_Color", Colors.Set(ColorType.Default1, colr.a));
-					}
-				}
+				Materials.Set(render, ColorType.Default1, render.material.color.a);
 			}
 		}
 
@@ -150,7 +127,7 @@ namespace View
 			}
 		}
 
-		private void OnDeselect_ModelTransparency(PlatformCode _platform, UIEventType _uiType, float _value)
+		private void OnDeselect_ModelTransparency(PlatformCode _pCode, UIEventType _uiType, float _value)
 		{
 			if (!IsInteractable) return;
 
@@ -185,7 +162,7 @@ namespace View
 
 		
 
-		private void OnDeselect_3dModel(PlatformCode _platform, UIEventType _uiType, bool _isHide)
+		private void OnDeselect_3dModel(PlatformCode _pCode, UIEventType _uiType, bool _isHide)
 		{
 			if (!IsInteractable) return;
 
@@ -195,7 +172,7 @@ namespace View
 				bool eventHide = _uiType == UIEventType.Mode_Hide || _uiType == UIEventType.Mode_Hide_Off
 					? true : false;
 
-				if (_platform == PlatformCode.PC_Viewer_Tunnel)
+				if(Platforms.IsTunnelPlatform(_pCode))
 				{
 					List<GameObject> objs = Targets;
 					foreach (GameObject obj in objs)
@@ -254,7 +231,7 @@ namespace View
 						}
 					}
 				}
-				else if (_platform == PlatformCode.PC_Viewer_Bridge)
+				else if(Platforms.IsBridgePlatform(_pCode))
 				{
 					List<GameObject> objs = Targets;
 					foreach (GameObject obj in objs)

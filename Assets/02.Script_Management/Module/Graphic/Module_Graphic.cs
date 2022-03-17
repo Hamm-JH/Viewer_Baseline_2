@@ -11,6 +11,8 @@ namespace Module.Graphic
 		// 스카이 박스 그래픽 컨트롤
 		// 전체 그래픽 톤 관리
 
+		// TODO :: Graphic 모듈에서 ColorTable 관리
+
 		// Start is called before the first frame update
 		void Start()
 		{

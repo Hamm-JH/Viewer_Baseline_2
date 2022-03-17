@@ -131,7 +131,7 @@ namespace View
 			PlatformCode pCode = MainManager.Instance.Platform;
 
 			bool isDemoAdminViewer = false;
-			if (pCode == PlatformCode.WebGL_AdminViewer) isDemoAdminViewer = true;
+			if (Platforms.IsDemoAdminViewer(pCode)) isDemoAdminViewer = true;
 
 			// 데모용 관리자뷰어 모드일때
 			if (isDemoAdminViewer)

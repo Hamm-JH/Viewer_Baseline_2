@@ -22,9 +22,6 @@ namespace Utilities
                 case "Top":
                 case "TO":
                     result = ViewRotations.Top;
-                    //ContentManager.Instance.DirectionAngle(0, _angle);
-                    //ContentManager.Instance.DcMemberSurface = "Top";
-                    //ContentManager.Instance.SetInspectionImage(1);
                     break;
 
                 case "Bottom":

@@ -12,20 +12,16 @@ namespace Management
 		{
 			Definition.SceneName sceneName = SceneName.NotDef;
 
-			switch(_pCode)
+			if(Platforms.IsMakerPlatform(_pCode))
 			{
-				case PlatformCode.PC_Maker1:
-					sceneName = SceneName.Maker;
-					break;
-
-				case PlatformCode.WebGL_AdminViewer:
-				case PlatformCode.PC_Viewer_Tunnel:
-				case PlatformCode.PC_Viewer_Bridge:
-					sceneName = SceneName.Viewer;
-					break;
+				sceneName = SceneName.Maker;
+			}
+			else if(Platforms.IsViewerPlatform(_pCode))
+			{
+				sceneName = SceneName.Viewer;
 			}
 
-			if(_pCode == PlatformCode.NotDef)
+			if(Platforms.IsNotDefinition(_pCode))
 			{
 				Debug.LogError("올바른 플랫폼 코드가 아닙니다.");
 				return;

@@ -360,8 +360,7 @@ namespace Management.Events
 				//Element = sObj;
 
 				PlatformCode _pCode = MainManager.Instance.Platform;
-				if(_pCode == PlatformCode.PC_Viewer_Bridge 
-					|| _pCode == PlatformCode.PC_Viewer_Tunnel)
+				if(Platforms.IsSmartInspectPlatform(_pCode))
 				{
 					m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
 					m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
