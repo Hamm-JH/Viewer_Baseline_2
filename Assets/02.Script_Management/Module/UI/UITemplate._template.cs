@@ -1,11 +1,18 @@
+using Definition;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using View;
 
 namespace Module.UI
 {
 	public class UITemplate : AUI
 	{
+		public override void GetUIEvent(UIEventType _uType, UI_Selectable _setter)
+		{
+			throw new System.NotImplementedException();
+		}
+
 		public override void OnStart()
 		{
 			Debug.LogWarning("UITemplate OnStart");

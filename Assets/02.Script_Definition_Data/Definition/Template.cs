@@ -12,6 +12,10 @@ namespace Definition
 
 			switch(_platform)
 			{
+				case PlatformCode.WebGL_AdminViewer:
+					obj = Resources.Load<GameObject>("UI/UI_AdminViewer");
+					break;
+
 				case PlatformCode.PC_Viewer_Tunnel:
 				case PlatformCode.PC_Viewer_Bridge:
 					//obj = Resources.Load<GameObject>("UI/TestView0221");

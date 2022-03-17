@@ -29,6 +29,14 @@ namespace Definition
 				case ColorType.UI_Highlight:
 					color = new Color(0xff/255f, 0xff/255f, 0x00/255f, _alpha);
 					break;
+
+				case ColorType.UI_Ad_Default:
+					color = new Color(0x55/255f, 0x55/255f, 0x55/255f, _alpha);
+					break;
+
+				case ColorType.UI_Ad_Highlight:
+					color = new Color(0xff/255f, 0xff/255f, 0x00/255f, _alpha);
+					break;
 			}
 
 			return color;

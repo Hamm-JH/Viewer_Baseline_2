@@ -734,7 +734,7 @@ MonoBehaviour:
     m_issueDmgURI: 
     m_issueRcvURI: 
     m_keyCode: 
-  m_templateIndex: 0
+  m_templateIndex: 2
   _templateDatas:
   - m_platform: 49
     m_graphic: 0
@@ -801,6 +801,40 @@ MonoBehaviour:
     m_url: 
     m_baseURL: 
     m_modelURI: http://wesmart.synology.me:45000/3dmodel/20211102-00000066.gltf
+    m_issueDmgURI: 
+    m_issueRcvURI: 
+    m_keyCode: 
+  - m_platform: 18
+    m_graphic: 0
+    mouseData:
+      dragBoundary: 1.5
+      dragInvert: {x: 1, y: -1}
+      focusInvert: 1
+      clickBtnIndex: 0
+      dragBtnIndex: 1
+      bMaxOffsetDistance: 50
+      bOrbitSpeed: 15
+      bPanSpeed: 0.5
+      bZoomSpeed: 10
+    keyboardData:
+      keyFront: 119
+      keyBack: 115
+      keyLeft: 97
+      keyRight: 100
+      keyUp: 101
+      keyDown: 113
+      keyBoost: 304
+      keyCtrl: 306
+    cameraData:
+      bMaxOffsetDistance: 50
+      bOrbitSpeed: 15
+      bPanSpeed: 0.5
+      bZoomSpeed: 10
+    m_moduleList: 10000000
+    m_functionCode: 11000000
+    m_url: 
+    m_baseURL: 
+    m_modelURI: http://wesmart.synology.me:45001/3dmodel/20211202-00000283.gltf
     m_issueDmgURI: 
     m_issueRcvURI: 
     m_keyCode: 

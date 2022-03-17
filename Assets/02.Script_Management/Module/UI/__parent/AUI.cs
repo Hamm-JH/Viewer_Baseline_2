@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Module.UI
 {
 	using Definition;
+	using View;
 
 	[System.Serializable]
 	public abstract class AUI : AModule
@@ -25,5 +26,13 @@ namespace Module.UI
 		/// </summary>
 		/// <param name="index"></param>
 		public abstract void TogglePanelList(int _index, GameObject _exclusive);
+
+		/// <summary>
+		/// 개별 UI 요소에서 받은 이벤트를 UI 패널 레벨에서 분배처리
+		/// </summary>
+		/// <param name="_uType"></param>
+		/// <param name="_setter"></param>
+		
+		public abstract void GetUIEvent(UIEventType _uType, UI_Selectable _setter);
 	}
 }

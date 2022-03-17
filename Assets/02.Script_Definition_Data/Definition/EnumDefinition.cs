@@ -14,6 +14,7 @@ namespace Definition
 
 		WebGL_Template1 = 0x10,
 		WebGL_Template2 = 0x11,
+		WebGL_AdminViewer = 0x12,
 
 		Mobile_Template1 = 0x20,
 		Mobile_Template2 = 0x21,
@@ -249,6 +250,18 @@ namespace Definition
 
 		Test_Surface = 0x110,
 
+		Ad_nav_state1 = 0x200,
+		Ad_nav_state2 = 0x201,
+		Ad_nav_state3 = 0x202,
+		Ad_nav_state4 = 0x203,
+		Ad_nav_state5 = 0x204,
+
+		Ad_Prev = 0x210,
+		Ad_Next = 0x211,
+
+		Ad_St3_Toggle = 0x216,
+		Ad_St4_Toggle = 0x217,
+		Ad_St5_Toggle = 0x218,
 	}
 
 	public enum UniqueUIEventType
@@ -279,6 +292,8 @@ namespace Definition
 		UI_Default = 0x30,
 		UI_Highlight = 0x31,
 
+		UI_Ad_Default = 0x200,
+		UI_Ad_Highlight = 0x201,
 	}
 	
 	// Definition types

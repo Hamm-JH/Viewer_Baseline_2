@@ -24,18 +24,18 @@ namespace View
 			// 자식 객체 토글
 			// 이 인스턴스가 가진 childPanel을 보내 토글 끄기 대상에서 제외한다.
 
-			m_rootUI.TogglePanelList(index, childPanel);
+			m_rootUI.TogglePanelList(index, ChildPanel);
 		}
 
 		private void Event_Toggle_ViewMode()
 		{
 			bool toggle = false;
 
-			if (childPanel != null)
+			if (ChildPanel != null)
 			{
-				toggle = !(bool)childPanel.activeSelf;
+				toggle = !(bool)ChildPanel.activeSelf;
 				
-				childPanel.SetActive(toggle);
+				ChildPanel.SetActive(toggle);
 
 				foreach(GameObject obj in m_uiFXs)
 				{

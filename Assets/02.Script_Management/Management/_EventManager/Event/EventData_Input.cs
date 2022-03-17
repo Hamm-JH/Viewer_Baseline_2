@@ -359,8 +359,13 @@ namespace Management.Events
 
 				//Element = sObj;
 
-				m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-				m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+				PlatformCode _pCode = MainManager.Instance.Platform;
+				if(_pCode == PlatformCode.PC_Viewer_Bridge 
+					|| _pCode == PlatformCode.PC_Viewer_Tunnel)
+				{
+					m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+					m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+				}
 				StatusCode = _success;
 				return;
 			}
@@ -402,13 +407,13 @@ namespace Management.Events
 							m_clickEvent.Invoke(Elements.Last().Target);
 							// TODO
 							ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
-							ContentManager.Instance.Toggle_ChildTabs(1);
+							//ContentManager.Instance.Toggle_ChildTabs(1);
 						}
 						else if(obj.TryGetComponent<Issue_Selectable>(out iObj))
 						{
 							m_clickEvent.Invoke(Elements.Last().Target);
 							ContentManager.Instance.OnSelect_Issue(Elements.Last().Target);
-							ContentManager.Instance.Toggle_ChildTabs(1);
+							//ContentManager.Instance.Toggle_ChildTabs(1);
 						}
 					}
 					// 빈 공간을 선택한 경우
@@ -417,7 +422,7 @@ namespace Management.Events
 
 						m_clickEvent.Invoke(null);
 						ContentManager.Instance.OnSelect_3D(null);
-						ContentManager.Instance.Toggle_ChildTabs(1);
+						//ContentManager.Instance.Toggle_ChildTabs(1);
 					}
 					break;
 

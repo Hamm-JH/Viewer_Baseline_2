@@ -25,28 +25,41 @@ namespace Module.Model
 
 			Model.transform.SetParent(root.transform);
 			PlatformCode platform = MainManager.Instance.Platform;
-			if (platform == PlatformCode.PC_Viewer_Tunnel)
+			switch(platform)
 			{
-				
-			}
-			else if (platform == PlatformCode.PC_Viewer_Bridge)
-			{
-				Model.transform.localScale = new Vector3(0.001f, 0.001f, 0.001f);
-			}
+				case PlatformCode.WebGL_AdminViewer:
+				case PlatformCode.PC_Viewer_Tunnel:
+					break;
 
-
+				case PlatformCode.PC_Viewer_Bridge:
+					Model.transform.localScale = new Vector3(0.001f, 0.001f, 0.001f);
+					break;
+			}
+			
 			Transform[] children = Model.transform.GetComponentsInChildren<Transform>();
 			SetChildren(children);
 
 			// TODO 0223
-			if(platform == PlatformCode.PC_Viewer_Tunnel)
+			switch(platform)
 			{
-				InitializeObjectTunnel(root);
+				case PlatformCode.WebGL_AdminViewer:
+				case PlatformCode.PC_Viewer_Tunnel:
+					InitializeObjectTunnel(root);
+					break;
+
+				case PlatformCode.PC_Viewer_Bridge:
+					InitializeObjectBridge(root);
+					break;
+
 			}
-			else if(platform == PlatformCode.PC_Viewer_Bridge)
-			{
-				InitializeObjectBridge(root);
-			}
+			//if(platform == PlatformCode.PC_Viewer_Tunnel)
+			//{
+			//	InitializeObjectTunnel(root);
+			//}
+			//else if(platform == PlatformCode.PC_Viewer_Bridge)
+			//{
+			//	InitializeObjectBridge(root);
+			//}
 
 			//ContentManager.Instance.SetCameraCenterPosition();
 			

@@ -18,6 +18,7 @@ namespace Management
 					sceneName = SceneName.Maker;
 					break;
 
+				case PlatformCode.WebGL_AdminViewer:
 				case PlatformCode.PC_Viewer_Tunnel:
 				case PlatformCode.PC_Viewer_Bridge:
 					sceneName = SceneName.Viewer;

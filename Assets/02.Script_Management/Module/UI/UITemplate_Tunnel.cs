@@ -4,7 +4,9 @@ using UnityEngine;
 
 namespace Module.UI
 {
+	using Definition;
 	using UnityEngine.UI;
+	using View;
 
 	public class UITemplate_Tunnel : AUI
 	{
@@ -12,6 +14,11 @@ namespace Module.UI
 		[SerializeField] Text m_line;
 		[SerializeField] Text m_description;
 		[SerializeField] List<GameObject> childElements_1;
+
+		public override void GetUIEvent(UIEventType _uType, UI_Selectable _setter)
+		{
+			throw new System.NotImplementedException();
+		}
 
 		public override void OnStart()
 		{

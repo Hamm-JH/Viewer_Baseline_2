@@ -35,6 +35,21 @@ namespace Definition.Data
 
 			switch(Platform)
 			{
+				case PlatformCode.WebGL_AdminViewer:
+					{
+						// todo 터널 모델
+#if UNITY_EDITOR
+						//_url = "http://wesmart.synology.me:45001/unity/UnityWeb/?cdTunnel=20211202-00000265&cdTunnelSub=20211202-00000266";
+						_url = "http://wesmart.synology.me:45001/unity/UnityWeb/?cdTunnel=20211202-00000283&cdTunnelSub=20211202-00000284";
+
+#else
+						_url = Application.absoluteURL;
+#endif
+						dmgURL = "/api/tunnel/damage/state?cdTunnel=";
+						rcvURL = "/api/tunnel/recover/state?cdTunnel=";
+					}
+					break;
+
 				case PlatformCode.PC_Viewer_Bridge:
 					{
 #if UNITY_EDITOR

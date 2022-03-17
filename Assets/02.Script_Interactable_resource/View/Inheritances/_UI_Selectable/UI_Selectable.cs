@@ -6,11 +6,12 @@ using UnityEngine.Events;
 namespace View
 {
 	using Definition;
+	using Management;
 	using Module.UI;
 	using UnityEngine.EventSystems;
 	using UnityEngine.UI;
 
-	public partial class UI_Selectable : Interactable, 
+	public partial class UI_Selectable : Interactable,
 		IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 	{
 		public override GameObject Target
@@ -19,6 +20,8 @@ namespace View
 		}
 
 		public override List<GameObject> Targets => throw new System.NotImplementedException();
+
+		public GameObject ChildPanel { get => childPanel; set => childPanel=value; }
 
 		Button m_btn;
 		Slider m_slider;
@@ -52,13 +55,13 @@ namespace View
 		private void Start()
 		{
 			// 버튼이 존재한다면, 버튼의 클릭 이벤트를 Conditional Branch에 연결한다.
-			if(gameObject.TryGetComponent<Button>(out m_btn))
+			if (gameObject.TryGetComponent<Button>(out m_btn))
 			{
 				m_btn.onClick.AddListener(new UnityAction(OnSelect));
 			}
 
 			// 슬라이더가 존재한다면, 슬라이더의 슬라이딩 이벤트를 Conditional Branch에 연결한다.
-			if(gameObject.TryGetComponent<Slider>(out m_slider))
+			if (gameObject.TryGetComponent<Slider>(out m_slider))
 			{
 				m_slider.onValueChanged.AddListener(new UnityAction<float>(OnChangeValue));
 			}
@@ -69,7 +72,7 @@ namespace View
 		{
 			Debug.Log($"OnDeselect : {this.name}");
 
-			
+
 		}
 
 		public override void OnSelect()
@@ -81,12 +84,12 @@ namespace View
 
 		public override void OnDeselect<T>(T t)
 		{
-			
+
 		}
 
 		public override void OnDeselect<T1, T2>(T1 t1, T2 t2)
 		{
-			
+
 		}
 
 		/// <summary>
@@ -107,7 +110,7 @@ namespace View
 		/// <param name="_eventType"></param>
 		private void ConditionalBranch(float _value, UIEventType _eventType)
 		{
-			switch(_eventType)
+			switch (_eventType)
 			{
 				case UIEventType.Slider_Model_Transparency:
 					Event_Model_Transparency(_value);
@@ -125,57 +128,72 @@ namespace View
 		/// <param name="_eventType"></param>
 		private void ConditionalBranch(UIEventType _eventType)
 		{
-			switch(_eventType)
+			PlatformCode pCode = MainManager.Instance.Platform;
+
+			bool isDemoAdminViewer = false;
+			if (pCode == PlatformCode.WebGL_AdminViewer) isDemoAdminViewer = true;
+
+			// 데모용 관리자뷰어 모드일때
+			if (isDemoAdminViewer)
 			{
-				case UIEventType.View_Home:
-					// 초기 화면으로 복귀
-					Event_View_Home();
-					Event_Toggle_ChildPanel(1);
-					break;
+				// 루트 UI에서 이벤트 분배
+				m_rootUI.GetUIEvent(_eventType, this);
+			}
+			// 잠시 교량, 터널용 이벤트 뒤로 두기
+			else
+			{
+				switch (_eventType)
+				{
+					case UIEventType.View_Home:
+						// 초기 화면으로 복귀
+						Event_View_Home();
+						Event_Toggle_ChildPanel(1);
+						break;
 
-				case UIEventType.Toggle:
-				case UIEventType.Viewport_ViewMode:
-					Event_Toggle_ViewMode();
-					break;
+					case UIEventType.Toggle:
+					case UIEventType.Viewport_ViewMode:
+						Event_Toggle_ViewMode();
+						break;
 
-				case UIEventType.Toggle_ChildPanel1:
-					// ChildPanel 1번 토글
-					Event_Toggle_ChildPanel(1);
-					Event_Toggle_ViewMode();
-					break;
+					case UIEventType.Toggle_ChildPanel1:
+						// ChildPanel 1번 토글
+						Event_Toggle_ChildPanel(1);
+						Event_Toggle_ViewMode();
+						break;
 
-				case UIEventType.Viewport_ViewMode_ISO:
-				case UIEventType.Viewport_ViewMode_TOP:
-				case UIEventType.Viewport_ViewMode_SIDE:
-				case UIEventType.Viewport_ViewMode_BOTTOM:
-					Event_Toggle_ViewMode(_eventType);
-					break;
+					case UIEventType.Viewport_ViewMode_ISO:
+					case UIEventType.Viewport_ViewMode_TOP:
+					case UIEventType.Viewport_ViewMode_SIDE:
+					case UIEventType.Viewport_ViewMode_BOTTOM:
+						Event_Toggle_ViewMode(_eventType);
+						break;
 
-				case UIEventType.OrthoView_Orthogonal:
-					Event_ToggleOrthoView(true);
-					Event_Toggle_ViewMode();
-					break;
+					case UIEventType.OrthoView_Orthogonal:
+						Event_ToggleOrthoView(true);
+						Event_Toggle_ViewMode();
+						break;
 
-				case UIEventType.OrthoView_Perspective:
-					Event_ToggleOrthoView(false);
-					Event_Toggle_ViewMode();
-					break;
+					case UIEventType.OrthoView_Perspective:
+						Event_ToggleOrthoView(false);
+						Event_Toggle_ViewMode();
+						break;
 
 					// 객체 모두 다시 켜기
-				case UIEventType.Mode_ShowAll:
-					Event_Mode_ShowAll();
-					Event_Toggle_ChildPanel(1);
-					break;
+					case UIEventType.Mode_ShowAll:
+						Event_Mode_ShowAll();
+						Event_Toggle_ChildPanel(1);
+						break;
 
-				case UIEventType.Mode_Hide:
-				case UIEventType.Mode_Isolate:
-					Event_Mode_HideIsolate(_eventType);
-					Event_Toggle_ChildPanel(1);
-					break;
+					case UIEventType.Mode_Hide:
+					case UIEventType.Mode_Isolate:
+						Event_Mode_HideIsolate(_eventType);
+						Event_Toggle_ChildPanel(1);
+						break;
 
-				case UIEventType.Test_Surface:
-					Event_Legacy_ChangeCameraDirection();
-					break;
+					case UIEventType.Test_Surface:
+						Event_Legacy_ChangeCameraDirection();
+						break;
+				}
 			}
 		}
 
@@ -224,7 +242,7 @@ namespace View
 		/// <param name="eventData"></param>
 		public void OnPointerEnter(PointerEventData eventData)
 		{
-			
+
 			m_uiHoverElements.ForEach(x => x.SetActive(true));
 		}
 
