@@ -16,8 +16,13 @@ namespace Definition
 	/// </summary>
 	public enum WebType
 	{
+		Address = 0x10,
+
 		Issue_Dmg = 0x11,
 		Issue_Rcv = 0x12,
+
+		Image_main = 0x21,
+		Image_single = 0x22,
 
 	}
 

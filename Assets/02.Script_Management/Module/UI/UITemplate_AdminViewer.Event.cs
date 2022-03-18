@@ -25,113 +25,138 @@ namespace Module.UI
 		#region Ad_nav
 		public void Ad_nav_state1_NAV()
 		{
-			NavData.nv1_bg.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv1_ic.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv1_tx.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv2_bg.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv2_ic.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv2_tx.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv3_bg.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv3_ic.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv3_tx.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv4_bg.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv4_ic.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv4_tx.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv5_bg.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv5_ic.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv5_tx.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv_ar1.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv_ar2.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv_ar3.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv_ar4.color = Colors.Set(ColorType.UI_Ad_Default, 1);
+			Color im_default = Colors.Set(ColorType.UI_Ad_Img_Default, 1);
+			Color im_highlight = Colors.Set(ColorType.UI_Ad_Img_Highlight, 1);
+			Color tx_default = Colors.Set(ColorType.UI_Ad_Txt_Default, 1);
+			Color tx_highlight = Colors.Set(ColorType.UI_Ad_Txt_Highlight, 1);
+
+			NavData.nv1_bg.color = im_highlight;
+			NavData.nv1_ic.color = im_highlight;
+			NavData.nv2_bg.color = im_default;
+			NavData.nv2_ic.color = im_default;
+			NavData.nv3_bg.color = im_default;
+			NavData.nv3_ic.color = im_default;
+			NavData.nv4_bg.color = im_default;
+			NavData.nv4_ic.color = im_default;
+			NavData.nv5_bg.color = im_default;
+			NavData.nv5_ic.color = im_default;
+			NavData.nv_ar1.color = im_default;
+			NavData.nv_ar2.color = im_default;
+			NavData.nv_ar3.color = im_default;
+			NavData.nv_ar4.color = im_default;
+			NavData.nv1_tx.color = tx_highlight;
+			NavData.nv2_tx.color = tx_default;
+			NavData.nv3_tx.color = tx_default;
+			NavData.nv4_tx.color = tx_default;
+			NavData.nv5_tx.color = tx_default;
 		}
 		public void Ad_nav_state2_NAV()
 		{
-			NavData.nv1_bg.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv1_ic.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv1_tx.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv2_bg.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv2_ic.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv2_tx.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv3_bg.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv3_ic.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv3_tx.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv4_bg.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv4_ic.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv4_tx.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv5_bg.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv5_ic.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv5_tx.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv_ar1.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv_ar2.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv_ar3.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv_ar4.color = Colors.Set(ColorType.UI_Ad_Default, 1);
+			Color im_default = Colors.Set(ColorType.UI_Ad_Img_Default, 1);
+			Color im_highlight = Colors.Set(ColorType.UI_Ad_Img_Highlight, 1);
+			Color tx_default = Colors.Set(ColorType.UI_Ad_Txt_Default, 1);
+			Color tx_highlight = Colors.Set(ColorType.UI_Ad_Txt_Highlight, 1);
+
+			NavData.nv1_bg.color = im_highlight;
+			NavData.nv1_ic.color = im_highlight;
+			NavData.nv1_tx.color = tx_highlight;
+			NavData.nv2_bg.color = im_highlight;
+			NavData.nv2_ic.color = im_highlight;
+			NavData.nv2_tx.color = tx_highlight;
+			NavData.nv3_bg.color = im_default;
+			NavData.nv3_ic.color = im_default;
+			NavData.nv3_tx.color = tx_default;
+			NavData.nv4_bg.color = im_default;
+			NavData.nv4_ic.color = im_default;
+			NavData.nv4_tx.color = tx_default;
+			NavData.nv5_bg.color = im_default;
+			NavData.nv5_ic.color = im_default;
+			NavData.nv5_tx.color = tx_default;
+			NavData.nv_ar1.color = im_highlight;
+			NavData.nv_ar2.color = im_default;
+			NavData.nv_ar3.color = im_default;
+			NavData.nv_ar4.color = im_default;
 		}
 		public void Ad_nav_state3_NAV()
 		{
-			NavData.nv1_bg.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv1_ic.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv1_tx.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv2_bg.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv2_ic.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv2_tx.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv3_bg.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv3_ic.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv3_tx.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv4_bg.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv4_ic.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv4_tx.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv5_bg.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv5_ic.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv5_tx.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv_ar1.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv_ar2.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv_ar3.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv_ar4.color = Colors.Set(ColorType.UI_Ad_Default, 1);
+			Color im_default = Colors.Set(ColorType.UI_Ad_Img_Default, 1);
+			Color im_highlight = Colors.Set(ColorType.UI_Ad_Img_Highlight, 1);
+			Color tx_default = Colors.Set(ColorType.UI_Ad_Txt_Default, 1);
+			Color tx_highlight = Colors.Set(ColorType.UI_Ad_Txt_Highlight, 1);
+
+			NavData.nv1_bg.color = im_highlight;
+			NavData.nv1_ic.color = im_highlight;
+			NavData.nv1_tx.color = tx_highlight;
+			NavData.nv2_bg.color = im_highlight;
+			NavData.nv2_ic.color = im_highlight;
+			NavData.nv2_tx.color = tx_highlight;
+			NavData.nv3_bg.color = im_highlight;
+			NavData.nv3_ic.color = im_highlight;
+			NavData.nv3_tx.color = tx_highlight;
+			NavData.nv4_bg.color = im_default;
+			NavData.nv4_ic.color = im_default;
+			NavData.nv4_tx.color = tx_default;
+			NavData.nv5_bg.color = im_default;
+			NavData.nv5_ic.color = im_default;
+			NavData.nv5_tx.color = tx_default;
+			NavData.nv_ar1.color = im_highlight;
+			NavData.nv_ar2.color = im_highlight;
+			NavData.nv_ar3.color = im_default;
+			NavData.nv_ar4.color = im_default;
 		}
 		public void Ad_nav_state4_NAV()
 		{
-			NavData.nv1_bg.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv1_ic.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv1_tx.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv2_bg.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv2_ic.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv2_tx.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv3_bg.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv3_ic.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv3_tx.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv4_bg.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv4_ic.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv4_tx.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv5_bg.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv5_ic.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv5_tx.color = Colors.Set(ColorType.UI_Ad_Default, 1);
-			NavData.nv_ar1.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv_ar2.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv_ar3.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv_ar4.color = Colors.Set(ColorType.UI_Ad_Default, 1);
+			Color im_default = Colors.Set(ColorType.UI_Ad_Img_Default, 1);
+			Color im_highlight = Colors.Set(ColorType.UI_Ad_Img_Highlight, 1);
+			Color tx_default = Colors.Set(ColorType.UI_Ad_Txt_Default, 1);
+			Color tx_highlight = Colors.Set(ColorType.UI_Ad_Txt_Highlight, 1);
+
+			NavData.nv1_bg.color = im_highlight;
+			NavData.nv1_ic.color = im_highlight;
+			NavData.nv1_tx.color = tx_highlight;
+			NavData.nv2_bg.color = im_highlight;
+			NavData.nv2_ic.color = im_highlight;
+			NavData.nv2_tx.color = tx_highlight;
+			NavData.nv3_bg.color = im_highlight;
+			NavData.nv3_ic.color = im_highlight;
+			NavData.nv3_tx.color = tx_highlight;
+			NavData.nv4_bg.color = im_highlight;
+			NavData.nv4_ic.color = im_highlight;
+			NavData.nv4_tx.color = tx_highlight;
+			NavData.nv5_bg.color = im_default;
+			NavData.nv5_ic.color = im_default;
+			NavData.nv5_tx.color = tx_default;
+			NavData.nv_ar1.color = im_highlight;
+			NavData.nv_ar2.color = im_highlight;
+			NavData.nv_ar3.color = im_highlight;
+			NavData.nv_ar4.color = im_default;
 		}
 		public void Ad_nav_state5_NAV()
 		{
-			NavData.nv1_bg.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv1_ic.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv1_tx.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv2_bg.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv2_ic.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv2_tx.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv3_bg.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv3_ic.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv3_tx.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv4_bg.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv4_ic.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv4_tx.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv5_bg.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv5_ic.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv5_tx.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv_ar1.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv_ar2.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv_ar3.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
-			NavData.nv_ar4.color = Colors.Set(ColorType.UI_Ad_Highlight, 1);
+			Color im_default = Colors.Set(ColorType.UI_Ad_Img_Default, 1);
+			Color im_highlight = Colors.Set(ColorType.UI_Ad_Img_Highlight, 1);
+			Color tx_default = Colors.Set(ColorType.UI_Ad_Txt_Default, 1);
+			Color tx_highlight = Colors.Set(ColorType.UI_Ad_Txt_Highlight, 1);
+
+			NavData.nv1_bg.color = im_highlight;
+			NavData.nv1_ic.color = im_highlight;
+			NavData.nv1_tx.color = tx_highlight;
+			NavData.nv2_bg.color = im_highlight;
+			NavData.nv2_ic.color = im_highlight;
+			NavData.nv2_tx.color = tx_highlight;
+			NavData.nv3_bg.color = im_highlight;
+			NavData.nv3_ic.color = im_highlight;
+			NavData.nv3_tx.color = tx_highlight;
+			NavData.nv4_bg.color = im_highlight;
+			NavData.nv4_ic.color = im_highlight;
+			NavData.nv4_tx.color = tx_highlight;
+			NavData.nv5_bg.color = im_highlight;
+			NavData.nv5_ic.color = im_highlight;
+			NavData.nv5_tx.color = tx_highlight;
+			NavData.nv_ar1.color = im_highlight;
+			NavData.nv_ar2.color = im_highlight;
+			NavData.nv_ar3.color = im_highlight;
+			NavData.nv_ar4.color = im_highlight;
 		}
 		#endregion
 

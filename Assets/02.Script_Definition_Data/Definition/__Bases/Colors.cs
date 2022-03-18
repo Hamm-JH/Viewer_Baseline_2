@@ -30,12 +30,20 @@ namespace Definition
 					color = new Color(0xff/255f, 0xff/255f, 0x00/255f, _alpha);
 					break;
 
-				case ColorType.UI_Ad_Default:
-					color = new Color(0x55/255f, 0x55/255f, 0x55/255f, _alpha);
+				case ColorType.UI_Ad_Img_Default:
+					color = new Color(0x30/255f, 0x3b/255f, 0x4e/255f, _alpha);
 					break;
 
-				case ColorType.UI_Ad_Highlight:
-					color = new Color(0xff/255f, 0xff/255f, 0x00/255f, _alpha);
+				case ColorType.UI_Ad_Img_Highlight:
+					color = new Color(0x2b/255f, 0x70/255f, 0xc6/255f, _alpha);
+					break;
+
+				case ColorType.UI_Ad_Txt_Default:
+					color = new Color(0xe8/255f, 0xea/255f, 0xee/255f, _alpha);
+					break;
+
+				case ColorType.UI_Ad_Txt_Highlight:
+					color = new Color(0xc4/255f, 0xd8/255f, 0xf1/255f, _alpha);
 					break;
 			}
 

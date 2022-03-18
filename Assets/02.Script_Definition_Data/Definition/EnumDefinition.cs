@@ -292,8 +292,11 @@ namespace Definition
 		UI_Default = 0x30,
 		UI_Highlight = 0x31,
 
-		UI_Ad_Default = 0x200,
-		UI_Ad_Highlight = 0x201,
+		UI_Ad_Img_Default = 0x200,
+		UI_Ad_Img_Highlight = 0x201,
+
+		UI_Ad_Txt_Default = 0x202,
+		UI_Ad_Txt_Highlight = 0x203,
 	}
 	
 	// Definition types

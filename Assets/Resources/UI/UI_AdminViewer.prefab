@@ -12014,7 +12014,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3005354841195520822
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32670,6 +32670,7 @@ MonoBehaviour:
   botData:
     adrName: {fileID: 3005354841132435909}
   items:
+    mainPicture: {fileID: 3005354841203244974}
     State1_rootPin: {fileID: 7310455949228950300}
     State1_pins:
     - {fileID: 7165831957646418368}

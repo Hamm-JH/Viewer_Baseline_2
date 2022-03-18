@@ -5,7 +5,10 @@ using UnityEngine;
 namespace Module.UI
 {
 	using AdminViewer;
+	using Data.API;
 	using Definition;
+	using Management;
+	using UnityEngine.Events;
 	using UnityEngine.UI;
 	using View;
 
@@ -36,6 +39,9 @@ namespace Module.UI
 		/// </summary>
 		[SerializeField] private ItemsData items;
 
+		/// <summary>
+		/// 패널 정보들
+		/// </summary>
 		[SerializeField] private InPanels m_panels;
 
 		public TitleData TitData { get => titData; set => titData=value; }
@@ -47,9 +53,55 @@ namespace Module.UI
 
 		public override void OnStart()
 		{
-			Debug.LogWarning("UITemplate OnStart");
+			Debug.LogWarning("********** UITemplate OnStart");
+
+			InitializeUI();
+
+			ContentManager.Instance._API.RequestAddressData(GetAddressData);
 		}
 
+		private void GetAddressData(AAPI _data)
+		{
+			// 다시 언박싱
+			DAddress data = (DAddress)_data;
+
+			TitData.oName.text = data.nmTunnel;
+			BotData.adrName.text = data.nmAddress;
+
+			//string _fid = data.mp_fid;
+			//string _ftype = data.mp_ftype;
+			//string _fgroup = data.mp_filename;
+
+			//string argument = string.Format("fid={0}&ftype={1}&fgroup={2}", _fid, _ftype, _fgroup);
+			GetTexture(data.mp_fid, data.mp_ftype, data.mp_fgroup, GetMainPicture);
+		}
+
+		private void GetTexture(string _fid, string _ftype, string _fgroup, UnityAction<Texture2D> _callback)
+		{
+			string argument = string.Format("fid={0}&ftype={1}&fgroup={2}", _fid, _ftype, _fgroup);
+
+			ContentManager.Instance._API.RequestMainPicture(argument, _callback);
+		}
+
+		private void GetMainPicture(Texture2D _image)
+		{
+			Debug.Log("안녀ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ엉");
+
+			items.mainPicture.texture = _image;
+		}
+
+		/// <summary>
+		/// UI 인스턴스 초기화
+		/// </summary>
+		private void InitializeUI()
+		{
+			Ad_nav_state1_NAV();
+			Ad_nav_state1_BOT();
+			SetPanel_State1();
+			SetPin(true);
+		}
+
+		#region ** not implemented
 		public override void SetObjectData_Tunnel(GameObject selected)
 		{
 			throw new System.NotImplementedException();
@@ -59,6 +111,7 @@ namespace Module.UI
 		{
 			throw new System.NotImplementedException();
 		}
+		#endregion
 
 		public override void GetUIEvent(UIEventType _uType, UI_Selectable _setter)
 		{

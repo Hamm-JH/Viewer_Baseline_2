@@ -59,6 +59,8 @@ namespace AdminViewer
 	[System.Serializable]
 	public class ItemsData
 	{
+		public RawImage mainPicture;
+
 		public GameObject State1_rootPin;
 		public List<GameObject> State1_pins;
 	}

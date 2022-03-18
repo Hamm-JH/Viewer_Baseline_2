@@ -67,6 +67,9 @@ namespace Module.Interaction
 			GameObject ui = Instantiate<GameObject>(_resource, RootCanvas.transform);
 			Template = ui;
 			UiInstance = ui.GetComponent<AUI>();
+
+			// 생성된 UI 인스턴스의 시작을 알린다.
+			UiInstance.OnStart();
 		}
 	}
 }
