@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using AdminViewer.UI;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,6 +7,14 @@ using UnityEngine.UI;
 
 namespace AdminViewer
 {
+	[System.Serializable]
+	public class ICON_Template
+	{
+		public Sprite m_icon_dmg;
+		public Sprite m_icon_rcv;
+		public Sprite m_icon_rein;
+	}
+
 	[System.Serializable]
 	public class TitleData
 	{
@@ -68,6 +77,7 @@ namespace AdminViewer
 	[System.Serializable]
 	public class InPanels
 	{
+		[Header("GameObjects")]
 		public GameObject mainLocation	;
 		public GameObject mainPicture	;
 		public GameObject keymap		;
@@ -77,5 +87,15 @@ namespace AdminViewer
 		public GameObject s5b1			;
 		public GameObject s5b2			;
 		public GameObject s5m1			;
+
+		[Header("Panel Codes")]
+		public Ad_Panel bpm1_code;
+		public Ad_Panel bpm2_code;
+		public Ad_Panel bpmm_code;
+		public Ad_Panel s5b1_code;
+		public Ad_Panel s5b2_code;
+		public Ad_Panel s5m1_code;
+
+
 	}
 }

@@ -31,9 +31,12 @@ namespace Definition._Issue
 		[SerializeField] string m_issueStatus;
 		[SerializeField] string m__positionVector;
 
+		[SerializeField] string m_dateDmg;
+
 		[SerializeField] Code m_issueCode;
 		[SerializeField] int m_dcLocation;
 		[SerializeField] Vector3 m_positionVector;
+
 
 		public string IssueOrderCode { get => m_issueOrderCode; set => m_issueOrderCode=value; }
 		public string CdBridge { get => m_cdBridge; set => m_cdBridge=value; }
@@ -88,8 +91,11 @@ namespace Definition._Issue
 			}
 		}
 
+		public string DateDmg { get => m_dateDmg; set => m_dateDmg=value; }
+
 		public int DcLocation { get => m_dcLocation; set => m_dcLocation=value; }
 		public Vector3 PositionVector { get => m_positionVector; set => m_positionVector=value; }
 		public Code IssueCode { get => m_issueCode; set => m_issueCode=value; }
+		
 	}
 }

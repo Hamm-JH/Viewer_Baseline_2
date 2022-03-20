@@ -31,15 +31,15 @@ namespace Module.UI
 			Color tx_highlight = Colors.Set(ColorType.UI_Ad_Txt_Highlight, 1);
 
 			NavData.nv1_bg.color = im_highlight;
-			NavData.nv1_ic.color = im_highlight;
+			NavData.nv1_ic.color = tx_highlight;
 			NavData.nv2_bg.color = im_default;
-			NavData.nv2_ic.color = im_default;
+			NavData.nv2_ic.color = tx_default;
 			NavData.nv3_bg.color = im_default;
-			NavData.nv3_ic.color = im_default;
+			NavData.nv3_ic.color = tx_default;
 			NavData.nv4_bg.color = im_default;
-			NavData.nv4_ic.color = im_default;
+			NavData.nv4_ic.color = tx_default;
 			NavData.nv5_bg.color = im_default;
-			NavData.nv5_ic.color = im_default;
+			NavData.nv5_ic.color = tx_default;
 			NavData.nv_ar1.color = im_default;
 			NavData.nv_ar2.color = im_default;
 			NavData.nv_ar3.color = im_default;
@@ -58,19 +58,19 @@ namespace Module.UI
 			Color tx_highlight = Colors.Set(ColorType.UI_Ad_Txt_Highlight, 1);
 
 			NavData.nv1_bg.color = im_highlight;
-			NavData.nv1_ic.color = im_highlight;
+			NavData.nv1_ic.color = tx_highlight;
 			NavData.nv1_tx.color = tx_highlight;
 			NavData.nv2_bg.color = im_highlight;
-			NavData.nv2_ic.color = im_highlight;
+			NavData.nv2_ic.color = tx_highlight;
 			NavData.nv2_tx.color = tx_highlight;
 			NavData.nv3_bg.color = im_default;
-			NavData.nv3_ic.color = im_default;
+			NavData.nv3_ic.color = tx_default;
 			NavData.nv3_tx.color = tx_default;
 			NavData.nv4_bg.color = im_default;
-			NavData.nv4_ic.color = im_default;
+			NavData.nv4_ic.color = tx_default;
 			NavData.nv4_tx.color = tx_default;
 			NavData.nv5_bg.color = im_default;
-			NavData.nv5_ic.color = im_default;
+			NavData.nv5_ic.color = tx_default;
 			NavData.nv5_tx.color = tx_default;
 			NavData.nv_ar1.color = im_highlight;
 			NavData.nv_ar2.color = im_default;
@@ -85,19 +85,19 @@ namespace Module.UI
 			Color tx_highlight = Colors.Set(ColorType.UI_Ad_Txt_Highlight, 1);
 
 			NavData.nv1_bg.color = im_highlight;
-			NavData.nv1_ic.color = im_highlight;
+			NavData.nv1_ic.color = tx_highlight;
 			NavData.nv1_tx.color = tx_highlight;
 			NavData.nv2_bg.color = im_highlight;
-			NavData.nv2_ic.color = im_highlight;
+			NavData.nv2_ic.color = tx_highlight;
 			NavData.nv2_tx.color = tx_highlight;
 			NavData.nv3_bg.color = im_highlight;
-			NavData.nv3_ic.color = im_highlight;
+			NavData.nv3_ic.color = tx_highlight;
 			NavData.nv3_tx.color = tx_highlight;
 			NavData.nv4_bg.color = im_default;
-			NavData.nv4_ic.color = im_default;
+			NavData.nv4_ic.color = tx_default;
 			NavData.nv4_tx.color = tx_default;
 			NavData.nv5_bg.color = im_default;
-			NavData.nv5_ic.color = im_default;
+			NavData.nv5_ic.color = tx_default;
 			NavData.nv5_tx.color = tx_default;
 			NavData.nv_ar1.color = im_highlight;
 			NavData.nv_ar2.color = im_highlight;
@@ -112,19 +112,19 @@ namespace Module.UI
 			Color tx_highlight = Colors.Set(ColorType.UI_Ad_Txt_Highlight, 1);
 
 			NavData.nv1_bg.color = im_highlight;
-			NavData.nv1_ic.color = im_highlight;
+			NavData.nv1_ic.color = tx_highlight;
 			NavData.nv1_tx.color = tx_highlight;
 			NavData.nv2_bg.color = im_highlight;
-			NavData.nv2_ic.color = im_highlight;
+			NavData.nv2_ic.color = tx_highlight;
 			NavData.nv2_tx.color = tx_highlight;
 			NavData.nv3_bg.color = im_highlight;
-			NavData.nv3_ic.color = im_highlight;
+			NavData.nv3_ic.color = tx_highlight;
 			NavData.nv3_tx.color = tx_highlight;
 			NavData.nv4_bg.color = im_highlight;
-			NavData.nv4_ic.color = im_highlight;
+			NavData.nv4_ic.color = tx_highlight;
 			NavData.nv4_tx.color = tx_highlight;
 			NavData.nv5_bg.color = im_default;
-			NavData.nv5_ic.color = im_default;
+			NavData.nv5_ic.color = tx_default;
 			NavData.nv5_tx.color = tx_default;
 			NavData.nv_ar1.color = im_highlight;
 			NavData.nv_ar2.color = im_highlight;
@@ -139,19 +139,19 @@ namespace Module.UI
 			Color tx_highlight = Colors.Set(ColorType.UI_Ad_Txt_Highlight, 1);
 
 			NavData.nv1_bg.color = im_highlight;
-			NavData.nv1_ic.color = im_highlight;
+			NavData.nv1_ic.color = tx_highlight;
 			NavData.nv1_tx.color = tx_highlight;
 			NavData.nv2_bg.color = im_highlight;
-			NavData.nv2_ic.color = im_highlight;
+			NavData.nv2_ic.color = tx_highlight;
 			NavData.nv2_tx.color = tx_highlight;
 			NavData.nv3_bg.color = im_highlight;
-			NavData.nv3_ic.color = im_highlight;
+			NavData.nv3_ic.color = tx_highlight;
 			NavData.nv3_tx.color = tx_highlight;
 			NavData.nv4_bg.color = im_highlight;
-			NavData.nv4_ic.color = im_highlight;
+			NavData.nv4_ic.color = tx_highlight;
 			NavData.nv4_tx.color = tx_highlight;
 			NavData.nv5_bg.color = im_highlight;
-			NavData.nv5_ic.color = im_highlight;
+			NavData.nv5_ic.color = tx_highlight;
 			NavData.nv5_tx.color = tx_highlight;
 			NavData.nv_ar1.color = im_highlight;
 			NavData.nv_ar2.color = im_highlight;
@@ -306,6 +306,14 @@ namespace Module.UI
 			Panels.s5b1			.SetActive(false);
 			Panels.s5b2			.SetActive(false);
 			Panels.s5m1			.SetActive(false);
+
+			UIEventType uType = UIEventType.Ad_nav_state1;
+			Panels.bpm1_code.SetPanel(uType);
+			Panels.bpm2_code.SetPanel(uType);
+			Panels.bpmm_code.SetPanel(uType);
+			Panels.s5b1_code.SetPanel(uType);
+			Panels.s5b2_code.SetPanel(uType);
+			Panels.s5m1_code.SetPanel(uType);
 		}
 		private void SetPanel_State2()
 		{
@@ -318,30 +326,54 @@ namespace Module.UI
 			Panels.s5b1.SetActive(false);
 			Panels.s5b2.SetActive(false);
 			Panels.s5m1.SetActive(false);
+
+			UIEventType uType = UIEventType.Ad_nav_state2;
+			Panels.bpm1_code.SetPanel(uType);
+			Panels.bpm2_code.SetPanel(uType);
+			Panels.bpmm_code.SetPanel(uType);
+			Panels.s5b1_code.SetPanel(uType);
+			Panels.s5b2_code.SetPanel(uType);
+			Panels.s5m1_code.SetPanel(uType);
 		}
 		private void SetPanel_State3()
 		{
 			Panels.mainLocation.SetActive(false);
 			Panels.mainPicture.SetActive(false);
-			Panels.keymap.SetActive(false);
+			Panels.keymap.SetActive(true);
 			Panels.bpm1.SetActive(true);
 			Panels.bpm2.SetActive(true);
 			Panels.bpmm.SetActive(false);
 			Panels.s5b1.SetActive(false);
 			Panels.s5b2.SetActive(false);
 			Panels.s5m1.SetActive(false);
+
+			UIEventType uType = UIEventType.Ad_nav_state3;
+			Panels.bpm1_code.SetPanel(uType);
+			Panels.bpm2_code.SetPanel(uType);
+			Panels.bpmm_code.SetPanel(uType);
+			Panels.s5b1_code.SetPanel(uType);
+			Panels.s5b2_code.SetPanel(uType);
+			Panels.s5m1_code.SetPanel(uType);
 		}
 		private void SetPanel_State4()
 		{
 			Panels.mainLocation.SetActive(false);
 			Panels.mainPicture.SetActive(false);
-			Panels.keymap.SetActive(false);
+			Panels.keymap.SetActive(true);
 			Panels.bpm1.SetActive(true);
-			Panels.bpm2.SetActive(false);
-			Panels.bpmm.SetActive(true);
+			Panels.bpm2.SetActive(true);
+			Panels.bpmm.SetActive(false);
 			Panels.s5b1.SetActive(false);
 			Panels.s5b2.SetActive(false);
 			Panels.s5m1.SetActive(false);
+
+			UIEventType uType = UIEventType.Ad_nav_state4;
+			Panels.bpm1_code.SetPanel(uType);
+			Panels.bpm2_code.SetPanel(uType);
+			Panels.bpmm_code.SetPanel(uType);
+			Panels.s5b1_code.SetPanel(uType);
+			Panels.s5b2_code.SetPanel(uType);
+			Panels.s5m1_code.SetPanel(uType);
 		}
 		private void SetPanel_State5()
 		{
@@ -354,6 +386,14 @@ namespace Module.UI
 			Panels.s5b1.SetActive(true);
 			Panels.s5b2.SetActive(true);
 			Panels.s5m1.SetActive(true);
+
+			UIEventType uType = UIEventType.Ad_nav_state5;
+			Panels.bpm1_code.SetPanel(uType);
+			Panels.bpm2_code.SetPanel(uType);
+			Panels.bpmm_code.SetPanel(uType);
+			Panels.s5b1_code.SetPanel(uType);
+			Panels.s5b2_code.SetPanel(uType);
+			Panels.s5m1_code.SetPanel(uType);
 		}
 
 		#endregion

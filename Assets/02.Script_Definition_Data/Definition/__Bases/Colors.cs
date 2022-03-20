@@ -45,6 +45,18 @@ namespace Definition
 				case ColorType.UI_Ad_Txt_Highlight:
 					color = new Color(0xc4/255f, 0xd8/255f, 0xf1/255f, _alpha);
 					break;
+
+				case ColorType.UI_dmg:
+					color = new Color(0x255/255f, 0x00/255f, 0x00/255f, _alpha);
+					break;
+
+				case ColorType.UI_rcv:
+					color = new Color(0x00/255f, 0x00/255f, 0x255/255f, _alpha);
+					break;
+
+				case ColorType.UI_rein:
+					color = new Color(0x00/255f, 0x255/255f, 0x00/255f, _alpha);
+					break;
 			}
 
 			return color;

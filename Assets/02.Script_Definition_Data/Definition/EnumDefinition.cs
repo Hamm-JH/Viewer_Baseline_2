@@ -297,6 +297,10 @@ namespace Definition
 
 		UI_Ad_Txt_Default = 0x202,
 		UI_Ad_Txt_Highlight = 0x203,
+
+		UI_dmg = 0x300,
+		UI_rcv = 0x301,
+		UI_rein = 0x302,
 	}
 	
 	// Definition types

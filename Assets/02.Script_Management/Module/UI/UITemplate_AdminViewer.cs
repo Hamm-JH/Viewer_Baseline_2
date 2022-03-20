@@ -8,12 +8,15 @@ namespace Module.UI
 	using Data.API;
 	using Definition;
 	using Management;
+	using Management.Events;
 	using UnityEngine.Events;
 	using UnityEngine.UI;
 	using View;
 
 	public partial class UITemplate_AdminViewer : AUI
 	{
+		[SerializeField] private ICON_Template icons;
+
 		/// <summary>
 		/// 타이틀 데이터
 		/// </summary>
@@ -44,6 +47,7 @@ namespace Module.UI
 		/// </summary>
 		[SerializeField] private InPanels m_panels;
 
+		public ICON_Template Icons { get => icons; set => icons=value; }
 		public TitleData TitData { get => titData; set => titData=value; }
 		public NavigationData NavData { get => navData; set => navData=value; }
 		public BottomBarData BotBarData { get => botBarData; set => botBarData=value; }
@@ -85,9 +89,27 @@ namespace Module.UI
 
 		private void GetMainPicture(Texture2D _image)
 		{
-			Debug.Log("안녀ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ엉");
-
 			items.mainPicture.texture = _image;
+		}
+
+		public void SetObject_IfNotSet()
+		{
+			GameObject obj = ContentManager.Instance._SelectedObj;
+
+			if (obj == null)
+			{
+				List<GameObject> _objs = ContentManager.Instance._ModelObjects;
+				int index = Random.Range(0, _objs.Count);
+
+				obj = _objs[index];
+
+				//EventData_Input
+				EventManager.Instance.OnEvent(new EventData_API(
+					InputEventType.API_SelectObject,
+					obj,
+					MainManager.Instance.cameraExecuteEvents.selectEvent
+				));
+			}
 		}
 
 		/// <summary>
