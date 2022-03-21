@@ -138,7 +138,7 @@ namespace Management
 		}
 
 		// 작업정보 Material 세팅
-		internal void SetIssueMaterial(MeshRenderer _render, IssueType _issueType, Code _issueCode)
+		internal void SetIssueMaterial(MeshRenderer _render, IssueType _issueType, IssueCodes _issueCode)
 		{
 
 		}

@@ -1,3 +1,4 @@
+ï»¿using Management;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,22 +6,23 @@ using UnityEngine;
 
 namespace Definition._Issue
 {
-	public enum Code
+	public enum IssueCodes
 	{
-		Null = -1,          // ¼Õ»ó ¾øÀ½
-		Crack = 0,          // ±Õ¿­
-		Efflorescence = 1,  // ¹éÅÂ
-		Spalling = 2,       // ¹Ú¸®¹Ú¶ô
-		breakage = 3,           // ÆÄ¼Õ
-		Scour_Erosion = 4,      // ¼¼±¼, Ä§½Ä
+		Null = -1,          // ì†ìƒ ì—†ìŒ
+		Crack = 1,          // ê· ì—´
+		Scour_Erosion = 4,      // ì„¸êµ´, ì¹¨ì‹
+		Spalling = 7,       // ë°•ë¦¬ë°•ë½
+		Efflorescence = 9,  // ë°±íƒœ
+		breakage = 22,           // íŒŒì†
 	}
 
 	/// <summary>
-	/// ÀÛ¾÷ Á¤º¸ (¼Õ»ó, º¸¼ö)
+	/// ì‘ì—… ì •ë³´ (ì†ìƒ, ë³´ìˆ˜)
 	/// </summary>
 	[System.Serializable]
 	public class Issue
 	{
+		#region field
 		[SerializeField] string m_issueOrderCode;
 		[SerializeField] string m_cdBridge;
 		[SerializeField] string m_cdBridgeParts;
@@ -32,8 +34,10 @@ namespace Definition._Issue
 		[SerializeField] string m__positionVector;
 
 		[SerializeField] string m_dateDmg;
+		[SerializeField] string m_dateRcvStart;
+		[SerializeField] string m_dateRcvEnd;
 
-		[SerializeField] Code m_issueCode;
+		[SerializeField] IssueCodes m_issueCode;
 		[SerializeField] int m_dcLocation;
 		[SerializeField] Vector3 m_positionVector;
 
@@ -49,9 +53,10 @@ namespace Definition._Issue
 			get => m__issueCode; 
 			set
 			{
+				Debug.Log($"issue code : {value}");
 				m__issueCode=value;
-				Code code;
-				if(Enum.TryParse<Code>(m__issueCode, out code))
+				IssueCodes code;
+				if(Enum.TryParse<IssueCodes>(m__issueCode, out code))
 				{
 					m_issueCode = code;
 				}
@@ -92,10 +97,107 @@ namespace Definition._Issue
 		}
 
 		public string DateDmg { get => m_dateDmg; set => m_dateDmg=value; }
+		public string DateRcvStart { get => m_dateRcvStart; set => m_dateRcvStart=value; }
+		public string DateRcvEnd { get => m_dateRcvEnd; set => m_dateRcvEnd=value; }
+
 
 		public int DcLocation { get => m_dcLocation; set => m_dcLocation=value; }
 		public Vector3 PositionVector { get => m_positionVector; set => m_positionVector=value; }
-		public Code IssueCode { get => m_issueCode; set => m_issueCode=value; }
-		
+		public IssueCodes IssueCode { get => m_issueCode; set => m_issueCode=value; }
+
+		#endregion
+
+		public string __PartName
+		{
+			get
+			{
+				string result = "";
+
+				string partCode = CdBridgeParts;
+
+				if(MainManager.Instance)
+				{
+					PlatformCode pCode = MainManager.Instance.Platform;
+
+					if(Platforms.IsTunnelPlatform(pCode))
+					{
+						result = Platform.Tunnel.Tunnels.GetName(partCode);
+					}
+					else if(Platforms.IsBridgePlatform(pCode))
+					{
+						Debug.LogError("Bridge Code to name Set");
+					}
+				}
+
+				return result;
+			}
+		}
+
+		public string __IssueName
+		{
+			get
+			{
+				string result = "";
+
+				IssueCodes iCode = IssueCode;
+
+				switch(iCode)
+				{
+					case IssueCodes.Crack:
+						result = "ê· ì—´";
+						break;
+
+					case IssueCodes.Spalling:
+						result = "ë°•ë¦¬ë°•ë½";
+						break;
+
+					case IssueCodes.Efflorescence:
+						result = "ë°±íƒœ";
+						break;
+
+					case IssueCodes.breakage:
+						result = "íŒŒì†";
+						break;
+				}
+
+				return result;
+			}
+		}
+
+		public string __LocationName
+		{
+			get
+			{
+				string result = "";
+
+				int index = DcLocation;
+
+				index = index-1;
+
+				int horizontalIndex = index / 3;
+				int verticalIndex = index % 3;
+
+				string hName = "";
+				string vName = "";
+				
+				switch(horizontalIndex)
+				{
+					case 0: hName = "ìƒë¶€"; break;
+					case 1: hName = "ì¤‘ì‹¬"; break;
+					case 2: hName = "í•˜ë¶€"; break;
+				}
+
+				switch(verticalIndex)
+				{
+					case 0: vName = "ì¢Œì¸¡"; break;
+					case 1: vName = "ì¤‘ì•™"; break;
+					case 2: vName = "ìš°ì¸¡"; break;
+				}
+
+				result = $"{hName} {vName}";
+
+				return result;
+			}
+		}
 	}
 }

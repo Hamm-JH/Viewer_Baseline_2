@@ -8,10 +8,12 @@ namespace Module.WebAPI
 	using Definition;
 	using Definition._Issue;
 	using Newtonsoft.Json.Linq;
+	using System.Data;
 	using UnityEngine.Events;
 
 	public partial class Module_WebAPI : AModule
 	{
+		#region GetData
 		private void GetData(string _data, WebType _webT)
 		{
 			switch (_webT)
@@ -49,6 +51,18 @@ namespace Module.WebAPI
 					break;
 			}
 		}
+
+		private void GetData(string _data, WebType _webT, UnityAction<DataTable> _callback)
+		{
+			switch(_webT)
+			{
+				case WebType.history:
+					GetData_history(_data, _callback);
+					break;
+			}
+		}
+		
+		#endregion
 
 		private void GetData_Address(string _data, UnityAction<AAPI> _callback)
 		{
@@ -123,7 +137,9 @@ namespace Module.WebAPI
 					_v.YnRecover			= "";
 					_v.IssueStatus			=	jArr[i].SelectToken("dcGrade").ToString();
 					_v._PositionVector		=  jArr[i].SelectToken("dcPinLocation").ToString();
-					_v.DateDmg              = jArr[i].SelectToken("dtCheck").ToString();
+					_v.DateDmg			= jArr[i].SelectToken("dtCheck").ToString();
+
+					
 
 
 					dmgDatas.Add(_v);
@@ -170,6 +186,8 @@ namespace Module.WebAPI
 					_v.YnRecover		= jArr[i].SelectToken("ynRecover").ToString();
 					_v._PositionVector	= jArr[i].SelectToken("dcPinLocation").ToString();
 					_v.IssueStatus		= "";
+					_v.DateRcvStart     = jArr[i].SelectToken("dtStart").ToString();
+					_v.DateRcvEnd       = jArr[i].SelectToken("dtEnd").ToString();
 
 					rcvDatas.Add(_v);
 				}
@@ -180,9 +198,33 @@ namespace Module.WebAPI
 
 		private void GetImage_main(Texture2D _texture, UnityAction<Texture2D> _callback)
 		{
-			//Texture2D tex = new Texture2D(100, 100);
-
 			_callback.Invoke(_texture);
+		}
+
+		private void GetData_history(string _data, UnityAction<DataTable> _callback)
+		{
+			DataTable result = new DataTable();
+
+			result.Columns.Add(new DataColumn("date", typeof(string)));
+			result.Columns.Add(new DataColumn("Dcrack", typeof(List<Issue>)));
+			result.Columns.Add(new DataColumn("Dbagli", typeof(List<Issue>)));
+			result.Columns.Add(new DataColumn("Dbaegtae", typeof(List<Issue>)));
+			result.Columns.Add(new DataColumn("Dsegul", typeof(List<Issue>)));
+			result.Columns.Add(new DataColumn("Ddamage", typeof(List<Issue>)));
+			result.Columns.Add(new DataColumn("Rcrack", typeof(List<Issue>)));
+			result.Columns.Add(new DataColumn("Rbagli", typeof(List<Issue>)));
+			result.Columns.Add(new DataColumn("Rbaegtae", typeof(List<Issue>)));
+			result.Columns.Add(new DataColumn("Rsegul", typeof(List<Issue>)));
+			result.Columns.Add(new DataColumn("Rdamage", typeof(List<Issue>)));
+
+			JObject jObj = JObject.Parse(_data);
+
+			string __data = jObj["data"]["dailyList"].ToString();
+
+			JObject _jObj = JObject.Parse(__data);
+			Debug.Log(_jObj.First.ToString());
+
+			_callback.Invoke(result);
 		}
 	}
 }

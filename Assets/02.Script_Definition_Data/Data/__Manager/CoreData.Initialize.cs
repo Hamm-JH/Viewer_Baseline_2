@@ -16,7 +16,7 @@ namespace Definition.Data
 		{
 			SetURL(out m_url, out m_baseURL, 
 				out m_modelURI, out m_addressURI,
-				out m_issueDmgURI, out m_issueRcvURI, out m_imageURL,
+				out m_issueDmgURI, out m_issueRcvURI, out m_imageURL, out m_historyURL,
 				out m_keyCode);
 
 			action.Invoke(this);
@@ -26,7 +26,7 @@ namespace Definition.Data
 
 		private void SetURL(out string _url, out string _baseURL, 
 			out string _modelURI, out string _addressURI,
-			out string _issueDmgURI, out string _issueRcvURI, out string _imageURL,
+			out string _issueDmgURI, out string _issueRcvURI, out string _imageURL, out string _historyURL,
 			out string _keyCode)
 		{
 			_url = "";
@@ -36,12 +36,14 @@ namespace Definition.Data
 			_issueDmgURI = "";
 			_issueRcvURI = "";
 			_imageURL = "";
+			_historyURL = "";
 			_keyCode = "";
 
 			string addressURL = "";
 			string dmgURL = "";
 			string rcvURL = "";
 			string imageURL = "";
+			string historyURL = "";
 
 			if(Platforms.IsTunnelPlatform(Platform))
 			{
@@ -59,6 +61,7 @@ namespace Definition.Data
 				addressURL = "/api/tunnel/search?cdTunnel=";
 				dmgURL = "/api/tunnel/damage/state?cdTunnel=";
 				rcvURL = "/api/tunnel/recover/state?cdTunnel=";
+				historyURL = "/api/tunnel/damageDailyHistory?cdTunnel=";
 				imageURL = "/api/common/file/dn?";
 			}
 			else if(Platforms.IsBridgePlatform(Platform))
@@ -73,6 +76,7 @@ namespace Definition.Data
 				dmgURL = "/api/bridge/damage/state?cdBridge=";
 				rcvURL = "/api/bridge/recover/state?cdBridge=";
 				// TODO 확인 필요
+				//historyURL = "";
 				//imageURL = "";
 			}
 
@@ -87,6 +91,7 @@ namespace Definition.Data
 			_addressURI = string.Format("{0}{1}{2}", _baseURL, addressURL, _keyCode);
 			_issueDmgURI = string.Format("{0}{1}{2}", _baseURL, dmgURL, _keyCode);
 			_issueRcvURI = string.Format("{0}{1}{2}", _baseURL, rcvURL, _keyCode);
+			_historyURL = string.Format("{0}{1}{2}", _baseURL, historyURL, _keyCode);
 			_imageURL = string.Format("{0}{1}", _baseURL, imageURL);
 		}
 	}

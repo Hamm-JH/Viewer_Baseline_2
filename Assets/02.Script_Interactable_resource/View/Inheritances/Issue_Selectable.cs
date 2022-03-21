@@ -100,7 +100,7 @@ namespace View
 
 		public void SetIssueCode(string issueCode, string issueIndex)
 		{
-			Issue.IssueCode = (Code)Enum.Parse(typeof(Code), issueCode);
+			Issue.IssueCode = (IssueCodes)Enum.Parse(typeof(IssueCodes), issueCode);
 		}
 
 		/// <summary>
@@ -108,7 +108,7 @@ namespace View
 		/// </summary>
 		public void SetMaterial(IssueType issueType = IssueType.Null)
 		{
-			if (Issue.IssueCode == Code.Null)
+			if (Issue.IssueCode == IssueCodes.Null)
 			{
 				//transform.GetComponent<MeshRenderer>().material = defaultMaterial;
 				return;

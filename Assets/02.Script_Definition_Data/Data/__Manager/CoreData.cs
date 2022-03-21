@@ -49,6 +49,7 @@ namespace Definition.Data
 		[SerializeField] string m_issueDmgURI;
 		[SerializeField] string m_issueRcvURI;
 		[SerializeField] string m_imageURL;
+		[SerializeField] string m_historyURL;
 		[SerializeField] string m_keyCode;
 
 		public string BaseURL { get => m_baseURL; set => m_baseURL=value; }
@@ -57,6 +58,7 @@ namespace Definition.Data
 		public string IssueDmgURI { get => m_issueDmgURI; set => m_issueDmgURI=value; }
 		public string IssueRcvURI { get => m_issueRcvURI; set => m_issueRcvURI=value; }
 		public string ImageURL { get => m_imageURL; set => m_imageURL=value; }
+		public string HistoryURL { get => m_historyURL; set => m_historyURL=value; }
 		public string KeyCode { get => m_keyCode; set => m_keyCode=value; }
 
 		//20211202-00000283

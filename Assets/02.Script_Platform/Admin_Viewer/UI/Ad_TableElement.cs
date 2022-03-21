@@ -42,6 +42,29 @@ namespace AdminViewer.UI
 		public TextMeshProUGUI b24re_2date;
 		public Button b24re_3image;
 
+		[Header("state5 m1 dmg")]
+		public TextMeshProUGUI s5m1_dmg_1number;
+		public TextMeshProUGUI s5m1_dmg_2dmgName;
+		public TextMeshProUGUI s5m1_dmg_3partName;
+		public TextMeshProUGUI s5m1_dmg_4dmgPos;
+		public TextMeshProUGUI s5m1_dmg_5date;
+
+		[Header("state5 m1 rcv")]
+		public TextMeshProUGUI s5m1_rcv_1number;
+		public TextMeshProUGUI s5m1_rcv_2dmgName;
+		public TextMeshProUGUI s5m1_rcv_3partName;
+		public TextMeshProUGUI s5m1_rcv_4rcvPos;
+		public TextMeshProUGUI s5m1_rcv_5date;
+
+		[Header("state5 m1 rein")]
+		public TextMeshProUGUI s5m1_rein_1number;
+		public TextMeshProUGUI s5m1_rein_2dmgName;
+		public TextMeshProUGUI s5m1_rein_3partName;
+		public TextMeshProUGUI s5m1_rein_4reinPos;
+		public TextMeshProUGUI s5m1_rein_5date;
+
+
+
 		public void SetTableElement(Ad_PanelType _pType, UIEventType _uType /* TODO 데이터*/)
 		{
 			if (_uType == UIEventType.Ad_nav_state2)
@@ -69,16 +92,16 @@ namespace AdminViewer.UI
 					SetTableElement_s4_b2();
 				}
 			}
-			else if (_uType == UIEventType.Ad_nav_state5)
-			{
-				if (_pType == Ad_PanelType.s5m1)
-				{
-					SetTableElement_s5_s5m1();
-				}
-			}
+			//else if (_uType == UIEventType.Ad_nav_state5)
+			//{
+			//	if (_pType == Ad_PanelType.s5m1)
+			//	{
+			//		SetTableElement_s5_s5m1();
+			//	}
+			//}
 		}
 
-		public void SetTableElement(Ad_PanelType _pType, UIEventType _uType, int _index, Issue _data)
+		public void SetTableElement(Ad_PanelType _pType, UIEventType _uType, Ad_TableType _tType, int _index, Issue _data)
 		{
 			if (_uType == UIEventType.Ad_nav_state2)
 			{
@@ -109,7 +132,7 @@ namespace AdminViewer.UI
 			{
 				if (_pType == Ad_PanelType.s5m1)
 				{
-					SetTableElement_s5_s5m1();
+					SetTableElement_s5_s5m1(_index, _data, _tType);
 				}
 			}
 		}
@@ -121,9 +144,9 @@ namespace AdminViewer.UI
 			SetTableElement_s2_bm();
 
 			bm2d_1number.text = $"{_index+1}";
-			bm2d_2issueName.text = $"{_data.IssueCode.ToString()}";
-			bm2d_3partName.text = $"{_data.CdBridgeParts}";
-			bm2d_4location.text = $"{_data.DcLocation}";
+			bm2d_2issueName.text = $"{_data.__IssueName}";
+			bm2d_3partName.text = $"{_data.__PartName}";
+			bm2d_4location.text = $"{_data.__LocationName}";
 			bm2d_5date.text = $"{_data.DateDmg}";
 		}
 
@@ -147,8 +170,8 @@ namespace AdminViewer.UI
 		{
 			SetTableElement_s3_b1();
 
-			b13d_1issueName.text = $"{_data.IssueCode.ToString()}";	// 손상정보
-			b13d_2location.text = $"{_data.DcLocation} TODO";   // 손상위치
+			b13d_1issueName.text = $"{_data.__IssueName}";	// 손상정보
+			b13d_2location.text = $"{_data.__LocationName} TODO";   // 손상위치
 			b13d_3date.text = $"{_data.DateDmg}";		// 날짜
 		}
 
@@ -203,7 +226,7 @@ namespace AdminViewer.UI
 		/// <summary>
 		/// 상태5번 s5m1패널
 		/// </summary>
-		private void SetTableElement_s5_s5m1(/* TODO 데이터*/)
+		private void SetTableElement_s5_s5m1(Ad_TableType _tType)
 		{
 			//Debug.Log("SetTableElement_s5_s5m1");
 
@@ -211,9 +234,72 @@ namespace AdminViewer.UI
 			r_b1_State3_dmg.SetActive(false);
 			r_b1_State4_rcv.SetActive(false);
 			r_b2_State4_rein.SetActive(false);
-			r_m1_State5_dmg.SetActive(true);
-			r_m1_State5_rcv.SetActive(false);
-			r_m1_State5_rein.SetActive(false);
+
+			bool isDmg = false;
+			bool isRcv = false;
+			bool isRein = false;
+			switch(_tType)
+			{
+				case Ad_TableType.dmg:
+					isDmg = true;
+					isRcv = false;
+					isRein = false;
+					break;
+
+				case Ad_TableType.rcv:
+					isDmg = false;
+					isRcv = true;
+					isRein = false;
+					break;
+
+				case Ad_TableType.rein:
+					isDmg = false;
+					isRcv = false;
+					isRein = true;
+					break;
+			}
+			r_m1_State5_dmg.SetActive(isDmg);
+			r_m1_State5_rcv.SetActive(isRcv);
+			r_m1_State5_rein.SetActive(isRein);
+		}
+
+		private void SetTableElement_s5_s5m1(int _index, Issue _data, Ad_TableType _tType)
+		{
+			SetTableElement_s5_s5m1(_tType);
+
+			switch(_tType)
+			{
+				case Ad_TableType.dmg:
+					{
+						s5m1_dmg_1number.text = $"{_index+1}";
+						s5m1_dmg_2dmgName.text = $"{_data.__IssueName}";
+						s5m1_dmg_3partName.text = $"{_data.__PartName}";
+						s5m1_dmg_4dmgPos.text = $"{_data.__LocationName}";
+						s5m1_dmg_5date.text = $"{_data.DateDmg}";
+					}
+					break;
+
+				case Ad_TableType.rcv:
+					{
+						s5m1_rcv_1number.text = $"{_index+1}";
+						s5m1_rcv_2dmgName.text = $"{_data.__IssueName}";
+						s5m1_rcv_3partName.text = $"{_data.__PartName}";
+						s5m1_rcv_4rcvPos.text = $"{_data.__LocationName}";
+						s5m1_rcv_5date.text = $"{_data.DateRcvEnd}";
+					}
+					break;
+
+				case Ad_TableType.rein:
+					{
+						s5m1_rein_1number.text = $"{_index+1}";
+						s5m1_rein_2dmgName.text = $"{_data.__IssueName}";
+						s5m1_rein_3partName.text = $"{_data.__PartName}";
+						s5m1_rein_4reinPos.text = $"{_data.__LocationName}";
+						s5m1_rein_5date.text = $"{_data.DateDmg}";
+					}
+					break;
+			}
+			
 		}
 
 		#endregion

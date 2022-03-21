@@ -262,6 +262,9 @@ namespace Definition
 		Ad_St3_Toggle = 0x216,
 		Ad_St4_Toggle = 0x217,
 		Ad_St5_Toggle = 0x218,
+		Ad_St5_Toggle_m1_dmg = 0x219,
+		Ad_St5_Toggle_m1_rcv = 0x21a,
+		Ad_St5_Toggle_m1_rein = 0x21b,
 	}
 
 	public enum UniqueUIEventType

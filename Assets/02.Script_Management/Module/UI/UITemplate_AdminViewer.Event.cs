@@ -5,7 +5,9 @@ using UnityEngine;
 namespace Module.UI
 {
 	using AdminViewer;
+	using AdminViewer.UI;
 	using Definition;
+	using Management;
 	using UnityEngine.UI;
 
 	public partial class UITemplate_AdminViewer : AUI
@@ -16,9 +18,28 @@ namespace Module.UI
 			TitData.oName.text = value;
 		}
 
-		public void SetPartText(string value)
+		public void TogglePartData(bool isOn)
 		{
-			TitData.pName.text = value;
+			TitData.pImage.enabled = isOn;
+			TitData.pName.enabled = isOn;
+		}
+
+		public void SetPartText(string _value)
+		{
+			PlatformCode pCode = MainManager.Instance.Platform;
+
+			string name = _value;
+
+			if(Platforms.IsTunnelPlatform(pCode))
+			{
+				name = Platform.Tunnel.Tunnels.GetName(_value);
+			}
+			else if(Platforms.IsBridgePlatform(pCode))
+			{
+				Debug.LogError("bridge part name setting");
+			}
+
+			TitData.pName.text = name;
 		}
 		#endregion
 
@@ -291,6 +312,34 @@ namespace Module.UI
 			}
 		}
 
+		private void SetSt5_m1_dmg_toggle()
+		{
+			Ad_Panel panel = Panels.s5m1_code;
+
+			panel.r_TableContents[0].gameObject.SetActive(true);
+			panel.r_TableContents[1].gameObject.SetActive(false);
+			panel.r_TableContents[2].gameObject.SetActive(false);
+		}
+
+		private void SetSt5_m1_rcv_toggle()
+		{
+			Ad_Panel panel = Panels.s5m1_code;
+
+			panel.r_TableContents[0].gameObject.SetActive(false);
+			panel.r_TableContents[1].gameObject.SetActive(true);
+			panel.r_TableContents[2].gameObject.SetActive(false);
+		}
+
+		private void SetSt5_m1_rein_toggle()
+		{
+			Ad_Panel panel = Panels.s5m1_code;
+
+			panel.r_TableContents[0].gameObject.SetActive(false);
+			panel.r_TableContents[1].gameObject.SetActive(false);
+			panel.r_TableContents[2].gameObject.SetActive(true);
+		}
+
+
 		#endregion
 
 		#region 상태변경
@@ -306,6 +355,8 @@ namespace Module.UI
 			Panels.s5b1			.SetActive(false);
 			Panels.s5b2			.SetActive(false);
 			Panels.s5m1			.SetActive(false);
+
+			TogglePartData(false);
 
 			UIEventType uType = UIEventType.Ad_nav_state1;
 			Panels.bpm1_code.SetPanel(uType);
@@ -327,6 +378,8 @@ namespace Module.UI
 			Panels.s5b2.SetActive(false);
 			Panels.s5m1.SetActive(false);
 
+			TogglePartData(false);
+
 			UIEventType uType = UIEventType.Ad_nav_state2;
 			Panels.bpm1_code.SetPanel(uType);
 			Panels.bpm2_code.SetPanel(uType);
@@ -346,6 +399,8 @@ namespace Module.UI
 			Panels.s5b1.SetActive(false);
 			Panels.s5b2.SetActive(false);
 			Panels.s5m1.SetActive(false);
+
+			TogglePartData(true);
 
 			UIEventType uType = UIEventType.Ad_nav_state3;
 			Panels.bpm1_code.SetPanel(uType);
@@ -367,6 +422,8 @@ namespace Module.UI
 			Panels.s5b2.SetActive(false);
 			Panels.s5m1.SetActive(false);
 
+			TogglePartData(true);
+
 			UIEventType uType = UIEventType.Ad_nav_state4;
 			Panels.bpm1_code.SetPanel(uType);
 			Panels.bpm2_code.SetPanel(uType);
@@ -387,6 +444,8 @@ namespace Module.UI
 			Panels.s5b2.SetActive(true);
 			Panels.s5m1.SetActive(true);
 
+			TogglePartData(false);
+
 			UIEventType uType = UIEventType.Ad_nav_state5;
 			Panels.bpm1_code.SetPanel(uType);
 			Panels.bpm2_code.SetPanel(uType);
@@ -394,6 +453,8 @@ namespace Module.UI
 			Panels.s5b1_code.SetPanel(uType);
 			Panels.s5b2_code.SetPanel(uType);
 			Panels.s5m1_code.SetPanel(uType);
+
+			SetSt5_m1_dmg_toggle();
 		}
 
 		#endregion

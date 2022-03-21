@@ -62,6 +62,19 @@ namespace Module.UI
 			InitializeUI();
 
 			ContentManager.Instance._API.RequestAddressData(GetAddressData);
+
+			PlatformCode pCode = MainManager.Instance.Platform;
+			if(Platforms.IsBridgePlatform(pCode))
+			{
+				TitData.oImage.sprite = Icons.m_bridge_icon;
+			}
+			else if(Platforms.IsTunnelPlatform(pCode))
+			{
+				TitData.oImage.sprite = Icons.m_tunnel_icon;
+			}
+
+
+			//if (MainManager.Instance.Platform)
 		}
 
 		private void GetAddressData(AAPI _data)
@@ -69,8 +82,10 @@ namespace Module.UI
 			// 다시 언박싱
 			DAddress data = (DAddress)_data;
 
-			TitData.oName.text = data.nmTunnel;
-			BotData.adrName.text = data.nmAddress;
+			//TitData.oName.text = data.nmTunnel;
+			//BotData.adrName.text = data.nmAddress;
+			SetTitleText(data.nmTunnel);
+			SetAddressText(data.nmAddress);
 
 			//string _fid = data.mp_fid;
 			//string _ftype = data.mp_ftype;
@@ -109,6 +124,12 @@ namespace Module.UI
 					obj,
 					MainManager.Instance.cameraExecuteEvents.selectEvent
 				));
+
+				SetPartText(obj.name);
+			}
+			else
+			{
+				SetPartText(obj.name);
 			}
 		}
 
@@ -185,6 +206,18 @@ namespace Module.UI
 
 				case UIEventType.Ad_St5_Toggle:
 					SetSt5_Toggle();
+					break;
+
+				case UIEventType.Ad_St5_Toggle_m1_dmg:
+					SetSt5_m1_dmg_toggle();
+					break;
+
+				case UIEventType.Ad_St5_Toggle_m1_rcv:
+					SetSt5_m1_rcv_toggle();
+					break;
+
+				case UIEventType.Ad_St5_Toggle_m1_rein:
+					SetSt5_m1_rein_toggle();
 					break;
 
 				case UIEventType.Ad_Prev:

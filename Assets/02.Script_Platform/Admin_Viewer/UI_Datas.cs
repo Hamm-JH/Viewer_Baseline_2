@@ -7,9 +7,14 @@ using UnityEngine.UI;
 
 namespace AdminViewer
 {
+	#region UI Template
+
 	[System.Serializable]
 	public class ICON_Template
 	{
+		public Sprite m_bridge_icon;
+		public Sprite m_tunnel_icon;
+
 		public Sprite m_icon_dmg;
 		public Sprite m_icon_rcv;
 		public Sprite m_icon_rein;
@@ -18,7 +23,9 @@ namespace AdminViewer
 	[System.Serializable]
 	public class TitleData
 	{
+		public Image oImage;
 		public TextMeshProUGUI oName;
+		public Image pImage;
 		public TextMeshProUGUI pName;
 	}
 
@@ -95,7 +102,55 @@ namespace AdminViewer
 		public Ad_Panel s5b1_code;
 		public Ad_Panel s5b2_code;
 		public Ad_Panel s5m1_code;
-
-
 	}
+
+	#endregion
+
+	#region AdminViewer in Ad_Panel
+
+	[System.Serializable]
+	public class S5b1_element
+	{
+		public TextMeshProUGUI m_s5b1_allDmg;
+		public TextMeshProUGUI m_s5b1_allRcv;
+
+		public TextMeshProUGUI m_s5b1_1crack_dmg;
+		public TextMeshProUGUI m_s5b1_1crack_rcv;
+
+		public TextMeshProUGUI m_s5b1_2spalling_dmg;
+		public TextMeshProUGUI m_s5b1_2spalling_rcv;
+
+		public TextMeshProUGUI m_s5b1_3Efflorence_dmg;
+		public TextMeshProUGUI m_s5b1_3Efflorence_rcv;
+
+		public TextMeshProUGUI m_s5b1_4Breakage_dmg;
+		public TextMeshProUGUI m_s5b1_4Breakage_rcv;
+
+		//---------------------------------------------------------------
+
+		public Image m_s5b1_image_allDmg;
+		public Image m_s5b1_image_allRcv;
+			   
+		public Image m_s5b1_image_1crack_dmg;
+		public Image m_s5b1_image_1crack_rcv;
+			   
+		public Image m_s5b1_image_2spalling_dmg;
+		public Image m_s5b1_image_2spalling_rcv;
+			   
+		public Image m_s5b1_image_3Efflorence_dmg;
+		public Image m_s5b1_image_3Efflorence_rcv;
+			   
+		public Image m_s5b1_image_4Breakage_dmg;
+		public Image m_s5b1_image_4Breakage_rcv;
+	}
+
+	[System.Serializable]
+	public class S5m1_element
+	{
+		public TextMeshProUGUI m_s5m1_count_dmg;
+		public TextMeshProUGUI m_s5m1_count_rcv;
+		public TextMeshProUGUI m_s5m1_count_rein;
+	}
+
+	#endregion
 }

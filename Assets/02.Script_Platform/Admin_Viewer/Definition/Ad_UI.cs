@@ -18,12 +18,19 @@ namespace AdminViewer
 	/// </summary>
 	public enum Ad_PanelType
 	{
-		Null,
-		b1,
-		b2,
-		bm,
-		s5m1,
-		s5b1,
-		s5b2,
+		Null = -1,
+		b1 = 0,
+		b2 = 1,
+		bm = 2,
+		s5m1 = 3,
+		s5b1 = 4,
+		s5b2 = 5,
+	}
+
+	public enum Ad_TableType
+	{
+		dmg,
+		rcv,
+		rein,
 	}
 }

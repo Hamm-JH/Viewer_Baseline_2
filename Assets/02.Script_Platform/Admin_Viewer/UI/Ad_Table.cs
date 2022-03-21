@@ -10,6 +10,8 @@ namespace AdminViewer.UI
 
 	public class Ad_Table : MonoBehaviour
 	{
+		[SerializeField] private Ad_TableType m_tType;
+
 		public GameObject sub_s2_bm;
 		public GameObject sub_s3_b1;
 		public GameObject sub_s4_b1;
@@ -192,16 +194,38 @@ namespace AdminViewer.UI
 			Debug.Log("SetTable_s5_s5m1");
 			ToggleObject(true);
 
+			bool isDmg = false;
+			bool isRcv = false;
+			bool isRein = false;
 			sub_s2_bm.SetActive(false);
 			sub_s3_b1.SetActive(false);
 			sub_s4_b1.SetActive(false);
 			sub_s4_b2.SetActive(false);
-			sub_s5_m1_dmg.SetActive(true);
-			sub_s5_m1_rcv.SetActive(false);
-			sub_s5_m1_rein.SetActive(false);
+			switch(m_tType)
+			{
+				case Ad_TableType.dmg:
+					isDmg = true;
+					isRcv = false;
+					isRein = false;
+					break;
 
-			Debug.LogError("St5 s5m1 테이블 할당");
-			TestData();
+				case Ad_TableType.rcv:
+					isDmg = false;
+					isRcv = true;
+					isRein = false;
+					break;
+
+				case Ad_TableType.rein:
+					isDmg = false;
+					isRcv = false;
+					isRein = true;
+					break;
+			}
+			sub_s5_m1_dmg.SetActive(isDmg);
+			sub_s5_m1_rcv.SetActive(isRcv);
+			sub_s5_m1_rein.SetActive(isRein);
+
+			GetTableData_s5_m1();
 		}
 
 		#endregion
@@ -253,7 +277,30 @@ namespace AdminViewer.UI
 
 		private void GetTableData_s4_b2()
 		{
+			// 보강정보는 빈 공간 출력
 			SetTableData(new List<Issue>());
+		}
+
+		private void GetTableData_s5_m1()
+		{
+			List<Issue> issueList = new List<Issue>();
+
+			switch(m_tType)
+			{
+				case Ad_TableType.dmg:
+					issueList = ContentManager.Instance._Model.DmgData;
+					break;
+
+				case Ad_TableType.rcv:
+					issueList = ContentManager.Instance._Model.RcvData;
+					break;
+
+				case Ad_TableType.rein:
+					issueList = new List<Issue>();
+					break;
+			}
+
+			SetTableData(issueList);
 		}
 
 		#endregion
@@ -264,13 +311,14 @@ namespace AdminViewer.UI
 		{
 			Ad_PanelType pType = m_pType;
 			UIEventType uType = m_uType;
+			Ad_TableType tType = m_tType;
 
 			ClearElement();
 
 			int index = _datas.Count;
 			for (int i = 0; i < index; i++)
 			{
-				AddElement(pType, uType, i, _datas[i]);
+				AddElement(pType, uType, tType, i, _datas[i]);
 			}
 		}
 
@@ -311,12 +359,12 @@ namespace AdminViewer.UI
 			tElems.Clear();
 		}
 
-		private void AddElement(Ad_PanelType _pType, UIEventType _uType, int _index, Issue _data)
+		private void AddElement(Ad_PanelType _pType, UIEventType _uType, Ad_TableType _tType, int _index, Issue _data)
 		{
 			GameObject elem = Instantiate<GameObject>(Resources.Load<GameObject>("UI/UIElement/ContentElements"), rContent.transform);
 			Ad_TableElement elemCode = elem.GetComponent<Ad_TableElement>();
 
-			elemCode.SetTableElement(_pType, _uType, _index, _data);
+			elemCode.SetTableElement(_pType, _uType, _tType, _index, _data);
 
 			tElems.Add(elemCode);
 		}

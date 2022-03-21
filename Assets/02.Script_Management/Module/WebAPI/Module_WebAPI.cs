@@ -8,6 +8,7 @@ namespace Module.WebAPI
 	using Definition;
 	using Definition.Data;
 	using Management;
+	using System.Data;
 	using UnityEngine.Events;
 
 	/// <summary>
@@ -39,7 +40,8 @@ namespace Module.WebAPI
 			RequestData(rcvURI, WebType.Issue_Rcv, GetData);
 		}
 
-		// Admin Viewer API...
+		// Admin Viewer API... ----------------------------------------------------------------------
+
 		public void RequestAddressData(UnityAction<AAPI> action)
 		{
 			CoreData data = MainManager.Instance.Data;
@@ -60,6 +62,19 @@ namespace Module.WebAPI
 
 			RequestImage(imageURI, WebType.Image_main, _action, GetData);
 			
+		}
+
+		/// <summary>
+		/// history 수집
+		/// </summary>
+		/// <param name="_action"></param>
+		public void RequestHistoryData(UnityAction<DataTable> _action)
+		{
+			CoreData data = MainManager.Instance.Data;
+
+			string historyURI = data.HistoryURL;
+
+			RequestData(historyURI, WebType.history, _action, GetData);
 		}
 	}
 }
