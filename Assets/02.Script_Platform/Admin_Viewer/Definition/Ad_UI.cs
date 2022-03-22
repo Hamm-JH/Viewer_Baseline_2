@@ -5,15 +5,6 @@ using UnityEngine;
 namespace AdminViewer
 {
 	/// <summary>
-	/// enum 정의
-	/// </summary>
-	
-	public enum Ad_UIType
-	{
-
-	}
-
-	/// <summary>
 	/// Admin Viewer 패널타입
 	/// </summary>
 	public enum Ad_PanelType
@@ -27,8 +18,10 @@ namespace AdminViewer
 		s5b2 = 5,
 	}
 
-	public enum Ad_TableType
+	public enum Ad_Panel_ElementType
 	{
+		s3_b2,
+
 		dmg,
 		rcv,
 		rein,

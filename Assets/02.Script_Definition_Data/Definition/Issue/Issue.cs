@@ -1,4 +1,5 @@
 ﻿using Management;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,12 +27,19 @@ namespace Definition._Issue
 		[SerializeField] string m_issueOrderCode;
 		[SerializeField] string m_cdBridge;
 		[SerializeField] string m_cdBridgeParts;
+		[SerializeField] string m_nmUser;
 		[SerializeField] string m_dcMemberSurface;
 		[SerializeField] string m__dcLocation;
 		[SerializeField] string m__issueCode;
 		[SerializeField] string m_ynRecover;
 		[SerializeField] string m_issueStatus;
 		[SerializeField] string m__positionVector;
+
+		[SerializeField] string m_width;
+		[SerializeField] string m_height;
+		[SerializeField] string m_depth;
+		[SerializeField] string m_dcRemark;
+		[SerializeField] string m_dcRecover;
 
 		[SerializeField] string m_dateDmg;
 		[SerializeField] string m_dateRcvStart;
@@ -45,6 +53,7 @@ namespace Definition._Issue
 		public string IssueOrderCode { get => m_issueOrderCode; set => m_issueOrderCode=value; }
 		public string CdBridge { get => m_cdBridge; set => m_cdBridge=value; }
 		public string CdBridgeParts { get => m_cdBridgeParts; set => m_cdBridgeParts=value; }
+		public string NmUser { get => m_nmUser; set => m_nmUser=value; }
 		public string DcMemberSurface { get => m_dcMemberSurface; set => m_dcMemberSurface=value; }
 		public string YnRecover { get => m_ynRecover; set => m_ynRecover=value; }
 		public string IssueStatus { get => m_issueStatus; set => m_issueStatus=value; }
@@ -53,7 +62,7 @@ namespace Definition._Issue
 			get => m__issueCode; 
 			set
 			{
-				Debug.Log($"issue code : {value}");
+				//Debug.Log($"issue code : {value}");
 				m__issueCode=value;
 				IssueCodes code;
 				if(Enum.TryParse<IssueCodes>(m__issueCode, out code))
@@ -95,6 +104,12 @@ namespace Definition._Issue
 				m_positionVector = pos;
 			}
 		}
+
+		public string Width { get => m_width; set => m_width=value; }
+		public string Height { get => m_height; set => m_height=value; }
+		public string Depth { get => m_depth; set => m_depth=value; }
+		public string DmgDescription { get => m_dcRemark; set => m_dcRemark=value; }
+		public string RcvDescription { get => m_dcRecover; set => m_dcRecover=value; }
 
 		public string DateDmg { get => m_dateDmg; set => m_dateDmg=value; }
 		public string DateRcvStart { get => m_dateRcvStart; set => m_dateRcvStart=value; }
@@ -198,6 +213,54 @@ namespace Definition._Issue
 
 				return result;
 			}
+		}
+
+		public void SetDmg(JToken _token)
+		{
+			IssueOrderCode       =  _token.SelectToken("cdTunnelDamaged").ToString();
+			CdBridge             =  _token.SelectToken("cdTunnel").ToString();
+			CdBridgeParts        =  _token.SelectToken("cdTunnelParts").ToString();
+			NmUser               =   _token.SelectToken("nmUser").ToString();
+			DcMemberSurface      =   _token.SelectToken("dcDamageMemberSurface").ToString();
+			_DcLocation          =   _token.SelectToken("dcLocation").ToString();
+			_IssueCode           =   _token.SelectToken("fgDA001").ToString();
+			//DcMemberSurface	= parseString(ParseCode.Surface, _token.SelectToken(JSON.IssueKey.dcDamageMemberSurface.ToString()).ToString());
+			//DcLocation			=      int.Parse(_token.SelectToken(JSON.IssueKey.dcLocation.ToString()).ToString());
+			//IssueCode			=       parseIssueCode(_token.SelectToken(JSON.IssueKey.fgDA001.ToString()).ToString());
+			YnRecover            = "";
+			IssueStatus          =   _token.SelectToken("dcGrade").ToString();
+			_PositionVector      =  _token.SelectToken("dcPinLocation").ToString();
+			DateDmg          = _token.SelectToken("dtCheck").ToString();
+
+			Width                =   _token.SelectToken("noDamageWidth").ToString();
+			Height               =   _token.SelectToken("noDamageHeight").ToString();
+			Depth                =   _token.SelectToken("noDamageDepth").ToString();
+			DmgDescription          =   _token.SelectToken("dcRemark").ToString();
+		}
+
+		public void SetRcv(JToken _token)
+		{
+			IssueOrderCode   = _token.SelectToken("cdTunnelRecover").ToString();
+			CdBridge         = _token.SelectToken("cdTunnel").ToString();
+			CdBridgeParts    = _token.SelectToken("cdTunnelParts").ToString();
+			NmUser           = _token.SelectToken("nmUser").ToString();
+			DcMemberSurface  = _token.SelectToken("dcDamageMemberSurface").ToString();
+			_DcLocation      = _token.SelectToken("dcLocation").ToString();
+			_IssueCode       = _token.SelectToken("fgDA001").ToString();
+			//DcMemberSurface  = parseString(ParseCode.Surface, _token.SelectToken(JSON.IssueKey.dcDamageMemberSurface.ToString()).ToString());
+			//DcLocation       = int.Parse(_token.SelectToken(JSON.IssueKey.dcLocation.ToString()).ToString());
+			//IssueCode        = parseIssueCode(_token.SelectToken(JSON.IssueKey.fgDA001.ToString()).ToString());
+			YnRecover        = _token.SelectToken("ynRecover").ToString();
+			_PositionVector  = _token.SelectToken("dcPinLocation").ToString();
+			IssueStatus      = "";
+			DateRcvStart     = _token.SelectToken("dtStart").ToString();
+			DateRcvEnd       = _token.SelectToken("dtEnd").ToString();
+
+			Width                =   _token.SelectToken("noDamageWidth").ToString();
+			Height               =   _token.SelectToken("noDamageHeight").ToString();
+			Depth                =   _token.SelectToken("noDamageDepth").ToString();
+			DmgDescription          =   _token.SelectToken("dcRemark").ToString();
+			RcvDescription       =   _token.SelectToken("dcRecover").ToString();
 		}
 	}
 }

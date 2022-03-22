@@ -289,6 +289,8 @@ namespace Definition
 
 	public enum ColorType
 	{
+		White = 0x01,
+
 		Default1 = 0x10,
 		Selected1 = 0x20,
 		

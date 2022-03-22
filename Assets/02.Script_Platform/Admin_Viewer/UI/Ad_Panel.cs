@@ -14,12 +14,12 @@ namespace AdminViewer.UI
 	using TMPro;
 	using UnityEngine.UI;
 
-	public class Ad_Panel : MonoBehaviour
+	public partial class Ad_Panel : MonoBehaviour
 	{
 		[SerializeField] UITemplate_AdminViewer m_uiRoot;
 
 		public Ad_PanelType m_pid;
-		public List<Ad_Table> r_TableContents;
+		public List<Ad_Panel_Table> r_TableContents;
 
 		[Header("Title")]
 		public Image m_icon;
@@ -29,8 +29,14 @@ namespace AdminViewer.UI
 
 		public TextMeshProUGUI m_user;
 
+		[Header("B2 element")]
+		[SerializeField] B2_element b2_element;
+
 		[Header("State5 b1")]
 		[SerializeField] S5b1_element s5b1_element;
+
+		[Header("State5 b2")]
+		[SerializeField] S5b2_element __el;
 
 		[Header("State5 m1")]
 		[SerializeField] S5m1_element s5m1_element;
@@ -57,10 +63,10 @@ namespace AdminViewer.UI
 					SetPanel_State2(m_pid);
 					break;
 				case UIEventType.Ad_nav_state3:
-					SetPanel_State3(m_pid);
+					SetPanel_State3(m_pid, _uType);
 					break;
 				case UIEventType.Ad_nav_state4:
-					SetPanel_State4(m_pid);
+					SetPanel_State4(m_pid, _uType);
 					break;
 				case UIEventType.Ad_nav_state5:
 					SetPanel_State5(m_pid);
@@ -93,7 +99,7 @@ namespace AdminViewer.UI
 			}
 		}
 
-		private void SetPanel_State3(Ad_PanelType _pType)
+		private void SetPanel_State3(Ad_PanelType _pType, UIEventType _uType)
 		{
 			if(_pType == Ad_PanelType.b1)
 			{
@@ -110,11 +116,29 @@ namespace AdminViewer.UI
 			}
 			else if(_pType == Ad_PanelType.b2)
 			{
-				Debug.LogError("선택 객체 표로 전달");
+				GameObject obj = ContentManager.Instance._SelectedObj;
+
+				string oName = "";
+				if (obj != null) oName = obj.name;
+
+				oName = GetPartName(oName);
+
+				m_titleCount.enabled = false;
+				m_user.enabled = true;
+
+				m_icon.sprite = m_uiRoot.Icons.m_icon_detail;
+				m_icon.color = Colors.Set(ColorType.White, 1);
+				m_title.text = $"{oName}";
+
+
+				r_TableContents.ForEach(x => x.gameObject.SetActive(false));
+				b2_element.m_detailPanel.gameObject.SetActive(true);
+
+				b2_element.m_detailPanel.SetPanel(_pType, _uType);
 			}
 		}
 
-		private void SetPanel_State4(Ad_PanelType _pType)
+		private void SetPanel_State4(Ad_PanelType _pType, UIEventType _uType)
 		{
 			if (_pType == Ad_PanelType.b1)
 			{
@@ -144,6 +168,9 @@ namespace AdminViewer.UI
 
 				m_titleCount.enabled = false;
 				m_user.enabled = false;
+
+				r_TableContents.ForEach(x => x.gameObject.SetActive(true));
+				b2_element.m_detailPanel.gameObject.SetActive(false);
 			}
 		}
 
@@ -191,7 +218,7 @@ namespace AdminViewer.UI
 			{
 				Debug.LogError("마지막 3구간 b2 처리");
 
-				ContentManager.Instance._API.RequestHistoryData(SetYearTable);
+				ContentManager.Instance._API.RequestHistoryData(GetHistoryTable);
 			}
 			else if (_pType == Ad_PanelType.s5m1)
 			{
@@ -204,11 +231,6 @@ namespace AdminViewer.UI
 				s5m1_element.m_s5m1_count_rcv.text = rcvIndex.ToString();
 				s5m1_element.m_s5m1_count_rein.text = reinIndex.ToString();
 			}
-		}
-
-		private void SetYearTable(DataTable _dTable)
-		{
-			Debug.LogError("Hello table");
 		}
 
 		private string GetPartName(string _value)
@@ -226,6 +248,18 @@ namespace AdminViewer.UI
 			}
 
 			return result;
+		}
+
+		/// <summary>
+		/// Root UI에서 사용자의 이름을 할당한다.
+		/// </summary>
+		/// <param name="_name"></param>
+		public void SetIssueUserName(string _name)
+		{
+			if(m_pid == Ad_PanelType.b2)
+			{
+				m_user.text = _name;
+			}
 		}
 
 	}

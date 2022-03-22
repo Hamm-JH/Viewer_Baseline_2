@@ -15,6 +15,7 @@ namespace AdminViewer
 		public Sprite m_bridge_icon;
 		public Sprite m_tunnel_icon;
 
+		public Sprite m_icon_detail;
 		public Sprite m_icon_dmg;
 		public Sprite m_icon_rcv;
 		public Sprite m_icon_rein;
@@ -109,6 +110,25 @@ namespace AdminViewer
 	#region AdminViewer in Ad_Panel
 
 	[System.Serializable]
+	public class B2_element
+	{
+		public Ad_Panel_Detail m_detailPanel;
+	}
+
+	[System.Serializable]
+	public class S3_B2_Panel_Detail
+	{
+		public TextMeshProUGUI m_user;
+
+		public TextMeshProUGUI m_partName;
+		public TextMeshProUGUI m_width;
+		public TextMeshProUGUI m_vertical;
+		public TextMeshProUGUI m_depth;
+
+		public TextMeshProUGUI m_description;
+	}
+
+	[System.Serializable]
 	public class S5b1_element
 	{
 		public TextMeshProUGUI m_s5b1_allDmg;
@@ -142,6 +162,17 @@ namespace AdminViewer
 			   
 		public Image m_s5b1_image_4Breakage_dmg;
 		public Image m_s5b1_image_4Breakage_rcv;
+	}
+
+	[System.Serializable]
+	public class S5b2_element
+	{
+		public RectTransform rcvElement;
+		public RectTransform dmgElement;
+
+		public Dictionary<int, Transform> yearDictionary;
+
+		public Transform YearGridPanel;
 	}
 
 	[System.Serializable]

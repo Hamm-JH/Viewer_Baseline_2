@@ -101,7 +101,7 @@ namespace AdminViewer.UI
 			//}
 		}
 
-		public void SetTableElement(Ad_PanelType _pType, UIEventType _uType, Ad_TableType _tType, int _index, Issue _data)
+		public void SetTableElement(Ad_PanelType _pType, UIEventType _uType, Ad_Panel_ElementType _tType, int _index, Issue _data)
 		{
 			if (_uType == UIEventType.Ad_nav_state2)
 			{
@@ -226,7 +226,7 @@ namespace AdminViewer.UI
 		/// <summary>
 		/// 상태5번 s5m1패널
 		/// </summary>
-		private void SetTableElement_s5_s5m1(Ad_TableType _tType)
+		private void SetTableElement_s5_s5m1(Ad_Panel_ElementType _tType)
 		{
 			//Debug.Log("SetTableElement_s5_s5m1");
 
@@ -240,19 +240,19 @@ namespace AdminViewer.UI
 			bool isRein = false;
 			switch(_tType)
 			{
-				case Ad_TableType.dmg:
+				case Ad_Panel_ElementType.dmg:
 					isDmg = true;
 					isRcv = false;
 					isRein = false;
 					break;
 
-				case Ad_TableType.rcv:
+				case Ad_Panel_ElementType.rcv:
 					isDmg = false;
 					isRcv = true;
 					isRein = false;
 					break;
 
-				case Ad_TableType.rein:
+				case Ad_Panel_ElementType.rein:
 					isDmg = false;
 					isRcv = false;
 					isRein = true;
@@ -263,13 +263,13 @@ namespace AdminViewer.UI
 			r_m1_State5_rein.SetActive(isRein);
 		}
 
-		private void SetTableElement_s5_s5m1(int _index, Issue _data, Ad_TableType _tType)
+		private void SetTableElement_s5_s5m1(int _index, Issue _data, Ad_Panel_ElementType _tType)
 		{
 			SetTableElement_s5_s5m1(_tType);
 
 			switch(_tType)
 			{
-				case Ad_TableType.dmg:
+				case Ad_Panel_ElementType.dmg:
 					{
 						s5m1_dmg_1number.text = $"{_index+1}";
 						s5m1_dmg_2dmgName.text = $"{_data.__IssueName}";
@@ -279,7 +279,7 @@ namespace AdminViewer.UI
 					}
 					break;
 
-				case Ad_TableType.rcv:
+				case Ad_Panel_ElementType.rcv:
 					{
 						s5m1_rcv_1number.text = $"{_index+1}";
 						s5m1_rcv_2dmgName.text = $"{_data.__IssueName}";
@@ -289,7 +289,7 @@ namespace AdminViewer.UI
 					}
 					break;
 
-				case Ad_TableType.rein:
+				case Ad_Panel_ElementType.rein:
 					{
 						s5m1_rein_1number.text = $"{_index+1}";
 						s5m1_rein_2dmgName.text = $"{_data.__IssueName}";

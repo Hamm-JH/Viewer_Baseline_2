@@ -110,10 +110,6 @@ namespace Module.WebAPI
 			string result = jObj["result"].ToString();
 			string data = jObj["data"].ToString(); // JSON Object "data" to JSON Token Array
 
-			//Debug.Log(_data);
-			//Debug.Log(result);
-			//Debug.Log(data);
-
 			JObject dmgListObj = JObject.Parse(data);
 			string dmgListString = dmgListObj["damagedList"].ToString();
 
@@ -125,21 +121,26 @@ namespace Module.WebAPI
 				{
 					Issue _v = new Issue();
 
-					_v.IssueOrderCode		=  jArr[i].SelectToken("cdTunnelDamaged").ToString();
-					_v.CdBridge				=  jArr[i].SelectToken("cdTunnel").ToString();
-					_v.CdBridgeParts		=  jArr[i].SelectToken("cdTunnelParts").ToString();
-					_v.DcMemberSurface		=	jArr[i].SelectToken("dcDamageMemberSurface").ToString();
-					_v._DcLocation			=	jArr[i].SelectToken("dcLocation").ToString();
-					_v._IssueCode			=	jArr[i].SelectToken("fgDA001").ToString();
-					//_v.DcMemberSurface	= parseString(ParseCode.Surface, jArr[i].SelectToken(JSON.IssueKey.dcDamageMemberSurface.ToString()).ToString());
-					//_v.DcLocation			=      int.Parse(jArr[i].SelectToken(JSON.IssueKey.dcLocation.ToString()).ToString());
-					//_v.IssueCode			=       parseIssueCode(jArr[i].SelectToken(JSON.IssueKey.fgDA001.ToString()).ToString());
-					_v.YnRecover			= "";
-					_v.IssueStatus			=	jArr[i].SelectToken("dcGrade").ToString();
-					_v._PositionVector		=  jArr[i].SelectToken("dcPinLocation").ToString();
-					_v.DateDmg			= jArr[i].SelectToken("dtCheck").ToString();
-
-					
+					_v.SetDmg(jArr[i]);
+					//_v.IssueOrderCode		=  jArr[i].SelectToken("cdTunnelDamaged").ToString();
+					//_v.CdBridge				=  jArr[i].SelectToken("cdTunnel").ToString();
+					//_v.CdBridgeParts		=  jArr[i].SelectToken("cdTunnelParts").ToString();
+					//_v.NmUser               =   jArr[i].SelectToken("nmUser").ToString();
+					//_v.DcMemberSurface		=	jArr[i].SelectToken("dcDamageMemberSurface").ToString();
+					//_v._DcLocation			=	jArr[i].SelectToken("dcLocation").ToString();
+					//_v._IssueCode			=	jArr[i].SelectToken("fgDA001").ToString();
+					////_v.DcMemberSurface	= parseString(ParseCode.Surface, jArr[i].SelectToken(JSON.IssueKey.dcDamageMemberSurface.ToString()).ToString());
+					////_v.DcLocation			=      int.Parse(jArr[i].SelectToken(JSON.IssueKey.dcLocation.ToString()).ToString());
+					////_v.IssueCode			=       parseIssueCode(jArr[i].SelectToken(JSON.IssueKey.fgDA001.ToString()).ToString());
+					//_v.YnRecover			= "";
+					//_v.IssueStatus			=	jArr[i].SelectToken("dcGrade").ToString();
+					//_v._PositionVector		=  jArr[i].SelectToken("dcPinLocation").ToString();
+					//_v.DateDmg			= jArr[i].SelectToken("dtCheck").ToString();
+					//
+					//_v.Width                =   jArr[i].SelectToken("noDamageWidth").ToString();
+					//_v.Height               =   jArr[i].SelectToken("noDamageHeight").ToString();
+					//_v.Depth                =   jArr[i].SelectToken("noDamageDepth").ToString();
+					//_v.DmgDescription          =   jArr[i].SelectToken("dcRemark").ToString();
 
 
 					dmgDatas.Add(_v);
@@ -159,10 +160,6 @@ namespace Module.WebAPI
 			string result = jObj["result"].ToString();
 			string data = jObj["data"].ToString(); // JSON Object "data" to JSON Token Array
 
-			//Debug.Log(_data);
-			//Debug.Log(result);
-			//Debug.Log(data);
-
 			JObject rcvListObj = JObject.Parse(data);
 			string rcvListString = rcvListObj["recoverList"].ToString();
 
@@ -174,20 +171,28 @@ namespace Module.WebAPI
 				{
 					Issue _v = new Issue();
 
-					_v.IssueOrderCode	= jArr[i].SelectToken("cdTunnelRecover").ToString();
-					_v.CdBridge			= jArr[i].SelectToken("cdTunnel").ToString();
-					_v.CdBridgeParts	= jArr[i].SelectToken("cdTunnelParts").ToString();
-					_v.DcMemberSurface	= jArr[i].SelectToken("dcDamageMemberSurface").ToString();
-					_v._DcLocation		= jArr[i].SelectToken("dcLocation").ToString();
-					_v._IssueCode		= jArr[i].SelectToken("fgDA001").ToString();
-					//_v.DcMemberSurface  = parseString(ParseCode.Surface, jArr[i].SelectToken(JSON.IssueKey.dcDamageMemberSurface.ToString()).ToString());
-					//_v.DcLocation       = int.Parse(jArr[i].SelectToken(JSON.IssueKey.dcLocation.ToString()).ToString());
-					//_v.IssueCode        = parseIssueCode(jArr[i].SelectToken(JSON.IssueKey.fgDA001.ToString()).ToString());
-					_v.YnRecover		= jArr[i].SelectToken("ynRecover").ToString();
-					_v._PositionVector	= jArr[i].SelectToken("dcPinLocation").ToString();
-					_v.IssueStatus		= "";
-					_v.DateRcvStart     = jArr[i].SelectToken("dtStart").ToString();
-					_v.DateRcvEnd       = jArr[i].SelectToken("dtEnd").ToString();
+					_v.SetRcv(jArr[i]);
+					//_v.IssueOrderCode	= jArr[i].SelectToken("cdTunnelRecover").ToString();
+					//_v.CdBridge			= jArr[i].SelectToken("cdTunnel").ToString();
+					//_v.CdBridgeParts	= jArr[i].SelectToken("cdTunnelParts").ToString();
+					//_v.NmUser           = jArr[i].SelectToken("nmUser").ToString();
+					//_v.DcMemberSurface	= jArr[i].SelectToken("dcDamageMemberSurface").ToString();
+					//_v._DcLocation		= jArr[i].SelectToken("dcLocation").ToString();
+					//_v._IssueCode		= jArr[i].SelectToken("fgDA001").ToString();
+					////_v.DcMemberSurface  = parseString(ParseCode.Surface, jArr[i].SelectToken(JSON.IssueKey.dcDamageMemberSurface.ToString()).ToString());
+					////_v.DcLocation       = int.Parse(jArr[i].SelectToken(JSON.IssueKey.dcLocation.ToString()).ToString());
+					////_v.IssueCode        = parseIssueCode(jArr[i].SelectToken(JSON.IssueKey.fgDA001.ToString()).ToString());
+					//_v.YnRecover		= jArr[i].SelectToken("ynRecover").ToString();
+					//_v._PositionVector	= jArr[i].SelectToken("dcPinLocation").ToString();
+					//_v.IssueStatus		= "";
+					//_v.DateRcvStart     = jArr[i].SelectToken("dtStart").ToString();
+					//_v.DateRcvEnd       = jArr[i].SelectToken("dtEnd").ToString();
+
+					//_v.Width                =   jArr[i].SelectToken("noDamageWidth").ToString();
+					//_v.Height               =   jArr[i].SelectToken("noDamageHeight").ToString();
+					//_v.Depth                =   jArr[i].SelectToken("noDamageDepth").ToString();
+					//_v.DmgDescription          =   jArr[i].SelectToken("dcRemark").ToString();
+					//_v.RcvDescription       =   jArr[i].SelectToken("dcRecover").ToString();
 
 					rcvDatas.Add(_v);
 				}
@@ -221,10 +226,134 @@ namespace Module.WebAPI
 
 			string __data = jObj["data"]["dailyList"].ToString();
 
-			JObject _jObj = JObject.Parse(__data);
-			Debug.Log(_jObj.First.ToString());
+			JObject dailyList = JObject.Parse(__data);
+
+			//Debug.Log(_jObj.First.ToString());
+			////JArray jArr = JArray.Parse(__data);
+			//Debug.Log($"*********{_jObj.First}");
+
+			foreach(var day in dailyList)
+			{
+				//Debug.Log(day.Key);
+				//Debug.Log(day.Value.ToString());
+
+				DataRow row = result.NewRow();
+				row["date"] = day.Key;
+
+				// 손상정보가 이 날짜에 있다면?
+				if(day.Value.SelectToken("damagedList") != null)
+				{
+					//Debug.Log($"DMG : {day.Value.SelectToken("damagedList").ToString()}");
+					row = GetDataRow(day.Value.SelectToken("damagedList").ToString(), row, true);
+				}
+				else
+				{
+					//Debug.LogError("damagedList not defined");
+				}
+
+				// 보수정보가 이 날짜에 있다면?
+				if (day.Value.SelectToken("recoverList") != null)
+				{
+					//Debug.Log(day.Value.SelectToken("recoverList").ToString());
+					row = GetDataRow(day.Value.SelectToken("recoverList").ToString(), row, false);
+				}
+				else
+				{
+					//Debug.LogError("recoverList not defined");
+				}
+
+				result.Rows.Add(row);
+			}
 
 			_callback.Invoke(result);
+		}
+
+		/// <summary>
+		/// 행 단위로 데이터 추가
+		/// </summary>
+		/// <param name="_data"> 분류된 데이터 </param>
+		/// <param name="_row"> 할당받아야 하는 행 변수 </param>
+		/// <param name="isDmg"> 손상정보일 경우 : true </param>
+		/// <returns></returns>
+		private DataRow GetDataRow(string _data, DataRow _row, bool isDmg)
+		{
+			//Debug.Log($"DMG : {_dmgData}");
+			JObject _inData = JObject.Parse(_data);
+
+			JToken crackToken = _inData.SelectToken("0001");
+			JToken bagliToken = _inData.SelectToken("0007");
+			JToken baegtaeToken = _inData.SelectToken("0009");
+			JToken segulToken = _inData.SelectToken("0013");
+			JToken damageToken = _inData.SelectToken("0022");
+
+			string prefix = isDmg ? "D" : "R";
+
+			if(crackToken != null)
+			{
+				_row = SetData_Issue(crackToken.ToString(), $"{prefix}crack", _row, isDmg);
+			}
+
+			if (bagliToken != null)
+			{
+				_row = SetData_Issue(bagliToken.ToString(), $"{prefix}bagli", _row, isDmg);
+			}
+
+			if (baegtaeToken != null)
+			{
+				_row = SetData_Issue(baegtaeToken.ToString(), $"{prefix}baegtae", _row, isDmg);
+			}
+
+			if (segulToken != null)
+			{
+				_row = SetData_Issue(segulToken.ToString(), $"{prefix}segul", _row, isDmg);
+			}
+
+			if (damageToken != null)
+			{
+				_row = SetData_Issue(damageToken.ToString(), $"{prefix}damage", _row, isDmg);
+			}
+
+			return _row;
+		}
+
+		/// <summary>
+		/// 단일 테이블 요소에 데이터 추가
+		/// </summary>
+		/// <param name="_data"></param>
+		/// <param name="_rowKey"></param>
+		/// <param name="_row"></param>
+		/// <returns></returns>
+		private DataRow SetData_Issue(string _data, string _rowKey, DataRow _row, bool isDmg)
+		{
+			List<Issue> list = new List<Issue>();
+
+			//Debug.Log($"{_rowKey} : {_dmgData}");
+
+			JArray jArr = JArray.Parse(_data);
+
+			if(jArr.Count != 0)
+			{
+				for (int i = 0; i < jArr.Count; i++)
+				{
+					//Debug.Log(jArr[i].ToString());
+
+					Issue _v = new Issue();
+
+					if(isDmg)
+					{
+						_v.SetDmg(jArr[i]);
+					}
+					else
+					{
+						_v.SetRcv(jArr[i]);
+					}
+
+					list.Add(_v);
+				}
+				_row[_rowKey] = list;
+			}
+
+			return _row;
 		}
 	}
 }

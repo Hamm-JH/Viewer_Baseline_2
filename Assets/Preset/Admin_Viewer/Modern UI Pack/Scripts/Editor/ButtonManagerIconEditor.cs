@@ -17,6 +17,7 @@ namespace Michsky.UI.ModernUIPack
 
         public override void OnInspectorGUI()
         {
+            return;
             GUISkin customSkin;
             Color defaultColor = GUI.color;
 

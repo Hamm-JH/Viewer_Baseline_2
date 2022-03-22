@@ -12,6 +12,10 @@ namespace Definition
 
 			switch(type)
 			{
+				case ColorType.White:
+					color = new Color(1, 1, 1, _alpha);
+					break;
+
 				case ColorType.Default1:
 					color = new Color(0x33/255f, 0x7e/255f, 0xf2/255f, _alpha);
 					//color = new Color(0xFF/255f, 0xC5/255f, 0x00/255f, _alpha);

@@ -121,7 +121,8 @@ namespace Module.WebAPI
 				}
 			}
 
-			yield break;
+			//yield break;
+
 		}
 
 		#endregion
