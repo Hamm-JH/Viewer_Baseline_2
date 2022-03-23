@@ -184,5 +184,7 @@ namespace Management
 		{
 			MainManager.Instance.MainCamera.orthographic = _isOrthogonal;
 		}
+
+		
 	}
 }

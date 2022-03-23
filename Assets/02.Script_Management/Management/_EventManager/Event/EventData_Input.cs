@@ -234,7 +234,7 @@ namespace Management.Events
 								{
 									//Element = null;
 									Elements = null;
-									StatusCode = Status.Skip;
+									StatusCode = Status.Pass;
 								}
 							}
 						}
@@ -418,10 +418,23 @@ namespace Management.Events
 					// 빈 공간을 선택한 경우
 					else
 					{
-
 						m_clickEvent.Invoke(null);
 						ContentManager.Instance.OnSelect_3D(null);
-						//ContentManager.Instance.Toggle_ChildTabs(1);
+						//// UI 선택의 결과가 0 이상인 경우
+						//if(Results.Count != 0)
+						//{
+						//	PlatformCode pCode = MainManager.Instance.Platform;
+						//	if(Platforms.IsDemoAdminViewer(pCode))
+						//	{
+
+						//	}
+
+						//}
+						//// 빈칸 선택
+						//else
+						//{
+						//}
+						////ContentManager.Instance.Toggle_ChildTabs(1);
 					}
 					break;
 
@@ -430,7 +443,29 @@ namespace Management.Events
 					break;
 
 				case InputEventType.Input_focus:
-					m_focusEvent.Invoke(m_focus, m_focusDelta);
+					{
+						m_selected3D = null;
+						m_hit = default(RaycastHit);
+						m_results = new List<RaycastResult>();
+
+						Get_Collect3DObject(Input.mousePosition, out m_selected3D, out m_hit, out m_results);
+
+						if (Selected3D != null)
+						{
+							m_focusEvent.Invoke(m_focus, m_focusDelta);
+						}
+						// 빈 공간을 누른 경우
+						else if (m_results.Count == 0)
+						{
+							m_focusEvent.Invoke(m_focus, m_focusDelta);
+						}
+						// UI 객체를 누른 경우 m_results.Count != 0
+						else
+						{
+
+						}
+					}
+					
 					break;
 
 				case InputEventType.Input_key:
@@ -446,7 +481,91 @@ namespace Management.Events
 
 		public override void DoEvent(Dictionary<InputEventType, EventData> _sEvents)
 		{
-			
+			switch(EventType)
+			{
+				case InputEventType.Input_clickSuccessUp:
+					if (Elements != null)
+					{
+						GameObject obj = Elements.Last().Target;
+
+						Obj_Selectable sObj;
+						Issue_Selectable iObj;
+
+						if (obj.TryGetComponent<Obj_Selectable>(out sObj))
+						{
+							m_clickEvent.Invoke(Elements.Last().Target);
+							// TODO
+							ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
+							//ContentManager.Instance.Toggle_ChildTabs(1);
+						}
+						else if (obj.TryGetComponent<Issue_Selectable>(out iObj))
+						{
+							m_clickEvent.Invoke(Elements.Last().Target);
+							ContentManager.Instance.OnSelect_Issue(Elements.Last().Target);
+							//ContentManager.Instance.Toggle_ChildTabs(1);
+						}
+					}
+					// 빈 공간을 선택한 경우
+					else
+					{
+						// UI 선택의 결과가 0 이상인 경우
+						if (Results.Count != 0)
+						{
+							if(_sEvents.ContainsKey(InputEventType.Input_clickDown))
+							{
+								List<RaycastResult> hits = _sEvents[InputEventType.Input_clickDown].Results;
+
+								if(IsClickOnKeymap(hits))
+								{
+									ContentManager.Instance.Input_KeymapClick(m_clickPosition);
+								}
+							}
+						}
+						else
+						{
+							m_clickEvent.Invoke(null);
+							ContentManager.Instance.OnSelect_3D(null);
+						}
+					}
+					break;
+
+				case InputEventType.Input_drag:
+					PlatformCode pCode = MainManager.Instance.Platform;
+					if(Platforms.IsDemoAdminViewer(pCode))
+					{
+						if(_sEvents.ContainsKey(InputEventType.Input_clickDown))
+						{
+							List<RaycastResult> hits = _sEvents[InputEventType.Input_clickDown].Results;
+
+							if(IsClickOnKeymap(hits))
+							{
+								ContentManager.Instance.Input_KeymapDrag(m_btn, m_delta);
+							}
+						}
+					}
+					break;
+			}
+		}
+
+		/// <summary>
+		/// AdminViewer 키맵 선택 이벤트
+		/// </summary>
+		private bool IsClickOnKeymap(List<RaycastResult> _hits)
+		{
+			bool result = false;
+
+			if(_hits.Count != 0)
+			{
+				_hits.ForEach(x =>
+				{
+					if(x.gameObject.name.Contains("Keymap"))
+					{
+						result = true;
+					}
+				});
+			}
+
+			return result;
 		}
 
 		//#endregion

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Management
 {
+	using AdminViewer.Data;
 	using Definition;
 	using Module;
 	using Module.Graphic;
@@ -18,6 +19,12 @@ namespace Management
 
 	public partial class ContentManager : IManager<ContentManager>
 	{
+		#region TODO 프로젝트별 데이터 컨테이너
+
+		[SerializeField] AContainer m_container;
+
+		#endregion
+
 		#region Modules
 
 		/// <summary>

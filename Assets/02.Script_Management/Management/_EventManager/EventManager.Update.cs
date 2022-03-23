@@ -58,12 +58,7 @@ namespace Management
 						// UI 선택시
 						// 3D 선택시
 
-						// 클릭다운 개체가 있을 경우
-						if (_sEvents.ContainsKey(InputEventType.Input_clickDown))
-						{
-							cacheDownObj = null;
-							_sEvents.Remove(InputEventType.Input_clickDown);
-						}
+						
 
 						// 다중 선택 조건에 적용되는가?
 						if (isMultiCondition(_sEvents))
@@ -76,10 +71,10 @@ namespace Management
 								// 다중 객체의 OnSelect 시행
 								// TODO 0228 :: 일단 단일 객체 이벤트로 대체
 								_sEvents[InputEventType.Input_clickSuccessUp].Elements.ForEach(x => x.OnSelect());
-								_sEvents[InputEventType.Input_clickSuccessUp].DoEvent();
+								_sEvents[InputEventType.Input_clickSuccessUp].DoEvent(_sEvents);
 								//_currEvent.DoEvent();
 							}
-							// 빈 공간을 누른 경우 (UI를 누른 경우의 수는 Status.Drop으로 차단함)
+							// 빈 공간을 누른 경우
 							else
 							{
 
@@ -94,16 +89,23 @@ namespace Management
 								// 단일 객체의 OnSelect 시행
 								_currEvent.Elements.ForEach(x => x.OnSelect());
 								// 단일 객체의 cameraEvent 시행
-								_currEvent.DoEvent();
+								_currEvent.DoEvent(_sEvents);
 
 								// 이벤트 리스트 업데이트
 								AddEvent<InputEventType, EventData>(_currEvent.EventType, _currEvent, _sEvents);
 							}
-							// 빈 공간을 누른 경우 (UI를 누른 경우의 수는 Status.Drop으로 차단함)
+							// 빈 공간을 누른 경우
 							else
 							{
-								_currEvent.DoEvent();
+								_currEvent.DoEvent(_sEvents);
 							}
+						}
+
+						// 클릭다운 개체가 있을 경우
+						if (_sEvents.ContainsKey(InputEventType.Input_clickDown))
+						{
+							cacheDownObj = null;
+							_sEvents.Remove(InputEventType.Input_clickDown);
 						}
 
 					}
@@ -123,11 +125,26 @@ namespace Management
 								{
 									_currEvent.DoEvent();
 								}
+								else
+								{
+									_currEvent.DoEvent(_sEvents);
+								}
 							}
 						}
 						else if (_currEvent.BtnIndex == 1)
 						{
-							_currEvent.DoEvent();
+							if (_sEvents.ContainsKey(InputEventType.Input_clickDown))
+							{
+								// 클릭다운 개체가 UI를 안 눌렀는가?
+								if(_sEvents[InputEventType.Input_clickDown].Results.Count == 0)
+								{
+									_currEvent.DoEvent();
+								}
+								else
+								{
+									_currEvent.DoEvent(_sEvents);
+								}
+							}
 						}
 					}
 					break;

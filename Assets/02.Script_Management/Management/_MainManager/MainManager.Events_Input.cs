@@ -103,18 +103,18 @@ namespace Management
 		{
 			//Debug.Log("OnClick");
 
+			EventManager.Instance.OnEvent(new Events.EventData_Input(
+					_eventType: type,
+					_btn: btn,
+					_mousePos: _mousePos,
+					_camera: main.MainCamera,
+					_graphicRaycaster: main.Content._GrRaycaster,
+					_event: main.cameraExecuteEvents.selectEvent
+					));
 			// 필터링 (__추후 변수 추출)
-			if(btn == 0)
-			{
-				EventManager.Instance.OnEvent(new Events.EventData_Input(
-						_eventType: type,
-						_btn: btn,
-						_mousePos: _mousePos,
-						_camera: main.MainCamera,
-						_graphicRaycaster: main.Content._GrRaycaster,
-						_event: main.cameraExecuteEvents.selectEvent
-						));
-			}
+			//if(btn == 0)
+			//{
+			//}
 		}
 
 #endregion

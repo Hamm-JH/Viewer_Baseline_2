@@ -119,6 +119,38 @@ namespace Management
 			_core.CameraMode = _mode;
 		}
 
+		public void InitSubCameraResource(Camera subCamera)
+		{
+			//cameraExecuteEvents;
+
+			SetCamera<BIMCamera>(subCamera, _core, _data);
+		}
+
+		/// <summary>
+		/// SubCam 등록
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="_cam"></param>
+		/// <param name="_core"></param>
+		/// <param name="_data"></param>
+		private void SetCamera<T>(Camera _cam, CoreManagement _core, CoreData _data) where T : ICamera
+		{
+			T component = null;
+
+			// 카메라에 해당 카메라가 등록되지 않았다면
+			if (!_cam.gameObject.TryGetComponent<T>(out component))
+			{
+				component = _cam.gameObject.AddComponent<T>();
+			}
+
+			// 코어 카메라 컴포넌트 등록
+			_core.Cameras.Add(component);
+
+			// 카메라에서 연결 대상 메서드 등록
+			component.Default = _core.CameraPoint;
+			component.SetData(_data.CameraData);
+		}
+
 		private void SetCamera<T>(CoreManagement _core, CoreData _data, Events.CameraEvents _camEvents) where T : ICamera
 		{
 			T component = null;

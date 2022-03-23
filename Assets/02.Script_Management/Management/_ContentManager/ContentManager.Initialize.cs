@@ -44,8 +44,12 @@ namespace Management
 
 			// 3. 모듈 시작
 			InitModules(Modules);
+
+			// 4. 컨테이너 아이템 초기화 시행
+			InitContainerItems();
 		}
 
+		#region Step 1
 		/// <summary>
 		/// 모듈 리스트 생성
 		/// </summary>
@@ -60,7 +64,9 @@ namespace Management
 
 			return mods;
 		}
+		#endregion
 
+		#region Step 2
 		/// <summary>
 		/// 모듈 리스트에 등록된 모듈 부모배치
 		/// </summary>
@@ -72,7 +78,9 @@ namespace Management
 				mod.transform.SetParent(this.transform);
 			}
 		}
+		#endregion
 
+		#region Step 3
 		/// <summary>
 		/// 모듈 리스트 요소별 동작 시작
 		/// </summary>
@@ -84,6 +92,16 @@ namespace Management
 				InitModule(mod);
 			}
 		}
+		#endregion
+
+		#region Step 4
+
+		private void InitContainerItems()
+		{
+			m_container.InitContainer();
+		}
+
+		#endregion
 
 		/// <summary>
 		/// 모듈 리스트 단일 요소 동작 시작

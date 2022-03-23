@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scene/_2 Viewer/Viewer.unity
     guid: 2d5380bbd65ee87439878cecb732aaa9
+  - enabled: 1
+    path: Assets/01.Scene/_2 Viewer/AdminViewer.unity
+    guid: f4f0ead6837b4024daa1a3e0a41f28a4
   m_configObjects: {}

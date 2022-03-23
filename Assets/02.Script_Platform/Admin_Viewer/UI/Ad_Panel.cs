@@ -29,6 +29,8 @@ namespace AdminViewer.UI
 
 		public TextMeshProUGUI m_user;
 
+		
+
 		[Header("B2 element")]
 		[SerializeField] B2_element b2_element;
 
@@ -178,45 +180,15 @@ namespace AdminViewer.UI
 		{
 			if(_pType == Ad_PanelType.s5b1)
 			{
-				Debug.LogError("마지막 3구간 b1 처리");
+				//Debug.LogError("마지막 3구간 b1 처리");
 
-				// 표 처리 b1
-				List<Issue> dmgs = ContentManager.Instance._Model.DmgData;
-				List<Issue> rcvs = ContentManager.Instance._Model.RcvData;
+				SetPanel_s5b1();
 
-				int allDmg = dmgs.Count;
-				int allRcv = rcvs.Count;
-
-				int dmg1 = dmgs.FindAll(x => x.IssueCode == IssueCodes.Crack).Count;
-				int rcv1 = rcvs.FindAll(x => x.IssueCode == IssueCodes.Crack).Count;
-
-				int dmg2 = dmgs.FindAll(x => x.IssueCode == IssueCodes.Spalling).Count;
-				int rcv2 = rcvs.FindAll(x => x.IssueCode == IssueCodes.Spalling).Count;
-
-				int dmg3 = dmgs.FindAll(x => x.IssueCode == IssueCodes.Efflorescence).Count;
-				int rcv3 = rcvs.FindAll(x => x.IssueCode == IssueCodes.Efflorescence).Count;
-
-				int dmg4 = dmgs.FindAll(x => x.IssueCode == IssueCodes.breakage).Count;
-				int rcv4 = rcvs.FindAll(x => x.IssueCode == IssueCodes.breakage).Count;
-
-				s5b1_element.m_s5b1_allDmg.text = allDmg.ToString();
-				s5b1_element.m_s5b1_allRcv.text = allRcv.ToString();
-
-				s5b1_element.m_s5b1_1crack_dmg.text = dmg1.ToString();
-				s5b1_element.m_s5b1_1crack_rcv.text = rcv1.ToString();
-
-				s5b1_element.m_s5b1_2spalling_dmg.text = dmg2.ToString();
-				s5b1_element.m_s5b1_2spalling_rcv.text = rcv2.ToString();
-
-				s5b1_element.m_s5b1_3Efflorence_dmg.text = dmg3.ToString();
-				s5b1_element.m_s5b1_3Efflorence_rcv.text = rcv3.ToString();
-
-				s5b1_element.m_s5b1_4Breakage_dmg.text = dmg4.ToString();
-				s5b1_element.m_s5b1_4Breakage_rcv.text = rcv4.ToString();
+				ContentManager.Instance.Function_S5b1_SetSubPanel();
 			}
 			else if (_pType == Ad_PanelType.s5b2)
 			{
-				Debug.LogError("마지막 3구간 b2 처리");
+				//Debug.LogError("마지막 3구간 b2 처리");
 
 				ContentManager.Instance._API.RequestHistoryData(GetHistoryTable);
 			}
@@ -231,6 +203,47 @@ namespace AdminViewer.UI
 				s5m1_element.m_s5m1_count_rcv.text = rcvIndex.ToString();
 				s5m1_element.m_s5m1_count_rein.text = reinIndex.ToString();
 			}
+		}
+
+		public void SetSubPanel_s5b1()
+		{
+			SetPanel_s5b1();
+		}
+
+		private void SetPanel_s5b1()
+		{
+			List<Issue> dmgs = ContentManager.Instance._Model.DmgData;
+			List<Issue> rcvs = ContentManager.Instance._Model.RcvData;
+
+			int allDmg = dmgs.Count;
+			int allRcv = rcvs.Count;
+
+			int dmg1 = dmgs.FindAll(x => x.IssueCode == IssueCodes.Crack).Count;
+			int rcv1 = rcvs.FindAll(x => x.IssueCode == IssueCodes.Crack).Count;
+
+			int dmg2 = dmgs.FindAll(x => x.IssueCode == IssueCodes.Spalling).Count;
+			int rcv2 = rcvs.FindAll(x => x.IssueCode == IssueCodes.Spalling).Count;
+
+			int dmg3 = dmgs.FindAll(x => x.IssueCode == IssueCodes.Efflorescence).Count;
+			int rcv3 = rcvs.FindAll(x => x.IssueCode == IssueCodes.Efflorescence).Count;
+
+			int dmg4 = dmgs.FindAll(x => x.IssueCode == IssueCodes.breakage).Count;
+			int rcv4 = rcvs.FindAll(x => x.IssueCode == IssueCodes.breakage).Count;
+
+			s5b1_element.m_s5b1_allDmg.text = allDmg.ToString();
+			s5b1_element.m_s5b1_allRcv.text = allRcv.ToString();
+
+			s5b1_element.m_s5b1_1crack_dmg.text = dmg1.ToString();
+			s5b1_element.m_s5b1_1crack_rcv.text = rcv1.ToString();
+
+			s5b1_element.m_s5b1_2spalling_dmg.text = dmg2.ToString();
+			s5b1_element.m_s5b1_2spalling_rcv.text = rcv2.ToString();
+
+			s5b1_element.m_s5b1_3Efflorence_dmg.text = dmg3.ToString();
+			s5b1_element.m_s5b1_3Efflorence_rcv.text = rcv3.ToString();
+
+			s5b1_element.m_s5b1_4Breakage_dmg.text = dmg4.ToString();
+			s5b1_element.m_s5b1_4Breakage_rcv.text = rcv4.ToString();
 		}
 
 		private string GetPartName(string _value)

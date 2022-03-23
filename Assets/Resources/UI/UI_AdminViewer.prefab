@@ -2025,6 +2025,7 @@ MonoBehaviour:
   m_titleCount: {fileID: 0}
   m_endText: {fileID: 0}
   m_user: {fileID: 0}
+  m_keymapPanel: {fileID: 0}
   b2_element:
     m_detailPanel: {fileID: 0}
   s5b1_element:
@@ -2049,6 +2050,7 @@ MonoBehaviour:
     m_s5b1_image_4Breakage_dmg: {fileID: 0}
     m_s5b1_image_4Breakage_rcv: {fileID: 0}
   __el:
+    isMain: 0
     rcvElement: {fileID: 0}
     dmgElement: {fileID: 0}
     YearGridPanel: {fileID: 0}
@@ -2538,7 +2540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_isInteractable: 0
   m_rootUI: {fileID: 4422238765229954178}
-  eventType: 0
+  eventType: 540
   m_unique: 0
   childPanel: {fileID: 0}
   m_uiFXs: []
@@ -4288,6 +4290,7 @@ MonoBehaviour:
   m_titleCount: {fileID: 0}
   m_endText: {fileID: 0}
   m_user: {fileID: 0}
+  m_keymapPanel: {fileID: 0}
   b2_element:
     m_detailPanel: {fileID: 0}
   s5b1_element:
@@ -4312,6 +4315,7 @@ MonoBehaviour:
     m_s5b1_image_4Breakage_dmg: {fileID: 0}
     m_s5b1_image_4Breakage_rcv: {fileID: 0}
   __el:
+    isMain: 0
     rcvElement: {fileID: 0}
     dmgElement: {fileID: 0}
     YearGridPanel: {fileID: 0}
@@ -22092,6 +22096,7 @@ MonoBehaviour:
   m_titleCount: {fileID: 0}
   m_endText: {fileID: 0}
   m_user: {fileID: 0}
+  m_keymapPanel: {fileID: 0}
   b2_element:
     m_detailPanel: {fileID: 0}
   s5b1_element:
@@ -22116,6 +22121,7 @@ MonoBehaviour:
     m_s5b1_image_4Breakage_dmg: {fileID: 0}
     m_s5b1_image_4Breakage_rcv: {fileID: 0}
   __el:
+    isMain: 0
     rcvElement: {fileID: 0}
     dmgElement: {fileID: 0}
     YearGridPanel: {fileID: 0}
@@ -30376,7 +30382,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354841835882555
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32167,7 +32173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3005354841891038489
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32247,6 +32253,7 @@ MonoBehaviour:
   m_titleCount: {fileID: 0}
   m_endText: {fileID: 0}
   m_user: {fileID: 0}
+  m_keymapPanel: {fileID: 0}
   b2_element:
     m_detailPanel: {fileID: 0}
   s5b1_element:
@@ -32271,6 +32278,7 @@ MonoBehaviour:
     m_s5b1_image_4Breakage_dmg: {fileID: 3005354842622706264}
     m_s5b1_image_4Breakage_rcv: {fileID: 3005354842288440980}
   __el:
+    isMain: 0
     rcvElement: {fileID: 0}
     dmgElement: {fileID: 0}
     YearGridPanel: {fileID: 0}
@@ -33090,6 +33098,7 @@ MonoBehaviour:
     s5b1_code: {fileID: 3404531081015710245}
     s5b2_code: {fileID: 1505991977335024129}
     s5m1_code: {fileID: 4492706823357306393}
+  m_keymapPanel: {fileID: 3005354842757220253}
 --- !u!1 &3005354841915928772
 GameObject:
   m_ObjectHideFlags: 0
@@ -40045,6 +40054,7 @@ MonoBehaviour:
   m_titleCount: {fileID: 3005354842669212856}
   m_endText: {fileID: 3005354840874956794}
   m_user: {fileID: 0}
+  m_keymapPanel: {fileID: 0}
   b2_element:
     m_detailPanel: {fileID: 0}
   s5b1_element:
@@ -40069,6 +40079,7 @@ MonoBehaviour:
     m_s5b1_image_4Breakage_dmg: {fileID: 0}
     m_s5b1_image_4Breakage_rcv: {fileID: 0}
   __el:
+    isMain: 0
     rcvElement: {fileID: 0}
     dmgElement: {fileID: 0}
     YearGridPanel: {fileID: 0}
@@ -51486,6 +51497,7 @@ MonoBehaviour:
   m_titleCount: {fileID: 3005354841572511398}
   m_endText: {fileID: 0}
   m_user: {fileID: 3005354841037213461}
+  m_keymapPanel: {fileID: 0}
   b2_element:
     m_detailPanel: {fileID: 890832739286430746}
   s5b1_element:
@@ -51510,6 +51522,7 @@ MonoBehaviour:
     m_s5b1_image_4Breakage_dmg: {fileID: 0}
     m_s5b1_image_4Breakage_rcv: {fileID: 0}
   __el:
+    isMain: 0
     rcvElement: {fileID: 0}
     dmgElement: {fileID: 0}
     YearGridPanel: {fileID: 0}
@@ -54086,7 +54099,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3005354842654051913
 RectTransform:
   m_ObjectHideFlags: 0
@@ -57117,7 +57130,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 8400000, guid: 24e0f9f494ffff540a6b7b9c23c882c5, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0

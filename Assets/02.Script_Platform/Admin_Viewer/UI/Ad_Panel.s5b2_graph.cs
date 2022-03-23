@@ -385,6 +385,21 @@ namespace AdminViewer.UI
         /// <param name="_dataTable"></param>
         public void GetHistoryTable(DataTable _dataTable)
         {
+            // 메인
+            SetHistoryTable(_dataTable);
+
+            // 서브 데이터 전달
+            ContentManager.Instance.Function_S5b2_SetSubHistoryTable(_dataTable);
+        }
+
+        public void SetSubHistoryTable(DataTable _dataTable)
+		{
+            // 서브
+            SetHistoryTable(_dataTable);
+        }
+
+        private void SetHistoryTable(DataTable _dataTable)
+		{
             ClearElements();
             SetChangeYearBtn();     // 연도 변환 버튼 옵션별 설정
             //GetHistoryTable(_dataTable);

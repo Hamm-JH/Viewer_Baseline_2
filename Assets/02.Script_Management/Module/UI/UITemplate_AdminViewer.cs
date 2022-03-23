@@ -55,6 +55,9 @@ namespace Module.UI
 		public ItemsData Items { get => items; set => items=value; }
 		public InPanels Panels { get => m_panels; set => m_panels=value; }
 
+		[Header("Keymap")]
+		[SerializeField] RectTransform m_keymapPanel;
+
 		public override void OnStart()
 		{
 			Debug.LogWarning("********** UITemplate OnStart");
@@ -73,7 +76,7 @@ namespace Module.UI
 				TitData.oImage.sprite = Icons.m_tunnel_icon;
 			}
 
-
+			ContentManager.Instance.Ad_InitUI(m_keymapPanel);
 			//if (MainManager.Instance.Platform)
 		}
 
@@ -218,6 +221,10 @@ namespace Module.UI
 
 				case UIEventType.Ad_St5_Toggle_m1_rein:
 					SetSt5_m1_rein_toggle();
+					break;
+
+				case UIEventType.Ad_St5_PrintExcel:
+					ContentManager.Instance.Functin_PrintExcel();
 					break;
 
 				case UIEventType.Ad_Prev:

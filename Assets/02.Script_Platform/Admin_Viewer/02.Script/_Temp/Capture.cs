@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Capture : MonoBehaviour
 {
     [System.Serializable]
-    public struct Env
+    public class Env
     {
         public Camera camera;
         public bool isFirst;

@@ -41,6 +41,7 @@ namespace Definition
 		NotDef = -1,
 		Maker = 0x00,
 		Viewer = 0x01,
+		AdminViewer = 0x02,
 
 	}
 
@@ -265,6 +266,9 @@ namespace Definition
 		Ad_St5_Toggle_m1_dmg = 0x219,
 		Ad_St5_Toggle_m1_rcv = 0x21a,
 		Ad_St5_Toggle_m1_rein = 0x21b,
+
+		Ad_St5_PrintExcel = 0x21c,
+
 	}
 
 	public enum UniqueUIEventType

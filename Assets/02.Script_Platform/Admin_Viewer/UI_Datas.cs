@@ -167,6 +167,8 @@ namespace AdminViewer
 	[System.Serializable]
 	public class S5b2_element
 	{
+		public bool isMain;
+
 		public RectTransform rcvElement;
 		public RectTransform dmgElement;
 

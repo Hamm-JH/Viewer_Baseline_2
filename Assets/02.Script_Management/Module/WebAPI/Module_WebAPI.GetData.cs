@@ -122,26 +122,6 @@ namespace Module.WebAPI
 					Issue _v = new Issue();
 
 					_v.SetDmg(jArr[i]);
-					//_v.IssueOrderCode		=  jArr[i].SelectToken("cdTunnelDamaged").ToString();
-					//_v.CdBridge				=  jArr[i].SelectToken("cdTunnel").ToString();
-					//_v.CdBridgeParts		=  jArr[i].SelectToken("cdTunnelParts").ToString();
-					//_v.NmUser               =   jArr[i].SelectToken("nmUser").ToString();
-					//_v.DcMemberSurface		=	jArr[i].SelectToken("dcDamageMemberSurface").ToString();
-					//_v._DcLocation			=	jArr[i].SelectToken("dcLocation").ToString();
-					//_v._IssueCode			=	jArr[i].SelectToken("fgDA001").ToString();
-					////_v.DcMemberSurface	= parseString(ParseCode.Surface, jArr[i].SelectToken(JSON.IssueKey.dcDamageMemberSurface.ToString()).ToString());
-					////_v.DcLocation			=      int.Parse(jArr[i].SelectToken(JSON.IssueKey.dcLocation.ToString()).ToString());
-					////_v.IssueCode			=       parseIssueCode(jArr[i].SelectToken(JSON.IssueKey.fgDA001.ToString()).ToString());
-					//_v.YnRecover			= "";
-					//_v.IssueStatus			=	jArr[i].SelectToken("dcGrade").ToString();
-					//_v._PositionVector		=  jArr[i].SelectToken("dcPinLocation").ToString();
-					//_v.DateDmg			= jArr[i].SelectToken("dtCheck").ToString();
-					//
-					//_v.Width                =   jArr[i].SelectToken("noDamageWidth").ToString();
-					//_v.Height               =   jArr[i].SelectToken("noDamageHeight").ToString();
-					//_v.Depth                =   jArr[i].SelectToken("noDamageDepth").ToString();
-					//_v.DmgDescription          =   jArr[i].SelectToken("dcRemark").ToString();
-
 
 					dmgDatas.Add(_v);
 				}
@@ -172,27 +152,6 @@ namespace Module.WebAPI
 					Issue _v = new Issue();
 
 					_v.SetRcv(jArr[i]);
-					//_v.IssueOrderCode	= jArr[i].SelectToken("cdTunnelRecover").ToString();
-					//_v.CdBridge			= jArr[i].SelectToken("cdTunnel").ToString();
-					//_v.CdBridgeParts	= jArr[i].SelectToken("cdTunnelParts").ToString();
-					//_v.NmUser           = jArr[i].SelectToken("nmUser").ToString();
-					//_v.DcMemberSurface	= jArr[i].SelectToken("dcDamageMemberSurface").ToString();
-					//_v._DcLocation		= jArr[i].SelectToken("dcLocation").ToString();
-					//_v._IssueCode		= jArr[i].SelectToken("fgDA001").ToString();
-					////_v.DcMemberSurface  = parseString(ParseCode.Surface, jArr[i].SelectToken(JSON.IssueKey.dcDamageMemberSurface.ToString()).ToString());
-					////_v.DcLocation       = int.Parse(jArr[i].SelectToken(JSON.IssueKey.dcLocation.ToString()).ToString());
-					////_v.IssueCode        = parseIssueCode(jArr[i].SelectToken(JSON.IssueKey.fgDA001.ToString()).ToString());
-					//_v.YnRecover		= jArr[i].SelectToken("ynRecover").ToString();
-					//_v._PositionVector	= jArr[i].SelectToken("dcPinLocation").ToString();
-					//_v.IssueStatus		= "";
-					//_v.DateRcvStart     = jArr[i].SelectToken("dtStart").ToString();
-					//_v.DateRcvEnd       = jArr[i].SelectToken("dtEnd").ToString();
-
-					//_v.Width                =   jArr[i].SelectToken("noDamageWidth").ToString();
-					//_v.Height               =   jArr[i].SelectToken("noDamageHeight").ToString();
-					//_v.Depth                =   jArr[i].SelectToken("noDamageDepth").ToString();
-					//_v.DmgDescription          =   jArr[i].SelectToken("dcRemark").ToString();
-					//_v.RcvDescription       =   jArr[i].SelectToken("dcRecover").ToString();
 
 					rcvDatas.Add(_v);
 				}

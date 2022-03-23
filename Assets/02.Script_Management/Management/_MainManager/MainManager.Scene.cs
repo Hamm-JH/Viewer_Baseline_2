@@ -12,7 +12,11 @@ namespace Management
 		{
 			Definition.SceneName sceneName = SceneName.NotDef;
 
-			if(Platforms.IsMakerPlatform(_pCode))
+			if(Platforms.IsDemoAdminViewer(_pCode))
+			{
+				sceneName = SceneName.AdminViewer;
+			}
+			else if(Platforms.IsMakerPlatform(_pCode))
 			{
 				sceneName = SceneName.Maker;
 			}
