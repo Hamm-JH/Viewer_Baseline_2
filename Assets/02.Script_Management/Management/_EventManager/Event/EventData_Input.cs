@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,9 +24,15 @@ namespace Management.Events
 		public Vector3 m_clickPosition;
 		UnityEvent<GameObject> m_clickEvent;
 
-		// API ´Ü¿¡¼­ ¼±ÅÃµÇ¾ú´ÂÁö¸¦ È®ÀÎÇÏ´Â º¯¼ö
+		// API ë‹¨ì—ì„œ ì„ íƒë˜ì—ˆëŠ”ì§€ë¥¼ í™•ì¸í•˜ëŠ” ë³€ìˆ˜
 		bool m_isPassAPI;
-		// API ´Ü¿¡¼­ ¼±ÅÃµÈ °´Ã¼
+
+		public bool IsPassedAPI
+		{
+			get => m_isPassAPI;
+		}
+
+		// API ë‹¨ì—ì„œ ì„ íƒëœ ê°ì²´
 		GameObject m_inAPISelected;
 		
 
@@ -44,10 +50,8 @@ namespace Management.Events
 		public List<KeyData> m_keys;
 		UnityEvent<List<KeyData>> m_keyEvent;
 
-		
-
 		/// <summary>
-		/// Å¬¸¯ ÀÌº¥Æ® »ı¼ºÀÚ
+		/// í´ë¦­ ì´ë²¤íŠ¸ ìƒì„±ì
 		/// </summary>
 		/// <param name="_eventType"></param>
 		public EventData_Input(InputEventType _eventType, 
@@ -67,7 +71,7 @@ namespace Management.Events
 		}
 
 		/// <summary>
-		/// API¿¡¼­ ³Ñ°Ü¹ŞÀº °´Ã¼Á¤º¸·Î ¼±ÅÃ ÀÌº¥Æ®¸¦ Ã³¸®ÇÑ´Ù.
+		/// APIì—ì„œ ë„˜ê²¨ë°›ì€ ê°ì²´ì •ë³´ë¡œ ì„ íƒ ì´ë²¤íŠ¸ë¥¼ ì²˜ë¦¬í•œë‹¤.
 		/// </summary>
 		/// <param name="_eventType"></param>
 		/// <param name="_obj"></param>
@@ -85,7 +89,7 @@ namespace Management.Events
 		}
 
 		/// <summary>
-		/// µå·¡±× ÀÌº¥Æ® »ı¼ºÀÚ
+		/// ë“œë˜ê·¸ ì´ë²¤íŠ¸ ìƒì„±ì
 		/// </summary>
 		/// <param name="_eventType"></param>
 		/// <param name="_btn"></param>
@@ -109,7 +113,7 @@ namespace Management.Events
 		}
 
 		/// <summary>
-		/// Æ÷Ä¿½º ÀÌº¥Æ® »ı¼ºÀÚ
+		/// í¬ì»¤ìŠ¤ ì´ë²¤íŠ¸ ìƒì„±ì
 		/// </summary>
 		/// <param name="_eventType"></param>
 		/// <param name="_focus"></param>
@@ -133,7 +137,7 @@ namespace Management.Events
 		}
 
 		/// <summary>
-		/// Å° ÀÌº¥Æ® »ı¼ºÀÚ
+		/// í‚¤ ì´ë²¤íŠ¸ ìƒì„±ì
 		/// </summary>
 		/// <param name="_eventType"></param>
 		/// <param name="_kCode"></param>
@@ -159,7 +163,7 @@ namespace Management.Events
 			switch(EventType)
 			{
 				case InputEventType.Input_clickDown:
-					// °´Ã¼ ¼±ÅÃ ´Ü°è¿¡¼± code :: pass, skip
+					// ê°ì²´ ì„ íƒ ë‹¨ê³„ì—ì„  code :: pass, skip
 					{
 						Status _success = Status.Update;
 						Status _fail = Status.Update;
@@ -187,17 +191,17 @@ namespace Management.Events
 						Elements = null;
 						StatusCode = _fail;
 					}
-					// µ¥Ä® ¹èÄ¡ ´Ü°è¿¡¼± code :: skip
+					// ë°ì¹¼ ë°°ì¹˜ ë‹¨ê³„ì—ì„  code :: skip
 
 					return;
 
 				case InputEventType.Input_clickSuccessUp:
-					// °´Ã¼ ¼±ÅÃ ´Ü°è¿¡¼± code :: pass, drop
+					// ê°ì²´ ì„ íƒ ë‹¨ê³„ì—ì„  code :: pass, drop
 					{
 						Status _success = Status.Pass;
 						//Status _fail = Status.Drop;
 
-						// PinMode°¡ ¾Æ´Ñ °æ¿ì
+						// PinModeê°€ ì•„ë‹Œ ê²½ìš°
 						if(!IsInPinMode(_mList))
 						{
 							if(m_isPassAPI)
@@ -221,7 +225,7 @@ namespace Management.Events
 								{
 									Func_Input_clickSuccessUp(_success);
 								}
-								// ºó °ø°£À» ´©¸¥ °æ¿ì
+								// ë¹ˆ ê³µê°„ì„ ëˆ„ë¥¸ ê²½ìš°
 								else if(m_results.Count == 0)
 								{
 									//Element = null;
@@ -229,7 +233,7 @@ namespace Management.Events
 									StatusCode = Status.Pass;
 									//StatusCode = _fail;
 								}
-								// UI °´Ã¼¸¦ ´©¸¥ °æ¿ì m_results.Count != 0
+								// UI ê°ì²´ë¥¼ ëˆ„ë¥¸ ê²½ìš° m_results.Count != 0
 								else
 								{
 									//Element = null;
@@ -238,15 +242,15 @@ namespace Management.Events
 								}
 							}
 						}
-						// PinModeÀÎ °æ¿ì
+						// PinModeì¸ ê²½ìš°
 						else
 						{
 							List<RaycastHit> hits;
 							Ray ray = Camera.main.ScreenPointToRay(m_clickPosition);
 
-							// ÇØ´ç Æ÷ÀÎÅÍ¿¡¼­ ÀÏÁ÷¼± »óÀ¸·Î ·¹ÀÌÄ³½ºÆ®
+							// í•´ë‹¹ í¬ì¸í„°ì—ì„œ ì¼ì§ì„  ìƒìœ¼ë¡œ ë ˆì´ìºìŠ¤íŠ¸
 							hits = Physics.RaycastAll(ray).ToList();
-							// ·¹ÀÌÄ³½ºÆ® °á°ú°¡ 1°³ ÀÌ»óÀÏ °æ¿ì
+							// ë ˆì´ìºìŠ¤íŠ¸ ê²°ê³¼ê°€ 1ê°œ ì´ìƒì¼ ê²½ìš°
 							if (hits.Count != 0)
 							{
 								RaycastHit hit_element = default(RaycastHit);
@@ -260,7 +264,7 @@ namespace Management.Events
 								//element = hits.Find(x => x.collider.gameObject.TryGetComponent<LocationElement>(out element)).collider.GetComponent<LocationElement>();
 								//selectable = hits.Find(x => x.collider.TryGetComponent<Obj_Selectable>(out selectable)).collider.GetComponent<Obj_Selectable>();
 
-								// À§Ä¡°ª°ú 3D °´Ã¼°¡ ¸ğµÎ ´­¸° °æ¿ì
+								// ìœ„ì¹˜ê°’ê³¼ 3D ê°ì²´ê°€ ëª¨ë‘ ëˆŒë¦° ê²½ìš°
 								if (element && selectable)
 								{
 									EventStatement _state = EventManager.Instance._Statement;
@@ -282,46 +286,46 @@ namespace Management.Events
 									}
 									//Debug.Log($"element : {element.name}, selectable : {selectable.name}");
 
-									// TODO µ¥ÀÌÅÍ Áı¾î³Ö°í, Ä³½Ì
+									// TODO ë°ì´í„° ì§‘ì–´ë„£ê³ , ìºì‹±
 								}
 
 							}
 						}
 					}
-					// µ¥Ä® ¹èÄ¡ ´Ü°è¿¡¼± code :: pass, drop
+					// ë°ì¹¼ ë°°ì¹˜ ë‹¨ê³„ì—ì„  code :: pass, drop
 					break;
 
 				case InputEventType.Input_clickFailureUp:
 					{
-						// °´Ã¼ ¼±ÅÃ ´Ü°è¿¡¼± code :: Update
-						// µ¥Ä® ¹èÄ¡ ´Ü°è¿¡¼± code :: Update
+						// ê°ì²´ ì„ íƒ ë‹¨ê³„ì—ì„  code :: Update
+						// ë°ì¹¼ ë°°ì¹˜ ë‹¨ê³„ì—ì„  code :: Update
 						StatusCode = Status.Update;
 					}
 					break;
 
 				case InputEventType.Input_drag:
-					// °´Ã¼ ¼±ÅÃ ´Ü°è¿¡¼± code :: Update
-					// µ¥Ä® ¹èÄ¡ ´Ü°è¿¡¼± code :: Update
+					// ê°ì²´ ì„ íƒ ë‹¨ê³„ì—ì„  code :: Update
+					// ë°ì¹¼ ë°°ì¹˜ ë‹¨ê³„ì—ì„  code :: Update
 					StatusCode = Status.Update;
 					break;
 
 				case InputEventType.Input_focus:
-					// °´Ã¼ ¼±ÅÃ ´Ü°è¿¡¼± code :: Update
-					// µ¥Ä® ¹èÄ¡ ´Ü°è¿¡¼± code :: Update
+					// ê°ì²´ ì„ íƒ ë‹¨ê³„ì—ì„  code :: Update
+					// ë°ì¹¼ ë°°ì¹˜ ë‹¨ê³„ì—ì„  code :: Update
 					StatusCode = Status.Update;
 					break;
 
 				case InputEventType.Input_key:
-					// °´Ã¼ ¼±ÅÃ ´Ü°è¿¡¼± code :: Update
-					// µ¥Ä® ¹èÄ¡ ´Ü°è¿¡¼± code :: Update
+					// ê°ì²´ ì„ íƒ ë‹¨ê³„ì—ì„  code :: Update
+					// ë°ì¹¼ ë°°ì¹˜ ë‹¨ê³„ì—ì„  code :: Update
 
-					// KeyData´Â µ¿ÀÛ ±¸Á¶ ÆÄ¾ÇÀ» À§ÇØ Á¶°ÇÀ» ¸í½ÃÇÔ. ½ÇÁ¦ Ã³¸®´Â EventManager¿¡¼­ Ã³¸®
-					// KeyData ¸®½ºÆ®°¡ null ¶Ç´Â 0ÀÌ ¾Æ´Ñ °æ¿ì
+					// KeyDataëŠ” ë™ì‘ êµ¬ì¡° íŒŒì•…ì„ ìœ„í•´ ì¡°ê±´ì„ ëª…ì‹œí•¨. ì‹¤ì œ ì²˜ë¦¬ëŠ” EventManagerì—ì„œ ì²˜ë¦¬
+					// KeyData ë¦¬ìŠ¤íŠ¸ê°€ null ë˜ëŠ” 0ì´ ì•„ë‹Œ ê²½ìš°
 					if(m_keys != null && m_keys.Count != 0)
 					{
 						StatusCode = Status.Update;
 					}
-					// KeyData ¸®½ºÆ®°¡ nullÀÎ °æ¿ì
+					// KeyData ë¦¬ìŠ¤íŠ¸ê°€ nullì¸ ê²½ìš°
 					else
 					{
 						StatusCode = Status.Update;
@@ -331,7 +335,7 @@ namespace Management.Events
 		}
 
 		/// <summary>
-		/// ¸ğµâÄÚµå¿¡¼­ PinMode°¡ Á¸ÀçÇÏ´Â°¡
+		/// ëª¨ë“ˆì½”ë“œì—ì„œ PinModeê°€ ì¡´ì¬í•˜ëŠ”ê°€
 		/// </summary>
 		/// <param name="_mList"></param>
 		/// <returns></returns>
@@ -382,7 +386,7 @@ namespace Management.Events
 		}
 
 		/// <summary>
-		/// ÀÌº¥Æ® ½ÇÇà ½ÂÀÎ½Ã ½ÇÇà
+		/// ì´ë²¤íŠ¸ ì‹¤í–‰ ìŠ¹ì¸ì‹œ ì‹¤í–‰
 		/// </summary>
 		public override void DoEvent()
 		{
@@ -393,7 +397,7 @@ namespace Management.Events
 					break;
 
 				case InputEventType.Input_clickSuccessUp:
-					// °´Ã¼¸¦ ¿Ã¹Ù¸£°Ô ¼±ÅÃÇÑ °æ¿ì
+					// ê°ì²´ë¥¼ ì˜¬ë°”ë¥´ê²Œ ì„ íƒí•œ ê²½ìš°
 					if(Elements != null)
 					{
 						GameObject obj = Elements.Last().Target;
@@ -415,12 +419,12 @@ namespace Management.Events
 							//ContentManager.Instance.Toggle_ChildTabs(1);
 						}
 					}
-					// ºó °ø°£À» ¼±ÅÃÇÑ °æ¿ì
+					// ë¹ˆ ê³µê°„ì„ ì„ íƒí•œ ê²½ìš°
 					else
 					{
 						m_clickEvent.Invoke(null);
 						ContentManager.Instance.OnSelect_3D(null);
-						//// UI ¼±ÅÃÀÇ °á°ú°¡ 0 ÀÌ»óÀÎ °æ¿ì
+						//// UI ì„ íƒì˜ ê²°ê³¼ê°€ 0 ì´ìƒì¸ ê²½ìš°
 						//if(Results.Count != 0)
 						//{
 						//	PlatformCode pCode = MainManager.Instance.Platform;
@@ -430,7 +434,7 @@ namespace Management.Events
 						//	}
 
 						//}
-						//// ºóÄ­ ¼±ÅÃ
+						//// ë¹ˆì¹¸ ì„ íƒ
 						//else
 						//{
 						//}
@@ -454,12 +458,12 @@ namespace Management.Events
 						{
 							m_focusEvent.Invoke(m_focus, m_focusDelta);
 						}
-						// ºó °ø°£À» ´©¸¥ °æ¿ì
+						// ë¹ˆ ê³µê°„ì„ ëˆ„ë¥¸ ê²½ìš°
 						else if (m_results.Count == 0)
 						{
 							m_focusEvent.Invoke(m_focus, m_focusDelta);
 						}
-						// UI °´Ã¼¸¦ ´©¸¥ °æ¿ì m_results.Count != 0
+						// UI ê°ì²´ë¥¼ ëˆ„ë¥¸ ê²½ìš° m_results.Count != 0
 						else
 						{
 
@@ -495,20 +499,31 @@ namespace Management.Events
 						{
 							m_clickEvent.Invoke(Elements.Last().Target);
 							// TODO
+							
+							if(IsPassedAPI)
+							{
+								ContentManager.Instance.Input_SelectObject(Elements.Last().Target);
+							}
+
 							ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
 							//ContentManager.Instance.Toggle_ChildTabs(1);
 						}
 						else if (obj.TryGetComponent<Issue_Selectable>(out iObj))
 						{
+							if (IsPassedAPI)
+							{
+								ContentManager.Instance.Input_SelectObject(Elements.Last().Target);
+							}
+
 							m_clickEvent.Invoke(Elements.Last().Target);
 							ContentManager.Instance.OnSelect_Issue(Elements.Last().Target);
 							//ContentManager.Instance.Toggle_ChildTabs(1);
 						}
 					}
-					// ºó °ø°£À» ¼±ÅÃÇÑ °æ¿ì
+					// ë¹ˆ ê³µê°„ì„ ì„ íƒí•œ ê²½ìš°
 					else
 					{
-						// UI ¼±ÅÃÀÇ °á°ú°¡ 0 ÀÌ»óÀÎ °æ¿ì
+						// UI ì„ íƒì˜ ê²°ê³¼ê°€ 0 ì´ìƒì¸ ê²½ìš°
 						if (Results.Count != 0)
 						{
 							if(_sEvents.ContainsKey(InputEventType.Input_clickDown))
@@ -548,7 +563,7 @@ namespace Management.Events
 		}
 
 		/// <summary>
-		/// AdminViewer Å°¸Ê ¼±ÅÃ ÀÌº¥Æ®
+		/// AdminViewer í‚¤ë§µ ì„ íƒ ì´ë²¤íŠ¸
 		/// </summary>
 		private bool IsClickOnKeymap(List<RaycastResult> _hits)
 		{
@@ -570,10 +585,10 @@ namespace Management.Events
 
 		//#endregion
 
-		#region Click - °´Ã¼ ¼±ÅÃ
+		#region Click - ê°ì²´ ì„ íƒ
 
 		/// <summary>
-		/// UI¸¦ °Çµå·ÈÀ» °æ¿ì¸¦ Á¦¿ÜÇÑ, 3D °´Ã¼ ¼±ÅÃ»óÅÂÀÎÁö È®ÀÎÇÑ´Ù.
+		/// UIë¥¼ ê±´ë“œë ¸ì„ ê²½ìš°ë¥¼ ì œì™¸í•œ, 3D ê°ì²´ ì„ íƒìƒíƒœì¸ì§€ í™•ì¸í•œë‹¤.
 		/// </summary>
 		/// <param name="_mousePos"></param>
 		/// <param name="obj"></param>
@@ -600,7 +615,7 @@ namespace Management.Events
 		}
 
 		/// <summary>
-		/// 3D °´Ã¼¸¦ ¸¶¿ì½º À§Ä¡¿¡¼­ °¡Á®¿È
+		/// 3D ê°ì²´ë¥¼ ë§ˆìš°ìŠ¤ ìœ„ì¹˜ì—ì„œ ê°€ì ¸ì˜´
 		/// </summary>
 		/// <param name="_mousePos"></param>
 		/// <param name="_hitPoint"></param>
@@ -609,7 +624,7 @@ namespace Management.Events
 		{
 			GameObject obj = null;
 
-			// 3D ¼±ÅÃ
+			// 3D ì„ íƒ
 			RaycastHit _hit;
 			Ray _ray = m_camera.ScreenPointToRay(_mousePos);
 			if (Physics.Raycast(_ray, out _hit))
@@ -626,7 +641,7 @@ namespace Management.Events
 		}
 
 		/// <summary>
-		/// UI °´Ã¼¸¦ ¸¶¿ì½º À§Ä¡¿¡¼­ °¡Á®¿È
+		/// UI ê°ì²´ë¥¼ ë§ˆìš°ìŠ¤ ìœ„ì¹˜ì—ì„œ ê°€ì ¸ì˜´
 		/// </summary>
 		/// <param name="_mousePos"></param>
 		/// <returns></returns>
@@ -634,7 +649,7 @@ namespace Management.Events
 		{
 			List<RaycastResult> results = new List<RaycastResult>();
 
-			// UI ¼±ÅÃ
+			// UI ì„ íƒ
 			PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
 			pointerEventData.position = _mousePos;
 

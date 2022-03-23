@@ -34,6 +34,11 @@ namespace Management
 			m_container.m_capture.s5b2_panel.SetSubHistoryTable(_dataTable);
 		}
 
+		public void Input_SelectObject(GameObject _obj)
+		{
+			m_container.m_keymap.m_keymapCamera.gameObject.GetComponent<BIMCamera>().OnSelect(_obj);
+		}
+
 		public void Input_KeymapClick(Vector3 _pos)
 		{
 			Camera cam = m_container.m_keymap.m_keymapCamera;
