@@ -7,7 +7,7 @@ namespace Management.Events
 	using Definition;
 	using View;
 
-	public class EventData_UI : EventData
+	public class EventData_UI : AEventData
 	{
 		private List<GameObject> m_modelObj;
 
@@ -20,25 +20,7 @@ namespace Management.Events
 			m_modelObj = _modelObj;
 		}
 
-		public override void DoEvent()
-		{
-			
-		}
-
-		public override void DoEvent(List<GameObject> _objs)
-		{
-			switch(UiEventType)
-			{
-				case UIEventType.Mode_Hide:
-				case UIEventType.Mode_Isolate:
-					{
-
-					}
-					break;
-			}
-		}
-
-		public override void DoEvent(Dictionary<InputEventType, EventData> _sEvents)
+		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			switch(UiEventType)
 			{

@@ -13,7 +13,7 @@ namespace Management.Events
 	using Items;
 
 	[System.Serializable]
-	public class EventData_Input : EventData
+	public class EventData_Input : AEventData
 	{
 		public Camera m_camera;
 		public GraphicRaycaster m_graphicRaycaster;
@@ -385,161 +385,65 @@ namespace Management.Events
 			}
 		}
 
-		/// <summary>
-		/// 이벤트 실행 승인시 실행
-		/// </summary>
-		public override void DoEvent()
+		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			switch(EventType)
 			{
-				case InputEventType.Input_clickDown:
-				case InputEventType.Input_clickFailureUp:
-					break;
-
 				case InputEventType.Input_clickSuccessUp:
-					// 객체를 올바르게 선택한 경우
-					if(Elements != null)
 					{
-						GameObject obj = Elements.Last().Target;
-
-						Obj_Selectable sObj;
-						Issue_Selectable iObj;
-
-						if(obj.TryGetComponent<Obj_Selectable>(out sObj))
+						if (Elements != null)
 						{
-							m_clickEvent.Invoke(Elements.Last().Target);
-							// TODO
-							ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
-							//ContentManager.Instance.Toggle_ChildTabs(1);
+							GameObject obj = Elements.Last().Target;
+
+							Obj_Selectable sObj;
+							Issue_Selectable iObj;
+
+							if (obj.TryGetComponent<Obj_Selectable>(out sObj))
+							{
+								m_clickEvent.Invoke(Elements.Last().Target);
+								// TODO
+							
+								if(IsPassedAPI)
+								{
+									ContentManager.Instance.Input_SelectObject(Elements.Last().Target);
+								}
+
+								ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
+								//ContentManager.Instance.Toggle_ChildTabs(1);
+							}
+							else if (obj.TryGetComponent<Issue_Selectable>(out iObj))
+							{
+								if (IsPassedAPI)
+								{
+									ContentManager.Instance.Input_SelectObject(Elements.Last().Target);
+								}
+
+								m_clickEvent.Invoke(Elements.Last().Target);
+								ContentManager.Instance.OnSelect_Issue(Elements.Last().Target);
+								//ContentManager.Instance.Toggle_ChildTabs(1);
+							}
 						}
-						else if(obj.TryGetComponent<Issue_Selectable>(out iObj))
-						{
-							m_clickEvent.Invoke(Elements.Last().Target);
-							ContentManager.Instance.OnSelect_Issue(Elements.Last().Target);
-							//ContentManager.Instance.Toggle_ChildTabs(1);
-						}
-					}
-					// 빈 공간을 선택한 경우
-					else
-					{
-						m_clickEvent.Invoke(null);
-						ContentManager.Instance.OnSelect_3D(null);
-						//// UI 선택의 결과가 0 이상인 경우
-						//if(Results.Count != 0)
-						//{
-						//	PlatformCode pCode = MainManager.Instance.Platform;
-						//	if(Platforms.IsDemoAdminViewer(pCode))
-						//	{
-
-						//	}
-
-						//}
-						//// 빈칸 선택
-						//else
-						//{
-						//}
-						////ContentManager.Instance.Toggle_ChildTabs(1);
-					}
-					break;
-
-				case InputEventType.Input_drag:
-					m_dragEvent.Invoke(m_btn, m_delta);
-					break;
-
-				case InputEventType.Input_focus:
-					{
-						m_selected3D = null;
-						m_hit = default(RaycastHit);
-						m_results = new List<RaycastResult>();
-
-						Get_Collect3DObject(Input.mousePosition, out m_selected3D, out m_hit, out m_results);
-
-						if (Selected3D != null)
-						{
-							m_focusEvent.Invoke(m_focus, m_focusDelta);
-						}
-						// 빈 공간을 누른 경우
-						else if (m_results.Count == 0)
-						{
-							m_focusEvent.Invoke(m_focus, m_focusDelta);
-						}
-						// UI 객체를 누른 경우 m_results.Count != 0
+						// 빈 공간을 선택한 경우
 						else
 						{
-
-						}
-					}
-					
-					break;
-
-				case InputEventType.Input_key:
-					m_keyEvent.Invoke(m_keys);
-					break;
-			}
-		}
-
-		public override void DoEvent(List<GameObject> _objs)
-		{
-			
-		}
-
-		public override void DoEvent(Dictionary<InputEventType, EventData> _sEvents)
-		{
-			switch(EventType)
-			{
-				case InputEventType.Input_clickSuccessUp:
-					if (Elements != null)
-					{
-						GameObject obj = Elements.Last().Target;
-
-						Obj_Selectable sObj;
-						Issue_Selectable iObj;
-
-						if (obj.TryGetComponent<Obj_Selectable>(out sObj))
-						{
-							m_clickEvent.Invoke(Elements.Last().Target);
-							// TODO
-							
-							if(IsPassedAPI)
+							// UI 선택의 결과가 0 이상인 경우
+							if (Results.Count != 0)
 							{
-								ContentManager.Instance.Input_SelectObject(Elements.Last().Target);
-							}
-
-							ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
-							//ContentManager.Instance.Toggle_ChildTabs(1);
-						}
-						else if (obj.TryGetComponent<Issue_Selectable>(out iObj))
-						{
-							if (IsPassedAPI)
-							{
-								ContentManager.Instance.Input_SelectObject(Elements.Last().Target);
-							}
-
-							m_clickEvent.Invoke(Elements.Last().Target);
-							ContentManager.Instance.OnSelect_Issue(Elements.Last().Target);
-							//ContentManager.Instance.Toggle_ChildTabs(1);
-						}
-					}
-					// 빈 공간을 선택한 경우
-					else
-					{
-						// UI 선택의 결과가 0 이상인 경우
-						if (Results.Count != 0)
-						{
-							if(_sEvents.ContainsKey(InputEventType.Input_clickDown))
-							{
-								List<RaycastResult> hits = _sEvents[InputEventType.Input_clickDown].Results;
-
-								if(IsClickOnKeymap(hits))
+								if(_sEvents.ContainsKey(InputEventType.Input_clickDown))
 								{
-									ContentManager.Instance.Input_KeymapClick(m_clickPosition);
+									List<RaycastResult> hits = _sEvents[InputEventType.Input_clickDown].Results;
+
+									if(IsClickOnKeymap(hits))
+									{
+										ContentManager.Instance.Input_KeymapClick(m_clickPosition);
+									}
 								}
 							}
-						}
-						else
-						{
-							m_clickEvent.Invoke(null);
-							ContentManager.Instance.OnSelect_3D(null);
+							else
+							{
+								m_clickEvent.Invoke(null);
+								ContentManager.Instance.OnSelect_3D(null);
+							}
 						}
 					}
 					break;
@@ -557,6 +461,14 @@ namespace Management.Events
 								{
 									ContentManager.Instance.Input_KeymapDrag(m_btn, m_delta);
 								}
+								else
+								{
+									m_dragEvent.Invoke(m_btn, m_delta);
+								}
+							}
+							else
+							{
+								m_dragEvent.Invoke(m_btn, m_delta);
 							}
 						}
 					}
@@ -588,6 +500,10 @@ namespace Management.Events
 							//}
 						}
 					}
+					break;
+
+				case InputEventType.Input_key:
+					m_keyEvent.Invoke(m_keys);
 					break;
 			}
 		}

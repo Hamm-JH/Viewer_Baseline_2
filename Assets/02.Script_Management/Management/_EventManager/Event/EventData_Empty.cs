@@ -7,7 +7,7 @@ namespace Management.Events
 	using Definition;
 
 	[System.Serializable]
-	public class EventData_Empty : EventData
+	public class EventData_Empty : AEventData
 	{
 		public EventData_Empty()
 		{
@@ -19,19 +19,9 @@ namespace Management.Events
 			Debug.Log("OnProcess Empty");
 		}
 
-		public override void DoEvent()
+		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			Debug.Log("DoEvent Empty");
-		}
-
-		public override void DoEvent(List<GameObject> _objs)
-		{
-			Debug.Log("DoEvent Empty");
-		}
-
-		public override void DoEvent(Dictionary<InputEventType, EventData> _sEvents)
-		{
-			throw new System.NotImplementedException();
 		}
 	}
 }

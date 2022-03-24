@@ -21,14 +21,14 @@ namespace Management
 		/// <summary>
 		/// 이벤트 단위로 현재 이벤트의 상태를 코드별로 저장한 변수
 		/// </summary>
-		[SerializeField] Dictionary<InputEventType, EventData> m_EventStates;
+		[SerializeField] Dictionary<InputEventType, AEventData> m_EventStates;
 
 		/// <summary>
 		/// clickDown에서 clickUp 타이밍 동안 드래깅용 객체
 		/// </summary>
 		[SerializeField] GameObject cacheDownObj;
 
-		public Dictionary<InputEventType, EventData> EventStates { get => m_EventStates; set => m_EventStates=value; }
+		public Dictionary<InputEventType, AEventData> EventStates { get => m_EventStates; set => m_EventStates=value; }
 
 		public EventStatement _Statement => m_eStatus;
 
@@ -56,12 +56,12 @@ namespace Management
 		{
 			cacheDownObj = null;
 
-			EventStates = new Dictionary<InputEventType, EventData>();
+			EventStates = new Dictionary<InputEventType, AEventData>();
 			m_eStatus = new EventStatement();
 			EventStates.Add(InputEventType.Statement, m_eStatus);
 		}
 
-		public void OnEvent(EventData currEvent)
+		public void OnEvent(AEventData currEvent)
 		{
 			// 선택된 이벤트 상태가 없는 경우, 아무 동작을 수행하지 않는 더미 인스턴스를 생성한다.
 			if (EventStates.Count == 0)
@@ -94,7 +94,7 @@ namespace Management
 		/// </summary>
 		/// <param name="_curr"> 실행 가능성 파악해야할 EventData </param>
 		/// <returns> 실행 가능할시 true, 실행 불가능시 false</returns>
-		private bool IsEventCanDoit(EventData _curr)
+		private bool IsEventCanDoit(AEventData _curr)
 		{
 			bool result = true;
 
@@ -110,7 +110,7 @@ namespace Management
 		}
 
 
-		private void DoEvent(Dictionary<InputEventType, EventData> _sEvents, EventData _curr)
+		private void DoEvent(Dictionary<InputEventType, AEventData> _sEvents, AEventData _curr)
 		{
 			// 이전 이벤트 상태가 아무것도 없는 상태였다면?
 			if (IsSelectedElementNull(_sEvents))
@@ -154,7 +154,7 @@ namespace Management
 		/// </summary>
 		/// <param name="_sEvents"></param>
 		/// <returns> true :: Null상태, false :: Null아님 </returns>
-		private bool IsSelectedElementNull(Dictionary<InputEventType, EventData> _sEvents)
+		private bool IsSelectedElementNull(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			bool result = false;
 
@@ -180,7 +180,7 @@ namespace Management
 		/// </summary>
 		/// <param name="_curr"></param>
 		/// <returns></returns>
-		private bool IsSelectedElementNull(EventData _curr)
+		private bool IsSelectedElementNull(AEventData _curr)
 		{
 			bool result = false;
 

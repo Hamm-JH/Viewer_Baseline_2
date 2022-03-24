@@ -15,7 +15,7 @@ namespace Management
 		/// 특정 이벤트는 이전 이벤트 영역으로 이전되지 않는다. (즉발성)
 		/// </summary>
 		/// <param name="_currEvent"></param>
-		private void UpdateNewEvent(Dictionary<InputEventType, EventData> _sEvents, EventData _currEvent)
+		private void UpdateNewEvent(Dictionary<InputEventType, AEventData> _sEvents, AEventData _currEvent)
 		{
 			switch (_currEvent.EventType)
 			{
@@ -66,7 +66,7 @@ namespace Management
 							// 정상적으로 객체가 선택이 된 경우
 							if (_currEvent.Elements != null)
 							{
-								AddEvent<InputEventType, EventData>(_currEvent.EventType, _currEvent, _sEvents, true);
+								AddEvent<InputEventType, AEventData>(_currEvent.EventType, _currEvent, _sEvents, true);
 
 								// 다중 객체의 OnSelect 시행
 								// TODO 0228 :: 일단 단일 객체 이벤트로 대체
@@ -92,7 +92,7 @@ namespace Management
 								_currEvent.DoEvent(_sEvents);
 
 								// 이벤트 리스트 업데이트
-								AddEvent<InputEventType, EventData>(_currEvent.EventType, _currEvent, _sEvents);
+								AddEvent<InputEventType, AEventData>(_currEvent.EventType, _currEvent, _sEvents);
 							}
 							// 빈 공간을 누른 경우
 							else
@@ -123,7 +123,7 @@ namespace Management
 								// 클릭다운 개체가 UI를 안눌렀는가?
 								if (_sEvents[InputEventType.Input_clickDown].Results.Count == 0)
 								{
-									_currEvent.DoEvent();
+									_currEvent.DoEvent(_sEvents);
 								}
 								else
 								{
@@ -138,7 +138,7 @@ namespace Management
 								// 클릭다운 개체가 UI를 안 눌렀는가?
 								if(_sEvents[InputEventType.Input_clickDown].Results.Count == 0)
 								{
-									_currEvent.DoEvent();
+									_currEvent.DoEvent(_sEvents);
 								}
 								else
 								{
@@ -183,7 +183,7 @@ namespace Management
 						}
 
 						// 즉발 (Not caching)
-						_currEvent.DoEvent();
+						_currEvent.DoEvent(_sEvents);
 					}
 					break;
 
@@ -212,7 +212,7 @@ namespace Management
 		/// </summary>
 		/// <param name="_sEvents"></param>
 		/// <returns></returns>
-		private bool isMultiCondition(Dictionary<InputEventType, EventData> _sEvents)
+		private bool isMultiCondition(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			bool result = false;
 			List<KeyData> kd = null;
@@ -243,7 +243,7 @@ namespace Management
 		/// 선택 해제 이벤트 실행구간
 		/// </summary>
 		/// <param name="_event"></param>
-		private void DeselectEvent(Dictionary<InputEventType, EventData> _sEvents, EventData _currEvent)
+		private void DeselectEvent(Dictionary<InputEventType, AEventData> _sEvents, AEventData _currEvent)
 		{
 			switch (_currEvent.EventType)
 			{

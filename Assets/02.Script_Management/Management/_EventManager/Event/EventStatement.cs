@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,10 +7,10 @@ namespace Management.Events
 	using Definition;
 
 	[System.Serializable]
-	public class EventStatement : EventData
+	public class EventStatement : AEventData
 	{
 		/// <summary>
-		/// ¸ğµâ ½ºÅÃ
+		/// ëª¨ë“ˆ ìŠ¤íƒ
 		/// </summary>
 		[SerializeField] List<ModuleCode> m_moduleList;
 
@@ -48,31 +48,21 @@ namespace Management.Events
 			Debug.Log("OnProcess Empty");
 		}
 
-		public override void DoEvent()
-		{
-			Debug.Log("DoEvent Empty");
-		}
-
-		public override void DoEvent(List<GameObject> _objs)
-		{
-			Debug.Log("DoEvent Empty");
-		}
-
-		public override void DoEvent(Dictionary<InputEventType, EventData> _sEvents)
+		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			throw new System.NotImplementedException();
 		}
 
 		public void Destroy_CacheObject()
 		{
-			// ¿©±â ÀúÀåµÈ ´ë»óÀº ¸ğµ¨ °´Ã¼ÀÓ
+			// ì—¬ê¸° ì €ì¥ëœ ëŒ€ìƒì€ ëª¨ë¸ ê°ì²´ì„
 			//GameObject.Destroy(CacheObject);
 			CacheObject = null;
 		}
 
 		public void Destroy_CachePin()
 		{
-			// ¿©±â ÀúÀåµÈ ´ë»óÀº Cache Pin °´Ã¼
+			// ì—¬ê¸° ì €ì¥ëœ ëŒ€ìƒì€ Cache Pin ê°ì²´
 			GameObject.Destroy(CachePin);
 			CachePin = null;
 		}

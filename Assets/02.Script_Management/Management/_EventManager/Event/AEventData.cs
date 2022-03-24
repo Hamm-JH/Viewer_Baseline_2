@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,18 +10,17 @@ namespace Management.Events
 	using View;
 
 	/// <summary>
-	/// Á¢±Ù µ¥ÀÌÅÍ¿Í µ¥ÀÌÅÍ¿¡ Á¢±ÙÇÏ±â À§ÇÑ ¸Ş¼­µå ¿øÇü ¼±¾ğ
+	/// ì ‘ê·¼ ë°ì´í„°ì™€ ë°ì´í„°ì— ì ‘ê·¼í•˜ê¸° ìœ„í•œ ë©”ì„œë“œ ì›í˜• ì„ ì–¸
 	/// </summary>
 	[System.Serializable]
-	public abstract class EventData
+	public abstract class AEventData
 	{
-		//protected IInteractable m_element;
 		protected List<IInteractable> m_elements;
 		protected InputEventType m_eventType;
 		private Status status;
 
 		/// <summary>
-		/// »óÈ£ÀÛ¿ë °¡´ÉÇÑ ¿ä¼Ò
+		/// ìƒí˜¸ì‘ìš© ê°€ëŠ¥í•œ ìš”ì†Œ
 		/// </summary>
 		//public IInteractable Element { get => m_element; set => m_element=value; }
 		public List<IInteractable> Elements { get => m_elements; set => m_elements=value; }
@@ -29,12 +28,12 @@ namespace Management.Events
 		public List<GameObject> objects;
 
 		/// <summary>
-		/// ¹ß»ıÇÑ ÀÌº¥Æ®ÀÇ Çü½Ä
+		/// ë°œìƒí•œ ì´ë²¤íŠ¸ì˜ í˜•ì‹
 		/// </summary>
 		public InputEventType EventType { get => m_eventType; set => m_eventType=value; }
 
 		/// <summary>
-		/// ÀÌº¥Æ® Ã³¸® °á°ú
+		/// ì´ë²¤íŠ¸ ì²˜ë¦¬ ê²°ê³¼
 		/// </summary>
 		public Status StatusCode { get => status; set => status=value; }
 
@@ -44,7 +43,7 @@ namespace Management.Events
 		protected GameObject m_selected3D = null;
 		protected RaycastHit m_hit = default(RaycastHit);
 		protected List<RaycastResult> m_results = new List<RaycastResult>();
-		// ¸¶¿ì½º ¹öÆ° ¹øÈ£
+		// ë§ˆìš°ìŠ¤ ë²„íŠ¼ ë²ˆí˜¸
 		protected int m_btn;
 
 		public GameObject Selected3D { get => m_selected3D; set => m_selected3D=value; }
@@ -64,20 +63,20 @@ namespace Management.Events
 
 
 		/// <summary>
-		/// ÀÌº¥Æ® Ã³¸® ¸Ş¼­µå
+		/// ì´ë²¤íŠ¸ ì²˜ë¦¬ ë©”ì„œë“œ
 		/// </summary>
 		public abstract void OnProcess(GameObject _cObj, List<ModuleCode> _mList);
 
 
 		/// <summary>
-		/// ÀÌº¥Æ® ³»ºÎÃ³¸® ¿Ï·áÈÄ ¿ÜºÎ ÀÌº¥Æ® ¹ß»êÃ³¸®
+		/// ì´ë²¤íŠ¸ ë‚´ë¶€ì²˜ë¦¬ ì™„ë£Œí›„ ì™¸ë¶€ ì´ë²¤íŠ¸ ë°œì‚°ì²˜ë¦¬
 		/// </summary>
-		public abstract void DoEvent();
-		public abstract void DoEvent(List<GameObject> _objs);
+		//public abstract void DoEvent();
+		//public abstract void DoEvent(List<GameObject> _objs);
 
-		public abstract void DoEvent(Dictionary<InputEventType, EventData> _sEvents);
+		public abstract void DoEvent(Dictionary<InputEventType, AEventData> _sEvents);
 		
-		public static bool IsEqual(EventData A, EventData B)
+		public static bool IsEqual(AEventData A, AEventData B)
 		{
 			if(A.Elements.Last().Target == B.Elements.Last().Target)
 			{

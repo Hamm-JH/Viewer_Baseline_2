@@ -45,7 +45,7 @@ namespace Management
 		/// <param name="_eData"> EventData </param>
 		/// <param name="_event"> [InputEventType, EventData] </param>
 		/// <param name="isMultiple"> 다중선택? </param>
-		private void AddEvent<K, V>(K _key, V _eData, Dictionary<K, V> _event, bool isMultiple = false) where V : EventData
+		private void AddEvent<K, V>(K _key, V _eData, Dictionary<K, V> _event, bool isMultiple = false) where V : AEventData
 		{
 			if (_event.ContainsKey(_key))
 			{

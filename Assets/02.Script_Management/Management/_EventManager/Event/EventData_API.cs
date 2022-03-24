@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace Management.Events
 	using View;
 
 	[System.Serializable]
-	public class EventData_API : EventData
+	public class EventData_API : AEventData
 	{
 		[Header("API :: SelectObject")]
 		GameObject m_obj;
@@ -28,7 +28,7 @@ namespace Management.Events
 		{
 			switch(EventType)
 			{
-				// ÀÌ ¿µ¿ª¿¡¼­ ¼±ÅÃ ÀÌº¥Æ®¸¦ Ã³¸®ÇÏÁö ¾Ê°í, ±âÁ¸¿¡ ÀÖ´ø EventData_Input :: clickSuccessUp ÀÌº¥Æ®·Î µ¿ÀÛÀ» Àü´ŞÇÑ´Ù.
+				// ì´ ì˜ì—­ì—ì„œ ì„ íƒ ì´ë²¤íŠ¸ë¥¼ ì²˜ë¦¬í•˜ì§€ ì•Šê³ , ê¸°ì¡´ì— ìˆë˜ EventData_Input :: clickSuccessUp ì´ë²¤íŠ¸ë¡œ ë™ì‘ì„ ì „ë‹¬í•œë‹¤.
 				case InputEventType.API_SelectObject:
 				case InputEventType.API_SelectIssue:
 					{
@@ -46,24 +46,14 @@ namespace Management.Events
 			}
 		}
 
-		public override void DoEvent()
+		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			switch(EventType)
 			{
-				// ½ºÅµ
+				// ìŠ¤í‚µ
 				case InputEventType.API_SelectObject:
 					break;
 			}
-		}
-
-		public override void DoEvent(List<GameObject> _objs)
-		{
-			Debug.Log("DoEvent Empty");
-		}
-
-		public override void DoEvent(Dictionary<InputEventType, EventData> _sEvents)
-		{
-			throw new System.NotImplementedException();
 		}
 	}
 }
