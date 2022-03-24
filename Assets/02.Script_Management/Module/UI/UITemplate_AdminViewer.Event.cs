@@ -339,6 +339,14 @@ namespace Module.UI
 			panel.r_TableContents[2].gameObject.SetActive(true);
 		}
 
+		private void SetViewmap(string arg)
+		{
+#if UNITY_EDITOR
+#else
+			ExternalAPI.ViewMap(arg);
+#endif
+		}
+
 
 		#endregion
 
@@ -365,6 +373,8 @@ namespace Module.UI
 			Panels.s5b1_code.SetPanel(uType);
 			Panels.s5b2_code.SetPanel(uType);
 			Panels.s5m1_code.SetPanel(uType);
+
+			SetViewmap("T");
 		}
 		private void SetPanel_State2()
 		{
@@ -387,6 +397,8 @@ namespace Module.UI
 			Panels.s5b1_code.SetPanel(uType);
 			Panels.s5b2_code.SetPanel(uType);
 			Panels.s5m1_code.SetPanel(uType);
+
+			SetViewmap("F");
 		}
 		private void SetPanel_State3()
 		{
@@ -409,6 +421,10 @@ namespace Module.UI
 			Panels.s5b1_code.SetPanel(uType);
 			Panels.s5b2_code.SetPanel(uType);
 			Panels.s5m1_code.SetPanel(uType);
+
+			SetKeymapCenterPosition();
+
+			SetViewmap("F");
 		}
 		private void SetPanel_State4()
 		{
@@ -431,7 +447,12 @@ namespace Module.UI
 			Panels.s5b1_code.SetPanel(uType);
 			Panels.s5b2_code.SetPanel(uType);
 			Panels.s5m1_code.SetPanel(uType);
+
+			SetKeymapCenterPosition();
+
+			SetViewmap("F");
 		}
+
 		private void SetPanel_State5()
 		{
 			Panels.mainLocation.SetActive(false);
@@ -455,8 +476,12 @@ namespace Module.UI
 			Panels.s5m1_code.SetPanel(uType);
 
 			SetSt5_m1_dmg_toggle();
+
+			SetViewmap("F");
 		}
 
-		#endregion
+#endregion
+
+		
 	}
 }

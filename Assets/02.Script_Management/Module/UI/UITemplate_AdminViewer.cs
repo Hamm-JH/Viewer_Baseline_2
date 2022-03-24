@@ -147,6 +147,11 @@ namespace Module.UI
 			SetPin(true);
 		}
 
+		public void SetKeymapCenterPosition()
+		{
+			ContentManager.Instance.Function_SetKeymapCenterPosition();
+		}
+
 		#region ** not implemented
 		public override void SetObjectData_Tunnel(GameObject selected)
 		{
@@ -233,6 +238,10 @@ namespace Module.UI
 
 				case UIEventType.Ad_Next:
 
+					break;
+
+				case UIEventType.Ad_SetKeymapCenter:
+					SetKeymapCenterPosition();
 					break;
 
 					

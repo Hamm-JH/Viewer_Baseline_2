@@ -34,6 +34,12 @@ namespace Management
 			m_container.m_capture.s5b2_panel.SetSubHistoryTable(_dataTable);
 		}
 
+		public void Function_SetKeymapCenterPosition()
+		{
+			Cameras.SetCameraCenter(m_container.m_keymap.m_keymapCamera,
+				m_container.m_keymap.m_keymapCamera.gameObject.GetComponent<BIMCamera>());
+		}
+
 		public void Input_SelectObject(GameObject _obj)
 		{
 			m_container.m_keymap.m_keymapCamera.gameObject.GetComponent<BIMCamera>().OnSelect(_obj);
@@ -123,9 +129,9 @@ namespace Management
 			m_container.m_keymap.m_keymapCamera.gameObject.GetComponent<BIMCamera>().OnDrag(_btn, _delta);
 		}
 
-		public void Input_KeymapFocus()
+		public void Input_KeymapFocus(Vector3 _point, float _delta)
 		{
-
+			m_container.m_keymap.m_keymapCamera.gameObject.GetComponent<BIMCamera>().OnFocus(_point, _delta);
 		}
 	}
 }

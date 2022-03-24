@@ -152,7 +152,7 @@ namespace Management
 				case InputEventType.Input_focus:
 					{
 						// 즉발 (Not caching)
-						_currEvent.DoEvent();
+						_currEvent.DoEvent(_sEvents);
 					}
 					break;
 

@@ -545,17 +545,47 @@ namespace Management.Events
 					break;
 
 				case InputEventType.Input_drag:
-					PlatformCode pCode = MainManager.Instance.Platform;
-					if(Platforms.IsDemoAdminViewer(pCode))
 					{
-						if(_sEvents.ContainsKey(InputEventType.Input_clickDown))
+						PlatformCode pCode = MainManager.Instance.Platform;
+						if(Platforms.IsDemoAdminViewer(pCode))
 						{
-							List<RaycastResult> hits = _sEvents[InputEventType.Input_clickDown].Results;
-
-							if(IsClickOnKeymap(hits))
+							if(_sEvents.ContainsKey(InputEventType.Input_clickDown))
 							{
-								ContentManager.Instance.Input_KeymapDrag(m_btn, m_delta);
+								List<RaycastResult> hits = _sEvents[InputEventType.Input_clickDown].Results;
+
+								if(IsClickOnKeymap(hits))
+								{
+									ContentManager.Instance.Input_KeymapDrag(m_btn, m_delta);
+								}
 							}
+						}
+					}
+					break;
+
+				case InputEventType.Input_focus:
+					{
+						m_selected3D = null;
+						m_hit = default(RaycastHit);
+						m_results = new List<RaycastResult>();
+
+						Get_Collect3DObject(Input.mousePosition, out m_selected3D, out m_hit, out m_results);
+
+						if (Selected3D != null)
+						{
+							m_focusEvent.Invoke(m_focus, m_focusDelta);
+						}
+						// 빈 공간을 누른 경우
+						else if (m_results.Count == 0)
+						{
+							m_focusEvent.Invoke(m_focus, m_focusDelta);
+						}
+						// UI 객체를 누른 경우 m_results.Count != 0
+						else
+						{
+							ContentManager.Instance.Input_KeymapFocus(m_focus, m_focusDelta);
+							//if (IsClickOnKeymap(_sEvents[InputEventType.Input_clickDown].Results))
+							//{
+							//}
 						}
 					}
 					break;

@@ -260,6 +260,8 @@ namespace Definition
 		Ad_Prev = 0x210,
 		Ad_Next = 0x211,
 
+		Ad_SetKeymapCenter = 0x212,
+
 		Ad_St3_Toggle = 0x216,
 		Ad_St4_Toggle = 0x217,
 		Ad_St5_Toggle = 0x218,
