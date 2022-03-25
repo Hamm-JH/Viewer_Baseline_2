@@ -26,16 +26,6 @@ namespace Management
 			Debug.Log("OnUpdate");
 		}
 
-		private void OnEnable()
-		{
-			cacheDownObj = null;
-		}
-
-		private void OnDisable()
-		{
-			cacheDownObj = null;
-		}
-
 		/// <summary>
 		/// 이벤트를 추가한다.
 		/// </summary>

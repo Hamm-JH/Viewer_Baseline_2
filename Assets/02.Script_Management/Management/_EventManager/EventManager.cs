@@ -26,7 +26,7 @@ namespace Management
 		/// <summary>
 		/// clickDown에서 clickUp 타이밍 동안 드래깅용 객체
 		/// </summary>
-		[SerializeField] GameObject cacheDownObj;
+		//[SerializeField] GameObject cacheDownObj;
 
 		public Dictionary<InputEventType, AEventData> EventStates { get => m_EventStates; set => m_EventStates=value; }
 
@@ -54,7 +54,7 @@ namespace Management
 
 		private void Awake()
 		{
-			cacheDownObj = null;
+			//cacheDownObj = null;
 
 			EventStates = new Dictionary<InputEventType, AEventData>();
 			m_eStatus = new EventStatement();
@@ -77,7 +77,7 @@ namespace Management
 			// 받아온 이벤트의 내부처리 메서드를 시행
 			// 내부에 연산 결과로 내부의 interactable 인터페이스 상속 인스턴스 업데이트됨.
 			// 추후 전달 데이터가 늘어나면 새로 내부 클래스 작성하기
-			currEvent.OnProcess(cacheDownObj, _ModuleList);
+			currEvent.OnProcess(_ModuleList);
 
 			DoEvent(EventStates, currEvent);
 			try

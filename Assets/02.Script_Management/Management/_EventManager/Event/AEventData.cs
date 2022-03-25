@@ -39,6 +39,7 @@ namespace Management.Events
 
 		//----------------------------------------------------------------------------------------------
 
+		// TODO 3D 업데이트 예정
 		[Header("Private 3D")]
 		protected GameObject m_selected3D = null;
 		protected RaycastHit m_hit = default(RaycastHit);
@@ -65,7 +66,7 @@ namespace Management.Events
 		/// <summary>
 		/// 이벤트 처리 메서드
 		/// </summary>
-		public abstract void OnProcess(GameObject _cObj, List<ModuleCode> _mList);
+		public abstract void OnProcess(List<ModuleCode> _mList);
 
 
 		/// <summary>

@@ -102,15 +102,28 @@ namespace Management
 		public void OnClick(InputEventType type, int btn, Vector3 _mousePos)
 		{
 			//Debug.Log("OnClick");
-
-			EventManager.Instance.OnEvent(new Events.EventData_Input(
-					_eventType: type,
+			if(type == InputEventType.Input_clickDown)
+			{
+				EventManager.Instance.OnEvent(new Events.Inputs.Event_ClickDown(
+					_eType: type,
 					_btn: btn,
 					_mousePos: _mousePos,
 					_camera: main.MainCamera,
-					_graphicRaycaster: main.Content._GrRaycaster,
+					_grRaycaster: main.Content._GrRaycaster,
 					_event: main.cameraExecuteEvents.selectEvent
 					));
+			}
+			else
+			{
+				EventManager.Instance.OnEvent(new Events.EventData_Input(
+						_eventType: type,
+						_btn: btn,
+						_mousePos: _mousePos,
+						_camera: main.MainCamera,
+						_graphicRaycaster: main.Content._GrRaycaster,
+						_event: main.cameraExecuteEvents.selectEvent
+						));
+			}
 			// 필터링 (__추후 변수 추출)
 			//if(btn == 0)
 			//{

@@ -25,7 +25,8 @@ namespace Management
 						// clickDown 캐시 업데이트
 						if (_currEvent.Elements != null)
 						{
-							cacheDownObj = _currEvent.Elements.Last().Target;
+							
+							//cacheDownObj = _currEvent.Elements.Last().Target;
 						}
 
 						if (EventStates.ContainsKey(InputEventType.Input_clickDown))
@@ -45,7 +46,7 @@ namespace Management
 						// ClickDown 캐시 삭제
 						if (EventStates.ContainsKey(InputEventType.Input_clickDown))
 						{
-							cacheDownObj = null;
+							//cacheDownObj = null;
 							EventStates.Remove(InputEventType.Input_clickDown);
 						}
 					}
@@ -104,7 +105,7 @@ namespace Management
 						// 클릭다운 개체가 있을 경우
 						if (_sEvents.ContainsKey(InputEventType.Input_clickDown))
 						{
-							cacheDownObj = null;
+							//cacheDownObj = null;
 							_sEvents.Remove(InputEventType.Input_clickDown);
 						}
 

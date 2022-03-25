@@ -72,7 +72,7 @@ namespace Management.Events
 			}
 		}
 
-		public override void OnProcess(GameObject _cObj, List<ModuleCode> _mList)
+		public override void OnProcess(List<ModuleCode> _mList)
 		{
 			if (EventType != InputEventType.UI_Invoke)
 			{
