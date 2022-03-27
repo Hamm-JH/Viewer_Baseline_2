@@ -54,7 +54,7 @@ namespace Management.Events
 		/// 클릭 이벤트 생성자
 		/// </summary>
 		/// <param name="_eventType"></param>
-		public EventData_Input(InputEventType _eventType, 
+		public EventData_Input(InputEventType _eventType,
 			int _btn, Vector3 _mousePos,
 			Camera _camera, GraphicRaycaster _graphicRaycaster,
 			UnityEvent<GameObject> _event)
@@ -88,6 +88,7 @@ namespace Management.Events
 			m_isPassAPI = true;
 		}
 
+		#region --
 		/// <summary>
 		/// 드래그 이벤트 생성자
 		/// </summary>
@@ -97,20 +98,20 @@ namespace Management.Events
 		/// <param name="_camera"></param>
 		/// <param name="_grRaycaster"></param>
 		/// <param name="_event"></param>
-		public EventData_Input(InputEventType _eventType,
-			int _btn, Vector2 _delta,
-			Camera _camera, GraphicRaycaster _grRaycaster,
-			UnityEvent<int, Vector2> _event)
-		{
-			StatusCode = Status.Ready;
+		//public EventData_Input(InputEventType _eventType,
+		//	int _btn, Vector2 _delta,
+		//	Camera _camera, GraphicRaycaster _grRaycaster,
+		//	UnityEvent<int, Vector2> _event)
+		//{
+		//	StatusCode = Status.Ready;
 
-			EventType = _eventType;
-			m_camera = _camera;
-			m_graphicRaycaster = _grRaycaster;
-			m_btn = _btn;
-			m_delta = _delta;
-			m_dragEvent = _event;
-		}
+		//	EventType = _eventType;
+		//	m_camera = _camera;
+		//	m_graphicRaycaster = _grRaycaster;
+		//	m_btn = _btn;
+		//	m_delta = _delta;
+		//	m_dragEvent = _event;
+		//}
 
 		/// <summary>
 		/// 포커스 이벤트 생성자
@@ -135,6 +136,7 @@ namespace Management.Events
 			m_focusDelta = _delta;
 			m_focusEvent = _event;
 		}
+		#endregion
 
 		/// <summary>
 		/// 키 이벤트 생성자
@@ -144,56 +146,58 @@ namespace Management.Events
 		/// <param name="_camera"></param>
 		/// <param name="_grRaycaster"></param>
 		/// <param name="_event"></param>
-		public EventData_Input(InputEventType _eventType,
-			List<KeyData> _kData,
-			Camera _camera, GraphicRaycaster _grRaycaster,
-			UnityEvent<List<KeyData>> _event)
-		{
-			StatusCode = Status.Ready;
+		//public EventData_Input(InputEventType _eventType,
+		//	List<KeyData> _kData,
+		//	Camera _camera, GraphicRaycaster _grRaycaster,
+		//	UnityEvent<List<KeyData>> _event)
+		//{
+		//	StatusCode = Status.Ready;
 
-			EventType = _eventType;
-			m_camera = _camera;
-			m_graphicRaycaster = _grRaycaster;
-			m_keys = _kData;
-			m_keyEvent = _event;
-		}
+		//	EventType = _eventType;
+		//	m_camera = _camera;
+		//	m_graphicRaycaster = _grRaycaster;
+		//	m_keys = _kData;
+		//	m_keyEvent = _event;
+		//}
 
 		public override void OnProcess(List<ModuleCode> _mList)
 		{
 			switch(EventType)
 			{
 				case InputEventType.Input_clickDown:
-					// 객체 선택 단계에선 code :: pass, skip
 					{
-						Status _success = Status.Update;
-						Status _fail = Status.Update;
+					// 객체 선택 단계에선 code :: pass, skip
+					//{
+					//	Status _success = Status.Update;
+					//	Status _fail = Status.Update;
 
-						//Debug.Log(EventType.ToString());
-						Elements = new List<IInteractable>();
-						m_selected3D = null;
-						m_hit = default(RaycastHit);
-						m_results = new List<RaycastResult>();
+					//	//Debug.Log(EventType.ToString());
+					//	Elements = new List<IInteractable>();
+					//	m_selected3D = null;
+					//	m_hit = default(RaycastHit);
+					//	m_results = new List<RaycastResult>();
 
-						Get_Collect3DObject(m_clickPosition, out m_selected3D, out m_hit, out m_results);
+					//	Get_Collect3DObject(m_clickPosition, out m_selected3D, out m_hit, out m_results);
 
-						if (Selected3D != null)
-						{
-							IInteractable interactable;
-							if (Selected3D.TryGetComponent<IInteractable>(out interactable))
-							{
-								Elements.Add(interactable);
-								//Element = interactable;
-								StatusCode = _success;
-								return;
-							}
-						}
+					//	if (Selected3D != null)
+					//	{
+					//		IInteractable interactable;
+					//		if (Selected3D.TryGetComponent<IInteractable>(out interactable))
+					//		{
+					//			Elements.Add(interactable);
+					//			//Element = interactable;
+					//			StatusCode = _success;
+					//			return;
+					//		}
+					//	}
 
-						Elements = null;
-						StatusCode = _fail;
-					}
+					//	Elements = null;
+					//	StatusCode = _fail;
+					//}
 					// 데칼 배치 단계에선 code :: skip
 
 					return;
+					}
 
 				case InputEventType.Input_clickSuccessUp:
 					// 객체 선택 단계에선 code :: pass, drop
@@ -299,36 +303,42 @@ namespace Management.Events
 					{
 						// 객체 선택 단계에선 code :: Update
 						// 데칼 배치 단계에선 code :: Update
-						StatusCode = Status.Update;
+						//StatusCode = Status.Update;
 					}
 					break;
 
 				case InputEventType.Input_drag:
-					// 객체 선택 단계에선 code :: Update
-					// 데칼 배치 단계에선 code :: Update
-					StatusCode = Status.Update;
+					{
+						// 객체 선택 단계에선 code :: Update
+						// 데칼 배치 단계에선 code :: Update
+						//StatusCode = Status.Update;
+					}
 					break;
 
 				case InputEventType.Input_focus:
-					// 객체 선택 단계에선 code :: Update
-					// 데칼 배치 단계에선 code :: Update
-					StatusCode = Status.Update;
+					{
+						// 객체 선택 단계에선 code :: Update
+						// 데칼 배치 단계에선 code :: Update
+						//StatusCode = Status.Update;
+					}
 					break;
 
 				case InputEventType.Input_key:
-					// 객체 선택 단계에선 code :: Update
-					// 데칼 배치 단계에선 code :: Update
+					{
+						//// 객체 선택 단계에선 code :: Update
+						//// 데칼 배치 단계에선 code :: Update
 
-					// KeyData는 동작 구조 파악을 위해 조건을 명시함. 실제 처리는 EventManager에서 처리
-					// KeyData 리스트가 null 또는 0이 아닌 경우
-					if(m_keys != null && m_keys.Count != 0)
-					{
-						StatusCode = Status.Update;
-					}
-					// KeyData 리스트가 null인 경우
-					else
-					{
-						StatusCode = Status.Update;
+						//// KeyData는 동작 구조 파악을 위해 조건을 명시함. 실제 처리는 EventManager에서 처리
+						//// KeyData 리스트가 null 또는 0이 아닌 경우
+						//if(m_keys != null && m_keys.Count != 0)
+						//{
+						//	StatusCode = Status.Update;
+						//}
+						//// KeyData 리스트가 null인 경우
+						//else
+						//{
+						//	StatusCode = Status.Update;
+						//}
 					}
 					break;
 			}
@@ -450,84 +460,86 @@ namespace Management.Events
 
 				case InputEventType.Input_drag:
 					{
-						PlatformCode pCode = MainManager.Instance.Platform;
-						if(Platforms.IsDemoAdminViewer(pCode))
-						{
-							if(_sEvents.ContainsKey(InputEventType.Input_clickDown))
-							{
-								List<RaycastResult> hits = _sEvents[InputEventType.Input_clickDown].Results;
+						//PlatformCode pCode = MainManager.Instance.Platform;
+						//if(Platforms.IsDemoAdminViewer(pCode))
+						//{
+						//	if(_sEvents.ContainsKey(InputEventType.Input_clickDown))
+						//	{
+						//		List<RaycastResult> hits = _sEvents[InputEventType.Input_clickDown].Results;
 
-								if(IsClickOnKeymap(hits))
-								{
-									ContentManager.Instance.Input_KeymapDrag(m_btn, m_delta);
-								}
-								else
-								{
-									m_dragEvent.Invoke(m_btn, m_delta);
-								}
-							}
-							else
-							{
-								m_dragEvent.Invoke(m_btn, m_delta);
-							}
-						}
+						//		if(IsClickOnKeymap(hits))
+						//		{
+						//			ContentManager.Instance.Input_KeymapDrag(m_btn, m_delta);
+						//		}
+						//		else
+						//		{
+						//			m_dragEvent.Invoke(m_btn, m_delta);
+						//		}
+						//	}
+						//	else
+						//	{
+						//		m_dragEvent.Invoke(m_btn, m_delta);
+						//	}
+						//}
 					}
 					break;
 
 				case InputEventType.Input_focus:
 					{
-						m_selected3D = null;
-						m_hit = default(RaycastHit);
-						m_results = new List<RaycastResult>();
+						//m_selected3D = null;
+						//m_hit = default(RaycastHit);
+						//m_results = new List<RaycastResult>();
 
-						Get_Collect3DObject(Input.mousePosition, out m_selected3D, out m_hit, out m_results);
+						//Get_Collect3DObject(Input.mousePosition, out m_selected3D, out m_hit, out m_results);
 
-						if (Selected3D != null)
-						{
-							m_focusEvent.Invoke(m_focus, m_focusDelta);
-						}
-						// 빈 공간을 누른 경우
-						else if (m_results.Count == 0)
-						{
-							m_focusEvent.Invoke(m_focus, m_focusDelta);
-						}
-						// UI 객체를 누른 경우 m_results.Count != 0
-						else
-						{
-							ContentManager.Instance.Input_KeymapFocus(m_focus, m_focusDelta);
-							//if (IsClickOnKeymap(_sEvents[InputEventType.Input_clickDown].Results))
-							//{
-							//}
-						}
+						//if (Selected3D != null)
+						//{
+						//	m_focusEvent.Invoke(m_focus, m_focusDelta);
+						//}
+						//// 빈 공간을 누른 경우
+						//else if (m_results.Count == 0)
+						//{
+						//	m_focusEvent.Invoke(m_focus, m_focusDelta);
+						//}
+						//// UI 객체를 누른 경우 m_results.Count != 0
+						//else
+						//{
+						//	ContentManager.Instance.Input_KeymapFocus(m_focus, m_focusDelta);
+						//	//if (IsClickOnKeymap(_sEvents[InputEventType.Input_clickDown].Results))
+						//	//{
+						//	//}
+						//}
 					}
 					break;
 
 				case InputEventType.Input_key:
-					m_keyEvent.Invoke(m_keys);
+					{
+						//m_keyEvent.Invoke(m_keys);
+					}
 					break;
 			}
 		}
 
-		/// <summary>
-		/// AdminViewer 키맵 선택 이벤트
-		/// </summary>
-		private bool IsClickOnKeymap(List<RaycastResult> _hits)
-		{
-			bool result = false;
+		///// <summary>
+		///// AdminViewer 키맵 선택 이벤트
+		///// </summary>
+		//protected bool IsClickOnKeymap(List<RaycastResult> _hits)
+		//{
+		//	bool result = false;
 
-			if(_hits.Count != 0)
-			{
-				_hits.ForEach(x =>
-				{
-					if(x.gameObject.name.Contains("Keymap"))
-					{
-						result = true;
-					}
-				});
-			}
+		//	if(_hits.Count != 0)
+		//	{
+		//		_hits.ForEach(x =>
+		//		{
+		//			if(x.gameObject.name.Contains("Keymap"))
+		//			{
+		//				result = true;
+		//			}
+		//		});
+		//	}
 
-			return result;
-		}
+		//	return result;
+		//}
 
 		//#endregion
 
@@ -539,7 +551,7 @@ namespace Management.Events
 		/// <param name="_mousePos"></param>
 		/// <param name="obj"></param>
 		/// <param name="_hit"></param>
-		private void Get_Collect3DObject(Vector3 _mousePos, out GameObject obj, out RaycastHit _hit, out List<RaycastResult> _results)
+		protected void Get_Collect3DObject(Vector3 _mousePos, out GameObject obj, out RaycastHit _hit, out List<RaycastResult> _results)
 		{
 			obj = null;
 
@@ -605,12 +617,6 @@ namespace Management.Events
 
 			return results;
 		}
-
-		
-
-
-
-
 
 		#endregion
 	}

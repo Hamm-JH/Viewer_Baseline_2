@@ -36,7 +36,7 @@ namespace Module.UI
 			}
 			else if(Platforms.IsBridgePlatform(pCode))
 			{
-				Debug.LogError("bridge part name setting");
+				name = Platform.Bridge.Bridges.GetName(_value);
 			}
 
 			TitData.pName.text = name;

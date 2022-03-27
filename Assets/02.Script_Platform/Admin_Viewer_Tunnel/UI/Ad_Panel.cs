@@ -257,7 +257,7 @@ namespace AdminViewer.UI
 			}
 			else if (Platforms.IsBridgePlatform(pCode))
 			{
-				Debug.LogError("bridge part name setting");
+				result = Platform.Bridge.Bridges.GetName(_value);
 			}
 
 			return result;

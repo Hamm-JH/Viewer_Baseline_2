@@ -72,12 +72,12 @@ namespace Definition.Data
 						_url = Application.absoluteURL;
 #endif
 				// TODO 확인 필요
-				//addressURL = "";	
+				addressURL = "/api/bridge/search?cdBridge=";	
 				dmgURL = "/api/bridge/damage/state?cdBridge=";
 				rcvURL = "/api/bridge/recover/state?cdBridge=";
 				// TODO 확인 필요
-				//historyURL = "";
-				//imageURL = "";
+				historyURL = "/api/bridge/damageDailyHistory?cdBridge=";
+				imageURL = "/api/common/file/dn?";
 			}
 
 			//-----

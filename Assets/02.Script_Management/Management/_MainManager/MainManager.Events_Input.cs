@@ -12,6 +12,7 @@ namespace Management
 	using Definition.Data;
 	using UnityEngine.Events;
 	using UnityEngine.EventSystems;
+	using Management.Events.Inputs;
 
 	/// <summary>
 	/// 컨텐츠의 핵심 데이터를 관리하는 관리자 클래스
@@ -113,6 +114,17 @@ namespace Management
 					_event: main.cameraExecuteEvents.selectEvent
 					));
 			}
+			else if(type == InputEventType.Input_clickFailureUp)
+			{
+				EventManager.Instance.OnEvent(new Events.Inputs.Event_ClickFailureUp(
+					_eType: type,
+					_btn: btn,
+					_mousePos: _mousePos,
+					_camera: main.MainCamera,
+					_grRaycaster: main.Content._GrRaycaster,
+					_event: main.cameraExecuteEvents.selectEvent
+					));
+			}
 			else
 			{
 				EventManager.Instance.OnEvent(new Events.EventData_Input(
@@ -141,7 +153,7 @@ namespace Management
 		public void OnDrag(InputEventType type, int btn, Vector2 _delta)
 		{
 			// 카메라의 드래그 이벤트 실행
-			EventManager.Instance.OnEvent(new Events.EventData_Input(
+			EventManager.Instance.OnEvent(new Event_Drag(
 				_eventType: type,
 				_btn: btn,
 				_delta: _delta,
@@ -149,6 +161,15 @@ namespace Management
 				_grRaycaster: main.Content._GrRaycaster,
 				_event: main.cameraExecuteEvents.dragEvent
 				));
+
+			//EventManager.Instance.OnEvent(new Events.EventData_Input(
+			//	_eventType: type,
+			//	_btn: btn,
+			//	_delta: _delta,
+			//	_camera: main.MainCamera,
+			//	_grRaycaster: main.Content._GrRaycaster,
+			//	_event: main.cameraExecuteEvents.dragEvent
+			//	));
 		}
 
 #endregion
@@ -163,7 +184,7 @@ namespace Management
 		public void OnFocus(InputEventType type, Vector3 _focus, float _delta)
 		{
 			// 카메라의 포커스 이벤트 실행
-			EventManager.Instance.OnEvent(new Events.EventData_Input(
+			EventManager.Instance.OnEvent(new Event_Focus(
 				_eventType: type,
 				_focus: _focus,
 				_delta: _delta,
@@ -172,6 +193,15 @@ namespace Management
 				_event: main.cameraExecuteEvents.focusEvent
 				));
 			//main.cameraExecuteEvents.focusEvent.Invoke(_focus, _delta);
+
+			//EventManager.Instance.OnEvent(new Events.EventData_Input(
+			//	_eventType: type,
+			//	_focus: _focus,
+			//	_delta: _delta,
+			//	_camera: main.MainCamera,
+			//	_grRaycaster: main.Content._GrRaycaster,
+			//	_event: main.cameraExecuteEvents.focusEvent
+			//	));
 		}
 
 #endregion
@@ -187,13 +217,21 @@ namespace Management
 			//_kData.ForEach(x => Debug.Log($"state : {x.m_keyState.ToString()}, key : {x.m_keyCode.ToString()}"));
 
 			// 키 입력 이벤트 실행
-			EventManager.Instance.OnEvent(new Events.EventData_Input(
+			EventManager.Instance.OnEvent(new Event_Key(
 				_eventType: type,
 				_kData: _kData,
 				_camera: main.MainCamera,
 				_grRaycaster: main.Content._GrRaycaster,
 				_event: main.cameraExecuteEvents.keyEvent
 				));
+
+			//EventManager.Instance.OnEvent(new Events.EventData_Input(
+			//	_eventType: type,
+			//	_kData: _kData,
+			//	_camera: main.MainCamera,
+			//	_grRaycaster: main.Content._GrRaycaster,
+			//	_event: main.cameraExecuteEvents.keyEvent
+			//	));
 		}
 
 #endregion

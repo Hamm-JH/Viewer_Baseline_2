@@ -32,7 +32,8 @@ namespace Definition
 		{
 			switch(_pCode)
 			{
-				case PlatformCode.WebGL_AdminViewer:
+				case PlatformCode.WebGL_AdminViewer_Tunnel:
+				case PlatformCode.WebGL_AdminViewer_Bridge:
 				case PlatformCode.PC_Viewer_Tunnel:
 				case PlatformCode.PC_Viewer_Bridge:
 					return true;
@@ -45,7 +46,7 @@ namespace Definition
 		{
 			switch(_pCode)
 			{
-				case PlatformCode.WebGL_AdminViewer:
+				case PlatformCode.WebGL_AdminViewer_Tunnel:
 				case PlatformCode.PC_Viewer_Tunnel:
 					return true;
 			}
@@ -57,6 +58,7 @@ namespace Definition
 		{
 			switch(_pCode)
 			{
+				case PlatformCode.WebGL_AdminViewer_Bridge:
 				case PlatformCode.PC_Viewer_Bridge:
 					return true;
 			}
@@ -80,7 +82,8 @@ namespace Definition
 		{
 			switch(_pCode)
 			{
-				case PlatformCode.WebGL_AdminViewer:
+				case PlatformCode.WebGL_AdminViewer_Bridge:
+				case PlatformCode.WebGL_AdminViewer_Tunnel:
 					return true;
 			}
 
@@ -91,7 +94,8 @@ namespace Definition
 		{
 			switch(_pCode)
 			{
-				case PlatformCode.WebGL_AdminViewer:
+				case PlatformCode.WebGL_AdminViewer_Bridge:
+				case PlatformCode.WebGL_AdminViewer_Tunnel:
 				case PlatformCode.PC_Viewer_Bridge:
 				case PlatformCode.PC_Viewer_Tunnel:
 					return true;

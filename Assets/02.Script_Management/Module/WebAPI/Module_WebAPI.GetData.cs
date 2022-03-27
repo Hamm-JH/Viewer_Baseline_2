@@ -7,6 +7,7 @@ namespace Module.WebAPI
 	using Data.API;
 	using Definition;
 	using Definition._Issue;
+	using Management;
 	using Newtonsoft.Json.Linq;
 	using System.Data;
 	using UnityEngine.Events;
@@ -80,20 +81,53 @@ namespace Module.WebAPI
 
 				if(jArr.Count > 0)
 				{
-					data.fgUF001 = jArr[0].SelectToken("fgUF001").ToString();
-					data.fgLM001 = jArr[0].SelectToken("fgLM001").ToString();
-					data.nmAddress = jArr[0].SelectToken("nmAddress").ToString();
-					data.nmTunnel = jArr[0].SelectToken("nmTunnel").ToString();
+					string fgUF001 = "";
+					string fgLM001 = "";
+					string nmAddress = "";
+					string nmTunnel = "";
+					string mp_fgroup = "";
+					string mp_fid = "";
+					string mp_ftype = "";
 
-					JArray mp = JArray.Parse(jArr[0].SelectToken("files").ToString());
-
-					data.mp_fgroup = jArr[0].SelectToken("fgroup").ToString();
-
-					if(mp.Count > 0)
+					PlatformCode pCode = MainManager.Instance.Platform;
+					if(Platforms.IsTunnelPlatform(pCode))
 					{
-						data.mp_fid = mp[0].SelectToken("fid").ToString();
-						data.mp_ftype = mp[0].SelectToken("ftype").ToString();
-						//data.mp_fgroup = mp[0].SelectToken("filename").ToString();
+						fgUF001 = "fgUF001";
+						fgLM001 = "fgLM001";
+						nmAddress = "nmAddress";
+						nmTunnel = "nmTunnel";
+						mp_fgroup = "fgroup";
+						mp_fid = "fid";
+						mp_ftype = "ftype";
+					}
+					else if(Platforms.IsBridgePlatform(pCode))
+					{
+						fgUF001 = "fgUS001";
+						fgLM001 = "fgPO001";
+						nmAddress = "nmAddress";
+						nmTunnel = "nmBridge";
+						mp_fgroup = "fgroup";
+						mp_fid = "fid";
+						mp_ftype = "ftype";
+					}
+
+					data.fgUF001 = jArr[0].SelectToken(fgUF001).ToString();		// 터널 형태
+					data.fgLM001 = jArr[0].SelectToken(fgLM001).ToString();
+					data.nmAddress = jArr[0].SelectToken(nmAddress).ToString();
+					data.nmTunnel = jArr[0].SelectToken(nmTunnel).ToString();
+
+					if(jArr[0].SelectToken("files").ToString() != "")
+					{
+						JArray mp = JArray.Parse(jArr[0].SelectToken("files").ToString());
+
+						data.mp_fgroup = jArr[0].SelectToken(mp_fgroup).ToString();
+
+						if(mp.Count > 0)
+						{
+							data.mp_fid = mp[0].SelectToken(mp_fid).ToString();
+							data.mp_ftype = mp[0].SelectToken(mp_ftype).ToString();
+							//data.mp_fgroup = mp[0].SelectToken("filename").ToString();
+						}
 					}
 				}
 			}

@@ -32,7 +32,6 @@ namespace Management.Events
 				case InputEventType.API_SelectObject:
 				case InputEventType.API_SelectIssue:
 					{
-						Status _success = Status.Skip;
 
 						EventManager.Instance.OnEvent(new EventData_Input(
 							_eventType: InputEventType.Input_clickSuccessUp,
@@ -40,6 +39,7 @@ namespace Management.Events
 							_event: m_clickEvent
 							));
 
+						Status _success = Status.Skip;
 						StatusCode = _success;
 					} 
 					break;
@@ -52,6 +52,14 @@ namespace Management.Events
 			{
 				// 스킵
 				case InputEventType.API_SelectObject:
+				case InputEventType.API_SelectIssue:
+					{
+						EventManager.Instance.OnEvent(new EventData_Input(
+							_eventType: InputEventType.Input_clickSuccessUp,
+							_obj: m_obj,
+							_event: m_clickEvent
+							));
+					}
 					break;
 			}
 		}

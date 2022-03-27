@@ -76,7 +76,14 @@ namespace Management.Events.Inputs
 
 		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
-			throw new System.NotImplementedException();
+			if (_sEvents.ContainsKey(InputEventType.Input_clickDown))
+			{
+				_sEvents[InputEventType.Input_clickDown] = this;
+			}
+			else
+			{
+				_sEvents.Add(this.EventType, this);
+			}
 		}
 
 		private void CachingObject(GameObject _obj)

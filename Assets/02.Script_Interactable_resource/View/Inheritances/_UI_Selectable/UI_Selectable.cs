@@ -71,8 +71,6 @@ namespace View
 		public override void OnDeselect()
 		{
 			Debug.Log($"OnDeselect : {this.name}");
-
-
 		}
 
 		public override void OnSelect()

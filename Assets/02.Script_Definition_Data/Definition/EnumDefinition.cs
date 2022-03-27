@@ -14,7 +14,8 @@ namespace Definition
 
 		WebGL_Template1 = 0x10,
 		WebGL_Template2 = 0x11,
-		WebGL_AdminViewer = 0x12,
+		WebGL_AdminViewer_Tunnel = 0x12,
+		WebGL_AdminViewer_Bridge = 0x13,
 
 		Mobile_Template1 = 0x20,
 		Mobile_Template2 = 0x21,

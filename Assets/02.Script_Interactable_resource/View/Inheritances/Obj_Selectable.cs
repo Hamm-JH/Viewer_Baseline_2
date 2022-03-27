@@ -236,6 +236,27 @@ namespace View
 					List<GameObject> objs = Targets;
 					foreach (GameObject obj in objs)
 					{
+						// Mode_Hide의 경우에는, 숨김 대상 제외하고 다른 객체들은 모두 현재 알파값 가짐
+						// Mode_Hide ? Hide :: 0.1f, NotHide :: alpha
+						// Mode_Isolate의 경우에는, 숨김 대상은 현재 알파값 가짐, 숨김 제외대상은 0.1f
+						// Mode_Isolate ?
+
+						// 카르노맵 정렬 결과
+						// _isHide :: false인 경우에는 모두 color.a 적용
+						// _isHide :: true인 경우에는 모두 a :: 0.1f 적용
+
+						float hideValue = 0f;
+						bool isOn = true;
+						if (_uiType == UIEventType.Mode_Hide_Off || _uiType == UIEventType.Mode_Isolate_Off)
+						{
+							hideValue = 0f;
+							isOn = false;
+						}
+						else
+						{
+							hideValue = 0.1f;
+							isOn = true;
+						}
 
 						MeshRenderer render;
 						if (obj.TryGetComponent<MeshRenderer>(out render))
@@ -243,19 +264,55 @@ namespace View
 							Material mat = render.material;
 							Color colr = mat.color;
 
-							if(_isHide)
+							if (_isHide)
 							{
 								Materials.ToFadeMode(render);
-								Materials.Set(render, ColorType.Default1, 0.1f);
+
+								Materials.Set(render, ColorType.Default1, hideValue);
+
+								obj.SetActive(isOn);
 							}
 							else
 							{
-								Materials.ToOpaqueMode(render);
-								Materials.Set(render, ColorType.Default1, 1);
+								// TODO 매직넘버 투명 경계값 밖으로 빼기
+								if (colr.a > 0.8f)
+								{
+									Materials.ToOpaqueMode(render);
+								}
+								else
+								{
+									Materials.ToFadeMode(render);
+								}
+
+								Materials.Set(render, ColorType.Default1, colr.a);
 							}
 
 						}
 					}
+
+					//List<GameObject> objs = Targets;
+					//foreach (GameObject obj in objs)
+					//{
+
+					//	MeshRenderer render;
+					//	if (obj.TryGetComponent<MeshRenderer>(out render))
+					//	{
+					//		Material mat = render.material;
+					//		Color colr = mat.color;
+
+					//		if(_isHide)
+					//		{
+					//			Materials.ToFadeMode(render);
+					//			Materials.Set(render, ColorType.Default1, 0.1f);
+					//		}
+					//		else
+					//		{
+					//			Materials.ToOpaqueMode(render);
+					//			Materials.Set(render, ColorType.Default1, 1);
+					//		}
+
+					//	}
+					//}
 				}
 			}
 		}

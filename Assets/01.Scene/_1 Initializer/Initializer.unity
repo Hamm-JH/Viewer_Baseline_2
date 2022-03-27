@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -560,7 +560,6 @@ MonoBehaviour:
     m_moduleList: 
     m_pinModeObj: {fileID: 0}
     m_pinModePin: {fileID: 0}
-  cacheDownObj: {fileID: 0}
 --- !u!1 &902421342
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,8 +730,11 @@ MonoBehaviour:
     m_url: 
     m_baseURL: 
     m_modelURI: 
+    m_addressURI: 
     m_issueDmgURI: 
     m_issueRcvURI: 
+    m_imageURL: 
+    m_historyURL: 
     m_keyCode: 
   m_templateIndex: 2
   _templateDatas:
@@ -767,8 +769,11 @@ MonoBehaviour:
     m_url: 
     m_baseURL: 
     m_modelURI: http://wesmart.synology.me:45001/3dmodel/20211202-00000283.gltf
+    m_addressURI: 
     m_issueDmgURI: 
     m_issueRcvURI: 
+    m_imageURL: 
+    m_historyURL: 
     m_keyCode: 
   - m_platform: 50
     m_graphic: 0
@@ -801,8 +806,11 @@ MonoBehaviour:
     m_url: 
     m_baseURL: 
     m_modelURI: http://wesmart.synology.me:45000/3dmodel/20211102-00000066.gltf
+    m_addressURI: 
     m_issueDmgURI: 
     m_issueRcvURI: 
+    m_imageURL: 
+    m_historyURL: 
     m_keyCode: 
   - m_platform: 18
     m_graphic: 0
@@ -835,8 +843,48 @@ MonoBehaviour:
     m_url: 
     m_baseURL: 
     m_modelURI: http://wesmart.synology.me:45001/3dmodel/20211202-00000283.gltf
+    m_addressURI: 
     m_issueDmgURI: 
     m_issueRcvURI: 
+    m_imageURL: 
+    m_historyURL: 
+    m_keyCode: 
+  - m_platform: 19
+    m_graphic: 0
+    mouseData:
+      dragBoundary: 1.5
+      dragInvert: {x: 1, y: -1}
+      focusInvert: 1
+      clickBtnIndex: 0
+      dragBtnIndex: 1
+      bMaxOffsetDistance: 50
+      bOrbitSpeed: 15
+      bPanSpeed: 0.5
+      bZoomSpeed: 10
+    keyboardData:
+      keyFront: 119
+      keyBack: 115
+      keyLeft: 97
+      keyRight: 100
+      keyUp: 101
+      keyDown: 113
+      keyBoost: 304
+      keyCtrl: 306
+    cameraData:
+      bMaxOffsetDistance: 50
+      bOrbitSpeed: 15
+      bPanSpeed: 0.5
+      bZoomSpeed: 10
+    m_moduleList: 10000000
+    m_functionCode: 11000000
+    m_url: 
+    m_baseURL: 
+    m_modelURI: http://wesmart.synology.me:45001/3dmodel/20211202-00000283.gltf
+    m_addressURI: 
+    m_issueDmgURI: 
+    m_issueRcvURI: 
+    m_imageURL: 
+    m_historyURL: 
     m_keyCode: 
 --- !u!1 &1245156187
 GameObject:

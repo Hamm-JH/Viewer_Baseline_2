@@ -140,7 +140,7 @@ namespace Definition._Issue
 					}
 					else if(Platforms.IsBridgePlatform(pCode))
 					{
-						Debug.LogError("Bridge Code to name Set");
+						result = Platform.Bridge.Bridges.GetName(partCode);
 					}
 				}
 
@@ -217,50 +217,169 @@ namespace Definition._Issue
 
 		public void SetDmg(JToken _token)
 		{
-			IssueOrderCode       =  _token.SelectToken("cdTunnelDamaged").ToString();
-			CdBridge             =  _token.SelectToken("cdTunnel").ToString();
-			CdBridgeParts        =  _token.SelectToken("cdTunnelParts").ToString();
-			NmUser               =   _token.SelectToken("nmUser").ToString();
-			DcMemberSurface      =   _token.SelectToken("dcDamageMemberSurface").ToString();
-			_DcLocation          =   _token.SelectToken("dcLocation").ToString();
-			_IssueCode           =   _token.SelectToken("fgDA001").ToString();
+			string kIssueOrderCode = "";
+			string kCdBridge			= "";
+			string kCdBridgeParts		= "";
+			string kNmUser				= "";
+			string kDcMemberSurface		= "";
+			string k_DcLocation			= "";
+			string k_IssueCode			= "";
+
+			string kYnRecover			= "";
+			string kIssueStatus			= "";
+			string k_PositionVector		= "";
+			string kDateDmg				= "";
+			string kWidth				= "";
+			string kHeight				= "";
+			string kDepth				= "";
+			string kDmgDescription		= "";
+
+			PlatformCode pCode = MainManager.Instance.Platform;
+			if(Platforms.IsTunnelPlatform(pCode))
+			{
+				kIssueOrderCode     = "cdTunnelDamaged";
+				kCdBridge			= "cdTunnel";
+				kCdBridgeParts		= "cdTunnelParts";
+				kNmUser				= "nmUser";
+				kDcMemberSurface	= "dcDamageMemberSurface";
+				k_DcLocation		= "dcLocation";
+				k_IssueCode			= "fgDA001";
+
+				kYnRecover			= "";
+				kIssueStatus		= "dcGrade";
+				k_PositionVector	= "dcPinLocation";
+				kDateDmg			= "dtCheck";
+				kWidth				= "noDamageWidth";
+				kHeight				= "noDamageHeight";
+				kDepth				= "noDamageDepth";
+				kDmgDescription		= "dcRemark";
+			}
+			else if(Platforms.IsBridgePlatform(pCode))
+			{
+				kIssueOrderCode     = "cdBridgeDamaged";
+				kCdBridge           = "cdBridge";
+				kCdBridgeParts      = "cdBridgeParts";
+				kNmUser             = "nmUser";
+				kDcMemberSurface    = "dcDamageMemberSurface";
+				k_DcLocation        = "dcLocation";
+				k_IssueCode         = "fgDA001";
+
+				kYnRecover          = "";
+				kIssueStatus        = "dcGrade";
+				k_PositionVector    = "dcPinLocation";
+				kDateDmg            = "dtCheck";
+				kWidth              = "noDamageWidth";
+				kHeight             = "noDamageHeight";
+				kDepth              = "noDamageDepth";
+				kDmgDescription     = "dcRemark";
+			}
+
+			IssueOrderCode       =  _token.SelectToken(kIssueOrderCode).ToString();
+			CdBridge             =  _token.SelectToken(kCdBridge).ToString();
+			CdBridgeParts        =  _token.SelectToken(kCdBridgeParts).ToString();
+			NmUser               =   _token.SelectToken(kNmUser).ToString();
+			DcMemberSurface      =   _token.SelectToken(kDcMemberSurface).ToString();
+			_DcLocation          =   _token.SelectToken(k_DcLocation).ToString();
+			_IssueCode           =   _token.SelectToken(k_IssueCode).ToString();
 			//DcMemberSurface	= parseString(ParseCode.Surface, _token.SelectToken(JSON.IssueKey.dcDamageMemberSurface.ToString()).ToString());
 			//DcLocation			=      int.Parse(_token.SelectToken(JSON.IssueKey.dcLocation.ToString()).ToString());
 			//IssueCode			=       parseIssueCode(_token.SelectToken(JSON.IssueKey.fgDA001.ToString()).ToString());
 			YnRecover            = "";
-			IssueStatus          =   _token.SelectToken("dcGrade").ToString();
-			_PositionVector      =  _token.SelectToken("dcPinLocation").ToString();
-			DateDmg          = _token.SelectToken("dtCheck").ToString();
-
-			Width                =   _token.SelectToken("noDamageWidth").ToString();
-			Height               =   _token.SelectToken("noDamageHeight").ToString();
-			Depth                =   _token.SelectToken("noDamageDepth").ToString();
-			DmgDescription          =   _token.SelectToken("dcRemark").ToString();
+			IssueStatus          =   _token.SelectToken(kIssueStatus).ToString();
+			_PositionVector      =  _token.SelectToken(k_PositionVector).ToString();
+			DateDmg          = _token.SelectToken(kDateDmg).ToString();
+			Width                =   _token.SelectToken(kWidth).ToString();
+			Height               =   _token.SelectToken(kHeight).ToString();
+			Depth                =   _token.SelectToken(kDepth).ToString();
+			DmgDescription          =   _token.SelectToken(kDmgDescription).ToString();
 		}
 
 		public void SetRcv(JToken _token)
 		{
-			IssueOrderCode   = _token.SelectToken("cdTunnelRecover").ToString();
-			CdBridge         = _token.SelectToken("cdTunnel").ToString();
-			CdBridgeParts    = _token.SelectToken("cdTunnelParts").ToString();
-			NmUser           = _token.SelectToken("nmUser").ToString();
-			DcMemberSurface  = _token.SelectToken("dcDamageMemberSurface").ToString();
-			_DcLocation      = _token.SelectToken("dcLocation").ToString();
-			_IssueCode       = _token.SelectToken("fgDA001").ToString();
+			string kIssueOrderCode = "";
+			string kCdBridge		= "";
+			string kCdBridgeParts	= "";
+			string kNmUser			= "";
+			string kDcMemberSurface	= "";
+			string k_DcLocation		= "";
+			string k_IssueCode		= "";
+			
+			string kYnRecover		= "";
+			string k_PositionVector	= "";
+			string kIssueStatus		= "";
+			string kDateRcvStart	= "";
+			string kDateRcvEnd		= "";
+			string kWidth			= "";
+			string kHeight			= "";
+			string kDepth			= "";
+			string kDmgDescription	= "";
+			string kRcvDescription	= "";
+
+			PlatformCode pCode = MainManager.Instance.Platform;
+			if (Platforms.IsTunnelPlatform(pCode))
+			{
+				kIssueOrderCode		= "cdTunnelRecover";
+				kCdBridge			= "cdTunnel";
+				kCdBridgeParts		= "cdTunnelParts";
+				kNmUser				= "nmUser";
+				kDcMemberSurface	= "dcDamageMemberSurface";
+				k_DcLocation		= "dcLocation";
+				k_IssueCode			= "fgDA001";
+									
+				kYnRecover			= "ynRecover";
+				k_PositionVector	= "dcPinLocation";
+				kIssueStatus		= "";
+				kDateRcvStart		= "dtStart";
+				kDateRcvEnd			= "dtEnd";
+				kWidth				= "noDamageWidth";
+				kHeight				= "noDamageHeight";
+				kDepth				= "noDamageDepth";
+				kDmgDescription		= "dcRemark";
+				kRcvDescription     = "dcRecover";
+			}
+			else if (Platforms.IsBridgePlatform(pCode))
+			{
+				kIssueOrderCode     = "cdBridgeRecover";
+				kCdBridge           = "cdBridge";
+				kCdBridgeParts      = "cdBridgeParts";
+				kNmUser             = "nmUser";
+				kDcMemberSurface    = "dcDamageMemberSurface";
+				k_DcLocation        = "dcLocation";
+				k_IssueCode         = "fgDA001";
+
+				kYnRecover          = "ynRecover";
+				k_PositionVector    = "dcPinLocation";
+				kIssueStatus        = "";
+				kDateRcvStart       = "dtStart";
+				kDateRcvEnd         = "dtEnd";
+				kWidth              = "noDamageWidth";
+				kHeight             = "noDamageHeight";
+				kDepth              = "noDamageDepth";
+				kDmgDescription     = "dcRemark";
+				kRcvDescription     = "dcRecover";
+			}
+
+			IssueOrderCode   = _token.SelectToken(kIssueOrderCode).ToString();
+			CdBridge         = _token.SelectToken(kCdBridge).ToString();
+			CdBridgeParts    = _token.SelectToken(kCdBridgeParts).ToString();
+			NmUser           = _token.SelectToken(kNmUser).ToString();
+			DcMemberSurface  = _token.SelectToken(kDcMemberSurface).ToString();
+			_DcLocation      = _token.SelectToken(k_DcLocation).ToString();
+			_IssueCode       = _token.SelectToken(k_IssueCode).ToString();
 			//DcMemberSurface  = parseString(ParseCode.Surface, _token.SelectToken(JSON.IssueKey.dcDamageMemberSurface.ToString()).ToString());
 			//DcLocation       = int.Parse(_token.SelectToken(JSON.IssueKey.dcLocation.ToString()).ToString());
 			//IssueCode        = parseIssueCode(_token.SelectToken(JSON.IssueKey.fgDA001.ToString()).ToString());
-			YnRecover        = _token.SelectToken("ynRecover").ToString();
-			_PositionVector  = _token.SelectToken("dcPinLocation").ToString();
+			YnRecover        = _token.SelectToken(kYnRecover).ToString();
+			_PositionVector  = _token.SelectToken(k_PositionVector).ToString();
 			IssueStatus      = "";
-			DateRcvStart     = _token.SelectToken("dtStart").ToString();
-			DateRcvEnd       = _token.SelectToken("dtEnd").ToString();
+			DateRcvStart     = _token.SelectToken(kDateRcvStart).ToString();
+			DateRcvEnd       = _token.SelectToken(kDateRcvEnd).ToString();
 
-			Width                =   _token.SelectToken("noDamageWidth").ToString();
-			Height               =   _token.SelectToken("noDamageHeight").ToString();
-			Depth                =   _token.SelectToken("noDamageDepth").ToString();
-			DmgDescription          =   _token.SelectToken("dcRemark").ToString();
-			RcvDescription       =   _token.SelectToken("dcRecover").ToString();
+			Width                =   _token.SelectToken(kWidth).ToString();
+			Height               =   _token.SelectToken(kHeight).ToString();
+			Depth                =   _token.SelectToken(kDepth).ToString();
+			DmgDescription          =   _token.SelectToken(kDmgDescription).ToString();
+			RcvDescription       =   _token.SelectToken(kRcvDescription).ToString();
 		}
 	}
 }

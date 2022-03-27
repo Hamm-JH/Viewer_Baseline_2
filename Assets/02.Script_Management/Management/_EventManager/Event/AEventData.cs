@@ -88,5 +88,26 @@ namespace Management.Events
 				return false;
 			}
 		}
+
+		/// <summary>
+		/// AdminViewer 키맵 선택 이벤트
+		/// </summary>
+		protected bool IsClickOnKeymap(List<RaycastResult> _hits)
+		{
+			bool result = false;
+
+			if (_hits.Count != 0)
+			{
+				_hits.ForEach(x =>
+				{
+					if (x.gameObject.name.Contains("Keymap"))
+					{
+						result = true;
+					}
+				});
+			}
+
+			return result;
+		}
 	}
 }

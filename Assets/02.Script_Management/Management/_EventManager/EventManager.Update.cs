@@ -6,6 +6,7 @@ namespace Management
 {
 	using Definition;
 	using Management.Events;
+	using Management.Events.Inputs;
 	using System.Linq;
 
 	public partial class EventManager : IManager<EventManager>
@@ -21,34 +22,13 @@ namespace Management
 			{
 				case InputEventType.Input_clickDown:
 					{
-						// Caching
-						// clickDown 캐시 업데이트
-						if (_currEvent.Elements != null)
-						{
-							
-							//cacheDownObj = _currEvent.Elements.Last().Target;
-						}
-
-						if (EventStates.ContainsKey(InputEventType.Input_clickDown))
-						{
-							EventStates[InputEventType.Input_clickDown] = _currEvent;
-						}
-						else
-						{
-							EventStates.Add(_currEvent.EventType, _currEvent);
-						}
+						_currEvent.DoEvent(_sEvents);
 					}
 					break;
 
 				case InputEventType.Input_clickFailureUp:
 					{
-						// Caching
-						// ClickDown 캐시 삭제
-						if (EventStates.ContainsKey(InputEventType.Input_clickDown))
-						{
-							//cacheDownObj = null;
-							EventStates.Remove(InputEventType.Input_clickDown);
-						}
+						_currEvent.DoEvent(_sEvents);
 					}
 					break;
 
@@ -114,82 +94,25 @@ namespace Management
 
 				case InputEventType.Input_drag:
 					{
-						// 즉발 (Not caching)
-						// 클릭다운 개체가 있는가?
-						//if(_currEvent)
-						if (_currEvent.BtnIndex == 0)
-						{
-							if (_sEvents.ContainsKey(InputEventType.Input_clickDown))
-							{
-								// 클릭다운 개체가 UI를 안눌렀는가?
-								if (_sEvents[InputEventType.Input_clickDown].Results.Count == 0)
-								{
-									_currEvent.DoEvent(_sEvents);
-								}
-								else
-								{
-									_currEvent.DoEvent(_sEvents);
-								}
-							}
-						}
-						else if (_currEvent.BtnIndex == 1)
-						{
-							if (_sEvents.ContainsKey(InputEventType.Input_clickDown))
-							{
-								// 클릭다운 개체가 UI를 안 눌렀는가?
-								if(_sEvents[InputEventType.Input_clickDown].Results.Count == 0)
-								{
-									_currEvent.DoEvent(_sEvents);
-								}
-								else
-								{
-									_currEvent.DoEvent(_sEvents);
-								}
-							}
-						}
+						_currEvent.DoEvent(_sEvents);
 					}
 					break;
 
 				case InputEventType.Input_focus:
 					{
-						// 즉발 (Not caching)
 						_currEvent.DoEvent(_sEvents);
 					}
 					break;
 
 				case InputEventType.Input_key:
 					{
-						EventData_Input _ev = (EventData_Input)_currEvent;
-
-						// 현재 입력된 키가 1개 이상일 경우
-						if (_ev.m_keys != null && _ev.m_keys.Count != 0)
-						{
-							// 키 데이터 업데이트
-							if (EventStates.ContainsKey(InputEventType.Input_key))
-							{
-								EventStates[InputEventType.Input_key] = _ev;
-							}
-							else
-							{
-								EventStates.Add(InputEventType.Input_key, _ev);
-							}
-						}
-						else
-						{
-							// 기존 저장된 키 지우기
-							if (EventStates.ContainsKey(InputEventType.Input_key))
-							{
-								EventStates.Remove(InputEventType.Input_key);
-							}
-						}
-
-						// 즉발 (Not caching)
 						_currEvent.DoEvent(_sEvents);
 					}
 					break;
 
 				case InputEventType.UI_Invoke:
 					{
+						//_currEvent.DoEvent(_sEvents);
 						if (!EventStates.ContainsKey(InputEventType.Input_clickSuccessUp)) return;
 						if (EventStates[InputEventType.Input_clickSuccessUp].Elements == null) return;
 
@@ -203,6 +126,9 @@ namespace Management
 					// 스킵됨
 				case InputEventType.API_SelectObject:
 				case InputEventType.API_SelectIssue:
+					{
+						_currEvent.DoEvent(_sEvents);
+					}
 					break;
 			}
 		}
@@ -221,7 +147,7 @@ namespace Management
 			// 키 입력이 있는 상태인가?
 			if (_sEvents.ContainsKey(InputEventType.Input_key))
 			{
-				EventData_Input _ev = (EventData_Input)_sEvents[InputEventType.Input_key];
+				Event_Key _ev = (Event_Key)_sEvents[InputEventType.Input_key];
 				kd = _ev.m_keys;
 			}
 
