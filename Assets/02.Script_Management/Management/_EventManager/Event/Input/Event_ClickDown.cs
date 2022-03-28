@@ -10,10 +10,10 @@ namespace Management.Events.Inputs
 	using UnityEngine.UI;
 	using View;
 
-	public class Event_ClickDown : AEventData
+	public class Event_ClickDown : EventData_Input
 	{
-		private Camera m_camera;
-		private GraphicRaycaster m_grRaycaster;
+		//private Camera m_camera;
+		//private GraphicRaycaster m_grRaycaster;
 		private Vector3 m_clickPosition;
 		private UnityEvent<GameObject> m_clickEvent;
 

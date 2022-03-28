@@ -125,9 +125,9 @@ namespace Management
 					_event: main.cameraExecuteEvents.selectEvent
 					));
 			}
-			else
+			else if(type == InputEventType.Input_clickSuccessUp)
 			{
-				EventManager.Instance.OnEvent(new Events.EventData_Input(
+				EventManager.Instance.OnEvent(new Events.Inputs.Event_ClickUp(
 						_eventType: type,
 						_btn: btn,
 						_mousePos: _mousePos,
@@ -135,6 +135,17 @@ namespace Management
 						_graphicRaycaster: main.Content._GrRaycaster,
 						_event: main.cameraExecuteEvents.selectEvent
 						));
+			}
+			else
+			{
+				//EventManager.Instance.OnEvent(new Events.EventData_Input(
+				//		_eventType: type,
+				//		_btn: btn,
+				//		_mousePos: _mousePos,
+				//		_camera: main.MainCamera,
+				//		_graphicRaycaster: main.Content._GrRaycaster,
+				//		_event: main.cameraExecuteEvents.selectEvent
+				//		));
 			}
 			// 필터링 (__추후 변수 추출)
 			//if(btn == 0)
@@ -192,16 +203,6 @@ namespace Management
 				_grRaycaster: main.Content._GrRaycaster,
 				_event: main.cameraExecuteEvents.focusEvent
 				));
-			//main.cameraExecuteEvents.focusEvent.Invoke(_focus, _delta);
-
-			//EventManager.Instance.OnEvent(new Events.EventData_Input(
-			//	_eventType: type,
-			//	_focus: _focus,
-			//	_delta: _delta,
-			//	_camera: main.MainCamera,
-			//	_grRaycaster: main.Content._GrRaycaster,
-			//	_event: main.cameraExecuteEvents.focusEvent
-			//	));
 		}
 
 #endregion

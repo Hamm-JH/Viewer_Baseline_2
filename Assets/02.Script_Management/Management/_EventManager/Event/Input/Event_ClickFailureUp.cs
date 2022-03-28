@@ -8,10 +8,10 @@ namespace Management.Events.Inputs
 	using UnityEngine.Events;
 	using UnityEngine.UI;
 
-	public class Event_ClickFailureUp : AEventData
+	public class Event_ClickFailureUp : EventData_Input
 	{
-		public Camera m_camera;
-		public GraphicRaycaster m_grRaycaster;
+		//public Camera m_camera;
+		//public GraphicRaycaster m_grRaycaster;
 		public Vector3 m_clickPosition;
 		UnityEvent<GameObject> m_clickEvent;
 

@@ -38,8 +38,8 @@ namespace Management
 						// 허공 선택시
 						// UI 선택시
 						// 3D 선택시
+						_currEvent.DoEvent(_sEvents);
 
-						
 
 						// 다중 선택 조건에 적용되는가?
 						if (isMultiCondition(_sEvents))

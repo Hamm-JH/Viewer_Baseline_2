@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Management.Events.UIs
+namespace Management.Events.Inputs
 {
 	using Definition;
+	using System.Linq;
 	using UnityEngine.Events;
+	using UnityEngine.EventSystems;
 	using View;
 
 	public class Event_SelectObject : AEventData
@@ -28,7 +30,56 @@ namespace Management.Events.UIs
 
 		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
-			
+			if (Elements != null)
+			{
+				GameObject obj = Elements.Last().Target;
+
+				Obj_Selectable sObj;
+				Issue_Selectable iObj;
+
+				if (obj.TryGetComponent<Obj_Selectable>(out sObj))
+				{
+					m_clickEvent.Invoke(Elements.Last().Target);
+					// TODO
+
+					// API로 접근한 개체가 실행하는 이벤트
+					// 키맵 카메라의 타겟 위치 변경
+					ContentManager.Instance.Input_SelectObject(Elements.Last().Target);
+
+					ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
+					//ContentManager.Instance.Toggle_ChildTabs(1);
+				}
+				else if (obj.TryGetComponent<Issue_Selectable>(out iObj))
+				{
+					ContentManager.Instance.Input_SelectObject(Elements.Last().Target);
+
+					m_clickEvent.Invoke(Elements.Last().Target);
+					ContentManager.Instance.OnSelect_Issue(Elements.Last().Target);
+					//ContentManager.Instance.Toggle_ChildTabs(1);
+				}
+			}
+			// 빈 공간을 선택한 경우
+			else
+			{
+				m_clickEvent.Invoke(null);
+				ContentManager.Instance.OnSelect_3D(null);
+				//// UI 선택의 결과가 0 이상인 경우
+				//if (Results.Count != 0)
+				//{
+				//	if (_sEvents.ContainsKey(InputEventType.Input_clickDown))
+				//	{
+				//		List<RaycastResult> hits = _sEvents[InputEventType.Input_clickDown].Results;
+
+				//		if (IsClickOnKeymap(hits))
+				//		{
+				//			ContentManager.Instance.Input_KeymapClick(m_clickPosition);
+				//		}
+				//	}
+				//}
+				//else
+				//{
+				//}
+			}
 		}
 
 		public override void OnProcess(List<ModuleCode> _mList)

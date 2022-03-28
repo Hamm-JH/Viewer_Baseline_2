@@ -86,11 +86,6 @@ namespace View
 			}
 		}
 
-		public override void OnDeselect<T>(T t)
-		{
-
-		}
-
 		public override void OnDeselect<T1, T2>(T1 t1, T2 t2)
 		{
 			if (!IsInteractable) return;

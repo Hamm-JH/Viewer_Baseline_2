@@ -1,17 +1,18 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace AdminViewer.Data
 {
 	using API;
+	using Definition;
 	using Management;
 	using Platform.Feature.Camera;
 
 	/// <summary>
-	/// TODO ÇÁ·ÎÁ§Æ®º°·Î ÇÒ´çµÇ¾î¾ß ÇÏ´Â µ¥ÀÌÅÍ¸¦ ¸ğ¾ÆµÎ´Â ÄÁÅ×ÀÌ³ÊÀÇ ¿øÇüÀ» Á¤ÀÇÇÑ´Ù.
-	/// ÇöÀç AdminViewer ±â¹İÀ¸·Î µ¥ÀÌÅÍ ÇÒ´çµÇ¾î ÀÖÀ¸¸ç, ÀÌ´Â ÃßÈÄ ScriptableObject·Î º¯°æµÇ¾î
-	/// ´ÜÀÏ ÀÎ½ºÅÏ½º·Î µ¿ÀÛÇÏµµ·Ï º¯°æÇÒ ¿¹Á¤ÀÌ´Ù.
+	/// TODO í”„ë¡œì íŠ¸ë³„ë¡œ í• ë‹¹ë˜ì–´ì•¼ í•˜ëŠ” ë°ì´í„°ë¥¼ ëª¨ì•„ë‘ëŠ” ì»¨í…Œì´ë„ˆì˜ ì›í˜•ì„ ì •ì˜í•œë‹¤.
+	/// í˜„ì¬ AdminViewer ê¸°ë°˜ìœ¼ë¡œ ë°ì´í„° í• ë‹¹ë˜ì–´ ìˆìœ¼ë©°, ì´ëŠ” ì¶”í›„ ScriptableObjectë¡œ ë³€ê²½ë˜ì–´
+	/// ë‹¨ì¼ ì¸ìŠ¤í„´ìŠ¤ë¡œ ë™ì‘í•˜ë„ë¡ ë³€ê²½í•  ì˜ˆì •ì´ë‹¤.
 	/// </summary>
 	[System.Serializable]
 	public class AContainer
@@ -22,7 +23,11 @@ namespace AdminViewer.Data
 
 		public void InitContainer()
 		{
-			MainManager.Instance.InitSubCameraResource(m_keymap.m_keymapCamera);
+			PlatformCode pCode = MainManager.Instance.Platform;
+			if(Platforms.IsDemoAdminViewer(pCode))
+			{
+				MainManager.Instance.InitSubCameraResource(m_keymap.m_keymapCamera);
+			}
 			//m_keymap.m_keymapCamera.gameObject.AddComponent<BIMCamera>();
 		}
 	}

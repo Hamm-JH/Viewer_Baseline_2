@@ -45,12 +45,12 @@ namespace Management.Events
 		protected RaycastHit m_hit = default(RaycastHit);
 		protected List<RaycastResult> m_results = new List<RaycastResult>();
 		// 마우스 버튼 번호
-		protected int m_btn;
+		//protected int m_btn;
 
 		public GameObject Selected3D { get => m_selected3D; set => m_selected3D=value; }
 		public RaycastHit Hit { get => m_hit; set => m_hit=value; }
 		public List<RaycastResult> Results { get => m_results; set => m_results=value; }
-		public int BtnIndex { get => m_btn; set => m_btn=value; }
+		//public int BtnIndex { get => m_btn; set => m_btn=value; }
 
 		//----------------------------------------------------------------------------------------------
 
@@ -64,17 +64,14 @@ namespace Management.Events
 
 
 		/// <summary>
-		/// 이벤트 처리 메서드
+		/// 이벤트 전처리 메서드
 		/// </summary>
 		public abstract void OnProcess(List<ModuleCode> _mList);
 
-
 		/// <summary>
-		/// 이벤트 내부처리 완료후 외부 이벤트 발산처리
+		/// 이벤트 후처리 메서드
 		/// </summary>
-		//public abstract void DoEvent();
-		//public abstract void DoEvent(List<GameObject> _objs);
-
+		/// <param name="_sEvents"></param>
 		public abstract void DoEvent(Dictionary<InputEventType, AEventData> _sEvents);
 		
 		public static bool IsEqual(AEventData A, AEventData B)
@@ -109,5 +106,54 @@ namespace Management.Events
 
 			return result;
 		}
+
+		/// <summary>
+		/// 이벤트를 추가한다.
+		/// </summary>
+		/// <typeparam name="K"></typeparam>
+		/// <typeparam name="V"></typeparam>
+		/// <param name="_key"> InputEventType </param>
+		/// <param name="_eData"> EventData </param>
+		/// <param name="_event"> [InputEventType, EventData] </param>
+		/// <param name="isMultiple"> 다중선택? </param>
+		public void AddEvent<K, V>(K _key, V _eData, Dictionary<K, V> _event, bool isMultiple = false) where V : AEventData
+		{
+			if (_event.ContainsKey(_key))
+			{
+				if (isMultiple)
+				{
+					_eData.Elements.ForEach(x => _event[_key].Elements.Add(x));
+				}
+				else
+				{
+					_event[_key] = _eData;
+				}
+			}
+			else
+			{
+				_event.Add(_key, _eData);
+			}
+		}
+
+		#region Check Module Method
+
+		/// <summary>
+		/// 모듈코드에서 PinMode가 존재하는가
+		/// </summary>
+		/// <param name="_mList"></param>
+		/// <returns></returns>
+		protected bool IsInPinMode(List<ModuleCode> _mList)
+		{
+			bool result = false;
+
+			if (_mList.Contains(ModuleCode.Work_Pinmode))
+			{
+				result = true;
+			}
+
+			return result;
+		}
+
+		#endregion
 	}
 }

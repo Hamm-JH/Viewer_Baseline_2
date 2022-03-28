@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 namespace Management.Events.Inputs
 {
-	public class Event_Key : AEventData
+	public class Event_Key : EventData_Input
 	{
-		private Camera m_camera;
-		private GraphicRaycaster m_grRaycaster;
+		//private Camera m_camera;
+		//private GraphicRaycaster m_grRaycaster;
 		public List<KeyData> m_keys;
 		UnityEvent<List<KeyData>> m_keyEvent;
 

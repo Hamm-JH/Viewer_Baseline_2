@@ -50,7 +50,7 @@ namespace View
 		/// 표면 버튼에 반응하는 변수
 		/// </summary>
 		[Header("Test Values")]
-		[SerializeField] string t_surfaceCode;
+		public string t_surfaceCode;
 
 		private void Start()
 		{
@@ -80,11 +80,6 @@ namespace View
 			ConditionalBranch(eventType);
 		}
 
-		public override void OnDeselect<T>(T t)
-		{
-
-		}
-
 		public override void OnDeselect<T1, T2>(T1 t1, T2 t2)
 		{
 
@@ -108,16 +103,7 @@ namespace View
 		/// <param name="_eventType"></param>
 		private void ConditionalBranch(float _value, UIEventType _eventType)
 		{
-			switch (_eventType)
-			{
-				case UIEventType.Slider_Model_Transparency:
-					Event_Model_Transparency(_value);
-					break;
-
-				case UIEventType.Slider_Icon_Scale:
-					Event_Icon_Scale(_value);
-					break;
-			}
+			m_rootUI.GetUIEvent(_value, _eventType, this);
 		}
 
 		/// <summary>
@@ -128,74 +114,23 @@ namespace View
 		{
 			PlatformCode pCode = MainManager.Instance.Platform;
 
-			bool isDemoAdminViewer = false;
-			if (Platforms.IsDemoAdminViewer(pCode)) isDemoAdminViewer = true;
+			//bool isDemoAdminViewer = false;
+			//if (Platforms.IsDemoAdminViewer(pCode)) isDemoAdminViewer = true;
 
-			// 데모용 관리자뷰어 모드일때
-			if (isDemoAdminViewer)
-			{
-				// 루트 UI에서 이벤트 분배
-				m_rootUI.GetUIEvent(_eventType, this);
-			}
-			// 잠시 교량, 터널용 이벤트 뒤로 두기
-			else
-			{
-				switch (_eventType)
-				{
-					case UIEventType.View_Home:
-						// 초기 화면으로 복귀
-						Event_View_Home();
-						Event_Toggle_ChildPanel(1);
-						break;
+			m_rootUI.GetUIEvent(_eventType, this);
 
-					case UIEventType.Toggle:
-					case UIEventType.Viewport_ViewMode:
-						Event_Toggle_ViewMode();
-						break;
-
-					case UIEventType.Toggle_ChildPanel1:
-						// ChildPanel 1번 토글
-						Event_Toggle_ChildPanel(1);
-						Event_Toggle_ViewMode();
-						break;
-
-					case UIEventType.Viewport_ViewMode_ISO:
-					case UIEventType.Viewport_ViewMode_TOP:
-					case UIEventType.Viewport_ViewMode_SIDE:
-					case UIEventType.Viewport_ViewMode_BOTTOM:
-						Event_Toggle_ViewMode(_eventType);
-						break;
-
-					case UIEventType.OrthoView_Orthogonal:
-						Event_ToggleOrthoView(true);
-						Event_Toggle_ViewMode();
-						break;
-
-					case UIEventType.OrthoView_Perspective:
-						Event_ToggleOrthoView(false);
-						Event_Toggle_ViewMode();
-						break;
-
-					// 객체 모두 다시 켜기
-					case UIEventType.Mode_ShowAll:
-						Event_Mode_ShowAll();
-						Event_Toggle_ChildPanel(1);
-						break;
-
-					case UIEventType.Mode_Hide:
-					case UIEventType.Mode_Isolate:
-						Event_Mode_HideIsolate(_eventType);
-						Event_Toggle_ChildPanel(1);
-						break;
-
-					case UIEventType.Test_Surface:
-						Event_Legacy_ChangeCameraDirection();
-						break;
-				}
-			}
+			//// 데모용 관리자뷰어 모드일때
+			//if (isDemoAdminViewer)
+			//{
+			//	// 루트 UI에서 이벤트 분배
+			//	m_rootUI.GetUIEvent(_eventType, this);
+			//}
+			//// 잠시 교량, 터널용 이벤트 뒤로 두기
+			//else
+			//{
+			//	m_rootUI.GetUIEvent(_eventType, this);
+			//}
 		}
-
-
 
 		#endregion
 
@@ -205,10 +140,10 @@ namespace View
 		{
 			m_uiHoverElements.ForEach(x => x.SetActive(false));
 
-			if (m_unique == UniqueUIEventType.SetChild_Highlight)
-			{
-				((Image)m_btn.targetGraphic).sprite = m_btn.spriteState.disabledSprite;
-			}
+			//if (m_unique == UniqueUIEventType.SetChild_Highlight)
+			//{
+			//	((Image)m_btn.targetGraphic).sprite = m_btn.spriteState.disabledSprite;
+			//}
 		}
 
 		private void OnDisable()

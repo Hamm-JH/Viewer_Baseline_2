@@ -9,10 +9,10 @@ namespace Management.Events.Inputs
 	using UnityEngine.EventSystems;
 	using UnityEngine.UI;
 
-	public class Event_Drag : AEventData
+	public class Event_Drag : EventData_Input
 	{
-		private Camera m_camera;
-		private GraphicRaycaster m_grRaycaster;
+		//private Camera m_camera;
+		//private GraphicRaycaster m_grRaycaster;
 		private Vector2 m_delta;
 		UnityEvent<int, Vector2> m_dragEvent;
 
@@ -44,7 +44,15 @@ namespace Management.Events.Inputs
 					}
 					else
 					{
-						OnDrag(_sEvents);
+						if (_sEvents.ContainsKey(InputEventType.Input_clickDown))
+						{
+							List<RaycastResult> hits = _sEvents[InputEventType.Input_clickDown].Results;
+
+							if(IsClickOnKeymap(hits))
+							{
+								ContentManager.Instance.Input_KeymapDrag(m_btn, m_delta);
+							}
+						}
 					}
 				}
 			}
@@ -59,7 +67,15 @@ namespace Management.Events.Inputs
 					}
 					else
 					{
-						OnDrag(_sEvents);
+						if (_sEvents.ContainsKey(InputEventType.Input_clickDown))
+						{
+							List<RaycastResult> hits = _sEvents[InputEventType.Input_clickDown].Results;
+
+							if (IsClickOnKeymap(hits))
+							{
+								ContentManager.Instance.Input_KeymapDrag(m_btn, m_delta);
+							}
+						}
 					}
 				}
 			}
@@ -67,27 +83,7 @@ namespace Management.Events.Inputs
 
 		private void OnDrag(Dictionary<InputEventType, AEventData> _sEvents)
 		{
-			PlatformCode pCode = MainManager.Instance.Platform;
-			if (Platforms.IsDemoAdminViewer(pCode))
-			{
-				if (_sEvents.ContainsKey(InputEventType.Input_clickDown))
-				{
-					List<RaycastResult> hits = _sEvents[InputEventType.Input_clickDown].Results;
-
-					if (IsClickOnKeymap(hits))
-					{
-						ContentManager.Instance.Input_KeymapDrag(m_btn, m_delta);
-					}
-					else
-					{
-						m_dragEvent.Invoke(m_btn, m_delta);
-					}
-				}
-				else
-				{
-					m_dragEvent.Invoke(m_btn, m_delta);
-				}
-			}
+			m_dragEvent.Invoke(m_btn, m_delta);
 		}
 
 		public override void OnProcess(List<ModuleCode> _mList)

@@ -33,7 +33,7 @@ namespace Management.Events
 				case InputEventType.API_SelectIssue:
 					{
 
-						EventManager.Instance.OnEvent(new EventData_Input(
+						EventManager.Instance.OnEvent(new Events.Inputs.Event_SelectObject(
 							_eventType: InputEventType.Input_clickSuccessUp,
 							_obj: m_obj,
 							_event: m_clickEvent
@@ -54,7 +54,7 @@ namespace Management.Events
 				case InputEventType.API_SelectObject:
 				case InputEventType.API_SelectIssue:
 					{
-						EventManager.Instance.OnEvent(new EventData_Input(
+						EventManager.Instance.OnEvent(new Events.Inputs.Event_SelectObject(
 							_eventType: InputEventType.Input_clickSuccessUp,
 							_obj: m_obj,
 							_event: m_clickEvent

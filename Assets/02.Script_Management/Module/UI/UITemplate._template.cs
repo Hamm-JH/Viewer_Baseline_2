@@ -13,6 +13,11 @@ namespace Module.UI
 			throw new System.NotImplementedException();
 		}
 
+		public override void GetUIEvent(float _value, UIEventType _uType, UI_Selectable _setter)
+		{
+			throw new System.NotImplementedException();
+		}
+
 		public override void OnStart()
 		{
 			Debug.LogWarning("UITemplate OnStart");

@@ -34,5 +34,13 @@ namespace Module.UI
 		/// <param name="_setter"></param>
 		
 		public abstract void GetUIEvent(UIEventType _uType, UI_Selectable _setter);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="_value"></param>
+		/// <param name="_uType"></param>
+		/// <param name="_setter"></param>
+		public abstract void GetUIEvent(float _value, UIEventType _uType, UI_Selectable _setter);
 	}
 }

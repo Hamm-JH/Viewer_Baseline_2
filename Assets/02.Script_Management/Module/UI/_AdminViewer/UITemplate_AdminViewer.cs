@@ -164,6 +164,11 @@ namespace Module.UI
 		}
 		#endregion
 
+		public override void GetUIEvent(float _value, UIEventType _uType, UI_Selectable _setter)
+		{
+			throw new System.NotImplementedException();
+		}
+
 		public override void GetUIEvent(UIEventType _uType, UI_Selectable _setter)
 		{
 			Debug.Log($"Type : {_uType.ToString()}");
