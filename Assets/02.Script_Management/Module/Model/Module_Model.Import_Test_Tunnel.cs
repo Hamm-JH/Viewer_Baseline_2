@@ -64,6 +64,8 @@ namespace Module.Model
 
 			ContentManager.Instance.SetCameraCenterPosition();
 
+			// TODO 완료 야매 확인 4
+			ContentManager.Instance.CompCheck(4);
 		}
 
 		#region 1-1. 모델 캐시데이터 할당

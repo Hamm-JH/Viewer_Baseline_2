@@ -232,11 +232,11 @@ namespace Management
 		/// <summary>
 		/// UI 메인 템플릿 인스턴스 반환
 		/// </summary>
-		public AUI _UIInstance
+		public List<AUI> _UIInstances
 		{
 			get
 			{
-				return _Interaction.UiInstance;
+				return _Interaction.UiInstances;
 			}
 		}
 

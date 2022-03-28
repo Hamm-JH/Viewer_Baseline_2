@@ -14,6 +14,16 @@ namespace Module.UI
 		[SerializeField] Text m_line;
 		[SerializeField] Text m_description;
 		[SerializeField] List<GameObject> childElements_1;
+		
+		public override void OnStart()
+		{
+			Debug.LogWarning("UITemplate OnStart");
+		}
+
+		public override void OnModuleComplete()
+		{
+			Debug.LogError("load complete");
+		}
 
 		public override void GetUIEvent(UIEventType _uType, UI_Selectable _setter)
 		{
@@ -25,10 +35,6 @@ namespace Module.UI
 			throw new System.NotImplementedException();
 		}
 
-		public override void OnStart()
-		{
-			Debug.LogWarning("UITemplate OnStart");
-		}
 
 		public override void SetObjectData_Tunnel(GameObject selected)
 		{

@@ -6,20 +6,21 @@ namespace Definition
 {
 	public static class Template
 	{
-		public static GameObject GetUITemplate(PlatformCode _pCode)
+		public static List<GameObject> GetUITemplates(PlatformCode _pCode)
 		{
-			GameObject obj = null;
+			List<GameObject> list = new List<GameObject>();
 
 			if (Platforms.IsDemoAdminViewer(_pCode))
 			{
-				obj = Resources.Load<GameObject>("UI/UI_AdminViewer");
+				list.Add(Resources.Load<GameObject>("UI/UI_AdminViewer"));
+				list.Add(Resources.Load<GameObject>("UI/UITemplate_0328 2"));
 			}
 			else if(Platforms.IsSmartInspectPlatform(_pCode))
 			{
-				obj = Resources.Load<GameObject>("UI/UITemplate_0302");
+				list.Add(Resources.Load<GameObject>("UI/UITemplate_0302"));
 			}
 
-			return obj;
+			return list;
 		}
 	}
 }

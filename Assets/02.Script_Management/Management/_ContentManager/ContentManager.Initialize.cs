@@ -9,7 +9,31 @@ namespace Management
 
 	public partial class ContentManager : IManager<ContentManager>
 	{
-		
+		bool dmgComp = false;
+		bool rcvComp = false;
+		bool itfComp = false;
+		bool modComp = false;
+
+		/// <summary>
+		/// UIManager 완료 시점 파악을 위한 메서드
+		/// 1 dmg, 2 rcv, 3 interface 4 model 완료 체크
+		/// </summary>
+		/// <param name="_index"></param>
+		public void CompCheck(int _index)
+		{
+			switch(_index)
+			{
+				case 1:	dmgComp = true;	break;
+				case 2: rcvComp = true; break;
+				case 3: itfComp = true; break;
+				case 4: modComp = true; break;
+			}
+
+			if(dmgComp && rcvComp && itfComp && modComp)
+			{
+				_Interaction.LoadModuleComplete();
+			}
+		}
 
 		/// <summary>
 		/// 컨텐츠 관리자가 시작될때 초기화 실행

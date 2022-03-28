@@ -215,6 +215,14 @@ namespace Definition._Issue
 			}
 		}
 
+		public string __TunnelPartCode
+		{
+			get
+			{
+				return "";
+			}
+		}
+
 		public void SetDmg(JToken _token)
 		{
 			string kIssueOrderCode = "";

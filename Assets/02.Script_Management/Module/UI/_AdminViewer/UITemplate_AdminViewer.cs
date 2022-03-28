@@ -78,6 +78,18 @@ namespace Module.UI
 
 			ContentManager.Instance.Ad_InitUI(m_keymapPanel);
 			//if (MainManager.Instance.Platform)
+
+			//Items.Init();
+
+			// TODO 야매 CompCheck 3
+			ContentManager.Instance.CompCheck(3);
+		}
+
+		public override void OnModuleComplete()
+		{
+			Debug.LogWarning("load complete");
+
+			items.Init();
 		}
 
 		private void GetAddressData(AAPI _data)

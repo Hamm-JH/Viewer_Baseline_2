@@ -15,6 +15,16 @@ namespace Module.UI
 		[SerializeField] Text m_description;
 		[SerializeField] List<GameObject> childElements_1;
 
+		public override void OnStart()
+		{
+			Debug.LogWarning("UITemplate OnStart");
+		}
+
+		public override void OnModuleComplete()
+		{
+			Debug.LogError("load complete");
+		}
+
 		public override void GetUIEvent(float _value, UIEventType _uType, UI_Selectable _setter)
 		{
 			switch (_uType)
@@ -85,10 +95,7 @@ namespace Module.UI
 			}
 		}
 
-		public override void OnStart()
-		{
-			Debug.LogWarning("UITemplate OnStart");
-		}
+		
 
 		public override void SetObjectData_Tunnel(GameObject selected)
 		{

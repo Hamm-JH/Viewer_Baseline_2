@@ -20,14 +20,14 @@ namespace Module.Interaction
 		[SerializeField] private GraphicRaycaster grRaycaster;
 
 		[Header("Instances")]
-		[SerializeField] private GameObject m_template;
-		[SerializeField] private AUI m_uiInstance;
+		[SerializeField] private List<GameObject> m_templates;
+		[SerializeField] private List<AUI> m_uiInstances;
 
 		public Canvas RootCanvas { get => rootCanvas; set => rootCanvas=value; }
 		public GraphicRaycaster GrRaycaster { get => grRaycaster; set => grRaycaster=value; }
 
-		public GameObject Template { get => m_template; set => m_template=value; }
-		public AUI UiInstance { get => m_uiInstance; set => m_uiInstance=value; }
+		public List<GameObject> Templates { get => m_templates; set => m_templates=value; }
+		public List<AUI> UiInstances { get => m_uiInstances; set => m_uiInstances=value; }
 
 		private void Start()
 		{
@@ -62,14 +62,35 @@ namespace Module.Interaction
 		/// 받아온 ui 템플릿을 생성
 		/// </summary>
 		/// <param name="_resource"></param>
-		private void UI_Instantiate(GameObject _resource)
+		private void UI_Instantiate(List<GameObject> _resources)
 		{
-			GameObject ui = Instantiate<GameObject>(_resource, RootCanvas.transform);
-			Template = ui;
-			UiInstance = ui.GetComponent<AUI>();
+			m_templates = new List<GameObject>();
+			m_uiInstances = new List<AUI>();
 
-			// 생성된 UI 인스턴스의 시작을 알린다.
-			UiInstance.OnStart();
+			_resources.ForEach(x =>
+			{
+				GameObject ui = Instantiate<GameObject>(x, RootCanvas.transform);
+				AUI aui = ui.GetComponent<AUI>();
+				Templates.Add(ui);
+				UiInstances.Add(aui);
+
+				aui.OnStart();
+			});
+
+			//GameObject ui = Instantiate<GameObject>(_resource, RootCanvas.transform);
+			//Template = ui;
+			//UiInstance = ui.GetComponent<AUI>();
+
+			//// 생성된 UI 인스턴스의 시작을 알린다.
+			//UiInstance.OnStart();
+		}
+
+		/// <summary>
+		/// 사전 초기화 단계 완료후 초기화 시작
+		/// </summary>
+		public void LoadModuleComplete()
+		{
+			UiInstances.ForEach(x => x.OnModuleComplete());
 		}
 	}
 }

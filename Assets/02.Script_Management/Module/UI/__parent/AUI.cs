@@ -16,6 +16,12 @@ namespace Module.UI
 		}
 
 		/// <summary>
+		/// TODO AModule 단으로 올리기
+		/// 컨텐츠 관리 단계에서 모든 초기화가 끝날시 실행
+		/// </summary>
+		public abstract void OnModuleComplete();
+
+		/// <summary>
 		/// 터널 모델에서 선택된 객체의 정보를 설정한다.
 		/// </summary>
 		/// <param name="selected"></param>

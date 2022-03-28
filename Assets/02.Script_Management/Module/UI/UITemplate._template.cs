@@ -8,6 +8,16 @@ namespace Module.UI
 {
 	public class UITemplate : AUI
 	{
+		public override void OnStart()
+		{
+			Debug.LogWarning("UITemplate OnStart");
+		}
+
+		public override void OnModuleComplete()
+		{
+			Debug.LogError("load complete");
+		}
+
 		public override void GetUIEvent(UIEventType _uType, UI_Selectable _setter)
 		{
 			throw new System.NotImplementedException();
@@ -18,10 +28,6 @@ namespace Module.UI
 			throw new System.NotImplementedException();
 		}
 
-		public override void OnStart()
-		{
-			Debug.LogWarning("UITemplate OnStart");
-		}
 
 		public override void SetObjectData_Tunnel(GameObject selected)
 		{

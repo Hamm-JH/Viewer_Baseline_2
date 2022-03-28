@@ -48,7 +48,7 @@ namespace Management
 		public void Get_SelectedData_UpdateUI(GameObject selected)
 		{
 			// 터널 정보 업데이트
-			_UIInstance.SetObjectData_Tunnel(selected);
+			_UIInstances.ForEach(x => x.SetObjectData_Tunnel(selected));
 		}
 
 		/// <summary>
@@ -64,15 +64,15 @@ namespace Management
 		/// Module_Interaction UI Instantiate
 		/// </summary>
 		/// <param name="action"></param>
-		public void RunModule_UIInstantiate(UnityAction<GameObject> action)
+		public void RunModule_UIInstantiate(UnityAction<List<GameObject>> action)
 		{
 			PlatformCode platform = MainManager.Instance.Platform;
 
-			GameObject template = Template.GetUITemplate(platform);
+			List<GameObject> templates = Template.GetUITemplates(platform);
 
-			if(template != null)
+			if(templates != null)
 			{
-				action.Invoke(template);
+				action.Invoke(templates);
 			}
 			else
 			{
@@ -177,7 +177,7 @@ namespace Management
 		/// <param name="index"></param>
 		public void Toggle_ChildTabs(int index)
 		{
-			_Interaction.UiInstance.TogglePanelList(index, null);
+			_Interaction.UiInstances.ForEach(x => x.TogglePanelList(index, null));
 		}
 
 		public void Function_ToggleOrthoView(bool _isOrthogonal)

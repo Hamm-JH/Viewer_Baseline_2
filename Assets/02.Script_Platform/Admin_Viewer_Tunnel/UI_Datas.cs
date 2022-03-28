@@ -1,4 +1,7 @@
 ﻿using AdminViewer.UI;
+using Definition;
+using Management;
+using Platform.Tunnel;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -80,6 +83,66 @@ namespace AdminViewer
 
 		public GameObject State1_rootPin;
 		public List<GameObject> State1_pins;
+
+		public void Init()
+		{
+			PlatformCode pCode = MainManager.Instance.Platform;
+			if(Platforms.IsTunnelPlatform(pCode))
+			{
+				List<int> lst = new List<int>
+				{ 
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0 };
+
+				ContentManager.Instance._Model.DmgData.ForEach(x =>
+				{
+					int index = (int)Tunnels.GetPartCode(x.CdBridgeParts);
+					lst[index]++;
+				});
+
+				ContentManager.Instance._Model.RcvData.ForEach(x =>
+				{
+					int index = (int)Tunnels.GetPartCode(x.CdBridgeParts) + 17;
+					lst[index]++;
+				});
+
+				// 다 끄기
+				State1_pins.ForEach(x => x.SetActive(false));
+
+				// 모델 경계값
+				Bounds _b = ContentManager.Instance._Model.CenterBounds;
+				Camera _cam = MainManager.Instance.MainCamera;
+
+				// 리스트 변환
+				int _index = lst.Count;
+				for (int i = 0; i < _index; i++)
+				{
+					// x 17 나머지
+					int xFactor = i % 17;
+					// 17 이상이면 1, 밑이면 -1
+					int zFactor = i > 16 ? 1 : -1;
+
+					Vector3 center = _b.center;
+					Vector3 pos = new Vector3(
+						center.x - 48 + xFactor * 5,
+						center.y,
+						center.z + zFactor * 5);
+
+					State1_pins[i].transform.position = _cam.WorldToScreenPoint(pos);
+
+					if (lst[i] != 0)
+					{
+						State1_pins[i].SetActive(true);
+					}
+				}
+
+
+
+			}
+
+		}
 	}
 
 	[System.Serializable]

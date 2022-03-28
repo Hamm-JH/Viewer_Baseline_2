@@ -6,6 +6,7 @@ namespace Module.Model
 {
 	using Definition;
 	using Definition._Issue;
+	using Management;
 	using View;
 
 	public partial class Module_Model : AModule
@@ -68,18 +69,21 @@ namespace Module.Model
 		{
 			List<GameObject> _iObjs = new List<GameObject>();
 
+			bool isDmg = false;
 			switch (_webT)
 			{
 				case WebType.Issue_Dmg:
 					m_Dmg = _issues;
 					m_dmgObjs = new List<GameObject>();
 					_iObjs = m_dmgObjs;
+					isDmg = true;
 					break;
 
 				case WebType.Issue_Rcv:
 					m_Rcv = _issues;
 					m_rcvObjs = new List<GameObject>();
 					_iObjs = m_rcvObjs;
+					isDmg = false;
 					break;
 			}
 
@@ -88,6 +92,16 @@ namespace Module.Model
 			SetIssuesInRoot(_iObjs);
 
 			CollectAllIssues(IssueObjs, _iObjs);
+
+			// TODO 야매 compcheck 1, 2
+			if(isDmg)
+			{
+				ContentManager.Instance.CompCheck(1);
+			}
+			else
+			{
+				ContentManager.Instance.CompCheck(2);
+			}
 		}
 
 		private void InitRootIssue(out GameObject _root)
