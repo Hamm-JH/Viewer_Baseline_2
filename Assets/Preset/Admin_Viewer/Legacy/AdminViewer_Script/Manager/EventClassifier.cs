@@ -152,7 +152,7 @@ namespace Manager
             eventTypeDics = new Dictionary<System.Type, System.Type>();
             eventTypeDics.Add(typeof(Skew), typeof(Skew));
             eventTypeDics.Add(typeof(Curve), typeof(Curve));
-            eventTypeDics.Add(typeof(Interactable), typeof(Interactable));
+            //eventTypeDics.Add(typeof(Interactable), typeof(Interactable));
             eventTypeDics.Add(typeof(CurveSkew), typeof(CurveSkew));
 
             eventTypeDics.Add(typeof(Bridge.ObjectData), typeof(Bridge.ObjectData));
@@ -424,11 +424,11 @@ namespace Manager
                     InvokeEvent<Curve>(_data);
                 }
 
-                else if (eventTypeDics[_obj[0].GetType()].Equals(typeof(Interactable)))
-                {
-                    Interactable _data = obj[0] as Interactable;
-                    InvokeEvent<Interactable>(_data);
-                }
+                //else if (eventTypeDics[_obj[0].GetType()].Equals(typeof(Interactable)))
+                //{
+                //    Interactable _data = obj[0] as Interactable;
+                //    InvokeEvent<Interactable>(_data);
+                //}
 
                 else if (eventTypeDics[_obj[0].GetType()].Equals(typeof(CurveSkew)))
                 {
@@ -493,12 +493,12 @@ namespace Manager
                         return;
                     }
 
-                    else if (eventTypeDics[_obj[0].GetType()].Equals(typeof(Interactable)))
-                    {
-                        Interactable _data = obj[0] as Interactable;
-                        InvokeEvent<Interactable>(_data);
-                        return;
-                    }
+                    //else if (eventTypeDics[_obj[0].GetType()].Equals(typeof(Interactable)))
+                    //{
+                    //    Interactable _data = obj[0] as Interactable;
+                    //    InvokeEvent<Interactable>(_data);
+                    //    return;
+                    //}
 
                     else if (eventTypeDics[_obj[0].GetType()].Equals(typeof(CurveSkew)))
                     {
@@ -702,10 +702,10 @@ namespace Manager
                 {
                     targetTransform = (_data as Curve).transform;
                 }
-                else if (_data.GetType().Equals(typeof(Interactable)))
-                {
-                    targetTransform = (_data as Interactable).transform;
-                }
+                //else if (_data.GetType().Equals(typeof(Interactable)))
+                //{
+                //    targetTransform = (_data as Interactable).transform;
+                //}
                 else if (_data.GetType().Equals(typeof(CurveSkew)))
                 {
                     targetTransform = (_data as CurveSkew).transform;

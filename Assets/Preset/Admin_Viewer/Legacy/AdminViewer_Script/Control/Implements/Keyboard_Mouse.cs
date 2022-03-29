@@ -120,16 +120,16 @@ namespace Control
                         Manager.EventClassifier.Instance.OnEvent<Curve>
                             (Control.Status.Click, _curve);
                     }
-                    else if (hit.collider.name == "Interactable")
-                    {
-                        Interactable _interactable = hit.collider.GetComponent<Interactable>();
+                    //else if (hit.collider.name == "Interactable")
+                    //{
+                    //    Interactable _interactable = hit.collider.GetComponent<Interactable>();
 
-                        Debug.Log(hit.collider.name);
-                        Debug.Log($"Interactable name : {_interactable.name}");
+                    //    Debug.Log(hit.collider.name);
+                    //    Debug.Log($"Interactable name : {_interactable.name}");
 
-                        Manager.EventClassifier.Instance.OnEvent<Interactable>
-                            (Control.Status.Click, _interactable);
-                    }
+                    //    Manager.EventClassifier.Instance.OnEvent<Interactable>
+                    //        (Control.Status.Click, _interactable);
+                    //}
                     else if (hit.collider.name == "CurveSkew")
                     {
                         CurveSkew _curveSkew = hit.collider.GetComponent<CurveSkew>();

@@ -11,6 +11,8 @@ namespace AdminViewer.UI
 
 	public class Ad_TableElement : MonoBehaviour
 	{
+		public Issue m_issue;
+
 		public GameObject r_bm_State2_dmg;
 		public GameObject r_b1_State3_dmg;
 		public GameObject r_b1_State4_rcv;
@@ -96,6 +98,8 @@ namespace AdminViewer.UI
 
 		public void SetTableElement(Ad_PanelType _pType, UIEventType _uType, Ad_Panel_ElementType _tType, int _index, Issue _data)
 		{
+			m_issue = _data;
+
 			if (_uType == UIEventType.Ad_nav_state2)
 			{
 				if (_pType == Ad_PanelType.bm)

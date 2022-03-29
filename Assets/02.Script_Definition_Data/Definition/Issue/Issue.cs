@@ -23,6 +23,17 @@ namespace Definition._Issue
 	[System.Serializable]
 	public class Issue
 	{
+		public Issue()
+		{
+			m_imgs = new List<ImgIndex>();
+		}
+
+		[System.Serializable]
+		public class ImgIndex
+		{
+			public string fid;
+			public string ftype;
+		}
 		#region field
 		[SerializeField] string m_issueOrderCode;
 		[SerializeField] string m_cdBridge;
@@ -44,6 +55,9 @@ namespace Definition._Issue
 		[SerializeField] string m_dateDmg;
 		[SerializeField] string m_dateRcvStart;
 		[SerializeField] string m_dateRcvEnd;
+
+		[SerializeField] string m_fgroup;
+		[SerializeField] List<ImgIndex> m_imgs;
 
 		[SerializeField] IssueCodes m_issueCode;
 		[SerializeField] int m_dcLocation;
@@ -115,6 +129,8 @@ namespace Definition._Issue
 		public string DateRcvStart { get => m_dateRcvStart; set => m_dateRcvStart=value; }
 		public string DateRcvEnd { get => m_dateRcvEnd; set => m_dateRcvEnd=value; }
 
+		public string Fgroup { get => m_fgroup; set => m_fgroup=value; }
+		public List<ImgIndex> Imgs { get => m_imgs; set => m_imgs=value; }
 
 		public int DcLocation { get => m_dcLocation; set => m_dcLocation=value; }
 		public Vector3 PositionVector { get => m_positionVector; set => m_positionVector=value; }
@@ -223,6 +239,8 @@ namespace Definition._Issue
 			}
 		}
 
+		
+
 		public void SetDmg(JToken _token)
 		{
 			string kIssueOrderCode = "";
@@ -241,6 +259,9 @@ namespace Definition._Issue
 			string kHeight				= "";
 			string kDepth				= "";
 			string kDmgDescription		= "";
+			string kFgroup				= "";
+			string kFid					= "";
+			string kFtype				= "";
 
 			PlatformCode pCode = MainManager.Instance.Platform;
 			if(Platforms.IsTunnelPlatform(pCode))
@@ -260,6 +281,10 @@ namespace Definition._Issue
 				kWidth				= "noDamageWidth";
 				kHeight				= "noDamageHeight";
 				kDepth				= "noDamageDepth";
+				kFgroup				= "fgroup";
+				kFid				= "fid";
+				kFtype				= "ftype";
+				
 				kDmgDescription		= "dcRemark";
 			}
 			else if(Platforms.IsBridgePlatform(pCode))
@@ -279,6 +304,10 @@ namespace Definition._Issue
 				kWidth              = "noDamageWidth";
 				kHeight             = "noDamageHeight";
 				kDepth              = "noDamageDepth";
+				kFgroup             = "fgroup";
+				kFid                = "fid";
+				kFtype              = "ftype";
+				
 				kDmgDescription     = "dcRemark";
 			}
 
@@ -299,7 +328,17 @@ namespace Definition._Issue
 			Width                =   _token.SelectToken(kWidth).ToString();
 			Height               =   _token.SelectToken(kHeight).ToString();
 			Depth                =   _token.SelectToken(kDepth).ToString();
+			Fgroup              =   _token.SelectToken(kFgroup).ToString();
 			DmgDescription          =   _token.SelectToken(kDmgDescription).ToString();
+
+			JArray jImgArr = JArray.Parse(_token.SelectToken("files").ToString());
+			foreach(var arg in jImgArr)
+			{
+				ImgIndex _index = new ImgIndex();
+				_index.fid = arg.SelectToken(kFid).ToString();
+				_index.ftype = arg.SelectToken(kFtype).ToString();
+				Imgs.Add(_index);
+			}
 		}
 
 		public void SetRcv(JToken _token)
@@ -320,6 +359,10 @@ namespace Definition._Issue
 			string kWidth			= "";
 			string kHeight			= "";
 			string kDepth			= "";
+			string kFgroup = "";
+			string kFid = "";
+			string kFtype = "";
+
 			string kDmgDescription	= "";
 			string kRcvDescription	= "";
 
@@ -342,6 +385,10 @@ namespace Definition._Issue
 				kWidth				= "noDamageWidth";
 				kHeight				= "noDamageHeight";
 				kDepth				= "noDamageDepth";
+				kFgroup             = "fgroup";
+				kFid                = "fid";
+				kFtype              = "ftype";
+
 				kDmgDescription		= "dcRemark";
 				kRcvDescription     = "dcRecover";
 			}
@@ -363,6 +410,10 @@ namespace Definition._Issue
 				kWidth              = "noDamageWidth";
 				kHeight             = "noDamageHeight";
 				kDepth              = "noDamageDepth";
+				kFgroup             = "fgroup";
+				kFid                = "fid";
+				kFtype              = "ftype";
+
 				kDmgDescription     = "dcRemark";
 				kRcvDescription     = "dcRecover";
 			}
@@ -386,8 +437,18 @@ namespace Definition._Issue
 			Width                =   _token.SelectToken(kWidth).ToString();
 			Height               =   _token.SelectToken(kHeight).ToString();
 			Depth                =   _token.SelectToken(kDepth).ToString();
+			Fgroup              = _token.SelectToken(kFgroup).ToString();
 			DmgDescription          =   _token.SelectToken(kDmgDescription).ToString();
 			RcvDescription       =   _token.SelectToken(kRcvDescription).ToString();
+
+			JArray jImgArr = JArray.Parse(_token.SelectToken("files").ToString());
+			foreach (var arg in jImgArr)
+			{
+				ImgIndex _index = new ImgIndex();
+				_index.fid = arg.SelectToken(kFid).ToString();
+				_index.ftype = arg.SelectToken(kFtype).ToString();
+				Imgs.Add(_index);
+			}
 		}
 	}
 }
