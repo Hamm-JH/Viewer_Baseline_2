@@ -79,22 +79,7 @@ namespace Definition
 		Delete = 8,
 	}
 
-	public enum ModuleCode
-	{
-		// 기본 상태는 베이스로 깔림
-		//Default = 
-		
-		/// <summary>
-		/// 점검정보 모듈 (진입시 사용)
-		/// </summary>
-		WorkQueue = 0x10,
-
-		/// <summary>
-		/// 점검정보 - 등록단계
-		/// </summary>
-		Work_Pinmode = 0x11,
-
-	}
+	
 
 	public enum UseCase
 	{

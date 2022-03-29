@@ -13,10 +13,11 @@ namespace Management
 		bool rcvComp = false;
 		bool itfComp = false;
 		bool modComp = false;
+		//bool evtComp = false;
 
 		/// <summary>
 		/// UIManager 완료 시점 파악을 위한 메서드
-		/// 1 dmg, 2 rcv, 3 interface 4 model 완료 체크
+		/// 1 dmg, 2 rcv, 3 interface 4 model 5 event 완료 체크
 		/// </summary>
 		/// <param name="_index"></param>
 		public void CompCheck(int _index)
@@ -27,9 +28,10 @@ namespace Management
 				case 2: rcvComp = true; break;
 				case 3: itfComp = true; break;
 				case 4: modComp = true; break;
+				//case 5:	evtComp = true; break;
 			}
 
-			if(dmgComp && rcvComp && itfComp && modComp)
+			if(dmgComp && rcvComp && itfComp && modComp/* && evtComp*/)
 			{
 				_Interaction.LoadModuleComplete();
 			}

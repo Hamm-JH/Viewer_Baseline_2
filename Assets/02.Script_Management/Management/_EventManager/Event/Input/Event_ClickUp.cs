@@ -67,6 +67,7 @@ namespace Management.Events.Inputs
 
 		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
+
 			if (Elements != null)
 			{
 				GameObject obj = Elements.Last().Target;
@@ -76,23 +77,98 @@ namespace Management.Events.Inputs
 
 				if (obj.TryGetComponent<Obj_Selectable>(out sObj))
 				{
-					m_clickEvent.Invoke(Elements.Last().Target);
-
-					ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
+					StartEvent_SelectObject(Elements.Last().Target);
+					//m_clickEvent.Invoke(Elements.Last().Target);
+					//ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
 				}
 				else if (obj.TryGetComponent<Issue_Selectable>(out iObj))
 				{
-					m_clickEvent.Invoke(Elements.Last().Target);
-					ContentManager.Instance.OnSelect_Issue(Elements.Last().Target);
+					StartEvent_SelectIssue(Elements.Last().Target);
+					//m_clickEvent.Invoke(Elements.Last().Target);
+					//ContentManager.Instance.OnSelect_Issue(Elements.Last().Target);
 				}
 			}
-			// 빈 공간을 선택한 경우
+			// UI 또는 빈 공간을 선택한 경우
 			else
 			{
 				// UI 선택의 결과가 0 이상인 경우
 				if (Results.Count != 0)
 				{
-					if (_sEvents.ContainsKey(InputEventType.Input_clickDown))
+					StartEvent_SelectUI(_sEvents, Results);
+					//if (_sEvents.ContainsKey(InputEventType.Input_clickDown))
+					//{
+					//	List<RaycastResult> hits = _sEvents[InputEventType.Input_clickDown].Results;
+
+					//	if (IsClickOnKeymap(hits))
+					//	{
+					//		ContentManager.Instance.Input_KeymapClick(m_clickPosition);
+					//	}
+					//}
+				}
+				else
+				{
+					StartEvent_SelectNull();
+					//m_clickEvent.Invoke(null);
+					//ContentManager.Instance.OnSelect_3D(null);
+				}
+			}
+		}
+
+		public void StartEvent_SelectObject(GameObject _obj)
+		{
+			PlatformCode pCode = MainManager.Instance.Platform;
+
+			if(Platforms.IsDemoAdminViewer(pCode))
+			{
+				// 객체는 34단계에서 눌리면 안됨.
+				AModuleStatus aStat = EventManager.Instance._Statement.GetModuleStatus(ModuleCode.Issue_Administration);
+				if(aStat != null)
+				{
+					// 현재 상태가 기본 관리모드(1 2 5)인가?
+					if (aStat.IsDefaultAdministrationMode())
+					{
+						m_clickEvent.Invoke(_obj);
+					}
+					// 지정모드 (3 4)
+					else { }
+				}
+				
+			}
+			else if(Platforms.IsViewerPlatform(pCode))
+			{
+				m_clickEvent.Invoke(_obj);
+				ContentManager.Instance.OnSelect_3D(_obj);
+			}
+		}
+
+		public void StartEvent_SelectIssue(GameObject _obj)
+		{
+			PlatformCode pCode = MainManager.Instance.Platform;
+
+			if(Platforms.IsDemoAdminViewer(pCode))
+			{
+				m_clickEvent.Invoke(_obj);
+			}
+			else if(Platforms.IsViewerPlatform(pCode))
+			{
+				m_clickEvent.Invoke(_obj);
+				ContentManager.Instance.OnSelect_Issue(_obj);
+			}
+		}
+
+		public void StartEvent_SelectUI(Dictionary<InputEventType, AEventData> _sEvents, List<RaycastResult> _results)
+		{
+			PlatformCode pCode = MainManager.Instance.Platform;
+
+			if(Platforms.IsDemoAdminViewer(pCode))
+			{
+				// ui 선택리스트 0 아니고 clickDown이 있는가?
+				if (Results.Count != 0 && _sEvents.ContainsKey(InputEventType.Input_clickDown)) 
+				{
+					AModuleStatus aStat = EventManager.Instance._Statement.GetModuleStatus(ModuleCode.Issue_Administration);
+
+					// null 아니고 지정모드(3 4)인가?
+					if (aStat != null && !aStat.IsDefaultAdministrationMode())
 					{
 						List<RaycastResult> hits = _sEvents[InputEventType.Input_clickDown].Results;
 
@@ -102,46 +178,60 @@ namespace Management.Events.Inputs
 						}
 					}
 				}
-				else
-				{
-					m_clickEvent.Invoke(null);
-					ContentManager.Instance.OnSelect_3D(null);
-				}
 			}
 		}
 
-		protected void Func_Input_clickSuccessUp(Status _success)
+		public void StartEvent_SelectNull()
 		{
-			Obj_Selectable sObj;
-			Issue_Selectable iObj;
+			PlatformCode pCode = MainManager.Instance.Platform;
 
-			if (Selected3D.TryGetComponent<Obj_Selectable>(out sObj))
+			if(Platforms.IsDemoAdminViewer(pCode))
 			{
-				Elements = new List<IInteractable>();
-				Elements.Add(sObj);
+				m_clickEvent.Invoke(null);
 
-				//Element = sObj;
-
-				PlatformCode _pCode = MainManager.Instance.Platform;
-				if (Platforms.IsSmartInspectPlatform(_pCode))
-				{
-					m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-					m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-				}
-				StatusCode = _success;
-				return;
+				ContentManager.Instance.Toggle_ChildTabs(1);
 			}
-			else if (Selected3D.TryGetComponent<Issue_Selectable>(out iObj))
+			else if(Platforms.IsViewerPlatform(pCode))
 			{
-				Elements = new List<IInteractable>();
-				Elements.Add(iObj);
-
-				//Element = iObj;
-
-				m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-				StatusCode = _success;
-				return;
+				m_clickEvent.Invoke(null);
+				ContentManager.Instance.OnSelect_3D(null);
 			}
 		}
+
+
+
+		//protected void Func_Input_clickSuccessUp(Status _success)
+		//{
+		//	Obj_Selectable sObj;
+		//	Issue_Selectable iObj;
+
+		//	if (Selected3D.TryGetComponent<Obj_Selectable>(out sObj))
+		//	{
+		//		Elements = new List<IInteractable>();
+		//		Elements.Add(sObj);
+
+		//		//Element = sObj;
+
+		//		PlatformCode _pCode = MainManager.Instance.Platform;
+		//		if (Platforms.IsSmartInspectPlatform(_pCode))
+		//		{
+		//			m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+		//			m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+		//		}
+		//		StatusCode = _success;
+		//		return;
+		//	}
+		//	else if (Selected3D.TryGetComponent<Issue_Selectable>(out iObj))
+		//	{
+		//		Elements = new List<IInteractable>();
+		//		Elements.Add(iObj);
+
+		//		//Element = iObj;
+
+		//		m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+		//		StatusCode = _success;
+		//		return;
+		//	}
+		//}
 	}
 }

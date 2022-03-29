@@ -18,6 +18,11 @@ namespace Module.UI
 			Debug.LogError("load complete");
 		}
 
+		public override void ReInvokeEvent()
+		{
+			throw new System.NotImplementedException();
+		}
+
 		public override void GetUIEvent(UIEventType _uType, UI_Selectable _setter)
 		{
 			throw new System.NotImplementedException();

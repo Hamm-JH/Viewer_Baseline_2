@@ -25,6 +25,11 @@ namespace Module.UI
 			Debug.LogError("load complete");
 		}
 
+		public override void ReInvokeEvent()
+		{
+			
+		}
+
 		public override void GetUIEvent(float _value, UIEventType _uType, UI_Selectable _setter)
 		{
 			switch (_uType)

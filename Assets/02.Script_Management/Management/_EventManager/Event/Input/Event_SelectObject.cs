@@ -10,7 +10,7 @@ namespace Management.Events.Inputs
 	using UnityEngine.EventSystems;
 	using View;
 
-	public class Event_SelectObject : AEventData
+	public class Event_SelectObject : EventData_Input
 	{
 		GameObject m_inAPISelected;
 		UnityEvent<GameObject> m_clickEvent;
@@ -39,46 +39,17 @@ namespace Management.Events.Inputs
 
 				if (obj.TryGetComponent<Obj_Selectable>(out sObj))
 				{
-					m_clickEvent.Invoke(Elements.Last().Target);
-					// TODO
-
-					// API로 접근한 개체가 실행하는 이벤트
-					// 키맵 카메라의 타겟 위치 변경
-					ContentManager.Instance.Input_SelectObject(Elements.Last().Target);
-
-					ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
-					//ContentManager.Instance.Toggle_ChildTabs(1);
+					StartEvent_KeymapSelectObject(Elements.Last().Target, _sEvents);
 				}
 				else if (obj.TryGetComponent<Issue_Selectable>(out iObj))
 				{
-					ContentManager.Instance.Input_SelectObject(Elements.Last().Target);
-
-					m_clickEvent.Invoke(Elements.Last().Target);
-					ContentManager.Instance.OnSelect_Issue(Elements.Last().Target);
-					//ContentManager.Instance.Toggle_ChildTabs(1);
+					StartEvent_KeymapSelectIssue(Elements.Last().Target, _sEvents);
 				}
 			}
 			// 빈 공간을 선택한 경우
 			else
 			{
-				m_clickEvent.Invoke(null);
-				ContentManager.Instance.OnSelect_3D(null);
-				//// UI 선택의 결과가 0 이상인 경우
-				//if (Results.Count != 0)
-				//{
-				//	if (_sEvents.ContainsKey(InputEventType.Input_clickDown))
-				//	{
-				//		List<RaycastResult> hits = _sEvents[InputEventType.Input_clickDown].Results;
-
-				//		if (IsClickOnKeymap(hits))
-				//		{
-				//			ContentManager.Instance.Input_KeymapClick(m_clickPosition);
-				//		}
-				//	}
-				//}
-				//else
-				//{
-				//}
+				StartEvent_KeymapSelectNull();
 			}
 		}
 
@@ -94,38 +65,68 @@ namespace Management.Events.Inputs
 			}
 		}
 
-		private void Func_Input_clickSuccessUp(Status _success)
+		private void StartEvent_KeymapSelectObject(GameObject _obj, Dictionary<InputEventType, AEventData> _sEvents)
 		{
-			Obj_Selectable sObj;
-			Issue_Selectable iObj;
+			PlatformCode pCode = MainManager.Instance.Platform;
 
-			if (Selected3D.TryGetComponent<Obj_Selectable>(out sObj))
+			if(Platforms.IsDemoAdminViewer(pCode))
 			{
-				Elements = new List<IInteractable>();
-				Elements.Add(sObj);
+				m_clickEvent.Invoke(_obj);
 
-				//Element = sObj;
+				// API로 접근한 개체가 실행하는 이벤트
+				// 키맵 카메라의 타겟 위치 변경
+				ContentManager.Instance.Input_SelectObject(_obj);
 
-				PlatformCode _pCode = MainManager.Instance.Platform;
-				if (Platforms.IsSmartInspectPlatform(_pCode))
+				GameObject selected;
+				// 이 시점에 이전 선택 개체가 존재하는 경우
+				if(_sEvents.ContainsKey(InputEventType.Input_clickSuccessUp))
 				{
-					m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-					m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+					// 이전 선택 객체를 할당
+					selected = _sEvents[InputEventType.Input_clickSuccessUp].Elements.Last().Target;
+
+					// 현재 객체와 이전 객체가 같은 경우(더블 클릭으로 침)
+					if(_obj == selected)
+					{
+						ContentManager.Instance._Interaction.ReInvokeStatusEvent();
+					}
 				}
-				StatusCode = _success;
-				return;
 			}
-			else if (Selected3D.TryGetComponent<Issue_Selectable>(out iObj))
+			else if(Platforms.IsViewerPlatform(pCode))
 			{
-				Elements = new List<IInteractable>();
-				Elements.Add(iObj);
-
-				//Element = iObj;
-
-				m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-				StatusCode = _success;
-				return;
+				ContentManager.Instance.OnSelect_3D(_obj);
 			}
+		}
+
+		private void StartEvent_KeymapSelectIssue(GameObject _obj, Dictionary<InputEventType, AEventData> _sEvents)
+		{
+			PlatformCode pCode = MainManager.Instance.Platform;
+
+			if(Platforms.IsDemoAdminViewer(pCode))
+			{
+				ContentManager.Instance.Input_SelectObject(_obj);
+
+				m_clickEvent.Invoke(_obj);
+			}
+			else if(Platforms.IsViewerPlatform(pCode))
+			{
+				ContentManager.Instance.OnSelect_Issue(_obj);
+			}
+		}
+
+		private void StartEvent_KeymapSelectNull()
+		{
+			PlatformCode pCode = MainManager.Instance.Platform;
+
+			if(Platforms.IsDemoAdminViewer(pCode))
+			{
+				m_clickEvent.Invoke(null);
+			}
+			else if(Platforms.IsViewerPlatform(pCode))
+			{
+				m_clickEvent.Invoke(null);
+				ContentManager.Instance.OnSelect_3D(null);
+			}
+
 		}
 	}
 }

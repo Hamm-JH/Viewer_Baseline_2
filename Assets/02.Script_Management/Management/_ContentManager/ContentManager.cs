@@ -23,6 +23,12 @@ namespace Management
 
 		[SerializeField] AContainer m_container;
 
+		public AContainer Container
+		{
+			get => m_container;
+			set => m_container = value;
+		}
+
 		#endregion
 
 		#region Modules

@@ -92,5 +92,10 @@ namespace Module.Interaction
 		{
 			UiInstances.ForEach(x => x.OnModuleComplete());
 		}
+
+		public void ReInvokeStatusEvent()
+		{
+			UiInstances.ForEach(x => x.ReInvokeEvent());
+		}
 	}
 }

@@ -34,6 +34,11 @@ namespace Module.UI
 		public abstract void TogglePanelList(int _index, GameObject _exclusive);
 
 		/// <summary>
+		/// ModuleStatus 기반 이벤트 재시작
+		/// </summary>
+		public abstract void ReInvokeEvent();
+
+		/// <summary>
 		/// 개별 UI 요소에서 받은 이벤트를 UI 패널 레벨에서 분배처리
 		/// </summary>
 		/// <param name="_uType"></param>

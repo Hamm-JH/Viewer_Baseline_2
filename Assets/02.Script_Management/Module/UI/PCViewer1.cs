@@ -25,6 +25,11 @@ namespace Module.UI
 			Debug.LogError("load complete");
 		}
 
+		public override void ReInvokeEvent()
+		{
+			throw new System.NotImplementedException();
+		}
+
 		public override void GetUIEvent(UIEventType _uType, UI_Selectable _setter)
 		{
 			throw new System.NotImplementedException();
@@ -68,5 +73,7 @@ namespace Module.UI
 			_seg = spl[0];
 			_line = spl[1];
 		}
+
+		
 	}
 }

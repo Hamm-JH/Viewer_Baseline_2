@@ -11,6 +11,23 @@ namespace Management
 
 	public partial class ContentManager : IManager<ContentManager>
 	{
+		public void CreateNewModule(ModuleCode mCode)
+		{
+			EventManager.Instance._Statement.CreateNewModule(mCode);
+		}
+
+		public ModuleStatus GetModuleStatus(ModuleCode mCode)
+		{
+			AModuleStatus mstatus = EventManager.Instance._Statement.GetModuleStatus(mCode);
+
+			return mstatus.m_moduleStatus;
+		}
+
+		public void SetModuleStatus(ModuleCode _mCode, ModuleStatus _mStatus)
+		{
+			EventManager.Instance._Statement.SetModuleStatus(_mCode, _mStatus);
+		}
+
 		/// <summary>
 		/// 카메라 중심 위치 변경
 		/// </summary>

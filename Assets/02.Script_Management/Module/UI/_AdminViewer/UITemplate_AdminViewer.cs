@@ -80,16 +80,26 @@ namespace Module.UI
 			//if (MainManager.Instance.Platform)
 
 			//Items.Init();
+			//ContentManager.Instance.CreateNewModule(ModuleCode.Issue_Administration);
 
 			// TODO 야매 CompCheck 3
 			ContentManager.Instance.CompCheck(3);
 		}
 
+		/// <summary>
+		/// 사전 준비단계가 끝났을때 실행
+		/// </summary>
 		public override void OnModuleComplete()
 		{
 			Debug.LogWarning("load complete");
 
 			items.Init();
+
+			// 모듈 인스턴스 상태코드 이벤트 관리자에 올리기
+			// 거대한 하나의 점검정보 관리 모듈의 형태이기 때문임.
+			ContentManager.Instance.CreateNewModule(ModuleCode.Issue_Administration);
+			// 모듈상태 변경 view1
+			ChangeModuleStatus(ModuleStatus.Administration_view1);
 		}
 
 		private void GetAddressData(AAPI _data)
@@ -172,9 +182,38 @@ namespace Module.UI
 
 		public override void TogglePanelList(int _index, GameObject _exclusive)
 		{
-			throw new System.NotImplementedException();
+			Debug.LogWarning("TogglePanelList");
 		}
 		#endregion
+
+		public override void ReInvokeEvent()
+		{
+			UIEventType uType = UIEventType.Null;
+			switch(m_status)
+			{
+				case ModuleStatus.Administration_view1:
+					uType = UIEventType.Ad_nav_state1;
+					break;
+
+				case ModuleStatus.Administration_view2:
+					uType = UIEventType.Ad_nav_state2;
+					break;
+
+				case ModuleStatus.Administration_view3:
+					uType = UIEventType.Ad_nav_state3;
+					break;
+
+				case ModuleStatus.Administration_view4:
+					uType = UIEventType.Ad_nav_state4;
+					break;
+
+				case ModuleStatus.Administration_view5:
+					uType = UIEventType.Ad_nav_state5;
+					break;
+			}
+
+			GetUIEvent(uType, null);
+		}
 
 		public override void GetUIEvent(float _value, UIEventType _uType, UI_Selectable _setter)
 		{
@@ -191,30 +230,35 @@ namespace Module.UI
 					Ad_nav_state1_BOT();
 					SetPanel_State1();
 					SetPin(true);
+					ChangeModuleStatus(ModuleStatus.Administration_view1);
 					break;
 				case UIEventType.Ad_nav_state2:
 					Ad_nav_state2_NAV();
 					Ad_nav_state2_BOT();
 					SetPanel_State2();
 					SetPin(false);
+					ChangeModuleStatus(ModuleStatus.Administration_view2);
 					break;
 				case UIEventType.Ad_nav_state3:
 					Ad_nav_state3_NAV();
 					Ad_nav_state3_BOT();
 					SetPanel_State3();
 					SetPin(false);
+					ChangeModuleStatus(ModuleStatus.Administration_view3);
 					break;
 				case UIEventType.Ad_nav_state4:
 					Ad_nav_state4_NAV();
 					Ad_nav_state4_BOT();
 					SetPanel_State4();
 					SetPin(false);
+					ChangeModuleStatus(ModuleStatus.Administration_view4);
 					break;
 				case UIEventType.Ad_nav_state5:
 					Ad_nav_state5_NAV();
 					Ad_nav_state5_BOT();
 					SetPanel_State5();
 					SetPin(false);
+					ChangeModuleStatus(ModuleStatus.Administration_view5);
 					break;
 
 				case UIEventType.Toggle:

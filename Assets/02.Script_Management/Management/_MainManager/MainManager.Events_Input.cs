@@ -172,15 +172,6 @@ namespace Management
 				_grRaycaster: main.Content._GrRaycaster,
 				_event: main.cameraExecuteEvents.dragEvent
 				));
-
-			//EventManager.Instance.OnEvent(new Events.EventData_Input(
-			//	_eventType: type,
-			//	_btn: btn,
-			//	_delta: _delta,
-			//	_camera: main.MainCamera,
-			//	_grRaycaster: main.Content._GrRaycaster,
-			//	_event: main.cameraExecuteEvents.dragEvent
-			//	));
 		}
 
 #endregion
@@ -225,14 +216,6 @@ namespace Management
 				_grRaycaster: main.Content._GrRaycaster,
 				_event: main.cameraExecuteEvents.keyEvent
 				));
-
-			//EventManager.Instance.OnEvent(new Events.EventData_Input(
-			//	_eventType: type,
-			//	_kData: _kData,
-			//	_camera: main.MainCamera,
-			//	_grRaycaster: main.Content._GrRaycaster,
-			//	_event: main.cameraExecuteEvents.keyEvent
-			//	));
 		}
 
 #endregion

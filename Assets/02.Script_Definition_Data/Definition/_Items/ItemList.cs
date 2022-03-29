@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,8 +10,8 @@ namespace Definition
 		{
 			GameObject result = null;
 
-			// TODO 0309 Module_UI ÄÚµå¿Í ÄÚµåµª½º Á¤ºñ (°°ÀÌ itemÀ» ·ÎµåÇÏ´Â °ü°èÀÎµ¥ AUI´Â ¸ğµâ¿¡ ¼ÓÇØÀÖ´Â ¹®Á¦)
-			// TODO 0309 ¼Õ»óÁ¤º¸ µî·Ï´Ü°è ÀÌº¥Æ® Ã³¸®
+			// TODO 0309 Module_UI ì½”ë“œì™€ ì½”ë“œëìŠ¤ ì •ë¹„ (ê°™ì´ itemì„ ë¡œë“œí•˜ëŠ” ê´€ê³„ì¸ë° AUIëŠ” ëª¨ë“ˆì— ì†í•´ìˆëŠ” ë¬¸ì œ)
+			// TODO 0309 ì†ìƒì •ë³´ ë“±ë¡ë‹¨ê³„ ì´ë²¤íŠ¸ ì²˜ë¦¬
 
 			switch(_fCode)
 			{

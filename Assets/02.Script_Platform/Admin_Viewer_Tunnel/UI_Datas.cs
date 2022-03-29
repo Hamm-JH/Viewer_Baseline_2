@@ -1,15 +1,17 @@
-﻿using AdminViewer.UI;
-using Definition;
-using Management;
-using Platform.Tunnel;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace AdminViewer
 {
+	using AdminViewer.UI;
+	using Definition;
+	using Management;
+	using Platform.Tunnel;
+	using TMPro;
+	using UnityEngine;
+	using UnityEngine.UI;
+	using Items.UIPin;
+
 	#region UI Template
 
 	[System.Serializable]
@@ -82,13 +84,32 @@ namespace AdminViewer
 		public RawImage mainPicture;
 
 		public GameObject State1_rootPin;
+		public List<UIPin> pins;
 		public List<GameObject> State1_pins;
 
 		public void Init()
 		{
+			GameObject root = new GameObject("pin root");
+			Controller_UIPin rootPin = root.AddComponent<Controller_UIPin>();
+
 			PlatformCode pCode = MainManager.Instance.Platform;
 			if(Platforms.IsTunnelPlatform(pCode))
 			{
+				#region 객체 34개 준비
+
+				List<GameObject> objList = new List<GameObject>();
+				for (int i = 0; i < 34; i++)
+				{
+					GameObject _obj = new GameObject($"pin pos {i+1}");
+					_obj.transform.SetParent(root.transform);
+					objList.Add(_obj);
+				}
+				rootPin.m_objectList = objList;
+
+				#endregion
+
+				#region 손상, 보수정보 구하기
+				// 34개 세팅
 				List<int> lst = new List<int>
 				{ 
 					0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -108,8 +129,10 @@ namespace AdminViewer
 					lst[index]++;
 				});
 
+				#endregion
+
 				// 다 끄기
-				State1_pins.ForEach(x => x.SetActive(false));
+				pins.ForEach(x => x.gameObject.SetActive(false));
 
 				// 모델 경계값
 				Bounds _b = ContentManager.Instance._Model.CenterBounds;
@@ -130,11 +153,16 @@ namespace AdminViewer
 						center.y,
 						center.z + zFactor * 5);
 
-					State1_pins[i].transform.position = _cam.WorldToScreenPoint(pos);
+					// 표시객체 위치할당
+					objList[i].transform.position = pos;
+					//State1_pins[i].transform.position = _cam.WorldToScreenPoint(pos);
+
+					// 표시객체 pin에 할당
+					pins[i].m_targetObject = objList[i].transform;
 
 					if (lst[i] != 0)
 					{
-						State1_pins[i].SetActive(true);
+						pins[i].gameObject.SetActive(true);
 					}
 				}
 

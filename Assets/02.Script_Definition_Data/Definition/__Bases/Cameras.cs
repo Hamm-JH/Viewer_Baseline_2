@@ -34,12 +34,18 @@ namespace Definition
         public static void SetCameraCenter(Camera _cam, ICamera _camCode)
 		{
             Bounds _b = ContentManager.Instance._CenterBounds;
+
+            // Å°¸Ê¿ë bounds ¼¼ÆÃ
+            Bounds bForKeymap = new Bounds();
+            bForKeymap.center = _b.center;
+            bForKeymap.size = _b.size * 0.37f;
+
             Canvas _canvas = ContentManager.Instance._Canvas;
             UIEventType _uType = UIEventType.Viewport_ViewMode_ISO;
 
             _camCode.CamMode = GetCameraMode(_uType, _camCode);
 
-            SetCameraCenterPosition(_cam, _b, _canvas, _uType);
+            SetCameraCenterPosition(_cam, bForKeymap, _canvas, _uType);
 		}
 
         public static CameraModes GetCameraMode(UIEventType _uType, ICamera _camCode)
