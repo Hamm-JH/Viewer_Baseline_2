@@ -14,7 +14,6 @@ namespace View
 
 		public abstract GameObject Target { get; }
 		public abstract List<GameObject> Targets { get; }
-		//public bool IsInteractable { get; set; }
 
 		public bool IsInteractable
 		{

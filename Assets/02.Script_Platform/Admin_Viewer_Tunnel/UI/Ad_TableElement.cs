@@ -92,13 +92,6 @@ namespace AdminViewer.UI
 					SetTableElement_s4_b2();
 				}
 			}
-			//else if (_uType == UIEventType.Ad_nav_state5)
-			//{
-			//	if (_pType == Ad_PanelType.s5m1)
-			//	{
-			//		SetTableElement_s5_s5m1();
-			//	}
-			//}
 		}
 
 		public void SetTableElement(Ad_PanelType _pType, UIEventType _uType, Ad_Panel_ElementType _tType, int _index, Issue _data)

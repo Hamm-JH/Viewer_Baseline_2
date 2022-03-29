@@ -65,7 +65,6 @@ namespace View
 			{
 				m_slider.onValueChanged.AddListener(new UnityAction<float>(OnChangeValue));
 			}
-			//m_btn.
 		}
 
 		public override void OnDeselect()
@@ -114,22 +113,7 @@ namespace View
 		{
 			PlatformCode pCode = MainManager.Instance.Platform;
 
-			//bool isDemoAdminViewer = false;
-			//if (Platforms.IsDemoAdminViewer(pCode)) isDemoAdminViewer = true;
-
 			m_rootUI.GetUIEvent(_eventType, this);
-
-			//// 데모용 관리자뷰어 모드일때
-			//if (isDemoAdminViewer)
-			//{
-			//	// 루트 UI에서 이벤트 분배
-			//	m_rootUI.GetUIEvent(_eventType, this);
-			//}
-			//// 잠시 교량, 터널용 이벤트 뒤로 두기
-			//else
-			//{
-			//	m_rootUI.GetUIEvent(_eventType, this);
-			//}
 		}
 
 		#endregion
