@@ -7,9 +7,11 @@ namespace AdminViewer.UI
 	using Definition;
 	using Definition._Issue;
 	using Management;
+	using Module.UI;
 
 	public class Ad_Panel_Table : MonoBehaviour
 	{
+		public AUI m_rootUI;
 		[SerializeField] private Ad_Panel_ElementType m_tType;
 
 		public GameObject sub_s2_bm;
@@ -364,7 +366,7 @@ namespace AdminViewer.UI
 			GameObject elem = Instantiate<GameObject>(Resources.Load<GameObject>("UI/UIElement/ContentElements"), rContent.transform);
 			Ad_TableElement elemCode = elem.GetComponent<Ad_TableElement>();
 
-			elemCode.SetTableElement(_pType, _uType, _tType, _index, _data);
+			elemCode.SetTableElement(_pType, _uType, _tType, _index, _data, m_rootUI);
 
 			tElems.Add(elemCode);
 		}
@@ -375,7 +377,7 @@ namespace AdminViewer.UI
 			Ad_TableElement elemCode = elem.GetComponent<Ad_TableElement>();
 
 			// TODO :: 요소 코드 동작 수행
-			elemCode.SetTableElement(m_pType, m_uType);
+			elemCode.SetTableElement(m_pType, m_uType, m_rootUI);
 
 			tElems.Add(elemCode);
 		}

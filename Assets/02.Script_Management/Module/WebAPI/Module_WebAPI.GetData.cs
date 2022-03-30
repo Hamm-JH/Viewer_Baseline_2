@@ -11,6 +11,7 @@ namespace Module.WebAPI
 	using Newtonsoft.Json.Linq;
 	using System.Data;
 	using UnityEngine.Events;
+	using UnityEngine.UI;
 
 	public partial class Module_WebAPI : AModule
 	{
@@ -25,6 +26,16 @@ namespace Module.WebAPI
 
 				case WebType.Issue_Rcv:
 					GetData_Rcv(_data);
+					break;
+			}
+		}
+
+		private void GetData(string _data, WebType _webT, UnityAction<string> _callback)
+		{
+			switch(_webT)
+			{
+				case WebType.imageHistory:
+					_callback.Invoke(_data);
 					break;
 			}
 		}
@@ -46,9 +57,15 @@ namespace Module.WebAPI
 				case WebType.Image_main:
 					GetImage_main(_texture, _callback);
 					break;
+			}
+		}
 
+		private void GetData(RawImage _rImage, Texture2D _texture, WebType _webT, UnityAction<RawImage, Texture2D> _callback)
+		{
+			switch(_webT)
+			{
 				case WebType.Image_single:
-
+					_callback.Invoke(_rImage, _texture);
 					break;
 			}
 		}

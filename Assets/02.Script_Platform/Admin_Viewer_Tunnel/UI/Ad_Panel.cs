@@ -16,6 +16,7 @@ namespace AdminViewer.UI
 
 	public partial class Ad_Panel : MonoBehaviour
 	{
+		[Header("base")]
 		[SerializeField] UITemplate_AdminViewer m_uiRoot;
 
 		public Ad_PanelType m_pid;
@@ -28,7 +29,6 @@ namespace AdminViewer.UI
 		public TextMeshProUGUI m_endText;
 
 		public TextMeshProUGUI m_user;
-
 		
 
 		[Header("B2 element")]
@@ -42,6 +42,12 @@ namespace AdminViewer.UI
 
 		[Header("State5 m1")]
 		[SerializeField] S5m1_element s5m1_element;
+
+		private void Start()
+		{
+			StartImage();
+			
+		}
 
 		public void SetPanel(UIEventType _uType)
 		{
@@ -212,8 +218,8 @@ namespace AdminViewer.UI
 
 		private void SetPanel_s5b1()
 		{
-			List<Issue> dmgs = ContentManager.Instance._Model.DmgData;
-			List<Issue> rcvs = ContentManager.Instance._Model.RcvData;
+			List<Definition._Issue.Issue> dmgs = ContentManager.Instance._Model.DmgData;
+			List<Definition._Issue.Issue> rcvs = ContentManager.Instance._Model.RcvData;
 
 			int allDmg = dmgs.Count;
 			int allRcv = rcvs.Count;

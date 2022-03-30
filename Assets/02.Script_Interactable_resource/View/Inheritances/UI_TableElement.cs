@@ -5,6 +5,8 @@ using UnityEngine;
 namespace View
 {
 	using AdminViewer.UI;
+	using Definition;
+	using Module.UI;
 	using UnityEngine.Events;
 	using UnityEngine.UI;
 
@@ -15,9 +17,14 @@ namespace View
 		Button m_btn;
 		Slider m_slider;
 
+		//[SerializeField] AUI m_rootUI;
+		[SerializeField] UIEventType eventType;
+		//public AUI RootUI { get => m_rootUI; set => m_rootUI=value; }
+
 		public override GameObject Target => gameObject;
 
 		public override List<GameObject> Targets => throw new System.NotImplementedException();
+
 
 		private void Start()
 		{
@@ -40,7 +47,6 @@ namespace View
 		/// <param name="_value"></param>
 		public override void OnChangeValue(float _value)
 		{
-			throw new System.NotImplementedException();
 		}
 
 		public override void OnDeselect()
@@ -58,7 +64,7 @@ namespace View
 		/// </summary>
 		public override void OnSelect()
 		{
-			throw new System.NotImplementedException();
+			tRootElement.m_rootUI.GetUIEvent(eventType, this);
 		}
 	}
 }

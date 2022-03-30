@@ -74,9 +74,7 @@ namespace View
 
 		public override void OnSelect()
 		{
-			//Debug.Log($"OnSelect : {this.name}");
-
-			ConditionalBranch(eventType);
+			m_rootUI.GetUIEvent(eventType, this);
 		}
 
 		public override void OnDeselect<T1, T2>(T1 t1, T2 t2)
@@ -90,54 +88,19 @@ namespace View
 		/// <param name="_value"></param>
 		public override void OnChangeValue(float _value)
 		{
-			ConditionalBranch(_value, eventType);
+			m_rootUI.GetUIEvent(_value, eventType, this);
 		}
-
-		#region Conditional Branch
-
-		/// <summary>
-		/// Slider Branch
-		/// </summary>
-		/// <param name="_value"></param>
-		/// <param name="_eventType"></param>
-		private void ConditionalBranch(float _value, UIEventType _eventType)
-		{
-			m_rootUI.GetUIEvent(_value, _eventType, this);
-		}
-
-		/// <summary>
-		/// Button Branch
-		/// </summary>
-		/// <param name="_eventType"></param>
-		private void ConditionalBranch(UIEventType _eventType)
-		{
-			PlatformCode pCode = MainManager.Instance.Platform;
-
-			m_rootUI.GetUIEvent(_eventType, this);
-		}
-
-		#endregion
 
 		#region Enable Disable
 
 		private void OnEnable()
 		{
 			m_uiHoverElements.ForEach(x => x.SetActive(false));
-
-			//if (m_unique == UniqueUIEventType.SetChild_Highlight)
-			//{
-			//	((Image)m_btn.targetGraphic).sprite = m_btn.spriteState.disabledSprite;
-			//}
 		}
 
 		private void OnDisable()
 		{
 			m_uiHoverElements.ForEach(x => x.SetActive(false));
-
-			//if (m_unique == UniqueUIEventType.SetChild_Highlight)
-			//{
-			//	((Image)m_btn.targetGraphic).sprite = m_btn.spriteState.disabledSprite;
-			//}
 		}
 
 		#endregion

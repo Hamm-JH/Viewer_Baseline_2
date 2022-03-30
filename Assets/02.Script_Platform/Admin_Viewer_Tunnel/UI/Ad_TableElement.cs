@@ -6,11 +6,13 @@ namespace AdminViewer.UI
 {
 	using Definition;
 	using Definition._Issue;
+	using Module.UI;
 	using TMPro;
 	using UnityEngine.UI;
 
 	public class Ad_TableElement : MonoBehaviour
 	{
+		public AUI m_rootUI;
 		public Issue m_issue;
 
 		public GameObject r_bm_State2_dmg;
@@ -67,8 +69,10 @@ namespace AdminViewer.UI
 
 
 
-		public void SetTableElement(Ad_PanelType _pType, UIEventType _uType /* TODO 데이터*/)
+		public void SetTableElement(Ad_PanelType _pType, UIEventType _uType, AUI _rootUI /* TODO 데이터*/)
 		{
+			m_rootUI = _rootUI;
+
 			if (_uType == UIEventType.Ad_nav_state2)
 			{
 				if (_pType == Ad_PanelType.bm)
@@ -96,8 +100,9 @@ namespace AdminViewer.UI
 			}
 		}
 
-		public void SetTableElement(Ad_PanelType _pType, UIEventType _uType, Ad_Panel_ElementType _tType, int _index, Issue _data)
+		public void SetTableElement(Ad_PanelType _pType, UIEventType _uType, Ad_Panel_ElementType _tType, int _index, Issue _data, AUI _rootUI)
 		{
+			m_rootUI = _rootUI;
 			m_issue = _data;
 
 			if (_uType == UIEventType.Ad_nav_state2)

@@ -12,8 +12,8 @@ namespace Definition
 
 			if (Platforms.IsDemoAdminViewer(_pCode))
 			{
-				list.Add(Resources.Load<GameObject>("UI/UI_AdminViewer"));
 				list.Add(Resources.Load<GameObject>("UI/UITemplate_0328 2"));
+				list.Add(Resources.Load<GameObject>("UI/UI_AdminViewer"));
 			}
 			else if(Platforms.IsSmartInspectPlatform(_pCode))
 			{

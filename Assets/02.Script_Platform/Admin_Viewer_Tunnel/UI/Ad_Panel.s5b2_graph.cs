@@ -15,64 +15,6 @@ namespace AdminViewer.UI
 
 	public partial class Ad_Panel : MonoBehaviour
 	{
-		//private void GetHistoryTable(DataTable _dTable)
-		//{
-		//	Debug.LogError("Hello table");
-        //
-        //    //if (isMain)
-        //    //{
-        //    //    ClearElements();
-        //    //    SetChangeYearBtn();     // 연도 변환 버튼 옵션별 설정
-        //    //    GetHistoryTable(_dataTable);
-        //    //}
-        //
-        //    //List<RecordInstance> _recordInstanceList = new List<RecordInstance>();
-        //
-        //    //int index = _dataTable.Rows.Count;
-        //    //for (int i = 0; i < index; i++)
-        //    //{
-        //    //    RecordInstance _record = new RecordInstance();
-        //
-        //    //    string _date = _dataTable.Rows[i]["date"].ToString();
-        //
-        //    //    _record.dateTime = new DateTime(
-        //    //        int.Parse(_date.Split('-')[0]),
-        //    //        int.Parse(_date.Split('-')[1]),
-        //    //        int.Parse(_date.Split('-')[2]));
-        //
-        //    //    _record.DCrackList = SetRowToList(_dataTable.Rows[i]["Dcrack"]);
-        //    //    _record.DEfflorescenceList = SetRowToList(_dataTable.Rows[i]["Dbagli"]);
-        //    //    _record.DSpallingList = SetRowToList(_dataTable.Rows[i]["Dbaegtae"]);
-        //    //    _record.DBreakageList = SetRowToList(_dataTable.Rows[i]["Ddamage"]);
-        //    //    _record.DScour_ErosionList = SetRowToList(_dataTable.Rows[i]["Dsegul"]);
-        //
-        //    //    _record.RCrackList = SetRowToList(_dataTable.Rows[i]["Rcrack"]);
-        //    //    _record.REfflorescenceList = SetRowToList(_dataTable.Rows[i]["Rbagli"]);
-        //    //    _record.RSpallingList = SetRowToList(_dataTable.Rows[i]["Rbaegtae"]);
-        //    //    _record.RBreakageList = SetRowToList(_dataTable.Rows[i]["Rdamage"]);
-        //    //    _record.RScour_ErosionList = SetRowToList(_dataTable.Rows[i]["Rsegul"]);
-        //
-        //    //    // 세굴 없애기
-        //    //    ResetRecord(_record);
-        //
-        //    //    if (!IsNullInstance(_record) == true)
-        //    //    {
-        //    //        _recordInstanceList.Add(_record);
-        //    //    }
-        //    //}
-        //
-        //    //// 데이터 날짜, 카운트 정렬단계
-        //    //SetDateTimeIssue(
-        //    //    _list: _recordInstanceList,
-        //    //    _elements: ref issueElements);
-        //
-        //    //// TODO : 추후 1년, 5년, 10년, 전체 조건을 건다
-        //    //// 1년 먼저 작업
-        //    //// 패널 생성 / 데이터 전달 단계
-        //    //SetDateTimePanels(ref issueElements);
-        //}
-
-        //public Element.State5_BP2_Element element;
 
         #region 날짜 분류변수
 
@@ -112,7 +54,7 @@ namespace AdminViewer.UI
             public IssueCode _code;
             public DateTime _date;
             public int _count;
-            public List<Issue> _issues;
+            public List<Definition._Issue.Issue> _issues;
 
             public override string ToString()
             {
@@ -129,7 +71,7 @@ namespace AdminViewer.UI
                 return result;
             }
 
-            private string GetIssueCodes(List<Issue> __issues)
+            private string GetIssueCodes(List<Definition._Issue.Issue> __issues)
             {
                 string result = "";
 
@@ -489,9 +431,9 @@ namespace AdminViewer.UI
             return result;
         }
 
-        private List<Issue> SetRowToList(object _dataRow)
+        private List<Definition._Issue.Issue> SetRowToList(object _dataRow)
         {
-            List<Issue> list = (_dataRow as List<Issue>);
+			List<Definition._Issue.Issue> list = (_dataRow as List<Definition._Issue.Issue>);
 
             if (list != null)
             {
@@ -662,7 +604,7 @@ namespace AdminViewer.UI
         /// <param name="_class"></param>
         /// <param name="_code"></param>
         /// <param name="_target"></param>
-        private void SetSingleDateCount(int _count, DateTime _date, IssueClass _class, IssueCode _code, List<Issue> _issues, ref Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, dateElement>>> _target)
+        private void SetSingleDateCount(int _count, DateTime _date, IssueClass _class, IssueCode _code, List<Definition._Issue.Issue> _issues, ref Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, dateElement>>> _target)
         {
             dateElement finalElement = new dateElement();
             finalElement._class = _class;
@@ -779,8 +721,8 @@ namespace AdminViewer.UI
             foreach (DateTime key in _target.Keys)
             {
 
-                // 리스트 요소 할당
-                List<Issue> _issues = _target[key]._issues;
+				// 리스트 요소 할당
+				List<Definition._Issue.Issue> _issues = _target[key]._issues;
 
                 int index = _issues.Count;
                 if (index != 0)
@@ -851,7 +793,7 @@ namespace AdminViewer.UI
         /// </summary>
         /// <param name="codeKey"></param>
         /// <param name="_list"></param>
-        private void RemoveListElement(string codeKey, ref List<Issue> _list)
+        private void RemoveListElement(string codeKey, ref List<Definition._Issue.Issue> _list)
         {
             int index = _list.Count;
             for (int i = index-1; i >= 0; i--)

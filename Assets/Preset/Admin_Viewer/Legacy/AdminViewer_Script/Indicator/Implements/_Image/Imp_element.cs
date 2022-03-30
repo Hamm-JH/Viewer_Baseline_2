@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 namespace Indicator.Element
 {
+    using TMPro;
+    using AdminViewer.UI;
+
     public class Imp_element : AElement
     {
+        //public Ad_Panel imgPanel;
+        public GameObject largeImgPanel;
+
         //public Issue.AIssue reference;
         private Indicator.ImageIndex imgIndex;
 
@@ -108,8 +113,10 @@ namespace Indicator.Element
 
         public void EnlargePhotoButton()
         {
-            Indicator.ImP_Indicator.Instance.enlargeImage.gameObject.SetActive(true);
-            Indicator.ImP_Indicator.Instance.enlargeImage.transform.GetChild(1).GetComponent<RawImage>().texture = this.image.texture;
+            largeImgPanel.SetActive(true);
+            largeImgPanel.transform.GetChild(1).GetComponent<RawImage>().texture = this.image.texture;
+            //Indicator.ImP_Indicator.Instance.enlargeImage.gameObject.SetActive(true);
+            //Indicator.ImP_Indicator.Instance.enlargeImage.transform.GetChild(1).GetComponent<RawImage>().texture = this.image.texture;
         }
     }
 }

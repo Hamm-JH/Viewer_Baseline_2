@@ -496,7 +496,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   tRootElement: {fileID: 7772447479038641997}
+  m_rootUI: {fileID: 0}
+  eventType: 531
 --- !u!1 &430226976774246268
 GameObject:
   m_ObjectHideFlags: 0
@@ -3242,7 +3245,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   tRootElement: {fileID: 7772447479038641997}
+  m_rootUI: {fileID: 0}
+  eventType: 531
 --- !u!1 &2748935517075626659
 GameObject:
   m_ObjectHideFlags: 0
@@ -3800,7 +3806,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   tRootElement: {fileID: 7772447479038641997}
+  m_rootUI: {fileID: 0}
+  eventType: 531
 --- !u!1 &3172562352170632977
 GameObject:
   m_ObjectHideFlags: 0
@@ -4182,6 +4191,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0210bc735ed8234a9dd7d2c98eec4ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_issue:
+    m_issueOrderCode: 
+    m_cdBridge: 
+    m_cdBridgeParts: 
+    m_nmUser: 
+    m_dcMemberSurface: 
+    m__dcLocation: 
+    m__issueCode: 
+    m_ynRecover: 
+    m_issueStatus: 
+    m__positionVector: 
+    m_width: 
+    m_height: 
+    m_depth: 
+    m_dcRemark: 
+    m_dcRecover: 
+    m_dateDmg: 
+    m_dateRcvStart: 
+    m_dateRcvEnd: 
+    m_fgroup: 
+    m_imgs: []
+    m_issueCode: 0
+    m_dcLocation: 0
+    m_positionVector: {x: 0, y: 0, z: 0}
   r_bm_State2_dmg: {fileID: 501701488571308034}
   r_b1_State3_dmg: {fileID: 3080797039498430496}
   r_b1_State4_rcv: {fileID: 985783739946531586}
@@ -4487,7 +4520,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   tRootElement: {fileID: 7772447479038641997}
+  m_rootUI: {fileID: 0}
+  eventType: 531
 --- !u!1 &3361159767803662810
 GameObject:
   m_ObjectHideFlags: 0
@@ -5500,7 +5536,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   tRootElement: {fileID: 7772447479038641997}
+  m_rootUI: {fileID: 0}
+  eventType: 531
 --- !u!1 &4930703522711900270
 GameObject:
   m_ObjectHideFlags: 0

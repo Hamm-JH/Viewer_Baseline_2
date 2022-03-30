@@ -10,6 +10,7 @@ namespace Module.WebAPI
 	using Management;
 	using System.Data;
 	using UnityEngine.Events;
+	using UnityEngine.UI;
 
 	/// <summary>
 	/// 웹 API 모듈
@@ -64,6 +65,18 @@ namespace Module.WebAPI
 			
 		}
 
+		public void RequestSinglePicture(string _imgArgument, RawImage _rImage, UnityAction<RawImage, Texture2D> _action)
+		{
+			CoreData data = MainManager.Instance.Data;
+
+			// 이미지 URI
+			string imageURL = data.ImageURL;
+
+			string imageURI = $"{imageURL}{_imgArgument}";
+
+			RequestImage(imageURI, WebType.Image_single, _rImage, _action, GetData);
+		}
+
 		/// <summary>
 		/// history 수집
 		/// </summary>
@@ -75,6 +88,15 @@ namespace Module.WebAPI
 			string historyURI = data.HistoryURL;
 
 			RequestData(historyURI, WebType.history, _action, GetData);
+		}
+
+		public void RequestImageHistoryData(string _imgQuery, UnityAction<string> _action)
+		{
+			CoreData data = MainManager.Instance.Data;
+
+			string imgHistoryURI = $"{data.HistoryURL}{_imgQuery}";
+
+			RequestData(imgHistoryURI, WebType.imageHistory, _action, GetData);
 		}
 	}
 }

@@ -16,6 +16,7 @@ namespace AdminViewer
 		s5m1 = 3,
 		s5b1 = 4,
 		s5b2 = 5,
+		image = 6,
 	}
 
 	public enum Ad_Panel_ElementType

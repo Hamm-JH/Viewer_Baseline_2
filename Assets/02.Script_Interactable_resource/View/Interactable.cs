@@ -37,6 +37,12 @@ namespace View
 		}
 
 		/// <summary>
+		/// 자식 패널 객체
+		/// </summary>
+		[SerializeField] GameObject childPanel;
+		public GameObject ChildPanel { get => childPanel; set => childPanel=value; }
+
+		/// <summary>
 		/// 인스턴스 선택시 실행
 		/// </summary>
 		public abstract void OnSelect();

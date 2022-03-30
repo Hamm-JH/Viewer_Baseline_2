@@ -35,6 +35,8 @@ namespace Definition._Issue
 			public string ftype;
 		}
 		#region field
+		[SerializeField] string m_date;
+
 		[SerializeField] string m_issueOrderCode;
 		[SerializeField] string m_cdBridge;
 		[SerializeField] string m_cdBridgeParts;
@@ -63,6 +65,7 @@ namespace Definition._Issue
 		[SerializeField] int m_dcLocation;
 		[SerializeField] Vector3 m_positionVector;
 
+		public string Date { get => m_date; set => m_date=value; }
 
 		public string IssueOrderCode { get => m_issueOrderCode; set => m_issueOrderCode=value; }
 		public string CdBridge { get => m_cdBridge; set => m_cdBridge=value; }
@@ -239,7 +242,12 @@ namespace Definition._Issue
 			}
 		}
 
-		
+		public void SetDmg(string _date, JToken _token)
+		{
+			Date = _date;
+
+			SetDmg(_token);
+		}
 
 		public void SetDmg(JToken _token)
 		{
@@ -339,6 +347,13 @@ namespace Definition._Issue
 				_index.ftype = arg.SelectToken(kFtype).ToString();
 				Imgs.Add(_index);
 			}
+		}
+
+		public void SetRcv(string _date, JToken _token)
+		{
+			Date = _date;
+
+			SetRcv(_token);
 		}
 
 		public void SetRcv(JToken _token)

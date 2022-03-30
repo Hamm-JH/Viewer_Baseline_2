@@ -262,6 +262,7 @@ namespace Definition
 		Ad_Next = 0x211,
 
 		Ad_SetKeymapCenter = 0x212,
+		Ad_SetImageWindow = 0x213,
 
 		Ad_St3_Toggle = 0x216,
 		Ad_St4_Toggle = 0x217,

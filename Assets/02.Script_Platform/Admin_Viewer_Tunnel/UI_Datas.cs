@@ -186,6 +186,7 @@ namespace AdminViewer
 		public GameObject s5b1			;
 		public GameObject s5b2			;
 		public GameObject s5m1			;
+		public GameObject image			;
 
 		[Header("Panel Codes")]
 		public Ad_Panel bpm1_code;
@@ -194,6 +195,7 @@ namespace AdminViewer
 		public Ad_Panel s5b1_code;
 		public Ad_Panel s5b2_code;
 		public Ad_Panel s5m1_code;
+		public Ad_Panel image_code;
 	}
 
 	#endregion
@@ -274,6 +276,17 @@ namespace AdminViewer
 		public TextMeshProUGUI m_s5m1_count_dmg;
 		public TextMeshProUGUI m_s5m1_count_rcv;
 		public TextMeshProUGUI m_s5m1_count_rein;
+	}
+
+	[System.Serializable]
+	public class ImgPanel_element
+	{
+		public GameObject img_cRoot;
+		
+		public GameObject img_enlargePanel;
+		public RawImage img_enlargeImage;
+
+		public List<Ad_Panel> imgContents;
 	}
 
 	#endregion

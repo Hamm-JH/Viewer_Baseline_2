@@ -30,7 +30,7 @@ namespace Module.UI
 			
 		}
 
-		public override void GetUIEvent(float _value, UIEventType _uType, UI_Selectable _setter)
+		public override void GetUIEvent(float _value, UIEventType _uType, Interactable _setter)
 		{
 			switch (_uType)
 			{
@@ -44,7 +44,7 @@ namespace Module.UI
 			}
 		}
 
-		public override void GetUIEvent(UIEventType _uType, UI_Selectable _setter)
+		public override void GetUIEvent(UIEventType _uType, Interactable _setter)
 		{
 			switch (_uType)
 			{
@@ -95,7 +95,7 @@ namespace Module.UI
 					break;
 
 				case UIEventType.Test_Surface:
-					Event_Legacy_ChangeCameraDirection(_setter.t_surfaceCode);
+					Event_Legacy_ChangeCameraDirection( ((UI_Selectable)_setter).t_surfaceCode);
 					break;
 			}
 		}

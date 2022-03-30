@@ -169,10 +169,7 @@ namespace Module.UI
 			SetPin(true);
 		}
 
-		public void SetKeymapCenterPosition()
-		{
-			ContentManager.Instance.Function_SetKeymapCenterPosition();
-		}
+		
 
 		#region ** not implemented
 		public override void SetObjectData_Tunnel(GameObject selected)
@@ -215,12 +212,12 @@ namespace Module.UI
 			GetUIEvent(uType, null);
 		}
 
-		public override void GetUIEvent(float _value, UIEventType _uType, UI_Selectable _setter)
+		public override void GetUIEvent(float _value, UIEventType _uType, Interactable _setter)
 		{
 			throw new System.NotImplementedException();
 		}
 
-		public override void GetUIEvent(UIEventType _uType, UI_Selectable _setter)
+		public override void GetUIEvent(UIEventType _uType, Interactable _setter)
 		{
 			Debug.Log($"Type : {_uType.ToString()}");
 			switch(_uType)
@@ -305,8 +302,32 @@ namespace Module.UI
 					SetKeymapCenterPosition();
 					break;
 
+				case UIEventType.Ad_SetImageWindow:
+					OpenImagePanel(_setter);
+					break;
+
 					
 			}
+		}
+
+		public void SetKeymapCenterPosition()
+		{
+			ContentManager.Instance.Function_SetKeymapCenterPosition();
+		}
+
+		private void OpenImagePanel(Interactable _setter)
+		{
+			// 이미지 할당자를 
+			UI_TableElement element = (UI_TableElement)_setter;
+
+			// 점검정보를 가져온다.
+			Definition._Issue.Issue issue = element.tRootElement.m_issue;
+
+			// 이미지 패널 켜기
+			Panels.image.SetActive(true);
+
+			// 이미지 패널 실행
+			Panels.image_code.OpenImagePanel(issue);
 		}
 	}
 }

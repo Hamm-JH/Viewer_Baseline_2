@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.2747876, g: 0.39077058, b: 0.50724125, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -834,6 +834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 0}
   eventType: 272
   m_unique: 0
@@ -1057,6 +1058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
 --- !u!4 &475374887
 Transform:
   m_ObjectHideFlags: 0
@@ -1705,6 +1707,54 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4957481881430923011}
     m_Modifications:
+    - target: {fileID: 735383547367688913, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 735383547367688913, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 735383547367688913, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 735383547367688913, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 735383547367688913, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 735383547367688913, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1627075769733787241, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1627075769733787241, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1627075769733787241, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1627075769733787241, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1627075769733787241, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1627075769733787241, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3005354841915401136, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
       propertyPath: m_Name
       value: UI_AdminViewer
@@ -1795,6 +1845,162 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005354841915401137, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411431343885350069, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411431343885350069, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411431343885350069, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411431343885350069, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411431343885350069, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411431343885350069, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845767374205622520, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845767374205622520, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845767374205622520, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845767374205622520, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845767374205622520, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845767374205622520, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236587791573547176, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.56294686
+      objectReference: {fileID: 0}
+    - target: {fileID: 4236587791573547176, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4433419328438030204, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1406
+      objectReference: {fileID: 0}
+    - target: {fileID: 4659015620286871980, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4659015620286871980, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4659015620286871980, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4659015620286871980, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4659015620286871980, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4659015620286871980, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5118978567653573766, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5118978567653573766, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5118978567653573766, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5118978567653573766, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5118978567653573766, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5118978567653573766, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332406359724430127, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332406359724430127, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332406359724430127, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 185
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332406359724430127, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 73
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332406359724430127, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 92.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332406359724430127, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -36.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365899230544720351, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365899230544720351, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365899230544720351, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365899230544720351, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365899230544720351, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365899230544720351, guid: 67d3f0d13a2f1254fb36396f8535dae8, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2492,6 +2698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 0}
   eventType: 272
   m_unique: 0
@@ -2865,6 +3072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 0}
   eventType: 272
   m_unique: 0
@@ -3097,6 +3305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 0}
   eventType: 272
   m_unique: 0
@@ -3307,6 +3516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 0}
   eventType: 272
   m_unique: 0
@@ -3449,6 +3659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 0}
   eventType: 272
   m_unique: 0
@@ -3791,6 +4002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 3831294775458957255}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 16
   m_unique: 1
@@ -3887,6 +4099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 257
   m_unique: 0
@@ -4327,6 +4540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 5396636576861620907}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -4430,6 +4644,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b558f144c17354e94aa02726c08480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  img_element:
+    img_cRoot: {fileID: 0}
+    img_enlargePanel: {fileID: 0}
+    img_enlargeImage: {fileID: 0}
+    imgContents: []
   m_uiRoot: {fileID: 8967468746842455738}
   m_pid: 1
   r_TableContents:
@@ -4517,6 +4736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 529
   m_unique: 0
@@ -4737,6 +4957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 528
   m_unique: 0
@@ -4960,6 +5181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -5982,6 +6204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 7537057257214815240}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -6143,6 +6366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -6451,6 +6675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -8100,6 +8325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -8169,6 +8395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -9314,6 +9541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 528
   m_unique: 0
@@ -9596,6 +9824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 528
   m_unique: 0
@@ -9616,6 +9845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 514
   m_unique: 0
@@ -9636,6 +9866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 256
   m_unique: 0
@@ -9792,6 +10023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -10288,6 +10520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -10558,6 +10791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 5396636576861620907}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -10847,6 +11081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 512
   m_unique: 0
@@ -10867,6 +11102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 540
   m_unique: 0
@@ -11332,6 +11568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 529
   m_unique: 0
@@ -11411,6 +11648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 529
   m_unique: 0
@@ -11570,6 +11808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -11897,6 +12136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -11925,6 +12165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 515
   m_unique: 0
@@ -12642,6 +12883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 528
   m_unique: 0
@@ -13018,6 +13260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 7537057256260403988}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -13710,6 +13953,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 534
   m_unique: 0
@@ -14080,6 +14324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 7259666348173711431}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 17
   m_unique: 0
@@ -14224,6 +14469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 70
   m_unique: 0
@@ -14321,6 +14567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 41
   m_unique: 0
@@ -14465,6 +14712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 65
   m_unique: 0
@@ -14732,6 +14980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 4976135276133779154}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 17
   m_unique: 0
@@ -14950,6 +15199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 4976135276133779154}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 17
   m_unique: 0
@@ -14970,6 +15220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 2631168186029553356}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 17
   m_unique: 0
@@ -15313,6 +15564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 64
   m_unique: 0
@@ -15687,6 +15939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 1159848649622197984}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 17
   m_unique: 0
@@ -16096,6 +16349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 7537057255919748505}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -16876,6 +17130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -18914,6 +19169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -19041,6 +19297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 7537057255472278308}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -19196,6 +19453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 512
   m_unique: 0
@@ -20448,6 +20706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 1159848649622197984}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 49
   m_unique: 0
@@ -20504,6 +20763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -20822,6 +21082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 529
   m_unique: 0
@@ -20858,6 +21119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 536
   m_unique: 0
@@ -20949,6 +21211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 33
   m_unique: 0
@@ -21148,6 +21411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -21217,6 +21481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 7537057256821125252}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -21245,6 +21510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -21265,6 +21531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 7537057256859935986}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -22033,6 +22300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 537
   m_unique: 0
@@ -22071,6 +22339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 529
   m_unique: 0
@@ -22416,6 +22685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 493621152736044716}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 16
   m_unique: 1
@@ -22861,6 +23131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -23007,6 +23278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 7537057256504414232}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -23075,6 +23347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -23095,6 +23368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 35
   m_unique: 0
@@ -23583,6 +23857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -23744,6 +24019,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b558f144c17354e94aa02726c08480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  img_element:
+    img_cRoot: {fileID: 0}
+    img_enlargePanel: {fileID: 0}
+    img_enlargeImage: {fileID: 0}
+    imgContents: []
   m_uiRoot: {fileID: 8967468746842455738}
   m_pid: 5
   r_TableContents: []
@@ -23971,6 +24251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 538
   m_unique: 0
@@ -24047,6 +24328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -24085,6 +24367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -24321,6 +24604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 539
   m_unique: 0
@@ -24399,6 +24683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 528
   m_unique: 0
@@ -24435,6 +24720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 36
   m_unique: 0
@@ -24785,6 +25071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -25437,6 +25724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 1159848649622197984}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 50
   m_unique: 0
@@ -25458,6 +25746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 7537057256918093600}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -25478,6 +25767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -25539,6 +25829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 7537057255472278308}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -26653,6 +26944,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b558f144c17354e94aa02726c08480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  img_element:
+    img_cRoot: {fileID: 0}
+    img_enlargePanel: {fileID: 0}
+    img_enlargeImage: {fileID: 0}
+    imgContents: []
   m_uiRoot: {fileID: 8967468746842455738}
   m_pid: 2
   r_TableContents:
@@ -26853,6 +27149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 7537057256508868877}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -26899,6 +27196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -27365,6 +27663,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b558f144c17354e94aa02726c08480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  img_element:
+    img_cRoot: {fileID: 0}
+    img_enlargePanel: {fileID: 0}
+    img_enlargeImage: {fileID: 0}
+    imgContents: []
   m_uiRoot: {fileID: 8967468746842455738}
   m_pid: 0
   r_TableContents:
@@ -89057,6 +89360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -89085,6 +89389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 7537057255919748505}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -90156,6 +90461,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b558f144c17354e94aa02726c08480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  img_element:
+    img_cRoot: {fileID: 0}
+    img_enlargePanel: {fileID: 0}
+    img_enlargeImage: {fileID: 0}
+    imgContents: []
   m_uiRoot: {fileID: 8967468746842455738}
   m_pid: 4
   r_TableContents: []
@@ -90241,6 +90551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 535
   m_unique: 0
@@ -90261,6 +90572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 7537057256508868877}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -90527,6 +90839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 516
   m_unique: 0
@@ -90772,6 +91085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -91614,6 +91928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 0
   m_unique: 0
@@ -91634,6 +91949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 7537057257157630697}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -92356,6 +92672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 513
   m_unique: 0
@@ -92632,6 +92949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 805203970225758978}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -92903,12 +93221,14 @@ MonoBehaviour:
     s5b1: {fileID: 7537057256918093600}
     s5b2: {fileID: 7537057256821125252}
     s5m1: {fileID: 7537057256859935986}
+    image: {fileID: 0}
     bpm1_code: {fileID: 7529943657477409942}
     bpm2_code: {fileID: 248842051249491811}
     bpmm_code: {fileID: 7283888076277643521}
     s5b1_code: {fileID: 7931816481346533405}
     s5b2_code: {fileID: 6181876941229654073}
     s5m1_code: {fileID: 9184360158265343009}
+    image_code: {fileID: 0}
   m_keymapPanel: {fileID: 7537057256039460261}
 --- !u!222 &8983715958154813167
 CanvasRenderer:
@@ -92931,6 +93251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 0}
   m_rootUI: {fileID: 8042148678394555471}
   eventType: 34
   m_unique: 0
@@ -93179,6 +93500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 7537057256859935986}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -93199,6 +93521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
+  childPanel: {fileID: 5396636576861620907}
   m_rootUI: {fileID: 8967468746842455738}
   eventType: 16
   m_unique: 0
@@ -93454,6 +93777,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b558f144c17354e94aa02726c08480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  img_element:
+    img_cRoot: {fileID: 0}
+    img_enlargePanel: {fileID: 0}
+    img_enlargeImage: {fileID: 0}
+    imgContents: []
   m_uiRoot: {fileID: 8967468746842455738}
   m_pid: 3
   r_TableContents:

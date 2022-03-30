@@ -25,6 +25,7 @@ namespace Definition
 		Image_single = 0x22,
 
 		history = 0x31,
+		imageHistory = 0x32,
 	}
 
 	/// <summary>

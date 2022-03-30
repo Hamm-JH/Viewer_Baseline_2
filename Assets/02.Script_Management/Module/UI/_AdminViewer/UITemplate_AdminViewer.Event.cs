@@ -363,6 +363,7 @@ namespace Module.UI
 			Panels.s5b1			.SetActive(false);
 			Panels.s5b2			.SetActive(false);
 			Panels.s5m1			.SetActive(false);
+			Panels.image		.SetActive(false);
 
 			TogglePartData(false);
 
@@ -387,6 +388,7 @@ namespace Module.UI
 			Panels.s5b1.SetActive(false);
 			Panels.s5b2.SetActive(false);
 			Panels.s5m1.SetActive(false);
+			Panels.image.SetActive(false);
 
 			TogglePartData(false);
 
@@ -411,6 +413,7 @@ namespace Module.UI
 			Panels.s5b1.SetActive(false);
 			Panels.s5b2.SetActive(false);
 			Panels.s5m1.SetActive(false);
+			Panels.image.SetActive(false);
 
 			TogglePartData(true);
 
@@ -437,6 +440,7 @@ namespace Module.UI
 			Panels.s5b1.SetActive(false);
 			Panels.s5b2.SetActive(false);
 			Panels.s5m1.SetActive(false);
+			Panels.image.SetActive(false);
 
 			TogglePartData(true);
 
@@ -464,6 +468,7 @@ namespace Module.UI
 			Panels.s5b1.SetActive(true);
 			Panels.s5b2.SetActive(true);
 			Panels.s5m1.SetActive(true);
+			Panels.image.SetActive(false);
 
 			TogglePartData(false);
 
