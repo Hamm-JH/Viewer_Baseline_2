@@ -245,7 +245,6 @@ namespace AdminViewer.UI
 
 			float maxHeight = 175f;
 
-
 			s5b1_element.m_s5b1_image_1crack_dmgRect.sizeDelta = new Vector2(16, (float)dmg1 / maxValue * maxHeight);
 			s5b1_element.m_s5b1_image_1crack_rcvRect.sizeDelta = new Vector2(16, (float)rcv1 / maxValue * maxHeight);
 

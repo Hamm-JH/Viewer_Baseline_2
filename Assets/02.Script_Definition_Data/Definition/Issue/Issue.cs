@@ -339,14 +339,20 @@ namespace Definition._Issue
 			Fgroup              =   _token.SelectToken(kFgroup).ToString();
 			DmgDescription          =   _token.SelectToken(kDmgDescription).ToString();
 
-			JArray jImgArr = JArray.Parse(_token.SelectToken("files").ToString());
-			foreach(var arg in jImgArr)
+			if(_token.SelectToken("files") != null && _token.SelectToken("files").ToString() != "")
 			{
-				ImgIndex _index = new ImgIndex();
-				_index.fid = arg.SelectToken(kFid).ToString();
-				_index.ftype = arg.SelectToken(kFtype).ToString();
-				Imgs.Add(_index);
+				JArray jImgArr = JArray.Parse(_token.SelectToken("files").ToString());
+				foreach(var arg in jImgArr)
+				{
+					ImgIndex _index = new ImgIndex();
+					_index.fid = arg.SelectToken(kFid).ToString();
+					_index.ftype = arg.SelectToken(kFtype).ToString();
+					Imgs.Add(_index);
+				}
 			}
+			//if(JArray.Parse(_token.SelectToken("files").ToString()) != null)
+			//{
+			//}
 		}
 
 		public void SetRcv(string _date, JToken _token)
@@ -456,14 +462,20 @@ namespace Definition._Issue
 			DmgDescription          =   _token.SelectToken(kDmgDescription).ToString();
 			RcvDescription       =   _token.SelectToken(kRcvDescription).ToString();
 
-			JArray jImgArr = JArray.Parse(_token.SelectToken("files").ToString());
-			foreach (var arg in jImgArr)
+			if (_token.SelectToken("files") != null && _token.SelectToken("files").ToString() != "")
 			{
-				ImgIndex _index = new ImgIndex();
-				_index.fid = arg.SelectToken(kFid).ToString();
-				_index.ftype = arg.SelectToken(kFtype).ToString();
-				Imgs.Add(_index);
+				JArray jImgArr = JArray.Parse(_token.SelectToken("files").ToString());
+				foreach (var arg in jImgArr)
+				{
+					ImgIndex _index = new ImgIndex();
+					_index.fid = arg.SelectToken(kFid).ToString();
+					_index.ftype = arg.SelectToken(kFtype).ToString();
+					Imgs.Add(_index);
+				}
 			}
+			//if (JArray.Parse(_token.SelectToken("files").ToString()) != null)
+			//{
+			//}
 		}
 	}
 }

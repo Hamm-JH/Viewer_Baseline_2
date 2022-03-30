@@ -197,10 +197,8 @@ namespace AdminViewer.UI
 				Imp_element _element = _obj.GetComponent<Imp_element>();
 
 				_element.largeImgPanel = img_element.img_enlargePanel;
-				// TODO element에 imgpanel root 전달
 
 				DateTime currTime =	DateTime.Parse(_list[i].Date);
-				//DateTime time = new DateTime.()
 
 				_element.yearDate.text = $"{currTime.Year}년";
 				_element.date.text = $"{currTime.Month}/{currTime.Day}";
