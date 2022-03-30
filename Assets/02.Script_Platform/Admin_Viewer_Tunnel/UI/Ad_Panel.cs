@@ -38,7 +38,7 @@ namespace AdminViewer.UI
 		[SerializeField] S5b1_element s5b1_element;
 
 		[Header("State5 b2")]
-		[SerializeField] S5b2_element __el;
+		[SerializeField] S5b2_element s5b2_element;
 
 		[Header("State5 m1")]
 		[SerializeField] S5m1_element s5m1_element;
@@ -235,6 +235,29 @@ namespace AdminViewer.UI
 
 			int dmg4 = dmgs.FindAll(x => x.IssueCode == IssueCodes.breakage).Count;
 			int rcv4 = rcvs.FindAll(x => x.IssueCode == IssueCodes.breakage).Count;
+
+			List<int> lst = new List<int>
+			{
+				dmg1, rcv1, dmg2, rcv2,
+				dmg3, rcv3, dmg4, rcv4
+			};
+			int maxValue = lst.Max();
+
+			float maxHeight = 175f;
+
+
+			s5b1_element.m_s5b1_image_1crack_dmgRect.sizeDelta = new Vector2(16, (float)dmg1 / maxValue * maxHeight);
+			s5b1_element.m_s5b1_image_1crack_rcvRect.sizeDelta = new Vector2(16, (float)rcv1 / maxValue * maxHeight);
+
+			s5b1_element.m_s5b1_image_2spalling_dmgRect.sizeDelta = new Vector2(16, (float)dmg2 / maxValue * maxHeight);
+			s5b1_element.m_s5b1_image_2spalling_rcvRect.sizeDelta = new Vector2(16, (float)rcv2 / maxValue * maxHeight);
+			
+			s5b1_element.m_s5b1_image_3Efflorence_dmgRect.sizeDelta = new Vector2(16, (float)dmg3 / maxValue * maxHeight);
+			s5b1_element.m_s5b1_image_3Efflorence_rcvRect.sizeDelta = new Vector2(16, (float)rcv3 / maxValue * maxHeight);
+			
+			s5b1_element.m_s5b1_image_4Breakage_dmgRect.sizeDelta = new Vector2(16, (float)dmg4 / maxValue * maxHeight);
+			s5b1_element.m_s5b1_image_4Breakage_rcvRect.sizeDelta = new Vector2(16, (float)rcv4 / maxValue * maxHeight);
+
 
 			s5b1_element.m_s5b1_allDmg.text = allDmg.ToString();
 			s5b1_element.m_s5b1_allRcv.text = allRcv.ToString();

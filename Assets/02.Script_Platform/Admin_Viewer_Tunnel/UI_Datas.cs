@@ -255,6 +255,20 @@ namespace AdminViewer
 			   
 		public Image m_s5b1_image_4Breakage_dmg;
 		public Image m_s5b1_image_4Breakage_rcv;
+
+
+		public RectTransform m_s5b1_image_1crack_dmgRect;
+		public RectTransform m_s5b1_image_1crack_rcvRect;
+
+		public RectTransform m_s5b1_image_2spalling_dmgRect;
+		public RectTransform m_s5b1_image_2spalling_rcvRect;
+
+		public RectTransform m_s5b1_image_3Efflorence_dmgRect;
+		public RectTransform m_s5b1_image_3Efflorence_rcvRect;
+
+		public RectTransform m_s5b1_image_4Breakage_dmgRect;
+		public RectTransform m_s5b1_image_4Breakage_rcvRect;
+
 	}
 
 	[System.Serializable]
