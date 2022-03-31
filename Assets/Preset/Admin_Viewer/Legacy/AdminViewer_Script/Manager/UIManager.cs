@@ -113,7 +113,7 @@ namespace Manager
         private string img2Base64;
 
         public ButtonDimView _btnDimView;
-        public Indicator.Element.KeymapElement _keymapElement;
+        //public Indicator.Element.KeymapElement _keymapElement;
         
         private bool isDimLineVisible;  // DimLine 생성상태 확인변수
 

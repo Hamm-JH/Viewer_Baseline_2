@@ -379,7 +379,7 @@ namespace Manager
         {
             RuntimeData.RootContainer.Instance.selectedInstance = null;
             RuntimeData.RootContainer.Instance.cachedInstance = null;
-            UIManager.Instance._keymapElement.clickedTransform = null;
+            //UIManager.Instance._keymapElement.clickedTransform = null;
             UIManager.Instance.SetButton(status);   // 버튼 상태변경
             UIManager.Instance.SetPanel(status);    // 패널 상태변경
             SwitchOptionalStatus(status);           // 특정 SceneStatus에서 실행되는 코드 모음
