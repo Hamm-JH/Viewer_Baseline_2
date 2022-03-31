@@ -359,7 +359,7 @@ namespace Manager
         {
             GameObject Controller = new GameObject("Controller");
 
-            Controller.AddComponent(Control.ImportManager.GetControllerComponent(controlType));
+            //Controller.AddComponent(Control.ImportManager.GetControllerComponent(controlType));
 
             Controller.transform.SetParent(transform);
         }
