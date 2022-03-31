@@ -170,11 +170,11 @@ namespace Manager
             }
         }
 
-        public void SelectButton(int btnNum)
-        {
-            selectedButton = (SceneMenu)btnNum;
-            Manager.EventClassifier.Instance.OnEvent<SceneChangeMenu>(Control.Status.Click, gameObject.GetComponent<SceneChangeMenu>());
-        }
+        //public void SelectButton(int btnNum)
+        //{
+        //    selectedButton = (SceneMenu)btnNum;
+        //    //Manager.EventClassifier.Instance.OnEvent<SceneChangeMenu>(Control.Status.Click, gameObject.GetComponent<SceneChangeMenu>());
+        //}
 
         public void ActiveButtonSelectedChild(int btnNum)
         {

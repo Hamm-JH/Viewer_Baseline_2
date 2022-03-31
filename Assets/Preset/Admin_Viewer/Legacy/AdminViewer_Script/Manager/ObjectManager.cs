@@ -188,7 +188,7 @@ namespace Manager
                         IssueObjDefaultColor();
                         Manager.PositionManager.Instance.ClearIssueData(); // 손상/보수 아이콘 표시 비활성화
                         RuntimeData.RootContainer.Instance.dimensionView = true;
-                        Manager.EventClassifier.Instance.SwitchDimensionView();
+                        //Manager.EventClassifier.Instance.SwitchDimensionView();
 
                         SetCamera(); // 카메라 설정
                         IssueManager.Instance.DisplayIssue();
@@ -1460,68 +1460,68 @@ namespace Manager
         //    Control.AContoller.Instance.PanningBounds = _panningBounds;
         //}
 
-        public void ResetCamPosition(GameObject rootObj, InVisibleOption visibleOption)
-        {
-            switch (visibleOption)
-            {
-                case InVisibleOption.Skew:
-                case InVisibleOption.Curve:
-                case InVisibleOption.Interactable:
-                    //{
-                    //    Collider _collider;
-                    //    Bounds _bound;
+        //public void ResetCamPosition(GameObject rootObj, InVisibleOption visibleOption)
+        //{
+        //    switch (visibleOption)
+        //    {
+        //        case InVisibleOption.Skew:
+        //        case InVisibleOption.Curve:
+        //        case InVisibleOption.Interactable:
+        //            //{
+        //            //    Collider _collider;
+        //            //    Bounds _bound;
 
-                    //    List<Vector3> minVector = new List<Vector3>();
-                    //    List<Vector3> maxVector = new List<Vector3>();
+        //            //    List<Vector3> minVector = new List<Vector3>();
+        //            //    List<Vector3> maxVector = new List<Vector3>();
 
-                    //    Vector3 resultMinVector;
-                    //    Vector3 resultMaxVector;
+        //            //    Vector3 resultMinVector;
+        //            //    Vector3 resultMaxVector;
 
-                    //    // 자식 객체들을 반복
-                    //    int index = rootObj.transform.childCount;
-                    //    for (int i = 0; i < index; i++)
-                    //    {
-                    //        // 자식 객체들을 돌면서 Collider 가진 객체 확인
-                    //        if (rootObj.transform.GetChild(i).TryGetComponent<Collider>(out _collider))
-                    //        {
-                    //            // collider 객체에서 bounds의 minVector, maxVector 수집
-                    //            minVector.Add(_collider.bounds.min);
-                    //            maxVector.Add(_collider.bounds.max);
-                    //        }
-                    //    }
+        //            //    // 자식 객체들을 반복
+        //            //    int index = rootObj.transform.childCount;
+        //            //    for (int i = 0; i < index; i++)
+        //            //    {
+        //            //        // 자식 객체들을 돌면서 Collider 가진 객체 확인
+        //            //        if (rootObj.transform.GetChild(i).TryGetComponent<Collider>(out _collider))
+        //            //        {
+        //            //            // collider 객체에서 bounds의 minVector, maxVector 수집
+        //            //            minVector.Add(_collider.bounds.min);
+        //            //            maxVector.Add(_collider.bounds.max);
+        //            //        }
+        //            //    }
 
-                    //    // 최소, 최대값 계산
-                    //    resultMinVector = GetMinVector(minVector);
-                    //    resultMaxVector = GetMaxVector(maxVector);
+        //            //    // 최소, 최대값 계산
+        //            //    resultMinVector = GetMinVector(minVector);
+        //            //    resultMaxVector = GetMaxVector(maxVector);
 
-                    //    _bound = new Bounds(
-                    //        (resultMaxVector + resultMinVector) / 2, (resultMaxVector - resultMinVector));
+        //            //    _bound = new Bounds(
+        //            //        (resultMaxVector + resultMinVector) / 2, (resultMaxVector - resultMinVector));
 
-                    //    float maxValue = 0f;
-                    //    float targetDistance = 0f;
+        //            //    float maxValue = 0f;
+        //            //    float targetDistance = 0f;
 
-                    //    maxValue = (maxValue < _bound.size.x) ? _bound.size.x : maxValue;
-                    //    maxValue = (maxValue < _bound.size.y) ? _bound.size.y : maxValue;
-                    //    maxValue = (maxValue < _bound.size.z) ? _bound.size.z : maxValue;
+        //            //    maxValue = (maxValue < _bound.size.x) ? _bound.size.x : maxValue;
+        //            //    maxValue = (maxValue < _bound.size.y) ? _bound.size.y : maxValue;
+        //            //    maxValue = (maxValue < _bound.size.z) ? _bound.size.z : maxValue;
 
-                    //    targetDistance = maxValue + maxValue / 10 - 3;
+        //            //    targetDistance = maxValue + maxValue / 10 - 3;
 
-                    //    MainManager.Instance.MainCameraController.targetDistance = targetDistance;
-                    //    MainManager.Instance.MainCamTransform.position = _bound.center;
+        //            //    MainManager.Instance.MainCameraController.targetDistance = targetDistance;
+        //            //    MainManager.Instance.MainCamTransform.position = _bound.center;
 
-                    //    Bounds _panningBounds = new Bounds(
-                    //        _bound.center,
-                    //        _bound.size * RuntimeData.RootContainer.Instance.panningExtensionBorder);
+        //            //    Bounds _panningBounds = new Bounds(
+        //            //        _bound.center,
+        //            //        _bound.size * RuntimeData.RootContainer.Instance.panningExtensionBorder);
 
-                    //    Control.AContoller.Instance.PanningBounds = _panningBounds;
-                    //}
-                    break;
+        //            //    Control.AContoller.Instance.PanningBounds = _panningBounds;
+        //            //}
+        //            break;
 
-                    //case InVisibleOption.Interactable:
-                    //    ResetCamPosition(Root3DObject);
-                    //    break;
-            }
-        }
+        //            //case InVisibleOption.Interactable:
+        //            //    ResetCamPosition(Root3DObject);
+        //            //    break;
+        //    }
+        //}
 
         private Vector3 GetMinVector(List<Vector3> minVector)
         {

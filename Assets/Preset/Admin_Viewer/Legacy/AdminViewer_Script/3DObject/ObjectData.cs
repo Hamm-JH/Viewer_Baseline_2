@@ -127,7 +127,7 @@ namespace Bridge
         private void OnMouseUp()
         {
             //Debug.Log("3D Object up");
-            Manager.EventClassifier.Instance.OnEvent<ObjectData>(Control.Status.Click, gameObject.GetComponent<ObjectData>());
+            //Manager.EventClassifier.Instance.OnEvent<ObjectData>(Control.Status.Click, gameObject.GetComponent<ObjectData>());
         }
 
 

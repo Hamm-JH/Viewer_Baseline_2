@@ -135,7 +135,7 @@ namespace Indicator.Element
 
                 clickedTransform = hit.collider.transform;
 
-                Manager.EventClassifier.Instance.OnEvent<KeymapElement>(Control.Status.Click, gameObject.GetComponent<KeymapElement>(), eventData);
+                //Manager.EventClassifier.Instance.OnEvent<KeymapElement>(Control.Status.Click, gameObject.GetCompoknent<KeymapElement>(), eventData);
 
                 //Manager.EventClassifier.Instance.OnEvent<MP2_DmgListElement>(Control.Status.Click, gameObject.GetComponent<MP2_DmgListElement>(), eventData);
             }

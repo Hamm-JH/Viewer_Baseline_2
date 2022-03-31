@@ -100,46 +100,46 @@ namespace Control
                     //_info.clickHit = hit.transform;
                     //_info.singleHit = hit;
 
-                    if(hit.collider.name == "Skew")
-                    {
-                        Skew _skew = hit.collider.GetComponent<Skew>();
-
-                        Debug.Log(hit.collider.name);
-                        Debug.Log($"Skew name : {_skew.name}");
-
-                        Manager.EventClassifier.Instance.OnEvent<Skew>
-                            (Control.Status.Click, _skew);
-                    }
-                    else if(hit.collider.name == "Curve")
-                    {
-                        Curve _curve = hit.collider.GetComponent<Curve>();
-
-                        Debug.Log(hit.collider.name);
-                        Debug.Log($"Curve name : {_curve.name}");
-
-                        Manager.EventClassifier.Instance.OnEvent<Curve>
-                            (Control.Status.Click, _curve);
-                    }
-                    //else if (hit.collider.name == "Interactable")
+                    //if(hit.collider.name == "Skew")
                     //{
-                    //    Interactable _interactable = hit.collider.GetComponent<Interactable>();
+                    //    Skew _skew = hit.collider.GetComponent<Skew>();
 
                     //    Debug.Log(hit.collider.name);
-                    //    Debug.Log($"Interactable name : {_interactable.name}");
+                    //    Debug.Log($"Skew name : {_skew.name}");
 
-                    //    Manager.EventClassifier.Instance.OnEvent<Interactable>
-                    //        (Control.Status.Click, _interactable);
+                    //    Manager.EventClassifier.Instance.OnEvent<Skew>
+                    //        (Control.Status.Click, _skew);
                     //}
-                    else if (hit.collider.name == "CurveSkew")
-                    {
-                        CurveSkew _curveSkew = hit.collider.GetComponent<CurveSkew>();
+                    //else if(hit.collider.name == "Curve")
+                    //{
+                    //    Curve _curve = hit.collider.GetComponent<Curve>();
 
-                        Debug.Log(hit.collider.name);
-                        Debug.Log($"CurveSkew name : {_curveSkew.name}");
+                    //    Debug.Log(hit.collider.name);
+                    //    Debug.Log($"Curve name : {_curve.name}");
 
-                        Manager.EventClassifier.Instance.OnEvent<CurveSkew>
-                            (Control.Status.Click, _curveSkew);
-                    }
+                    //    Manager.EventClassifier.Instance.OnEvent<Curve>
+                    //        (Control.Status.Click, _curve);
+                    //}
+                    ////else if (hit.collider.name == "Interactable")
+                    ////{
+                    ////    Interactable _interactable = hit.collider.GetComponent<Interactable>();
+
+                    ////    Debug.Log(hit.collider.name);
+                    ////    Debug.Log($"Interactable name : {_interactable.name}");
+
+                    ////    Manager.EventClassifier.Instance.OnEvent<Interactable>
+                    ////        (Control.Status.Click, _interactable);
+                    ////}
+                    //else if (hit.collider.name == "CurveSkew")
+                    //{
+                    //    CurveSkew _curveSkew = hit.collider.GetComponent<CurveSkew>();
+
+                    //    Debug.Log(hit.collider.name);
+                    //    Debug.Log($"CurveSkew name : {_curveSkew.name}");
+
+                    //    Manager.EventClassifier.Instance.OnEvent<CurveSkew>
+                    //        (Control.Status.Click, _curveSkew);
+                    //}
 
                     //InvokeMouseEvent(_info);
                 }

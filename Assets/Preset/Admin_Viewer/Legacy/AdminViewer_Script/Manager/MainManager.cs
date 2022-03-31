@@ -122,7 +122,7 @@ namespace Manager
 		#region Resources
 
 		[Header("handling resources")]
-        public InVisibleOption visibleOption;
+        //public InVisibleOption visibleOption;
         public string bridgeType;
 
         //===================================================
@@ -488,7 +488,7 @@ namespace Manager
 					{
                         Data.Viewer.Cache.Instance.models.ModelName.SetActive(true);
 					}
-                    ObjectManager.Instance.ResetCamPosition(RuntimeData.RootContainer.Instance.Root3DObject, visibleOption);
+                    //ObjectManager.Instance.ResetCamPosition(RuntimeData.RootContainer.Instance.Root3DObject, visibleOption);
                     break;
             }
         }
@@ -512,11 +512,11 @@ namespace Manager
                 && RuntimeData.RootContainer.Instance.isIssueRoutineEnd)
             {
                 SceneStatus = ViewSceneStatus.Ready;
-                EventClassifier.Instance.currentCache =
-                    new EventCache(typeof(Manager.SceneChangeMenu),
-                                   Manager.SceneChangeMenu.Instance,
-                                   Manager.SceneChangeMenu.Instance.transform,
-                                   ViewSceneStatus.Ready);
+                //EventClassifier.Instance.currentCache =
+                //    new EventCache(typeof(Manager.SceneChangeMenu),
+                //                   Manager.SceneChangeMenu.Instance,
+                //                   Manager.SceneChangeMenu.Instance.transform,
+                //                   ViewSceneStatus.Ready);
             }
         }
 

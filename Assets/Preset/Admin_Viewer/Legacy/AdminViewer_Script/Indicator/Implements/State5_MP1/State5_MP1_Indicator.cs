@@ -1,4 +1,4 @@
-﻿using Issue;
+﻿ using Issue;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +7,7 @@ using TMPro;
 
 namespace Indicator
 {
-    public class State5_MP1_Indicator : AIndicator
+    public class State5_MP1_Indicator__ : AIndicator
     {
         public List<GameObject> issueTables;
         public List<bool> issueChecker;
