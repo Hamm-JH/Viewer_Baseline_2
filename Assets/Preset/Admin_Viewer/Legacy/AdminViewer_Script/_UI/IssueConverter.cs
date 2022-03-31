@@ -87,52 +87,52 @@ namespace UI
 
         // ======================================
 
-        public static targetIssue GetTargetIssue(UI.PanelType panelType, Manager.ViewSceneStatus sceneStatus)
-        {
-            targetIssue target = targetIssue.Null;
+        //public static targetIssue GetTargetIssue(UI.PanelType panelType, Manager.ViewSceneStatus sceneStatus)
+        //{
+        //    targetIssue target = targetIssue.Null;
 
-            switch(panelType)
-            {
-                case PanelType.BPMM:
-                    if(sceneStatus.Equals(Manager.ViewSceneStatus.ViewAllDamage))
-                    {
-                        target = targetIssue.Damage;
-                    }
-                    break;
+        //    //switch(panelType)
+        //    //{
+        //    //    case PanelType.BPMM:
+        //    //        if(sceneStatus.Equals(Manager.ViewSceneStatus.ViewAllDamage))
+        //    //        {
+        //    //            target = targetIssue.Damage;
+        //    //        }
+        //    //        break;
 
-                case PanelType.BPM1:
-                    if(sceneStatus.Equals(Manager.ViewSceneStatus.ViewPartDamage))
-                    {
-                        target = targetIssue.Damage;
-                    }
-                    else if(sceneStatus.Equals(Manager.ViewSceneStatus.ViewPart2R))
-                    {
-                        target = targetIssue.Recover;
-                    }
-                    else if(sceneStatus.Equals(Manager.ViewSceneStatus.ViewMaintainance))
-                    {
-                        target = targetIssue.Damage;
-                    }
-                    break;
+        //    //    case PanelType.BPM1:
+        //    //        if(sceneStatus.Equals(Manager.ViewSceneStatus.ViewPartDamage))
+        //    //        {
+        //    //            target = targetIssue.Damage;
+        //    //        }
+        //    //        else if(sceneStatus.Equals(Manager.ViewSceneStatus.ViewPart2R))
+        //    //        {
+        //    //            target = targetIssue.Recover;
+        //    //        }
+        //    //        else if(sceneStatus.Equals(Manager.ViewSceneStatus.ViewMaintainance))
+        //    //        {
+        //    //            target = targetIssue.Damage;
+        //    //        }
+        //    //        break;
 
-                case PanelType.BPM2:
-                    if (sceneStatus.Equals(Manager.ViewSceneStatus.ViewPartDamage))
-                    {
-                        target = targetIssue.Image;
-                    }
-                    else if (sceneStatus.Equals(Manager.ViewSceneStatus.ViewPart2R))
-                    {
-                        target = targetIssue.Reinforcement;
-                    }
-                    else if (sceneStatus.Equals(Manager.ViewSceneStatus.ViewMaintainance))
-                    {
-                        target = targetIssue.R2;
-                    }
-                    break;
-            }
+        //    //    case PanelType.BPM2:
+        //    //        if (sceneStatus.Equals(Manager.ViewSceneStatus.ViewPartDamage))
+        //    //        {
+        //    //            target = targetIssue.Image;
+        //    //        }
+        //    //        else if (sceneStatus.Equals(Manager.ViewSceneStatus.ViewPart2R))
+        //    //        {
+        //    //            target = targetIssue.Reinforcement;
+        //    //        }
+        //    //        else if (sceneStatus.Equals(Manager.ViewSceneStatus.ViewMaintainance))
+        //    //        {
+        //    //            target = targetIssue.R2;
+        //    //        }
+        //    //        break;
+        //    //}
 
-            return target;
-        }
+        //    return target;
+        //}
 
         #region Set Column
         public static Sprite GetColumnIcon(ColumnType type)

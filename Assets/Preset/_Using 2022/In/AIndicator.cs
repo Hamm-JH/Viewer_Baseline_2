@@ -9,7 +9,7 @@ namespace Indicator
     {
         // 표시기 내부의 요소 리스트
         protected List<Element.AElement> elements;
-        protected Manager.ViewSceneStatus sceneStatus;
+        //protected Manager.ViewSceneStatus sceneStatus;
         [SerializeField] protected RectTransform ElementPanel;
 
         public List<Element.AElement> Elements
