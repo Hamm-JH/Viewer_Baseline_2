@@ -21,7 +21,7 @@ namespace View
 
 		public override List<GameObject> Targets => throw new System.NotImplementedException();
 
-		public GameObject ChildPanel { get => childPanel; set => childPanel=value; }
+		//public GameObject ChildPanel { get => childPanel; set => childPanel=value; }
 
 		Button m_btn;
 		Slider m_slider;
@@ -34,7 +34,7 @@ namespace View
 		/// <summary>
 		/// 자식 패널 객체
 		/// </summary>
-		[SerializeField] GameObject childPanel;
+		//[SerializeField] GameObject childPanel;
 
 		/// <summary>
 		/// ui 효과 요소

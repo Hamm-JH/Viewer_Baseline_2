@@ -39,7 +39,7 @@ namespace View
 		/// <summary>
 		/// 자식 패널 객체
 		/// </summary>
-		[SerializeField] GameObject childPanel;
+		public GameObject childPanel;
 		public GameObject ChildPanel { get => childPanel; set => childPanel=value; }
 
 		/// <summary>
