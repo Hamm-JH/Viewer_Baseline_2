@@ -1209,7 +1209,7 @@ namespace AdminViewer.UI
         {
             ViewTypeOption = ViewTypeGraph.Year_1;
 
-            SetPanelElements(RuntimeData.RootContainer.Instance.IssueObjectList);
+            //SetPanelElements(RuntimeData.RootContainer.Instance.IssueObjectList);
 
             while (true)
             {

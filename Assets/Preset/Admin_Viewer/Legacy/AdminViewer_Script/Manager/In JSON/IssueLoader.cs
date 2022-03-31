@@ -87,7 +87,7 @@ namespace Manager
             yield return new WaitUntil(() => isDmgEnd.Equals(true));
             yield return new WaitUntil(() => isRcvEnd.Equals(true));
 
-            RuntimeData.RootContainer.Instance.isIssueRoutineEnd = true;
+            //RuntimeData.RootContainer.Instance.isIssueRoutineEnd = true;
             //MainManager.Instance.InitializeRoutineCheck();
         }
 

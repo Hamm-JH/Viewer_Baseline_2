@@ -20,18 +20,18 @@ namespace UI
         {
             Sprite result = null;
 
-            if(typeof(T).Equals(typeof(Issue.DamagedIssue)))
-            {
-                result = Resources.Load<Sprite>("Icon/BotPanel/ICON_DamageTitle");
-            }
-            else if(typeof(T).Equals(typeof(Issue.RecoveredIssue)))
-            {
-                result = Resources.Load<Sprite>("Icon/BotPanel/ICON_rcv");
-            }
-            else if(typeof(T).Equals(typeof(Issue.ReinforcementIssue)))
-            {
-                result = Resources.Load<Sprite>("Icon/BotPanel/ICON_ReinforcementTitle");
-            }
+            //if(typeof(T).Equals(typeof(Issue.DamagedIssue)))
+            //{
+            //    result = Resources.Load<Sprite>("Icon/BotPanel/ICON_DamageTitle");
+            //}
+            //else if(typeof(T).Equals(typeof(Issue.RecoveredIssue)))
+            //{
+            //    result = Resources.Load<Sprite>("Icon/BotPanel/ICON_rcv");
+            //}
+            //else if(typeof(T).Equals(typeof(Issue.ReinforcementIssue)))
+            //{
+            //    result = Resources.Load<Sprite>("Icon/BotPanel/ICON_ReinforcementTitle");
+            //}
 
             return result;
         }
@@ -49,18 +49,18 @@ namespace UI
         {
             string result = "";
 
-            if (typeof(T).Equals(typeof(Issue.DamagedIssue)))
-            {
-                result = "손상정보";
-            }
-            else if (typeof(T).Equals(typeof(Issue.RecoveredIssue)))
-            {
-                result = "보수정보";
-            }
-            else if (typeof(T).Equals(typeof(Issue.ReinforcementIssue)))
-            {
-                result = "보강정보";
-            }
+            //if (typeof(T).Equals(typeof(Issue.DamagedIssue)))
+            //{
+            //    result = "손상정보";
+            //}
+            //else if (typeof(T).Equals(typeof(Issue.RecoveredIssue)))
+            //{
+            //    result = "보수정보";
+            //}
+            //else if (typeof(T).Equals(typeof(Issue.ReinforcementIssue)))
+            //{
+            //    result = "보강정보";
+            //}
 
             return result;
         }
@@ -69,18 +69,18 @@ namespace UI
         {
             Color result = new Color(0, 0, 0, 1);
 
-            if (typeof(T).Equals(typeof(Issue.DamagedIssue)))
-            {
-                result = new Color(253 / 255f, 17 / 255f, 110 / 255f, 1);
-            }
-            else if (typeof(T).Equals(typeof(Issue.RecoveredIssue)))
-            {
-                result = new Color(0x25/255f, 0x8c/255f, 0xeb/255f, 1);
-            }
-            else if (typeof(T).Equals(typeof(Issue.ReinforcementIssue)))
-            {
-                result = new Color(0x55/255f, 0xd2/255f, 0x3c/255f, 1);
-            }
+            //if (typeof(T).Equals(typeof(Issue.DamagedIssue)))
+            //{
+            //    result = new Color(253 / 255f, 17 / 255f, 110 / 255f, 1);
+            //}
+            //else if (typeof(T).Equals(typeof(Issue.RecoveredIssue)))
+            //{
+            //    result = new Color(0x25/255f, 0x8c/255f, 0xeb/255f, 1);
+            //}
+            //else if (typeof(T).Equals(typeof(Issue.ReinforcementIssue)))
+            //{
+            //    result = new Color(0x55/255f, 0xd2/255f, 0x3c/255f, 1);
+            //}
 
             return result;
         }
@@ -178,56 +178,56 @@ namespace UI
         {
             string result = "";
 
-            if (typeof(T).Equals(typeof(Issue.DamagedIssue)))
-            {
-                result = "손상";
-            }
-            else if (typeof(T).Equals(typeof(Issue.RecoveredIssue)))
-            {
-                result = "보수";
-            }
-            else if (typeof(T).Equals(typeof(Issue.ReinforcementIssue)))
-            {
-                result = "보강";
-            }
+            //if (typeof(T).Equals(typeof(Issue.DamagedIssue)))
+            //{
+            //    result = "손상";
+            //}
+            //else if (typeof(T).Equals(typeof(Issue.RecoveredIssue)))
+            //{
+            //    result = "보수";
+            //}
+            //else if (typeof(T).Equals(typeof(Issue.ReinforcementIssue)))
+            //{
+            //    result = "보강";
+            //}
 
-            switch (type)
-            {
-                case ColumnType.DamageLocation:
-                    result += "위치";
-                    break;
+            //switch (type)
+            //{
+            //    case ColumnType.DamageLocation:
+            //        result += "위치";
+            //        break;
 
-                case ColumnType.DamageInfo:
-                    result += "정보";
-                    break;
+            //    case ColumnType.DamageInfo:
+            //        result += "정보";
+            //        break;
 
-                case ColumnType.DamagePart:
-                    result += "부재";
-                    break;
+            //    case ColumnType.DamagePart:
+            //        result += "부재";
+            //        break;
 
-                case ColumnType.Date:
-                    if(typeof(T).Equals(typeof(Issue.DamagedIssue)))
-                    {
-                        result = "확인날짜";
-                    }
-                    else
-                    {
-                        result += "날짜";
-                    }
-                    break;
+            //    case ColumnType.Date:
+            //        if(typeof(T).Equals(typeof(Issue.DamagedIssue)))
+            //        {
+            //            result = "확인날짜";
+            //        }
+            //        else
+            //        {
+            //            result += "날짜";
+            //        }
+            //        break;
 
-                case ColumnType.Image:
-                    result += "사진";
-                    break;
+            //    case ColumnType.Image:
+            //        result += "사진";
+            //        break;
 
-                case ColumnType.RepairMethod:
-                    result += "공법";
-                    break;
+            //    case ColumnType.RepairMethod:
+            //        result += "공법";
+            //        break;
 
-                case ColumnType.ReinforcementMethod:
-                    result += "공법";
-                    break;
-            }
+            //    case ColumnType.ReinforcementMethod:
+            //        result += "공법";
+            //        break;
+            //}
 
             return result;
         }

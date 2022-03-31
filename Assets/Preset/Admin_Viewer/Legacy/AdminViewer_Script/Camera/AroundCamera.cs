@@ -108,15 +108,15 @@ namespace MGS.UCamera
             //Manager.EventClassifier.Instance.OnEvent<AroundCamera>(Control.Status.Scroll, gameObject.GetComponent<AroundCamera>());
 
 
-            if (RuntimeData.RootContainer.Instance.IsScrollInPanel == false)
-            {
-                ChangeTargetDistance(Input.GetAxis("Mouse ScrollWheel"));
+            //if (RuntimeData.RootContainer.Instance.IsScrollInPanel == false)
+            //{
+            //    ChangeTargetDistance(Input.GetAxis("Mouse ScrollWheel"));
 
-                //if (selectViewMode == false)
-                //    this.targetDistance = this.targetDistance - Input.GetAxis("Mouse ScrollWheel") * this.mouseSettings.wheelSensitivity;
-                //else
-                //    Camera.main.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * this.mouseSettings.wheelSensitivity;
-            }
+            //    //if (selectViewMode == false)
+            //    //    this.targetDistance = this.targetDistance - Input.GetAxis("Mouse ScrollWheel") * this.mouseSettings.wheelSensitivity;
+            //    //else
+            //    //    Camera.main.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * this.mouseSettings.wheelSensitivity;
+            //}
 
             Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, this.orthoSizeRange.min, this.orthoSizeRange.max);
             #endregion

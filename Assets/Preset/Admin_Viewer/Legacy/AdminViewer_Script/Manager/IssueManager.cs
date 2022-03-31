@@ -33,7 +33,7 @@ namespace Manager
         {
             if(issueList == null)
             {
-                issueList = RuntimeData.RootContainer.Instance.IssueObjectList;
+                //issueList = RuntimeData.RootContainer.Instance.IssueObjectList;
             }
 
             for (int i = 0; i < issueList.Count; i++)
@@ -49,19 +49,19 @@ namespace Manager
         /// <param name="isOn"></param>
         public void DisplayAllDamagedOnlyView(bool isOn)
         {
-            if (issueList == null)
-            {
-                issueList = RuntimeData.RootContainer.Instance.IssueObjectList;
-            }
+            //if (issueList == null)
+            //{
+            //    issueList = RuntimeData.RootContainer.Instance.IssueObjectList;
+            //}
 
-            for (int i = 0; i < issueList.Count; i++)
-            {
-                if (issueList[i].GetComponent<DamagedIssue>())
-                {
-                    issueList[i].GetComponent<MeshRenderer>().enabled = isOn;
-                    issueList[i].GetComponent<Collider>().enabled = !isOn; // 현재 큐브 클릭이벤트 제외한 상태이므로 bool 반대값 할당
-                }
-            }
+            //for (int i = 0; i < issueList.Count; i++)
+            //{
+            //    if (issueList[i].GetComponent<DamagedIssue>())
+            //    {
+            //        issueList[i].GetComponent<MeshRenderer>().enabled = isOn;
+            //        issueList[i].GetComponent<Collider>().enabled = !isOn; // 현재 큐브 클릭이벤트 제외한 상태이므로 bool 반대값 할당
+            //    }
+            //}
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Manager
         {
             if(issueList == null)
             {
-                issueList = RuntimeData.RootContainer.Instance.IssueObjectList;
+                //issueList = RuntimeData.RootContainer.Instance.IssueObjectList;
             }
 
             if (issueType == "Damaged")
@@ -82,11 +82,11 @@ namespace Manager
                 {
                     if (issueList[i].BridgePartName == partName)
                     {
-                        if (issueList[i].GetComponent<DamagedIssue>())
-                        {
-                            issueList[i].GetComponent<MeshRenderer>().enabled = true;
-                            issueList[i].GetComponent<Collider>().enabled = true;
-                        }
+                        //if (issueList[i].GetComponent<DamagedIssue>())
+                        //{
+                        //    issueList[i].GetComponent<MeshRenderer>().enabled = true;
+                        //    issueList[i].GetComponent<Collider>().enabled = true;
+                        //}
                     }
                     else
                     {
@@ -99,29 +99,29 @@ namespace Manager
             {
                 for (int i = 0; i < issueList.Count; i++)
                 {
-                    if (issueList[i].BridgePartName == partName)
-                    {
-                        if (issueList[i].GetComponent<RecoveredIssue>())
-                        {
-                            issueList[i].GetComponent<MeshRenderer>().enabled = true;
-                            issueList[i].GetComponent<Collider>().enabled = true;
-                        }
-                    }
-                    else
-                    {
-                        issueList[i].GetComponent<MeshRenderer>().enabled = false;
-                        issueList[i].GetComponent<Collider>().enabled = false;
-                    }
+                    //if (issueList[i].BridgePartName == partName)
+                    //{
+                    //    if (issueList[i].GetComponent<RecoveredIssue>())
+                    //    {
+                    //        issueList[i].GetComponent<MeshRenderer>().enabled = true;
+                    //        issueList[i].GetComponent<Collider>().enabled = true;
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    issueList[i].GetComponent<MeshRenderer>().enabled = false;
+                    //    issueList[i].GetComponent<Collider>().enabled = false;
+                    //}
                 }
             }
         }
 
         private void DisplaySpecifiedIssue(string issueName)
         {
-            if(issueList == null)
-            {
-                issueList = RuntimeData.RootContainer.Instance.IssueObjectList;
-            }
+            //if(issueList == null)
+            //{
+            //    issueList = RuntimeData.RootContainer.Instance.IssueObjectList;
+            //}
 
             //Debug.Log($"***********************");
             //Debug.Log($"display issue name : {issueName}");

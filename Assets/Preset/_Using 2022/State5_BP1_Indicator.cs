@@ -117,14 +117,14 @@ namespace Indicator
 
                 if(issueIndex >= 0 && issueIndex < 4)
                 {
-                    if( _issue[i].GetType() == typeof(DamagedIssue))
-                    {
-                        dmgIndexes[(int)_issue[i].IssueCodes]++;
-                    }
-                    else if( _issue[i].GetType() == typeof(RecoveredIssue))
-                    {
-                        rcvIndexes[(int)_issue[i].IssueCodes]++;
-                    }
+                    //if( _issue[i].GetType() == typeof(DamagedIssue))
+                    //{
+                    //    dmgIndexes[(int)_issue[i].IssueCodes]++;
+                    //}
+                    //else if( _issue[i].GetType() == typeof(RecoveredIssue))
+                    //{
+                    //    rcvIndexes[(int)_issue[i].IssueCodes]++;
+                    //}
                 }
             }
         }

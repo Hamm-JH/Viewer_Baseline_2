@@ -51,7 +51,7 @@ namespace Indicator
             public IssueCode _code;
             public DateTime _date;
             public int _count;
-            public List<RecordIssue> _issues;
+            //public List<RecordIssue> _issues;
 
             public override string ToString()
             {
@@ -61,25 +61,25 @@ namespace Indicator
                 string strCode = _code.ToString();
                 string strDate = _date != null ? _date.ToString() : "";
                 string strCount = _count.ToString();
-                string issueCodes = GetIssueCodes(_issues);
+                //string issueCodes = GetIssueCodes(_issues);
 
-                result = $"Class : {strClass}\t Code : {strCode}\t Date : {strDate}\t Count : {strCount}{issueCodes}";
-
-                return result;
-            }
-
-            private string GetIssueCodes(List<RecordIssue> __issues)
-            {
-                string result = "";
-
-                int index = __issues.Count;
-                for (int i = 0; i < index; i++)
-                {
-                    result += $"\t issue{i + 1} : {_issues[i].IssueOrderCode}";
-                }
+                //result = $"Class : {strClass}\t Code : {strCode}\t Date : {strDate}\t Count : {strCount}{issueCodes}";
 
                 return result;
             }
+
+            //private string GetIssueCodes(List<RecordIssue> __issues)
+            //{
+            //    string result = "";
+
+            //    int index = __issues.Count;
+            //    for (int i = 0; i < index; i++)
+            //    {
+            //        result += $"\t issue{i + 1} : {_issues[i].IssueOrderCode}";
+            //    }
+
+            //    return result;
+            //}
         }
 
         //public Dictionary<IssueClass, Dictionary<IssueCode, List<int>>> dateByYears;
@@ -203,7 +203,7 @@ namespace Indicator
             {
                 ViewTypeOption = clicked;
 
-                SetPanelElements(RuntimeData.RootContainer.Instance.IssueObjectList);
+                //SetPanelElements(RuntimeData.RootContainer.Instance.IssueObjectList);
             }
             
         }
@@ -415,19 +415,19 @@ namespace Indicator
             return result;
         }
 
-        private List<RecordIssue> SetRowToList(object _dataRow)
-        {
-            List<RecordIssue> list = (_dataRow as List<RecordIssue>);
+        //private List<RecordIssue> SetRowToList(object _dataRow)
+        //{
+        //    List<RecordIssue> list = (_dataRow as List<RecordIssue>);
 
-            if (list != null)
-            {
-                return list;
-            }
-            else
-            {
-                return null;
-            }
-        }
+        //    if (list != null)
+        //    {
+        //        return list;
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
         #endregion
 
         #region Set DateTime Issue 초기 (날짜, 발생 회수) 정렬
@@ -588,54 +588,54 @@ namespace Indicator
         /// <param name="_class"></param>
         /// <param name="_code"></param>
         /// <param name="_target"></param>
-        private void SetSingleDateCount(int _count, DateTime _date, IssueClass _class, IssueCode _code, List<RecordIssue> _issues, ref Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, dateElement>>> _target)
-        {
-            dateElement finalElement = new dateElement();
-            finalElement._class = _class;
-            finalElement._code = _code;
-            finalElement._date = _date;
-            finalElement._count = _count;
-            finalElement._issues = _issues;
+        //private void SetSingleDateCount(int _count, DateTime _date, IssueClass _class, IssueCode _code, List<RecordIssue> _issues, ref Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, dateElement>>> _target)
+        //{
+        //    dateElement finalElement = new dateElement();
+        //    finalElement._class = _class;
+        //    finalElement._code = _code;
+        //    finalElement._date = _date;
+        //    finalElement._count = _count;
+        //    finalElement._issues = _issues;
 
-            if(_count != 0)
-            {
-                if(_class == IssueClass.Rcv)
-                {
-                    // 보수 정보의 개수만큼 카운트 값을 양수로 적용한다.
-                    if(!_target[IssueClass.Rcv][_code].ContainsKey(_date))
-                    {
-                        _target[IssueClass.Rcv][_code].Add(_date, finalElement);
-                    }
-                    else
-                    {
-                        _target[IssueClass.Rcv][_code][_date]._count += finalElement._count;
-                    }
+        //    if(_count != 0)
+        //    {
+        //        if(_class == IssueClass.Rcv)
+        //        {
+        //            // 보수 정보의 개수만큼 카운트 값을 양수로 적용한다.
+        //            if(!_target[IssueClass.Rcv][_code].ContainsKey(_date))
+        //            {
+        //                _target[IssueClass.Rcv][_code].Add(_date, finalElement);
+        //            }
+        //            else
+        //            {
+        //                _target[IssueClass.Rcv][_code][_date]._count += finalElement._count;
+        //            }
 
-                    // 손상 정보에 보수정보의 개수만큼 카운트 값을 역수로 적용한다.
-                    //if(!_target[IssueClass.Dmg][_code].ContainsKey(_date))
-                    //{
-                    //    finalElement._count = -finalElement._count;
-                    //    _target[IssueClass.Dmg][_code].Add(_date, finalElement);
-                    //}
-                    //else
-                    //{
-                    //    _target[IssueClass.Dmg][_code][_date]._count -= finalElement._count;
-                    //}
-                }
-                else if(_class == IssueClass.Dmg)
-                {
-                    // 손상 정보의 개수만큼 카운트 값을 양수로 적용한다.
-                    if(!_target[IssueClass.Dmg][_code].ContainsKey(_date))
-                    {
-                        _target[IssueClass.Dmg][_code].Add(_date, finalElement);
-                    }
-                    else
-                    {
-                        _target[IssueClass.Dmg][_code][_date]._count += finalElement._count;
-                    }
-                }
-            }
-        }
+        //            // 손상 정보에 보수정보의 개수만큼 카운트 값을 역수로 적용한다.
+        //            //if(!_target[IssueClass.Dmg][_code].ContainsKey(_date))
+        //            //{
+        //            //    finalElement._count = -finalElement._count;
+        //            //    _target[IssueClass.Dmg][_code].Add(_date, finalElement);
+        //            //}
+        //            //else
+        //            //{
+        //            //    _target[IssueClass.Dmg][_code][_date]._count -= finalElement._count;
+        //            //}
+        //        }
+        //        else if(_class == IssueClass.Dmg)
+        //        {
+        //            // 손상 정보의 개수만큼 카운트 값을 양수로 적용한다.
+        //            if(!_target[IssueClass.Dmg][_code].ContainsKey(_date))
+        //            {
+        //                _target[IssueClass.Dmg][_code].Add(_date, finalElement);
+        //            }
+        //            else
+        //            {
+        //                _target[IssueClass.Dmg][_code][_date]._count += finalElement._count;
+        //            }
+        //        }
+        //    }
+        //}
         #endregion
 
         #region Debug Raw Data
@@ -710,83 +710,83 @@ namespace Indicator
         private void ClearDuplicatedData_PerDmgIssueCode(Dictionary<DateTime, dateElement> _target)
         {
             // 중복 확인용 변수
-            Dictionary<string, dateElement> keyChecker = new Dictionary<string, dateElement>();
+    //        Dictionary<string, dateElement> keyChecker = new Dictionary<string, dateElement>();
 
-            // 날짜 단위로 키값 반복
-            foreach(DateTime key in _target.Keys)
-            {
+    //        // 날짜 단위로 키값 반복
+    //        foreach(DateTime key in _target.Keys)
+    //        {
                 
-                // 리스트 요소 할당
-                List<RecordIssue> _issues = _target[key]._issues;
+    //            // 리스트 요소 할당
+    //            List<RecordIssue> _issues = _target[key]._issues;
 
                 
 
-                int index = _issues.Count;
-                if(index != 0)
-				{
-                    for (int i = index-1; i >= 0; i--)
-                    {
+    //            int index = _issues.Count;
+    //            if(index != 0)
+				//{
+    //                for (int i = index-1; i >= 0; i--)
+    //                {
                     
 
-                        // 키값에 이슈 코드가 존재하는가?
-                        if(!keyChecker.ContainsKey(_issues[i].IssueOrderCode))
-                        {
-                            // 존재하지 않는 경우
-                            // - keyChecker에 값 추가
-                            keyChecker.Add(_issues[i].IssueOrderCode, _target[key]);
-                        }
-                        else
-                        {
-                            // 손상 코드키 할당
-                            string _key = _issues[i].IssueOrderCode;
+    //                    // 키값에 이슈 코드가 존재하는가?
+    //                    if(!keyChecker.ContainsKey(_issues[i].IssueOrderCode))
+    //                    {
+    //                        // 존재하지 않는 경우
+    //                        // - keyChecker에 값 추가
+    //                        keyChecker.Add(_issues[i].IssueOrderCode, _target[key]);
+    //                    }
+    //                    else
+    //                    {
+    //                        // 손상 코드키 할당
+    //                        string _key = _issues[i].IssueOrderCode;
 
-                            //-----------------------------------------------
-                            // check의 날짜와 같은 target 요소간 날짜비교
-                            // 날짜가 빠른 쪽의 요소를 살리고
-                            // 날짜가 느린 쪽의 요소를 없앤다
+    //                        //-----------------------------------------------
+    //                        // check의 날짜와 같은 target 요소간 날짜비교
+    //                        // 날짜가 빠른 쪽의 요소를 살리고
+    //                        // 날짜가 느린 쪽의 요소를 없앤다
 
-                            // 존재하는 경우
-                            // - 서로의 날짜를 비교한다.
-                            DateTime beforeDateTime = keyChecker[_key]._date;
-                            DateTime nowDateTime = _target[key]._date;
+    //                        // 존재하는 경우
+    //                        // - 서로의 날짜를 비교한다.
+    //                        DateTime beforeDateTime = keyChecker[_key]._date;
+    //                        DateTime nowDateTime = _target[key]._date;
 
-                            int dateCount = beforeDateTime.CompareTo(nowDateTime);
+    //                        int dateCount = beforeDateTime.CompareTo(nowDateTime);
 
-                            // before값이 더 일찍인 경우
-                            if(dateCount < 0)
-                            {
-                                // 이후 값에 관해
-                                _target[key]._count--;  // 카운트 1 감소
-                                RemoveListElement(_key, ref _target[key]._issues);      // - 이후 값 recordIssue 삭제
-                            }
-                            // 두 날짜가 같은경우
-                            else if (dateCount == 0)
-                            {
-                                // 날이 같으므로 카운트 값만 뺀다
-                                _target[key]._count--;
-                            }
-                            // now값이 더 일찍인 경우
-                            else
-                            {
-                                // 이전 값에 관해
-                                keyChecker[_key]._count--;  // 카운트 1 감소
-                                RemoveListElement(_key, ref keyChecker[_key]._issues);  // - 이전 값 recordIssue 삭제
-                                // - 이전 값 dictionary 키값으로 삭제
-                                keyChecker.Remove(_key);
+    //                        // before값이 더 일찍인 경우
+    //                        if(dateCount < 0)
+    //                        {
+    //                            // 이후 값에 관해
+    //                            _target[key]._count--;  // 카운트 1 감소
+    //                            RemoveListElement(_key, ref _target[key]._issues);      // - 이후 값 recordIssue 삭제
+    //                        }
+    //                        // 두 날짜가 같은경우
+    //                        else if (dateCount == 0)
+    //                        {
+    //                            // 날이 같으므로 카운트 값만 뺀다
+    //                            _target[key]._count--;
+    //                        }
+    //                        // now값이 더 일찍인 경우
+    //                        else
+    //                        {
+    //                            // 이전 값에 관해
+    //                            keyChecker[_key]._count--;  // 카운트 1 감소
+    //                            RemoveListElement(_key, ref keyChecker[_key]._issues);  // - 이전 값 recordIssue 삭제
+    //                            // - 이전 값 dictionary 키값으로 삭제
+    //                            keyChecker.Remove(_key);
 
-                                // 이후 값에 관해
-                                // - dictionary에 추가
-                                keyChecker.Add(_issues[i].IssueOrderCode, _target[key]);
-                            }
+    //                            // 이후 값에 관해
+    //                            // - dictionary에 추가
+    //                            keyChecker.Add(_issues[i].IssueOrderCode, _target[key]);
+    //                        }
 
-                        }
-                        // 이슈 리스트를 돌면서 기존의 같은 id코드가 Dictionary에 존재하는지 확인
-                        //Debug.Log(_target[key]._issues[i].IssueOrderCode);
-                        //_target[key]._issues.RemoveAt(i);
-                        //key.CompareTo()
-                    }
-				}
-            }
+    //                    }
+    //                    // 이슈 리스트를 돌면서 기존의 같은 id코드가 Dictionary에 존재하는지 확인
+    //                    //Debug.Log(_target[key]._issues[i].IssueOrderCode);
+    //                    //_target[key]._issues.RemoveAt(i);
+    //                    //key.CompareTo()
+    //                }
+				//}
+    //        }
         }
 
         /// <summary>
@@ -794,17 +794,17 @@ namespace Indicator
         /// </summary>
         /// <param name="codeKey"></param>
         /// <param name="_list"></param>
-        private void RemoveListElement(string codeKey, ref List<RecordIssue> _list)
-        {
-            int index = _list.Count;
-            for (int i = index-1; i >= 0; i--)
-            {
-                if(_list[i].IssueOrderCode == codeKey)
-                {
-                    _list.RemoveAt(i);
-                }
-            }
-        }
+        //private void RemoveListElement(string codeKey, ref List<RecordIssue> _list)
+        //{
+        //    int index = _list.Count;
+        //    for (int i = index-1; i >= 0; i--)
+        //    {
+        //        if(_list[i].IssueOrderCode == codeKey)
+        //        {
+        //            _list.RemoveAt(i);
+        //        }
+        //    }
+        //}
 
         #endregion
 
@@ -1350,7 +1350,7 @@ namespace Indicator
         {
             ViewTypeOption = ViewType.Year_1;
 
-            SetPanelElements(RuntimeData.RootContainer.Instance.IssueObjectList);
+            //SetPanelElements(RuntimeData.RootContainer.Instance.IssueObjectList);
 
             while(true)
             {
