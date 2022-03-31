@@ -27,35 +27,35 @@ namespace Indicator.Element
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
 #if UNITY_EDITOR
-            EditDebug.PrintEvent_DEFAULT("pointer enter");
+            //EditDebug.PrintEvent_DEFAULT("pointer enter");
 #endif
         }
 
         public virtual void OnPointerExit(PointerEventData eventData)
         {
 #if UNITY_EDITOR
-            EditDebug.PrintEvent_DEFAULT("pointer exit");
+            //EditDebug.PrintEvent_DEFAULT("pointer exit");
 #endif
         }
 
         public virtual void OnPointerUp(PointerEventData eventData)
         {
 #if UNITY_EDITOR
-            EditDebug.PrintEvent_DEFAULT("pointer up");
+            //EditDebug.PrintEvent_DEFAULT("pointer up");
 #endif
         }
 
         public virtual void OnPointerClick(PointerEventData eventData)
         {
 #if UNITY_EDITOR
-            EditDebug.PrintEvent_DEFAULT("pointer click");
+            //EditDebug.PrintEvent_DEFAULT("pointer click");
 #endif
         }
 
         public virtual void OnPointerDown(PointerEventData eventData)
         {
 #if UNITY_EDITOR
-            EditDebug.PrintEvent_DEFAULT("pointer down");
+            //EditDebug.PrintEvent_DEFAULT("pointer down");
 #endif
         }
 
