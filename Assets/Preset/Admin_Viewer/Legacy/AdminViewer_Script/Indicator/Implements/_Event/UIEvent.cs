@@ -39,7 +39,7 @@ namespace Indicator.Element
 
         // Tag : 패널 정보 스위칭용 표시기 객체
         public AIndicator indicator;
-        public ImP_option option;
+        //public ImP_option option;
 
         #endregion
 
@@ -100,92 +100,92 @@ namespace Indicator.Element
         /// </summary>
         private void InvokeOpenImagePanel()
         {
-            Indicator.ImP_option option = GetImagePanelOption();
+            //Indicator.ImP_option option = GetImagePanelOption();
 
-            if (!option.Equals(Indicator.ImP_option.Null))
-            {
-                ImP_Indicator imagePanelIndicator = (Manager.UIManager.Instance.indicatorDic[IndicatorType.ImP] as ImP_Indicator);
+            //if (!option.Equals(Indicator.ImP_option.Null))
+            //{
+            //    ImP_Indicator imagePanelIndicator = (Manager.UIManager.Instance.indicatorDic[IndicatorType.ImP] as ImP_Indicator);
 
-                imagePanelIndicator.gameObject.SetActive(true);
+            //    imagePanelIndicator.gameObject.SetActive(true);
 
-                imagePanelIndicator.SetPanelElements(
-                    _issue: issue,
-                    initOption: option
-                    );
-            }
+            //    imagePanelIndicator.SetPanelElements(
+            //        _issue: issue,
+            //        initOption: option
+            //        );
+            //}
         }
 
-        private Indicator.ImP_option GetImagePanelOption()
-        {
-            Indicator.ImP_option _option = ImP_option.Null;
+        //private Indicator.ImP_option GetImagePanelOption()
+        //{
+        //    Indicator.ImP_option _option = ImP_option.Null;
 
-            switch(sceneStatus)
-            {
-                case Manager.ViewSceneStatus.ViewAllDamage:
+        //    switch(sceneStatus)
+        //    {
+        //        case Manager.ViewSceneStatus.ViewAllDamage:
 
-                    break;
+        //            break;
 
-                case Manager.ViewSceneStatus.ViewPartDamage:
-                    switch(panel)
-                    {
-                        case PanelPosition.BPM1:
-                            _option = ImP_option.Damage;
-                            break;
+        //        case Manager.ViewSceneStatus.ViewPartDamage:
+        //            switch(panel)
+        //            {
+        //                case PanelPosition.BPM1:
+        //                    _option = ImP_option.Damage;
+        //                    break;
 
-                        case PanelPosition.BPM2:
-                            _option = ImP_option.DamageInDay;
-                            break;
-                    }
-                    break;
+        //                case PanelPosition.BPM2:
+        //                    _option = ImP_option.DamageInDay;
+        //                    break;
+        //            }
+        //            break;
 
-                case Manager.ViewSceneStatus.ViewPart2R:
-                    switch(panel)
-                    {
-                        case PanelPosition.BPM1:
-                            _option = ImP_option.Recover;
-                            break;
+        //        case Manager.ViewSceneStatus.ViewPart2R:
+        //            switch(panel)
+        //            {
+        //                case PanelPosition.BPM1:
+        //                    _option = ImP_option.Recover;
+        //                    break;
 
-                        case PanelPosition.BPM2:
-                            _option = ImP_option.Reinforcement;
-                            break;
-                    }
-                    break;
+        //                case PanelPosition.BPM2:
+        //                    _option = ImP_option.Reinforcement;
+        //                    break;
+        //            }
+        //            break;
 
-                case Manager.ViewSceneStatus.ViewMaintainance:
-                    switch(panel)
-                    {
-                        //case PanelPosition.BPM1:
-                        //    _option = ImP_option.Damage;
-                        //    break;
+        //        case Manager.ViewSceneStatus.ViewMaintainance:
+        //            switch(panel)
+        //            {
+        //                //case PanelPosition.BPM1:
+        //                //    _option = ImP_option.Damage;
+        //                //    break;
 
-                        //case PanelPosition.BPM2:
-                        //    if(issue.GetType().Equals(typeof(Issue.RecoveredIssue)))
-                        //    {
-                        //        _option = ImP_option.Recover;
-                        //    }
-                        //    else if(issue.GetType().Equals(typeof(Issue.ReinforcementIssue)))
-                        //    {
-                        //        _option = ImP_option.Reinforcement;
-                        //    }
-                        //    break;
+        //                //case PanelPosition.BPM2:
+        //                //    if(issue.GetType().Equals(typeof(Issue.RecoveredIssue)))
+        //                //    {
+        //                //        _option = ImP_option.Recover;
+        //                //    }
+        //                //    else if(issue.GetType().Equals(typeof(Issue.ReinforcementIssue)))
+        //                //    {
+        //                //        _option = ImP_option.Reinforcement;
+        //                //    }
+        //                //    break;
 
-                        case PanelPosition.St5_Dmg:
-                            _option = ImP_option.Damage;
-                            break;
+        //                case PanelPosition.St5_Dmg:
+        //                    _option = ImP_option.Damage;
+        //                    break;
 
-                        case PanelPosition.St5_Rcv:
-                            _option = ImP_option.Recover;
-                            break;
+        //                case PanelPosition.St5_Rcv:
+        //                    _option = ImP_option.Recover;
+        //                    break;
 
-                        case PanelPosition.St5_Rein:
-                            _option = ImP_option.Reinforcement;
-                            break;
-                    }
-                    break;
-            }
+        //                case PanelPosition.St5_Rein:
+        //                    _option = ImP_option.Reinforcement;
+        //                    break;
+        //            }
+        //            break;
+        //    }
 
-            return _option;
-        }
+        //    return _option;
+        //}
         #endregion
 
         #region Exit event
@@ -207,12 +207,12 @@ namespace Indicator.Element
             
             if(indicator != null)
             {
-                if(panel.Equals(PanelPosition.ImP))
-                {
-                    ImP_Indicator imagePanelIndicator = (Manager.UIManager.Instance.indicatorDic[IndicatorType.ImP] as ImP_Indicator);
+                //if(panel.Equals(PanelPosition.ImP))
+                //{
+                //    ImP_Indicator imagePanelIndicator = (Manager.UIManager.Instance.indicatorDic[IndicatorType.ImP] as ImP_Indicator);
 
-                    imagePanelIndicator.TagData(option);
-                }
+                //    imagePanelIndicator.TagData(option);
+                //}
                 //else if(panel.Equals(PanelPosition.BPM2))
                 //{
                 //    BPM2_Indicator bpm2Indicator = (Manager.UIManager.Instance.indicatorDic[IndicatorType.BPM2] as BPM2_Indicator);

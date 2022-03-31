@@ -96,10 +96,10 @@ namespace Manager
             StartCoroutine(issueLoader.LoadHistoryJSON(loadType, bridgeCode, query, restrict));
         }
 
-        public void LoadHistory(JSONLoadType loadType, string bridgeCode, string query, Issue.AIssue issue, Indicator.ImP_option option)
-        {
-            StartCoroutine(issueLoader.LoadHistoryJSON(loadType, bridgeCode, query, issue, option));
-        }
+        //public void LoadHistory(JSONLoadType loadType, string bridgeCode, string query, Issue.AIssue issue, Indicator.ImP_option option)
+        //{
+        //    StartCoroutine(issueLoader.LoadHistoryJSON(loadType, bridgeCode, query, issue, option));
+        //}
         #endregion
 
         #endregion

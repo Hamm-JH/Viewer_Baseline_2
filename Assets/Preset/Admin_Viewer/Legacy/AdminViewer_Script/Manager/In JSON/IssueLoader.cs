@@ -179,191 +179,191 @@ namespace Manager
             }
         }
 
-        public IEnumerator LoadHistoryJSON(JSONLoadType loadType, string bridgeCode, string query, Issue.AIssue issue, Indicator.ImP_option option)
-        {
-            string URI = "";
+//        public IEnumerator LoadHistoryJSON(JSONLoadType loadType, string bridgeCode, string query, Issue.AIssue issue, Indicator.ImP_option option)
+//        {
+//            string URI = "";
 
-            URI = string.Format("{0}cdTunnel={1}{2}", loadURL[loadType], bridgeCode, query);
-            //URI = string.Format("{0}cdBridge={1}{2}", loadURL[loadType], bridgeCode, query);
+//            URI = string.Format("{0}cdTunnel={1}{2}", loadURL[loadType], bridgeCode, query);
+//            //URI = string.Format("{0}cdBridge={1}{2}", loadURL[loadType], bridgeCode, query);
 
-            Debug.Log(URI);
+//            Debug.Log(URI);
 
-            //URI = string.Format("{0}cdBridge={1}&cdBridgeParts={2}", loadURL[loadType], bridgeCode, bridgeParts);
+//            //URI = string.Format("{0}cdBridge={1}&cdBridgeParts={2}", loadURL[loadType], bridgeCode, bridgeParts);
 
-#if UNITY_EDITOR
-            EditDebug.PrintINITJSONRoutine(URI);
-#endif
+//#if UNITY_EDITOR
+//            EditDebug.PrintINITJSONRoutine(URI);
+//#endif
 
-            using (UnityWebRequest webRequest = UnityWebRequest.Get(URI))
-            {
-                yield return webRequest.SendWebRequest();
+//            using (UnityWebRequest webRequest = UnityWebRequest.Get(URI))
+//            {
+//                yield return webRequest.SendWebRequest();
 
-                if (webRequest.isNetworkError)
-                {
-                    Debug.Log(string.Format($"Error : {webRequest.error}"));
-                }
-                else
-                {
-                    yield return new WaitForSeconds(0.5f);
-                    SetJSONData(loadType, webRequest.downloadHandler.text, issue, option);
-                }
-            }
-        }
+//                if (webRequest.isNetworkError)
+//                {
+//                    Debug.Log(string.Format($"Error : {webRequest.error}"));
+//                }
+//                else
+//                {
+//                    yield return new WaitForSeconds(0.5f);
+//                    SetJSONData(loadType, webRequest.downloadHandler.text, issue, option);
+//                }
+//            }
+//        }
 
-        private void SetJSONData(JSONLoadType loadType, string _JSONData, Issue.AIssue issue, Indicator.ImP_option option)
-        {
-            //string _data = "";
-            //JSONArray _issueArray;
+        //private void SetJSONData(JSONLoadType loadType, string _JSONData, Issue.AIssue issue, Indicator.ImP_option option)
+        //{
+        //    //string _data = "";
+        //    //JSONArray _issueArray;
 
-            //switch (loadType)
-            //{
-            //    case JSONLoadType.HistoryImage:
-            //        {
-            //            _data = JSON.Parse(_JSONData)["data"].ToString();
+        //    //switch (loadType)
+        //    //{
+        //    //    case JSONLoadType.HistoryImage:
+        //    //        {
+        //    //            _data = JSON.Parse(_JSONData)["data"].ToString();
 
-            //            string _dailyList = JSON.Parse(_data)["dailyList"].ToString();
-            //            JSONNode dailyList = JSON.Parse(_data)["dailyList"];
+        //    //            string _dailyList = JSON.Parse(_data)["dailyList"].ToString();
+        //    //            JSONNode dailyList = JSON.Parse(_data)["dailyList"];
 
-            //            string date = "";
-            //            List<Indicator.ImageIndex> imageIndexList = new List<Indicator.ImageIndex>();
+        //    //            string date = "";
+        //    //            List<Indicator.ImageIndex> imageIndexList = new List<Indicator.ImageIndex>();
 
-            //            //Debug.Log("restrict : " + restrict);
+        //    //            //Debug.Log("restrict : " + restrict);
 
-            //            int count = 0;
-            //            foreach (var dates in dailyList)
-            //            {
-            //                count++;
-            //                //Debug.Log($"{count} {dates}");
+        //    //            int count = 0;
+        //    //            foreach (var dates in dailyList)
+        //    //            {
+        //    //                count++;
+        //    //                //Debug.Log($"{count} {dates}");
 
-            //                date = dates.Key;   // 날짜
-            //                if (dates.Value["damagedList"].Count > 0 && (option == Indicator.ImP_option.Damage || option == Indicator.ImP_option.DamageInDay))
-            //                {
-            //                    Issue.IssueCode issueCode = Issue.IssueCode.Null;
+        //    //                date = dates.Key;   // 날짜
+        //    //                if (dates.Value["damagedList"].Count > 0 && (option == Indicator.ImP_option.Damage || option == Indicator.ImP_option.DamageInDay))
+        //    //                {
+        //    //                    Issue.IssueCode issueCode = Issue.IssueCode.Null;
 
-            //                    foreach (var issues in dates.Value["damagedList"])
-            //                    {
-            //                        issueCode = ParseIssueCode(issues.Key);
-            //                        foreach (var node in issues.Value)
-            //                        {
-            //                            JSONNode _node = node;
+        //    //                    foreach (var issues in dates.Value["damagedList"])
+        //    //                    {
+        //    //                        issueCode = ParseIssueCode(issues.Key);
+        //    //                        foreach (var node in issues.Value)
+        //    //                        {
+        //    //                            JSONNode _node = node;
 
-            //                            Indicator.ImP_option imgOption = Indicator.ImP_option.Damage;
-            //                            string _issueCode = _node["cdTunnelDamaged"].Value;
+        //    //                            Indicator.ImP_option imgOption = Indicator.ImP_option.Damage;
+        //    //                            string _issueCode = _node["cdTunnelDamaged"].Value;
 
-            //                            string description = _node["dcRemark"].Value;
-            //                            string fgroup = _node["fgroup"].Value;
+        //    //                            string description = _node["dcRemark"].Value;
+        //    //                            string fgroup = _node["fgroup"].Value;
 
-            //                            List<Dictionary<string, string>> imgIndexes = new List<Dictionary<string, string>>();
+        //    //                            List<Dictionary<string, string>> imgIndexes = new List<Dictionary<string, string>>();
 
-            //                            JSONArray files = _node["files"].AsArray;
-            //                            if (files != null)
-            //                            {
-            //                                int index = files.Count;
-            //                                for (int i = 0; i < index; i++)
-            //                                {
-            //                                    Dictionary<string, string> inDic = new Dictionary<string, string>();
-            //                                    inDic.Add("fid", files[i]["fid"].Value);
-            //                                    inDic.Add("ftype", files[i]["ftype"].Value);
-            //                                    imgIndexes.Add(inDic);
-            //                                }
+        //    //                            JSONArray files = _node["files"].AsArray;
+        //    //                            if (files != null)
+        //    //                            {
+        //    //                                int index = files.Count;
+        //    //                                for (int i = 0; i < index; i++)
+        //    //                                {
+        //    //                                    Dictionary<string, string> inDic = new Dictionary<string, string>();
+        //    //                                    inDic.Add("fid", files[i]["fid"].Value);
+        //    //                                    inDic.Add("ftype", files[i]["ftype"].Value);
+        //    //                                    imgIndexes.Add(inDic);
+        //    //                                }
 
-            //                                if (option == Indicator.ImP_option.DamageInDay)
-            //                                {
-            //                                    Issue.DamagedIssue _issue = issue as Issue.DamagedIssue;
-            //                                    if ((_issue.CheckDate == _node["dtCheck"].Value) && (_issue.IssueOrderCode == _issueCode))
-            //                                    {
-            //                                        Indicator.ImageIndex imgIndex = new Indicator.ImageIndex(
-            //                                        _date: date,
-            //                                        _issueCode: issueCode,
-            //                                        _description: description,
-            //                                        _imgOption: imgOption,
-            //                                        _issueOrderCode: _issueCode,
-            //                                        _fgroup: fgroup,
-            //                                        _imgList: imgIndexes
-            //                                        );
-            //                                        imageIndexList.Add(imgIndex);
-            //                                    }
-            //                                }
-            //                                else if (option == Indicator.ImP_option.Damage)
-            //                                {
-            //                                    Issue.DamagedIssue _issue = issue as Issue.DamagedIssue;
-            //                                    if (_issue.IssueOrderCode == _issueCode)
-            //                                    {
-            //                                        Indicator.ImageIndex imgIndex = new Indicator.ImageIndex(
-            //                                            _date: date,
-            //                                            _issueCode: issueCode,
-            //                                            _description: description,
-            //                                            _imgOption: imgOption,
-            //                                            _issueOrderCode: _issueCode,
-            //                                            _fgroup: fgroup,
-            //                                            _imgList: imgIndexes
-            //                                            );
-            //                                        imageIndexList.Add(imgIndex);
-            //                                    }
-            //                                }
-            //                            }
+        //    //                                if (option == Indicator.ImP_option.DamageInDay)
+        //    //                                {
+        //    //                                    Issue.DamagedIssue _issue = issue as Issue.DamagedIssue;
+        //    //                                    if ((_issue.CheckDate == _node["dtCheck"].Value) && (_issue.IssueOrderCode == _issueCode))
+        //    //                                    {
+        //    //                                        Indicator.ImageIndex imgIndex = new Indicator.ImageIndex(
+        //    //                                        _date: date,
+        //    //                                        _issueCode: issueCode,
+        //    //                                        _description: description,
+        //    //                                        _imgOption: imgOption,
+        //    //                                        _issueOrderCode: _issueCode,
+        //    //                                        _fgroup: fgroup,
+        //    //                                        _imgList: imgIndexes
+        //    //                                        );
+        //    //                                        imageIndexList.Add(imgIndex);
+        //    //                                    }
+        //    //                                }
+        //    //                                else if (option == Indicator.ImP_option.Damage)
+        //    //                                {
+        //    //                                    Issue.DamagedIssue _issue = issue as Issue.DamagedIssue;
+        //    //                                    if (_issue.IssueOrderCode == _issueCode)
+        //    //                                    {
+        //    //                                        Indicator.ImageIndex imgIndex = new Indicator.ImageIndex(
+        //    //                                            _date: date,
+        //    //                                            _issueCode: issueCode,
+        //    //                                            _description: description,
+        //    //                                            _imgOption: imgOption,
+        //    //                                            _issueOrderCode: _issueCode,
+        //    //                                            _fgroup: fgroup,
+        //    //                                            _imgList: imgIndexes
+        //    //                                            );
+        //    //                                        imageIndexList.Add(imgIndex);
+        //    //                                    }
+        //    //                                }
+        //    //                            }
 
-            //                        }
-            //                    }
-            //                }
-            //                if (dates.Value["recoverList"].Count > 0 && option == Indicator.ImP_option.Recover)
-            //                {
-            //                    Issue.IssueCode issueCode = Issue.IssueCode.Null;
+        //    //                        }
+        //    //                    }
+        //    //                }
+        //    //                if (dates.Value["recoverList"].Count > 0 && option == Indicator.ImP_option.Recover)
+        //    //                {
+        //    //                    Issue.IssueCode issueCode = Issue.IssueCode.Null;
 
-            //                    foreach (var issues in dates.Value["recoverList"])
-            //                    {
-            //                        issueCode = ParseIssueCode(issues.Key);
-            //                        foreach (var node in issues.Value)
-            //                        {
-            //                            JSONNode _node = node;
+        //    //                    foreach (var issues in dates.Value["recoverList"])
+        //    //                    {
+        //    //                        issueCode = ParseIssueCode(issues.Key);
+        //    //                        foreach (var node in issues.Value)
+        //    //                        {
+        //    //                            JSONNode _node = node;
 
-            //                            Indicator.ImP_option imgOption = Indicator.ImP_option.Recover;
-            //                            string _issueCode = _node["cdTunnelRecover"].Value;
+        //    //                            Indicator.ImP_option imgOption = Indicator.ImP_option.Recover;
+        //    //                            string _issueCode = _node["cdTunnelRecover"].Value;
 
-            //                            List<Dictionary<string, string>> imgIndexes = new List<Dictionary<string, string>>();
+        //    //                            List<Dictionary<string, string>> imgIndexes = new List<Dictionary<string, string>>();
 
-            //                            string description = _node["dcRecover"].Value;
-            //                            string fgroup = _node["fgroup"].Value;
+        //    //                            string description = _node["dcRecover"].Value;
+        //    //                            string fgroup = _node["fgroup"].Value;
 
-            //                            JSONArray files = _node["files"].AsArray;
-            //                            if (files != null)
-            //                            {
-            //                                int index = files.Count;
-            //                                for (int i = 0; i < index; i++)
-            //                                {
-            //                                    Dictionary<string, string> inDic = new Dictionary<string, string>();
-            //                                    inDic.Add("fid", files[i]["fid"].Value);
-            //                                    inDic.Add("ftype", files[i]["ftype"].Value);
-            //                                    imgIndexes.Add(inDic);
-            //                                }
+        //    //                            JSONArray files = _node["files"].AsArray;
+        //    //                            if (files != null)
+        //    //                            {
+        //    //                                int index = files.Count;
+        //    //                                for (int i = 0; i < index; i++)
+        //    //                                {
+        //    //                                    Dictionary<string, string> inDic = new Dictionary<string, string>();
+        //    //                                    inDic.Add("fid", files[i]["fid"].Value);
+        //    //                                    inDic.Add("ftype", files[i]["ftype"].Value);
+        //    //                                    imgIndexes.Add(inDic);
+        //    //                                }
 
-            //                                Issue.RecoveredIssue _issue = issue as Issue.RecoveredIssue;
-            //                                if(_issue.IssueOrderCode == _issueCode)
-            //                                {
-            //                                    Indicator.ImageIndex imgIndex = new Indicator.ImageIndex(
-            //                                        _date: date,
-            //                                        _issueCode: issueCode,
-            //                                        _description: description,
-            //                                        _imgOption: imgOption,
-            //                                        _issueOrderCode: _issueCode,
-            //                                        _fgroup: fgroup,
-            //                                        _imgList: imgIndexes
-            //                                        );
-            //                                    imageIndexList.Add(imgIndex);
-            //                                }
-            //                            }
-            //                        }
-            //                    }
+        //    //                                Issue.RecoveredIssue _issue = issue as Issue.RecoveredIssue;
+        //    //                                if(_issue.IssueOrderCode == _issueCode)
+        //    //                                {
+        //    //                                    Indicator.ImageIndex imgIndex = new Indicator.ImageIndex(
+        //    //                                        _date: date,
+        //    //                                        _issueCode: issueCode,
+        //    //                                        _description: description,
+        //    //                                        _imgOption: imgOption,
+        //    //                                        _issueOrderCode: _issueCode,
+        //    //                                        _fgroup: fgroup,
+        //    //                                        _imgList: imgIndexes
+        //    //                                        );
+        //    //                                    imageIndexList.Add(imgIndex);
+        //    //                                }
+        //    //                            }
+        //    //                        }
+        //    //                    }
 
 
-            //                }
-            //            }
+        //    //                }
+        //    //            }
 
-            //            (Manager.UIManager.Instance.indicatorDic[Indicator.IndicatorType.ImP] as Indicator.ImP_Indicator).SetImages(imageIndexList);
-            //        }
-            //        break;
-            //}
-        }
+        //    //            (Manager.UIManager.Instance.indicatorDic[Indicator.IndicatorType.ImP] as Indicator.ImP_Indicator).SetImages(imageIndexList);
+        //    //        }
+        //    //        break;
+        //    //}
+        //}
 
         private void SetJSONData(JSONLoadType loadType, string _JSONData, string restrict = "")
         {
