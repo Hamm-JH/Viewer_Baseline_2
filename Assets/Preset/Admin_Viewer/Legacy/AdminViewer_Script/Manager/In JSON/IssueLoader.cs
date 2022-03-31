@@ -88,36 +88,36 @@ namespace Manager
             yield return new WaitUntil(() => isRcvEnd.Equals(true));
 
             RuntimeData.RootContainer.Instance.isIssueRoutineEnd = true;
-            MainManager.Instance.InitializeRoutineCheck();
+            //MainManager.Instance.InitializeRoutineCheck();
         }
 
-        public void Initialize(Manager.UrlSet urlSet)
-        {
-            //AddressURL = "http://wesmart.synology.me:45000/bridge/search?cdBridge=";
-            //DamagedURL = "http://wesmart.synology.me:45000/bridge/damage/state?cdBridge=";
-            //RecoveredURL = "http://wesmart.synology.me:45000/bridge/recover/state?cdBridge=";
+        //public void Initialize(Manager.UrlSet urlSet)
+        //{
+        //    //AddressURL = "http://wesmart.synology.me:45000/bridge/search?cdBridge=";
+        //    //DamagedURL = "http://wesmart.synology.me:45000/bridge/damage/state?cdBridge=";
+        //    //RecoveredURL = "http://wesmart.synology.me:45000/bridge/recover/state?cdBridge=";
 
-            loadURL = new Dictionary<JSONLoadType, string>();
-            loadURL.Add(JSONLoadType.BridgeList, urlSet.bridgeListURL);
-            loadURL.Add(JSONLoadType.Address, urlSet.addressURL);
-            loadURL.Add(JSONLoadType.Damaged, urlSet.damagedURL);
-            loadURL.Add(JSONLoadType.Recovered, urlSet.recoverURL);
-            loadURL.Add(JSONLoadType.Image, urlSet.imageURL);
-            loadURL.Add(JSONLoadType.History, urlSet.historyURL);
-            loadURL.Add(JSONLoadType.IssueHistory, urlSet.historyURL);
-            loadURL.Add(JSONLoadType.TotalHistory, urlSet.historyURL);
-            loadURL.Add(JSONLoadType.HistoryImage, urlSet.historyURL);
-            loadURL.Add(JSONLoadType.Report, urlSet.reportURL);
-            //loadURL.Add(JSONLoadType.Image, u)
+        //    loadURL = new Dictionary<JSONLoadType, string>();
+        //    loadURL.Add(JSONLoadType.BridgeList, urlSet.bridgeListURL);
+        //    loadURL.Add(JSONLoadType.Address, urlSet.addressURL);
+        //    loadURL.Add(JSONLoadType.Damaged, urlSet.damagedURL);
+        //    loadURL.Add(JSONLoadType.Recovered, urlSet.recoverURL);
+        //    loadURL.Add(JSONLoadType.Image, urlSet.imageURL);
+        //    loadURL.Add(JSONLoadType.History, urlSet.historyURL);
+        //    loadURL.Add(JSONLoadType.IssueHistory, urlSet.historyURL);
+        //    loadURL.Add(JSONLoadType.TotalHistory, urlSet.historyURL);
+        //    loadURL.Add(JSONLoadType.HistoryImage, urlSet.historyURL);
+        //    loadURL.Add(JSONLoadType.Report, urlSet.reportURL);
+        //    //loadURL.Add(JSONLoadType.Image, u)
 
-            loadKeys = new Dictionary<JSONLoadType, string>();
-            loadKeys.Add(JSONLoadType.Damaged, "damagedList");
-            loadKeys.Add(JSONLoadType.Recovered, "recoverList");
+        //    loadKeys = new Dictionary<JSONLoadType, string>();
+        //    loadKeys.Add(JSONLoadType.Damaged, "damagedList");
+        //    loadKeys.Add(JSONLoadType.Recovered, "recoverList");
 
-            isAdrEnd = false;
-            isDmgEnd = false;
-            isRcvEnd = false;
-        }
+        //    isAdrEnd = false;
+        //    isDmgEnd = false;
+        //    isRcvEnd = false;
+        //}
 
         #region 손상/보수 신규할당
 

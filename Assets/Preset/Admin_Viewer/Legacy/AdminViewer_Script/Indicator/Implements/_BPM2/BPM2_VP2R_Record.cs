@@ -11,7 +11,7 @@ namespace Indicator.Element
         public Issue.AIssue issue;
         [SerializeField] private List<TextMeshProUGUI> textList;
         [SerializeField] private List<Image> imageList;
-        [SerializeField] private UIEvent imageEvent;
+        //[SerializeField] private UIEvent imageEvent;
 
         public void SetElement(Issue.AIssue _issue, int index)
         {
@@ -24,10 +24,10 @@ namespace Indicator.Element
 
             imageList[0].sprite = UI.IssueConverter.GetRecordImageIcon();
 
-            imageEvent.InitData(
-                _issue: issue,
-                _panel: PanelPosition.BPM2,
-                _eventType: ElementEventType.Image);
+            //imageEvent.InitData(
+            //    _issue: issue,
+            //    _panel: PanelPosition.BPM2,
+            //    _eventType: ElementEventType.Image);
         }
     }
 }

@@ -309,7 +309,7 @@ namespace AdminViewer.UI
         protected void SetElements(List<AIssue> _issue)
         {
             // TODO 0215 : 교량에 대한 전체 Issue의 이력정보 필요
-            Manager.JSONManager.Instance.LoadHistory(Manager.JSONLoadType.TotalHistory, Manager.MainManager.Instance.BridgeCode, "");
+            //Manager.JSONManager.Instance.LoadHistory(Manager.JSONLoadType.TotalHistory, Manager.MainManager.Instance.BridgeCode, "");
         }
 
         /// <summary>
@@ -1200,7 +1200,7 @@ namespace AdminViewer.UI
 
             yield return new WaitUntil(() => isCaptureReady == true);
 
-            Manager.UIManager.Instance.isCapReady2 = true;
+            //Manager.UIManager.Instance.isCapReady2 = true;
 
             yield break;
         }
@@ -1232,7 +1232,7 @@ namespace AdminViewer.UI
 
             isCaptureReady = true;
 
-            Manager.UIManager.Instance.isCapReady2 = true;
+            //Manager.UIManager.Instance.isCapReady2 = true;
 
             yield break;
         }

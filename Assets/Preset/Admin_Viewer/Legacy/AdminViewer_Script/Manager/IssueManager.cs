@@ -145,39 +145,39 @@ namespace Manager
 
         public void DisplayIssue()
         {
-            ViewSceneStatus sceneStatus = MainManager.Instance.SceneStatus;
-            List<AIssue> issueList = RuntimeData.RootContainer.Instance.IssueObjectList;
+            //ViewSceneStatus sceneStatus = MainManager.Instance.SceneStatus;
+            //List<AIssue> issueList = RuntimeData.RootContainer.Instance.IssueObjectList;
 
-            switch(sceneStatus)
-            {
-                case ViewSceneStatus.Ready:
-                case ViewSceneStatus.ViewAllDamage:
-                    DisplayAll(false);
-                    DisplayAllDamagedOnlyView(true);
-                    break;
+            //switch(sceneStatus)
+            //{
+            //    case ViewSceneStatus.Ready:
+            //    case ViewSceneStatus.ViewAllDamage:
+            //        DisplayAll(false);
+            //        DisplayAllDamagedOnlyView(true);
+            //        break;
 
-                case ViewSceneStatus.ViewPartDamage:
-                    {
-                        string partName = RuntimeData.RootContainer.Instance.cached3DInstance.itemTransform.name;
-                        DisplayAll(false);
-                        DisplayPart(partName, "Damaged");
-                    }
-                    break;
+            //    case ViewSceneStatus.ViewPartDamage:
+            //        {
+            //            string partName = RuntimeData.RootContainer.Instance.cached3DInstance.itemTransform.name;
+            //            DisplayAll(false);
+            //            DisplayPart(partName, "Damaged");
+            //        }
+            //        break;
 
-                case ViewSceneStatus.ViewPart2R:
-                    {
-                        string partName = RuntimeData.RootContainer.Instance.cached3DInstance.itemTransform.name;
-                        DisplayAll(false);
-                        DisplayPart(partName, "Recovered");
-                    }
-                    break;
+            //    case ViewSceneStatus.ViewPart2R:
+            //        {
+            //            string partName = RuntimeData.RootContainer.Instance.cached3DInstance.itemTransform.name;
+            //            DisplayAll(false);
+            //            DisplayPart(partName, "Recovered");
+            //        }
+            //        break;
 
-                case ViewSceneStatus.ViewMaintainance:
-                    {
-                        DisplayAll(true);
-                    }
-                    break;
-            }
+            //    case ViewSceneStatus.ViewMaintainance:
+            //        {
+            //            DisplayAll(true);
+            //        }
+            //        break;
+            //}
         }
 
         private void DisplayData<T>(T _data) where T : Issue.AIssue

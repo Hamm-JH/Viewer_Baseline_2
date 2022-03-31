@@ -95,70 +95,70 @@ namespace Manager
         // 교량에 길이(가변)에 맞게 손상/보수 아이콘을 재배치
         public void SetInsteractablePoint(Transform pointList)
         {
-            Transform interactablePointList = pointList.GetChild(0).transform;
-            Transform[] damageList = new Transform[17];
-            Transform[] recoverList = new Transform[17];
-            List<Transform> listDS = new List<Transform>();
-            int countDS = 0;
+            //Transform interactablePointList = pointList.GetChild(0).transform;
+            //Transform[] damageList = new Transform[17];
+            //Transform[] recoverList = new Transform[17];
+            //List<Transform> listDS = new List<Transform>();
+            //int countDS = 0;
 
-            float minX = 0;
-            float minY = 0;
-            float minZ = 0;
-            float maxX = 0;
-            float maxY = 0;
-            float maxZ = 0;
-            float totalX = 0;
-            float betweenDisX = 0;
+            //float minX = 0;
+            //float minY = 0;
+            //float minZ = 0;
+            //float maxX = 0;
+            //float maxY = 0;
+            //float maxZ = 0;
+            //float totalX = 0;
+            //float betweenDisX = 0;
 
-            // 리스트를 손상/보수 두가지로 나눔
-            for (int i = 0; i < 17; i++)
-            {
-                damageList[i] = pointList.GetChild(0).GetChild(i).transform;
-                recoverList[i] = pointList.GetChild(0).GetChild(i + 17).transform;
-            }
-
-            // DS=포장 리스트 생성
-            //for(int i = 0; i < Manager.DimViewManager.Instance.objLevel3.Count; i++)
+            //// 리스트를 손상/보수 두가지로 나눔
+            //for (int i = 0; i < 17; i++)
             //{
-            //    if (Manager.DimViewManager.Instance.objLevel3[i].name.Contains("DS"))
-            //    {
-            //        listDS.Add(Manager.DimViewManager.Instance.objLevel3[i]);
-            //        countDS++;
-            //    }
+            //    damageList[i] = pointList.GetChild(0).GetChild(i).transform;
+            //    recoverList[i] = pointList.GetChild(0).GetChild(i + 17).transform;
             //}
 
-            Bounds _b = MainManager.Instance.rootBounds;
+            //// DS=포장 리스트 생성
+            ////for(int i = 0; i < Manager.DimViewManager.Instance.objLevel3.Count; i++)
+            ////{
+            ////    if (Manager.DimViewManager.Instance.objLevel3[i].name.Contains("DS"))
+            ////    {
+            ////        listDS.Add(Manager.DimViewManager.Instance.objLevel3[i]);
+            ////        countDS++;
+            ////    }
+            ////}
 
-            // 포장면을 기준으로 min, max 값 할당
-            minX = _b.min.x;
-            minY = _b.min.y;
-            minZ = _b.min.z;
-            maxX = _b.max.x;
-            maxY = _b.max.y;
-            maxZ = _b.max.z;
+            //Bounds _b = MainManager.Instance.rootBounds;
 
-            //minX = listDS[0].GetComponent<Bridge.ObjectData>().MinVector3.x;
-            //minY = listDS[0].GetComponent<Bridge.ObjectData>().MinVector3.y;
-            //minZ = listDS[0].GetComponent<Bridge.ObjectData>().MinVector3.z;
-            //maxX = listDS[countDS - 1].GetComponent<Bridge.ObjectData>().MaxVector3.x;
-            //maxY = listDS[countDS - 1].GetComponent<Bridge.ObjectData>().MaxVector3.y;
-            //maxZ = listDS[countDS - 1].GetComponent<Bridge.ObjectData>().MaxVector3.z;
-            // 3-1-2. 해당 교량의 부재별 손상/보수 건이 몇건인지 확인
-            // 3-1-3. 손상/보수 건이 없거나 0개인 부재는 표시 객체를 비활성화
-            // 3-1-4. 받아온 좌표값을 바탕으로 손상/보수 position 객체의 위치를 지정
-            totalX = maxX - minX;
+            //// 포장면을 기준으로 min, max 값 할당
+            //minX = _b.min.x;
+            //minY = _b.min.y;
+            //minZ = _b.min.z;
+            //maxX = _b.max.x;
+            //maxY = _b.max.y;
+            //maxZ = _b.max.z;
 
-            // CodeLv4의 0번이 null = 0 으로 설정되어 있어서 damageList[0]을 제외하고 처리
-            // null = 0을 제외하면 손상, 보수 각각 11개의 데이터
-            betweenDisX = totalX / (damageList.Length - 2); // 리스트 전체 개수가 12이므로 필요한 i 값은 1~11까지 10개 
-            for (int i = 1; i < damageList.Length; i++)
-            {
-                    damageList[i].position = new Vector3(minX + (betweenDisX * (i - 1)), maxY, maxZ / 4);
-            }
-            for (int i = 1; i < recoverList.Length; i++)
-            {
-                    recoverList[i].position = new Vector3(minX + (betweenDisX * (i - 1)), minY, minZ / 4);
-            }
+            ////minX = listDS[0].GetComponent<Bridge.ObjectData>().MinVector3.x;
+            ////minY = listDS[0].GetComponent<Bridge.ObjectData>().MinVector3.y;
+            ////minZ = listDS[0].GetComponent<Bridge.ObjectData>().MinVector3.z;
+            ////maxX = listDS[countDS - 1].GetComponent<Bridge.ObjectData>().MaxVector3.x;
+            ////maxY = listDS[countDS - 1].GetComponent<Bridge.ObjectData>().MaxVector3.y;
+            ////maxZ = listDS[countDS - 1].GetComponent<Bridge.ObjectData>().MaxVector3.z;
+            //// 3-1-2. 해당 교량의 부재별 손상/보수 건이 몇건인지 확인
+            //// 3-1-3. 손상/보수 건이 없거나 0개인 부재는 표시 객체를 비활성화
+            //// 3-1-4. 받아온 좌표값을 바탕으로 손상/보수 position 객체의 위치를 지정
+            //totalX = maxX - minX;
+
+            //// CodeLv4의 0번이 null = 0 으로 설정되어 있어서 damageList[0]을 제외하고 처리
+            //// null = 0을 제외하면 손상, 보수 각각 11개의 데이터
+            //betweenDisX = totalX / (damageList.Length - 2); // 리스트 전체 개수가 12이므로 필요한 i 값은 1~11까지 10개 
+            //for (int i = 1; i < damageList.Length; i++)
+            //{
+            //        damageList[i].position = new Vector3(minX + (betweenDisX * (i - 1)), maxY, maxZ / 4);
+            //}
+            //for (int i = 1; i < recoverList.Length; i++)
+            //{
+            //        recoverList[i].position = new Vector3(minX + (betweenDisX * (i - 1)), minY, minZ / 4);
+            //}
         }
 
         public void CheckIssueCount(Dictionary<char, Dictionary<CodeLv4, int>> _index, string name)

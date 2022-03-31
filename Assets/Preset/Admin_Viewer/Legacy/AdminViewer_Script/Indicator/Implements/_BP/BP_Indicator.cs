@@ -23,11 +23,11 @@ namespace Indicator
         {
             //Debug.Log("BP panel set element");
 
-            _sceneStatus = Manager.MainManager.Instance.SceneStatus;
-            statusIndex = SetStatusIndex(_sceneStatus);
+            //_sceneStatus = Manager.MainManager.Instance.SceneStatus;
+            //statusIndex = SetStatusIndex(_sceneStatus);
 
-            ClearElements();
-            SetElements(_issue);
+            //ClearElements();
+            //SetElements(_issue);
         }
 
         protected override void ClearElements()
@@ -37,7 +37,7 @@ namespace Indicator
 
         protected override void SetElements(List<AIssue> _issue)
         {
-            Manager.UIManager.Instance.GetRoutineCode(IndicatorType.BP);
+            //Manager.UIManager.Instance.GetRoutineCode(IndicatorType.BP);
         }
 
         protected override void SetTitleText() { }

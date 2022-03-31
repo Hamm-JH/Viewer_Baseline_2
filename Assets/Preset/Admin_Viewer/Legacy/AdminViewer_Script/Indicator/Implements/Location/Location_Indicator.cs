@@ -9,7 +9,7 @@ namespace Indicator
     {
         public override void SetPanelElements(List<AIssue> _issue)
         {
-            Manager.UIManager.Instance.GetRoutineCode(IndicatorType.Location);
+            //Manager.UIManager.Instance.GetRoutineCode(IndicatorType.Location);
         }
 
         protected override void ClearElements()

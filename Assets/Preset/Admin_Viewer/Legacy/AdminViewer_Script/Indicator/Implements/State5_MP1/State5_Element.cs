@@ -11,29 +11,29 @@ namespace Indicator.Element
         public Issue.AIssue issue;
         public int index;
 
-        public TableElement root;
+        //public TableElement root;
         public List<TextMeshProUGUI> textmeshes;
         public List<Image> images;
 
-        public void SetElement<T>(Issue.AIssue _issue, int _index, TableElement _root) where T : Issue.AIssue
-        {
-            issue = _issue;
-            index = _index + 1;
-            root = _root;
+        //public void SetElement<T>(Issue.AIssue _issue, int _index, TableElement _root) where T : Issue.AIssue
+        //{
+        //    issue = _issue;
+        //    index = _index + 1;
+        //    root = _root;
 
-            if(typeof(T) == typeof(Issue.DamagedIssue))
-            {
-                SetDmgIssueData(_issue as Issue.DamagedIssue, index);
-            }
-            else if(typeof(T) == typeof(Issue.RecoveredIssue))
-            {
-                SetRcvIssueData(_issue as Issue.RecoveredIssue, index);
-            }
-            else if(typeof(T) == typeof(Issue.ReinforcementIssue))
-            {
-                SetReinIssueData(_issue as Issue.ReinforcementIssue, index);
-            }
-        }
+        //    if(typeof(T) == typeof(Issue.DamagedIssue))
+        //    {
+        //        SetDmgIssueData(_issue as Issue.DamagedIssue, index);
+        //    }
+        //    else if(typeof(T) == typeof(Issue.RecoveredIssue))
+        //    {
+        //        SetRcvIssueData(_issue as Issue.RecoveredIssue, index);
+        //    }
+        //    else if(typeof(T) == typeof(Issue.ReinforcementIssue))
+        //    {
+        //        SetReinIssueData(_issue as Issue.ReinforcementIssue, index);
+        //    }
+        //}
 
         private void SetDmgIssueData(Issue.DamagedIssue _issue, int index)
         {
@@ -59,7 +59,7 @@ namespace Indicator.Element
             // img[1] 사진 이미지
             images[1].sprite = UI.IssueConverter.GetRecordImageIcon();
 
-            images[1].GetComponent<UIEvent>().issue = _issue;
+            //images[1].GetComponent<UIEvent>().issue = _issue;
         }
 
         private void SetRcvIssueData(Issue.RecoveredIssue _issue, int index)
@@ -83,7 +83,7 @@ namespace Indicator.Element
             //image[0] 사진 이미지
             images[0].sprite = UI.IssueConverter.GetRecordImageIcon();
 
-            images[0].GetComponent<UIEvent>().issue = _issue;
+            //images[0].GetComponent<UIEvent>().issue = _issue;
 
             //textList[0].text = index.ToString();
             //textList[1].text = MODBS_Library.BridgeCodeConverter.ConvertCode(issue.BridgePartName, MODBS_Library.OutOption.AdView_BPMM_VAD);
@@ -113,7 +113,7 @@ namespace Indicator.Element
             //image[0] 사진 이미지
             images[0].sprite = UI.IssueConverter.GetRecordImageIcon();
 
-            images[0].GetComponent<UIEvent>().issue = _issue;
+            //images[0].GetComponent<UIEvent>().issue = _issue;
         }
     }
 }

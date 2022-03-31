@@ -61,7 +61,7 @@ namespace Indicator
 
             SetElements(_issue);
 
-            Manager.UIManager.Instance.GetRoutineCode(IndicatorType.State5_BP1);
+            //Manager.UIManager.Instance.GetRoutineCode(IndicatorType.State5_BP1);
         }
 
         // 캡쳐용 패널 초기화

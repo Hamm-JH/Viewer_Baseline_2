@@ -7,6 +7,7 @@ namespace Module.WebAPI
     using System;
     using System.IO;
     using AdminViewer.API;
+    using Management;
     using UnityEngine.UI;
 
 	public partial class Module_WebAPI : AModule
@@ -124,7 +125,7 @@ namespace Module.WebAPI
 
             //Debug.Log($"file Route : {fileRoute}");
 
-            Camera targetCamera = Manager.MainManager.Instance.MainCamera;
+            Camera targetCamera = MainManager.Instance.MainCamera;
             #endregion
 
             if (!Directory.Exists(fileLocation)) Directory.CreateDirectory(fileLocation);
@@ -225,24 +226,24 @@ namespace Module.WebAPI
         {
             string result = "";
 
-            string bridgeCode = Manager.MainManager.Instance.BridgeCode;
+            //string bridgeCode = Manager.MainManager.Instance.BridgeCode;
 
-            DateTime nowTime = DateTime.Now;
-            string dateCode = string.Format("{0}-{1:00}-{2:00}-{3:00}-{4:00}",
-                nowTime.Year, nowTime.Month, nowTime.Day,
-                nowTime.Hour, nowTime.Minute);
+            //DateTime nowTime = DateTime.Now;
+            //string dateCode = string.Format("{0}-{1:00}-{2:00}-{3:00}-{4:00}",
+            //    nowTime.Year, nowTime.Month, nowTime.Day,
+            //    nowTime.Hour, nowTime.Minute);
 
-            string fileCode = "";
-            if (_index == 0)
-            {
-                fileCode = "F1";
-            }
-            else if (_index == 1)
-            {
-                fileCode = "F2";
-            }
+            //string fileCode = "";
+            //if (_index == 0)
+            //{
+            //    fileCode = "F1";
+            //}
+            //else if (_index == 1)
+            //{
+            //    fileCode = "F2";
+            //}
 
-            result = $"{bridgeCode},{dateCode},{fileCode}.png";
+            //result = $"{bridgeCode},{dateCode},{fileCode}.png";
 
             return result;
         }
@@ -253,7 +254,7 @@ namespace Module.WebAPI
         {
             string fileRoute = "";
 
-            string bridgeCode = Manager.MainManager.Instance.BridgeCode;
+            //string bridgeCode = ContentManager.Instance. Manager.MainManager.Instance.BridgeCode;
 
             // 파일 위치 지정
             //string fileLocation = @"D:\GLTFBuild\GraphImages";

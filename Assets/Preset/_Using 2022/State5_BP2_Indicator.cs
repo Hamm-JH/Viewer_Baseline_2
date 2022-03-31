@@ -225,7 +225,7 @@ namespace Indicator
 
             SetElements(_issue);
 
-            Manager.UIManager.Instance.GetRoutineCode(IndicatorType.State5_BP2);
+            //Manager.UIManager.Instance.GetRoutineCode(IndicatorType.State5_BP2);
         }
 
         public void SetSubElement(List<AIssue> _issue, State5_BP2_Indicator ind)
@@ -305,7 +305,7 @@ namespace Indicator
         protected override void SetElements(List<AIssue> _issue)
         {
             // TODO 0215 : 교량에 대한 전체 Issue의 이력정보 필요
-            Manager.JSONManager.Instance.LoadHistory(Manager.JSONLoadType.TotalHistory, Manager.MainManager.Instance.BridgeCode, "");
+            //Manager.JSONManager.Instance.LoadHistory(Manager.JSONLoadType.TotalHistory, Manager.MainManager.Instance.BridgeCode, "");
         }
 
         /// <summary>
@@ -1341,7 +1341,7 @@ namespace Indicator
 
             yield return new WaitUntil(() => isCaptureReady == true);
 
-            Manager.UIManager.Instance.isCapReady2 = true;
+            //Manager.UIManager.Instance.isCapReady2 = true;
 
             yield break;
         }
@@ -1373,7 +1373,7 @@ namespace Indicator
 
             isCaptureReady = true;
 
-            Manager.UIManager.Instance.isCapReady2 = true;
+            //Manager.UIManager.Instance.isCapReady2 = true;
 
             yield break;
         }

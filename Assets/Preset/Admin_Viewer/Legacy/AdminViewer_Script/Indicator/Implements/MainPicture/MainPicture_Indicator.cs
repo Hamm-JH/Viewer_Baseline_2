@@ -17,7 +17,7 @@ namespace Indicator
                 SetMainImage();
             }
             
-            Manager.UIManager.Instance.GetRoutineCode(IndicatorType.mainPicture);
+            //Manager.UIManager.Instance.GetRoutineCode(IndicatorType.mainPicture);
         }
 
         public void SetMainImage()

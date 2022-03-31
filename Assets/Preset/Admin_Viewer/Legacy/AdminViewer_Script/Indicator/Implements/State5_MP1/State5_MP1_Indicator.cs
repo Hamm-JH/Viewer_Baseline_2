@@ -20,7 +20,7 @@ namespace Indicator
 
         public override void SetPanelElements(List<AIssue> _issue)
         {
-            Manager.UIManager.Instance.GetRoutineCode(IndicatorType.State5_MP1);
+            //Manager.UIManager.Instance.GetRoutineCode(IndicatorType.State5_MP1);
 
             // 기존 요소 제거
             ClearElements();
@@ -124,9 +124,9 @@ namespace Indicator
         #region 
         protected override void SetElements(List<AIssue> _issue)
         {
-            issueTables[0].GetComponent<Element.TableElement>().CreateRecords<Issue.DamagedIssue>(_issue);
-            issueTables[1].GetComponent<Element.TableElement>().CreateRecords<Issue.RecoveredIssue>(_issue);
-            issueTables[2].GetComponent<Element.TableElement>().CreateRecords<Issue.ReinforcementIssue>(_issue);
+            //issueTables[0].GetComponent<Element.TableElement>().CreateRecords<Issue.DamagedIssue>(_issue);
+            //issueTables[1].GetComponent<Element.TableElement>().CreateRecords<Issue.RecoveredIssue>(_issue);
+            //issueTables[2].GetComponent<Element.TableElement>().CreateRecords<Issue.ReinforcementIssue>(_issue);
         }
 
         protected override void SetTitleText()

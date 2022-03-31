@@ -43,10 +43,10 @@ namespace Manager
         /// IssueLoader 내부 변수 초기화
         /// </summary>
         /// <param name="urlSet"></param>
-        public void Initialize(Manager.UrlSet urlSet)
-        {
-            issueLoader.Initialize(urlSet);
-        }
+        //public void Initialize(Manager.UrlSet urlSet)
+        //{
+        //    issueLoader.Initialize(urlSet);
+        //}
 
         #endregion
 
