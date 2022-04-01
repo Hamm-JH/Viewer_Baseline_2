@@ -7,6 +7,7 @@ namespace Module.WebAPI
     using System;
     using System.IO;
     using AdminViewer.API;
+    using Definition;
     using Management;
     using UnityEngine.UI;
 
@@ -53,11 +54,10 @@ namespace Module.WebAPI
             // TODO 0616
 #if UNITY_EDITOR
 #else
-                WebManager.OnReadyToPrint(
-                    _fName1: env.L1_Result,
-                    _fName2: env.L2_Result,
-                    _fName3: env.L3_Result
-                    );
+            ExternalAPI.OnReadyToPrint(
+                    _fName1: capture.L1_Result,
+                    _fName2: capture.L2_Result,
+                    _fName3: capture.L3_Result);
 #endif
         }
 
@@ -189,6 +189,7 @@ namespace Module.WebAPI
 
             if (capture.isCapEnd1 && capture.isCapEnd2)
             {
+                
                 //#if UNITY_EDITOR
                 //#else
                 //                WebManager.OnReadyToPrint(

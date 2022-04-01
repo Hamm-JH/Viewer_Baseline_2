@@ -99,10 +99,11 @@ namespace Indicator.Element
             SetDmgGraph(ref dElements);
             SetRcvGraph(ref _elements);
 
+            gameObject.SetActive(minMaxYear[1] == YearID);
+
             yield return new WaitForEndOfFrame();
             yield return new WaitForEndOfFrame();
             
-            gameObject.SetActive(minMaxYear[1] == YearID);
 
             yield break;
         }
