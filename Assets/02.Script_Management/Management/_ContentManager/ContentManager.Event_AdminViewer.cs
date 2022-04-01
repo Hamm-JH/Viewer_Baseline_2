@@ -34,13 +34,23 @@ namespace Management
 			m_container.m_capture.s5b2_panel.SetSubHistoryTable(_dataTable);
 		}
 
-		public void Function_SetKeymapCenterPosition()
+		public void Function_SetCameraCenterPosition()
 		{
+			//Cameras.SetCameraCenter(m_container.m_keymap.m_keymapCamera,
+			//	m_container.m_keymap.m_keymapCamera.gameObject.GetComponent<BIMCamera>());
 			Cameras.SetCameraCenter(m_container.m_keymap.m_keymapCamera,
 				m_container.m_keymap.m_keymapCamera.gameObject.GetComponent<BIMCamera>());
 		}
 
-		public void Input_SelectObject(GameObject _obj)
+        public void Function_SetCameraCenterPosition(Camera _cam)
+        {
+            //Cameras.SetCameraCenter(m_container.m_keymap.m_keymapCamera,
+            //	m_container.m_keymap.m_keymapCamera.gameObject.GetComponent<BIMCamera>());
+            Cameras.SetCameraCenter(_cam,
+                _cam.gameObject.GetComponent<BIMCamera>());
+        }
+
+        public void Input_SelectObject(GameObject _obj)
 		{
 			m_container.m_keymap.m_keymapCamera.gameObject.GetComponent<BIMCamera>().OnSelect(_obj);
 		}
@@ -56,8 +66,8 @@ namespace Management
 			float screenWidth = Screen.width;
 			float screenHeight = Screen.height;
 
-			int defScreenWidth = 1920;
-			int defScreenHeight = 1080;
+			int defScreenWidth = Screen.width;// 1920;
+			int defScreenHeight = Screen.height;// 1080;
 
 			Vector2 panelPivot = keymapPanel.position;         // 패널 중심위치
 			Vector2 panelOffsetMin = new Vector2(              // 패널 최소위치

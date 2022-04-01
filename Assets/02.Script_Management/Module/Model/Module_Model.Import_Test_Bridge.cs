@@ -50,6 +50,8 @@ namespace Module.Model
 			Destroy(dim);
 
 			StartCoroutine(Initialize3DObject(m_bRoot3D));
+
+			
 		}
 
 		private IEnumerator Initialize3DObject(GameObject _root3DObject)
@@ -86,6 +88,8 @@ namespace Module.Model
 			yield return new WaitForEndOfFrame();
 
 			ContentManager.Instance.SetCameraCenterPosition();
+
+			ContentManager.Instance.CompCheck(4);
 
 			yield break;
 		}

@@ -38,7 +38,9 @@ namespace Module.WebAPI
 
             StartCoroutine(capture.L1_Capture.GetImage(this, capture.L1_CaptureTarget.TogglesBeforeCapture));
             StartCoroutine(capture.L2_Capture.GetImage(this, capture.L2_CaptureTarget.TogglesBeforeCapture));
-            //StartCoroutine(capture.L3_Capture.GetImage(this));
+
+            ContentManager.Instance.Function_SetCameraCenterPosition(capture.L3_Capture.env.camera);
+            StartCoroutine(capture.L3_Capture.GetImage(this));
 
             while (true)
             {

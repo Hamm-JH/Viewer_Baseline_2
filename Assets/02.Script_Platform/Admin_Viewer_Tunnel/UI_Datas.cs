@@ -165,10 +165,11 @@ namespace AdminViewer
 						pins[i].gameObject.SetActive(true);
 					}
 				}
-
-
-
 			}
+			else if(Platforms.IsBridgePlatform(pCode))
+            {
+				pins.ForEach(x => x.gameObject.SetActive(false));
+            }
 
 		}
 	}

@@ -219,7 +219,7 @@ namespace Module.UI
 
 		public override void GetUIEvent(UIEventType _uType, Interactable _setter)
 		{
-			Debug.Log($"Type : {_uType.ToString()}");
+			//Debug.Log($"Type : {_uType.ToString()}");
 			switch(_uType)
 			{
 				case UIEventType.Ad_nav_state1:
@@ -312,7 +312,7 @@ namespace Module.UI
 
 		public void SetKeymapCenterPosition()
 		{
-			ContentManager.Instance.Function_SetKeymapCenterPosition();
+			ContentManager.Instance.Function_SetCameraCenterPosition();
 		}
 
 		private void OpenImagePanel(Interactable _setter)
