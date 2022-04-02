@@ -1,3 +1,4 @@
+using Management;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,9 @@ namespace Definition
 		public static Vector3 Set(UIEventType eventType)
 		{
 			Vector3 result = default(Vector3);
+
+			PlatformCode pCode = MainManager.Instance.Platform;
+
 
 			switch(eventType)
 			{
@@ -29,11 +33,25 @@ namespace Definition
 					break;
 
 				case UIEventType.Viewport_ViewMode_SIDE_FRONT:
-					result = new Vector3(0, 0, 0);
+					if(Platforms.IsTunnelPlatform(pCode))
+					{
+						result = new Vector3(0, 0, 0);
+					}
+					else if(Platforms.IsBridgePlatform(pCode))
+					{
+						result = new Vector3(0, 180, 0);
+					}
 					break;
 
 				case UIEventType.Viewport_ViewMode_SIDE_BACK:
-					result = new Vector3(0, 180, 0);
+					if(Platforms.IsTunnelPlatform(pCode))
+					{
+						result = new Vector3(0, 180, 0);
+					}
+					else if(Platforms.IsBridgePlatform(pCode))
+					{
+						result = new Vector3(0, 0, 0);
+					}
 					break;
 
 				case UIEventType.Viewport_ViewMode_SIDE_LEFT:
