@@ -274,6 +274,7 @@ namespace Definition
 		Ad_St5_PrintExcel = 0x21c,
 
 		Ad_St_DimToggle = 0x21d,
+		Ad_St_PrintDim = 0x21e,
 
 	}
 

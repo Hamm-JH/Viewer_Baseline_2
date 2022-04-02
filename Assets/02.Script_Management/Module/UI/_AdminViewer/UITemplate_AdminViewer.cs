@@ -310,7 +310,9 @@ namespace Module.UI
 					ToggleDimension();
 					break;
 
-					
+				case UIEventType.Ad_St_PrintDim:
+					PrintDimension();
+					break;
 			}
 		}
 

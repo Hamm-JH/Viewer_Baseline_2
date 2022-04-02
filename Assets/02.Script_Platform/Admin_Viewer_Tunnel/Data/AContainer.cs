@@ -22,6 +22,8 @@ namespace AdminViewer.Data
 
 		public Ad_Capture m_capture;
 
+		public Ad_Dim m_dim;
+
 		public DimViewManager m_dimView;
 
 		public void InitContainer()

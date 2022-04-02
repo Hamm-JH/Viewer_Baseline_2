@@ -26961,6 +26961,13 @@ MonoBehaviour:
       IndicatorState5_BP2: {fileID: 0}
       IndicatorTypeState5_BP1: {fileID: 0}
       IndicatorTypeState5_BP2: {fileID: 0}
+    m_dim:
+      tex_fr: {fileID: 8400000, guid: cb45148e9a95bc4469abdb769faf8f41, type: 2}
+      tex_ba: {fileID: 8400000, guid: f09a571a3d746ad4e975e7afb87f2865, type: 2}
+      tex_to: {fileID: 8400000, guid: a2f0130fd7fd6b9458b7f093bff3b518, type: 2}
+      tex_bo: {fileID: 8400000, guid: 6d8280f72e7ff4645b2cfe2225d46d96, type: 2}
+      tex_le: {fileID: 8400000, guid: 7722bc103ea2350489ab57ca643ff817, type: 2}
+      tex_re: {fileID: 8400000, guid: 700b6e702e94d374caeab448941e0336, type: 2}
     m_dimView: {fileID: 221872169}
   m_modules:
   - {fileID: 7272807276706612160}

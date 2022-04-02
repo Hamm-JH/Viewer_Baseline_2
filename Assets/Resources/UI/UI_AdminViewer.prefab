@@ -41065,7 +41065,7 @@ MonoBehaviour:
   m_isInteractable: 0
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
-  eventType: 0
+  eventType: 542
   m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
@@ -46842,7 +46842,7 @@ MonoBehaviour:
   m_isInteractable: 0
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
-  eventType: 0
+  eventType: 542
   m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []

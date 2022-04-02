@@ -15,6 +15,8 @@ namespace Module.UI
 
 	public partial class UITemplate_AdminViewer : AUI
 	{
+		#region Toggle Dimension
+
 		private void ToggleDimension()
 		{
 			GameObject selected = EventManager.Instance._SelectedObject;
@@ -68,6 +70,30 @@ namespace Module.UI
 			}
 
 			return result;
+		}
+
+		#endregion
+
+
+		private void PrintDimension()
+		{
+			float offset = 5f;
+
+			GameObject selected = EventManager.Instance._SelectedObject;
+
+			//GameObject obj = new GameObject("fr cam");
+			GameObject obj = Instantiate(new GameObject("fr cam"), selected.transform);
+			Camera cam = obj.AddComponent<Camera>();
+
+			// skybox type 구하기
+			//cam.
+			cam.orthographic = true;
+			cam.orthographicSize = 5;
+			cam.targetTexture = ContentManager.Instance.Container.m_dim.tex_fr;
+			cam.cullingMask = Layers.SetMask(11);
+
+			obj.transform.Translate(Vector3.back * offset);
+
 		}
 	}
 }

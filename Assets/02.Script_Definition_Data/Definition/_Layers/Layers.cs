@@ -37,23 +37,23 @@ namespace Definition
 					break;
 
 				case 3:
-					result = LayerMask.NameToLayer("FR");
+					result = LayerMask.NameToLayer("BA");
 					break;
 
 				case 4:
-					result = LayerMask.NameToLayer("FR");
+					result = LayerMask.NameToLayer("TO");
 					break;
 
 				case 5:
-					result = LayerMask.NameToLayer("FR");
+					result = LayerMask.NameToLayer("BO");
 					break;
 
 				case 6:
-					result = LayerMask.NameToLayer("FR");
+					result = LayerMask.NameToLayer("LE");
 					break;
 
 				case 7:
-					result = LayerMask.NameToLayer("FR");
+					result = LayerMask.NameToLayer("RE");
 					break;
 			}
 
@@ -64,12 +64,12 @@ namespace Definition
 		/// 0 ALL
 		/// 1 34상태 main
 		/// 2 34상태 sub
-		/// 2 FR
-		/// 3 BA
-		/// 4 TO
-		/// 5 BO
-		/// 6 LE
-		/// 7 RE
+		/// 11 FR
+		/// 12 BA
+		/// 13 TO
+		/// 14 BO
+		/// 15 LE
+		/// 16 RE
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
@@ -100,6 +100,42 @@ namespace Definition
 					layers.Add("Default");
 					layers.Add("Cache");
 					layers.Add("UI");
+					mask = Set(layers);
+					break;
+
+				case 11:
+					layers.Add("Cache");
+					layers.Add("FR");
+					mask = Set(layers);
+					break;
+
+				case 12:
+					layers.Add("Cache");
+					layers.Add("BA");
+					mask = Set(layers);
+					break;
+
+				case 13:
+					layers.Add("Cache");
+					layers.Add("TO");
+					mask = Set(layers);
+					break;
+
+				case 14:
+					layers.Add("Cache");
+					layers.Add("BO");
+					mask = Set(layers);
+					break;
+
+				case 15:
+					layers.Add("Cache");
+					layers.Add("LE");
+					mask = Set(layers);
+					break;
+
+				case 16:
+					layers.Add("Cache");
+					layers.Add("RE");
 					mask = Set(layers);
 					break;
 			}
