@@ -24,6 +24,8 @@ namespace Definition.Data
 		[SerializeField] GameObject m_rootInput;
 
 		[SerializeField] GameObject m_cameraPoint;
+
+		
 		public GameObject CameraPoint { get => m_cameraPoint; }
 
 		#endregion
@@ -62,9 +64,12 @@ namespace Definition.Data
 			}
 		}
 
-
 		#endregion
 
+		[Header("Dimension")]
+		public Material m_outlineMat;
+
+		public Material OutlineMat { get => m_outlineMat; set => m_outlineMat=value; }
 
 	}
 }

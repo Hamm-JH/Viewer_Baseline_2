@@ -6,6 +6,7 @@ namespace Management
 {
 	using Definition;
 	using Events;
+	using System.Linq;
 	using View;
 
 	/// <summary>
@@ -37,6 +38,24 @@ namespace Management
 			get
 			{
 				return m_eStatus.ModuleList;
+			}
+		}
+
+		public GameObject _SelectedObject
+		{
+			get
+			{
+				GameObject obj = null;
+
+				AEventData _event;
+				if(EventStates.TryGetValue(InputEventType.Input_clickSuccessUp, out _event))
+				{
+					if(_event.Elements != null && _event.Elements.Count != 0)
+					{
+						obj = _event.Elements.Last().Target;
+					}
+				}
+				return obj;
 			}
 		}
 

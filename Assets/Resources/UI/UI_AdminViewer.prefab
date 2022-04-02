@@ -17439,7 +17439,7 @@ MonoBehaviour:
   m_isInteractable: 0
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
-  eventType: 0
+  eventType: 541
   m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
@@ -31717,7 +31717,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3005354841965641604
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44433,7 +44433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842482263006
 RectTransform:
   m_ObjectHideFlags: 0
@@ -58947,7 +58947,7 @@ MonoBehaviour:
   m_isInteractable: 0
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
-  eventType: 0
+  eventType: 541
   m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []

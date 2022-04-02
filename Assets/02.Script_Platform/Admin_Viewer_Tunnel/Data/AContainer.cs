@@ -6,6 +6,7 @@ namespace AdminViewer.Data
 {
 	using API;
 	using Definition;
+	using Legacy.Items;
 	using Management;
 	using Platform.Feature.Camera;
 
@@ -20,6 +21,8 @@ namespace AdminViewer.Data
 		public Ad_Keymap m_keymap;
 
 		public Ad_Capture m_capture;
+
+		public DimViewManager m_dimView;
 
 		public void InitContainer()
 		{

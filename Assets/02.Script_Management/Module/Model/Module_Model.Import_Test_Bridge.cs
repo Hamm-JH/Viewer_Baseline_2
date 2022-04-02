@@ -8,6 +8,9 @@ namespace Module.Model
 	using View;
 	using System.Linq;
 	using Management;
+	using TMPro;
+	using UnityEngine.UI;
+	using Legacy.UI;
 
 	/// <summary>
 	/// 템플릿
@@ -17,15 +20,15 @@ namespace Module.Model
 		[Header("Bridge")]
 		[SerializeField] GameObject m_bRootObj;
 		[SerializeField] GameObject m_bRoot3D;
+        [SerializeField] GameObject m_bRoot2D;
 		[SerializeField] GameObject[] m_bridgeTopParts;
 		[SerializeField] GameObject[] m_bridgeBottomParts;
 
 		public void InitializeObjectBridge(GameObject _root)
 		{
-			GameObject dim = null;
-
 			m_bRootObj = _root.transform.GetChild(0).gameObject;
 			m_bRoot3D = null;
+            m_bRoot2D = null;
 
 			int index = m_bRootObj.transform.childCount;
 			for (int i = 0; i < index; i++)
@@ -41,20 +44,24 @@ namespace Module.Model
 						break;
 
 					default:
-						dim = m_bRootObj.transform.GetChild(i).gameObject;
+                        m_bRoot2D = m_bRootObj.transform.GetChild(i).gameObject;
 						break;
 				}
 			}
 
 			// 치수선 삭제
-			Destroy(dim);
+			//Destroy(dim);
+            Initialize2DObject(m_bRoot2D);
 
 			StartCoroutine(Initialize3DObject(m_bRoot3D));
 
 			
 		}
 
-		private IEnumerator Initialize3DObject(GameObject _root3DObject)
+        bool routineCheck3D;
+
+
+        private IEnumerator Initialize3DObject(GameObject _root3DObject)
 		{
 			//manager.RootObject.transform.parent.position = new Vector3(0, 0, 0);
 
@@ -87,9 +94,12 @@ namespace Module.Model
 
 			yield return new WaitForEndOfFrame();
 
-			ContentManager.Instance.SetCameraCenterPosition();
+            routineCheck3D = true;
+            InitializeCheck();
 
-			ContentManager.Instance.CompCheck(4);
+			//ContentManager.Instance.SetCameraCenterPosition();
+
+			//ContentManager.Instance.CompCheck(4);
 
 			yield break;
 		}
@@ -177,5 +187,471 @@ namespace Module.Model
 
 
 		}
-	}
+
+        private void InitializeCheck()
+        {
+            bool result =
+                routineCheck2D &&
+                routineCheck2D_11 && routineCheck2D_12 && routineCheck2D_13 &&
+                routineCheck3D;
+
+            if (result)
+            {
+                ContentManager.Instance.SetCameraCenterPosition();
+
+                ContentManager.Instance.CompCheck(4);
+
+                ContentManager.Instance.Container.m_dimView.Initial2DSet(m_bRootObj);
+                    //DimViewManager.Instance.Initial2DSet(_2DObject: (GameObject)args[0]);
+                //MaterialChange();
+                //MainManager.Instance.Request(new Request(Type.DimView, RequestCode.DimView_3DCall), RootObject);
+                //MainManager.Instance.Request(new Request(Type.DimView, RequestCode.DimView_2DCall), RootObject);
+
+                //RuntimeData.RootContainer.Instance.isObjectRoutineEnd = true;
+                //MainManager.Instance.InitializeRoutineCheck();
+            }
+        }
+
+        #region 2D initialize
+
+        bool routineCheck2D;
+        bool routineCheck2D_11;
+        bool routineCheck2D_12;
+        bool routineCheck2D_13;
+
+        GameObject dimObj;
+        Transform[] dimTransforms;
+        Transform[] mainLineTransforms;
+        Transform[] subLineTransforms;
+
+        float offset = 5f;
+
+        private async void Initialize2DObject(GameObject root2D)
+        {
+            //yield return null;
+
+            routineCheck2D    = false;
+            routineCheck2D_11 = false;
+            routineCheck2D_12 = false;
+            routineCheck2D_13 = false;
+
+            StartCoroutine(SetObject_Dimension(root2D));
+
+            routineCheck2D = true;
+            InitializeCheck();
+
+            //yield break;
+        }
+
+        /// <summary>
+        /// 1. 치수선 배열 검출
+        /// </summary>
+        /// <param name="root2D"></param>
+        /// <returns></returns>
+        private IEnumerator SetObject_Dimension(GameObject root2D)
+        {
+            yield return null;
+
+            dimObj = root2D.transform.GetChild(0).gameObject;
+
+            dimTransforms = dimObj.transform.GetComponentsInChildren<Transform>();
+
+            // 1. 치수선 객체 배열 정렬
+            Transform[] dimensionLineTransforms = (from obj in dimTransforms where obj.name.Contains("Line") select obj)
+                .ToArray<Transform>(); // 모든 치수선들을 받아오는 배열
+            mainLineTransforms = (from obj in dimensionLineTransforms where obj.name.Contains("Main") select obj)
+                .ToArray<Transform>(); // 주 치수선 배열 정렬
+            subLineTransforms = (from obj in dimensionLineTransforms where obj.name.Contains("sub") select obj)
+                .ToArray<Transform>(); // 부 치수선 배열 정렬
+
+            StartCoroutine(SetObject_DimensionLines(dimensionLineTransforms));
+
+
+            // 2. 모든 외곽선값 표시객체 배열 정렬
+            Transform[] outlineTransforms = (from obj in dimTransforms where obj.name.Split('_').Length >= 3 select obj)
+                .ToArray<Transform>();
+
+            StartCoroutine(SetObject_OutLines(outlineTransforms));
+
+            // 3. 모든 치수선값 표시 객체 배열 정렬
+            Transform[] textMeshTransforms =
+                (from obj in dimTransforms
+                 where obj.name.Contains("Main") &&
+                       obj.name.Split('_').Length == 3
+                 select obj).ToArray<Transform>();
+
+            StartCoroutine(SetObject_TextMeshes(textMeshTransforms));
+
+            yield break;
+        }
+
+        /// <summary>
+        /// 1-1. 치수선 material 할당
+        /// </summary>
+        /// <param name="dimLines"></param>
+        /// <returns></returns>
+        private IEnumerator SetObject_DimensionLines(Transform[] dimLines)
+        {
+            yield return null;
+            //Task.Delay(1);6
+
+            int index = dimLines.Length;
+            MeshRenderer renderer;
+
+            for (int i = 0; i < index; i++)
+            {
+                if (dimLines[i].TryGetComponent<MeshRenderer>(out renderer))
+                {
+                    renderer.material = MainManager.Instance.OutlineMat;
+                }
+            }
+
+            routineCheck2D_11 = true;
+            InitializeCheck();
+
+            yield break;
+        }
+
+        /// <summary>
+        /// 1-2. 외곽선 material 할당
+        /// </summary>
+        /// <param name="outLines"></param>
+        /// <returns></returns>
+        private IEnumerator SetObject_OutLines(Transform[] outLines)
+        {
+            yield return null;
+
+            int _index = outLines.Length;
+            MeshRenderer render;
+
+            for (int i = 0; i < _index; i++)
+            {
+                if(outLines[i].TryGetComponent<MeshRenderer>(out render))
+				{
+                    outLines[i].GetComponent<MeshRenderer>().material = MainManager.Instance.OutlineMat;
+				}
+            }
+
+            routineCheck2D_12 = true;
+            InitializeCheck();
+
+            yield break;
+        }
+
+        /// <summary>
+        /// 1-3. TextMesh 할당
+        /// </summary>
+        /// <param name="textMeshes"></param>
+        /// <returns></returns>
+        private IEnumerator SetObject_TextMeshes(Transform[] textMeshes)
+        {
+            yield return null;
+
+            int _index = 0;
+
+            TextMeshPro tmPro;
+            string[] arguments;
+            GameObject textInstance = new GameObject("textInstance");
+            textInstance.AddComponent<TextMeshPro>();
+            ContentSizeFitter fit = textInstance.AddComponent<ContentSizeFitter>();
+            fit.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
+            fit.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+
+            List<GameObject> texts = new List<GameObject>();
+
+            _index = textMeshes.Length;
+            for (int i = 0; i < _index; i++)
+            {
+                arguments = textMeshes[i].name.Split('_');
+
+                textInstance.transform.position = textMeshes[i].position; // text 기본위치 설정
+                textInstance.transform.eulerAngles = GetTextMeshRotation(textMeshes[i]);
+
+                // tmPro 설정단계
+                tmPro = textInstance.GetComponent<TextMeshPro>();
+                tmPro.text = string.Format("{0:N0}", int.Parse(arguments[1]));
+                tmPro.fontSize = 2;
+                tmPro.fontStyle = FontStyles.Bold;
+                tmPro.alignment = TextAlignmentOptions.Center;
+                tmPro.color = new Color(1f, 0.8759048f, 0, 1);
+
+                GameObject tempObj = Instantiate(textInstance, textInstance.transform.position,
+                    textInstance.transform.rotation);
+                tempObj.transform.SetParent(textMeshes[i]); // text 객체 SetParent
+                tempObj.transform.localPosition = new Vector3(0, 0, 0); // text 0, 0, 0 정렬
+                tempObj.transform.localPosition = GetTextMeshPosition(textMeshes[i]); // text 위치 정렬
+
+                texts.Add(tempObj);
+
+                //yield return new WaitForEndOfFrame();
+
+                //RectTransform _rect = tempObj.GetComponent<RectTransform>();
+
+                //BoxCollider coll = tempObj.AddComponent<BoxCollider>();
+                //coll.center = new Vector3(0, 0, 0);
+                //coll.size = new Vector3(_rect.rect.width, _rect.rect.height, 0.1f);
+
+                //_rect.
+                //if (i % 100 == 0)
+                //{
+                //    yield return null;
+                //}
+            }
+
+            yield return new WaitForEndOfFrame();
+
+            _index = texts.Count;
+            for (int i = 0; i < _index; i++)
+            {
+                RectTransform _rect = texts[i].GetComponent<RectTransform>();
+
+                OffsetFitter offsetFitter = texts[i].AddComponent<OffsetFitter>();
+                offsetFitter.Init(texts[i].transform.localPosition);
+
+                BoxCollider coll = texts[i].AddComponent<BoxCollider>();
+                coll.center = new Vector3(0, 0, 0);
+                coll.size = new Vector3(_rect.rect.width+0.1f, _rect.rect.height, 0.1f);
+                coll.isTrigger = true;
+
+                Rigidbody rigid = texts[i].AddComponent<Rigidbody>();
+                rigid.useGravity = false;
+
+                //texts[i].transform.localPosition; // offset용
+            }
+
+            // 할당이 끝난 textInstance 삭제
+            Destroy(textInstance, 0.1f);
+
+            routineCheck2D_13 = true;
+            InitializeCheck();
+
+            yield break;
+        }
+
+        private Vector3 GetTextMeshRotation(Transform target)
+        {
+            string parentName = target.parent.name.Substring(0, 2);
+            string textPosition = target.name.Split('_')[2];
+            string partName = target.parent.parent.name.Substring(0, 6);
+
+            switch (parentName)
+            {
+                case "TO":
+                    return new Vector3(90, -90, 180);
+
+                case "BO":
+                    return new Vector3(-90, 180, -90);
+
+                case "FR":
+                    return new Vector3(0, 180, 0);
+
+                case "BA":
+                    return new Vector3(0, 0, 0);
+
+                case "RE":
+                    switch (textPosition)
+                    {
+                        case "Top":
+                        case "Bottom":
+                            return new Vector3(0, -90, 0);
+
+                        case "Left":
+                        case "Right":
+                            return new Vector3(180, 90, 180);
+                    }
+
+                    return new Vector3(0, -90, 0);
+
+                case "LE":
+                    return new Vector3(0, 90, 0);
+            }
+
+            return new Vector3(0, 0, 0);
+        }
+
+        private Vector3 GetTextMeshPosition(Transform target)
+        {
+            string parentName = target.parent.name.Substring(0, 2);
+            string textPosition = target.name.Split('_')[2];
+
+            switch (parentName)
+            {
+                case "TO":
+                    {
+                        switch (textPosition)
+                        {
+                            case "Top":
+                                return new Vector3(0, 0, -offset);
+
+                            case "Bottom":
+                                return new Vector3(0, 0, offset);
+
+                            case "Left":
+                                return new Vector3(offset, 0, 0);
+
+                            case "Right":
+                                return new Vector3(-offset, 0, 0);
+                        }
+                    }
+                    break;
+
+                case "BO":
+                    {
+                        switch (textPosition)
+                        {
+                            case "Top":
+                                return new Vector3(0, 0, offset);
+
+                            case "Bottom":
+                                return new Vector3(0, 0, -offset);
+
+                            case "Left":
+                                return new Vector3(offset, 0, 0);
+
+                            case "Right":
+                                return new Vector3(-offset, 0, 0);
+                        }
+                    }
+                    break;
+
+                case "FR":
+                    {
+                        switch (textPosition)
+                        {
+                            case "Top":
+                                return new Vector3(0, offset, 0);
+
+                            case "Bottom":
+                                return new Vector3(0, -offset, 0);
+
+                            case "Left":
+                                return new Vector3(-offset, 0, 0);
+
+                            case "Right":
+                                return new Vector3(offset, 0, 0);
+                        }
+                    }
+                    break;
+
+                case "BA":
+                    {
+                        switch (textPosition)
+                        {
+                            case "Top":
+                                return new Vector3(0, offset, 0);
+
+                            case "Bottom":
+                                return new Vector3(0, -offset, 0);
+
+                            case "Left":
+                                return new Vector3(offset, 0, 0);
+
+                            case "Right":
+                                return new Vector3(-offset, 0, 0);
+                        }
+                    }
+                    break;
+
+                case "LE":
+                    {
+                        switch (textPosition)
+                        {
+                            case "Top":
+                                return new Vector3(0, offset, 0);
+
+                            case "Bottom":
+                                return new Vector3(0, -offset, 0);
+
+                            case "Left":
+                                return new Vector3(0, 0, -offset);
+
+                            case "Right":
+                                return new Vector3(0, 0, offset);
+                        }
+                    }
+                    break;
+
+                case "RE":
+                    {
+                        switch (textPosition)
+                        {
+                            case "Top":
+                                return new Vector3(0, offset, 0);
+
+                            case "Bottom":
+                                return new Vector3(0, -offset, 0);
+
+                            case "Left":
+                                return new Vector3(0, 0, offset);
+
+                            case "Right":
+                                return new Vector3(0, 0, -offset);
+                        }
+                    }
+                    break;
+            }
+
+            return new Vector3(0, 0, 0);
+        }
+
+        private Vector3 GetTextColliderSize(Transform target)
+        {
+            Vector3 result = default(Vector3);
+
+            string parentName = target.parent.name.Substring(0, 2);
+            string textPosition = target.name.Split('_')[2];
+
+            RectTransform rect = target.GetComponent<RectTransform>();
+            float width = rect.rect.width;
+            float height = rect.rect.height;
+
+            switch (parentName)
+            {
+                case "TO":
+                    {
+                        switch (textPosition)
+                        {
+                            case "Top":
+                                return new Vector3(0, 0, -offset);
+
+                            case "Bottom":
+                                return new Vector3(0, 0, offset);
+
+                            case "Left":
+                                return new Vector3(offset, 0, 0);
+
+                            case "Right":
+                                return new Vector3(-offset, 0, 0);
+                        }
+                    }
+                    break;
+
+                case "BO":
+
+                    break;
+
+                case "FR":
+
+                    break;
+
+                case "BA":
+
+                    break;
+
+                case "LE":
+
+                    break;
+
+                case "RE":
+
+                    break;
+            }
+
+
+
+            return result;
+        }
+
+        #endregion
+    }
 }

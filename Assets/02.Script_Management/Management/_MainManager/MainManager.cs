@@ -16,6 +16,7 @@ namespace Management
 	/// </summary>
 	public partial class MainManager : IManager<MainManager>
 	{
+		
 		/// <summary>
 		/// 시스템 주 관리 데이터
 		/// </summary>
@@ -65,7 +66,10 @@ namespace Management
 			get => _data;
 		}
 		
-
+		public Material OutlineMat
+		{
+			get => _core.m_outlineMat;
+		}
 		#endregion
 
 

@@ -306,6 +306,10 @@ namespace Module.UI
 					OpenImagePanel(_setter);
 					break;
 
+				case UIEventType.Ad_St_DimToggle:
+					ToggleDimension();
+					break;
+
 					
 			}
 		}

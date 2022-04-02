@@ -9,6 +9,12 @@ namespace Definition
 		/// <summary>
 		/// 0 Default
 		/// 1 Cache
+		/// 2 FR
+		/// 3 BA
+		/// 4 TO
+		/// 5 BO
+		/// 6 LE
+		/// 7 RE
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
@@ -25,6 +31,30 @@ namespace Definition
 				case 1:
 					result = LayerMask.NameToLayer("Cache");
 					break;
+
+				case 2:
+					result = LayerMask.NameToLayer("FR");
+					break;
+
+				case 3:
+					result = LayerMask.NameToLayer("FR");
+					break;
+
+				case 4:
+					result = LayerMask.NameToLayer("FR");
+					break;
+
+				case 5:
+					result = LayerMask.NameToLayer("FR");
+					break;
+
+				case 6:
+					result = LayerMask.NameToLayer("FR");
+					break;
+
+				case 7:
+					result = LayerMask.NameToLayer("FR");
+					break;
 			}
 
 			return result;
@@ -34,6 +64,12 @@ namespace Definition
 		/// 0 ALL
 		/// 1 34상태 main
 		/// 2 34상태 sub
+		/// 2 FR
+		/// 3 BA
+		/// 4 TO
+		/// 5 BO
+		/// 6 LE
+		/// 7 RE
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
@@ -51,6 +87,12 @@ namespace Definition
 				case 1:
 					layers.Add("Cache");
 					layers.Add("UI");
+					layers.Add("FR");
+					layers.Add("BA");
+					layers.Add("TO");
+					layers.Add("BO");
+					layers.Add("LE");
+					layers.Add("RE");
 					mask = Set(layers);
 					break;
 
