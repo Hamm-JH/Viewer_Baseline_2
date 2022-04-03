@@ -224,6 +224,7 @@ namespace Module.UI
 		private IEnumerator PrintDim(int _index, GameObject _selected, Camera _cam, int _firstCullmask, int _secondCullmask)
 		{
 			yield return new WaitForEndOfFrame();
+			yield return new WaitForEndOfFrame();
 			{
 				_cam.cullingMask = _firstCullmask;
 
