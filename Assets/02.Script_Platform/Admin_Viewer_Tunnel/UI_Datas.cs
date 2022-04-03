@@ -177,6 +177,13 @@ namespace AdminViewer
 	[System.Serializable]
 	public class DimData
 	{
+		public Camera fr_cam;
+		public Camera ba_cam;
+		public Camera to_cam;
+		public Camera bo_cam;
+		public Camera le_cam;
+		public Camera re_cam;
+
 		public string	fr_result1;
 		public string	fr_result2;
 		public bool		fr_complete;
