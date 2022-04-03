@@ -92,6 +92,13 @@ namespace Module.UI
 		{
 			float offset = 5f;
 
+			dimData.fr_complete = false;
+			dimData.ba_complete = false;
+			dimData.to_complete = false;
+			dimData.bo_complete = false;
+			dimData.le_complete = false;
+			dimData.re_complete = false;
+
 			GameObject selected = EventManager.Instance._SelectedObject;
 
 			Camera frCam = SetDimCamera(0, offset, selected);
@@ -374,6 +381,34 @@ namespace Module.UI
 					true
 					);
 #endif
+				Debug.Log($"name : {_selected.name}");
+				Debug.Log($"fr 1");
+				Debug.Log($"{dimData.fr_result1}");
+				Debug.Log($"ba 1");
+				Debug.Log($"{dimData.ba_result1}");
+				Debug.Log($"to 1");
+				Debug.Log($"{dimData.to_result1}");
+				Debug.Log($"bo 1");
+				Debug.Log($"{dimData.bo_result1}");
+				Debug.Log($"le 1");
+				Debug.Log($"{dimData.le_result1}");
+				Debug.Log($"re 1");
+				Debug.Log($"{dimData.re_result1}");
+
+				Debug.Log($"fr 2");
+				Debug.Log($"{dimData.fr_result2}");
+				Debug.Log($"ba 2");
+				Debug.Log($"{dimData.ba_result2}");
+				Debug.Log($"to 2");
+				Debug.Log($"{dimData.to_result2}");
+				Debug.Log($"bo 2");
+				Debug.Log($"{dimData.bo_result2}");
+				Debug.Log($"le 2");
+				Debug.Log($"{dimData.le_result2}");
+				Debug.Log($"re 2");
+				Debug.Log($"{dimData.re_result2}");
+
+
 				Debug.Log("dim print is end");
 			}
 		}
