@@ -21,11 +21,20 @@ namespace Module.UI
 
 		private void ToggleDimension(bool isOn)
 		{
-			Transform lv2 = ContentManager.Instance.Container.m_dimView.dimLevel2;
-			List<Transform> lv4 = ContentManager.Instance.Container.m_dimView.dimLevel4;
+			PlatformCode pCode = MainManager.Instance.Platform;
 
-			lv2.gameObject.SetActive(isOn);
-			lv4.ForEach(x => x.gameObject.SetActive(false));
+			if(Platforms.IsBridgePlatform(pCode))
+			{
+				Transform lv2 = ContentManager.Instance.Container.m_dimView.dimLevel2;
+				List<Transform> lv4 = ContentManager.Instance.Container.m_dimView.dimLevel4;
+
+				lv2.gameObject.SetActive(isOn);
+				lv4.ForEach(x => x.gameObject.SetActive(false));
+			}
+			else if(Platforms.IsTunnelPlatform(pCode))
+			{
+				Debug.LogError("터널 치수선 토글링");
+			}
 		}
 
 		private void ToggleDimension()
