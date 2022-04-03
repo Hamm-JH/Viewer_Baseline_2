@@ -839,7 +839,7 @@ MonoBehaviour:
       bMaxOffsetDistance: 50
       bOrbitSpeed: 15
       bPanSpeed: 0.5
-      bZoomSpeed: 10
+      bZoomSpeed: 3
     m_moduleList: 10000000
     m_functionCode: 11000000
     m_url: 
@@ -876,7 +876,7 @@ MonoBehaviour:
       bMaxOffsetDistance: 50
       bOrbitSpeed: 15
       bPanSpeed: 0.5
-      bZoomSpeed: 10
+      bZoomSpeed: 3
     m_moduleList: 10000000
     m_functionCode: 11000000
     m_url: 
