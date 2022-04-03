@@ -70,6 +70,12 @@ namespace Definition
 		/// 14 BO
 		/// 15 LE
 		/// 16 RE
+		/// 21 FR only dim
+		/// 22 BA only dim
+		/// 23 TO only dim
+		/// 24 BO only dim
+		/// 25 LE only dim
+		/// 26 RE only dim
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
@@ -135,6 +141,36 @@ namespace Definition
 
 				case 16:
 					layers.Add("Cache");
+					layers.Add("RE");
+					mask = Set(layers);
+					break;
+
+				case 21:
+					layers.Add("FR");
+					mask = Set(layers);
+					break;
+
+				case 22:
+					layers.Add("BA");
+					mask = Set(layers);
+					break;
+
+				case 23:
+					layers.Add("TO");
+					mask = Set(layers);
+					break;
+
+				case 24:
+					layers.Add("BO");
+					mask = Set(layers);
+					break;
+
+				case 25:
+					layers.Add("LE");
+					mask = Set(layers);
+					break;
+
+				case 26:
 					layers.Add("RE");
 					mask = Set(layers);
 					break;

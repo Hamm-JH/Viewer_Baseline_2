@@ -268,7 +268,7 @@ namespace Module.Model
 
 
             // 2. 모든 외곽선값 표시객체 배열 정렬
-            Transform[] outlineTransforms = (from obj in dimTransforms where obj.name.Split('_').Length >= 3 select obj)
+            Transform[] outlineTransforms = (from obj in dimTransforms where obj.name.Split('_').Length > 3 select obj)
                 .ToArray<Transform>();
 
             StartCoroutine(SetObject_OutLines(outlineTransforms));
@@ -302,7 +302,7 @@ namespace Module.Model
             {
                 if (dimLines[i].TryGetComponent<MeshRenderer>(out renderer))
                 {
-                    renderer.material = MainManager.Instance.OutlineMat;
+                    renderer.material = MainManager.Instance.DimLineMat;
                 }
             }
 

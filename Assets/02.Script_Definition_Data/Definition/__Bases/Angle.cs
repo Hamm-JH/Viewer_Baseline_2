@@ -21,11 +21,25 @@ namespace Definition
 					break;
 
 				case UIEventType.Viewport_ViewMode_TOP:
-					result = new Vector3(90, 0, 0);
+					if(Platforms.IsTunnelPlatform(pCode))
+					{
+						result = new Vector3(90, 0, 0);
+					}
+					else if(Platforms.IsBridgePlatform(pCode))
+					{
+						result = new Vector3(90, 0, -90);
+					}
 					break;
 
 				case UIEventType.Viewport_ViewMode_BOTTOM:
-					result = new Vector3(-90, 0, 0);
+					if(Platforms.IsTunnelPlatform(pCode))
+					{
+						result = new Vector3(-90, 0, 0);
+					}
+					else if(Platforms.IsBridgePlatform(pCode))
+					{
+						result = new Vector3(-90, 0, 90);
+					}
 					break;
 
 				case UIEventType.Viewport_ViewMode_SIDE:

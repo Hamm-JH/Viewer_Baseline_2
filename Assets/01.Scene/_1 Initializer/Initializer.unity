@@ -696,7 +696,8 @@ MonoBehaviour:
     m_platform: 49
     m_graphicMode: 16
     m_cameraMode: 48
-    m_outlineMat: {fileID: 2100000, guid: 75c852bcf56d00743bfc04948ab7da8b, type: 2}
+    m_dimLineMat: {fileID: 2100000, guid: 75c852bcf56d00743bfc04948ab7da8b, type: 2}
+    m_outlineMat: {fileID: 2100000, guid: 5bf316fddf08b074ebeb53d298197693, type: 2}
   _content:
     _content: {fileID: 0}
   _data:

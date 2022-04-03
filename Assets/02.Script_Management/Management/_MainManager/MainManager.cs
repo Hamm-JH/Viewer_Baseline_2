@@ -66,6 +66,11 @@ namespace Management
 			get => _data;
 		}
 		
+		public Material DimLineMat
+		{
+			get => _core.m_dimLineMat;
+		}
+
 		public Material OutlineMat
 		{
 			get => _core.m_outlineMat;

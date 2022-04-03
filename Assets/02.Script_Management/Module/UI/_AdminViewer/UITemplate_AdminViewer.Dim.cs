@@ -8,6 +8,7 @@ namespace Module.UI
 	using Data.API;
 	using Definition;
 	using Management;
+	using System;
 	using System.Linq;
 	using UnityEngine.Events;
 	using UnityEngine.Rendering.Universal;
@@ -17,6 +18,15 @@ namespace Module.UI
 	public partial class UITemplate_AdminViewer : AUI
 	{
 		#region Toggle Dimension
+
+		private void ToggleDimension(bool isOn)
+		{
+			Transform lv2 = ContentManager.Instance.Container.m_dimView.dimLevel2;
+			List<Transform> lv4 = ContentManager.Instance.Container.m_dimView.dimLevel4;
+
+			lv2.gameObject.SetActive(isOn);
+			lv4.ForEach(x => x.gameObject.SetActive(false));
+		}
 
 		private void ToggleDimension()
 		{
@@ -39,15 +49,17 @@ namespace Module.UI
 			}
 			else if(Platforms.IsBridgePlatform(pCode))
 			{
-				Transform lv2 = ContentManager.Instance.Container.m_dimView.dimLevel2;
+				ToggleDimension(true);
+
+				//Transform lv2 = ContentManager.Instance.Container.m_dimView.dimLevel2;
 				List<Transform> lv4 = ContentManager.Instance.Container.m_dimView.dimLevel4;
 
 				// 매칭되는 대상 찾기
 				Transform _find = lv4.FindAll(x => name.Contains(x.name)).Last();
 
 				// 활성화
-				lv2.gameObject.SetActive(true);
-				lv4.ForEach(x => x.gameObject.SetActive(false));
+				//lv2.gameObject.SetActive(true);
+				//lv4.ForEach(x => x.gameObject.SetActive(false));
 
 				if(_find != null)
 				{
@@ -90,8 +102,15 @@ namespace Module.UI
 			Camera reCam = SetDimCamera(5, offset, selected);
 
 			// TODO 카메라 종류별로 이미지 찍어서 전송
-		}
 
+			StartCoroutine(PrintDim(0, selected, frCam, Layers.SetMask(21), Layers.SetMask(11)));
+			StartCoroutine(PrintDim(1, selected, baCam, Layers.SetMask(22), Layers.SetMask(12)));
+			StartCoroutine(PrintDim(2, selected, toCam, Layers.SetMask(23), Layers.SetMask(13)));
+			StartCoroutine(PrintDim(3, selected, boCam, Layers.SetMask(24), Layers.SetMask(14)));
+			StartCoroutine(PrintDim(4, selected, leCam, Layers.SetMask(25), Layers.SetMask(15)));
+			StartCoroutine(PrintDim(5, selected, reCam, Layers.SetMask(26), Layers.SetMask(16)));
+		}
+			
 		/// <summary>
 		/// DimCamera setting
 		/// _index :;
@@ -106,6 +125,7 @@ namespace Module.UI
 			string name = "";
 			RenderTexture tex = null;
 			int cullMask = 0;
+			int lineCullMask = 0;
 			Vector3 angle = default(Vector3);
 
 			switch(_index)
@@ -115,6 +135,7 @@ namespace Module.UI
 						name = "fr cam";
 						tex = ContentManager.Instance.Container.m_dim.tex_fr;
 						cullMask = Layers.SetMask(11);
+						lineCullMask = Layers.SetMask(21);
 						angle = Angle.Set(UIEventType.Viewport_ViewMode_SIDE_FRONT);
 					}
 					break;
@@ -124,6 +145,7 @@ namespace Module.UI
 						name = "ba cam";
 						tex = ContentManager.Instance.Container.m_dim.tex_ba;
 						cullMask = Layers.SetMask(12);
+						lineCullMask = Layers.SetMask(22);
 						angle = Angle.Set(UIEventType.Viewport_ViewMode_SIDE_BACK);
 					}
 					break;
@@ -133,6 +155,7 @@ namespace Module.UI
 						name = "to cam";
 						tex = ContentManager.Instance.Container.m_dim.tex_to;
 						cullMask = Layers.SetMask(13);
+						lineCullMask = Layers.SetMask(23);
 						angle = Angle.Set(UIEventType.Viewport_ViewMode_TOP);
 					}
 					break;
@@ -142,6 +165,7 @@ namespace Module.UI
 						name = "bo cam";
 						tex = ContentManager.Instance.Container.m_dim.tex_bo;
 						cullMask = Layers.SetMask(14);
+						lineCullMask = Layers.SetMask(24);
 						angle = Angle.Set(UIEventType.Viewport_ViewMode_BOTTOM);
 					}
 					break;
@@ -151,6 +175,7 @@ namespace Module.UI
 						name = "le cam";
 						tex = ContentManager.Instance.Container.m_dim.tex_le;
 						cullMask = Layers.SetMask(15);
+						lineCullMask = Layers.SetMask(25);
 						angle = Angle.Set(UIEventType.Viewport_ViewMode_SIDE_LEFT);
 					}
 					break;
@@ -160,14 +185,20 @@ namespace Module.UI
 						name = "re cam";
 						tex = ContentManager.Instance.Container.m_dim.tex_re;
 						cullMask = Layers.SetMask(16);
+						lineCullMask = Layers.SetMask(26);
 						angle = Angle.Set(UIEventType.Viewport_ViewMode_SIDE_RIGHT);
 					}
 					break;
 			}
-
-			GameObject obj = Instantiate(new GameObject(name), _target.transform);
+			
+			GameObject temp = new GameObject(name);
+			GameObject obj = Instantiate(temp, _target.transform);
 			obj.transform.rotation = Quaternion.Euler(angle);
 			Camera cam = obj.AddComponent<Camera>();
+
+			Light light = obj.AddComponent<Light>();
+			light.type = LightType.Directional;
+			light.cullingMask = lineCullMask;
 
 			cam.clearFlags = CameraClearFlags.SolidColor;
 			cam.backgroundColor = Color.black;
@@ -178,7 +209,173 @@ namespace Module.UI
 
 			obj.transform.Translate(Vector3.back * _offset);
 
+			Destroy(temp);
+
 			return cam;
+		}
+
+		private IEnumerator PrintDim(int _index, GameObject _selected, Camera _cam, int _firstCullmask, int _secondCullmask)
+		{
+			yield return new WaitForEndOfFrame();
+			{
+				_cam.cullingMask = _firstCullmask;
+
+				RenderTexture currentTexture = RenderTexture.active;
+				RenderTexture.active = _cam.targetTexture;
+
+				Rect rect = new Rect(0, 0, _cam.targetTexture.width, _cam.targetTexture.height);
+
+				byte[] imgByte;
+				Texture2D _tex = new Texture2D((int)rect.width, (int)rect.height, TextureFormat.RGB24, false);
+
+				_tex.ReadPixels(rect, 0, 0, false);
+				_tex.Apply();
+
+				RenderTexture.active = currentTexture;
+
+				imgByte = _tex.EncodeToPNG();
+				DestroyImmediate(_tex);
+
+				string base64 = Convert.ToBase64String(imgByte);
+
+				switch(_index)
+				{
+					case 0:
+						dimData.fr_result1 = base64;
+						break;
+
+					case 1:
+						dimData.ba_result1 = base64;
+						break;
+
+					case 2:
+						dimData.to_result1 = base64;
+						break;
+
+					case 3:
+						dimData.bo_result1 = base64;
+						break;
+
+					case 4:
+						dimData.le_result1 = base64;
+						break;
+
+					case 5:
+						dimData.re_result1 = base64;
+						break;
+				}
+			}
+
+			yield return new WaitForEndOfFrame();
+			{
+				_cam.cullingMask = _secondCullmask;
+
+				RenderTexture currentTexture = RenderTexture.active;
+				RenderTexture.active = _cam.targetTexture;
+
+				Rect rect = new Rect(0, 0, _cam.targetTexture.width, _cam.targetTexture.height);
+
+				byte[] imgByte;
+				Texture2D _tex = new Texture2D((int)rect.width, (int)rect.height, TextureFormat.RGB24, false);
+
+				_tex.ReadPixels(rect, 0, 0, false);
+				_tex.Apply();
+
+				RenderTexture.active = currentTexture;
+
+				imgByte = _tex.EncodeToPNG();
+				DestroyImmediate(_tex);
+
+				string base64 = Convert.ToBase64String(imgByte);
+
+				switch (_index)
+				{
+					case 0:
+						dimData.fr_result2 = base64;
+						dimData.fr_complete = true;
+						break;
+
+					case 1:
+						dimData.ba_result2 = base64;
+						dimData.ba_complete = true;
+						break;
+
+					case 2:
+						dimData.to_result2 = base64;
+						dimData.to_complete = true;
+						break;
+
+					case 3:
+						dimData.bo_result2 = base64;
+						dimData.bo_complete = true;
+						break;
+
+					case 4:
+						dimData.le_result2 = base64;
+						dimData.le_complete = true;
+						break;
+
+					case 5:
+						dimData.re_result2 = base64;
+						dimData.re_complete = true;
+						break;
+				}
+
+			}
+
+			CheckDimPrintEnd(_selected);
+
+			Destroy(_cam.gameObject);
+
+			yield break;
+		}
+
+		private void CheckDimPrintEnd(GameObject _selected)
+		{
+			bool result = dimData.fr_complete && dimData.ba_complete &&
+				dimData.to_complete && dimData.bo_complete &&
+				dimData.le_complete && dimData.re_complete;
+
+			if(result)
+			{
+#if UNITY_EDITOR
+				/*
+				* OnReadyToDrawingPrint
+				* 1 : 현재 선택된 부재명
+				* 2 : 앞면 도면 front
+				* 3 : 뒷면 도면 back
+				* 4 : 좌면 도면 left
+				* 5 : 우면 도면 right
+				* 6 : 윗면 도면 top
+				* 7 : 밑면 도면 bottom
+				* 8 : 앞면 이미지 front
+				* 9 : 뒷면 이미지 back
+				* 10 : 좌면 이미지 left
+				* 11 : 우면 이미지 right
+				* 12 : 윗면 이미지 top
+				* 13 : 밑면 이미지 bottom
+				* 14 : 손상/보수 선택 bool
+				*/
+#else
+				ExternalAPI.OnReadyToDrawingPrint(
+					_selected.name,
+					dimData.fr_result1,
+					dimData.ba_result1,
+					dimData.le_result1,
+					dimData.re_result1,
+					dimData.to_result1,
+					dimData.bo_result1,
+					dimData.fr_result2,
+					dimData.ba_result2,
+					dimData.le_result2,
+					dimData.re_result2,
+					dimData.to_result2,
+					dimData.bo_result2,
+					true
+					);
+#endif
+				Debug.Log("dim print is end");
+			}
 		}
 	}
 }

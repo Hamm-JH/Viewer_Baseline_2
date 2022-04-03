@@ -43,6 +43,11 @@ namespace Module.UI
 		[SerializeField] private ItemsData items;
 
 		/// <summary>
+		/// 치수선 출력 결과
+		/// </summary>
+		[SerializeField] private DimData dimData;
+
+		/// <summary>
 		/// 패널 정보들
 		/// </summary>
 		[SerializeField] private InPanels m_panels;
@@ -228,6 +233,7 @@ namespace Module.UI
 					SetPanel_State1();
 					SetPin(true);
 					ChangeModuleStatus(ModuleStatus.Administration_view1);
+					ToggleDimension(false);
 					break;
 				case UIEventType.Ad_nav_state2:
 					Ad_nav_state2_NAV();
@@ -235,6 +241,7 @@ namespace Module.UI
 					SetPanel_State2();
 					SetPin(false);
 					ChangeModuleStatus(ModuleStatus.Administration_view2);
+					ToggleDimension(false);
 					break;
 				case UIEventType.Ad_nav_state3:
 					Ad_nav_state3_NAV();
@@ -242,6 +249,7 @@ namespace Module.UI
 					SetPanel_State3();
 					SetPin(false);
 					ChangeModuleStatus(ModuleStatus.Administration_view3);
+					ToggleDimension(false);
 					break;
 				case UIEventType.Ad_nav_state4:
 					Ad_nav_state4_NAV();
@@ -249,6 +257,7 @@ namespace Module.UI
 					SetPanel_State4();
 					SetPin(false);
 					ChangeModuleStatus(ModuleStatus.Administration_view4);
+					ToggleDimension(false);
 					break;
 				case UIEventType.Ad_nav_state5:
 					Ad_nav_state5_NAV();
@@ -256,6 +265,7 @@ namespace Module.UI
 					SetPanel_State5();
 					SetPin(false);
 					ChangeModuleStatus(ModuleStatus.Administration_view5);
+					ToggleDimension(false);
 					break;
 
 				case UIEventType.Toggle:

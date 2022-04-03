@@ -175,6 +175,34 @@ namespace AdminViewer
 	}
 
 	[System.Serializable]
+	public class DimData
+	{
+		public string	fr_result1;
+		public string	fr_result2;
+		public bool		fr_complete;
+
+		public string	ba_result1;
+		public string	ba_result2;
+		public bool		ba_complete;
+
+		public string	to_result1;
+		public string	to_result2;
+		public bool		to_complete;
+
+		public string	bo_result1;
+		public string	bo_result2;
+		public bool		bo_complete;
+
+		public string	le_result1;
+		public string	le_result2;
+		public bool		le_complete;
+
+		public string	re_result1;
+		public string	re_result2;
+		public bool		re_complete;
+	}
+
+	[System.Serializable]
 	public class InPanels
 	{
 		[Header("GameObjects")]

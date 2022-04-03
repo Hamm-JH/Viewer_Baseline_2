@@ -67,6 +67,7 @@ namespace Definition.Data
 		#endregion
 
 		[Header("Dimension")]
+		public Material m_dimLineMat;
 		public Material m_outlineMat;
 
 		public Material OutlineMat { get => m_outlineMat; set => m_outlineMat=value; }
