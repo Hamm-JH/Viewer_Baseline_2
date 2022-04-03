@@ -245,6 +245,8 @@ namespace Module.UI
 
 				string base64 = Convert.ToBase64String(imgByte);
 
+				Debug.Log($"index : {_index} 1");
+				Debug.Log(base64);
 				switch(_index)
 				{
 					case 0:
@@ -295,6 +297,8 @@ namespace Module.UI
 
 				string base64 = Convert.ToBase64String(imgByte);
 
+				Debug.Log($"index : {_index} 2");
+				Debug.Log(base64);
 				switch (_index)
 				{
 					case 0:
@@ -381,6 +385,11 @@ namespace Module.UI
 					true
 					);
 #endif
+				Debug.Log($"---------------------------");
+				Debug.Log($"---------------------------");
+				Debug.Log($"---------------------------");
+				Debug.Log($"---------------------------");
+				Debug.Log($"---------------------------");
 				Debug.Log($"name : {_selected.name}");
 				Debug.Log($"fr 1");
 				Debug.Log($"{dimData.fr_result1}");
