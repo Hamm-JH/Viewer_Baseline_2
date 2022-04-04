@@ -21,14 +21,12 @@ namespace View
 
 		public override List<GameObject> Targets => throw new System.NotImplementedException();
 
-		//public GameObject ChildPanel { get => childPanel; set => childPanel=value; }
-
 		Button m_btn;
 		Slider m_slider;
 
 		[SerializeField] AUI m_rootUI;
 		[SerializeField] UIEventType eventType;
-		[SerializeField] UniqueUIEventType m_unique;
+		//[SerializeField] UniqueUIEventType m_unique;
 
 		[Header("Linked UI Elements")]
 		/// <summary>
@@ -74,6 +72,12 @@ namespace View
 
 		public override void OnSelect()
 		{
+			if(eventType == UIEventType.Null)
+            {
+				Debug.LogError($"{this.name} needs event");
+				return;
+            }
+
 			m_rootUI.GetUIEvent(eventType, this);
 		}
 
@@ -88,6 +92,12 @@ namespace View
 		/// <param name="_value"></param>
 		public override void OnChangeValue(float _value)
 		{
+			if (eventType == UIEventType.Null)
+			{
+				Debug.LogError($"{this.name} needs event");
+				return;
+			}
+
 			m_rootUI.GetUIEvent(_value, eventType, this);
 		}
 
