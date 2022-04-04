@@ -8,11 +8,12 @@ namespace Definition.Data
 	using Platform.Feature._Input;
 	using global::Platform.Feature.Camera;
 	using Management;
-	
-	/// <summary>
-	/// 주 관리자의 메인 관리변수
-	/// </summary>
-	[System.Serializable]
+    using UnityEngine.Rendering.Universal;
+
+    /// <summary>
+    /// 주 관리자의 메인 관리변수
+    /// </summary>
+    [System.Serializable]
 	public partial class CoreManagement : IData
 	{
 		#region [Private] Managed GameObjects
@@ -69,6 +70,7 @@ namespace Definition.Data
 		[Header("Dimension")]
 		public Material m_dimLineMat;
 		public Material m_outlineMat;
+		public ForwardRendererData m_renderSetting;
 
 		public Material OutlineMat { get => m_outlineMat; set => m_outlineMat=value; }
 

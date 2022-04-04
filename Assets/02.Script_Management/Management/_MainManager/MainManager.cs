@@ -10,11 +10,12 @@ namespace Management
 	using Definition.Data;
 	using Platform.Feature.Camera;
 	using UnityEngine.Events;
+    using UnityEngine.Rendering.Universal;
 
-	/// <summary>
-	/// 컨텐츠의 핵심 데이터를 관리하는 관리자 클래스
-	/// </summary>
-	public partial class MainManager : IManager<MainManager>
+    /// <summary>
+    /// 컨텐츠의 핵심 데이터를 관리하는 관리자 클래스
+    /// </summary>
+    public partial class MainManager : IManager<MainManager>
 	{
 		
 		/// <summary>
@@ -75,6 +76,11 @@ namespace Management
 		{
 			get => _core.m_outlineMat;
 		}
+
+		public ForwardRendererData RenderSetting
+        {
+			get => _core.m_renderSetting;
+        }
 		#endregion
 
 
