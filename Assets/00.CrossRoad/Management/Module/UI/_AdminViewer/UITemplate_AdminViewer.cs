@@ -228,10 +228,10 @@ namespace Module.UI
 			switch(_uType)
 			{
 				case UIEventType.Ad_nav_state1:
-					Ad_nav_state1_NAV();
-					Ad_nav_state1_BOT();
-					SetPanel_State1();
-					SetPin(true);
+					Ad_nav_state1_NAV();		// 상태바 표시변경
+					Ad_nav_state1_BOT();		// 하단바 표시변경
+					SetPanel_State1();			// 패널 표시변경
+					SetPin(true);				// 1번상태 핀 표시여부
 					ChangeModuleStatus(ModuleStatus.Administration_view1);
 					ToggleDimension(false);
 					break;

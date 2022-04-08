@@ -173,6 +173,8 @@ namespace Module.UI
 
 				_b.center = (max + min) / 2;
 				_b.size = (max - min);
+
+				Cameras.SetCameraCenterPosition(_cam, _b, _canvas, _uType);
             }
         }
 	}
