@@ -437,7 +437,6 @@ MonoBehaviour:
   childPanel: {fileID: 5332406359726098746}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -669,7 +668,6 @@ MonoBehaviour:
   childPanel: {fileID: 3005354841516656176}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -2605,7 +2603,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 540
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -3710,7 +3707,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354840870346300
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4642,7 +4639,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 528
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -5085,7 +5081,6 @@ MonoBehaviour:
   childPanel: {fileID: 849104132135444627}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -5291,7 +5286,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 512
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -5925,7 +5919,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354840929823921
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6806,7 +6800,6 @@ MonoBehaviour:
   childPanel: {fileID: 3005354842190037276}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -7111,7 +7104,6 @@ MonoBehaviour:
   childPanel: {fileID: 3005354841191070240}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -7995,7 +7987,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -9261,7 +9252,6 @@ MonoBehaviour:
   childPanel: {fileID: 3005354842190037276}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -9478,7 +9468,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 529
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -10280,7 +10269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354841113523767
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11171,7 +11160,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354841166259393
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12227,7 +12216,6 @@ MonoBehaviour:
   childPanel: {fileID: 3005354842889187233}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -12384,7 +12372,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -13000,7 +12987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354841234775573
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13440,7 +13427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354841241827370
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13625,7 +13612,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -14030,7 +14016,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -14050,7 +14035,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354841272581843
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16817,7 +16802,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354841380240270
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17298,7 +17283,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -17440,7 +17424,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 541
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -18573,7 +18556,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -19446,7 +19428,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 534
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -22346,7 +22327,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 528
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -22520,7 +22500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354841592114628
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23764,7 +23744,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354841674368225
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24413,7 +24393,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -26945,7 +26924,6 @@ MonoBehaviour:
   childPanel: {fileID: 3005354842574481708}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -27102,7 +27080,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 537
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -27244,7 +27221,6 @@ MonoBehaviour:
   childPanel: {fileID: 3005354840875519690}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -27549,7 +27525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354841816616099
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27805,7 +27781,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354841819377842
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28871,7 +28847,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354841858502614
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30104,7 +30080,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 529
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -30553,6 +30528,31 @@ MonoBehaviour:
     - {fileID: 3005354841234775572}
     - {fileID: 3005354842966978058}
     - {fileID: 3005354841949814797}
+  dimData:
+    fr_cam: {fileID: 0}
+    ba_cam: {fileID: 0}
+    to_cam: {fileID: 0}
+    bo_cam: {fileID: 0}
+    le_cam: {fileID: 0}
+    re_cam: {fileID: 0}
+    fr_result1: 
+    fr_result2: 
+    fr_complete: 0
+    ba_result1: 
+    ba_result2: 
+    ba_complete: 0
+    to_result1: 
+    to_result2: 
+    to_complete: 0
+    bo_result1: 
+    bo_result2: 
+    bo_complete: 0
+    le_result1: 
+    le_result2: 
+    le_complete: 0
+    re_result1: 
+    re_result2: 
+    re_complete: 0
   m_panels:
     mainLocation: {fileID: 3005354842889187233}
     mainPicture: {fileID: 3005354841195520821}
@@ -31492,7 +31492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354841949701665
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31542,7 +31542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354841949814798
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33028,7 +33028,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842027637080
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33717,7 +33717,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -33858,7 +33857,6 @@ MonoBehaviour:
   childPanel: {fileID: 3005354841891038488}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -33953,7 +33951,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842057809251
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34079,7 +34077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842059852529
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34709,7 +34707,6 @@ MonoBehaviour:
   childPanel: {fileID: 3005354840875519690}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -34851,7 +34848,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 528
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -35431,7 +35427,6 @@ MonoBehaviour:
   childPanel: {fileID: 3005354840836676284}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -35573,7 +35568,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 535
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -36261,7 +36255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842142281696
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36716,7 +36710,6 @@ MonoBehaviour:
   childPanel: {fileID: 849104132135444627}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -37768,7 +37761,6 @@ MonoBehaviour:
   childPanel: {fileID: 3005354841195520821}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -37938,7 +37930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842208171504
 RectTransform:
   m_ObjectHideFlags: 0
@@ -38121,7 +38113,6 @@ MonoBehaviour:
   childPanel: {fileID: 3005354841575878865}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -38428,7 +38419,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 538
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -38837,7 +38827,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842231931860
 RectTransform:
   m_ObjectHideFlags: 0
@@ -39484,7 +39474,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842254963655
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40590,7 +40580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842293861602
 RectTransform:
   m_ObjectHideFlags: 0
@@ -41066,7 +41056,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 542
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -42246,7 +42235,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 539
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -42266,7 +42254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842379580355
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42513,7 +42501,6 @@ MonoBehaviour:
   childPanel: {fileID: 3005354841195520821}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -44412,7 +44399,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -44648,7 +44634,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -46843,7 +46828,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 542
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -46985,7 +46969,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 528
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -47142,7 +47125,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -48266,7 +48248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842592114129
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49584,7 +49566,6 @@ MonoBehaviour:
   childPanel: {fileID: 3005354842889187233}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -49741,7 +49722,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -49761,7 +49741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842631087276
 RectTransform:
   m_ObjectHideFlags: 0
@@ -50237,7 +50217,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -51640,7 +51619,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -52101,7 +52079,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -52657,7 +52634,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -53250,7 +53226,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -54132,7 +54107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842804491236
 RectTransform:
   m_ObjectHideFlags: 0
@@ -54503,7 +54478,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842819620667
 RectTransform:
   m_ObjectHideFlags: 0
@@ -54688,7 +54663,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -54708,7 +54682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842819861344
 RectTransform:
   m_ObjectHideFlags: 0
@@ -54758,7 +54732,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842822041299
 RectTransform:
   m_ObjectHideFlags: 0
@@ -55142,7 +55116,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -55439,7 +55412,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 528
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -55534,7 +55506,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842848595854
 RectTransform:
   m_ObjectHideFlags: 0
@@ -56298,7 +56270,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 529
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -56451,7 +56422,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -57048,7 +57018,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 529
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -57744,7 +57713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842927715969
 RectTransform:
   m_ObjectHideFlags: 0
@@ -57929,7 +57898,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 0
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -58252,7 +58220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3005354842966978059
 RectTransform:
   m_ObjectHideFlags: 0
@@ -58424,7 +58392,6 @@ MonoBehaviour:
   childPanel: {fileID: 849104132135444627}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 16
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -58948,7 +58915,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 541
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -59090,7 +59056,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 529
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -59232,7 +59197,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 536
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -59721,7 +59685,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 513
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -60014,7 +59977,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 512
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -60253,7 +60215,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 516
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -60408,7 +60369,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 515
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -60713,7 +60673,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 4422238765229954178}
   eventType: 514
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -63086,7 +63045,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1737957071931690406
 RectTransform:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ namespace Definition
 		/// </summary>
 		public GameObject m_cacheObject;
 
+		public List<GameObject> m_cacheObjects;
+
 		/// <summary>
 		/// 모듈 상태코드
 		/// </summary>
@@ -24,6 +26,7 @@ namespace Definition
 		{
 			// 초기값 null
 			m_cacheObject = null;
+			m_cacheObjects = null;
 
 			// 초기 값은 view1
 			m_moduleStatus = ModuleStatus.Administration_view1;
@@ -66,6 +69,11 @@ namespace Definition
 			m_cacheObject = _selected;
 		}
 
+		public void CachingObjects(List<GameObject> _selecteds)
+        {
+			m_cacheObjects = _selecteds;
+        }
+
 		/// <summary>
 		/// 캐싱 객체를 가져온다.
 		/// </summary>
@@ -75,6 +83,11 @@ namespace Definition
 			return m_cacheObject;
 		}
 
+		public List<GameObject> GetCaches()
+        {
+			return m_cacheObjects;
+        }
+
 		/// <summary>
 		/// 캐시를 지운다.
 		/// </summary>
@@ -82,5 +95,10 @@ namespace Definition
 		{
 			m_cacheObject = null;
 		}
+
+		public void RemoveCaches()
+        {
+			m_cacheObjects = null;
+        }
 	}
 }

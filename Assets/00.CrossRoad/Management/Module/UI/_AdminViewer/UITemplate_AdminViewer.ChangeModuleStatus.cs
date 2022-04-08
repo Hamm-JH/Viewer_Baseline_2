@@ -8,7 +8,8 @@ namespace Module.UI
 	using Data.API;
 	using Definition;
 	using Management;
-	using UnityEngine.Events;
+    using System.Linq;
+    using UnityEngine.Events;
 	using UnityEngine.UI;
 	using View;
 
@@ -27,6 +28,7 @@ namespace Module.UI
 
 				// 1 캐시 객체
 				GameObject cache = null;
+				List<GameObject> caches = new List<GameObject>();
 
 				// 3 메인 카메라, 서브 카메라
 				Camera mCam = MainManager.Instance.MainCamera;
@@ -53,17 +55,30 @@ namespace Module.UI
 				// 특수 보기상태인가? (3, 4 상태)
 				else
 				{
-					cache = ContentManager.Instance._SelectedObj;
-					aStatus.CachingObject(cache);
+					//cache = ContentManager.Instance._SelectedObj;		///
+					
+					// 선택 객체가 있는 경우 객체 리스트를 가져온다.
+					if(EventManager.Instance.EventStates.ContainsKey(InputEventType.Input_clickSuccessUp))
+                    {
+						EventManager.Instance.EventStates[InputEventType.Input_clickSuccessUp].Elements.ForEach(x =>
+						{
+							caches.Add(x.Target);
+						});
+                    }
+
+					//aStatus.CachingObject(cache);	///
+					aStatus.CachingObjects(caches);
 
 					mCam.cullingMask = Layers.SetMask(1);
 					sCam.cullingMask = Layers.SetMask(2);
 
 					SetObjectToDefaultLayer(objs);          // 모든 객체 레이어 기본
-					SetObjectSelectedLayer(cache);          // 선택 객체 레이어 캐시레이어
+					//SetObjectSelectedLayer(cache);          // 선택 객체 레이어 캐시레이어
+					SetObjectsSelectedLayer(caches);
 
 					// TODO 캐시 위치로 카메라 중심잡기
-					SetFocusSelectedObject(cache, mCam);
+					//SetFocusSelectedObject(cache, mCam);
+					SetFocusSelectedObjects(caches, mCam);
 				}
 			}
 			else
@@ -92,6 +107,14 @@ namespace Module.UI
 			_cache.layer = Layers.GetLayerIndex(1);
 		}
 
+		private void SetObjectsSelectedLayer(List<GameObject> _caches)
+        {
+			_caches.ForEach(x =>
+			{
+				x.layer = Layers.GetLayerIndex(1);
+			});
+        }
+
 		private void SetFocusSelectedObject(GameObject _cache, Camera _cam)
 		{
 			Bounds _b = new Bounds();
@@ -106,5 +129,51 @@ namespace Module.UI
 				Cameras.SetCameraCenterPosition(_cam, _b, _canvas, _uType);
 			}
 		}
+
+		private void SetFocusSelectedObjects(List<GameObject> _caches, Camera _cam)
+        {
+			Bounds _b = new Bounds();
+			Canvas _canvas = ContentManager.Instance._Canvas;
+			UIEventType _uType = UIEventType.Viewport_ViewMode_ISO;
+
+			MeshRenderer render;
+			if(_caches.Count != 0)
+            {
+				Vector3 min = default(Vector3);
+				Vector3 max = default(Vector3);
+
+				if(_caches.First().TryGetComponent<MeshRenderer>(out render))
+                {
+					Bounds bound = render.bounds;
+
+					min = bound.min;
+					max = bound.max;
+                }
+
+				// 캐시들 반복하면서 경계값 업데이트
+				_caches.ForEach(x =>
+				{
+					if(x.TryGetComponent<MeshRenderer>(out render))
+                    {
+						Bounds bound = render.bounds;
+
+						min = new Vector3(
+							min.x > bound.min.x ? bound.min.x : min.x ,
+							min.y > bound.min.y ? bound.min.y : min.y ,
+							min.z > bound.min.z ? bound.min.z : min.z
+							);
+
+						max = new Vector3(
+							max.x < bound.max.x ? bound.max.x : max.x,
+							max.y < bound.max.y ? bound.max.y : max.y,
+							max.z < bound.max.z ? bound.max.z : max.z
+							);
+					}
+				});
+
+				_b.center = (max + min) / 2;
+				_b.size = (max - min);
+            }
+        }
 	}
 }

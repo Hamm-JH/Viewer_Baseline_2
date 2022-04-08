@@ -35,16 +35,68 @@ namespace Management.Events
 			if (Selected3D.TryGetComponent<Obj_Selectable>(out sObj))
 			{
 				Elements = new List<IInteractable>();
-				Elements.Add(sObj);
+				//Elements.Add(sObj);
 
 				//Element = sObj;
 
 				PlatformCode _pCode = MainManager.Instance.Platform;
-				if(Platforms.IsSmartInspectPlatform(_pCode))
-				{
-					//m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-					//m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+				if(Platforms.IsBridgePlatform(_pCode))
+                {
+					// 교량 플랫폼의 경우.
+					//Debug.Log("Hello click");
+					IInteractable _interactable;
+					List<GameObject> objs = ContentManager.Instance._ModelObjects;
+
+					// ',' 스플릿 길이 1이 아닌 경우 (지간, 경간)
+					string pName = Selected3D.transform.parent.name;
+					if(pName.Split(",".ToCharArray()).Length == 1 &&
+						pName.Split("_".ToCharArray()).Length != 1)
+                    {
+						// 같은 이름의 부재가 여러개 있는 객체 
+						// 부모객체 가져오기
+						GameObject pObj = Selected3D.transform.parent.gameObject;
+						int index = pObj.transform.childCount;
+                        for (int i = 0; i < index; i++)
+                        {
+							GameObject cObj = pObj.transform.GetChild(i).gameObject;
+							if (cObj.TryGetComponent<IInteractable>(out _interactable))
+                            {
+								// 자식 객체에 상호작용 가능하면
+								Elements.Add(_interactable);
+                            }
+                        }
+                    }
+					else
+                    {
+						// , 단위로 이름 나누기
+						string sName = Selected3D.transform.name.Split(",".ToCharArray())[0];
+
+						objs.ForEach(x =>
+						{
+							// sName을 포함한 개체가 있는 경우
+							if(x.name.Contains(sName))
+                            {
+								// 상호작용 가능 객체인 경우
+								if(x.TryGetComponent<IInteractable>(out _interactable))
+                                {
+									Elements.Add(_interactable);
+                                }
+                            }
+						});
+
+						// 그냥 바로 위에 지간, 경간 있으면 바로고
+						//Elements.Add(sObj);
+                    }
+                }
+				else
+                {
+					Elements.Add(sObj);
 				}
+				//else if(Platforms.IsSmartInspectPlatform(_pCode))
+				//{
+				//	//m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+				//	//m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
+				//}
 				StatusCode = _success;
 				return;
 			}
