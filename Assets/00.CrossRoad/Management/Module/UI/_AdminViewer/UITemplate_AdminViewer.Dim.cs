@@ -58,7 +58,11 @@ namespace Module.UI
 			}
 			else if(Platforms.IsBridgePlatform(pCode))
 			{
-				ToggleDimension(true);
+				GameObject lv2 = ContentManager.Instance.Container.m_dimView.dimLevel2.gameObject;
+
+				bool isLv2On = !lv2.activeSelf;
+
+				ToggleDimension(isLv2On);
 
 				//Transform lv2 = ContentManager.Instance.Container.m_dimView.dimLevel2;
 				List<Transform> lv4 = ContentManager.Instance.Container.m_dimView.dimLevel4;
@@ -72,7 +76,7 @@ namespace Module.UI
 
 				if(_find != null)
 				{
-					_find.gameObject.SetActive(true);
+					_find.gameObject.SetActive(isLv2On);
 				}
 			}
 		}

@@ -196,42 +196,7 @@ namespace Management.Events.Inputs
 				m_clickEvent.Invoke(null);
 				ContentManager.Instance.OnSelect_3D(null);
 			}
-		}
+		} 
 
-
-
-		//protected void Func_Input_clickSuccessUp(Status _success)
-		//{
-		//	Obj_Selectable sObj;
-		//	Issue_Selectable iObj;
-
-		//	if (Selected3D.TryGetComponent<Obj_Selectable>(out sObj))
-		//	{
-		//		Elements = new List<IInteractable>();
-		//		Elements.Add(sObj);
-
-		//		//Element = sObj;
-
-		//		PlatformCode _pCode = MainManager.Instance.Platform;
-		//		if (Platforms.IsSmartInspectPlatform(_pCode))
-		//		{
-		//			m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-		//			m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-		//		}
-		//		StatusCode = _success;
-		//		return;
-		//	}
-		//	else if (Selected3D.TryGetComponent<Issue_Selectable>(out iObj))
-		//	{
-		//		Elements = new List<IInteractable>();
-		//		Elements.Add(iObj);
-
-		//		//Element = iObj;
-
-		//		m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-		//		StatusCode = _success;
-		//		return;
-		//	}
-		//}
 	}
 }
