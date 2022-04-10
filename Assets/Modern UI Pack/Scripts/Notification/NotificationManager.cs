@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine.Events;
 using TMPro;
 
 namespace Michsky.UI.ModernUIPack
 {
+    [RequireComponent(typeof(Animator))]
     public class NotificationManager : MonoBehaviour
     {
-        // CONTENT
+        // Content
         public Sprite icon;
         public string title = "Notification Title";
         [TextArea] public string description = "Notification description";
@@ -24,34 +25,25 @@ namespace Michsky.UI.ModernUIPack
         public float timer = 3f;
         public bool useCustomContent = false;
         public bool useStacking = false;
-        public bool destroyAfterPlaying = false;
-        public NotificationStyle notificationStyle;
+        [HideInInspector] public bool isOn;
+        public StartBehaviour startBehaviour = StartBehaviour.Disable;
+        public CloseBehaviour closeBehaviour = CloseBehaviour.Disable;
 
-        public enum NotificationStyle
+        // Events
+        public UnityEvent onOpen;
+        public UnityEvent onClose;
+
+        public enum StartBehaviour { None, Disable }
+        public enum CloseBehaviour { None, Disable, Destroy }
+
+        void Awake()
         {
-            FADING,
-            POPUP,
-            SLIDING
-        }
+            isOn = false;
 
-        void Start()
-        {
-            try
+            if (useCustomContent == false)
             {
-                if (notificationAnimator == null)
-                    notificationAnimator = gameObject.GetComponent<Animator>();
-
-                if (useCustomContent == false)
-                {
-                    iconObj.sprite = icon;
-                    titleObj.text = title;
-                    descriptionObj.text = description;
-                }
-            }
-
-            catch
-            {
-                Debug.LogError("Notification - Cannot initalize the object due to missing components.", this);
+                try { UpdateUI(); }
+                catch { Debug.LogError("<b>[Notification]</b> Cannot initalize the object due to missing components.", this); }
             }
 
             if (useStacking == true)
@@ -61,39 +53,42 @@ namespace Michsky.UI.ModernUIPack
                     NotificationStacking stacking = transform.GetComponentInParent<NotificationStacking>();
                     stacking.notifications.Add(this);
                     stacking.enableUpdating = true;
-                    gameObject.SetActive(false);
                 }
 
-                catch { }
+                catch { Debug.LogError("<b>[Notification]</b> 'Stacking' is enabled but 'Notification Stacking' cannot be found in parent.", this); }
             }
-        }
 
-        IEnumerator StartTimer()
-        {
-            yield return new WaitForSeconds(timer);
-            CloseNotification();
-        }
-
-        IEnumerator DestroyNotification()
-        {
-            yield return new WaitForSeconds(1f);
-            Destroy(gameObject);
+            if (notificationAnimator == null) { notificationAnimator = gameObject.GetComponent<Animator>(); }
+            if (startBehaviour == StartBehaviour.Disable) { gameObject.SetActive(false); }
         }
 
         public void OpenNotification()
         {
-            notificationAnimator.Play("In");
+            if (isOn == true)
+                return;
 
-            if (enableTimer == true)
-                StartCoroutine("StartTimer");
+            gameObject.SetActive(true);
+            isOn = true;
+
+            StopCoroutine("StartTimer");
+            StopCoroutine("DisableNotification");
+
+            notificationAnimator.Play("In");
+            onOpen.Invoke();
+
+            if (enableTimer == true) { StartCoroutine("StartTimer"); }
         }
 
         public void CloseNotification()
         {
-            notificationAnimator.Play("Out");
+            if (isOn == false)
+                return;
 
-            if (destroyAfterPlaying == true)
-                StartCoroutine("DestroyNotification");
+            isOn = false;
+            notificationAnimator.Play("Out");
+            onClose.Invoke();
+
+            StartCoroutine("DisableNotification");
         }
 
         public void UpdateUI()
@@ -105,10 +100,23 @@ namespace Michsky.UI.ModernUIPack
                 descriptionObj.text = description;
             }
 
-            catch
-            {
-                Debug.LogError("Notification - Cannot update the object due to missing components.", this);
-            }
+            catch { Debug.LogError("<b>[Notification]</b> Cannot update the component due to missing variables.", this); }
+        }
+
+        IEnumerator StartTimer()
+        {
+            yield return new WaitForSeconds(timer);
+
+            CloseNotification();
+            StartCoroutine("DisableNotification");
+        }
+
+        IEnumerator DisableNotification()
+        {
+            yield return new WaitForSeconds(1f);
+
+            if (closeBehaviour == CloseBehaviour.Disable) { gameObject.SetActive(false); isOn = false; }
+            else if (closeBehaviour == CloseBehaviour.Destroy) { Destroy(gameObject); }
         }
     }
 }

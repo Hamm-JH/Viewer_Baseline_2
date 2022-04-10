@@ -1,51 +1,38 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 
 namespace Michsky.UI.ModernUIPack
 {
     [CustomEditor(typeof(TooltipManager))]
     public class TooltipManagerEditor : Editor
     {
-        private int currentTab;
+        private GUISkin customSkin;
         private TooltipManager tooltipTarget;
+        private UIManagerTooltip tempUIM;
+        private int currentTab;
 
         private void OnEnable()
         {
             tooltipTarget = (TooltipManager)target;
+
+            try { tempUIM = tooltipTarget.GetComponent<UIManagerTooltip>(); }
+            catch { }
+
+            if (EditorGUIUtility.isProSkin == true) { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark"); }
+            else { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light"); }
         }
 
         public override void OnInspectorGUI()
         {
-            GUISkin customSkin;
-            Color defaultColor = GUI.color;
-
-            if (EditorGUIUtility.isProSkin == true)
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark");
-            else
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light");
-
-            GUILayout.BeginHorizontal();
-            GUI.backgroundColor = defaultColor;
-
-            GUILayout.Box(new GUIContent(""), customSkin.FindStyle("Tooltip Top Header"));
-
-            GUILayout.EndHorizontal();
-            GUILayout.Space(-42);
+            MUIPEditorHandler.DrawComponentHeader(customSkin, "Tooltip Top Header");
 
             GUIContent[] toolbarTabs = new GUIContent[3];
             toolbarTabs[0] = new GUIContent("Content");
             toolbarTabs[1] = new GUIContent("Resources");
             toolbarTabs[2] = new GUIContent("Settings");
 
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(17);
-
-            currentTab = GUILayout.Toolbar(currentTab, toolbarTabs, customSkin.FindStyle("Tab Indicator"));
-
-            GUILayout.EndHorizontal();
-            GUILayout.Space(-40);
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(17);
+            currentTab = MUIPEditorHandler.DrawTabs(currentTab, toolbarTabs, customSkin);
 
             if (GUILayout.Button(new GUIContent("Content", "Content"), customSkin.FindStyle("Tab Content")))
                 currentTab = 0;
@@ -64,68 +51,83 @@ namespace Michsky.UI.ModernUIPack
             var tooltipObject = serializedObject.FindProperty("tooltipObject");
             var tooltipContent = serializedObject.FindProperty("tooltipContent");
             var tooltipSmoothness = serializedObject.FindProperty("tooltipSmoothness");
-            var useAnimator = serializedObject.FindProperty("useAnimator");
+            var dampSpeed = serializedObject.FindProperty("dampSpeed");
+            var preferredWidth = serializedObject.FindProperty("preferredWidth");
+            var targetCamera = serializedObject.FindProperty("targetCamera");
+            var cameraSource = serializedObject.FindProperty("cameraSource");
 
             switch (currentTab)
             {
                 case 0:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                    MUIPEditorHandler.DrawHeader(customSkin, "Content Header", 6);
+                    MUIPEditorHandler.DrawProperty(vBorderTop, customSkin, "Top Bound");
+                    MUIPEditorHandler.DrawProperty(vBorderBottom, customSkin, "Bottom Bound");
+                    MUIPEditorHandler.DrawProperty(hBorderLeft, customSkin, "Left Bound");
+                    MUIPEditorHandler.DrawProperty(hBorderRight, customSkin, "Right Bound");
 
-                    EditorGUILayout.LabelField(new GUIContent("Top Bound"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(vBorderTop, new GUIContent(""));
+                    if (tooltipTarget.tooltipObject != null && tooltipTarget.tooltipObject.GetComponent<CanvasGroup>().alpha == 0)
+                    {
+                        if (GUILayout.Button("Make It Visible", customSkin.button))
+                        {
+                            tooltipTarget.tooltipObject.GetComponent<CanvasGroup>().alpha = 1;
+                            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+                        }
+                    }
 
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                    else
+                    {
+                        if (GUILayout.Button("Make It Invisible", customSkin.button))
+                        {
+                            tooltipTarget.tooltipObject.GetComponent<CanvasGroup>().alpha = 0;
+                            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+                        }
+                    }
 
-                    EditorGUILayout.LabelField(new GUIContent("Bottom Bound"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(vBorderBottom, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Left Bound"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(hBorderLeft, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Right Bound"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(hBorderRight, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
                     break;
 
                 case 1:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Tooltip Object"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(tooltipObject, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Tooltip Content"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(tooltipContent, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Main Canvas"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(mainCanvas, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
+                    MUIPEditorHandler.DrawHeader(customSkin, "Core Header", 6);
+                    MUIPEditorHandler.DrawProperty(tooltipObject, customSkin, "Tooltip Object");
+                    MUIPEditorHandler.DrawProperty(tooltipContent, customSkin, "Tooltip Content");
+                    MUIPEditorHandler.DrawProperty(mainCanvas, customSkin, "Main Canvas");
                     break;
 
                 case 2:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                    MUIPEditorHandler.DrawHeader(customSkin, "Options Header", 6);
+                    MUIPEditorHandler.DrawProperty(preferredWidth, customSkin, "Preferred Width");
+                    MUIPEditorHandler.DrawProperty(tooltipSmoothness, customSkin, "Smoothness");
+                    MUIPEditorHandler.DrawProperty(dampSpeed, customSkin, "Damp Speed");
+                    MUIPEditorHandler.DrawProperty(cameraSource, customSkin, "Camera Source");
 
-                    EditorGUILayout.LabelField(new GUIContent("Smoothness"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(tooltipSmoothness, new GUIContent(""));
+                    if (tooltipTarget.cameraSource == TooltipManager.CameraSource.Custom)
+                        MUIPEditorHandler.DrawProperty(targetCamera, customSkin, "Target Camera");
 
-                    GUILayout.EndHorizontal();
+                    MUIPEditorHandler.DrawHeader(customSkin, "UIM Header", 10);
+
+                    if (tempUIM != null)
+                    {
+                        MUIPEditorHandler.DrawUIManagerConnectedHeader();
+
+                        if (GUILayout.Button("Open UI Manager", customSkin.button))
+                            EditorApplication.ExecuteMenuItem("Tools/Modern UI Pack/Show UI Manager");
+
+                        if (GUILayout.Button("Disable UI Manager Connection", customSkin.button))
+                        {
+                            if (EditorUtility.DisplayDialog("Modern UI Pack", "Are you sure you want to disable UI Manager connection with the object? " +
+                                "This operation cannot be undone.", "Yes", "Cancel"))
+                            {
+                                try { DestroyImmediate(tempUIM); }
+                                catch { Debug.LogError("<b>[Horizontal Selector]</b> Failed to delete UI Manager connection.", this); }
+                            }
+                        }
+                    }
+
+                    else if (tempUIM == null) { MUIPEditorHandler.DrawUIManagerDisconnectedHeader(); }
+
                     break;            
             }
 
+            this.Repaint();
             serializedObject.ApplyModifiedProperties();
         }
     }

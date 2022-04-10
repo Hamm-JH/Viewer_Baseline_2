@@ -6,45 +6,31 @@ namespace Michsky.UI.ModernUIPack
     [CustomEditor(typeof(SwitchManager))]
     public class SwitchManagerEditor : Editor
     {
-        private int currentTab;
+        private GUISkin customSkin;
         private SwitchManager switchTarget;
+        private UIManagerSwitch tempUIM;
+        private int currentTab;
 
         private void OnEnable()
         {
             switchTarget = (SwitchManager)target;
+
+            try { tempUIM = switchTarget.GetComponent<UIManagerSwitch>(); }
+            catch { }
+
+            if (EditorGUIUtility.isProSkin == true) { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark"); }
+            else { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light"); }
         }
 
         public override void OnInspectorGUI()
         {
-            GUISkin customSkin;
-            Color defaultColor = GUI.color;
-
-            if (EditorGUIUtility.isProSkin == true)
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark");
-            else
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light");
-
-            GUILayout.BeginHorizontal();
-            GUI.backgroundColor = defaultColor;
-
-            GUILayout.Box(new GUIContent(""), customSkin.FindStyle("Switch Top Header"));
-
-            GUILayout.EndHorizontal();
-            GUILayout.Space(-42);
+            MUIPEditorHandler.DrawComponentHeader(customSkin, "Switch Top Header");
 
             GUIContent[] toolbarTabs = new GUIContent[2];
             toolbarTabs[0] = new GUIContent("Content");
             toolbarTabs[1] = new GUIContent("Settings");
-
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(17);
-
-            currentTab = GUILayout.Toolbar(currentTab, toolbarTabs, customSkin.FindStyle("Tab Indicator"));
-
-            GUILayout.EndHorizontal();
-            GUILayout.Space(-40);
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(17);
+    
+            currentTab = MUIPEditorHandler.DrawTabs(currentTab, toolbarTabs, customSkin);
 
             if (GUILayout.Button(new GUIContent("Content", "Content"), customSkin.FindStyle("Tab Content")))
                 currentTab = 0;
@@ -69,80 +55,33 @@ namespace Michsky.UI.ModernUIPack
             switch (currentTab)
             {
                 case 0:
+                    MUIPEditorHandler.DrawHeader(customSkin, "Events Header", 6);
                     EditorGUILayout.PropertyField(OnEvents, new GUIContent("On Events"), true);
                     EditorGUILayout.PropertyField(OffEvents, new GUIContent("Off Events"), true);
 
-                    if (enableSwitchSounds.boolValue == true)
-                    {
-                        GUILayout.Space(10);
+                    if (enableSwitchSounds.boolValue == true && useHoverSound.boolValue == true)
+                        MUIPEditorHandler.DrawProperty(hoverSound, customSkin, "Hover Sound");
 
-                        if (enableSwitchSounds.boolValue == true && useHoverSound.boolValue == true)
-                        {
-                            GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                            EditorGUILayout.LabelField(new GUIContent("Hover Sound"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                            EditorGUILayout.PropertyField(hoverSound, new GUIContent(""));
-
-                            GUILayout.EndHorizontal();
-                        }
-
-                        if (enableSwitchSounds.boolValue == true && useClickSound.boolValue == true)
-                        {
-                            GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                            EditorGUILayout.LabelField(new GUIContent("Click Sound"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                            EditorGUILayout.PropertyField(clickSound, new GUIContent(""));
-
-                            GUILayout.EndHorizontal();
-                        }
-                    }
+                    if (enableSwitchSounds.boolValue == true && useClickSound.boolValue == true)
+                        MUIPEditorHandler.DrawProperty(clickSound, customSkin, "Click Sound");
 
                     break;
 
                 case 1:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                    MUIPEditorHandler.DrawHeader(customSkin, "Options Header", 6);
+                    invokeAtStart.boolValue = MUIPEditorHandler.DrawToggle(invokeAtStart.boolValue, customSkin, "Invoke At Start");
+                    isOn.boolValue = MUIPEditorHandler.DrawToggle(isOn.boolValue, customSkin, "Is On");
 
-                    invokeAtStart.boolValue = GUILayout.Toggle(invokeAtStart.boolValue, new GUIContent("Invoke At Start"), customSkin.FindStyle("Toggle"));
-                    invokeAtStart.boolValue = GUILayout.Toggle(invokeAtStart.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    isOn.boolValue = GUILayout.Toggle(isOn.boolValue, new GUIContent("Is On"), customSkin.FindStyle("Toggle"));
-                    isOn.boolValue = GUILayout.Toggle(isOn.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-
-                    if (saveValue.boolValue == true)
-                        EditorGUILayout.HelpBox("Save Value is enabled. This option won't be used if there's a stored value.", MessageType.Info);
-
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    enableSwitchSounds.boolValue = GUILayout.Toggle(enableSwitchSounds.boolValue, new GUIContent("Enable Switch Sounds"), customSkin.FindStyle("Toggle"));
-                    enableSwitchSounds.boolValue = GUILayout.Toggle(enableSwitchSounds.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
+                    GUILayout.BeginVertical(EditorStyles.helpBox);
+                    GUILayout.Space(-3);
+                    enableSwitchSounds.boolValue = MUIPEditorHandler.DrawTogglePlain(enableSwitchSounds.boolValue, customSkin, "Enable Switch Sounds");
+                    GUILayout.Space(3);
 
                     if (enableSwitchSounds.boolValue == true)
                     {
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        useHoverSound.boolValue = GUILayout.Toggle(useHoverSound.boolValue, new GUIContent("Enable Hover Sound"), customSkin.FindStyle("Toggle"));
-                        useHoverSound.boolValue = GUILayout.Toggle(useHoverSound.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                        GUILayout.EndHorizontal();
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        useClickSound.boolValue = GUILayout.Toggle(useClickSound.boolValue, new GUIContent("Enable Click Sound"), customSkin.FindStyle("Toggle"));
-                        useClickSound.boolValue = GUILayout.Toggle(useClickSound.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                        GUILayout.EndHorizontal();
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        EditorGUILayout.LabelField(new GUIContent("Sound Source"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        EditorGUILayout.PropertyField(soundSource, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
+                        useHoverSound.boolValue = MUIPEditorHandler.DrawToggle(useHoverSound.boolValue, customSkin, "Enable Hover Sound");
+                        useClickSound.boolValue = MUIPEditorHandler.DrawToggle(useClickSound.boolValue, customSkin, "Enable Click Sound");
+                        MUIPEditorHandler.DrawProperty(soundSource, customSkin, "Sound Sound");
 
                         if (switchTarget.soundSource == null)
                         {
@@ -156,30 +95,47 @@ namespace Michsky.UI.ModernUIPack
                         }
                     }
 
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    saveValue.boolValue = GUILayout.Toggle(saveValue.boolValue, new GUIContent("Save Value"), customSkin.FindStyle("Toggle"));
-                    saveValue.boolValue = GUILayout.Toggle(saveValue.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
+                    GUILayout.EndVertical();
+                    GUILayout.BeginVertical(EditorStyles.helpBox);
+                    GUILayout.Space(-3);
+                    saveValue.boolValue = MUIPEditorHandler.DrawTogglePlain(saveValue.boolValue, customSkin, "Save Value");
+                    GUILayout.Space(3);
 
                     if (saveValue.boolValue == true)
                     {
-                        EditorGUI.indentLevel = 2;
-                        GUILayout.BeginHorizontal();
-
-                        EditorGUILayout.LabelField(new GUIContent("Tag:"), customSkin.FindStyle("Text"), GUILayout.Width(40));
-                        EditorGUILayout.PropertyField(switchTag, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
-                        EditorGUI.indentLevel = 0;
-                        GUILayout.Space(2);
+                        MUIPEditorHandler.DrawPropertyPlainCW(switchTag, customSkin, "Switch Tag:", 90);
                         EditorGUILayout.HelpBox("Each switch should has its own unique tag.", MessageType.Info);
                     }
+
+                    GUILayout.EndVertical();
+
+                    MUIPEditorHandler.DrawHeader(customSkin, "UIM Header", 10);
+
+                    if (tempUIM != null)
+                    {
+                        MUIPEditorHandler.DrawUIManagerConnectedHeader();
+                        tempUIM.overrideColors = MUIPEditorHandler.DrawToggle(tempUIM.overrideColors, customSkin, "Override Colors");
+
+                        if (GUILayout.Button("Open UI Manager", customSkin.button))
+                            EditorApplication.ExecuteMenuItem("Tools/Modern UI Pack/Show UI Manager");
+
+                        if (GUILayout.Button("Disable UI Manager Connection", customSkin.button))
+                        {
+                            if (EditorUtility.DisplayDialog("Modern UI Pack", "Are you sure you want to disable UI Manager connection with the object? " +
+                                "This operation cannot be undone.", "Yes", "Cancel"))
+                            {
+                                try { DestroyImmediate(tempUIM); }
+                                catch { Debug.LogError("<b>[Horizontal Selector]</b> Failed to delete UI Manager connection.", this); }
+                            }
+                        }
+                    }
+
+                    else if (tempUIM == null) { MUIPEditorHandler.DrawUIManagerDisconnectedHeader(); }
 
                     break;
             }
 
+            this.Repaint();
             serializedObject.ApplyModifiedProperties();
         }
     }

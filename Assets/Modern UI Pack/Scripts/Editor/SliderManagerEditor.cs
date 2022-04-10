@@ -6,46 +6,32 @@ namespace Michsky.UI.ModernUIPack
     [CustomEditor(typeof(SliderManager))]
     public class SliderManagerEditor : Editor
     {
-        private SliderManager sliderTarget;
+        private GUISkin customSkin;
+        private SliderManager sTarget;
+        private UIManagerSlider tempUIM;
         private int currentTab;
 
         private void OnEnable()
         {
-            sliderTarget = (SliderManager)target;
+            sTarget = (SliderManager)target;
+
+            try { tempUIM = sTarget.GetComponent<UIManagerSlider>(); }
+            catch { }
+
+            if (EditorGUIUtility.isProSkin == true) { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark"); }
+            else { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light"); }
         }
 
         public override void OnInspectorGUI()
         {
-            GUISkin customSkin;
-            Color defaultColor = GUI.color;
-
-            if (EditorGUIUtility.isProSkin == true)
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark");
-            else
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light");
-
-            GUILayout.BeginHorizontal();
-            GUI.backgroundColor = defaultColor;
-
-            GUILayout.Box(new GUIContent(""), customSkin.FindStyle("Slider Top Header"));
-
-            GUILayout.EndHorizontal();
-            GUILayout.Space(-42);
+            MUIPEditorHandler.DrawComponentHeader(customSkin, "Slider Top Header");
 
             GUIContent[] toolbarTabs = new GUIContent[3];
             toolbarTabs[0] = new GUIContent("Content");
             toolbarTabs[1] = new GUIContent("Resources");
             toolbarTabs[2] = new GUIContent("Settings");
 
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(17);
-
-            currentTab = GUILayout.Toolbar(currentTab, toolbarTabs, customSkin.FindStyle("Tab Indicator"));
-
-            GUILayout.EndHorizontal();
-            GUILayout.Space(-40);
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(17);
+            currentTab = MUIPEditorHandler.DrawTabs(currentTab, toolbarTabs, customSkin);
 
             if (GUILayout.Button(new GUIContent("Content", "Content"), customSkin.FindStyle("Tab Content")))
                 currentTab = 0;
@@ -66,34 +52,47 @@ namespace Michsky.UI.ModernUIPack
             var useRoundValue = serializedObject.FindProperty("useRoundValue");
             var showValue = serializedObject.FindProperty("showValue");
             var showPopupValue = serializedObject.FindProperty("showPopupValue");
+            var minValue = serializedObject.FindProperty("minValue");
+            var maxValue = serializedObject.FindProperty("maxValue");
+            var invokeOnAwake = serializedObject.FindProperty("invokeOnAwake");
 
             switch (currentTab)
             {
                 case 0:
-                    if (sliderTarget.mainSlider != null)
+                    MUIPEditorHandler.DrawHeader(customSkin, "Content Header", 6);
+
+                    if (sTarget.mainSlider != null)
                     {
                         GUILayout.BeginHorizontal(EditorStyles.helpBox);
 
                         EditorGUILayout.LabelField(new GUIContent("Current Value"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        sliderTarget.mainSlider.value = EditorGUILayout.Slider(sliderTarget.mainSlider.value, sliderTarget.mainSlider.minValue, sliderTarget.mainSlider.maxValue);
+                        sTarget.mainSlider.value = EditorGUILayout.Slider(sTarget.mainSlider.value, sTarget.mainSlider.minValue, sTarget.mainSlider.maxValue);
 
                         GUILayout.EndHorizontal();
                         GUILayout.BeginHorizontal(EditorStyles.helpBox);
 
                         EditorGUILayout.LabelField(new GUIContent("Min Value"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        sliderTarget.mainSlider.minValue = EditorGUILayout.FloatField(sliderTarget.mainSlider.minValue);
+
+                        if (sTarget.mainSlider.wholeNumbers == false)
+                            sTarget.mainSlider.minValue = EditorGUILayout.FloatField(sTarget.mainSlider.minValue);
+                        else
+                            sTarget.mainSlider.minValue = EditorGUILayout.IntField((int)sTarget.mainSlider.minValue);
 
                         GUILayout.EndHorizontal();
                         GUILayout.BeginHorizontal(EditorStyles.helpBox);
 
                         EditorGUILayout.LabelField(new GUIContent("Max Value"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        sliderTarget.mainSlider.maxValue = EditorGUILayout.FloatField(sliderTarget.mainSlider.maxValue);
+
+                        if (sTarget.mainSlider.wholeNumbers == false)
+                            sTarget.mainSlider.maxValue = EditorGUILayout.FloatField(sTarget.mainSlider.maxValue);
+                        else
+                            sTarget.mainSlider.maxValue = EditorGUILayout.IntField((int)sTarget.mainSlider.maxValue);
 
                         GUILayout.EndHorizontal();
                         GUILayout.BeginHorizontal(EditorStyles.helpBox);
 
-                        sliderTarget.mainSlider.wholeNumbers = GUILayout.Toggle(sliderTarget.mainSlider.wholeNumbers, new GUIContent("Use Whole Numbers"), customSkin.FindStyle("Toggle"));
-                        sliderTarget.mainSlider.wholeNumbers = GUILayout.Toggle(sliderTarget.mainSlider.wholeNumbers, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+                        sTarget.mainSlider.wholeNumbers = GUILayout.Toggle(sTarget.mainSlider.wholeNumbers, new GUIContent("Use Whole Numbers"), customSkin.FindStyle("Toggle"));
+                        sTarget.mainSlider.wholeNumbers = GUILayout.Toggle(sTarget.mainSlider.wholeNumbers, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
 
                         GUILayout.EndHorizontal();
                     }
@@ -101,93 +100,64 @@ namespace Michsky.UI.ModernUIPack
                     else
                         EditorGUILayout.HelpBox("'Main Slider' is not assigned. Go to Resources tab and assign the correct variable.", MessageType.Error);
 
-                    GUILayout.Space(10);
+                    MUIPEditorHandler.DrawHeader(customSkin, "Events Header", 10);
                     EditorGUILayout.PropertyField(sliderEvent, new GUIContent("On Value Changed"), true);
                     break;
 
                 case 1:
-                    GUILayout.Space(20);
-                    GUILayout.Label("RESOURCES", customSkin.FindStyle("Header"));
-                    GUILayout.Space(2);
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Slider Object"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(sliderObject, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-
-                    if (showValue.boolValue == true)
-                    {
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        EditorGUILayout.LabelField(new GUIContent("Label Text"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        EditorGUILayout.PropertyField(valueText, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
-                    }
-
-                    if (showPopupValue.boolValue == true)
-                    {
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        EditorGUILayout.LabelField(new GUIContent("Popup Label Text"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        EditorGUILayout.PropertyField(popupValueText, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
-                    }
-
+                    MUIPEditorHandler.DrawHeader(customSkin, "Core Header", 6);
+                    MUIPEditorHandler.DrawProperty(sliderObject, customSkin, "Slider Source");
+                    if (showValue.boolValue == true) { MUIPEditorHandler.DrawProperty(valueText, customSkin, "Label Text"); }
+                    if (showPopupValue.boolValue == true) { MUIPEditorHandler.DrawProperty(popupValueText, customSkin, "Popup Label Text"); }
                     GUILayout.Space(4);
                     break;
 
                 case 2:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    usePercent.boolValue = GUILayout.Toggle(usePercent.boolValue, new GUIContent("Use Percent"), customSkin.FindStyle("Toggle"));
-                    usePercent.boolValue = GUILayout.Toggle(usePercent.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    showValue.boolValue = GUILayout.Toggle(showValue.boolValue, new GUIContent("Show Label"), customSkin.FindStyle("Toggle"));
-                    showValue.boolValue = GUILayout.Toggle(showValue.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    showPopupValue.boolValue = GUILayout.Toggle(showPopupValue.boolValue, new GUIContent("Show Popup Label"), customSkin.FindStyle("Toggle"));
-                    showPopupValue.boolValue = GUILayout.Toggle(showPopupValue.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    useRoundValue.boolValue = GUILayout.Toggle(useRoundValue.boolValue, new GUIContent("Use Round Value"), customSkin.FindStyle("Toggle"));
-                    useRoundValue.boolValue = GUILayout.Toggle(useRoundValue.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    enableSaving.boolValue = GUILayout.Toggle(enableSaving.boolValue, new GUIContent("Save Value"), customSkin.FindStyle("Toggle"));
-                    enableSaving.boolValue = GUILayout.Toggle(enableSaving.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
+                    MUIPEditorHandler.DrawHeader(customSkin, "Options Header", 6);
+                    usePercent.boolValue = MUIPEditorHandler.DrawToggle(usePercent.boolValue, customSkin, "Use Percent");
+                    showValue.boolValue = MUIPEditorHandler.DrawToggle(showValue.boolValue, customSkin, "Show Label");
+                    showPopupValue.boolValue = MUIPEditorHandler.DrawToggle(showPopupValue.boolValue, customSkin, "Show Popup Label");
+                    useRoundValue.boolValue = MUIPEditorHandler.DrawToggle(useRoundValue.boolValue, customSkin, "Use Round Value");
+                    invokeOnAwake.boolValue = MUIPEditorHandler.DrawToggle(invokeOnAwake.boolValue, customSkin, "Invoke On Awake");
+                    enableSaving.boolValue = MUIPEditorHandler.DrawToggle(enableSaving.boolValue, customSkin, "Save Value");
 
                     if (enableSaving.boolValue == true)
                     {
                         EditorGUI.indentLevel = 2;
-                        GUILayout.BeginHorizontal();
-
-                        EditorGUILayout.LabelField(new GUIContent("Tag:"), customSkin.FindStyle("Text"), GUILayout.Width(40));
-                        EditorGUILayout.PropertyField(sliderTag, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
+                        MUIPEditorHandler.DrawPropertyPlainCW(sliderTag, customSkin, "Tag:", 40);
                         EditorGUI.indentLevel = 0;
                         GUILayout.Space(2);
                         EditorGUILayout.HelpBox("Each slider should has its own unique tag.", MessageType.Info);
                     }
 
+                    MUIPEditorHandler.DrawHeader(customSkin, "UIM Header", 10);
+
+                    if (tempUIM != null)
+                    {
+                        MUIPEditorHandler.DrawUIManagerConnectedHeader();
+                        tempUIM.overrideColors = MUIPEditorHandler.DrawToggle(tempUIM.overrideColors, customSkin, "Override Colors");
+                        tempUIM.overrideFonts = MUIPEditorHandler.DrawToggle(tempUIM.overrideFonts, customSkin, "Override Fonts");
+
+                        if (GUILayout.Button("Open UI Manager", customSkin.button))
+                            EditorApplication.ExecuteMenuItem("Tools/Modern UI Pack/Show UI Manager");
+
+                        if (GUILayout.Button("Disable UI Manager Connection", customSkin.button))
+                        {
+                            if (EditorUtility.DisplayDialog("Modern UI Pack", "Are you sure you want to disable UI Manager connection with the object? " +
+                                "This operation cannot be undone.", "Yes", "Cancel"))
+                            {
+                                try { DestroyImmediate(tempUIM); }
+                                catch { Debug.LogError("<b>[Horizontal Selector]</b> Failed to delete UI Manager connection.", this); }
+                            }
+                        }
+                    }
+
+                    else if (tempUIM == null) { MUIPEditorHandler.DrawUIManagerDisconnectedHeader(); }
+
                     break;
             }
 
+            this.Repaint();
             serializedObject.ApplyModifiedProperties();
         }
     }

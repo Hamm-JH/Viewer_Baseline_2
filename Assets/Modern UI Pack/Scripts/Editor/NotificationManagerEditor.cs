@@ -1,51 +1,38 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 
 namespace Michsky.UI.ModernUIPack
 {
     [CustomEditor(typeof(NotificationManager))]
     public class NotificationManagerEditor : Editor
     {
+        private GUISkin customSkin;
         private NotificationManager ntfTarget;
+        private UIManagerNotification tempUIM;
         private int currentTab;
 
         private void OnEnable()
         {
             ntfTarget = (NotificationManager)target;
+
+            try { tempUIM = ntfTarget.GetComponent<UIManagerNotification>(); }
+            catch { }
+
+            if (EditorGUIUtility.isProSkin == true) { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark"); }
+            else { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light"); }
         }
 
         public override void OnInspectorGUI()
         {
-            GUISkin customSkin;
-            Color defaultColor = GUI.color;
-
-            if (EditorGUIUtility.isProSkin == true)
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark");
-            else
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light");
-
-            GUILayout.BeginHorizontal();
-            GUI.backgroundColor = defaultColor;
-
-            GUILayout.Box(new GUIContent(""), customSkin.FindStyle("Notification Top Header"));
-
-            GUILayout.EndHorizontal();
-            GUILayout.Space(-42);
+            MUIPEditorHandler.DrawComponentHeader(customSkin, "Notification Top Header");
 
             GUIContent[] toolbarTabs = new GUIContent[3];
             toolbarTabs[0] = new GUIContent("Content");
             toolbarTabs[1] = new GUIContent("Resources");
             toolbarTabs[2] = new GUIContent("Settings");
 
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(17);
-
-            currentTab = GUILayout.Toolbar(currentTab, toolbarTabs, customSkin.FindStyle("Tab Indicator"));
-
-            GUILayout.EndHorizontal();
-            GUILayout.Space(-40);
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(17);
+            currentTab = MUIPEditorHandler.DrawTabs(currentTab, toolbarTabs, customSkin);
 
             if (GUILayout.Button(new GUIContent("Content", "Content"), customSkin.FindStyle("Tab Content")))
                 currentTab = 0;
@@ -65,20 +52,18 @@ namespace Michsky.UI.ModernUIPack
             var descriptionObj = serializedObject.FindProperty("descriptionObj");
             var enableTimer = serializedObject.FindProperty("enableTimer");
             var timer = serializedObject.FindProperty("timer");
-            var notificationStyle = serializedObject.FindProperty("notificationStyle");
             var useCustomContent = serializedObject.FindProperty("useCustomContent");
             var useStacking = serializedObject.FindProperty("useStacking");
-            var destroyAfterPlaying = serializedObject.FindProperty("destroyAfterPlaying");
+            var closeBehaviour = serializedObject.FindProperty("closeBehaviour");
+            var startBehaviour = serializedObject.FindProperty("startBehaviour");
+            var onOpen = serializedObject.FindProperty("onOpen");
+            var onClose = serializedObject.FindProperty("onClose");
 
             switch (currentTab)
             {
                 case 0:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Icon"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(icon, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
+                    MUIPEditorHandler.DrawHeader(customSkin, "Content Header", 6);
+                    MUIPEditorHandler.DrawProperty(icon, customSkin, "Icon");
 
                     if (ntfTarget.iconObj != null)
                         ntfTarget.iconObj.sprite = ntfTarget.icon;
@@ -93,12 +78,7 @@ namespace Michsky.UI.ModernUIPack
                         }
                     }
 
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Title"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(title, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
+                    MUIPEditorHandler.DrawProperty(title, customSkin, "Title");
 
                     if (ntfTarget.titleObj != null)
                         ntfTarget.titleObj.text = title.stringValue;
@@ -133,80 +113,76 @@ namespace Michsky.UI.ModernUIPack
                         }
                     }
 
+                    if (ntfTarget.GetComponent<CanvasGroup>().alpha == 0)
+                    {
+                        if (GUILayout.Button("Make It Visible", customSkin.button))
+                        {
+                            ntfTarget.GetComponent<CanvasGroup>().alpha = 1;
+                            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+                        }
+                    }
+
+                    else
+                    {
+                        if (GUILayout.Button("Make It Invisible", customSkin.button))
+                        {
+                            ntfTarget.GetComponent<CanvasGroup>().alpha = 0;
+                            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+                        }
+                    }
+
+                    MUIPEditorHandler.DrawHeader(customSkin, "Events Header", 10);
+                    EditorGUILayout.PropertyField(onOpen, new GUIContent("On Open"), true);
+                    EditorGUILayout.PropertyField(onClose, new GUIContent("On Close"), true);
                     break;
 
                 case 1:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Animator"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(notificationAnimator, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Icon Object"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(iconObj, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Title Object"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(titleObj, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Description Object"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(descriptionObj, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
+                    MUIPEditorHandler.DrawHeader(customSkin, "Core Header", 6);
+                    MUIPEditorHandler.DrawProperty(notificationAnimator, customSkin, "Animator");
+                    MUIPEditorHandler.DrawProperty(iconObj, customSkin, "Icon Object");
+                    MUIPEditorHandler.DrawProperty(titleObj, customSkin, "Title Object");
+                    MUIPEditorHandler.DrawProperty(descriptionObj, customSkin, "Description Object");
                     break;
 
                 case 2:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    useCustomContent.boolValue = GUILayout.Toggle(useCustomContent.boolValue, new GUIContent("Use Custom Content"), customSkin.FindStyle("Toggle"));
-                    useCustomContent.boolValue = GUILayout.Toggle(useCustomContent.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    useStacking.boolValue = GUILayout.Toggle(useStacking.boolValue, new GUIContent("Use Stacking"), customSkin.FindStyle("Toggle"));
-                    useStacking.boolValue = GUILayout.Toggle(useStacking.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    destroyAfterPlaying.boolValue = GUILayout.Toggle(destroyAfterPlaying.boolValue, new GUIContent("Destroy After Playing"), customSkin.FindStyle("Toggle"));
-                    destroyAfterPlaying.boolValue = GUILayout.Toggle(destroyAfterPlaying.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    enableTimer.boolValue = GUILayout.Toggle(enableTimer.boolValue, new GUIContent("Enable Timer"), customSkin.FindStyle("Toggle"));
-                    enableTimer.boolValue = GUILayout.Toggle(enableTimer.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
+                    MUIPEditorHandler.DrawHeader(customSkin, "Options Header", 6);
+                    MUIPEditorHandler.DrawProperty(startBehaviour, customSkin, "Start Behaviour");
+                    MUIPEditorHandler.DrawProperty(closeBehaviour, customSkin, "Close Behaviour");
+                    useCustomContent.boolValue = MUIPEditorHandler.DrawToggle(useCustomContent.boolValue, customSkin, "Use Custom Content");
+                    useStacking.boolValue = MUIPEditorHandler.DrawToggle(useStacking.boolValue, customSkin, "Use Stacking");
+                    enableTimer.boolValue = MUIPEditorHandler.DrawToggle(enableTimer.boolValue, customSkin, "Enable Timer");
 
                     if (enableTimer.boolValue == true)
+                        MUIPEditorHandler.DrawProperty(timer, customSkin, "Timer");
+
+                    MUIPEditorHandler.DrawHeader(customSkin, "UIM Header", 10);
+
+                    if (tempUIM != null)
                     {
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                        MUIPEditorHandler.DrawUIManagerConnectedHeader();
+                        tempUIM.overrideColors = MUIPEditorHandler.DrawToggle(tempUIM.overrideColors, customSkin, "Override Colors");
+                        tempUIM.overrideFonts = MUIPEditorHandler.DrawToggle(tempUIM.overrideFonts, customSkin, "Override Fonts");
 
-                        EditorGUILayout.LabelField(new GUIContent("Timer"), customSkin.FindStyle("Text"), GUILayout.Width(120));
+                        if (GUILayout.Button("Open UI Manager", customSkin.button))
+                            EditorApplication.ExecuteMenuItem("Tools/Modern UI Pack/Show UI Manager");
 
-                        EditorGUILayout.PropertyField(timer, new GUIContent(""));
-                        GUILayout.EndHorizontal();
+                        if (GUILayout.Button("Disable UI Manager Connection", customSkin.button))
+                        {
+                            if (EditorUtility.DisplayDialog("Modern UI Pack", "Are you sure you want to disable UI Manager connection with the object? " +
+                                "This operation cannot be undone.", "Yes", "Cancel"))
+                            {
+                                try { DestroyImmediate(tempUIM); }
+                                catch { Debug.LogError("<b>[Notification Manager]</b> Failed to delete UI Manager connection.", this); }
+                            }
+                        }
                     }
 
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                    else if (tempUIM == null) { MUIPEditorHandler.DrawUIManagerDisconnectedHeader(); }
 
-                    EditorGUILayout.LabelField(new GUIContent("Notification Style"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(notificationStyle, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
                     break;
             }
 
+            this.Repaint();
             serializedObject.ApplyModifiedProperties();
         }
     }

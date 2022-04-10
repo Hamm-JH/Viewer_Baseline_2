@@ -1,77 +1,135 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace Michsky.UI.ModernUIPack
 {
-    public class DemoListShadow : MonoBehaviour
+    public class DemoListShadow : MonoBehaviour, IBeginDragHandler
     {
-        public Scrollbar listScrollbar;
-        public bool isTop;
+        [Header("Resources")]
+        [SerializeField] private Scrollbar listScrollbar;
+        [SerializeField] private CanvasGroup leftCG;
+        [SerializeField] private CanvasGroup rightCG;
 
-        bool enableAnim = false;
-        Animator shadowAnimator;
+        [Header("Settings")]
+        [SerializeField] private float scrollTime = 5;
+        [SerializeField] private float transitionSpeed = 4;
 
-        void Start()
+        void Awake()
         {
-            shadowAnimator = gameObject.GetComponent<Animator>();
-            listScrollbar.value = 1;
-
-            if (isTop == false)
-                shadowAnimator.Play("Out");
-            else
-                shadowAnimator.Play("In");
+            CheckForValue(0);
         }
 
-        void Update()
+        public void CheckForValue(float value)
         {
-            if (isTop == true)
+            if (value > 0.05)
             {
-                if (listScrollbar.value != 1 && enableAnim == true)
-                {
-                    shadowAnimator.Play("In");
-                    listScrollbar.value = Mathf.Lerp(listScrollbar.value, 1, 0.25f);
-                }
-
-                if (listScrollbar.value == 1 || listScrollbar.value >= 0.99f)
-                {
-                    listScrollbar.value = 1;
-                    shadowAnimator.Play("Out");
-                    enableAnim = false;
-                }
-
-                else if(listScrollbar.value != 1)
-                    shadowAnimator.Play("In");
-
+                StopCoroutine("LeftCGFadeOut");
+                StartCoroutine("LeftCGFadeIn");
             }
 
             else
             {
-                if (listScrollbar.value != 0 && enableAnim == true)
-                {
-                    shadowAnimator.Play("In");
-                    listScrollbar.value = Mathf.Lerp(listScrollbar.value, 0, 0.25f);
-                }
+                StopCoroutine("LeftCGFadeIn");
+                StartCoroutine("LeftCGFadeOut");
+            }
 
-                if (listScrollbar.value == 0 || listScrollbar.value <= 0.01f)
-                {
-                    listScrollbar.value = 0;
-                    shadowAnimator.Play("Out");
-                    enableAnim = false;
-                }
+            if (value < 0.95)
+            {
+                StopCoroutine("RightCGFadeOut");
+                StartCoroutine("RightCGFadeIn");
+            }
 
-                else if (listScrollbar.value != 0)
-                    shadowAnimator.Play("In");
+            else
+            {
+                StopCoroutine("RightCGFadeIn");
+                StartCoroutine("RightCGFadeOut");
             }
         }
 
-        public void ScrollUp()
+        public void ScrollUp() { StopCoroutine("ScrollDownHelper"); StartCoroutine("ScrollUpHelper"); }
+        public void ScrollDown() { StopCoroutine("ScrollUpHelper"); StartCoroutine("ScrollDownHelper"); }
+        public void OnBeginDrag(PointerEventData data) { StopCoroutine("ScrollUpHelper"); StopCoroutine("ScrollDownHelper"); }
+
+        IEnumerator ScrollUpHelper()
         {
-            enableAnim = true;
+            float elapsedTime = 0;
+
+            while (elapsedTime < scrollTime)
+            {
+                listScrollbar.value = Mathf.Lerp(listScrollbar.value, 0, elapsedTime / scrollTime);
+                elapsedTime += Time.unscaledDeltaTime;
+                yield return new WaitForEndOfFrame();
+            }
         }
 
-        public void ScrollDown()
+        IEnumerator ScrollDownHelper()
         {
-            enableAnim = true;
+            float elapsedTime = 0;
+
+            while (elapsedTime < scrollTime)
+            {
+                listScrollbar.value = Mathf.Lerp(listScrollbar.value, 1, elapsedTime / scrollTime);
+                elapsedTime += Time.unscaledDeltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
+        IEnumerator LeftCGFadeIn()
+        {
+            leftCG.interactable = true;
+            leftCG.blocksRaycasts = true;
+
+            while (leftCG.alpha < 0.99f)
+            {
+                leftCG.alpha += Time.unscaledDeltaTime * transitionSpeed;
+                yield return new WaitForEndOfFrame();
+            }
+
+            leftCG.alpha = 1;
+        }
+
+        IEnumerator LeftCGFadeOut()
+        {
+            leftCG.interactable = false;
+            leftCG.blocksRaycasts = false;
+
+            while (leftCG.alpha > 0.01f)
+            {
+                leftCG.alpha -= Time.unscaledDeltaTime * transitionSpeed;
+                yield return new WaitForEndOfFrame();
+            }
+
+            leftCG.alpha = 0;
+        }
+
+        IEnumerator RightCGFadeIn()
+        {
+            rightCG.interactable = true;
+            rightCG.blocksRaycasts = true;
+
+            while (rightCG.alpha < 0.99f)
+            {
+                rightCG.alpha += Time.unscaledDeltaTime * transitionSpeed;
+                yield return new WaitForEndOfFrame();
+            }
+
+            rightCG.alpha = 1;
+        }
+
+        IEnumerator RightCGFadeOut()
+        {
+            rightCG.interactable = false;
+            rightCG.blocksRaycasts = false;
+
+            while (rightCG.alpha > 0.01f)
+            {
+                rightCG.alpha -= Time.unscaledDeltaTime * transitionSpeed;
+                yield return new WaitForEndOfFrame();
+            }
+
+            rightCG.alpha = 0;
         }
     }
 }

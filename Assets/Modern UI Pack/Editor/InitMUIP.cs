@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using UnityEngine;
+using UnityEditor;
 
 namespace Michsky.UI.ModernUIPack
 {
@@ -9,19 +10,25 @@ namespace Michsky.UI.ModernUIPack
         {
             static InitOnLoad()
             {
-                if (!EditorPrefs.HasKey("MUIPv4.Installed"))
+                if (!EditorPrefs.HasKey("MUIPv5.Installed"))
                 {
-                    EditorPrefs.SetInt("MUIPv4.Installed", 1);
+                    EditorPrefs.SetInt("MUIPv5.Installed", 1);
                     EditorUtility.DisplayDialog("Hello there!", "Thank you for purchasing Modern UI Pack." +
-                        "\r\rFirst of all, import TextMesh Pro from Package Manager if you haven't already." +
-                        "\r\rTo change UI element values, go to Window > Tools > Modern UI Pack > Show UI Manager." +
-                        "\r\rYou can contact me at support@michsky.com for support.", "Got it!");
+                        "\r\rTo use the UI Manager, go to Tools > Modern UI Pack > Show UI Manager." +
+                        "\r\rIf you need help, feel free to contact us through our support channels or Discord.", "Got it!");
                 }
 
-                if (!EditorPrefs.HasKey("MUIP.ObjectCreator.Upgraded"))
+                if (!EditorPrefs.HasKey("MUIP.HasCustomEditorData"))
                 {
-                    EditorPrefs.SetInt("MUIP.ObjectCreator.Upgraded", 1);
-                    EditorPrefs.SetString("UIManager.RootFolder", "Modern UI Pack/Prefabs/");
+                    EditorPrefs.SetInt("MUIP.HasCustomEditorData", 1);
+
+                    string mainPath = AssetDatabase.GetAssetPath(Resources.Load("MUIP Manager"));
+                    mainPath = mainPath.Replace("Resources/MUIP Manager.asset", "").Trim();
+                    string darkPath = mainPath + "Skins/MUI Skin Dark.guiskin";
+                    string lightPath = mainPath + "Skins/MUI Skin Light.guiskin";
+
+                    EditorPrefs.SetString("MUIP.CustomEditorDark", darkPath);
+                    EditorPrefs.SetString("MUIP.CustomEditorLight", lightPath);
                 }
             }
         }

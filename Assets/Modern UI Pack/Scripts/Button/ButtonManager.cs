@@ -4,11 +4,15 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
 using UnityEngine.EventSystems;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 namespace Michsky.UI.ModernUIPack
 {
+    [ExecuteInEditMode]
     [RequireComponent(typeof(Button))]
-    public class ButtonManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+    public class ButtonManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, ISelectHandler, IDeselectHandler
     {
         // Content
         public string buttonText = "Button";
@@ -25,7 +29,7 @@ namespace Michsky.UI.ModernUIPack
         public GameObject rippleParent;
 
         // Settings
-        public AnimationSolution animationSolution = AnimationSolution.SCRIPT;
+        public AnimationSolution animationSolution = AnimationSolution.Script;
         [Range(0.25f, 15)]  public float fadingMultiplier = 8;
         public bool useCustomContent = false;
         public bool enableButtonSounds = false;
@@ -34,6 +38,7 @@ namespace Michsky.UI.ModernUIPack
         public bool useRipple = true;
 
         // Ripple
+        public RippleUpdateMode rippleUpdateMode = RippleUpdateMode.UnscaledTime;
         public Sprite rippleShape;
         [Range(0.1f, 5)] public float speed = 1f;
         [Range(0.5f, 25)] public float maxSize = 4f;
@@ -43,20 +48,35 @@ namespace Michsky.UI.ModernUIPack
         public bool centered = false;
         bool isPointerOn;
 
-        CanvasGroup normalCG;
-        CanvasGroup highlightedCG;
+        public bool isPreset;
         float currentNormalValue;
         float currenthighlightedValue;
+        CanvasGroup normalCG;
+        CanvasGroup highlightedCG;
 
-        public enum AnimationSolution
+        public enum AnimationSolution { Animator, Script }
+        public enum RippleUpdateMode { Normal, UnscaledTime }
+
+        void OnEnable()
         {
-            ANIMATOR,
-            SCRIPT
+            if (normalCG == null && highlightedCG == null)
+                return;
+
+            normalCG.alpha = 1;
+            highlightedCG.alpha = 0;
         }
 
-        void Start()
+        void Awake()
         {
-            if (animationSolution == AnimationSolution.SCRIPT)
+#if UNITY_EDITOR
+            if (Application.isPlaying == false)
+            {
+                if (useCustomContent == false) { UpdateUI(); }
+                return;
+            }
+#endif
+
+            if (animationSolution == AnimationSolution.Script)
             {
                 normalCG = transform.Find("Normal").GetComponent<CanvasGroup>();
                 highlightedCG = transform.Find("Highlighted").GetComponent<CanvasGroup>();
@@ -65,9 +85,7 @@ namespace Michsky.UI.ModernUIPack
                 Destroy(tempAnimator);
             }
 
-            if (buttonVar == null)
-                buttonVar = gameObject.GetComponent<Button>();
-
+            if (buttonVar == null) { buttonVar = gameObject.GetComponent<Button>(); }
             buttonVar.onClick.AddListener(delegate { clickEvent.Invoke(); });
 
             if (enableButtonSounds == true && useClickSound == true)
@@ -76,16 +94,14 @@ namespace Michsky.UI.ModernUIPack
             if (useCustomContent == false)
                 UpdateUI();
 
-            if (useRipple == true && rippleParent != null)
-                rippleParent.SetActive(false);
-            else if (useRipple == false && rippleParent != null)
-                Destroy(rippleParent);
+            if (useRipple == true && rippleParent != null) { rippleParent.SetActive(false); }
+            else if (useRipple == false && rippleParent != null) { Destroy(rippleParent); }
         }
 
         public void UpdateUI()
         {
-            normalText.text = buttonText;
-            highlightedText.text = buttonText;
+            if (normalText != null) { normalText.text = buttonText; }
+            if (normalText != null) { highlightedText.text = buttonText; }
         }
 
         public void CreateRipple(Vector2 pos)
@@ -93,36 +109,38 @@ namespace Michsky.UI.ModernUIPack
             if (rippleParent != null)
             {
                 GameObject rippleObj = new GameObject();
-                rippleObj.AddComponent<Ripple>();
                 rippleObj.AddComponent<Image>();
                 rippleObj.GetComponent<Image>().sprite = rippleShape;
                 rippleObj.name = "Ripple";
                 rippleParent.SetActive(true);
                 rippleObj.transform.SetParent(rippleParent.transform);
 
-                if (renderOnTop == true)
-                    rippleParent.transform.SetAsLastSibling();
-                else
-                    rippleParent.transform.SetAsFirstSibling();
+                if (renderOnTop == true) { rippleParent.transform.SetAsLastSibling(); }
+                else { rippleParent.transform.SetAsFirstSibling(); }
 
-                if (centered == true)
-                    rippleObj.transform.localPosition = new Vector2(0f, 0f);
-                else
-                    rippleObj.transform.position = pos;
+                if (centered == true) { rippleObj.transform.localPosition = new Vector2(0f, 0f); }
+                else { rippleObj.transform.position = pos; }
 
-                rippleObj.GetComponent<Ripple>().speed = speed;
-                rippleObj.GetComponent<Ripple>().maxSize = maxSize;
-                rippleObj.GetComponent<Ripple>().startColor = startColor;
-                rippleObj.GetComponent<Ripple>().transitionColor = transitionColor;
+                rippleObj.AddComponent<Ripple>();
+                Ripple tempRipple = rippleObj.GetComponent<Ripple>();
+                tempRipple.speed = speed;
+                tempRipple.maxSize = maxSize;
+                tempRipple.startColor = startColor;
+                tempRipple.transitionColor = transitionColor;
+
+                if (rippleUpdateMode == RippleUpdateMode.Normal) { tempRipple.unscaledTime = false; }
+                else { tempRipple.unscaledTime = true; }
             }
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
             if (useRipple == true && isPointerOn == true)
+#if ENABLE_LEGACY_INPUT_MANAGER
                 CreateRipple(Input.mousePosition);
-            else if (useRipple == false)
-                this.enabled = false;
+#elif ENABLE_INPUT_SYSTEM
+                CreateRipple(Mouse.current.position.ReadValue());
+#endif
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -133,7 +151,7 @@ namespace Michsky.UI.ModernUIPack
             hoverEvent.Invoke();
             isPointerOn = true;
 
-            if (animationSolution == AnimationSolution.SCRIPT && buttonVar.interactable == true)
+            if (animationSolution == AnimationSolution.Script && buttonVar.interactable == true)
                 StartCoroutine("FadeIn");
         }
 
@@ -141,7 +159,19 @@ namespace Michsky.UI.ModernUIPack
         {
             isPointerOn = false;
 
-            if (animationSolution == AnimationSolution.SCRIPT && buttonVar.interactable == true)
+            if (animationSolution == AnimationSolution.Script && buttonVar.interactable == true)
+                StartCoroutine("FadeOut");
+        }
+
+        public void OnSelect(BaseEventData eventData)
+        {
+            if (animationSolution == AnimationSolution.Script && buttonVar.interactable == true)
+                StartCoroutine("FadeIn");
+        }
+
+        public void OnDeselect(BaseEventData eventData)
+        {
+            if (animationSolution == AnimationSolution.Script && buttonVar.interactable == true)
                 StartCoroutine("FadeOut");
         }
 
@@ -153,15 +183,13 @@ namespace Michsky.UI.ModernUIPack
 
             while (currenthighlightedValue <= 1)
             {
-                currentNormalValue -= Time.deltaTime * fadingMultiplier;
+                currentNormalValue -= Time.unscaledDeltaTime * fadingMultiplier;
                 normalCG.alpha = currentNormalValue;
               
-                currenthighlightedValue += Time.deltaTime * fadingMultiplier;
+                currenthighlightedValue += Time.unscaledDeltaTime * fadingMultiplier;
                 highlightedCG.alpha = currenthighlightedValue;
 
-                if (normalCG.alpha >= 1)
-                    StopCoroutine("FadeIn");
-
+                if (normalCG.alpha >= 1) { StopCoroutine("FadeIn"); }
                 yield return null;
             }
         }
@@ -174,15 +202,13 @@ namespace Michsky.UI.ModernUIPack
 
             while (currentNormalValue >= 0)
             {
-                currentNormalValue += Time.deltaTime * fadingMultiplier;
+                currentNormalValue += Time.unscaledDeltaTime * fadingMultiplier;
                 normalCG.alpha = currentNormalValue;
 
-                currenthighlightedValue -= Time.deltaTime * fadingMultiplier;
+                currenthighlightedValue -= Time.unscaledDeltaTime * fadingMultiplier;
                 highlightedCG.alpha = currenthighlightedValue;
 
-                if (highlightedCG.alpha <= 0)
-                    StopCoroutine("FadeOut");
-
+                if (highlightedCG.alpha <= 0) { StopCoroutine("FadeOut"); }
                 yield return null;
             }
         }

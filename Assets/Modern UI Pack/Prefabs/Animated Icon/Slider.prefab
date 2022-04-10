@@ -321,14 +321,13 @@ GameObject:
   - component: {fileID: 224087566369254132}
   - component: {fileID: 222790239124694484}
   - component: {fileID: 114539059903153134}
-  - component: {fileID: 114675705703928074}
-  - component: {fileID: 114549160794140110}
   - component: {fileID: 114054721689108648}
+  - component: {fileID: 114549160794140110}
   - component: {fileID: 95555734125939206}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2800000, guid: 3ed3bfb48269e2646b4dc2130299c956, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -373,7 +372,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playType: 0
---- !u!114 &114675705703928074
+  iconAnimator: {fileID: 95555734125939206}
+--- !u!114 &114054721689108648
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -382,40 +382,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1740047319722890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: fa9c8e8ebd8e36245bbac0e6d6979363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Highlighted
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 114549160794140110}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
+  UIManagerAsset: {fileID: 11400000, guid: 2a619a9609984be49b53b928dd94e61b, type: 2}
+  webglMode: 0
+  images:
+  - {fileID: 1676020211685902}
+  - {fileID: 1918215307070548}
+  - {fileID: 1203141250869986}
+  - {fileID: 1907325662360126}
+  - {fileID: 1766082104205900}
+  - {fileID: 1635327481670724}
+  imagesWithAlpha: []
 --- !u!114 &114549160794140110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,27 +424,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &114054721689108648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1740047319722890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa9c8e8ebd8e36245bbac0e6d6979363, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UIManagerAsset: {fileID: 11400000, guid: 2a619a9609984be49b53b928dd94e61b, type: 2}
-  images:
-  - {fileID: 1676020211685902}
-  - {fileID: 1918215307070548}
-  - {fileID: 1203141250869986}
-  - {fileID: 1907325662360126}
-  - {fileID: 1766082104205900}
-  - {fileID: 1635327481670724}
-  imagesWithAlpha: []
 --- !u!95 &95555734125939206
 Animator:
   serializedVersion: 3

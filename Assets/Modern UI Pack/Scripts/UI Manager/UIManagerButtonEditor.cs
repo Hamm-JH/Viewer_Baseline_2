@@ -17,7 +17,7 @@ namespace Michsky.UI.ModernUIPack
 
             EditorGUI.indentLevel++;
 
-            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.BASIC)))
+            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.Basic)))
             {
                 if (group.visible == true)
                 {
@@ -26,7 +26,7 @@ namespace Michsky.UI.ModernUIPack
                 }
             }
 
-            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.BASIC_ONLY_ICON)))
+            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.BasicOnlyIcon)))
             {
                 if (group.visible == true)
                 {
@@ -35,7 +35,7 @@ namespace Michsky.UI.ModernUIPack
                 }
             }
 
-            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.BASIC_WITH_ICON)))
+            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.BasicWithIcon)))
             {
                 if (group.visible == true)
                 {
@@ -45,7 +45,7 @@ namespace Michsky.UI.ModernUIPack
                 }
             }
 
-            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.BASIC_OUTLINE)))
+            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.BasicOutline)))
             {
                 if (group.visible == true)
                 {
@@ -56,7 +56,7 @@ namespace Michsky.UI.ModernUIPack
                 }
             }
 
-            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.BASIC_OUTLINE_ONLY_ICON)))
+            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.BasicOutlineOnlyIcon)))
             {
                 if (group.visible == true)
                 {
@@ -67,7 +67,7 @@ namespace Michsky.UI.ModernUIPack
                 }
             }
 
-            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.BASIC_OUTLINE_WITH_ICON)))
+            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.BasicOutlineWithIcon)))
             {
                 if (group.visible == true)
                 {
@@ -80,7 +80,7 @@ namespace Michsky.UI.ModernUIPack
                 }
             }
 
-            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.RADIAL_ONLY_ICON)))
+            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.RadialOnlyIcon)))
             {
                 if (group.visible == true)
                 {
@@ -89,7 +89,7 @@ namespace Michsky.UI.ModernUIPack
                 }
             }
 
-            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.RADIAL_OUTLINE_ONLY_ICON)))
+            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.RadialOutlineOnlyIcon)))
             {
                 if (group.visible == true)
                 {
@@ -100,7 +100,7 @@ namespace Michsky.UI.ModernUIPack
                 }
             }
 
-            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.ROUNDED)))
+            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.Rounded)))
             {
                 if (group.visible == true)
                 {
@@ -109,7 +109,7 @@ namespace Michsky.UI.ModernUIPack
                 }
             }
 
-            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.ROUNDED_OUTLINE)))
+            using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(UIManagerButton.buttonType == UIManagerButton.ButtonType.RoundedOutline)))
             {
                 if (group.visible == true)
                 {

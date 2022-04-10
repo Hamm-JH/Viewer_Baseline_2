@@ -35,19 +35,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: editorHints
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: optimizeUpdating
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: changeRootFolder
     value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: rootFolder
-    value: Modern UI Pack/Prefabs/
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: animatedIconColor.r

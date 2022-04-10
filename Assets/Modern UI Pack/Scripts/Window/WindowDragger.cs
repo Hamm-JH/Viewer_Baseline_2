@@ -5,11 +5,11 @@ namespace Michsky.UI.ModernUIPack
 {
     public class WindowDragger : UIBehaviour, IBeginDragHandler, IDragHandler
     {
-        [Header("RESOURCES")]
+        [Header("Resources")]
         public RectTransform dragArea;
         public RectTransform dragObject;
 
-        [Header("SETTINGS")]
+        [Header("Settings")]
         public bool topOnClick = true;
 
         private Vector2 originalLocalPointerPosition;

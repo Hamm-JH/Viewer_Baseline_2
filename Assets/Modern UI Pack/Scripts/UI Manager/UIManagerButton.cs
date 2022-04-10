@@ -1,5 +1,4 @@
-﻿#if UNITY_EDITOR
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -8,9 +7,12 @@ namespace Michsky.UI.ModernUIPack
     [ExecuteInEditMode]
     public class UIManagerButton : MonoBehaviour
     {
-        [Header("SETTINGS")]
+        [Header("Settings")]
         public UIManager UIManagerAsset;
         public ButtonType buttonType;
+        public bool webglMode = false;
+        public bool overrideColors = false;
+        public bool overrideFonts = false;
 
         // Basic Resources
         [HideInInspector] public Image basicFilled;
@@ -67,24 +69,26 @@ namespace Michsky.UI.ModernUIPack
 
         public enum ButtonType
         {
-            BASIC,
-            BASIC_ONLY_ICON,
-            BASIC_WITH_ICON,
-            BASIC_OUTLINE,
-            BASIC_OUTLINE_ONLY_ICON,
-            BASIC_OUTLINE_WITH_ICON,
-            RADIAL_ONLY_ICON,
-            RADIAL_OUTLINE_ONLY_ICON,
-            ROUNDED,
-            ROUNDED_OUTLINE,
+            Basic,
+            BasicOnlyIcon,
+            BasicWithIcon,
+            BasicOutline,
+            BasicOutlineOnlyIcon,
+            BasicOutlineWithIcon,
+            RadialOnlyIcon,
+            RadialOutlineOnlyIcon,
+            Rounded,
+            RoundedOutline,
         }
 
         void Awake()
         {
+            if (Application.isPlaying && webglMode == true)
+                return;
+
             try
             {
-                if (UIManagerAsset == null)
-                    UIManagerAsset = Resources.Load<UIManager>("MUIP Manager");
+                if (UIManagerAsset == null) { UIManagerAsset = Resources.Load<UIManager>("MUIP Manager"); }
 
                 this.enabled = true;
 
@@ -95,10 +99,7 @@ namespace Michsky.UI.ModernUIPack
                 }
             }
 
-            catch
-            {
-                Debug.Log("<b>[Modern UI Pack]</b> No UI Manager found, assign it manually.", this);
-            }
+            catch { Debug.Log("<b>[Modern UI Pack]</b> No UI Manager found, assign it manually.", this); }
         }
 
         void LateUpdate()
@@ -112,46 +113,70 @@ namespace Michsky.UI.ModernUIPack
 
         void UpdateButton()
         {
+            if (Application.isPlaying && webglMode == true)
+                return;
+
             try
             {
-                if (UIManagerAsset.buttonThemeType == UIManager.ButtonThemeType.BASIC)
+                if (UIManagerAsset.buttonThemeType == UIManager.ButtonThemeType.Basic)
                 {
-                    if (buttonType == ButtonType.BASIC)
+                    if (buttonType == ButtonType.Basic)
                     {
-                        basicFilled.color = UIManagerAsset.buttonBorderColor;
-                        basicText.color = UIManagerAsset.buttonFilledColor;
-                        basicText.font = UIManagerAsset.buttonFont;
-                        basicText.fontSize = UIManagerAsset.buttonFontSize;
+                        if (overrideColors == false)
+                        {
+                            basicFilled.color = UIManagerAsset.buttonBorderColor;
+                            basicText.color = UIManagerAsset.buttonFilledColor;
+                        }
+
+                        if (overrideFonts == false)
+                        {
+                            basicText.font = UIManagerAsset.buttonFont;
+                            basicText.fontSize = UIManagerAsset.buttonFontSize;
+                        }
                     }
 
-                    else if (buttonType == ButtonType.BASIC_ONLY_ICON)
+                    else if (buttonType == ButtonType.BasicOnlyIcon && overrideColors == false)
                     {
                         basicOnlyIconFilled.color = UIManagerAsset.buttonBorderColor;
                         basicOnlyIconIcon.color = UIManagerAsset.buttonFilledColor;
                     }
 
-                    else if (buttonType == ButtonType.BASIC_WITH_ICON)
+                    else if (buttonType == ButtonType.BasicWithIcon)
                     {
-                        basicWithIconFilled.color = UIManagerAsset.buttonBorderColor;
-                        basicWithIconIcon.color = UIManagerAsset.buttonFilledColor;
-                        basicWithIconText.color = UIManagerAsset.buttonFilledColor;
-                        basicWithIconText.font = UIManagerAsset.buttonFont;
-                        basicWithIconText.fontSize = UIManagerAsset.buttonFontSize;
+                        if (overrideColors == false)
+                        {
+                            basicWithIconFilled.color = UIManagerAsset.buttonBorderColor;
+                            basicWithIconIcon.color = UIManagerAsset.buttonFilledColor;
+                            basicWithIconText.color = UIManagerAsset.buttonFilledColor;
+                        }
+
+                        if (overrideFonts == false)
+                        {
+                            basicWithIconText.font = UIManagerAsset.buttonFont;
+                            basicWithIconText.fontSize = UIManagerAsset.buttonFontSize;
+                        }
                     }
 
-                    else if (buttonType == ButtonType.BASIC_OUTLINE)
+                    else if (buttonType == ButtonType.BasicOutline)
                     {
-                        basicOutlineBorder.color = UIManagerAsset.buttonBorderColor;
-                        basicOutlineFilled.color = UIManagerAsset.buttonBorderColor;
-                        basicOutlineText.color = UIManagerAsset.buttonBorderColor;
-                        basicOutlineTextHighligted.color = UIManagerAsset.buttonFilledColor;
-                        basicOutlineText.font = UIManagerAsset.buttonFont;
-                        basicOutlineTextHighligted.font = UIManagerAsset.buttonFont;
-                        basicOutlineText.fontSize = UIManagerAsset.buttonFontSize;
-                        basicOutlineTextHighligted.fontSize = UIManagerAsset.buttonFontSize;
+                        if (overrideColors == false)
+                        {
+                            basicOutlineBorder.color = UIManagerAsset.buttonBorderColor;
+                            basicOutlineFilled.color = UIManagerAsset.buttonBorderColor;
+                            basicOutlineText.color = UIManagerAsset.buttonBorderColor;
+                            basicOutlineTextHighligted.color = UIManagerAsset.buttonFilledColor;
+                        }
+
+                        if (overrideFonts == false)
+                        {
+                            basicOutlineText.font = UIManagerAsset.buttonFont;
+                            basicOutlineTextHighligted.font = UIManagerAsset.buttonFont;
+                            basicOutlineText.fontSize = UIManagerAsset.buttonFontSize;
+                            basicOutlineTextHighligted.fontSize = UIManagerAsset.buttonFontSize;
+                        }
                     }
 
-                    else if (buttonType == ButtonType.BASIC_OUTLINE_ONLY_ICON)
+                    else if (buttonType == ButtonType.BasicOutlineOnlyIcon && overrideColors == false)
                     {
                         basicOutlineOOBorder.color = UIManagerAsset.buttonBorderColor;
                         basicOutlineOOFilled.color = UIManagerAsset.buttonBorderColor;
@@ -159,28 +184,35 @@ namespace Michsky.UI.ModernUIPack
                         basicOutlineOOIconHighlighted.color = UIManagerAsset.buttonFilledColor;
                     }
 
-                    else if (buttonType == ButtonType.BASIC_OUTLINE_WITH_ICON)
+                    else if (buttonType == ButtonType.BasicOutlineWithIcon)
                     {
-                        basicOutlineWOBorder.color = UIManagerAsset.buttonBorderColor;
-                        basicOutlineWOFilled.color = UIManagerAsset.buttonBorderColor;
-                        basicOutlineWOIcon.color = UIManagerAsset.buttonBorderColor;
-                        basicOutlineWOIconHighlighted.color = UIManagerAsset.buttonFilledColor;
-                        basicOutlineWOText.color = UIManagerAsset.buttonBorderColor;
-                        basicOutlineWOTextHighligted.color = UIManagerAsset.buttonFilledColor;
-                        basicOutlineWOText.font = UIManagerAsset.buttonFont;
-                        basicOutlineWOTextHighligted.font = UIManagerAsset.buttonFont;
-                        basicOutlineWOText.fontSize = UIManagerAsset.buttonFontSize;
-                        basicOutlineWOTextHighligted.fontSize = UIManagerAsset.buttonFontSize;
+                        if (overrideColors == false)
+                        {
+                            basicOutlineWOBorder.color = UIManagerAsset.buttonBorderColor;
+                            basicOutlineWOFilled.color = UIManagerAsset.buttonBorderColor;
+                            basicOutlineWOIcon.color = UIManagerAsset.buttonBorderColor;
+                            basicOutlineWOIconHighlighted.color = UIManagerAsset.buttonFilledColor;
+                            basicOutlineWOText.color = UIManagerAsset.buttonBorderColor;
+                            basicOutlineWOTextHighligted.color = UIManagerAsset.buttonFilledColor;
+                        }
+
+                        if (overrideFonts == false)
+                        {
+                            basicOutlineWOText.font = UIManagerAsset.buttonFont;
+                            basicOutlineWOTextHighligted.font = UIManagerAsset.buttonFont;
+                            basicOutlineWOText.fontSize = UIManagerAsset.buttonFontSize;
+                            basicOutlineWOTextHighligted.fontSize = UIManagerAsset.buttonFontSize;
+                        }
 
                     }
 
-                    else if (buttonType == ButtonType.RADIAL_ONLY_ICON)
+                    else if (buttonType == ButtonType.RadialOnlyIcon && overrideColors == false)
                     {
                         radialOOBackground.color = UIManagerAsset.buttonBorderColor;
                         radialOOIcon.color = UIManagerAsset.buttonFilledColor;
                     }
 
-                    else if (buttonType == ButtonType.RADIAL_OUTLINE_ONLY_ICON)
+                    else if (buttonType == ButtonType.RadialOutlineOnlyIcon && overrideColors == false)
                     {
                         radialOutlineOOBorder.color = UIManagerAsset.buttonBorderColor;
                         radialOutlineOOFilled.color = UIManagerAsset.buttonBorderColor;
@@ -188,65 +220,100 @@ namespace Michsky.UI.ModernUIPack
                         radialOutlineOOIconHighlighted.color = UIManagerAsset.buttonFilledColor;
                     }
 
-                    else if (buttonType == ButtonType.ROUNDED)
+                    else if (buttonType == ButtonType.Rounded)
                     {
-                        roundedBackground.color = UIManagerAsset.buttonBorderColor;
-                        roundedText.color = UIManagerAsset.buttonFilledColor;
-                        roundedText.font = UIManagerAsset.buttonFont;
-                        roundedText.fontSize = UIManagerAsset.buttonFontSize;
+                        if (overrideColors == false)
+                        {
+                            roundedBackground.color = UIManagerAsset.buttonBorderColor;
+                            roundedText.color = UIManagerAsset.buttonFilledColor;
+                        }
+
+                        if (overrideFonts == false)
+                        {
+                            roundedText.font = UIManagerAsset.buttonFont;
+                            roundedText.fontSize = UIManagerAsset.buttonFontSize;
+                        }
                     }
 
-                    else if (buttonType == ButtonType.ROUNDED_OUTLINE)
+                    else if (buttonType == ButtonType.RoundedOutline)
                     {
-                        roundedOutlineBorder.color = UIManagerAsset.buttonBorderColor;
-                        roundedOutlineFilled.color = UIManagerAsset.buttonBorderColor;
-                        roundedOutlineText.color = UIManagerAsset.buttonBorderColor;
-                        roundedOutlineTextHighligted.color = UIManagerAsset.buttonFilledColor;
-                        roundedOutlineText.font = UIManagerAsset.buttonFont;
-                        roundedOutlineTextHighligted.font = UIManagerAsset.buttonFont;
-                        roundedOutlineText.fontSize = UIManagerAsset.buttonFontSize;
-                        roundedOutlineTextHighligted.fontSize = UIManagerAsset.buttonFontSize;
+                        if (overrideColors == false)
+                        {
+                            roundedOutlineBorder.color = UIManagerAsset.buttonBorderColor;
+                            roundedOutlineFilled.color = UIManagerAsset.buttonBorderColor;
+                            roundedOutlineText.color = UIManagerAsset.buttonBorderColor;
+                            roundedOutlineTextHighligted.color = UIManagerAsset.buttonFilledColor;
+                        }
+
+                        if (overrideFonts == false)
+                        {
+                            roundedOutlineText.font = UIManagerAsset.buttonFont;
+                            roundedOutlineTextHighligted.font = UIManagerAsset.buttonFont;
+                            roundedOutlineText.fontSize = UIManagerAsset.buttonFontSize;
+                            roundedOutlineTextHighligted.fontSize = UIManagerAsset.buttonFontSize;
+                        }
                     }
                 }
 
-                else if (UIManagerAsset.buttonThemeType == UIManager.ButtonThemeType.CUSTOM)
+                else if (UIManagerAsset.buttonThemeType == UIManager.ButtonThemeType.Custom)
                 {
-                    if (buttonType == ButtonType.BASIC)
+                    if (buttonType == ButtonType.Basic)
                     {
-                        basicFilled.color = UIManagerAsset.buttonFilledColor;
-                        basicText.color = UIManagerAsset.buttonTextBasicColor;
-                        basicText.font = UIManagerAsset.buttonFont;
-                        basicText.fontSize = UIManagerAsset.buttonFontSize;
+                        if (overrideColors == false)
+                        {
+                            basicFilled.color = UIManagerAsset.buttonFilledColor;
+                            basicText.color = UIManagerAsset.buttonTextBasicColor;
+                        }
+
+                        if (overrideFonts == false)
+                        {
+                            basicText.font = UIManagerAsset.buttonFont;
+                            basicText.fontSize = UIManagerAsset.buttonFontSize;
+                        }
                     }
 
-                    else if (buttonType == ButtonType.BASIC_ONLY_ICON)
+                    else if (buttonType == ButtonType.BasicOnlyIcon && overrideColors == false)
                     {
                         basicOnlyIconFilled.color = UIManagerAsset.buttonFilledColor;
                         basicOnlyIconIcon.color = UIManagerAsset.buttonIconBasicColor;
                     }
 
-                    else if (buttonType == ButtonType.BASIC_WITH_ICON)
+                    else if (buttonType == ButtonType.BasicWithIcon)
                     {
-                        basicWithIconFilled.color = UIManagerAsset.buttonFilledColor;
-                        basicWithIconIcon.color = UIManagerAsset.buttonIconBasicColor;
-                        basicWithIconText.color = UIManagerAsset.buttonTextBasicColor;
-                        basicWithIconText.font = UIManagerAsset.buttonFont;
-                        basicWithIconText.fontSize = UIManagerAsset.buttonFontSize;
+                        if (overrideColors == false)
+                        {
+                            basicWithIconFilled.color = UIManagerAsset.buttonFilledColor;
+                            basicWithIconIcon.color = UIManagerAsset.buttonIconBasicColor;
+                            basicWithIconText.color = UIManagerAsset.buttonTextBasicColor;
+                        }
+
+                        if (overrideFonts == false)
+                        {
+                            basicWithIconText.font = UIManagerAsset.buttonFont;
+                            basicWithIconText.fontSize = UIManagerAsset.buttonFontSize;
+                        }
                     }
 
-                    else if (buttonType == ButtonType.BASIC_OUTLINE)
+                    else if (buttonType == ButtonType.BasicOutline)
                     {
-                        basicOutlineBorder.color = UIManagerAsset.buttonBorderColor;
-                        basicOutlineFilled.color = UIManagerAsset.buttonFilledColor;
-                        basicOutlineText.color = UIManagerAsset.buttonTextColor;
-                        basicOutlineTextHighligted.color = UIManagerAsset.buttonTextHighlightedColor;
-                        basicOutlineText.font = UIManagerAsset.buttonFont;
-                        basicOutlineTextHighligted.font = UIManagerAsset.buttonFont;
-                        basicOutlineText.fontSize = UIManagerAsset.buttonFontSize;
-                        basicOutlineTextHighligted.fontSize = UIManagerAsset.buttonFontSize;
+                        if (overrideColors == false)
+                        {
+                            basicOutlineBorder.color = UIManagerAsset.buttonBorderColor;
+                            basicOutlineFilled.color = UIManagerAsset.buttonFilledColor;
+                            basicOutlineText.color = UIManagerAsset.buttonTextColor;
+                            basicOutlineTextHighligted.color = UIManagerAsset.buttonTextHighlightedColor;
+                        }
+
+                        if (overrideFonts == false)
+                        {
+                            basicOutlineText.font = UIManagerAsset.buttonFont;
+                            basicOutlineTextHighligted.font = UIManagerAsset.buttonFont;
+                            basicOutlineText.fontSize = UIManagerAsset.buttonFontSize;
+                            basicOutlineTextHighligted.fontSize = UIManagerAsset.buttonFontSize;
+                        }
                     }
 
-                    else if (buttonType == ButtonType.BASIC_OUTLINE_ONLY_ICON)
+                    else if (buttonType == ButtonType.BasicOutlineOnlyIcon && overrideFonts == false)
                     {
                         basicOutlineOOBorder.color = UIManagerAsset.buttonBorderColor;
                         basicOutlineOOFilled.color = UIManagerAsset.buttonFilledColor;
@@ -254,27 +321,34 @@ namespace Michsky.UI.ModernUIPack
                         basicOutlineOOIconHighlighted.color = UIManagerAsset.buttonFilledColor;
                     }
 
-                    else if (buttonType == ButtonType.BASIC_OUTLINE_WITH_ICON)
+                    else if (buttonType == ButtonType.BasicOutlineWithIcon)
                     {
-                        basicOutlineWOBorder.color = UIManagerAsset.buttonBorderColor;
-                        basicOutlineWOFilled.color = UIManagerAsset.buttonFilledColor;
-                        basicOutlineWOIcon.color = UIManagerAsset.buttonIconColor;
-                        basicOutlineWOIconHighlighted.color = UIManagerAsset.buttonIconHighlightedColor;
-                        basicOutlineWOText.color = UIManagerAsset.buttonTextColor;
-                        basicOutlineWOTextHighligted.color = UIManagerAsset.buttonTextHighlightedColor;
-                        basicOutlineWOText.font = UIManagerAsset.buttonFont;
-                        basicOutlineWOTextHighligted.font = UIManagerAsset.buttonFont;
-                        basicOutlineWOText.fontSize = UIManagerAsset.buttonFontSize;
-                        basicOutlineWOTextHighligted.fontSize = UIManagerAsset.buttonFontSize;
+                        if (overrideColors == false)
+                        {
+                            basicOutlineWOBorder.color = UIManagerAsset.buttonBorderColor;
+                            basicOutlineWOFilled.color = UIManagerAsset.buttonFilledColor;
+                            basicOutlineWOIcon.color = UIManagerAsset.buttonIconColor;
+                            basicOutlineWOIconHighlighted.color = UIManagerAsset.buttonIconHighlightedColor;
+                            basicOutlineWOText.color = UIManagerAsset.buttonTextColor;
+                            basicOutlineWOTextHighligted.color = UIManagerAsset.buttonTextHighlightedColor;
+                        }
+
+                        if (overrideFonts == false)
+                        {
+                            basicOutlineWOText.font = UIManagerAsset.buttonFont;
+                            basicOutlineWOTextHighligted.font = UIManagerAsset.buttonFont;
+                            basicOutlineWOText.fontSize = UIManagerAsset.buttonFontSize;
+                            basicOutlineWOTextHighligted.fontSize = UIManagerAsset.buttonFontSize;
+                        }
                     }
 
-                    else if (buttonType == ButtonType.RADIAL_ONLY_ICON)
+                    else if (buttonType == ButtonType.RadialOnlyIcon && overrideColors == false)
                     {
                         radialOOBackground.color = UIManagerAsset.buttonFilledColor;
                         radialOOIcon.color = UIManagerAsset.buttonIconBasicColor;
                     }
 
-                    else if (buttonType == ButtonType.RADIAL_OUTLINE_ONLY_ICON)
+                    else if (buttonType == ButtonType.RadialOutlineOnlyIcon && overrideColors == false)
                     {
                         radialOutlineOOBorder.color = UIManagerAsset.buttonBorderColor;
                         radialOutlineOOFilled.color = UIManagerAsset.buttonFilledColor;
@@ -282,24 +356,38 @@ namespace Michsky.UI.ModernUIPack
                         radialOutlineOOIconHighlighted.color = UIManagerAsset.buttonIconHighlightedColor;
                     }
 
-                    else if (buttonType == ButtonType.ROUNDED)
+                    else if (buttonType == ButtonType.Rounded)
                     {
-                        roundedBackground.color = UIManagerAsset.buttonFilledColor;
-                        roundedText.color = UIManagerAsset.buttonTextBasicColor;
-                        roundedText.font = UIManagerAsset.buttonFont;
-                        roundedText.fontSize = UIManagerAsset.buttonFontSize;
+                        if (overrideColors == false)
+                        {
+                            roundedBackground.color = UIManagerAsset.buttonFilledColor;
+                            roundedText.color = UIManagerAsset.buttonTextBasicColor;
+                        }
+
+                        if (overrideFonts == false)
+                        {
+                            roundedText.font = UIManagerAsset.buttonFont;
+                            roundedText.fontSize = UIManagerAsset.buttonFontSize;
+                        }
                     }
 
-                    else if (buttonType == ButtonType.ROUNDED_OUTLINE)
+                    else if (buttonType == ButtonType.RoundedOutline)
                     {
-                        roundedOutlineBorder.color = UIManagerAsset.buttonBorderColor;
-                        roundedOutlineFilled.color = UIManagerAsset.buttonFilledColor;
-                        roundedOutlineText.color = UIManagerAsset.buttonTextColor;
-                        roundedOutlineTextHighligted.color = UIManagerAsset.buttonTextHighlightedColor;
-                        roundedOutlineText.font = UIManagerAsset.buttonFont;
-                        roundedOutlineTextHighligted.font = UIManagerAsset.buttonFont;
-                        roundedOutlineText.fontSize = UIManagerAsset.buttonFontSize;
-                        roundedOutlineTextHighligted.fontSize = UIManagerAsset.buttonFontSize;
+                        if (overrideColors == false)
+                        {
+                            roundedOutlineBorder.color = UIManagerAsset.buttonBorderColor;
+                            roundedOutlineFilled.color = UIManagerAsset.buttonFilledColor;
+                            roundedOutlineText.color = UIManagerAsset.buttonTextColor;
+                            roundedOutlineTextHighligted.color = UIManagerAsset.buttonTextHighlightedColor;
+                        }
+
+                        if (overrideFonts == false)
+                        {
+                            roundedOutlineText.font = UIManagerAsset.buttonFont;
+                            roundedOutlineTextHighligted.font = UIManagerAsset.buttonFont;
+                            roundedOutlineText.fontSize = UIManagerAsset.buttonFontSize;
+                            roundedOutlineTextHighligted.fontSize = UIManagerAsset.buttonFontSize;
+                        }
                     }
                 }
             }
@@ -308,4 +396,3 @@ namespace Michsky.UI.ModernUIPack
         }
     }
 }
-#endif

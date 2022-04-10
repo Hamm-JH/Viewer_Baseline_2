@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224364878427244766}
-  - component: {fileID: 222908768601002950}
   m_Layer: 5
   m_Name: Indicator Item
   m_TagString: Untagged
@@ -38,14 +37,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 8, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &222908768601002950
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1323806087491500}
-  m_CullTransparentMesh: 0
 --- !u!1 &1331661202007336
 GameObject:
   m_ObjectHideFlags: 0

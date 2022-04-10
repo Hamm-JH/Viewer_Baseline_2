@@ -6,46 +6,32 @@ namespace Michsky.UI.ModernUIPack
     [CustomEditor(typeof(RadialSlider))]
     public class RadialSliderEditor : Editor
     {
+        private GUISkin customSkin;
         private RadialSlider rsTarget;
+        private UIManagerSlider tempUIM;
         private int currentTab;
 
         private void OnEnable()
         {
             rsTarget = (RadialSlider)target;
+
+            try { tempUIM = rsTarget.GetComponent<UIManagerSlider>(); }
+            catch { }
+
+            if (EditorGUIUtility.isProSkin == true) { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark"); }
+            else { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light"); }
         }
 
         public override void OnInspectorGUI()
         {
-            GUISkin customSkin;
-            Color defaultColor = GUI.color;
-
-            if (EditorGUIUtility.isProSkin == true)
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark");
-            else
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light");
-
-            GUILayout.BeginHorizontal();
-            GUI.backgroundColor = defaultColor;
-
-            GUILayout.Box(new GUIContent(""), customSkin.FindStyle("Slider Top Header"));
-
-            GUILayout.EndHorizontal();
-            GUILayout.Space(-42);
+            MUIPEditorHandler.DrawComponentHeader(customSkin, "Slider Top Header");
 
             GUIContent[] toolbarTabs = new GUIContent[3];
             toolbarTabs[0] = new GUIContent("Content");
             toolbarTabs[1] = new GUIContent("Resources");
             toolbarTabs[2] = new GUIContent("Settings");
 
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(17);
-
-            currentTab = GUILayout.Toolbar(currentTab, toolbarTabs, customSkin.FindStyle("Tab Indicator"));
-
-            GUILayout.EndHorizontal();
-            GUILayout.Space(-40);
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(17);
+            currentTab = MUIPEditorHandler.DrawTabs(currentTab, toolbarTabs, customSkin);
 
             if (GUILayout.Button(new GUIContent("Content", "Content"), customSkin.FindStyle("Tab Content")))
                 currentTab = 0;
@@ -69,11 +55,13 @@ namespace Michsky.UI.ModernUIPack
             var maxValue = serializedObject.FindProperty("maxValue");
             var isPercent = serializedObject.FindProperty("isPercent");
             var decimals = serializedObject.FindProperty("decimals");
+            var contentTransform = serializedObject.FindProperty("contentTransform");
+            var startPoint = serializedObject.FindProperty("startPoint");
 
-            // Draw content depending on tab index
             switch (currentTab)
             {
                 case 0:
+                    MUIPEditorHandler.DrawHeader(customSkin, "Content Header", 6);
                     GUILayout.BeginHorizontal(EditorStyles.helpBox);
 
                     EditorGUILayout.LabelField(new GUIContent("Current Value"), customSkin.FindStyle("Text"), GUILayout.Width(120));
@@ -81,92 +69,71 @@ namespace Michsky.UI.ModernUIPack
 
                     GUILayout.EndHorizontal();
 
-                    if(rsTarget.sliderImage != null && rsTarget.indicatorPivot != null && rsTarget.valueText != null)
-                    {
-                        rsTarget.SliderValueRaw = currentValue.floatValue;
-                        float normalizedAngle = rsTarget.SliderAngle / 360.0f;
-                        rsTarget.indicatorPivot.transform.localEulerAngles = new Vector3(180.0f, 0.0f, rsTarget.SliderAngle);
-                        rsTarget.sliderImage.fillAmount = normalizedAngle;
-                        rsTarget.valueText.text = string.Format("{0}{1}", currentValue.floatValue, rsTarget.isPercent ? "%" : "");
-                    }
-
-                    GUILayout.Space(10);
-
+                    MUIPEditorHandler.DrawHeader(customSkin, "Events Header", 10);
                     EditorGUILayout.PropertyField(onValueChanged, new GUIContent("On Value Changed"), true);
                     EditorGUILayout.PropertyField(onPointerEnter, new GUIContent("On Pointer Enter"), true);
                     EditorGUILayout.PropertyField(onPointerExit, new GUIContent("On Pointer Exit"), true);
                     break;
 
                 case 1:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Slider Image"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(sliderImage, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Indicator Pivot"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(indicatorPivot, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Indicator Text"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(valueText, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
+                    MUIPEditorHandler.DrawHeader(customSkin, "Core Header", 6);
+                    MUIPEditorHandler.DrawProperty(sliderImage, customSkin, "Slider Image");
+                    MUIPEditorHandler.DrawProperty(indicatorPivot, customSkin, "Indicator Pivot");
+                    MUIPEditorHandler.DrawProperty(valueText, customSkin, "Indicator Text");
                     break;
 
                 case 2:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Min Value"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(minValue, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Max Value"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(maxValue, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Decimals"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(decimals, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    isPercent.boolValue = GUILayout.Toggle(isPercent.boolValue, new GUIContent("Is Percent"), customSkin.FindStyle("Toggle"));
-                    isPercent.boolValue = GUILayout.Toggle(isPercent.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    rememberValue.boolValue = GUILayout.Toggle(rememberValue.boolValue, new GUIContent("Save Value"), customSkin.FindStyle("Toggle"));
-                    rememberValue.boolValue = GUILayout.Toggle(rememberValue.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
+                    MUIPEditorHandler.DrawHeader(customSkin, "Options Header", 6);
+                    MUIPEditorHandler.DrawProperty(minValue, customSkin, "Min Value");
+                    MUIPEditorHandler.DrawProperty(maxValue, customSkin, "Max Value");
+                    MUIPEditorHandler.DrawProperty(decimals, customSkin, "Decimals");
+                    isPercent.boolValue = MUIPEditorHandler.DrawToggle(isPercent.boolValue, customSkin, "Is Percent");
+                    rememberValue.boolValue = MUIPEditorHandler.DrawToggle(rememberValue.boolValue, customSkin, "Save Value");
 
                     if (rememberValue.boolValue == true)
                     {
                         EditorGUI.indentLevel = 2;
-                        GUILayout.BeginHorizontal();
-
-                        EditorGUILayout.LabelField(new GUIContent("Tag:"), customSkin.FindStyle("Text"), GUILayout.Width(40));
-                        EditorGUILayout.PropertyField(sliderTag, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
+                        MUIPEditorHandler.DrawPropertyPlainCW(sliderTag, customSkin, "Tag:", 40);
                         EditorGUI.indentLevel = 0;
                         GUILayout.Space(2);
                         EditorGUILayout.HelpBox("Each slider should has its own unique tag.", MessageType.Info);
                     }
+
+                    MUIPEditorHandler.DrawHeader(customSkin, "UIM Header", 10);
+
+                    if (tempUIM != null)
+                    {
+                        MUIPEditorHandler.DrawUIManagerConnectedHeader();
+
+                        if (GUILayout.Button("Open UI Manager", customSkin.button))
+                            EditorApplication.ExecuteMenuItem("Tools/Modern UI Pack/Show UI Manager");
+
+                        if (GUILayout.Button("Disable UI Manager Connection", customSkin.button))
+                        {
+                            if (EditorUtility.DisplayDialog("Modern UI Pack", "Are you sure you want to disable UI Manager connection with the object? " +
+                                "This operation cannot be undone.", "Yes", "Cancel"))
+                            {
+                                try { DestroyImmediate(tempUIM); }
+                                catch { Debug.LogError("<b>[Pie Chart]</b> Failed to delete UI Manager connection.", this); }
+                            }
+                        }
+                    }
+
+                    else if (tempUIM == null) { MUIPEditorHandler.DrawUIManagerDisconnectedHeader(); }
+
                     break;
             }
 
+            if (rsTarget.sliderImage != null && rsTarget.indicatorPivot != null && rsTarget.valueText != null)
+            {
+                rsTarget.SliderValueRaw = currentValue.floatValue;
+                float normalizedAngle = rsTarget.SliderAngle / 360.0f;
+                rsTarget.indicatorPivot.transform.localEulerAngles = new Vector3(180.0f, 0.0f, rsTarget.SliderAngle);
+                rsTarget.sliderImage.fillAmount = normalizedAngle;
+                rsTarget.valueText.text = string.Format("{0}{1}", currentValue.floatValue, rsTarget.isPercent ? "%" : "");
+            }
+
+            this.Repaint();
             serializedObject.ApplyModifiedProperties();
         }
     }

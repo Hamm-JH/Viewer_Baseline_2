@@ -4,9 +4,7 @@ namespace Michsky.UI.ModernUIPack
 {
     public class LaunchURL : MonoBehaviour
     {
-        public string URL;
-
-        public void urlLinkOrWeb()
+        public void GoToURL(string URL)
         {
             Application.OpenURL(URL);
         }

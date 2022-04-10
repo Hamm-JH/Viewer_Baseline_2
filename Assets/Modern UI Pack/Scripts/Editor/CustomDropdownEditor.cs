@@ -5,47 +5,33 @@ namespace Michsky.UI.ModernUIPack
 {
     [CustomEditor(typeof(CustomDropdown))]
     public class CustomDropdownEditor : Editor
-    {      
+    {
+        private GUISkin customSkin;
         private CustomDropdown dTarget;
+        private UIManagerDropdown tempUIM;
         private int currentTab;
 
         private void OnEnable()
         {
             dTarget = (CustomDropdown)target;
+
+            try { tempUIM = dTarget.GetComponent<UIManagerDropdown>(); }
+            catch { }
+
+            if (EditorGUIUtility.isProSkin == true) { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark"); }
+            else { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light"); }
         }
 
         public override void OnInspectorGUI()
         {
-            GUISkin customSkin;
-            Color defaultColor = GUI.color;
-
-            if (EditorGUIUtility.isProSkin == true)
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark");
-            else
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light");
-
-            GUILayout.BeginHorizontal();
-            GUI.backgroundColor = defaultColor;
-
-            GUILayout.Box(new GUIContent(""), customSkin.FindStyle("Dropdown Top Header"));
-
-            GUILayout.EndHorizontal();
-            GUILayout.Space(-42);
+            MUIPEditorHandler.DrawComponentHeader(customSkin, "Dropdown Top Header");
 
             GUIContent[] toolbarTabs = new GUIContent[3];
             toolbarTabs[0] = new GUIContent("Content");
             toolbarTabs[1] = new GUIContent("Resources");
             toolbarTabs[2] = new GUIContent("Settings");
 
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(17);
-
-            currentTab = GUILayout.Toolbar(currentTab, toolbarTabs, customSkin.FindStyle("Tab Indicator"));
-
-            GUILayout.EndHorizontal();
-            GUILayout.Space(-40);
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(17);
+            currentTab = MUIPEditorHandler.DrawTabs(currentTab, toolbarTabs, customSkin);
 
             if (GUILayout.Button(new GUIContent("Content", "Content"), customSkin.FindStyle("Tab Content")))
                 currentTab = 0;
@@ -74,6 +60,7 @@ namespace Michsky.UI.ModernUIPack
             var outOnPointerExit = serializedObject.FindProperty("outOnPointerExit");
             var isListItem = serializedObject.FindProperty("isListItem");
             var invokeAtStart = serializedObject.FindProperty("invokeAtStart");
+            var initAtStart = serializedObject.FindProperty("initAtStart");
             var animationType = serializedObject.FindProperty("animationType");
             var selectedItemIndex = serializedObject.FindProperty("selectedItemIndex");
             var enableDropdownSounds = serializedObject.FindProperty("enableDropdownSounds");
@@ -82,10 +69,37 @@ namespace Michsky.UI.ModernUIPack
             var hoverSound = serializedObject.FindProperty("hoverSound");
             var clickSound = serializedObject.FindProperty("clickSound");
             var soundSource = serializedObject.FindProperty("soundSource");
+            var itemSpacing = serializedObject.FindProperty("itemSpacing");
+            var itemPaddingLeft = serializedObject.FindProperty("itemPaddingLeft");
+            var itemPaddingRight = serializedObject.FindProperty("itemPaddingRight");
+            var itemPaddingTop = serializedObject.FindProperty("itemPaddingTop");
+            var itemPaddingBottom = serializedObject.FindProperty("itemPaddingBottom");
+            var transitionSmoothness = serializedObject.FindProperty("transitionSmoothness");
+            var sizeSmoothness = serializedObject.FindProperty("sizeSmoothness");
+            var panelSize = serializedObject.FindProperty("panelSize");
+            var listRect = serializedObject.FindProperty("listRect");
+            var listCG = serializedObject.FindProperty("listCG");
 
             switch (currentTab)
             {
                 case 0:
+                    MUIPEditorHandler.DrawHeader(customSkin, "Content Header", 6);
+
+                    if (dTarget.dropdownItems.Count != 0)
+                    {
+                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
+
+                        EditorGUILayout.LabelField(new GUIContent("Selected Item Index"), customSkin.FindStyle("Text"), GUILayout.Width(120));
+                        selectedItemIndex.intValue = EditorGUILayout.IntSlider(selectedItemIndex.intValue, 0, dTarget.dropdownItems.Count - 1);
+
+                        GUILayout.Space(2);
+                        GUILayout.EndHorizontal();
+                        // EditorGUILayout.LabelField(new GUIContent(dTarget.dropdownItems[selectedItemIndex.intValue].itemName), customSkin.FindStyle("Text"));
+                    }
+
+                    else
+                        EditorGUILayout.HelpBox("There is no item in the list.", MessageType.Warning);
+
                     GUILayout.BeginVertical(EditorStyles.helpBox);
                     EditorGUI.indentLevel = 1;
 
@@ -99,106 +113,65 @@ namespace Michsky.UI.ModernUIPack
 
                     GUILayout.EndVertical();
 
-                    if (enableDropdownSounds.boolValue == true)
-                    {
-                        GUILayout.Space(18);
-                        GUILayout.Label("SOUNDS", customSkin.FindStyle("Header"));
-
-                        if (enableDropdownSounds.boolValue == true && useHoverSound.boolValue == true)
-                        {
-                            GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                            EditorGUILayout.LabelField(new GUIContent("Hover Sound"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                            EditorGUILayout.PropertyField(hoverSound, new GUIContent(""));
-
-                            GUILayout.EndHorizontal();
-                        }
-
-                        if (enableDropdownSounds.boolValue == true && useClickSound.boolValue == true)
-                        {
-                            GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                            EditorGUILayout.LabelField(new GUIContent("Click Sound"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                            EditorGUILayout.PropertyField(clickSound, new GUIContent(""));
-
-                            GUILayout.EndHorizontal();
-                        }
-                    }
-
-                    GUILayout.Space(10);
+                    MUIPEditorHandler.DrawHeader(customSkin, "Events Header", 10);
                     EditorGUILayout.PropertyField(dropdownEvent, new GUIContent("Dropdown Event"), true);
                     break;
 
                 case 1:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                    MUIPEditorHandler.DrawHeader(customSkin, "Core Header", 6);
+                    MUIPEditorHandler.DrawProperty(triggerObject, customSkin, "Trigger Object");
+                    MUIPEditorHandler.DrawProperty(selectedText, customSkin, "Selected Text");
+                    MUIPEditorHandler.DrawProperty(selectedImage, customSkin, "Selected Image");
+                    MUIPEditorHandler.DrawProperty(itemObject, customSkin, "Item Prefab");
+                    MUIPEditorHandler.DrawProperty(itemParent, customSkin, "Item Parent");
+                    MUIPEditorHandler.DrawProperty(scrollbar, customSkin, "Scrollbar");
 
-                    EditorGUILayout.LabelField(new GUIContent("Trigger Object"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(triggerObject, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Selected Text"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(selectedText, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Selected Image"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(selectedImage, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Item Prefab"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(itemObject, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Item Parent"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(itemParent, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Scrollbar"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(scrollbar, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("List Parent"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(listParent, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-
-                    if (enableDropdownSounds.boolValue == true)
+                    if (dTarget.animationType == CustomDropdown.AnimationType.Modular)
                     {
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        EditorGUILayout.LabelField(new GUIContent("Sound Source"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        EditorGUILayout.PropertyField(soundSource, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
+                        MUIPEditorHandler.DrawProperty(listRect, customSkin, "List Rect");
+                        MUIPEditorHandler.DrawProperty(listCG, customSkin, "List Canvas Group");
                     }
 
                     break;
 
                 case 2:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                    MUIPEditorHandler.DrawHeader(customSkin, "Customization Header", 6);
+                    enableIcon.boolValue = MUIPEditorHandler.DrawToggle(enableIcon.boolValue, customSkin, "Enable Header Icon");
+                    enableScrollbar.boolValue = MUIPEditorHandler.DrawToggle(enableScrollbar.boolValue, customSkin, "Enable Scrollbar");
+                    MUIPEditorHandler.DrawPropertyCW(itemSpacing, customSkin, "Item Spacing", 90);
 
-                    enableIcon.boolValue = GUILayout.Toggle(enableIcon.boolValue, new GUIContent("Enable Icon"), customSkin.FindStyle("Toggle"));
-                    enableIcon.boolValue = GUILayout.Toggle(enableIcon.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
+                    GUILayout.BeginVertical(EditorStyles.helpBox);
+                    GUILayout.BeginHorizontal();
+                    EditorGUILayout.LabelField(new GUIContent("Item Padding"), customSkin.FindStyle("Text"), GUILayout.Width(90));
                     GUILayout.EndHorizontal();
+                    EditorGUI.indentLevel = 1;
+
+                    EditorGUILayout.PropertyField(itemPaddingTop, new GUIContent("Top"));
+                    EditorGUILayout.PropertyField(itemPaddingBottom, new GUIContent("Bottom"));
+                    EditorGUILayout.PropertyField(itemPaddingLeft, new GUIContent("Left"));
+                    EditorGUILayout.PropertyField(itemPaddingRight, new GUIContent("Right"));
+                    
+                    EditorGUI.indentLevel = 0;
+                    GUILayout.EndVertical();
+
+                    MUIPEditorHandler.DrawHeader(customSkin, "Animation Header", 10);
+                    MUIPEditorHandler.DrawProperty(animationType, customSkin, "Animation Type");
+
+                    if (dTarget.animationType == CustomDropdown.AnimationType.Modular)
+                    {
+                        MUIPEditorHandler.DrawProperty(transitionSmoothness, customSkin, "Transition Speed");
+                        MUIPEditorHandler.DrawProperty(sizeSmoothness, customSkin, "Size Smoothness");
+                        MUIPEditorHandler.DrawProperty(panelSize, customSkin, "Panel Size");
+                    }
+
+                    MUIPEditorHandler.DrawHeader(customSkin, "Options Header", 10);
+                    initAtStart.boolValue = MUIPEditorHandler.DrawToggle(initAtStart.boolValue, customSkin, "Initialize At Start");
+                    invokeAtStart.boolValue = MUIPEditorHandler.DrawToggle(invokeAtStart.boolValue, customSkin, "Invoke At Start");
 
                     if (dTarget.selectedImage != null)
                     {
-                        if (enableIcon.boolValue == true)
-                            dTarget.selectedImage.enabled = true;
-                        else
-                            dTarget.selectedImage.enabled = false;
+                        if (enableIcon.boolValue == true) { dTarget.selectedImage.enabled = true; }
+                        else { dTarget.selectedImage.enabled = false; }
                     }
 
                     else
@@ -211,12 +184,7 @@ namespace Michsky.UI.ModernUIPack
                         }                       
                     }
 
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    enableTrigger.boolValue = GUILayout.Toggle(enableTrigger.boolValue, new GUIContent("Enable Trigger"), customSkin.FindStyle("Toggle"));
-                    enableTrigger.boolValue = GUILayout.Toggle(enableTrigger.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();  
+                    enableTrigger.boolValue = MUIPEditorHandler.DrawToggle(enableTrigger.boolValue, customSkin, "Enable Trigger");
 
                     if (enableTrigger.boolValue == true && dTarget.triggerObject == null)
                     {
@@ -225,19 +193,10 @@ namespace Michsky.UI.ModernUIPack
                         GUILayout.EndHorizontal();
                     }
 
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    enableScrollbar.boolValue = GUILayout.Toggle(enableScrollbar.boolValue, new GUIContent("Enable Scrollbar"), customSkin.FindStyle("Toggle"));
-                    enableScrollbar.boolValue = GUILayout.Toggle(enableScrollbar.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-
                     if (dTarget.scrollbar != null)
                     {
-                        if (enableScrollbar.boolValue == true)
-                            dTarget.scrollbar.SetActive(true);
-                        else
-                            dTarget.scrollbar.SetActive(false);
+                        if (enableScrollbar.boolValue == true) { dTarget.scrollbar.SetActive(true); }
+                        else { dTarget.scrollbar.SetActive(false); }
                     }
 
                     else
@@ -250,63 +209,46 @@ namespace Michsky.UI.ModernUIPack
                         }                     
                     }
 
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    setHighPriorty.boolValue = GUILayout.Toggle(setHighPriorty.boolValue, new GUIContent("Set High Priorty"), customSkin.FindStyle("Toggle"));
-                    setHighPriorty.boolValue = GUILayout.Toggle(setHighPriorty.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    outOnPointerExit.boolValue = GUILayout.Toggle(outOnPointerExit.boolValue, new GUIContent("Out On Pointer Exit"), customSkin.FindStyle("Toggle"));
-                    outOnPointerExit.boolValue = GUILayout.Toggle(outOnPointerExit.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    isListItem.boolValue = GUILayout.Toggle(isListItem.boolValue, new GUIContent("Is List Item"), customSkin.FindStyle("Toggle"));
-                    isListItem.boolValue = GUILayout.Toggle(isListItem.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-             
-                    if (isListItem.boolValue == true && dTarget.listParent == null)
-                    {
-                        GUILayout.BeginHorizontal();
-                        EditorGUILayout.HelpBox("'List Parent' is not assigned. Go to Resources tab and assign the correct variable.", MessageType.Error);
-                        GUILayout.EndHorizontal();
-                    }
-
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    invokeAtStart.boolValue = GUILayout.Toggle(invokeAtStart.boolValue, new GUIContent("Invoke At Start"), customSkin.FindStyle("Toggle"));
-                    invokeAtStart.boolValue = GUILayout.Toggle(invokeAtStart.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    enableDropdownSounds.boolValue = GUILayout.Toggle(enableDropdownSounds.boolValue, new GUIContent("Enable Dropdown Sounds"), customSkin.FindStyle("Toggle"));
-                    enableDropdownSounds.boolValue = GUILayout.Toggle(enableDropdownSounds.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
+                    setHighPriorty.boolValue = MUIPEditorHandler.DrawToggle(setHighPriorty.boolValue, customSkin, "Set High Priorty");
+                    outOnPointerExit.boolValue = MUIPEditorHandler.DrawToggle(outOnPointerExit.boolValue, customSkin, "Out On Pointer Exit");
+                   
+                    GUILayout.BeginVertical(EditorStyles.helpBox);
+                    GUILayout.Space(-3);
+                   
+                    enableDropdownSounds.boolValue = MUIPEditorHandler.DrawTogglePlain(enableDropdownSounds.boolValue, customSkin, "Enable Dropdown Sounds");
+                   
+                    GUILayout.Space(3);
 
                     if (enableDropdownSounds.boolValue == true)
                     {
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                        GUILayout.BeginVertical(EditorStyles.helpBox);
+                        GUILayout.Space(-3);
 
-                        useHoverSound.boolValue = GUILayout.Toggle(useHoverSound.boolValue, new GUIContent("Enable Hover Sound"), customSkin.FindStyle("Toggle"));
-                        useHoverSound.boolValue = GUILayout.Toggle(useHoverSound.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+                        useHoverSound.boolValue = MUIPEditorHandler.DrawTogglePlain(useHoverSound.boolValue, customSkin, "Enable Hover Sound");
+                     
+                        GUILayout.Space(3);
 
-                        GUILayout.EndHorizontal();
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                        if (useHoverSound.boolValue == true)
+                            MUIPEditorHandler.DrawProperty(hoverSound, customSkin, "Hover Sound");
 
-                        useClickSound.boolValue = GUILayout.Toggle(useClickSound.boolValue, new GUIContent("Enable Click Sound"), customSkin.FindStyle("Toggle"));
-                        useClickSound.boolValue = GUILayout.Toggle(useClickSound.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+                        GUILayout.EndVertical();
+                        GUILayout.BeginVertical(EditorStyles.helpBox);
+                        GUILayout.Space(-3);
+                        
+                        useClickSound.boolValue = MUIPEditorHandler.DrawTogglePlain(useClickSound.boolValue, customSkin, "Enable Click Sound");
+                       
+                        GUILayout.Space(3);
 
-                        GUILayout.EndHorizontal();
+                        if (useClickSound.boolValue == true)
+                            MUIPEditorHandler.DrawProperty(clickSound, customSkin, "Click Sound");
+
+                        GUILayout.EndVertical();
+
+                        MUIPEditorHandler.DrawProperty(soundSource, customSkin, "Sound Source");
 
                         if (dTarget.soundSource == null)
                         {
-                            EditorGUILayout.HelpBox("'Sound Source' is not assigned. Go to Resources tab or click the button to create a new audio source.", MessageType.Info);
+                            EditorGUILayout.HelpBox("'Sound Source' is not assigned. Go to Resources tab or click the button to create a new audio source.", MessageType.Warning);
 
                             if (GUILayout.Button("+ Create a new one", customSkin.button))
                             {
@@ -316,53 +258,70 @@ namespace Michsky.UI.ModernUIPack
                         }
                     }
 
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                    GUILayout.EndVertical();
+                    GUILayout.BeginVertical(EditorStyles.helpBox);
+                    GUILayout.Space(-3);
+                    
+                    isListItem.boolValue = MUIPEditorHandler.DrawTogglePlain(isListItem.boolValue, customSkin, "Is List Item");
+                    
+                    GUILayout.Space(3);
 
-                    saveSelected.boolValue = GUILayout.Toggle(saveSelected.boolValue, new GUIContent("Save Selection"), customSkin.FindStyle("Toggle"));
-                    saveSelected.boolValue = GUILayout.Toggle(saveSelected.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+                    if (isListItem.boolValue == true)
+                    {
+                        MUIPEditorHandler.DrawPropertyPlain(listParent, customSkin, "List Parent");
 
-                    GUILayout.EndHorizontal();
+                        if (dTarget.listParent == null)
+                        {
+                            GUILayout.BeginHorizontal();
+                            EditorGUILayout.HelpBox("'List Parent' is not assigned. Go to Resources tab and assign the correct variable.", MessageType.Error);
+                            GUILayout.EndHorizontal();
+                        }
+                    }
+
+                    GUILayout.EndVertical();
+                    GUILayout.BeginVertical(EditorStyles.helpBox);
+                    GUILayout.Space(-3);
+
+                    saveSelected.boolValue = MUIPEditorHandler.DrawTogglePlain(saveSelected.boolValue, customSkin, "Save Selected");
+                  
+                    GUILayout.Space(3);
 
                     if (saveSelected.boolValue == true)
                     {
-                        GUILayout.BeginHorizontal();
-                        GUILayout.Space(35);
-
-                        EditorGUILayout.LabelField(new GUIContent("Tag:"), customSkin.FindStyle("Text"), GUILayout.Width(40));
-                        EditorGUILayout.PropertyField(dropdownTag, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
+                        MUIPEditorHandler.DrawPropertyPlainCW(dropdownTag, customSkin, "Dropdown Tag:", 90);
                         EditorGUILayout.HelpBox("Each dropdown should has its own unique tag.", MessageType.Info);
                     }
 
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                    GUILayout.EndVertical();
+                    MUIPEditorHandler.DrawHeader(customSkin, "UIM Header", 10);
 
-                    EditorGUILayout.LabelField(new GUIContent("Animation Type"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(animationType, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-
-                    if (dTarget.dropdownItems.Count != 0)
+                    if (tempUIM != null)
                     {
-                        GUILayout.BeginVertical(EditorStyles.helpBox);
+                        MUIPEditorHandler.DrawUIManagerConnectedHeader();
 
-                        EditorGUILayout.LabelField(new GUIContent("Selected Item Index:"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        selectedItemIndex.intValue = EditorGUILayout.IntSlider(selectedItemIndex.intValue, 0, dTarget.dropdownItems.Count - 1);
+                        tempUIM.overrideColors = MUIPEditorHandler.DrawToggle(tempUIM.overrideColors, customSkin, "Override Colors");
+                        tempUIM.overrideFonts = MUIPEditorHandler.DrawToggle(tempUIM.overrideFonts, customSkin, "Override Fonts");
 
-                        GUILayout.Space(2);
-                        EditorGUILayout.LabelField(new GUIContent(dTarget.dropdownItems[selectedItemIndex.intValue].itemName), customSkin.FindStyle("Text"));
-                        GUILayout.EndVertical();
+                        if (GUILayout.Button("Open UI Manager", customSkin.button))
+                            EditorApplication.ExecuteMenuItem("Tools/Modern UI Pack/Show UI Manager");
 
-                        if (saveSelected.boolValue == true)
-                            EditorGUILayout.HelpBox("Save Selection is enabled. This option won't be used if there's a stored value.", MessageType.Info);
+                        if (GUILayout.Button("Disable UI Manager Connection", customSkin.button))
+                        {
+                            if (EditorUtility.DisplayDialog("Modern UI Pack", "Are you sure you want to disable UI Manager connection with the object? " +
+                                "This operation cannot be undone.", "Yes", "Cancel"))
+                            {
+                                try { DestroyImmediate(tempUIM); }
+                                catch { Debug.LogError("<b>[Dropdown]</b> Failed to delete UI Manager connection.", this); }
+                            }
+                        }
                     }
 
-                    else
-                        EditorGUILayout.HelpBox("There is no item in the list.", MessageType.Warning);
-
+                    else if (tempUIM == null) { MUIPEditorHandler.DrawUIManagerDisconnectedHeader(); }
+                    
                     break;
             }
 
+            this.Repaint();
             serializedObject.ApplyModifiedProperties();
         }
     }

@@ -7,46 +7,32 @@ namespace Michsky.UI.ModernUIPack
     [CustomEditor(typeof(ButtonManagerWithIcon))]
     public class ButtonManagerWithIconEditor : Editor
     {
+        private GUISkin customSkin;
         private ButtonManagerWithIcon bTarget;
+        private UIManagerButton tempUIM;
         private int currentTab;
 
         private void OnEnable()
         {
             bTarget = (ButtonManagerWithIcon)target;
+
+            try { tempUIM = bTarget.GetComponent<UIManagerButton>(); }
+            catch { }
+
+            if (EditorGUIUtility.isProSkin == true) { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark"); }
+            else { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light"); }
         }
 
         public override void OnInspectorGUI()
         {
-            GUISkin customSkin;
-            Color defaultColor = GUI.color;
-
-            if (EditorGUIUtility.isProSkin == true)
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark");
-            else
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light");
-
-            GUILayout.BeginHorizontal();
-            GUI.backgroundColor = defaultColor;
-
-            GUILayout.Box(new GUIContent(""), customSkin.FindStyle("Button Top Header"));
-
-            GUILayout.EndHorizontal();
-            GUILayout.Space(-42);
+            MUIPEditorHandler.DrawComponentHeader(customSkin, "Button Top Header");
 
             GUIContent[] toolbarTabs = new GUIContent[3];
             toolbarTabs[0] = new GUIContent("Content");
             toolbarTabs[1] = new GUIContent("Resources");
             toolbarTabs[2] = new GUIContent("Settings");
 
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(17);
-
-            currentTab = GUILayout.Toolbar(currentTab, toolbarTabs, customSkin.FindStyle("Tab Indicator"));
-
-            GUILayout.EndHorizontal();
-            GUILayout.Space(-40);
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(17);
+            currentTab = MUIPEditorHandler.DrawTabs(currentTab, toolbarTabs, customSkin);
 
             if (GUILayout.Button(new GUIContent("Content", "Content"), customSkin.FindStyle("Tab Content")))
                 currentTab = 0;
@@ -83,161 +69,64 @@ namespace Michsky.UI.ModernUIPack
             var transitionColor = serializedObject.FindProperty("transitionColor");
             var animationSolution = serializedObject.FindProperty("animationSolution");
             var fadingMultiplier = serializedObject.FindProperty("fadingMultiplier");
+            var rippleUpdateMode = serializedObject.FindProperty("rippleUpdateMode");
 
             switch (currentTab)
             {
                 case 0:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                    MUIPEditorHandler.DrawHeader(customSkin, "Content Header", 6);
 
-                    EditorGUILayout.LabelField(new GUIContent("Button Text"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(buttonText, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-
-                    if (useCustomContent.boolValue == false && bTarget.normalText != null)
+                    if (useCustomContent.boolValue == false)
                     {
-                        bTarget.normalText.text = buttonText.stringValue;
-                        bTarget.highlightedText.text = buttonText.stringValue;
+                        MUIPEditorHandler.DrawProperty(buttonText, customSkin, "Button Text");
+                        MUIPEditorHandler.DrawProperty(buttonIcon, customSkin, "Button Icon");
+
+                        if (bTarget.normalText != null) { bTarget.normalText.text = buttonText.stringValue; }
+                        else if (bTarget.normalText == null) { EditorGUILayout.HelpBox("'Text Object' is missing.", MessageType.Error); }
+
+                        if (bTarget.normalIcon != null) { bTarget.normalIcon.sprite = bTarget.buttonIcon; }
+                        else if (bTarget.normalIcon == null) { EditorGUILayout.HelpBox("'Image Object' is missing.", MessageType.Error); }
                     }
 
-                    else if (useCustomContent.boolValue == false && bTarget.normalText == null)
-                    {
-                        GUILayout.Space(2);
-                        EditorGUILayout.HelpBox("'Text Object' is not assigned. Go to Resources tab and assign the correct variable.", MessageType.Error);
-                    }
-
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Button Icon"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(buttonIcon, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-
-                    if (useCustomContent.boolValue == false && bTarget.normalIcon != null)
-                    {
-                        bTarget.normalIcon.sprite = bTarget.buttonIcon;
-                        bTarget.highlightedIcon.sprite = bTarget.buttonIcon;
-                    }
-
-                    else if (useCustomContent.boolValue == false && bTarget.normalIcon == null)
-                    {
-                        GUILayout.Space(2);
-                        EditorGUILayout.HelpBox("'Image Object' is not assigned. Go to Resources tab and assign the correct variable.", MessageType.Error);
-                    }
+                    else { EditorGUILayout.HelpBox("'Use Custom Content' is enabled.", MessageType.Info); }
 
                     if (enableButtonSounds.boolValue == true && useHoverSound.boolValue == true)
-                    {
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        EditorGUILayout.LabelField(new GUIContent("Hover Sound"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        EditorGUILayout.PropertyField(hoverSound, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
-                    }
-
+                        MUIPEditorHandler.DrawProperty(hoverSound, customSkin, "Hover Sound");
                     if (enableButtonSounds.boolValue == true && useClickSound.boolValue == true)
-                    {
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                        MUIPEditorHandler.DrawProperty(clickSound, customSkin, "Click Sound");
 
-                        EditorGUILayout.LabelField(new GUIContent("Click Sound"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        EditorGUILayout.PropertyField(clickSound, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
-                    }
-
-                    GUILayout.Space(4);
+                    MUIPEditorHandler.DrawHeader(customSkin, "Events Header", 10);
                     EditorGUILayout.PropertyField(clickEvent, new GUIContent("On Click Event"), true);
                     EditorGUILayout.PropertyField(hoverEvent, new GUIContent("On Hover Event"), true);
                     break;
 
                 case 1:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Normal Text"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(normalText, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Highlighted Text"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(highlightedText, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Normal Icon"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(normalIcon, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Highlighted Icon"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(highlightedIcon, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-
-                    if (enableButtonSounds.boolValue == true)
-                    {
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        EditorGUILayout.LabelField(new GUIContent("Sound Source"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        EditorGUILayout.PropertyField(soundSource, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
-                    }
-
-                    if (useRipple.boolValue == true)
-                    {
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        EditorGUILayout.LabelField(new GUIContent("Ripple Parent"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        EditorGUILayout.PropertyField(rippleParent, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
-                    }
-
+                    MUIPEditorHandler.DrawHeader(customSkin, "Core Header", 6);
+                    MUIPEditorHandler.DrawProperty(normalText, customSkin, "Normal Text");
+                    MUIPEditorHandler.DrawProperty(highlightedText, customSkin, "Highlighted Text");
+                    MUIPEditorHandler.DrawProperty(normalIcon, customSkin, "Normal Icon");
+                    MUIPEditorHandler.DrawProperty(highlightedIcon, customSkin, "Highlighted Icon");
+                    if (enableButtonSounds.boolValue == true) { MUIPEditorHandler.DrawProperty(soundSource, customSkin, "Sound Source"); }
+                    if (useRipple.boolValue == true) { MUIPEditorHandler.DrawProperty(rippleParent, customSkin, "Ripple Parent"); }
                     break;
 
                 case 2:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                    MUIPEditorHandler.DrawHeader(customSkin, "Customization Header", 6);
+                    MUIPEditorHandler.DrawProperty(animationSolution, customSkin, "Animation Solution");
+                    MUIPEditorHandler.DrawProperty(fadingMultiplier, customSkin, "Fading Multiplier");
+                    useCustomContent.boolValue = MUIPEditorHandler.DrawToggle(useCustomContent.boolValue, customSkin, "Use Custom Content");
 
-                    EditorGUILayout.LabelField(new GUIContent("Animation Solution"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(animationSolution, new GUIContent(""));
+                    GUILayout.BeginVertical(EditorStyles.helpBox);
+                    GUILayout.Space(-3);
 
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                    enableButtonSounds.boolValue = MUIPEditorHandler.DrawTogglePlain(enableButtonSounds.boolValue, customSkin, "Enable Button Sounds");
 
-                    EditorGUILayout.LabelField(new GUIContent("Fading Multiplier"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(fadingMultiplier, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    useCustomContent.boolValue = GUILayout.Toggle(useCustomContent.boolValue, new GUIContent("Use Custom Content"), customSkin.FindStyle("Toggle"));
-                    useCustomContent.boolValue = GUILayout.Toggle(useCustomContent.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    enableButtonSounds.boolValue = GUILayout.Toggle(enableButtonSounds.boolValue, new GUIContent("Enable Button Sounds"), customSkin.FindStyle("Toggle"));
-                    enableButtonSounds.boolValue = GUILayout.Toggle(enableButtonSounds.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
+                    GUILayout.Space(3);
 
                     if (enableButtonSounds.boolValue == true)
                     {
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        useHoverSound.boolValue = GUILayout.Toggle(useHoverSound.boolValue, new GUIContent("Enable Hover Sound"), customSkin.FindStyle("Toggle"));
-                        useHoverSound.boolValue = GUILayout.Toggle(useHoverSound.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                        GUILayout.EndHorizontal();
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        useClickSound.boolValue = GUILayout.Toggle(useClickSound.boolValue, new GUIContent("Enable Click Sound"), customSkin.FindStyle("Toggle"));
-                        useClickSound.boolValue = GUILayout.Toggle(useClickSound.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                        GUILayout.EndHorizontal();
+                        useHoverSound.boolValue = MUIPEditorHandler.DrawToggle(useHoverSound.boolValue, customSkin, "Enable Hover Sound");
+                        useClickSound.boolValue = MUIPEditorHandler.DrawToggle(useClickSound.boolValue, customSkin, "Enable Click Sound");
 
                         if (bTarget.soundSource == null)
                         {
@@ -251,66 +140,80 @@ namespace Michsky.UI.ModernUIPack
                         }
                     }
 
+                    GUILayout.EndVertical();
                     GUILayout.BeginVertical(EditorStyles.helpBox);
                     GUILayout.Space(-2);
-                    GUILayout.BeginHorizontal();
 
-                    useRipple.boolValue = GUILayout.Toggle(useRipple.boolValue, new GUIContent("Use Ripple"), customSkin.FindStyle("Toggle"));
-                    useRipple.boolValue = GUILayout.Toggle(useRipple.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+                    useRipple.boolValue = MUIPEditorHandler.DrawTogglePlain(useRipple.boolValue, customSkin, "Use Ripple");
 
-                    GUILayout.EndHorizontal();
                     GUILayout.Space(4);
 
                     if (useRipple.boolValue == true)
                     {
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        renderOnTop.boolValue = GUILayout.Toggle(renderOnTop.boolValue, new GUIContent("Render On Top"), customSkin.FindStyle("Toggle"));
-                        renderOnTop.boolValue = GUILayout.Toggle(renderOnTop.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                        GUILayout.EndHorizontal();
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        centered.boolValue = GUILayout.Toggle(centered.boolValue, new GUIContent("Centered"), customSkin.FindStyle("Toggle"));
-                        centered.boolValue = GUILayout.Toggle(centered.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                        GUILayout.EndHorizontal();
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        EditorGUILayout.LabelField(new GUIContent("Shape"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        EditorGUILayout.PropertyField(rippleShape, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        EditorGUILayout.LabelField(new GUIContent("Speed"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        EditorGUILayout.PropertyField(speed, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        EditorGUILayout.LabelField(new GUIContent("Max Size"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        EditorGUILayout.PropertyField(maxSize, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        EditorGUILayout.LabelField(new GUIContent("Start Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        EditorGUILayout.PropertyField(startColor, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
-                        GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                        EditorGUILayout.LabelField(new GUIContent("Transition Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                        EditorGUILayout.PropertyField(transitionColor, new GUIContent(""));
-
-                        GUILayout.EndHorizontal();
+                        renderOnTop.boolValue = MUIPEditorHandler.DrawToggle(renderOnTop.boolValue, customSkin, "Render On Top");
+                        centered.boolValue = MUIPEditorHandler.DrawToggle(centered.boolValue, customSkin, "Centered");
+                        MUIPEditorHandler.DrawProperty(rippleUpdateMode, customSkin, "Update Mode");
+                        MUIPEditorHandler.DrawProperty(rippleShape, customSkin, "Shape");
+                        MUIPEditorHandler.DrawProperty(speed, customSkin, "Speed");
+                        MUIPEditorHandler.DrawProperty(maxSize, customSkin, "Max Size");
+                        MUIPEditorHandler.DrawProperty(startColor, customSkin, "Start Color");
+                        MUIPEditorHandler.DrawProperty(transitionColor, customSkin, "Transition Color");
                     }
 
                     GUILayout.EndVertical();
+                    MUIPEditorHandler.DrawHeader(customSkin, "UIM Header", 10);
+
+                    if (tempUIM != null)
+                    {
+                        MUIPEditorHandler.DrawUIManagerConnectedHeader();
+                        tempUIM.overrideColors = MUIPEditorHandler.DrawToggle(tempUIM.overrideColors, customSkin, "Override Colors");
+                        tempUIM.overrideFonts = MUIPEditorHandler.DrawToggle(tempUIM.overrideFonts, customSkin, "Override Fonts");
+
+                        if (GUILayout.Button("Open UI Manager", customSkin.button))
+                            EditorApplication.ExecuteMenuItem("Tools/Modern UI Pack/Show UI Manager");
+
+                        if (GUILayout.Button("Disable UI Manager Connection", customSkin.button))
+                        {
+                            if (EditorUtility.DisplayDialog("Modern UI Pack", "Are you sure you want to disable UI Manager connection with the object? " +
+                                "This operation cannot be undone.", "Yes", "Cancel"))
+                            {
+                                try { DestroyImmediate(tempUIM); }
+                                catch { Debug.LogError("<b>[Horizontal Selector]</b> Failed to delete UI Manager connection.", this); }
+                            }
+                        }
+                    }
+
+                    else if (tempUIM == null)
+                    {
+                        if (bTarget.isPreset == true) { MUIPEditorHandler.DrawUIManagerPresetHeader(); }
+                        else
+                        {
+                            MUIPEditorHandler.DrawUIManagerDisconnectedHeader();
+
+                            if (GUILayout.Button("Restore UI Manager", customSkin.button))
+                            {
+                                UIManagerButton uimb = bTarget.gameObject.AddComponent<UIManagerButton>();
+
+                                try
+                                {
+                                    uimb.buttonType = UIManagerButton.ButtonType.BasicOutlineWithIcon;
+                                    uimb.basicOutlineWOBorder = bTarget.transform.Find("Normal/Background").GetComponent<UnityEngine.UI.Image>();
+                                    uimb.basicOutlineWOFilled = bTarget.transform.Find("Highlighted/Background").GetComponent<UnityEngine.UI.Image>();
+                                    uimb.basicOutlineWOIcon = bTarget.transform.Find("Normal/Icon").GetComponent<UnityEngine.UI.Image>();
+                                    uimb.basicOutlineWOIconHighlighted = bTarget.transform.Find("Highlighted/Icon").GetComponent<UnityEngine.UI.Image>();
+                                    uimb.basicOutlineWOText = bTarget.transform.Find("Normal/Text").GetComponent<TMPro.TextMeshProUGUI>();
+                                    uimb.basicOutlineWOTextHighligted = bTarget.transform.Find("Highlighted/Text").GetComponent<TMPro.TextMeshProUGUI>();
+                                }
+
+                                catch { DestroyImmediate(uimb); Debug.LogError("<b>[Modern UI Pack]</b> Cannot restore the UI Manager connection."); }
+                            }
+                        }
+                    }
+
                     break;
             }
 
+            this.Repaint();
             serializedObject.ApplyModifiedProperties();
         }
     }

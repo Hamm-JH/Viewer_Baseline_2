@@ -130,8 +130,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 125, y: 0}
-  m_SizeDelta: {x: 250, y: 0}
+  m_AnchoredPosition: {x: 150, y: 0}
+  m_SizeDelta: {x: 300, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &4851083006754044346
 CanvasRenderer:
@@ -196,7 +196,7 @@ GameObject:
   m_Layer: 5
   m_Name: Context Menu
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2800000, guid: cceded5b1d0834e48849fb152ac8e53d, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -234,15 +234,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 0}
-  contextButton: {fileID: 2934981049858405015, guid: 973eafd0c53826d44a0cc0357d66158b,
-    type: 3}
   contextContent: {fileID: 5868228825687011392}
   contextAnimator: {fileID: 2567694075107465199}
-  isContextMenuOn: 0
+  contextButton: {fileID: 2934981049858405015, guid: 973eafd0c53826d44a0cc0357d66158b,
+    type: 3}
+  contextSeparator: {fileID: 3111258497454059738, guid: 0c5ca18b61e250540b9ca0e106775d52,
+    type: 3}
+  contextSubMenu: {fileID: 2636518644277203883, guid: 1564acbff8cc2924eb8df597e68b2e50,
+    type: 3}
+  autoSubMenuPosition: 1
+  subMenuBehaviour: 0
   vBorderTop: -10
   vBorderBottom: 10
   hBorderLeft: 15
   hBorderRight: -15
+  isOn: 0
+  bottomLeft: 0
+  bottomRight: 0
+  topLeft: 0
+  topRight: 0
 --- !u!225 &1984969786778973680
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -268,6 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIManagerAsset: {fileID: 11400000, guid: 2a619a9609984be49b53b928dd94e61b, type: 2}
+  webglMode: 0
   backgroundImage: {fileID: 9185608107712053107}
 --- !u!95 &2567694075107465199
 Animator:
@@ -327,7 +338,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 125, y: -10}
-  m_SizeDelta: {x: 250, y: 0}
+  m_SizeDelta: {x: 300, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9089205277915299263
 CanvasRenderer:
@@ -559,7 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1764706, g: 0.25490198, b: 0.33333334, a: 1}
+  m_Color: {r: 0.21568628, g: 0.29411766, b: 0.37254903, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

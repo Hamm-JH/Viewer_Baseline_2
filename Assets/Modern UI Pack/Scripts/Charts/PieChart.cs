@@ -164,6 +164,22 @@ namespace Michsky.UI.ModernUIPack
 		public void AddNewItem()
 		{
 			PieChartDataNode item = new PieChartDataNode();
+
+			if (indicatorParent.childCount != 0)
+			{
+				int tempIndex = indicatorParent.childCount - 1;
+				
+				GameObject tempIndicator = indicatorParent.GetChild(tempIndex).gameObject;
+				GameObject newIndicator = Instantiate(tempIndicator, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+				
+				newIndicator.transform.SetParent(indicatorParent, false);
+				newIndicator.gameObject.name = "Item " + tempIndex.ToString() + " Indicator";
+				
+				item.indicatorImage = newIndicator.GetComponentInChildren<Image>();
+				item.indicatorText = newIndicator.GetComponentInChildren<TextMeshProUGUI>();
+				item.name = "Chart Item " + tempIndex.ToString();
+			}
+
 			chartData.Add(item);
 		}
 

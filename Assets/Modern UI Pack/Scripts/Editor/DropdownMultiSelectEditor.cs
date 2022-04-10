@@ -5,47 +5,33 @@ namespace Michsky.UI.ModernUIPack
 {
     [CustomEditor(typeof(DropdownMultiSelect))]
     public class DropdownMultiSelectEditor : Editor
-    {      
+    {
+        private GUISkin customSkin;
         private DropdownMultiSelect dTarget;
+        private UIManagerDropdown tempUIM;
         private int currentTab;
 
         private void OnEnable()
         {
             dTarget = (DropdownMultiSelect)target;
+
+            try { tempUIM = dTarget.GetComponent<UIManagerDropdown>(); }
+            catch { }
+
+            if (EditorGUIUtility.isProSkin == true) { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark"); }
+            else { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light"); }
         }
 
         public override void OnInspectorGUI()
         {
-            GUISkin customSkin;
-            Color defaultColor = GUI.color;
-
-            if (EditorGUIUtility.isProSkin == true)
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark");
-            else
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light");
-
-            GUILayout.BeginHorizontal();
-            GUI.backgroundColor = defaultColor;
-
-            GUILayout.Box(new GUIContent(""), customSkin.FindStyle("Dropdown Top Header"));
-
-            GUILayout.EndHorizontal();
-            GUILayout.Space(-42);
+            MUIPEditorHandler.DrawComponentHeader(customSkin, "Dropdown Top Header");
 
             GUIContent[] toolbarTabs = new GUIContent[3];
             toolbarTabs[0] = new GUIContent("Content");
             toolbarTabs[1] = new GUIContent("Resources");
             toolbarTabs[2] = new GUIContent("Settings");
 
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(17);
-
-            currentTab = GUILayout.Toolbar(currentTab, toolbarTabs, customSkin.FindStyle("Tab Indicator"));
-
-            GUILayout.EndHorizontal();
-            GUILayout.Space(-40);
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(17);
+            currentTab = MUIPEditorHandler.DrawTabs(currentTab, toolbarTabs, customSkin);
 
             if (GUILayout.Button(new GUIContent("Content", "Content"), customSkin.FindStyle("Tab Content")))
                 currentTab = 0;
@@ -70,10 +56,22 @@ namespace Michsky.UI.ModernUIPack
             var isListItem = serializedObject.FindProperty("isListItem");
             var invokeAtStart = serializedObject.FindProperty("invokeAtStart");
             var animationType = serializedObject.FindProperty("animationType");
+            var itemSpacing = serializedObject.FindProperty("itemSpacing");
+            var itemPaddingLeft = serializedObject.FindProperty("itemPaddingLeft");
+            var itemPaddingRight = serializedObject.FindProperty("itemPaddingRight");
+            var itemPaddingTop = serializedObject.FindProperty("itemPaddingTop");
+            var itemPaddingBottom = serializedObject.FindProperty("itemPaddingBottom");
+            var initAtStart = serializedObject.FindProperty("initAtStart");
+            var transitionSmoothness = serializedObject.FindProperty("transitionSmoothness");
+            var sizeSmoothness = serializedObject.FindProperty("sizeSmoothness");
+            var panelSize = serializedObject.FindProperty("panelSize");
+            var listRect = serializedObject.FindProperty("listRect");
+            var listCG = serializedObject.FindProperty("listCG");
 
             switch (currentTab)
             {
                 case 0:
+                    MUIPEditorHandler.DrawHeader(customSkin, "Content Header", 6);
                     GUILayout.BeginVertical(EditorStyles.helpBox);
                     EditorGUI.indentLevel = 1;
 
@@ -89,51 +87,55 @@ namespace Michsky.UI.ModernUIPack
                     break;
 
                 case 1:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                    MUIPEditorHandler.DrawHeader(customSkin, "Core Header", 6);
+                    MUIPEditorHandler.DrawProperty(triggerObject, customSkin, "Trigger Object");
+                    MUIPEditorHandler.DrawProperty(itemObject, customSkin, "Item Prefab");
+                    MUIPEditorHandler.DrawProperty(itemParent, customSkin, "Item Parent");
+                    MUIPEditorHandler.DrawProperty(scrollbar, customSkin, "Scrollbar");
+                    MUIPEditorHandler.DrawProperty(listParent, customSkin, "List Parent");
 
-                    EditorGUILayout.LabelField(new GUIContent("Trigger Object"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(triggerObject, new GUIContent(""));
+                    if (dTarget.animationType == DropdownMultiSelect.AnimationType.Modular)
+                    {
+                        MUIPEditorHandler.DrawProperty(listRect, customSkin, "List Rect");
+                        MUIPEditorHandler.DrawProperty(listCG, customSkin, "List Canvas Group");
+                    }
 
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Item Prefab"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(itemObject, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Item Parent"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(itemParent, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("Scrollbar"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(scrollbar, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    EditorGUILayout.LabelField(new GUIContent("List Parent"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(listParent, new GUIContent(""));
-
-                    GUILayout.EndHorizontal();
                     break;
 
                 case 2:
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                    MUIPEditorHandler.DrawHeader(customSkin, "Customization Header", 6);
+                    enableIcon.boolValue = MUIPEditorHandler.DrawToggle(enableIcon.boolValue, customSkin, "Enable Header Icon");
+                    enableScrollbar.boolValue = MUIPEditorHandler.DrawToggle(enableScrollbar.boolValue, customSkin, "Enable Scrollbar");
+                    MUIPEditorHandler.DrawPropertyCW(itemSpacing, customSkin, "Item Spacing", 90);
 
-                    enableIcon.boolValue = GUILayout.Toggle(enableIcon.boolValue, new GUIContent("Enable Icon"), customSkin.FindStyle("Toggle"));
-                    enableIcon.boolValue = GUILayout.Toggle(enableIcon.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
+                    GUILayout.BeginVertical(EditorStyles.helpBox);
+                    GUILayout.BeginHorizontal();
+                    EditorGUILayout.LabelField(new GUIContent("Item Padding"), customSkin.FindStyle("Text"), GUILayout.Width(90));
                     GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                    EditorGUI.indentLevel = 1;
 
-                    enableTrigger.boolValue = GUILayout.Toggle(enableTrigger.boolValue, new GUIContent("Enable Trigger"), customSkin.FindStyle("Toggle"));
-                    enableTrigger.boolValue = GUILayout.Toggle(enableTrigger.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+                    EditorGUILayout.PropertyField(itemPaddingTop, new GUIContent("Top"));
+                    EditorGUILayout.PropertyField(itemPaddingBottom, new GUIContent("Bottom"));
+                    EditorGUILayout.PropertyField(itemPaddingLeft, new GUIContent("Left"));
+                    EditorGUILayout.PropertyField(itemPaddingRight, new GUIContent("Right"));
 
-                    GUILayout.EndHorizontal();  
+                    EditorGUI.indentLevel = 0;
+                    GUILayout.EndVertical();
+
+                    MUIPEditorHandler.DrawHeader(customSkin, "Animation Header", 10);
+                    MUIPEditorHandler.DrawProperty(animationType, customSkin, "Animation Type");
+
+                    if (dTarget.animationType == DropdownMultiSelect.AnimationType.Modular)
+                    {
+                        MUIPEditorHandler.DrawProperty(transitionSmoothness, customSkin, "Transition Speed");
+                        MUIPEditorHandler.DrawProperty(sizeSmoothness, customSkin, "Size Smoothness");
+                        MUIPEditorHandler.DrawProperty(panelSize, customSkin, "Panel Size");
+                    }
+
+                    MUIPEditorHandler.DrawHeader(customSkin, "Options Header", 10);
+                    initAtStart.boolValue = MUIPEditorHandler.DrawToggle(initAtStart.boolValue, customSkin, "Initialize At Start");
+                    invokeAtStart.boolValue = MUIPEditorHandler.DrawToggle(invokeAtStart.boolValue, customSkin, "Invoke At Start");
+                    enableTrigger.boolValue = MUIPEditorHandler.DrawToggle(enableTrigger.boolValue, customSkin, "Enable Trigger");
 
                     if (enableTrigger.boolValue == true && dTarget.triggerObject == null)
                     {
@@ -142,50 +144,9 @@ namespace Michsky.UI.ModernUIPack
                         GUILayout.EndHorizontal();
                     }
 
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    enableScrollbar.boolValue = GUILayout.Toggle(enableScrollbar.boolValue, new GUIContent("Enable Scrollbar"), customSkin.FindStyle("Toggle"));
-                    enableScrollbar.boolValue = GUILayout.Toggle(enableScrollbar.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-
-                    if (dTarget.scrollbar != null)
-                    {
-                        if (enableScrollbar.boolValue == true)
-                            dTarget.scrollbar.SetActive(true);
-                        else
-                            dTarget.scrollbar.SetActive(false);
-                    }
-
-                    else
-                    {
-                        if (enableScrollbar.boolValue == true)
-                        {
-                            GUILayout.BeginHorizontal();
-                            EditorGUILayout.HelpBox("'Scrollbar' is not assigned. Go to Resources tab and assign the correct variable.", MessageType.Error);
-                            GUILayout.EndHorizontal();
-                        }                     
-                    }
-
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    setHighPriorty.boolValue = GUILayout.Toggle(setHighPriorty.boolValue, new GUIContent("Set High Priorty"), customSkin.FindStyle("Toggle"));
-                    setHighPriorty.boolValue = GUILayout.Toggle(setHighPriorty.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    outOnPointerExit.boolValue = GUILayout.Toggle(outOnPointerExit.boolValue, new GUIContent("Out On Pointer Exit"), customSkin.FindStyle("Toggle"));
-                    outOnPointerExit.boolValue = GUILayout.Toggle(outOnPointerExit.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                    isListItem.boolValue = GUILayout.Toggle(isListItem.boolValue, new GUIContent("Is List Item"), customSkin.FindStyle("Toggle"));
-                    isListItem.boolValue = GUILayout.Toggle(isListItem.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                    GUILayout.EndHorizontal();
-             
+                    setHighPriorty.boolValue = MUIPEditorHandler.DrawToggle(setHighPriorty.boolValue, customSkin, "Set High Priorty");
+                    outOnPointerExit.boolValue = MUIPEditorHandler.DrawToggle(outOnPointerExit.boolValue, customSkin, "Out On Pointer Exit");
+                    isListItem.boolValue = MUIPEditorHandler.DrawToggle(isListItem.boolValue, customSkin, "Is List Item");
 
                     if (isListItem.boolValue == true && dTarget.listParent == null)
                     {
@@ -194,21 +155,34 @@ namespace Michsky.UI.ModernUIPack
                         GUILayout.EndHorizontal();
                     }
 
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                    MUIPEditorHandler.DrawHeader(customSkin, "UIM Header", 10);
 
-                    invokeAtStart.boolValue = GUILayout.Toggle(invokeAtStart.boolValue, new GUIContent("Invoke At Start"), customSkin.FindStyle("Toggle"));
-                    invokeAtStart.boolValue = GUILayout.Toggle(invokeAtStart.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+                    if (tempUIM != null)
+                    {
+                        MUIPEditorHandler.DrawUIManagerConnectedHeader();
+                        tempUIM.overrideColors = MUIPEditorHandler.DrawToggle(tempUIM.overrideColors, customSkin, "Override Colors");
+                        tempUIM.overrideFonts = MUIPEditorHandler.DrawToggle(tempUIM.overrideFonts, customSkin, "Override Fonts");
 
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
+                        if (GUILayout.Button("Open UI Manager", customSkin.button))
+                            EditorApplication.ExecuteMenuItem("Tools/Modern UI Pack/Show UI Manager");
 
-                    EditorGUILayout.LabelField(new GUIContent("Animation Type"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                    EditorGUILayout.PropertyField(animationType, new GUIContent(""));
+                        if (GUILayout.Button("Disable UI Manager Connection", customSkin.button))
+                        {
+                            if (EditorUtility.DisplayDialog("Modern UI Pack", "Are you sure you want to disable UI Manager connection with the object? " +
+                                "This operation cannot be undone.", "Yes", "Cancel"))
+                            {
+                                try { DestroyImmediate(tempUIM); }
+                                catch { Debug.LogError("<b>[Dropdown]</b> Failed to delete UI Manager connection.", this); }
+                            }
+                        }
+                    }
 
-                    GUILayout.EndHorizontal();
+                    else if (tempUIM == null) { MUIPEditorHandler.DrawUIManagerDisconnectedHeader(); }
+
                     break;
             }
 
+            this.Repaint();
             serializedObject.ApplyModifiedProperties();
         }
     }

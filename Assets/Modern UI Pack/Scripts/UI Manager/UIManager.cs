@@ -10,8 +10,6 @@ namespace Michsky.UI.ModernUIPack
         [HideInInspector] public bool enableDynamicUpdate = true;
         [HideInInspector] public bool enableExtendedColorPicker = true;
         [HideInInspector] public bool editorHints = true;
-        [HideInInspector] public bool changeRootFolder = true;
-        [HideInInspector] public string rootFolder = "Modern UI Pack/Prefabs/";
 
         // Animated Icon
         public Color animatedIconColor = new Color(255, 255, 255, 255);
@@ -36,7 +34,6 @@ namespace Michsky.UI.ModernUIPack
         public TMP_FontAsset dropdownItemFont;
         public float dropdownItemFontSize = 22.5f;
         public DropdownThemeType dropdownThemeType;
-        public DropdownAnimationType dropdownAnimationType;
         public TMP_FontAsset dropdownFont;
         public float dropdownFontSize = 22.5f;
         public Color dropdownColor = new Color(255, 255, 255, 255);
@@ -123,47 +120,11 @@ namespace Michsky.UI.ModernUIPack
         public Color tooltipTextColor = new Color(255, 255, 255, 255);
         public Color tooltipBackgroundColor = new Color(255, 255, 255, 255);
 
-        public enum ButtonThemeType
-        {
-            BASIC,
-            CUSTOM
-        }
-
-        public enum DropdownThemeType
-        {
-            BASIC,
-            CUSTOM
-        }
-
-        public enum DropdownAnimationType
-        {
-            FADING,
-            SLIDING,
-            STYLISH
-        }
-
-        public enum ModalWindowThemeType
-        {
-            BASIC,
-            CUSTOM
-        }
-
-        public enum NotificationThemeType
-        {
-            BASIC,
-            CUSTOM
-        }
-
-        public enum SliderThemeType
-        {
-            BASIC,
-            CUSTOM
-        }
-
-        public enum ToggleThemeType
-        {
-            BASIC,
-            CUSTOM
-        }
+        public enum ButtonThemeType { Basic, Custom }
+        public enum DropdownThemeType { Basic, Custom }
+        public enum ModalWindowThemeType { Basic, Custom }
+        public enum NotificationThemeType { Basic, Custom }
+        public enum SliderThemeType { Basic, Custom }
+        public enum ToggleThemeType { Basic, Custom }
     }
 }

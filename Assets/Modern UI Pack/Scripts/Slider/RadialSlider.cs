@@ -23,6 +23,7 @@ namespace Michsky.UI.ModernUIPack
         public float maxValue = 100;
         [Range(0, 8)] public int decimals;
         public bool isPercent;
+        public StartPoint startPoint = StartPoint.Left;
 
         // Saving
         public bool rememberValue;
@@ -42,6 +43,8 @@ namespace Michsky.UI.ModernUIPack
         private float currentAngle;
         private float currentAngleOnPointerDown;
         private float valueDisplayPrecision;
+
+        public enum StartPoint { Left, Right, Top, Down }
 
         public float SliderAngle
         {
@@ -68,17 +71,18 @@ namespace Michsky.UI.ModernUIPack
             graphicRaycaster = GetComponentInParent<GraphicRaycaster>();
 
             if (graphicRaycaster == null)
-            {
-                Debug.LogWarning("Could not find GraphicRaycaster component in parent of this GameObject: " + name, this);
-                Destroy(gameObject);
-            }
+                Debug.LogWarning("<b>[Radial Slider]</b> Could not find GraphicRaycaster component in parent.", this);
         }
 
         private void Start()
         {
             valueDisplayPrecision = Mathf.Pow(10, decimals);
-            LoadState();
-            SliderAngle = currentValue * 3.6f;
+
+            if (rememberValue == true) { LoadState(); }
+            else { SliderAngle = currentValue * 3.6f; }
+
+            SliderValue = currentValue;
+            onValueChanged.Invoke(SliderValueRaw);
             UpdateUI();
         }
 
@@ -101,10 +105,8 @@ namespace Michsky.UI.ModernUIPack
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (currentValue >= minValue)
-                HandleSliderMouseInput(eventData, false);
-            else if (currentValue <= minValue)
-                SliderValueRaw = minValue;
+            if (currentValue >= minValue) { HandleSliderMouseInput(eventData, false); }
+            else if (currentValue <= minValue) { SliderValueRaw = minValue; }
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -119,9 +121,6 @@ namespace Michsky.UI.ModernUIPack
 
         public void LoadState()
         {
-            if (!rememberValue)
-                return;
-
             currentAngle = PlayerPrefs.GetFloat(sliderTag + PREFS_UI_SAVE_NAME);
         }
 
@@ -162,7 +161,7 @@ namespace Michsky.UI.ModernUIPack
 
             if (!allowValueWrap)
             {
-                float currentAngle = SliderAngle;
+                currentAngle = SliderAngle;
                 bool needsClamping = Mathf.Abs(newAngle - currentAngle) >= 180;
 
                 if (needsClamping)

@@ -125,7 +125,7 @@ GameObject:
   m_Layer: 5
   m_Name: Slider - Standard
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2800000, guid: b5c20faaa6c0f514092673e609258886, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -172,6 +172,8 @@ MonoBehaviour:
   showValue: 0
   showPopupValue: 0
   useRoundValue: 0
+  minValue: 0
+  maxValue: 0
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -245,6 +247,9 @@ MonoBehaviour:
   UIManagerAsset: {fileID: 11400000, guid: 2a619a9609984be49b53b928dd94e61b, type: 2}
   hasLabel: 0
   hasPopupLabel: 0
+  webglMode: 0
+  overrideColors: 0
+  overrideFonts: 0
   background: {fileID: 114290137290206638}
   bar: {fileID: 114130183789567126}
   handle: {fileID: 114190760175915368}

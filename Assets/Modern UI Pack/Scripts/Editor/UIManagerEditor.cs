@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
-#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.Presets;
-#endif
 
-#if UNITY_EDITOR
 namespace Michsky.UI.ModernUIPack
 {
     [CustomEditor(typeof(UIManager))]
     [System.Serializable]
     public class UIManagerEditor : Editor
     {
-        // Variables
-        Texture2D uimLogo;
+        GUISkin customSkin;
+        protected static string buildID = "B16-20220319";
+        protected static float foldoutItemSpace = 2;
+        protected static float foldoutTopSpace = 5;
+        protected static float foldoutBottomSpace = 2;
+
         protected static bool showAnimatedIcon = false;
         protected static bool showButton = false;
         protected static bool showContext = false;
@@ -28,61 +29,48 @@ namespace Michsky.UI.ModernUIPack
         protected static bool showToggle = false;
         protected static bool showTooltip = false;
 
-        void OnEnable()
+        private void OnEnable() 
         {
-            if (EditorGUIUtility.isProSkin == true)
-                uimLogo = Resources.Load<Texture2D>("Editor\\UIM Editor Dark");
-            else
-                uimLogo = Resources.Load<Texture2D>("Editor\\UIM Editor Light");
+            if (EditorGUIUtility.isProSkin == true) { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark"); }
+            else { customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light"); }
         }
 
         public override void OnInspectorGUI()
         {
-            // GUI skin variables
-            GUISkin customSkin;
-
-            if (EditorGUIUtility.isProSkin == true)
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Dark");
-            else
-                customSkin = (GUISkin)Resources.Load("Editor\\MUI Skin Light");
+            if (customSkin == null)
+            {
+                EditorGUILayout.HelpBox("Editor variables are missing. You can manually fix this by deleting " +
+                    "Modern UI Pack > Resources folder and then re-import the package. \n\nIf you're still seeing this " +
+                    "dialog even after the re-import, contact me with this ID: " + buildID, MessageType.Error);
+              
+                if (GUILayout.Button("Contact")) { Email(); }
+                return;
+            }
 
             // Foldout style
-            GUIStyle foldoutStyle = new GUIStyle(EditorStyles.foldout);
-            foldoutStyle.font = customSkin.font;
-            foldoutStyle.fontStyle = FontStyle.Normal;
-            foldoutStyle.fontSize = 15;
-            foldoutStyle.margin = new RectOffset(11, 55, 6, 6);
-            Vector2 contentOffset = foldoutStyle.contentOffset;
-            contentOffset.x = 5;
-            contentOffset.y = -1;
-            foldoutStyle.contentOffset = contentOffset;
+            GUIStyle foldoutStyle = customSkin.FindStyle("UIM Foldout");
 
-            // Logo
-            GUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-            GUILayout.Label(uimLogo, GUILayout.Width(250), GUILayout.Height(40));
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
-            GUILayout.Space(6);
-
+            // UIM Header
+            MUIPEditorHandler.DrawHeader(customSkin, "UIM Header", 8);
             GUILayout.BeginVertical(EditorStyles.helpBox);
 
             // Animated Icon
             var animatedIconColor = serializedObject.FindProperty("animatedIconColor");
+          
+            GUILayout.Space(foldoutTopSpace);
+            GUILayout.BeginHorizontal();
             showAnimatedIcon = EditorGUILayout.Foldout(showAnimatedIcon, "Animated Icon", true, foldoutStyle);
+            showAnimatedIcon = GUILayout.Toggle(showAnimatedIcon, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+            GUILayout.EndHorizontal();
+            GUILayout.Space(foldoutBottomSpace);
 
             if (showAnimatedIcon)
             {
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(animatedIconColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
+                MUIPEditorHandler.DrawProperty(animatedIconColor, customSkin, "Color");
             }
 
             GUILayout.EndVertical();
-            GUILayout.Space(2);
+            GUILayout.Space(foldoutItemSpace);
             GUILayout.BeginVertical(EditorStyles.helpBox);
 
             // Button
@@ -97,16 +85,17 @@ namespace Michsky.UI.ModernUIPack
             var buttonIconBasicColor = serializedObject.FindProperty("buttonIconBasicColor");
             var buttonIconColor = serializedObject.FindProperty("buttonIconColor");
             var buttonIconHighlightedColor = serializedObject.FindProperty("buttonIconHighlightedColor");
+
+            GUILayout.Space(foldoutTopSpace);
+            GUILayout.BeginHorizontal();
             showButton = EditorGUILayout.Foldout(showButton, "Button", true, foldoutStyle);
+            showButton = GUILayout.Toggle(showButton, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+            GUILayout.EndHorizontal();
+            GUILayout.Space(foldoutBottomSpace);
 
             if (showButton && buttonTheme.enumValueIndex == 0)
             {
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Theme Type"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(buttonTheme, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
+                MUIPEditorHandler.DrawProperty(buttonTheme, customSkin, "Theme Type");
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
 
                 EditorGUILayout.LabelField(new GUIContent("Font"), customSkin.FindStyle("Text"), GUILayout.Width(120));
@@ -114,106 +103,49 @@ namespace Michsky.UI.ModernUIPack
                 EditorGUILayout.PropertyField(buttonFont, new GUIContent(""));
 
                 GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Primary Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(buttonBorderColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Secondary Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(buttonFilledColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
+                MUIPEditorHandler.DrawProperty(buttonBorderColor, customSkin, "Primary Colorlor");
+                MUIPEditorHandler.DrawProperty(buttonFilledColor, customSkin, "Secondary Color");
             }
 
             if (showButton && buttonTheme.enumValueIndex == 1)
             {
+                MUIPEditorHandler.DrawProperty(buttonTheme, customSkin, "Theme Type");
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Theme Type"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(buttonTheme, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
                 EditorGUILayout.LabelField(new GUIContent("Font"), customSkin.FindStyle("Text"), GUILayout.Width(120));
                 EditorGUILayout.PropertyField(buttonFontSize, new GUIContent(""), GUILayout.Width(40));
                 EditorGUILayout.PropertyField(buttonFont, new GUIContent(""));
-
                 GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Border Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(buttonBorderColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Filled Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(buttonFilledColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Text Basic Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(buttonTextBasicColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Text Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(buttonTextColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Text Hover Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(buttonTextHighlightedColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Icon Basic Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(buttonIconBasicColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Icon Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(buttonIconColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Icon Hover Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(buttonIconHighlightedColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
+                MUIPEditorHandler.DrawProperty(buttonBorderColor, customSkin, "Border Color");
+                MUIPEditorHandler.DrawProperty(buttonFilledColor, customSkin, "Filled Color");
+                MUIPEditorHandler.DrawProperty(buttonTextBasicColor, customSkin, "Text Basic Color");
+                MUIPEditorHandler.DrawProperty(buttonTextColor, customSkin, "Text Color");
+                MUIPEditorHandler.DrawProperty(buttonTextHighlightedColor, customSkin, "Text Hover Color");
+                MUIPEditorHandler.DrawProperty(buttonIconBasicColor, customSkin, "Icon Basic Color");
+                MUIPEditorHandler.DrawProperty(buttonIconColor, customSkin, "Icon Color");
+                MUIPEditorHandler.DrawProperty(buttonIconHighlightedColor, customSkin, "Icon Hover Color");
             }
 
             GUILayout.EndVertical();
-            GUILayout.Space(2);
+            GUILayout.Space(foldoutItemSpace);
             GUILayout.BeginVertical(EditorStyles.helpBox);
 
             // Context Menu
             var contextBackgroundColor = serializedObject.FindProperty("contextBackgroundColor");
+
+            GUILayout.Space(foldoutTopSpace);
+            GUILayout.BeginHorizontal();
             showContext = EditorGUILayout.Foldout(showContext, "Context Menu", true, foldoutStyle);
+            showContext = GUILayout.Toggle(showContext, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+            GUILayout.EndHorizontal();
+            GUILayout.Space(foldoutBottomSpace);
 
             if (showContext)
             {
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Background Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(contextBackgroundColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                EditorGUILayout.HelpBox("Context Menu is currently in beta, expect major changes in future releases.", MessageType.Info);
+                MUIPEditorHandler.DrawProperty(contextBackgroundColor, customSkin, "Background Color");
             }
 
             GUILayout.EndVertical();
-            GUILayout.Space(2);
+            GUILayout.Space(foldoutItemSpace);
             GUILayout.BeginVertical(EditorStyles.helpBox);
 
             // Dropdown
@@ -229,120 +161,52 @@ namespace Michsky.UI.ModernUIPack
             var dropdownItemColor = serializedObject.FindProperty("dropdownItemColor");
             var dropdownItemTextColor = serializedObject.FindProperty("dropdownItemTextColor");
             var dropdownItemIconColor = serializedObject.FindProperty("dropdownItemIconColor");
+
+            GUILayout.Space(foldoutTopSpace);
+            GUILayout.BeginHorizontal();
             showDropdown = EditorGUILayout.Foldout(showDropdown, "Dropdown", true, foldoutStyle);
+            showDropdown = GUILayout.Toggle(showDropdown, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+            GUILayout.EndHorizontal();
+            GUILayout.Space(foldoutBottomSpace);
 
             if (showDropdown && dropdownTheme.enumValueIndex == 0)
             {
+                MUIPEditorHandler.DrawProperty(dropdownTheme, customSkin, "Theme Type");
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Theme Type"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(dropdownTheme, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Animation Type"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(dropdownAnimationType, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
                 EditorGUILayout.LabelField(new GUIContent("Font"), customSkin.FindStyle("Text"), GUILayout.Width(120));
                 EditorGUILayout.PropertyField(dropdownFontSize, new GUIContent(""), GUILayout.Width(40));
                 EditorGUILayout.PropertyField(dropdownFont, new GUIContent(""));
-
                 GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Primary Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(dropdownColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Secondary Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(dropdownTextColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Item Background"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(dropdownItemColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                EditorGUILayout.HelpBox("Item values will be applied at start.", MessageType.Info);
+                MUIPEditorHandler.DrawProperty(dropdownColor, customSkin, "Primary Color");
+                MUIPEditorHandler.DrawProperty(dropdownTextColor, customSkin, "Secondary Color");
+                MUIPEditorHandler.DrawProperty(dropdownItemColor, customSkin, "Item Background");
+                EditorGUILayout.HelpBox("Item values will be applied at runtime.", MessageType.Info);
             }
 
             if (showDropdown && dropdownTheme.enumValueIndex == 1)
             {
+                MUIPEditorHandler.DrawProperty(dropdownTheme, customSkin, "Theme Type");
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Theme Type"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(dropdownTheme, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Animation Type"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(dropdownAnimationType, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
                 EditorGUILayout.LabelField(new GUIContent("Font"), customSkin.FindStyle("Text"), GUILayout.Width(120));
                 EditorGUILayout.PropertyField(dropdownFontSize, new GUIContent(""), GUILayout.Width(40));
                 EditorGUILayout.PropertyField(dropdownFont, new GUIContent(""));
-
                 GUILayout.EndHorizontal();;
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
                 EditorGUILayout.LabelField(new GUIContent("Item Font"), customSkin.FindStyle("Text"), GUILayout.Width(120));
                 EditorGUILayout.PropertyField(dropdownItemFontSize, new GUIContent(""), GUILayout.Width(40));
                 EditorGUILayout.PropertyField(dropdownItemFont, new GUIContent(""));
-
                 GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(dropdownColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Text Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(dropdownTextColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Icon Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(dropdownIconColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Item Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(dropdownItemColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Item Text Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(dropdownItemTextColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Item Icon Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(dropdownItemIconColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                EditorGUILayout.HelpBox("Item values will be applied at start.", MessageType.Info);
+                MUIPEditorHandler.DrawProperty(dropdownColor, customSkin, "Color");
+                MUIPEditorHandler.DrawProperty(dropdownTextColor, customSkin, "Text Color");
+                MUIPEditorHandler.DrawProperty(dropdownIconColor, customSkin, "Icon Color");
+                MUIPEditorHandler.DrawProperty(dropdownItemColor, customSkin, "Item Color");
+                MUIPEditorHandler.DrawProperty(dropdownItemTextColor, customSkin, "Item Text Color");
+                MUIPEditorHandler.DrawProperty(dropdownItemIconColor, customSkin, "Item Icon Color");
+                EditorGUILayout.HelpBox("Item values will be applied at runtime.", MessageType.Info);
             }
 
             GUILayout.EndVertical();
-            GUILayout.Space(2);
+            GUILayout.Space(foldoutItemSpace);
             GUILayout.BeginVertical(EditorStyles.helpBox);
 
             // Horizontal Selector
@@ -352,74 +216,55 @@ namespace Michsky.UI.ModernUIPack
             var selectorHighlightedColor = serializedObject.FindProperty("selectorHighlightedColor");
             var hSelectorInvertAnimation = serializedObject.FindProperty("hSelectorInvertAnimation");
             var hSelectorLoopSelection = serializedObject.FindProperty("hSelectorLoopSelection");
+
+            GUILayout.Space(foldoutTopSpace);
+            GUILayout.BeginHorizontal();
             showHorSelector = EditorGUILayout.Foldout(showHorSelector, "Horizontal Selector", true, foldoutStyle);
+            showHorSelector = GUILayout.Toggle(showHorSelector, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+            GUILayout.EndHorizontal();
+            GUILayout.Space(foldoutBottomSpace);
 
             if (showHorSelector)
             {
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
                 EditorGUILayout.LabelField(new GUIContent("Font"), customSkin.FindStyle("Text"), GUILayout.Width(120));
                 EditorGUILayout.PropertyField(hSelectorFontSize, new GUIContent(""), GUILayout.Width(40));
                 EditorGUILayout.PropertyField(selectorFont, new GUIContent(""));
-
                 GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(selectorColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Highlighted Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(selectorHighlightedColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Invert Animation"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                hSelectorInvertAnimation.boolValue = GUILayout.Toggle(hSelectorInvertAnimation.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle"));
-                hSelectorInvertAnimation.boolValue = GUILayout.Toggle(hSelectorInvertAnimation.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Loop Selection"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                hSelectorLoopSelection.boolValue = GUILayout.Toggle(hSelectorLoopSelection.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle"));
-                hSelectorLoopSelection.boolValue = GUILayout.Toggle(hSelectorLoopSelection.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-                GUILayout.EndHorizontal();
+                MUIPEditorHandler.DrawProperty(selectorColor, customSkin, "Color");
+                MUIPEditorHandler.DrawProperty(selectorHighlightedColor, customSkin, "Highlighted Color");
+                hSelectorInvertAnimation.boolValue = MUIPEditorHandler.DrawToggle(hSelectorInvertAnimation.boolValue, customSkin, "Invert Animation");
+                hSelectorLoopSelection.boolValue = MUIPEditorHandler.DrawToggle(hSelectorLoopSelection.boolValue, customSkin, "Loop Selection");
             }
 
             GUILayout.EndVertical();
-            GUILayout.Space(2);
+            GUILayout.Space(foldoutItemSpace);
             GUILayout.BeginVertical(EditorStyles.helpBox);
 
             // Input Field
             var inputFieldFont = serializedObject.FindProperty("inputFieldFont");
             var inputFieldFontSize = serializedObject.FindProperty("inputFieldFontSize");
             var inputFieldColor = serializedObject.FindProperty("inputFieldColor");
+
+            GUILayout.Space(foldoutTopSpace);
+            GUILayout.BeginHorizontal();
             showInputField = EditorGUILayout.Foldout(showInputField, "Input Field", true, foldoutStyle);
+            showInputField = GUILayout.Toggle(showInputField, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+            GUILayout.EndHorizontal();
+            GUILayout.Space(foldoutBottomSpace);
 
             if (showInputField)
             {
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
                 EditorGUILayout.LabelField(new GUIContent("Font"), customSkin.FindStyle("Text"), GUILayout.Width(120));
                 EditorGUILayout.PropertyField(inputFieldFontSize, new GUIContent(""), GUILayout.Width(40));
                 EditorGUILayout.PropertyField(inputFieldFont, new GUIContent(""));
-
                 GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(inputFieldColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
+                MUIPEditorHandler.DrawProperty(inputFieldColor, customSkin, "Color");
             }
 
             GUILayout.EndVertical();
-            GUILayout.Space(2);
+            GUILayout.Space(foldoutItemSpace);
             GUILayout.BeginVertical(EditorStyles.helpBox);
 
             // Modal Window
@@ -430,57 +275,28 @@ namespace Michsky.UI.ModernUIPack
             var modalWindowIconColor = serializedObject.FindProperty("modalWindowIconColor");
             var modalWindowBackgroundColor = serializedObject.FindProperty("modalWindowBackgroundColor");
             var modalWindowContentPanelColor = serializedObject.FindProperty("modalWindowContentPanelColor");
+
+            GUILayout.Space(foldoutTopSpace);
+            GUILayout.BeginHorizontal();
             showModalWindow = EditorGUILayout.Foldout(showModalWindow, "Modal Window", true, foldoutStyle);
+            showModalWindow = GUILayout.Toggle(showModalWindow, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+            GUILayout.EndHorizontal();
+            GUILayout.Space(foldoutBottomSpace);
 
             if (showModalWindow)
             {
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Title Font"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(modalWindowTitleFont, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Content Font"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(modalWindowContentFont, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Title Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(modalWindowTitleColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Description Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(modalWindowDescriptionColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Icon Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(modalWindowIconColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Background Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(modalWindowBackgroundColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Content Panel Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(modalWindowContentPanelColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
+                MUIPEditorHandler.DrawProperty(modalWindowTitleFont, customSkin, "Title Font");
+                MUIPEditorHandler.DrawProperty(modalWindowContentFont, customSkin, "Content Font");
+                MUIPEditorHandler.DrawProperty(modalWindowTitleColor, customSkin, "Title Color");
+                MUIPEditorHandler.DrawProperty(modalWindowDescriptionColor, customSkin, "Description Color");
+                MUIPEditorHandler.DrawProperty(modalWindowIconColor, customSkin, "Icon Color");
+                MUIPEditorHandler.DrawProperty(modalWindowBackgroundColor, customSkin, "Background Color");
+                MUIPEditorHandler.DrawProperty(modalWindowContentPanelColor, customSkin, "Content Panel Color");
                 EditorGUILayout.HelpBox("These values will only affect 'Style 1 - Standard' window.", MessageType.Info);
             }
 
             GUILayout.EndVertical();
-            GUILayout.Space(2);
+            GUILayout.Space(foldoutItemSpace);
             GUILayout.BeginVertical(EditorStyles.helpBox);
 
             // Notification
@@ -492,52 +308,34 @@ namespace Michsky.UI.ModernUIPack
             var notificationTitleColor = serializedObject.FindProperty("notificationTitleColor");
             var notificationDescriptionColor = serializedObject.FindProperty("notificationDescriptionColor");
             var notificationIconColor = serializedObject.FindProperty("notificationIconColor");
+
+            GUILayout.Space(foldoutTopSpace);
+            GUILayout.BeginHorizontal();
             showNotification = EditorGUILayout.Foldout(showNotification, "Notification", true, foldoutStyle);
+            showNotification = GUILayout.Toggle(showNotification, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+            GUILayout.EndHorizontal();
+            GUILayout.Space(foldoutBottomSpace);
 
             if (showNotification)
             {
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
                 EditorGUILayout.LabelField(new GUIContent("Title Font"), customSkin.FindStyle("Text"), GUILayout.Width(120));
                 EditorGUILayout.PropertyField(notificationTitleFontSize, new GUIContent(""), GUILayout.Width(40));
                 EditorGUILayout.PropertyField(notificationTitleFont, new GUIContent(""));
-
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
                 EditorGUILayout.LabelField(new GUIContent("Description Font"), customSkin.FindStyle("Text"), GUILayout.Width(120));
                 EditorGUILayout.PropertyField(notificationDescriptionFontSize, new GUIContent(""), GUILayout.Width(40));
                 EditorGUILayout.PropertyField(notificationDescriptionFont, new GUIContent(""));
-
                 GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Background Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(notificationBackgroundColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Title Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(notificationTitleColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Description Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(notificationDescriptionColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Icon Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(notificationIconColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
+                MUIPEditorHandler.DrawProperty(notificationBackgroundColor, customSkin, "Background Color");
+                MUIPEditorHandler.DrawProperty(notificationTitleColor, customSkin, "Title Color");
+                MUIPEditorHandler.DrawProperty(notificationDescriptionColor, customSkin, "Description Color");
+                MUIPEditorHandler.DrawProperty(notificationIconColor, customSkin, "Icon Color");
             }
 
             GUILayout.EndVertical();
-            GUILayout.Space(2);
+            GUILayout.Space(foldoutItemSpace);
             GUILayout.BeginVertical(EditorStyles.helpBox);
 
             // Progress Bar
@@ -547,70 +345,50 @@ namespace Michsky.UI.ModernUIPack
             var progressBarBackgroundColor = serializedObject.FindProperty("progressBarBackgroundColor");
             var progressBarLoopBackgroundColor = serializedObject.FindProperty("progressBarLoopBackgroundColor");
             var progressBarLabelColor = serializedObject.FindProperty("progressBarLabelColor");
+
+            GUILayout.Space(foldoutTopSpace);
+            GUILayout.BeginHorizontal();
             showProgressBar = EditorGUILayout.Foldout(showProgressBar, "Progress Bar", true, foldoutStyle);
+            showProgressBar = GUILayout.Toggle(showProgressBar, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+            GUILayout.EndHorizontal();
+            GUILayout.Space(foldoutBottomSpace);
 
             if (showProgressBar)
             {
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
                 EditorGUILayout.LabelField(new GUIContent("Label Font"), customSkin.FindStyle("Text"), GUILayout.Width(120));
                 EditorGUILayout.PropertyField(progressBarLabelFontSize, new GUIContent(""), GUILayout.Width(40));
                 EditorGUILayout.PropertyField(progressBarLabelFont, new GUIContent(""));
-
                 GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(progressBarColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Label Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(progressBarLabelColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Background Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(progressBarBackgroundColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Loop BG Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(progressBarLoopBackgroundColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
+                MUIPEditorHandler.DrawProperty(progressBarColor, customSkin, "Color");
+                MUIPEditorHandler.DrawProperty(progressBarLabelColor, customSkin, "Label Color");
+                MUIPEditorHandler.DrawProperty(progressBarBackgroundColor, customSkin, "Background Color");
+                MUIPEditorHandler.DrawProperty(progressBarLoopBackgroundColor, customSkin, "Loop BG Color");
             }
 
             GUILayout.EndVertical();
-            GUILayout.Space(2);
+            GUILayout.Space(foldoutItemSpace);
             GUILayout.BeginVertical(EditorStyles.helpBox);
 
             // Scrollbar
             var scrollbarColor = serializedObject.FindProperty("scrollbarColor");
             var scrollbarBackgroundColor = serializedObject.FindProperty("scrollbarBackgroundColor");
+
+            GUILayout.Space(foldoutTopSpace);
+            GUILayout.BeginHorizontal();
             showScrollbar = EditorGUILayout.Foldout(showScrollbar, "Scrollbar", true, foldoutStyle);
+            showScrollbar = GUILayout.Toggle(showScrollbar, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+            GUILayout.EndHorizontal();
+            GUILayout.Space(foldoutBottomSpace);
 
             if (showScrollbar)
             {
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Bar Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(scrollbarColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Background Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(scrollbarBackgroundColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
+                MUIPEditorHandler.DrawProperty(scrollbarColor, customSkin, "Bar Color");
+                MUIPEditorHandler.DrawProperty(scrollbarBackgroundColor, customSkin, "Background Color");
             }
 
             GUILayout.EndVertical();
-            GUILayout.Space(2);
+            GUILayout.Space(foldoutItemSpace);
             GUILayout.BeginVertical(EditorStyles.helpBox);
 
             // Slider
@@ -622,92 +400,44 @@ namespace Michsky.UI.ModernUIPack
             var sliderPopupLabelColor = serializedObject.FindProperty("sliderPopupLabelColor");
             var sliderHandleColor = serializedObject.FindProperty("sliderHandleColor");
             var sliderBackgroundColor = serializedObject.FindProperty("sliderBackgroundColor");
+
+            GUILayout.Space(foldoutTopSpace);
+            GUILayout.BeginHorizontal();
             showSlider = EditorGUILayout.Foldout(showSlider, "Slider", true, foldoutStyle);
+            showSlider = GUILayout.Toggle(showSlider, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+            GUILayout.EndHorizontal();
+            GUILayout.Space(foldoutBottomSpace);
 
             if (showSlider && sliderThemeType.enumValueIndex == 0)
             {
+                MUIPEditorHandler.DrawProperty(sliderThemeType, customSkin, "Theme Type");
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Theme Type"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(sliderThemeType, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
                 EditorGUILayout.LabelField(new GUIContent("Label Font"), customSkin.FindStyle("Text"), GUILayout.Width(120));
                 EditorGUILayout.PropertyField(sliderLabelFontSize, new GUIContent(""), GUILayout.Width(40));
                 EditorGUILayout.PropertyField(sliderLabelFont, new GUIContent(""));
-
                 GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Primary Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(sliderColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Secondary Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(sliderBackgroundColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Label Popup Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(sliderLabelColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
+                MUIPEditorHandler.DrawProperty(sliderColor, customSkin, "Primary Color");
+                MUIPEditorHandler.DrawProperty(sliderBackgroundColor, customSkin, "Secondary Color");
+                MUIPEditorHandler.DrawProperty(sliderLabelColor, customSkin, "Label Popup Color");
             }
 
             if (showSlider && sliderThemeType.enumValueIndex == 1)
             {
+                MUIPEditorHandler.DrawProperty(sliderThemeType, customSkin, "Theme Type");
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Theme Type"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(sliderThemeType, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
                 EditorGUILayout.LabelField(new GUIContent("Label Font"), customSkin.FindStyle("Text"), GUILayout.Width(120));
                 EditorGUILayout.PropertyField(sliderLabelFontSize, new GUIContent(""), GUILayout.Width(40));
                 EditorGUILayout.PropertyField(sliderLabelFont, new GUIContent(""));
-
                 GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(sliderColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Label Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(sliderLabelColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Label Popup Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(sliderPopupLabelColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Handle Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(sliderHandleColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Background Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(sliderBackgroundColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
+                MUIPEditorHandler.DrawProperty(sliderColor, customSkin, "Color");
+                MUIPEditorHandler.DrawProperty(sliderLabelColor, customSkin, "Label Color");
+                MUIPEditorHandler.DrawProperty(sliderPopupLabelColor, customSkin, "Label Popup Color");
+                MUIPEditorHandler.DrawProperty(sliderHandleColor, customSkin, "Handle Color");
+                MUIPEditorHandler.DrawProperty(sliderBackgroundColor, customSkin, "Background Color");
             }
 
             GUILayout.EndVertical();
-            GUILayout.Space(2);
+            GUILayout.Space(foldoutItemSpace);
             GUILayout.BeginVertical(EditorStyles.helpBox);
 
             // Switch
@@ -715,38 +445,24 @@ namespace Michsky.UI.ModernUIPack
             var switchBackgroundColor = serializedObject.FindProperty("switchBackgroundColor");
             var switchHandleOnColor = serializedObject.FindProperty("switchHandleOnColor");
             var switchHandleOffColor = serializedObject.FindProperty("switchHandleOffColor");
+
+            GUILayout.Space(foldoutTopSpace);
+            GUILayout.BeginHorizontal();
             showSwitch = EditorGUILayout.Foldout(showSwitch, "Switch", true, foldoutStyle);
+            showSwitch = GUILayout.Toggle(showSwitch, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+            GUILayout.EndHorizontal();
+            GUILayout.Space(foldoutBottomSpace);
 
             if (showSwitch)
             {
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Border Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(switchBorderColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Background Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(switchBackgroundColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Handle On Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(switchHandleOnColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Handle Off Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(switchHandleOffColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
+                MUIPEditorHandler.DrawProperty(switchBorderColor, customSkin, "Border Color");
+                MUIPEditorHandler.DrawProperty(switchBackgroundColor, customSkin, "Background Color");
+                MUIPEditorHandler.DrawProperty(switchHandleOnColor, customSkin, "Handle On Color");
+                MUIPEditorHandler.DrawProperty(switchHandleOffColor, customSkin, "Handle Off Color");
             }
 
             GUILayout.EndVertical();
-            GUILayout.Space(2);
+            GUILayout.Space(foldoutItemSpace);
             GUILayout.BeginVertical(EditorStyles.helpBox);
 
             // Toggle
@@ -756,45 +472,29 @@ namespace Michsky.UI.ModernUIPack
             var toggleBorderColor = serializedObject.FindProperty("toggleBorderColor");
             var toggleBackgroundColor = serializedObject.FindProperty("toggleBackgroundColor");
             var toggleCheckColor = serializedObject.FindProperty("toggleCheckColor");
+
+            GUILayout.Space(foldoutTopSpace);
+            GUILayout.BeginHorizontal();
             showToggle = EditorGUILayout.Foldout(showToggle, "Toggle", true, foldoutStyle);
+            showToggle = GUILayout.Toggle(showToggle, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+            GUILayout.EndHorizontal();
+            GUILayout.Space(foldoutBottomSpace);
 
             if (showToggle)
             {
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
                 EditorGUILayout.LabelField(new GUIContent("Font"), customSkin.FindStyle("Text"), GUILayout.Width(120));
                 EditorGUILayout.PropertyField(toggleFontSize, new GUIContent(""), GUILayout.Width(40));
                 EditorGUILayout.PropertyField(toggleFont, new GUIContent(""));
-
                 GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Text Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(toggleTextColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Border Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(toggleBorderColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Background Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(toggleBackgroundColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Check Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(toggleCheckColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
+                MUIPEditorHandler.DrawProperty(toggleTextColor, customSkin, "Text Color");
+                MUIPEditorHandler.DrawProperty(toggleBorderColor, customSkin, "Border Color");
+                MUIPEditorHandler.DrawProperty(toggleBackgroundColor, customSkin, "Background Color");
+                MUIPEditorHandler.DrawProperty(toggleCheckColor, customSkin, "Check Color");
             }
 
             GUILayout.EndVertical();
-            GUILayout.Space(2);
+            GUILayout.Space(foldoutItemSpace);
             GUILayout.BeginVertical(EditorStyles.helpBox);
 
             // Tooltip
@@ -802,109 +502,56 @@ namespace Michsky.UI.ModernUIPack
             var tooltipFontSize = serializedObject.FindProperty("tooltipFontSize");
             var tooltipTextColor = serializedObject.FindProperty("tooltipTextColor");
             var tooltipBackgroundColor = serializedObject.FindProperty("tooltipBackgroundColor");
+
+            GUILayout.Space(foldoutTopSpace);
+            GUILayout.BeginHorizontal();
             showTooltip = EditorGUILayout.Foldout(showTooltip, "Tooltip", true, foldoutStyle);
+            showTooltip = GUILayout.Toggle(showTooltip, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
+            GUILayout.EndHorizontal();
+            GUILayout.Space(foldoutBottomSpace);
 
             if (showTooltip)
             {
                 GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
                 EditorGUILayout.LabelField(new GUIContent("Font"), customSkin.FindStyle("Text"), GUILayout.Width(120));
                 EditorGUILayout.PropertyField(tooltipFontSize, new GUIContent(""), GUILayout.Width(40));
                 EditorGUILayout.PropertyField(tooltipFont, new GUIContent(""));
-
                 GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Text Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(tooltipTextColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-                EditorGUILayout.LabelField(new GUIContent("Background Color"), customSkin.FindStyle("Text"), GUILayout.Width(120));
-                EditorGUILayout.PropertyField(tooltipBackgroundColor, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
+                MUIPEditorHandler.DrawProperty(tooltipTextColor, customSkin, "Text Color");
+                MUIPEditorHandler.DrawProperty(tooltipBackgroundColor, customSkin, "Background Color");
             }
 
             // Settings
             GUILayout.EndVertical();
-            GUILayout.Space(7);
-            EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-            GUILayout.Space(6);
+            MUIPEditorHandler.DrawHeader(customSkin, "Options Header", 14);
 
             var enableDynamicUpdate = serializedObject.FindProperty("enableDynamicUpdate");
-
-            GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-            enableDynamicUpdate.boolValue = GUILayout.Toggle(enableDynamicUpdate.boolValue, new GUIContent("Update Values"), customSkin.FindStyle("Toggle"));
-            enableDynamicUpdate.boolValue = GUILayout.Toggle(enableDynamicUpdate.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-            GUILayout.EndHorizontal();
+            enableDynamicUpdate.boolValue = MUIPEditorHandler.DrawToggle(enableDynamicUpdate.boolValue, customSkin, "Update Values");
 
             var enableExtendedColorPicker = serializedObject.FindProperty("enableExtendedColorPicker");
+            enableExtendedColorPicker.boolValue = MUIPEditorHandler.DrawToggle(enableExtendedColorPicker.boolValue, customSkin, "Extended Color Picker");
 
-            GUILayout.BeginHorizontal(EditorStyles.helpBox);
-
-            enableExtendedColorPicker.boolValue = GUILayout.Toggle(enableExtendedColorPicker.boolValue, new GUIContent("Extended Color Picker"), customSkin.FindStyle("Toggle"));
-            enableExtendedColorPicker.boolValue = GUILayout.Toggle(enableExtendedColorPicker.boolValue, new GUIContent(""), customSkin.FindStyle("Toggle Helper"));
-
-            GUILayout.EndHorizontal();
-
-            if (enableExtendedColorPicker.boolValue == true)
-                EditorPrefs.SetInt("UIManager.EnableExtendedColorPicker", 1);
-            else
-                EditorPrefs.SetInt("UIManager.EnableExtendedColorPicker", 0);
+            if (enableExtendedColorPicker.boolValue == true) { EditorPrefs.SetInt("UIManager.EnableExtendedColorPicker", 1); }
+            else { EditorPrefs.SetInt("UIManager.EnableExtendedColorPicker", 0); }
 
             var editorHints = serializedObject.FindProperty("editorHints");
 
             GUILayout.BeginVertical(EditorStyles.helpBox);
-
-            editorHints.boolValue = GUILayout.Toggle(editorHints.boolValue, new GUIContent("UI Manager Hints"), customSkin.FindStyle("Toggle"), GUILayout.Width(500));
+            GUILayout.Space(-3);
+            editorHints.boolValue = MUIPEditorHandler.DrawTogglePlain(editorHints.boolValue, customSkin, "UI Manager Hints");
+            GUILayout.Space(3);
 
             if (editorHints.boolValue == true)
             {
-                EditorGUILayout.HelpBox("These values are universal and will affect any object that contains 'UI Manager' component.", MessageType.Info);
-                EditorGUILayout.HelpBox("Remove 'UI Manager' component from the object if want to assign unique values.", MessageType.Info);
-				EditorGUILayout.HelpBox("You can press 'CTRL + SHIFT + M' to open UI Manager quickly.", MessageType.Info);
-            }
-
-            GUILayout.EndVertical();
-
-            var rootFolder = serializedObject.FindProperty("rootFolder");
-            var changeRootFolder = serializedObject.FindProperty("changeRootFolder");
-
-            GUILayout.BeginVertical(EditorStyles.helpBox);
-
-            changeRootFolder.boolValue = GUILayout.Toggle(changeRootFolder.boolValue, new GUIContent("Change Root Folder"), customSkin.FindStyle("Toggle"), GUILayout.Width(500));
-
-            if (changeRootFolder.boolValue == true)
-            {
-                EditorGUI.indentLevel = 2;
-                GUILayout.BeginHorizontal();
-
-                EditorGUILayout.LabelField(new GUIContent("Root Folder:"), customSkin.FindStyle("Text"), GUILayout.Width(76));
-                EditorGUILayout.PropertyField(rootFolder, new GUIContent(""));
-
-                GUILayout.EndHorizontal();
-                GUILayout.Space(2);
-                GUILayout.BeginHorizontal();
-                GUILayout.FlexibleSpace();
-
-                if (GUILayout.Button("Apply", customSkin.button, GUILayout.Width(120)))
-                    EditorPrefs.SetString("UIManager.RootFolder", rootFolder.stringValue);
-
-                GUILayout.EndHorizontal();
-                GUILayout.Space(2);
-                EditorGUI.indentLevel = 0;
-                EditorGUILayout.HelpBox("Use this option only if you're moving Modern UI Pack folder. " +
-                    "Make sure to hit apply after changing the root. " +
-                    "Example: Parent Folders/Modern UI Pack/Prefabs.", MessageType.Warning);
+                EditorGUILayout.HelpBox("These values are universal and affect all objects containing 'UI Manager' component.", MessageType.Info);
+                EditorGUILayout.HelpBox("If want to assign unique values, remove 'UI Manager' component from the object ", MessageType.Info);
+				EditorGUILayout.HelpBox("You can press 'Control/Command + Shift + M' to open the manager quickly.", MessageType.Info);
             }
 
             GUILayout.EndVertical();
 
             serializedObject.ApplyModifiedProperties();
+            Repaint();
 
             GUILayout.Space(12);
             GUILayout.BeginHorizontal();
@@ -913,64 +560,37 @@ namespace Michsky.UI.ModernUIPack
                 ResetToDefaults();
 
             GUILayout.EndHorizontal();
-            GUILayout.Space(5);
-            EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
 
-            GUILayout.Space(4);
+            // Support
+            MUIPEditorHandler.DrawHeader(customSkin, "Support Header", 14);
             GUILayout.BeginVertical();
             GUILayout.BeginHorizontal();
-            // GUILayout.FlexibleSpace();
             GUILayout.Label("Need help? Contact me via:", customSkin.FindStyle("Text"));
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
-            // GUILayout.FlexibleSpace();
 
-            if (GUILayout.Button("Discord", customSkin.button))
-                Discord();
-
-            if (GUILayout.Button("E-mail", customSkin.button))
-                Email();
-
-            if (GUILayout.Button("YouTube", customSkin.button))
-                YouTube();
+            if (GUILayout.Button("Discord", customSkin.button)) { Discord(); }
+            if (GUILayout.Button("Twitter", customSkin.button)) { Twitter(); }
 
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
 
-            if (GUILayout.Button("Website", customSkin.button))
-                Website();
+            if (GUILayout.Button("E-mail", customSkin.button)) { Email(); }
 
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
-
-            if (GUILayout.Button("Write a review", customSkin.button))
-                Review();
+            GUILayout.Space(6);
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            GUILayout.Label("ID: " + buildID);
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            GUILayout.Space(6);
         }
 
-        void Discord()
-        {
-            Application.OpenURL("https://discord.gg/VXpHyUt");
-        }
-
-        void Email()
-        {
-            Application.OpenURL("mailto:support@michsky.com?subject=Contact");
-        }
-
-        void YouTube()
-        {
-            Application.OpenURL("https://www.youtube.com/c/michsky");
-        }
-
-        void Website()
-        {
-            Application.OpenURL("https://www.michsky.com/");
-        }
-
-        void Review()
-        {
-            Application.OpenURL("https://assetstore.unity.com/packages/tools/gui/modern-ui-pack-150824/reviews/?page=1&sort_by=helpful");
-        }
+        void Discord() { Application.OpenURL("https://discord.gg/VXpHyUt"); }
+        void Email() { Application.OpenURL("https://www.michsky.com/contact/"); }
+        void Twitter() { Application.OpenURL("https://www.twitter.com/michskyHQ"); }
 
         void ResetToDefaults()
         {
@@ -984,12 +604,8 @@ namespace Michsky.UI.ModernUIPack
                     Debug.Log("<b>[UI Manager]</b> Resetting successful.");
                 }
 
-                catch
-                {
-                    Debug.LogWarning("<b>[UI Manager]</b> Resetting failed.");
-                }
+                catch { Debug.LogWarning("<b>[UI Manager]</b> Resetting failed. Default preset seems to be missing"); }
             }    
         }
     }
 }
-#endif

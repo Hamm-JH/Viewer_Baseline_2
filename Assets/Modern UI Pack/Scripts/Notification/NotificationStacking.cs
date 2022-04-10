@@ -10,7 +10,7 @@ namespace Michsky.UI.ModernUIPack
         public List<NotificationManager> notifications = new List<NotificationManager>();
         [HideInInspector] public bool enableUpdating = false;
 
-        [Header("SETTINGS")]
+        [Header("Settings")]
         public float delay = 1;
         int currentNotification = 0;
 
