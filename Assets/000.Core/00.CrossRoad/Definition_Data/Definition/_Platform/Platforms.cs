@@ -97,10 +97,15 @@ namespace Definition
 		{
 			switch(_pCode)
 			{
-				case PlatformCode.WebGL_AdminViewer_Bridge:
+				case PlatformCode.WebGL_Template1:
+				case PlatformCode.WebGL_Template2:
 				case PlatformCode.WebGL_AdminViewer_Tunnel:
+				case PlatformCode.WebGL_AdminViewer_Bridge:
 				case PlatformCode.PC_Viewer_Bridge:
 				case PlatformCode.PC_Viewer_Tunnel:
+
+				case PlatformCode.WebGL_SmartInspect_Tunnel:
+				case PlatformCode.WebGL_SmartInspect_Bridge:
 					return true;
 			}
 
@@ -109,7 +114,13 @@ namespace Definition
 
 		public static bool IsMobilePlatform(PlatformCode _pCode)
 		{
-			throw new System.NotImplementedException();
+			switch(_pCode)
+            {
+				case PlatformCode.Mobile_Template1:
+					return true;
+            }
+
+			return false;
 		}
 	}
 }

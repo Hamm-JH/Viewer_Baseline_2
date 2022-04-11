@@ -2525,7 +2525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3499201885763165651
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4059,7 +4059,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 35
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements:
   - {fileID: 6798270971000583705}
@@ -4395,7 +4394,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 33
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements:
   - {fileID: 2823325675007408161}
@@ -4690,7 +4688,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 34
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements:
   - {fileID: 8852529610742658401}
@@ -5626,7 +5623,6 @@ MonoBehaviour:
   childPanel: {fileID: 2767807994974479105}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 17
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements:
   - {fileID: 3609068223629402185}
@@ -5846,7 +5842,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 64
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements:
   - {fileID: 4587914001794537806}
@@ -5988,7 +5983,6 @@ MonoBehaviour:
   childPanel: {fileID: 5180331003630555935}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 17
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -6207,7 +6201,6 @@ MonoBehaviour:
   childPanel: {fileID: 7373930970596593034}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 17
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements:
   - {fileID: 9042493016543876771}
@@ -6427,7 +6420,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 41
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements:
   - {fileID: 5554508777278076611}
@@ -6647,7 +6639,6 @@ MonoBehaviour:
   childPanel: {fileID: 5180331003630555935}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 17
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements:
   - {fileID: 6564803290113871629}
@@ -6791,7 +6782,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 65
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements:
   - {fileID: 896320010891267128}
@@ -6935,7 +6925,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 70
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements:
   - {fileID: 4130103343302083428}
@@ -7156,7 +7145,6 @@ MonoBehaviour:
   childPanel: {fileID: 1365275687327073069}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 17
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements:
   - {fileID: 8366386082976697845}
@@ -12043,7 +12031,6 @@ MonoBehaviour:
   childPanel: {fileID: 4017647915758752266}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 16
-  m_unique: 1
   m_uiFXs: []
   m_uiHoverElements:
   - {fileID: 8418394050198732948}
@@ -13597,7 +13584,6 @@ MonoBehaviour:
   childPanel: {fileID: 1365275687327073069}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 50
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements:
   - {fileID: 982699407739362342}
@@ -13891,7 +13877,6 @@ MonoBehaviour:
   childPanel: {fileID: 1365275687327073069}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 49
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements:
   - {fileID: 725987910585653483}
@@ -14227,7 +14212,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 257
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -15518,7 +15502,6 @@ MonoBehaviour:
   childPanel: {fileID: 302659130275558241}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 16
-  m_unique: 1
   m_uiFXs: []
   m_uiHoverElements:
   - {fileID: 4884953306326324398}
@@ -16838,7 +16821,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 36
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements:
   - {fileID: 5896774398684699172}
@@ -17638,7 +17620,6 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 7886225913975454082}
   eventType: 256
-  m_unique: 0
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 

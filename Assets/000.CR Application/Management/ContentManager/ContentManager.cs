@@ -45,6 +45,33 @@ namespace Management
 
 		public List<AModule> Modules { get => m_modules; set => m_modules=value; }
 
+		private Dictionary<ModuleID, AModule> moduleIndex;
+
+		public T Module<T>(ModuleID _id) where T : AModule
+        {
+			AModule result;
+			if(moduleIndex.TryGetValue(_id, out result))
+            {
+				// dictionary에 값이 있으면
+				T t = (T)result;
+				return t;
+            }
+			else
+            {
+				// dictionary에 값이 없으면
+				T t = (T)Modules.Find(x => x.ID == _id);
+				if (t != null)
+                {
+					return t;
+                }
+				else
+				{
+					throw new Definition.Exceptions.ModuleNotInstantiated(_id);
+					//return null;
+				}
+            }
+        }
+
 		public Module_Model _Model
 		{
 			get
@@ -131,9 +158,14 @@ namespace Management
 			
 		}
 
-		#endregion
+        #endregion
 
-		List<GameObject> m_modelObjects;
+        private void Awake()
+        {
+			moduleIndex = new Dictionary<ModuleID, AModule>();
+        }
+
+        List<GameObject> m_modelObjects;
 		List<GameObject> m_issueObjects;
 
 		/// <summary>

@@ -17,8 +17,13 @@ namespace Definition
 			}
 			else if(Platforms.IsSmartInspectPlatform(_pCode))
 			{
-				list.Add(Resources.Load<GameObject>("UI/UITemplate_0302"));
+				//list.Add(Resources.Load<GameObject>("UI/UITemplate_0302"));
+				list.Add(Resources.Load<GameObject>("UI/SmartInspect"));
 			}
+			else
+            {
+				throw new Definition.Exceptions.PlatformNotDefinedException(_pCode);
+            }
 
 			return list;
 		}

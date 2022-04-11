@@ -11,7 +11,6 @@ namespace Module.UI
 		private void Event_ToggleOrthoView(bool _isOrthogonal)
 		{
 			ContentManager.Instance.Function_ToggleOrthoView(_isOrthogonal);
-
 		}
 	}
 }
