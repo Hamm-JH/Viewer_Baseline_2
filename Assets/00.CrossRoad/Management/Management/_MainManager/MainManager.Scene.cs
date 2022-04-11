@@ -37,11 +37,9 @@ namespace Management
 
 			EditorBuildSettingsScene[] scenes = EditorBuildSettings.scenes;
 			int index = scenes.Length;
-			Debug.Log(index);
             for (int i = 0; i < index; i++)
             {
-				Debug.Log(scenes[i].path.ToString());
-
+				//Debug.Log(scenes[i].path.ToString());
 				// buildSetting에 존재하는 scene 이름이 sceneName과 같은가?
 				if(scenes[i].path.Split('/').Last().Split('.').First() == sceneName.ToString())
                 {
