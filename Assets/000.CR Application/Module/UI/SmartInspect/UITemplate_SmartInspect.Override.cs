@@ -21,6 +21,8 @@ namespace Module.UI
         {
 			switch (_uType)
 			{
+				#region ButtonBar
+
 				case UIEventType.View_Home:
 					// 초기 화면으로 복귀
 					Event_View_Home();
@@ -66,6 +68,8 @@ namespace Module.UI
 					Event_Mode_HideIsolate(_uType);
 					Event_Toggle_ChildPanel(1, _setter.ChildPanel);
 					break;
+
+					#endregion
 			}
 		}
 
