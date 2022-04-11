@@ -48,6 +48,7 @@ namespace Definition
 			{
 				case PlatformCode.WebGL_AdminViewer_Tunnel:
 				case PlatformCode.PC_Viewer_Tunnel:
+				case PlatformCode.WebGL_SmartInspect_Tunnel:
 					return true;
 			}
 
@@ -72,6 +73,8 @@ namespace Definition
 			{
 				case PlatformCode.PC_Viewer_Bridge:
 				case PlatformCode.PC_Viewer_Tunnel:
+				case PlatformCode.WebGL_SmartInspect_Tunnel:
+				case PlatformCode.WebGL_SmartInspect_Bridge:
 					return true;
 			}
 

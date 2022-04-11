@@ -23,6 +23,9 @@ namespace Definition
 		PC_Maker1 = 0x30,
 		PC_Viewer_Tunnel = 0x31,
 		PC_Viewer_Bridge = 0x32,
+
+		WebGL_SmartInspect_Tunnel = 0x101,
+		WebGL_SmartInspect_Bridge = 0x102,
 	}
 
 	public enum GraphicCode
@@ -43,6 +46,8 @@ namespace Definition
 		Maker = 0x00,
 		Viewer = 0x01,
 		AdminViewer = 0x02,
+
+		SmartInspectViewer = 0x03,
 
 	}
 

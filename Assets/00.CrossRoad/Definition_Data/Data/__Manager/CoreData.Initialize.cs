@@ -79,6 +79,10 @@ namespace Definition.Data
 				historyURL = "/api/bridge/damageDailyHistory?cdBridge=";
 				imageURL = "/api/common/file/dn?";
 			}
+			else
+            {
+				throw new Definition.Exceptions.PlatformNotDefinedException(Platform);
+            }
 
 			//-----
 

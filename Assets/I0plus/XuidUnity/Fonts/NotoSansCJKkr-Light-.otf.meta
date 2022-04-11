@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5c21f6df39e1e0f42b288b181002c4f7
+guid: bcffce4bb59d2f749844bfdfc33f8e74
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -11,11 +11,9 @@ TrueTypeFontImporter:
   fontNames:
   - Noto Sans CJK KR
   fallbackFontReferences:
-  - {fileID: 12800000, guid: ab9b91a2ee5ea6142a050e2b8270c3b0, type: 3}
-  - {fileID: 12800000, guid: d3aeba2dd98fee243b653ee88d24681b, type: 3}
-  - {fileID: 12800000, guid: 6b23e94f3ca8a8b45b2ce019400faa00, type: 3}
-  - {fileID: 12800000, guid: 29ee941f45384a3409db544bc2341302, type: 3}
-  - {fileID: 12800000, guid: 690053bb986f65a4ea5ea832cb540a40, type: 3}
+  - {fileID: 12800000, guid: 04e99b47d935b324c90e02a3e429d8ca, type: 3}
+  - {fileID: 12800000, guid: a0f49c7a8355b5d4fbb3105764134d5d, type: 3}
+  - {fileID: 12800000, guid: cb1beaa5ca3f66a41a65b2051ce26276, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

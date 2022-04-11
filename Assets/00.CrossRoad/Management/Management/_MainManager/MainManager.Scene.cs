@@ -1,6 +1,8 @@
 ﻿using Definition;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,15 +26,33 @@ namespace Management
 			{
 				sceneName = SceneName.Viewer;
 			}
+			else if(Platforms.IsSmartInspectPlatform(_pCode))
+            {
+				sceneName = SceneName.SmartInspectViewer;
+            }
+			else
+            {
+				throw new Definition.Exceptions.PlatformNotDefinedException(_pCode);
+            }
 
-			if(Platforms.IsNotDefinition(_pCode))
-			{
-				Debug.LogError("올바른 플랫폼 코드가 아닙니다.");
-				return;
-			}
+			EditorBuildSettingsScene[] scenes = EditorBuildSettings.scenes;
+			int index = scenes.Length;
+			Debug.Log(index);
+            for (int i = 0; i < index; i++)
+            {
+				Debug.Log(scenes[i].path.ToString());
 
-			SceneManager.LoadScene(sceneName.ToString());
-			
+				// buildSetting에 존재하는 scene 이름이 sceneName과 같은가?
+				if(scenes[i].path.Split('/').Last().Split('.').First() == sceneName.ToString())
+                {
+					SceneManager.LoadScene(sceneName.ToString());
+					return;	// 존재하면 메서드 끝내기
+                }
+            }
+
+			// 여기 넘어왔다는 뜻은 맞는 scene이 없다는뜻
+			throw new Definition.Exceptions.SceneNotExisted(sceneName);
+
 		}
 	}
 }

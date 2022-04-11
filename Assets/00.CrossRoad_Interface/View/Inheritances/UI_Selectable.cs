@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,35 +30,35 @@ namespace View
 
 		[Header("Linked UI Elements")]
 		/// <summary>
-		/// ÀÚ½Ä ÆĞ³Î °´Ã¼
+		/// ìì‹ íŒ¨ë„ ê°ì²´
 		/// </summary>
 		//[SerializeField] GameObject childPanel;
 
 		/// <summary>
-		/// ui È¿°ú ¿ä¼Ò
+		/// ui íš¨ê³¼ ìš”ì†Œ
 		/// </summary>
 		[SerializeField] List<GameObject> m_uiFXs;
 
 		/// <summary>
-		/// ui È£¹ö¸µ ¿¬°á Åä±Û¿ä¼Ò
+		/// ui í˜¸ë²„ë§ ì—°ê²° í† ê¸€ìš”ì†Œ
 		/// </summary>
 		[SerializeField] List<GameObject> m_uiHoverElements;
 
 		/// <summary>
-		/// Ç¥¸é ¹öÆ°¿¡ ¹İÀÀÇÏ´Â º¯¼ö
+		/// í‘œë©´ ë²„íŠ¼ì— ë°˜ì‘í•˜ëŠ” ë³€ìˆ˜
 		/// </summary>
 		[Header("Test Values")]
 		public string t_surfaceCode;
 
 		private void Start()
 		{
-			// ¹öÆ°ÀÌ Á¸ÀçÇÑ´Ù¸é, ¹öÆ°ÀÇ Å¬¸¯ ÀÌº¥Æ®¸¦ Conditional Branch¿¡ ¿¬°áÇÑ´Ù.
+			// ë²„íŠ¼ì´ ì¡´ì¬í•œë‹¤ë©´, ë²„íŠ¼ì˜ í´ë¦­ ì´ë²¤íŠ¸ë¥¼ Conditional Branchì— ì—°ê²°í•œë‹¤.
 			if (gameObject.TryGetComponent<Button>(out m_btn))
 			{
 				m_btn.onClick.AddListener(new UnityAction(OnSelect));
 			}
 
-			// ½½¶óÀÌ´õ°¡ Á¸ÀçÇÑ´Ù¸é, ½½¶óÀÌ´õÀÇ ½½¶óÀÌµù ÀÌº¥Æ®¸¦ Conditional Branch¿¡ ¿¬°áÇÑ´Ù.
+			// ìŠ¬ë¼ì´ë”ê°€ ì¡´ì¬í•œë‹¤ë©´, ìŠ¬ë¼ì´ë”ì˜ ìŠ¬ë¼ì´ë”© ì´ë²¤íŠ¸ë¥¼ Conditional Branchì— ì—°ê²°í•œë‹¤.
 			if (gameObject.TryGetComponent<Slider>(out m_slider))
 			{
 				m_slider.onValueChanged.AddListener(new UnityAction<float>(OnChangeValue));
@@ -87,7 +87,7 @@ namespace View
 		}
 
 		/// <summary>
-		/// ½½¶óÀÌ´õ °ª º¯°æ½Ã ½ÇÇà
+		/// ìŠ¬ë¼ì´ë” ê°’ ë³€ê²½ì‹œ ì‹¤í–‰
 		/// </summary>
 		/// <param name="_value"></param>
 		public override void OnChangeValue(float _value)
@@ -118,7 +118,7 @@ namespace View
 		#region Mouse region
 
 		/// <summary>
-		/// UI Á¦´ë·Î Å¬¸¯½Ã ¹ßµ¿?
+		/// UI ì œëŒ€ë¡œ í´ë¦­ì‹œ ë°œë™?
 		/// </summary>
 		/// <param name="eventData"></param>
 		public void OnPointerUp(PointerEventData eventData)
@@ -127,7 +127,7 @@ namespace View
 		}
 
 		/// <summary>
-		/// ¸¶¿ì½º Æ÷ÀÎÅÍ ÁøÀÔ½Ã ¹ßµ¿
+		/// ë§ˆìš°ìŠ¤ í¬ì¸í„° ì§„ì…ì‹œ ë°œë™
 		/// </summary>
 		/// <param name="eventData"></param>
 		public void OnPointerEnter(PointerEventData eventData)
@@ -137,7 +137,7 @@ namespace View
 		}
 
 		/// <summary>
-		/// ¸¶¿ì½º Æ÷ÀÎÅÍ ³ª°¡¸é ¹ßµ¿
+		/// ë§ˆìš°ìŠ¤ í¬ì¸í„° ë‚˜ê°€ë©´ ë°œë™
 		/// </summary>
 		/// <param name="eventData"></param>
 		public void OnPointerExit(PointerEventData eventData)

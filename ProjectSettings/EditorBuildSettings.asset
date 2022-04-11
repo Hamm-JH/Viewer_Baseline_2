@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scene/_2 Viewer/AdminViewer.unity
     guid: f4f0ead6837b4024daa1a3e0a41f28a4
+  - enabled: 1
+    path: Assets/01.Scene/_2 Viewer/SmartInspectViewer.unity
+    guid: 0ad20d2a663a1434996f2d8154a4e854
   m_configObjects: {}
