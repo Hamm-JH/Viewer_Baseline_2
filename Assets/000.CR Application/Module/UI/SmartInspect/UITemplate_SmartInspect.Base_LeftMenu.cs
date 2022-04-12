@@ -3,6 +3,7 @@ using SmartInspect;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using View;
 
 namespace Module.UI
@@ -152,25 +153,33 @@ namespace Module.UI
             else
             {
                 currIndex = index;
-                switch (index)
-                {
-                    case 0: // dmg
-                        Debug.LogError($"LeftMenu dmg 상태변경 예정");
-                        break;
-
-                    case 1: // rcv
-                        Debug.LogError($"LeftMenu rcv 상태변경 예정");
-                        break;
-
-                    case 2: // setting
-                        Debug.LogError($"LeftMenu set 상태변경 예정");
-                        break;
-                }
             }
+
+            SetLeftMenu_Images(currIndex);
 
             // 이벤트 상태 업데이트
             m_eventBase.m_index = currIndex;
             return currIndex;
+        }
+
+        private void SetLeftMenu_Images(int index)
+		{
+            Image m1_bg = m_basePanel.m_processMenus.menus[0].btn_menu.GetComponent<Image>();
+            Image m1_main = m_basePanel.m_processMenus.menus[0].img_main;
+            Image m1_side = m_basePanel.m_processMenus.menus[0].img_side;
+
+            Image m2_bg = m_basePanel.m_processMenus.menus[1].btn_menu.GetComponent<Image>();
+            Image m2_main = m_basePanel.m_processMenus.menus[1].img_main;
+            Image m2_side = m_basePanel.m_processMenus.menus[1].img_side;
+
+            Image m3_bg = m_basePanel.m_processMenus.menus[2].btn_menu.GetComponent<Image>();
+            Image m3_main = m_basePanel.m_processMenus.menus[2].img_main;
+            Image m3_side = m_basePanel.m_processMenus.menus[2].img_side;
+
+            m_uiResources.m_processMenu.SetImage(index,
+                m1_bg, m1_main, m1_side,
+                m2_bg, m2_main, m2_side,
+                m3_bg, m3_main, m3_side);
         }
 
         #endregion

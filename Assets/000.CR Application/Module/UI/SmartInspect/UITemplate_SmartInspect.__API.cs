@@ -18,9 +18,13 @@ namespace Module.UI
             Initialize_API_GetAddress(_data);
         }
 
+        /// <summary>
+        /// API에서 주 이미지를 가져온다.
+        /// </summary>
+        /// <param name="_image"></param>
         public void API_getMainTexture(Texture2D _image)
         {
-
+            General_SetMainImage(_image);
         }
     }
 }

@@ -16,6 +16,9 @@ namespace Module.UI
 		[Header("프로젝트 이벤트 베이스")]
 		public EventBase m_eventBase;
 
+		[Header("UI 리소스 모음")]
+		public UIResources m_uiResources;
+
 		/// <summary>
 		/// 모듈 단위 요소들 모음
 		/// </summary>

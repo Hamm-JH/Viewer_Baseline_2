@@ -243,6 +243,8 @@ namespace SmartInspect
     public class ObjectStatus
     {
         public GameObject root;
+        public RawImage mainImage;
+        public TextMeshProUGUI addressText;
     }
 
     /// <summary>

@@ -29,20 +29,10 @@ namespace Module.UI
             // 다시 언박싱
             DAddress data = (DAddress)_data;
 
-            //TitData.oName.text = data.nmTunnel;
-            //BotData.adrName.text = data.nmAddress;
-
             Header_SetObjectName(data.nmTunnel);    // 시설물명
-            //SetTitleText(data.nmTunnel);      // 시설물명
-            //SetAddressText(data.nmAddress);   // 주소 할당
+            General_SetAddress(data.nmAddress);     // 주소 할당
 
-            //string _fid = data.mp_fid;
-            //string _ftype = data.mp_ftype;
-            //string _fgroup = data.mp_filename;
-
-            //string argument = string.Format("fid={0}&ftype={1}&fgroup={2}", _fid, _ftype, _fgroup);
-
-            API_RequestTexture(data.mp_fid, data.mp_ftype, data.mp_fgroup, API_getMainTexture);     // 텍스트 가져오기
+            API_RequestTexture(data.mp_fid, data.mp_ftype, data.mp_fgroup, API_getMainTexture);     // 텍스처 가져오기
         }
     }
 }
