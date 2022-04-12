@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,12 +22,48 @@ namespace SmartInspect
     public class DamageElement
     {
         public GameObject root;
+
+        /// <summary>
+        /// 부재별 손상정보 패널
+        /// </summary>
+        public GameObject m_dmgCount;
+
+        /// <summary>
+        /// 부재별 손상정보 리스트 패널
+        /// </summary>
+        public GameObject m_dmgList;
+
+        /// <summary>
+        /// 부재별 특정 손상의 자세한 정보 패널
+        /// </summary>
+        public GameObject m_dmgInformation;
     }
 
     [System.Serializable]
     public class RecoverElement
     {
         public GameObject root;
+
+        /// <summary>
+        /// 부재별 보수정보 패널
+        /// </summary>
+        public GameObject m_rcvCount;
+
+        /// <summary>
+        /// 부재별 보수 리스트 패널
+        /// </summary>
+        public GameObject m_rcvList;
+
+        /// <summary>
+        /// 부재별 보강정보 패널
+        /// </summary>
+        public GameObject m_reinCount;
+
+        /// <summary>
+        /// 부재별 보강 리스트 패널
+        /// </summary>
+        public GameObject m_reinList;
+
     }
 
     #endregion
@@ -35,7 +71,20 @@ namespace SmartInspect
     #region Base elements
 
     /// <summary>
-    /// ���̽�
+    /// 이벤트 베이스
+    /// </summary>
+    [System.Serializable]
+    public class EventBase
+    {
+        /// <summary>
+        /// 현재 인덱스
+        /// </summary>
+        [Header("모듈 상태정보")]
+        public int m_index;
+    }
+
+    /// <summary>
+    /// 베이스
     /// </summary>
     [System.Serializable]
     public class Base
@@ -46,39 +95,39 @@ namespace SmartInspect
     }
 
     /// <summary>
-    /// ���
+    /// 헤더
     /// </summary>
     [System.Serializable]
     public class Header
     {
         /// <summary>
-        /// �ü��� �ؽ�Ʈ ���
+        /// 시설물 텍스트 배경
         /// </summary>
         public GameObject objectBackground;
 
         /// <summary>
-        /// �ü��� �̸�
+        /// 시설물 이름
         /// </summary>
         public TextMeshProUGUI objectName;
 
         /// <summary>
-        /// ���� �ؽ�Ʈ ���
+        /// 부재 텍스트 배경
         /// </summary>
         public GameObject partBackground;
 
         /// <summary>
-        /// ���� �̸�
+        /// 부재 이름
         /// </summary>
         public TextMeshProUGUI partName;
 
         /// <summary>
-        /// ������ ��ư
+        /// 프로필 버튼
         /// </summary>
         public Button btn_profile;
     }
 
     /// <summary>
-    /// ���μ��� �޴���
+    /// 프로세스 메뉴들
     /// </summary>
     [System.Serializable]
     public class ProcessMenus
@@ -87,7 +136,7 @@ namespace SmartInspect
     }
 
     /// <summary>
-    /// ���� ���μ��� �޴�
+    /// 단일 프로세스 메뉴
     /// </summary>
     [System.Serializable]
     public class ProcessMenu
@@ -99,23 +148,23 @@ namespace SmartInspect
     }
 
     /// <summary>
-    /// ������ �˾�â
+    /// 프로필 팝업창
     /// </summary>
     [System.Serializable]
     public class ProfilePopup
     {
         /// <summary>
-        /// ������ ��ư�ڽ�
+        /// 프로필 버튼박스
         /// </summary>
         public GameObject profileBox;
 
         /// <summary>
-        /// ������ ��ư
+        /// 프로필 버튼
         /// </summary>
         public Button btn_profile;
 
         /// <summary>
-        /// ������ �α׾ƿ�
+        /// 프로필 로그아웃
         /// </summary>
         public Button btn_logOut;
     }
@@ -131,7 +180,6 @@ namespace SmartInspect
 
         public ViewPort m_viewport;
         public Orthographic m_orthographic;
-        public Setting m_setting;
         public Zoom m_zoom;
     }
 
@@ -153,12 +201,7 @@ namespace SmartInspect
         public GameObject btn_2Perspective;
     }
 
-    [System.Serializable]
-    public class Setting
-    {
-        public GameObject root;
-
-    }
+    
 
     [System.Serializable]
     public class Zoom
@@ -166,6 +209,49 @@ namespace SmartInspect
         public GameObject root;
         public GameObject zoomIn;
         public GameObject zoomOut;
+    }
+
+    #endregion
+
+    #region General elements
+
+
+    [System.Serializable]
+    public class GeneralElement
+    {
+        /// <summary>
+        /// 일반적인 패널들
+        /// </summary>
+        public List<GameObject> m_generalPanels;
+
+        public Setting m_setting;
+        public ObjectStatus m_objStatus;
+        public ImagePopup m_imgPopup;
+    }
+
+    [System.Serializable]
+    public class Setting
+    {
+        public GameObject root;
+
+    }
+
+    /// <summary>
+    /// 시설물 현황정보창
+    /// </summary>
+    [System.Serializable]
+    public class ObjectStatus
+    {
+        public GameObject root;
+    }
+
+    /// <summary>
+    /// 특정 부재의 보수 또는 보강 이미지 팝업 리스트 패널
+    /// </summary>
+    [System.Serializable]
+    public class ImagePopup
+    {
+        public GameObject root;
     }
 
     #endregion

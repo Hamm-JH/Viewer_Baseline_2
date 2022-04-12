@@ -39,7 +39,36 @@ namespace Module.WebAPI
 
 			RequestData(dmgURI, WebType.Issue_Dmg, GetData);
 			RequestData(rcvURI, WebType.Issue_Rcv, GetData);
+
+			m_isDmgEnd = false;
+			m_isRcvEnd = false;
 		}
+
+		private bool m_isDmgEnd;
+		private bool m_isRcvEnd;
+
+		/// <summary>
+		/// 초기화 완료 확인 // 확인시 관리자에 전달
+		/// index ::
+		/// 0 : dmg end
+		/// 1 : rcv end
+		/// </summary>
+		/// <param name="_index"></param>
+		private void CompleteCheck(int _index)
+        {
+			switch(_index)
+            {
+				case 0:	m_isDmgEnd = true;	break;
+				case 1: m_isRcvEnd = true;	break;
+            }
+
+			// 손상정보, 보수정보 모두 끝났는가?
+			if(m_isDmgEnd && m_isRcvEnd)
+            {
+				// WebAPI 작업 완료
+				ContentManager.Instance.CheckInitModuleComplete(ID);
+            }
+        }
 
 		// Admin Viewer API... ----------------------------------------------------------------------
 

@@ -8,6 +8,10 @@ namespace Module.UI
 {
     public partial class UITemplate_SmartInspect : AUI
     {
-        
+        private void TopMenu_ToggleProfile()
+        {
+            m_basePanel.m_profilePopup.profileBox.SetActive(
+                !m_basePanel.m_profilePopup.profileBox.activeSelf);
+        }
     }
 }

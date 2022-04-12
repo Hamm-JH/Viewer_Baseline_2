@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,40 +29,40 @@ namespace Platform.Bridge
 		{
 			Null = 0,
 
-			// °Å´õ, °¡·Îº¸ lv5
+			// ê±°ë”, ê°€ë¡œë³´ lv5
 			PSCI25 = 1,
 			PSCI30,
 			RCT25,
 
-			// ½½¶óºê lv5
+			// ìŠ¬ë¼ë¸Œ lv5
 			PSCI,
 			RCT,
 			RA,
 			RCS,
 
-			// Æ÷Àå lv5
+			// í¬ì¥ lv5
 			AP,
 			CP,
 
-			// ³­°£ lv5
+			// ë‚œê°„ lv5
 			GRC,
 			GRS,
 			GR,
 			CU,
 
-			// ½ÅÃàÀÌÀ½ lv5
+			// ì‹ ì¶•ì´ìŒ lv5
 			MO,
 			NB,
 			RI,
 			TRP,
 
-			// ±³´ë lv5
+			// êµëŒ€ lv5
 			SGA,
 			RTA,
-			RBA,        // Ãß°¡
+			RBA,        // ì¶”ê°€
 						//RA
 
-			// ±³°¢ lv5
+			// êµê° lv5
 			WLP,
 			TP,
 			RAP,
@@ -70,11 +70,11 @@ namespace Platform.Bridge
 			//RTA
 			//RA
 
-			// ¹ŞÄ§ lv5
+			// ë°›ì¹¨ lv5
 			RUP,
 			POT,
 
-			// ±âÃÊ lv5
+			// ê¸°ì´ˆ lv5
 			MAT
 		}
 
@@ -123,12 +123,12 @@ namespace Platform.Bridge
 
 			if(_arg.Contains("SP"))
 			{
-				result = "Áö°£";
+				result = "ì§€ê°„";
 				_arg = _arg.Replace("SP", "");
 			}
 			else if(_arg.Contains("AP"))
 			{
-				result = "ÁöÁ¡";
+				result = "ì§€ì ";
 				_arg = _arg.Replace("AP", "");
 			}
 
@@ -189,17 +189,17 @@ namespace Platform.Bridge
 		{
 			switch (code)
 			{
-				case CodeLv4.GD: return "°Å´õ";
-				case CodeLv4.CB: return "°¡·Îº¸";
-				case CodeLv4.SL: return "½½¶óºê";
-				case CodeLv4.DS: return "Æ÷Àå";
-				case CodeLv4.GR: return "³­°£";
-				case CodeLv4.GF: return "¹æÈ£½Ã¼³";
-				case CodeLv4.JI: return "½ÅÃàÀÌÀ½";
-				case CodeLv4.AB: return "±³´ë";
-				case CodeLv4.PI: return "±³°¢";
-				case CodeLv4.BE: return "¹ŞÄ§";
-				case CodeLv4.FT: return "±âÃÊ";
+				case CodeLv4.GD: return "ê±°ë”";
+				case CodeLv4.CB: return "ê°€ë¡œë³´";
+				case CodeLv4.SL: return "ìŠ¬ë¼ë¸Œ";
+				case CodeLv4.DS: return "í¬ì¥";
+				case CodeLv4.GR: return "ë‚œê°„";
+				case CodeLv4.GF: return "ë°©í˜¸ì‹œì„¤";
+				case CodeLv4.JI: return "ì‹ ì¶•ì´ìŒ";
+				case CodeLv4.AB: return "êµëŒ€";
+				case CodeLv4.PI: return "êµê°";
+				case CodeLv4.BE: return "ë°›ì¹¨";
+				case CodeLv4.FT: return "ê¸°ì´ˆ";
 				default: return CodeLv4.Null.ToString();
 			}
 		}
@@ -208,51 +208,51 @@ namespace Platform.Bridge
 		{
 			switch (code)
 			{
-				// °Å´õ, °¡·Îº¸
+				// ê±°ë”, ê°€ë¡œë³´
 				case CodeLv5.PSCI25: return string.Format($"PSCI 25m");
 				case CodeLv5.PSCI30: return string.Format($"PSCI 30m");
 				case CodeLv5.RCT25: return string.Format($"RCT 25m");
 
-				// ½½¶óºê
+				// ìŠ¬ë¼ë¸Œ
 				case CodeLv5.PSCI: return string.Format($"PSCI");
 				case CodeLv5.RCT: return string.Format($"RCT");
-				case CodeLv5.RA: return string.Format($"¶ó¸à±³");
+				case CodeLv5.RA: return string.Format($"ë¼ë©˜êµ");
 				case CodeLv5.RCS: return string.Format($"RCS");
 
-				// Æ÷Àå
-				case CodeLv5.AP: return string.Format($"¾Æ½ºÆÈÆ®");
-				case CodeLv5.CP: return string.Format($"ÄÜÅ©¸®Æ®");
+				// í¬ì¥
+				case CodeLv5.AP: return string.Format($"ì•„ìŠ¤íŒ”íŠ¸");
+				case CodeLv5.CP: return string.Format($"ì½˜í¬ë¦¬íŠ¸");
 
-				// ³­°£
-				case CodeLv5.GRC: return string.Format($"ÄÜÅ©¸®Æ®");
-				case CodeLv5.GRS: return string.Format($"°­ÀçÇü");
+				// ë‚œê°„
+				case CodeLv5.GRC: return string.Format($"ì½˜í¬ë¦¬íŠ¸");
+				case CodeLv5.GRS: return string.Format($"ê°•ì¬í˜•");
 
-				// ¹æÈ£½Ã¼³ (³­°£)
-				case CodeLv5.GR: return string.Format($"¹æÈ£º®");
-				case CodeLv5.CU: return string.Format($"¿¬¼®");
+				// ë°©í˜¸ì‹œì„¤ (ë‚œê°„)
+				case CodeLv5.GR: return string.Format($"ë°©í˜¸ë²½");
+				case CodeLv5.CU: return string.Format($"ì—°ì„");
 
-				// ½ÅÃàÀÌÀ½
-				case CodeLv5.MO: return string.Format($"¸ğ³ë¼¿");
-				case CodeLv5.NB: return string.Format($"¿£ºñÁ¶ÀÎÆ®");
-				case CodeLv5.RI: return string.Format($"·¹ÀÏÁ¶ÀÎÆ®");
-				case CodeLv5.TRP: return string.Format($"Æ®·»½ºÇÃ·º½º");
+				// ì‹ ì¶•ì´ìŒ
+				case CodeLv5.MO: return string.Format($"ëª¨ë…¸ì…€");
+				case CodeLv5.NB: return string.Format($"ì—”ë¹„ì¡°ì¸íŠ¸");
+				case CodeLv5.RI: return string.Format($"ë ˆì¼ì¡°ì¸íŠ¸");
+				case CodeLv5.TRP: return string.Format($"íŠ¸ë ŒìŠ¤í”Œë ‰ìŠ¤");
 
-				// ±³´ë
-				case CodeLv5.SGA: return string.Format($"¹İÁß·Â½Ä");
-				case CodeLv5.RTA: return string.Format($"¿ªTÇü");
-				case CodeLv5.RBA: return string.Format($"¶ó¸à±³");
+				// êµëŒ€
+				case CodeLv5.SGA: return string.Format($"ë°˜ì¤‘ë ¥ì‹");
+				case CodeLv5.RTA: return string.Format($"ì—­Tí˜•");
+				case CodeLv5.RBA: return string.Format($"ë¼ë©˜êµ");
 
-				// ±³°¢
-				case CodeLv5.WLP: return string.Format($"º®Ã¼Çü");
-				case CodeLv5.TP: return string.Format($"TÇü");
-				case CodeLv5.RAP: return string.Format($"¶ó¸àÇü");
-				case CodeLv5.RBP: return string.Format($"¶ó¸à±³");
+				// êµê°
+				case CodeLv5.WLP: return string.Format($"ë²½ì²´í˜•");
+				case CodeLv5.TP: return string.Format($"Tí˜•");
+				case CodeLv5.RAP: return string.Format($"ë¼ë©˜í˜•");
+				case CodeLv5.RBP: return string.Format($"ë¼ë©˜êµ");
 
-				// ¹ŞÄ§
-				case CodeLv5.RUP: return string.Format($"Åº¼º");
-				case CodeLv5.POT: return string.Format($"Æ÷Æ®");
+				// ë°›ì¹¨
+				case CodeLv5.RUP: return string.Format($"íƒ„ì„±");
+				case CodeLv5.POT: return string.Format($"í¬íŠ¸");
 
-				// ±âÃÊ
+				// ê¸°ì´ˆ
 				case CodeLv5.MAT: return string.Format($"MAT");
 				default: return CodeLv5.Null.ToString();
 			}

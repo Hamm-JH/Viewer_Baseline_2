@@ -178,7 +178,12 @@ namespace Module.WebAPI
 				}
 			}
 
-			OnComplete(WebType.Issue_Dmg, dmgDatas);
+			OnComplete(WebType.Issue_Dmg, dmgDatas);	// 손상정보 (Legacy) 완료
+			// 손상정보 완료가 되지 않았을때 (초기화 시점에만 동작)
+			if(!m_isDmgEnd)
+            {
+				CompleteCheck(0);	// 손상정보 완료
+            }
 		}
 
 		private void GetData_Rcv(string _data)
@@ -208,7 +213,12 @@ namespace Module.WebAPI
 				}
 			}
 
-			OnComplete(WebType.Issue_Rcv, rcvDatas);
+			OnComplete(WebType.Issue_Rcv, rcvDatas);	// 보수정보 (Legacy) 완료
+			// 보수정보 완료가 되지 않았을때 (초기화 시점에만 동작)
+			if(!m_isRcvEnd)
+            {
+				CompleteCheck(1);	// 보수정보 완료
+            }
 		}
 
 		private void GetImage_main(Texture2D _texture, UnityAction<Texture2D> _callback)

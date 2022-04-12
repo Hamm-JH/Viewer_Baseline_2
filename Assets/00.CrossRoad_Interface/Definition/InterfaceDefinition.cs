@@ -1,18 +1,18 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Definition
 {
 	/// <summary>
-	/// UI¿¡¼­ ÀÌº¥Æ®¿¡ ¹İÀÀÇÒ¶§ÀÇ ºĞ±â¸¦ °áÁ¤
+	/// UIì—ì„œ ì´ë²¤íŠ¸ì— ë°˜ì‘í• ë•Œì˜ ë¶„ê¸°ë¥¼ ê²°ì •
 	/// </summary>
 	public enum UIEventType
 	{
 		Null = 0,
 
 		/// <summary>
-		/// UI Åä±Û
+		/// UI í† ê¸€
 		/// </summary>
 		Toggle = 0x10,
 		Toggle_ChildPanel1 = 0x11,
@@ -28,7 +28,7 @@ namespace Definition
 		Viewport_ViewMode_SIDE_RIGHT = 0x28,
 
 		/// <summary>
-		/// º¸±â :: È¨ 
+		/// ë³´ê¸° :: í™ˆ 
 		/// </summary>
 		View_Home = 0x29,
 
@@ -38,8 +38,8 @@ namespace Definition
 
 		Mode_ShowAll = 0x40,
 		/// <summary>
-		/// °´Ã¼ ¼±ÅÃ½Ã Hide, Isolate
-		/// Off°¡ ºÙÀ¸¸é ¾Æ¿¹ °´Ã¼¸¦ ²ö´Ù.
+		/// ê°ì²´ ì„ íƒì‹œ Hide, Isolate
+		/// Offê°€ ë¶™ìœ¼ë©´ ì•„ì˜ˆ ê°ì²´ë¥¼ ëˆë‹¤.
 		/// </summary>
 		Mode_Hide = 0x41,
 		Mode_Hide_Off = 0x42,
@@ -76,38 +76,59 @@ namespace Definition
 		Ad_St_DimToggle = 0x21d,
 		Ad_St_PrintDim = 0x21e,
 
+		/// <summary>
+		/// ëª¨ë“ˆ ì™¼ìª½ dmg, rcv, setting
+		/// </summary>
+		Ins_Left_ModuleDmg = 0x300,
+		Ins_Left_ModuleRcv = 0x301,
+		Ins_Left_ModuleSet = 0x302,
+
+		Ins_Top_Profile = 0x310,
+
+		/// <summary>
+		/// Module Dmg LBar 1
+		/// </summary>
+		Ins_MDmg_LBar_1DamagedInfo = 0x320,
+		Ins_MDmg_LBar_2DamagedList = 0x321,
+		Ins_MDmg_LBar_3StatusInfo = 0x322,
+		
+		Ins_MRcv_LBar_1RepairedList = 0x340,
+		Ins_MRcv_LBar_2ReinforcedList = 0x341,
+		Ins_MRcv_LBar_3StatusInfo = 0x342,
+		Ins_MRcv_LBar_4Dimension = 0x343,
+		Ins_MRcv_LBar_5DrawingPrint = 0x344,
 	}
 
 	public enum ModuleID
 	{
 		NotDef = -1,
 		/// <summary>
-		/// Code :: ¸ğµ¨
+		/// Code :: ëª¨ë¸
 		/// </summary>
 		Model = 0x10,
 
 		/// <summary>
-		/// Code :: »óÈ£ÀÛ¿ë ???
+		/// Code :: ìƒí˜¸ì‘ìš© ???
 		/// </summary>
 		Interaction = 0x20,
 
 		/// <summary>
-		/// Code :: À¥ »óÈ£ÀÛ¿ë
+		/// Code :: ì›¹ ìƒí˜¸ì‘ìš©
 		/// </summary>
 		WebAPI = 0x30,
 
 		/// <summary>
-		/// Code :: ±×·¡ÇÈ
+		/// Code :: ê·¸ë˜í”½
 		/// </summary>
 		Graphic = 0x50,
 
 		/// <summary>
-		/// Code :: UI ¼Ó¼º
+		/// Code :: UI ì†ì„±
 		/// </summary>
 		Prop_UI = 0x50,
 
 		/// <summary>
-		/// Item :: ÇÑÁ¤¸ñÀû¿ë Prefab °ü¸®
+		/// Item :: í•œì •ëª©ì ìš© Prefab ê´€ë¦¬
 		/// </summary>
 		Item = 0x60,
 	}

@@ -7,8 +7,11 @@ namespace Module.UI
 	using Definition;
 	using View;
 
+	/// <summary>
+	/// 모든 root UI 인스턴스에서 상속을 받아야 하는 추상 클래스
+	/// </summary>
 	[System.Serializable]
-	public abstract class AUI : AModule
+	public abstract partial class AUI : AModule
 	{
 		public new void OnCreate(ModuleID _id, FunctionCode _code)
 		{

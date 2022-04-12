@@ -6,6 +6,9 @@ namespace Management.Content
 {
     public class SmartInspectManager : ContentManager
     {
-        
+        public override void OnCreate()
+        {
+            base.OnCreate();
+        }
     }
 }

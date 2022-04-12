@@ -83,6 +83,9 @@ namespace Module.Interaction
 
 			//// 생성된 UI 인스턴스의 시작을 알린다.
 			//UiInstance.OnStart();
+
+			// Interaction 관리자에서 컨텐츠 관리자로 동작 완료를 알린다.
+			ContentManager.Instance.CheckInitModuleComplete(ID);
 		}
 
 		/// <summary>

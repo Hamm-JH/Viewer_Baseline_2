@@ -132,6 +132,7 @@ namespace Module
 			{
 				switch(_function)
 				{
+					case FunctionCode.API:
 					case FunctionCode.API_Front:
 					case FunctionCode.API_Back:
 						return true;

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,32 +8,32 @@ namespace Definition
 
 	public class AModuleStatus
 	{
-		// TODO :: °ü¸®ÄÚµå ¸ğµâ ¿µ¿ªÀ¸·Î Ãß»óÈ­ ÇÊ¿ä
+		// TODO :: ê´€ë¦¬ì½”ë“œ ëª¨ë“ˆ ì˜ì—­ìœ¼ë¡œ ì¶”ìƒí™” í•„ìš”
 
 		/// <summary>
-		/// °ü¸® ¸ğµå¿¡¼­ ÀÓ½Ã Ä³½Ì¿ë °´Ã¼
+		/// ê´€ë¦¬ ëª¨ë“œì—ì„œ ì„ì‹œ ìºì‹±ìš© ê°ì²´
 		/// </summary>
 		public GameObject m_cacheObject;
 
 		public List<GameObject> m_cacheObjects;
 
 		/// <summary>
-		/// ¸ğµâ »óÅÂÄÚµå
+		/// ëª¨ë“ˆ ìƒíƒœì½”ë“œ
 		/// </summary>
 		public ModuleStatus m_moduleStatus;
 
 		public AModuleStatus()
 		{
-			// ÃÊ±â°ª null
+			// ì´ˆê¸°ê°’ null
 			m_cacheObject = null;
 			m_cacheObjects = null;
 
-			// ÃÊ±â °ªÀº view1
+			// ì´ˆê¸° ê°’ì€ view1
 			m_moduleStatus = ModuleStatus.Administration_view1;
 		}
 
 		/// <summary>
-		/// ÇöÀç »óÅÂ°¡ ±âº» °ü¸®¸ğµåÀÎ°¡?
+		/// í˜„ì¬ ìƒíƒœê°€ ê¸°ë³¸ ê´€ë¦¬ëª¨ë“œì¸ê°€?
 		/// </summary>
 		/// <returns></returns>
 		public bool IsDefaultAdministrationMode()
@@ -61,7 +61,7 @@ namespace Definition
 		}
 
 		/// <summary>
-		/// ÇöÀç ¼±ÅÃµÈ °´Ã¼¸¦ Ä³½ÌÇÑ´Ù.
+		/// í˜„ì¬ ì„ íƒëœ ê°ì²´ë¥¼ ìºì‹±í•œë‹¤.
 		/// </summary>
 		/// <param name="_selected"></param>
 		public void CachingObject(GameObject _selected)
@@ -75,7 +75,7 @@ namespace Definition
         }
 
 		/// <summary>
-		/// Ä³½Ì °´Ã¼¸¦ °¡Á®¿Â´Ù.
+		/// ìºì‹± ê°ì²´ë¥¼ ê°€ì ¸ì˜¨ë‹¤.
 		/// </summary>
 		/// <returns></returns>
 		public GameObject GetCache()
@@ -89,7 +89,7 @@ namespace Definition
         }
 
 		/// <summary>
-		/// Ä³½Ã¸¦ Áö¿î´Ù.
+		/// ìºì‹œë¥¼ ì§€ìš´ë‹¤.
 		/// </summary>
 		public void RemoveCache()
 		{

@@ -345,5 +345,10 @@ namespace Module.UI
 			// 이미지 패널 실행
 			Panels.image_code.OpenImagePanel(issue);
 		}
-	}
+
+        public override void API_GetAddress(AAPI _data)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }

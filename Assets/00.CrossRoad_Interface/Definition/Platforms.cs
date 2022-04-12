@@ -61,6 +61,7 @@ namespace Definition
 			{
 				case PlatformCode.WebGL_AdminViewer_Bridge:
 				case PlatformCode.PC_Viewer_Bridge:
+				case PlatformCode.WebGL_SmartInspect_Bridge:
 					return true;
 			}
 
@@ -71,8 +72,9 @@ namespace Definition
 		{
 			switch(_pCode)
 			{
-				case PlatformCode.PC_Viewer_Bridge:
-				case PlatformCode.PC_Viewer_Tunnel:
+				// IsViewerPlatform과 중복되서 주석처리
+				//case PlatformCode.PC_Viewer_Bridge:
+				//case PlatformCode.PC_Viewer_Tunnel:
 				case PlatformCode.WebGL_SmartInspect_Tunnel:
 				case PlatformCode.WebGL_SmartInspect_Bridge:
 					return true;

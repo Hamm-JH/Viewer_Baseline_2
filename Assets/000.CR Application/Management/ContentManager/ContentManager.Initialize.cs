@@ -6,8 +6,10 @@ namespace Management
 {
 	using Definition;
 	using Module;
+    using Module.Interaction;
+    using Module.UI;
 
-	public partial class ContentManager : IManager<ContentManager>
+    public partial class ContentManager : IManager<ContentManager>
 	{
 		bool dmgComp = false;
 		bool rcvComp = false;
@@ -37,6 +39,8 @@ namespace Management
 			}
 		}
 
+		private Dictionary<ModuleID, bool> m_mChecker;
+
 		/// <summary>
 		/// 컨텐츠 관리자가 시작될때 초기화 실행
 		/// </summary>
@@ -65,6 +69,9 @@ namespace Management
 			List<AModule> mods = CreateModules(_cData.ModuleLists, _cData.FunctionCodes);
 			Modules.AddRange(mods);
 
+			// 1-1. 모듈 완성 확인변수 초기화
+			m_mChecker = CreateChecker(Modules);
+			
 			// 2. 모듈 부모배치
 			SetParentModules(Modules);
 
@@ -90,6 +97,18 @@ namespace Management
 
 			return mods;
 		}
+
+		private Dictionary<ModuleID, bool> CreateChecker(List<AModule> _modules)
+        {
+			Dictionary<ModuleID, bool> result = new Dictionary<ModuleID, bool>();
+
+			_modules.ForEach(x =>
+			{
+				result.Add(x.ID, false);
+			});
+
+			return result;
+        }
 		#endregion
 
 		#region Step 2
@@ -137,5 +156,74 @@ namespace Management
 		{
 			_module.OnStart();
 		}
+
+		/// <summary>
+		/// 모듈 초기화 완료시 완료 결과 보고
+		/// </summary>
+		/// <param name="_id"></param>
+		public void CheckInitModuleComplete(ModuleID _id)
+        {
+			bool isFinish = true;
+
+			// 현재 받아온 아이디 값이 체커에 존재하는 키인지 확인
+			if(m_mChecker.ContainsKey(_id))
+            {
+				// 존재한다면 value을 true로 변경
+				m_mChecker[_id] = true;
+            }
+			else
+            {
+				throw new Definition.Exceptions.ModuleNotInstantiated(_id);
+            }
+
+			// 모듈 결과 확인 리스트 순회
+			foreach(bool result in m_mChecker.Values)
+            {
+				// 모듈 완료 결과 
+				isFinish = isFinish && result;
+            }
+
+			// 모든 모듈의 초기화가 완료된 경우
+			if(isFinish)
+            {
+				Debug.Log($"----- 모든 모듈 초기화가 완료됨. -----");
+				Initialize_AfterModuleComplete();
+			}
+        }
+
+		/// <summary>
+		/// 모듈 초기화 완료 후에 초기화 단계
+		/// </summary>
+		private void Initialize_AfterModuleComplete()
+        {
+			PlatformCode pCode = MainManager.Instance.Platform;
+			
+			if(Platforms.IsDemoAdminViewer(pCode))
+            {
+				Debug.Log("모듈 초기화후 초기화");
+            }
+			else if(Platforms.IsSmartInspectPlatform(pCode))
+            {
+				// Interaction 모듈을 찾는다.
+				Module_Interaction interaction = Module<Module_Interaction>(ModuleID.Interaction);
+				if (interaction != null)
+                {
+					// SmartInspect 인스턴스를 찾는다.
+					UITemplate_SmartInspect ui;
+					foreach(var aui in interaction.UiInstances)
+                    {
+						if (Utilities.Objects.TryGetValue(aui.gameObject, out ui))
+                        {
+							// 초기화 후 초기화를 시작한다.
+							ui.Initialize_AfterModuleInitialize();
+                        }
+                    }
+                }
+            }
+			else
+            {
+				throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+            }
+        }
 	}
 }

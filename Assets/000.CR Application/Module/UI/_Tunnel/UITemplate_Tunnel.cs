@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Module.UI
 {
-	using Definition;
+    using Data.API;
+    using Definition;
 	using UnityEngine.UI;
 	using View;
 
@@ -100,9 +101,12 @@ namespace Module.UI
 			}
 		}
 
-		
+        public override void API_GetAddress(AAPI _data)
+        {
+            throw new System.NotImplementedException();
+        }
 
-		public override void SetObjectData_Tunnel(GameObject selected)
+        public override void SetObjectData_Tunnel(GameObject selected)
 		{
 			if (selected == null) return;
 

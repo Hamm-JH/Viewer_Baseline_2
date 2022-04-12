@@ -62,6 +62,12 @@ namespace Management
 				T t = (T)Modules.Find(x => x.ID == _id);
 				if (t != null)
                 {
+					// 모듈 인덱스에 키값이 없으면
+					if(!moduleIndex.ContainsKey(_id))
+                    {
+						// 키 기반으로 검출된 값 배치
+						moduleIndex.Add(_id, t);
+                    }
 					return t;
                 }
 				else

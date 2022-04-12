@@ -52,8 +52,13 @@ namespace Management.Events.Inputs
 			// UI 객체를 누른 경우 m_results.Count != 0
 			else
 			{
-				Debug.LogError("포커스시 키맵 UI를 포커싱하는지 확인 필요");
-				ContentManager.Instance.Input_KeymapFocus(m_focus, m_focusDelta);
+				PlatformCode pCode = MainManager.Instance.Platform;
+
+				if(Platforms.IsDemoAdminViewer(pCode))
+                {
+					Debug.LogError("포커스시 키맵 UI를 포커싱하는지 확인 필요");
+					ContentManager.Instance.Input_KeymapFocus(m_focus, m_focusDelta);
+                }
 			}
 		}
 

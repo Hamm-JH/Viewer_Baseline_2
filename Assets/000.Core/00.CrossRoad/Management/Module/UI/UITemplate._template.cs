@@ -1,3 +1,4 @@
+using Data.API;
 using Definition;
 using System.Collections;
 using System.Collections.Generic;
@@ -43,5 +44,10 @@ namespace Module.UI
 		{
 			throw new System.NotImplementedException();
 		}
-	}
+
+        public override void API_GetAddress(AAPI _data)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }

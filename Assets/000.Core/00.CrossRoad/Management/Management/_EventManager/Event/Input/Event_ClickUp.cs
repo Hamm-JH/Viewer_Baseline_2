@@ -7,7 +7,11 @@ using UnityEngine;
 namespace Management.Events.Inputs
 {
 	using Items;
-	using UnityEngine.Events;
+    using Module.Interaction;
+    using Module.Model;
+    using Module.UI;
+    using Module.WebAPI;
+    using UnityEngine.Events;
 	using UnityEngine.EventSystems;
 	using UnityEngine.UI;
 	using View;
@@ -139,6 +143,30 @@ namespace Management.Events.Inputs
 				m_clickEvent.Invoke(_obj);
 				ContentManager.Instance.OnSelect_3D(_obj);
 			}
+			else if(Platforms.IsSmartInspectPlatform(pCode))
+            {
+				Debug.Log($"***** Hello inspect platform");
+				m_clickEvent.Invoke(_obj);
+				//Module_WebAPI api = Content.SmartInspectManager.Instance.Module<Module.WebAPI.Module_WebAPI>(ModuleID.WebAPI);
+				//Module_Model model = Content.SmartInspectManager.Instance.Module<Module_Model>(ModuleID.Model);
+
+				Module_Interaction interaction = Content.SmartInspectManager.Instance.Module<Module_Interaction>(ModuleID.Interaction);
+
+				UITemplate_SmartInspect ui;
+				foreach(var value in interaction.UiInstances)
+                {
+					// 각 UI 개체 중에서 UITemplate_SmartInspect에 해당하는 개체가 있는지 확인한다. 존재하는 경우
+					if(Utilities.Objects.TryGetValue<UITemplate_SmartInspect>(value.gameObject, out ui))
+                    {
+						ui.Input_Select3DObject(_obj);
+                    }
+                }
+				//interaction.UiInstances
+            }
+			else
+            {
+				throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+            }
 		}
 
 		public void StartEvent_SelectIssue(GameObject _obj)
