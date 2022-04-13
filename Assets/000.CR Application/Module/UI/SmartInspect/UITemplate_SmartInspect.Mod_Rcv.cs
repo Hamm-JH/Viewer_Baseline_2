@@ -1,0 +1,77 @@
+﻿using Definition;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using View;
+
+namespace Module.UI
+{
+    public partial class UITemplate_SmartInspect : AUI
+    {
+        /// <summary>
+        /// Mode Rcv 활성화
+        /// </summary>
+        public void ModRcv_Active()
+        {
+            ModRcv_TogglePanel(0, true);
+            ModRcv_TogglePanel(1, true);
+            ModRcv_TogglePanel(2, false);
+            ModRcv_TogglePanel(3, false);
+            ModRcv_TogglePanel(4, false);
+        }
+
+        /// <summary>
+        /// index //
+        /// 0 : RepairList //
+        /// 1 : ReinforceList //
+        /// 2 : objStatus //
+        /// 3 : dimension //
+        /// 4 : drawing print //
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="isOn"></param>
+        private void ModRcv_TogglePanel(int index, bool isOn)
+        {
+            List<GameObject> toggleRoots = _ModRcv_GetToggleRoot(index);
+
+            if(toggleRoots != null)
+            {
+                toggleRoots.ForEach(x => x.SetActive(isOn));
+            }
+
+            MRcv_ToggleLBar(index, isOn);
+        }
+
+        private List<GameObject> _ModRcv_GetToggleRoot(int index)
+        {
+            List<GameObject> result = null;
+
+            switch(index)
+            {
+                case 0:
+                    result = new List<GameObject>();
+                    result.Add(m_moduleElements.m_rcvElement.m_rcvCount);
+                    result.Add(m_moduleElements.m_rcvElement.m_rcvList);
+                    break;
+
+                case 1:
+                    result = new List<GameObject>();
+                    result.Add(m_moduleElements.m_rcvElement.m_reinCount);
+                    result.Add(m_moduleElements.m_rcvElement.m_reinList);
+                    break;
+
+                case 2:
+                    result = new List<GameObject>();
+                    result.Add(m_general.m_objStatus.root);
+                    break;
+            }
+
+            return result;
+        }
+
+        //private void _ModRcv_Set_Leftbar(int index, bool isOn)
+        //{
+        //    MRcv_ToggleLBar(index, isOn);
+        //}
+    }
+}

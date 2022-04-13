@@ -2,10 +2,12 @@ using Definition;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using View;
 
 namespace Module.UI
 {
+    using UnityEngine.UI;
+    using View;
+
     public partial class UITemplate_SmartInspect : AUI
     {
         /// <summary>
@@ -17,6 +19,8 @@ namespace Module.UI
 
             m_moduleElements.m_rcvElement.m_rcvCount.SetActive(isToggle);
             m_moduleElements.m_rcvElement.m_rcvList.SetActive(isToggle);
+
+            MRcv_ToggleLBar(0, isToggle);
         }
 
         /// <summary>
@@ -28,6 +32,8 @@ namespace Module.UI
 
             m_moduleElements.m_rcvElement.m_reinCount.SetActive(isToggle);
             m_moduleElements.m_rcvElement.m_reinList.SetActive(isToggle);
+
+            MRcv_ToggleLBar(1, isToggle);
         }
 
         /// <summary>
@@ -35,7 +41,10 @@ namespace Module.UI
         /// </summary>
         private void MRcv_LBar_3StatusInfo()
         {
-            m_general.m_objStatus.root.SetActive(!m_general.m_objStatus.root.activeSelf);
+            bool isOn = !m_general.m_objStatus.root.activeSelf;
+            m_general.m_objStatus.root.SetActive(isOn);
+
+            MRcv_ToggleLBar(2, isOn);
         }
 
         /// <summary>
@@ -45,6 +54,7 @@ namespace Module.UI
         {
             // TODO 4 Dimension 메서드 작업예정
             Debug.LogError($"4 Dimension 메서드 작업예정");
+            MRcv_ToggleLBar(3, false);
         }
 
         /// <summary>
@@ -54,6 +64,54 @@ namespace Module.UI
         {
             // TODO 5 DrawingPrint 메서드 작업예정
             Debug.LogError($"5 DrawingPrint 메서드 작업예정");
+            MRcv_ToggleLBar(4, false);
+        }
+
+        /// <summary>
+        /// index ::
+        /// 0 : Repaired List // 1 : Damaged List // 2 : Status Info // 3 : Dimension // 4 : Drawing Print
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="isOn"></param>
+        private void MRcv_ToggleLBar(int index, bool isOn)
+        {
+            Image img_bg = null;
+            Image img_main = null;
+
+            switch(index)
+            {
+                case 0:
+                    img_main = m_moduleElements.m_rcvElement.m_leftbar[0].btn_menu.image;
+                    img_bg = m_moduleElements.m_rcvElement.m_leftbar[0].imgs[0];
+                    break;
+
+                case 1:
+                    img_main = m_moduleElements.m_rcvElement.m_leftbar[1].btn_menu.image;
+                    img_bg = m_moduleElements.m_rcvElement.m_leftbar[1].imgs[0];
+                    break;
+
+                case 2:
+                    img_main = m_moduleElements.m_rcvElement.m_leftbar[2].btn_menu.image;
+                    img_bg = m_moduleElements.m_rcvElement.m_leftbar[2].imgs[0];
+                    break;
+
+                case 3:
+                    img_main = m_moduleElements.m_rcvElement.m_leftbar[3].btn_menu.image;
+                    img_bg = m_moduleElements.m_rcvElement.m_leftbar[3].imgs[0];
+                    break;
+
+                case 4:
+                    img_main = m_moduleElements.m_rcvElement.m_leftbar[4].btn_menu.image;
+                    img_bg = m_moduleElements.m_rcvElement.m_leftbar[4].imgs[0];
+                    break;
+            }
+
+            if(img_bg == null || img_main == null)
+            {
+                throw new Definition.Exceptions.ImagesNotAssigned();
+            }
+
+            m_uiResources.m_rcv_leftbar.SetImage(img_bg, img_main, index, isOn);
         }
     }
 }

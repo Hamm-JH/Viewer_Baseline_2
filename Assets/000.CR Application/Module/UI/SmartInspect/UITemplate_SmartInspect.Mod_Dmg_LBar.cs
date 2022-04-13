@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using View;
 
 namespace Module.UI
@@ -13,9 +14,11 @@ namespace Module.UI
         /// </summary>
         private void MDmg_LBar_1ToggleDInfo()
         {
+            bool isOn = !m_moduleElements.m_dmgElement.m_dmgCount.activeSelf;
             // 손상정보 부재별 손상정보 토글
-            m_moduleElements.m_dmgElement.m_dmgCount.SetActive(
-                !m_moduleElements.m_dmgElement.m_dmgCount.activeSelf);
+            m_moduleElements.m_dmgElement.m_dmgCount.SetActive(isOn);
+
+            MDmg_ToggleLBar(0, isOn);
         }
 
         /// <summary>
@@ -23,9 +26,11 @@ namespace Module.UI
         /// </summary>
         private void MDmg_LBar_2ToggleDList()
         {
+            bool isOn = !m_moduleElements.m_dmgElement.m_dmgList.activeSelf;
             // 손상목록 리스트 패널 토글
-            m_moduleElements.m_dmgElement.m_dmgList.SetActive(
-                !m_moduleElements.m_dmgElement.m_dmgList.activeSelf);
+            m_moduleElements.m_dmgElement.m_dmgList.SetActive(isOn);
+
+            MDmg_ToggleLBar(1, isOn);
         }
 
         /// <summary>
@@ -33,7 +38,10 @@ namespace Module.UI
         /// </summary>
         private void MDmg_LBar_3ToggleSInfo()
         {
-            m_general.m_objStatus.root.SetActive(!m_general.m_objStatus.root.activeSelf);
+            bool isOn = !m_general.m_objStatus.root.activeSelf;
+            m_general.m_objStatus.root.SetActive(isOn);
+
+            MDmg_ToggleLBar(2, isOn);
         }
 
         /// <summary>
@@ -44,6 +52,44 @@ namespace Module.UI
             // 자세한 정보창(예시 교대01 창) On/Off
             m_moduleElements.m_dmgElement.m_dmgInformation.SetActive(
                 !m_moduleElements.m_dmgElement.m_dmgInformation.activeSelf);
+        }
+
+        /// <summary>
+        /// index ::
+        /// 0 : dInfo, 1 : dList, 2 : sInfo
+        /// </summary>
+        /// <param name="index"></param>
+        private void MDmg_ToggleLBar(int index, bool isOn)
+        {
+            Image img_bg = null;
+            Image img_main = null;
+
+            switch(index)
+            {
+                case 0:
+                    //img_bg = m_moduleElements.m_dmgElement.m_leftbar[0].btn_menu.image;
+                    //img_main = m_moduleElements.m_dmgElement.m_leftbar[0].imgs[0];
+                    img_main = m_moduleElements.m_dmgElement.m_leftbar[0].btn_menu.image;
+                    img_bg = m_moduleElements.m_dmgElement.m_leftbar[0].imgs[0];
+                    break;
+
+                case 1:
+                    img_main = m_moduleElements.m_dmgElement.m_leftbar[1].btn_menu.image;
+                    img_bg = m_moduleElements.m_dmgElement.m_leftbar[1].imgs[0];
+                    break;
+
+                case 2:
+                    img_main = m_moduleElements.m_dmgElement.m_leftbar[2].btn_menu.image;
+                    img_bg = m_moduleElements.m_dmgElement.m_leftbar[2].imgs[0];
+                    break;
+            }
+
+            if(img_bg == null || img_main == null)
+            {
+                throw new Definition.Exceptions.ImagesNotAssigned();
+            }
+
+            m_uiResources.m_dmg_leftbar.SetImage(img_bg, img_main, index, isOn);
         }
     }
 }

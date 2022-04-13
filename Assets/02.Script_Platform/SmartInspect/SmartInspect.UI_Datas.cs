@@ -7,6 +7,17 @@ namespace SmartInspect
     using TMPro;
     using UnityEngine.UI;
 
+    /// <summary>
+    /// 단일 프로세스 메뉴
+    /// </summary>
+    [System.Serializable]
+    public class RProcessMenu
+    {
+        public Button btn_menu;
+        public List<Image> imgs;
+        public List<TextMeshProUGUI> txts;
+    }
+
     #region Module elements
 
     [System.Serializable]
@@ -37,6 +48,11 @@ namespace SmartInspect
         /// 부재별 특정 손상의 자세한 정보 패널
         /// </summary>
         public GameObject m_dmgInformation;
+
+        /// <summary>
+        /// 왼쪽 버튼 바 리스트
+        /// </summary>
+        public List<RProcessMenu> m_leftbar;
     }
 
     [System.Serializable]
@@ -64,6 +80,10 @@ namespace SmartInspect
         /// </summary>
         public GameObject m_reinList;
 
+        /// <summary>
+        /// 왼쪽 버튼 바 리스트
+        /// </summary>
+        public List<RProcessMenu> m_leftbar;
     }
 
     #endregion
@@ -146,6 +166,8 @@ namespace SmartInspect
         public Image img_side;
         public TextMeshProUGUI txt_desc;
     }
+
+    
 
     /// <summary>
     /// 프로필 팝업창

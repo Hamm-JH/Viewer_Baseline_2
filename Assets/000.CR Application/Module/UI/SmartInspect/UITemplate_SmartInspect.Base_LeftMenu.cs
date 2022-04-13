@@ -2,6 +2,7 @@
 using SmartInspect;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using View;
@@ -24,6 +25,8 @@ namespace Module.UI
             // dmg button 상태 활성화
             LeftMenu_SetToggleButton(currIndex);
 
+            // Dmg 모드 활성화 실행
+            ModDmg_Active();
         }
 
         /// <summary>
@@ -41,6 +44,8 @@ namespace Module.UI
             // rcv button 상태 활성화
             LeftMenu_SetToggleButton(currIndex);
 
+            // rcv 모드 활성화 실행
+            ModRcv_Active();
         }
 
         /// <summary>
@@ -167,19 +172,22 @@ namespace Module.UI
             Image m1_bg = m_basePanel.m_processMenus.menus[0].btn_menu.GetComponent<Image>();
             Image m1_main = m_basePanel.m_processMenus.menus[0].img_main;
             Image m1_side = m_basePanel.m_processMenus.menus[0].img_side;
+            TextMeshProUGUI m1_text = m_basePanel.m_processMenus.menus[0].txt_desc;
 
             Image m2_bg = m_basePanel.m_processMenus.menus[1].btn_menu.GetComponent<Image>();
             Image m2_main = m_basePanel.m_processMenus.menus[1].img_main;
             Image m2_side = m_basePanel.m_processMenus.menus[1].img_side;
+            TextMeshProUGUI m2_text = m_basePanel.m_processMenus.menus[1].txt_desc;
 
             Image m3_bg = m_basePanel.m_processMenus.menus[2].btn_menu.GetComponent<Image>();
             Image m3_main = m_basePanel.m_processMenus.menus[2].img_main;
             Image m3_side = m_basePanel.m_processMenus.menus[2].img_side;
+            TextMeshProUGUI m3_text = m_basePanel.m_processMenus.menus[2].txt_desc;
 
             m_uiResources.m_processMenu.SetImage(index,
-                m1_bg, m1_main, m1_side,
-                m2_bg, m2_main, m2_side,
-                m3_bg, m3_main, m3_side);
+                m1_bg, m1_main, m1_side, m1_text,
+                m2_bg, m2_main, m2_side, m2_text,
+                m3_bg, m3_main, m3_side, m3_text);
         }
 
         #endregion
