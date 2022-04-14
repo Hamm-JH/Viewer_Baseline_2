@@ -27,7 +27,10 @@ namespace SmartInspect
 
         private void REIN_IssueList_Init()
         {
+            // issue 리스트를 가져온다.
+            List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory);
 
+            SetIssueList(2, issues);
         }
     }
 }

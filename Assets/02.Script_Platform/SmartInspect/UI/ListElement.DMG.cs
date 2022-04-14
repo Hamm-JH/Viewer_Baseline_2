@@ -43,8 +43,10 @@ namespace SmartInspect
             List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory);
 
             // 가져온 리스트 개별 단위로 순회한다.
-                // 단일 이슈에 대한 인스턴스 생성
-                // 패킷 생성후 실행
+            // 단일 이슈에 대한 인스턴스 생성
+            // 패킷 생성후 실행
+
+            SetIssueList(1, issues);
         }
 
     }

@@ -45,6 +45,7 @@ namespace SmartInspect
 
 
         #endregion
+
         public Packet_Record(int _rIndex, int _lNumber, string _partName, UITemplate_SmartInspect _rootUI)
         {
             m_requestIndex = _rIndex;
@@ -60,10 +61,17 @@ namespace SmartInspect
             m_rootUI = _rootUI;
         }
 
+        /// <summary>
+        /// Dmg
+        /// </summary>
+        /// <param name="_rIndex"></param>
+        /// <param name="_number"></param>
+        /// <param name="_issue"></param>
+        /// <param name="_rootUI"></param>
         public Packet_Record(int _rIndex, int _number, Definition._Issue.Issue _issue, UITemplate_SmartInspect _rootUI)
         {
             m_requestIndex = _rIndex;
-            m_listedNumber = _number;
+            m_elementNumber = _number;
             m_issue = _issue;
             m_rootUI = _rootUI;
         }
@@ -206,7 +214,7 @@ namespace SmartInspect
             tx_issueName.text = _packet.m_issue.__IssueName;
             tx_partName.text = _packet.m_issue.__PartName;
             tx_locName.text = _packet.m_issue.__LocationName;
-            tx_date.text = _packet.m_issue.Date;
+            tx_date.text = _packet.m_issue.DateDmg;
 
             btn_image.RootUI = _packet.m_rootUI;
             btn_detail.RootUI = _packet.m_rootUI;
@@ -231,7 +239,7 @@ namespace SmartInspect
             tx_number.text = _packet.m_elementNumber.ToString();
             tx_partName.text = _packet.m_issue.__PartName;
             tx_repairName.text = _packet.m_issue.RcvDescription;
-            tx_date.text = _packet.m_issue.Date;
+            tx_date.text = _packet.m_issue.DateRcvEnd;
 
             btn_image.RootUI = _packet.m_rootUI;
         }
