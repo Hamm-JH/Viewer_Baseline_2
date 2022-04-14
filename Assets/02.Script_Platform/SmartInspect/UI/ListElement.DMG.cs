@@ -31,51 +31,20 @@ namespace SmartInspect
             {
                 throw new System.Exception("template not defined");
             }
-
-            //Packet_Record packet = new Packet_Record(
-            //    _rIndex: 0,
-            //    _issue: null,
-            //    _rootUI: m_rootUI);
         }
 
-        private void PartCount_Init()
-        {
-            PlatformCode pCode = MainManager.Instance.Platform;
-            if(Platforms.IsBridgePlatform(pCode))
-            {
-                // 분류 코드 리스트 갖고온다.
-                List<Bridges.CodeLv4> cList = Bridges.GetCodeList();
-                // 손상정보 리스트도 갖고온다.
-                List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory);
-                //SmartInspectManager.Instance.Module<Module_Model>(ModuleID.Model).DmgData;
-
-                // 분류 코드 리스트 기반으로 요소 리스트를 생성한다.
-                Dictionary<Bridges.CodeLv4, int> result = GetCountList_Bridge(cList, issues);
-
-                SetCountList_Bridge(result);
-            }
-            else if(Platforms.IsTunnelPlatform(pCode))
-            {
-                // 분류 코드 리스트 갖고온다.
-                List<AdminViewer.Tunnel.TunnelCode> cList = Tunnels.GetCodeList();
-                // 손상정보 리스트도 갖고온다.
-                List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory);
-                //SmartInspectManager.Instance.Module<Module_Model>(ModuleID.Model).DmgData;
-
-                // 분류 코드 리스트 기반으로 요소 리스트를 생성한다.
-                Dictionary<AdminViewer.Tunnel.TunnelCode, int> result = GetCountList_Tunnel(cList, issues);
-
-                SetCountList_Tunnel(result);
-            }
-            else
-            {
-                throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
-            }
-        }
+        
 
         private void DMG_IssueList_Init()
         {
+            // 단일 이슈 단위로 정보를 배치하는 작업을 수행한다.
 
+            // issue 리스트를 가져온다.
+            List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory);
+
+            // 가져온 리스트 개별 단위로 순회한다.
+                // 단일 이슈에 대한 인스턴스 생성
+                // 패킷 생성후 실행
         }
 
     }

@@ -1,11 +1,13 @@
-﻿using Management;
-using Module.UI;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace SmartInspect
 {
+    using Module.UI;
+    using Management;
+    using Management.Content;
+
     /// <summary>
     /// SmartInspect의 UI 내부 리스트 요소 클래스
     /// </summary>
@@ -80,5 +82,41 @@ namespace SmartInspect
             }
         }
 
+        #region General
+
+        private List<Definition._Issue.Issue> GetIssueList(Category _category)
+        {
+            List<Definition._Issue.Issue> list = new List<Definition._Issue.Issue>();
+
+            if (_category == Category.ALL)
+            {
+                List<GameObject> objs = SmartInspectManager.Instance._Model.IssueObjs;
+                objs.ForEach(x =>
+                {
+                    Definition._Issue.Issue _issue;
+                    if (x.TryGetComponent<Definition._Issue.Issue>(out _issue))
+                    {
+                        list.Add(_issue);
+                    }
+                });
+            }
+            else if (_category == Category.DMG)
+            {
+                list = SmartInspectManager.Instance._Model.DmgData;
+            }
+            else if (_category == Category.RCV)
+            {
+                list = SmartInspectManager.Instance._Model.RcvData;
+            }
+            else if (_category == Category.REIN)
+            {
+
+            }
+
+
+            return list;
+        }
+
+        #endregion
     }
 }

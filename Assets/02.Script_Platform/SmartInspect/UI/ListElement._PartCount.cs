@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace SmartInspect
 {
+    using Definition;
+    using Management;
     using Management.Content;
     using Platform.Bridge;
     using Platform.Tunnel;
@@ -13,42 +15,42 @@ namespace SmartInspect
     /// </summary>
     public partial class ListElement
     {
-        #region part count
-
-        private List<Definition._Issue.Issue> GetIssueList(Category _category)
+        private void PartCount_Init()
         {
-            List<Definition._Issue.Issue> list = new List<Definition._Issue.Issue>();
-
-            if (_category == Category.ALL)
+            PlatformCode pCode = MainManager.Instance.Platform;
+            if (Platforms.IsBridgePlatform(pCode))
             {
-                List<GameObject> objs = SmartInspectManager.Instance._Model.IssueObjs;
-                objs.ForEach(x =>
-                {
-                    Definition._Issue.Issue _issue;
-                    if (x.TryGetComponent<Definition._Issue.Issue>(out _issue))
-                    {
-                        list.Add(_issue);
-                    }
-                });
-            }
-            else if (_category == Category.DMG)
-            {
-                list = SmartInspectManager.Instance._Model.DmgData;
-            }
-            else if (_category == Category.RCV)
-            {
-                list = SmartInspectManager.Instance._Model.RcvData;
-            }
-            else if (_category == Category.REIN)
-            {
+                // 분류 코드 리스트 갖고온다.
+                List<Bridges.CodeLv4> cList = Bridges.GetCodeList();
+                // 손상정보 리스트도 갖고온다.
+                List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory);
+                //SmartInspectManager.Instance.Module<Module_Model>(ModuleID.Model).DmgData;
 
+                // 분류 코드 리스트 기반으로 요소 리스트를 생성한다.
+                Dictionary<Bridges.CodeLv4, int> result = GetCountList_Bridge(cList, issues);
+
+                SetCountList_Bridge(result);
             }
+            else if (Platforms.IsTunnelPlatform(pCode))
+            {
+                // 분류 코드 리스트 갖고온다.
+                List<AdminViewer.Tunnel.TunnelCode> cList = Tunnels.GetCodeList();
+                // 손상정보 리스트도 갖고온다.
+                List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory);
+                //SmartInspectManager.Instance.Module<Module_Model>(ModuleID.Model).DmgData;
 
+                // 분류 코드 리스트 기반으로 요소 리스트를 생성한다.
+                Dictionary<AdminViewer.Tunnel.TunnelCode, int> result = GetCountList_Tunnel(cList, issues);
 
-            return list;
+                SetCountList_Tunnel(result);
+            }
+            else
+            {
+                throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+            }
         }
 
-        #endregion
+        
 
         #region Bridge - part count
 
