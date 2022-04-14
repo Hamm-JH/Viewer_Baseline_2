@@ -137,6 +137,16 @@ namespace Platform.Bridge
 			return result;
 		}
 
+		public static CodeLv4 GetPartCode(string _name)
+        {
+			CodeLv4 result = CodeLv4.Null;
+
+			string arg1 = _name.Split('_')[1];
+			result = ConvertLv4Code(arg1);
+
+			return result;
+        }
+
 		private static string GetArg1(string _arg)
 		{
 			string result = "";
@@ -184,6 +194,25 @@ namespace Platform.Bridge
 				return CodeLv5.Null;
 			}
 		}
+
+		public static List<CodeLv4> GetCodeList()
+        {
+			List<CodeLv4> list = new List<CodeLv4>();
+
+			list.Add(CodeLv4.GD);
+			list.Add(CodeLv4.CB);
+			list.Add(CodeLv4.SL);
+			list.Add(CodeLv4.DS);
+			list.Add(CodeLv4.GR);
+			list.Add(CodeLv4.GF);
+			list.Add(CodeLv4.JI);
+			list.Add(CodeLv4.AB);
+			list.Add(CodeLv4.PI);
+			list.Add(CodeLv4.BE);
+			list.Add(CodeLv4.FT);
+
+			return list;
+        }
 
 		public static string ConvertLv4String(CodeLv4 code)
 		{

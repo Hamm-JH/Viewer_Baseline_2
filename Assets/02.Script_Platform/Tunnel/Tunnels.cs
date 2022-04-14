@@ -8,6 +8,8 @@ namespace Platform.Tunnel
 
 	public static class Tunnels
 	{
+		
+
 		public static string GetName(string _value)
 		{
 			string result = "";
@@ -198,5 +200,51 @@ namespace Platform.Tunnel
 
 			return result;
 		}
+
+		public static List<TunnelCode> GetCodeList()
+        {
+			List<TunnelCode> list = new List<TunnelCode>();
+
+			list.Add(TunnelCode.ETC_EmergencyCall		);
+			list.Add(TunnelCode.ETC_fireplug			);
+			list.Add(TunnelCode.ETC_EmergencyExit		);
+			list.Add(TunnelCode.LIGHT					);
+			list.Add(TunnelCode.MAIN_Drain				);
+			list.Add(TunnelCode.MAIN_Cover				);
+			list.Add(TunnelCode.MAIN_Paving				);
+			list.Add(TunnelCode.MAIN_SideWall			);
+			list.Add(TunnelCode.MAIN_Ceiling			);
+			list.Add(TunnelCode.JET						);
+			list.Add(TunnelCode.WALL_CentralReservation );
+			list.Add(TunnelCode.WALL_Gate				);
+			list.Add(TunnelCode.WALL_Slope				);
+
+			return list;
+        }
+
+		public static string GetCodeName(TunnelCode _code)
+        {
+			string result = "";
+
+			switch(_code)
+            {
+				case TunnelCode.ETC_EmergencyCall:			result = "비상전화";	break;
+				case TunnelCode.ETC_fireplug:				result = "소화전";	break;
+				case TunnelCode.ETC_EmergencyExit:			result = "비상구";	break;
+				case TunnelCode.LIGHT:						result = "조명";	break;
+				case TunnelCode.MAIN_Drain:					result = "배수로";	break;
+				case TunnelCode.MAIN_Cover:					result = "배수로 덮개";	break;
+				case TunnelCode.MAIN_Paving:				result = "포장";		break;
+				case TunnelCode.MAIN_SideWall:				result = "측벽";		break;
+				case TunnelCode.MAIN_Ceiling:				result = "천장";		break;
+				case TunnelCode.JET:						result = "팬";		break;
+				case TunnelCode.WALL_CentralReservation:	result = "중앙분리대";	break;
+				case TunnelCode.WALL_Gate:					result = "옹벽";		break;
+				case TunnelCode.WALL_Slope:					result = "사면";		break;
+
+            }
+
+			return result;
+        }
 	}
 }

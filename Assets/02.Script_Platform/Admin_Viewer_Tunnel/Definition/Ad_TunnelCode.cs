@@ -47,7 +47,7 @@ namespace AdminViewer.Tunnel
 		/// <summary>
 		/// 측벽
 		/// </summary>
-		MAIN_SideWall,
+		MAIN_SideWall = 20,
 
 		/// <summary>
 		/// 천장

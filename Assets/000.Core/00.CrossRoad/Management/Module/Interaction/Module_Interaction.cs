@@ -88,6 +88,22 @@ namespace Module.Interaction
 			ContentManager.Instance.CheckInitModuleComplete(ID);
 		}
 
+		public bool TryGetUITempalte<T>(out T _t) where T : AUI
+        {
+			bool result = false;
+			_t = null;
+
+			foreach(var ui in UiInstances)
+            {
+				if(Utilities.Objects.TryGetValue<T>(ui.gameObject, out _t))
+                {
+					return result;
+                }
+            }
+
+			return result;
+        }
+
 		/// <summary>
 		/// 사전 초기화 단계 완료후 초기화 시작
 		/// </summary>

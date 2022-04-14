@@ -1,5 +1,6 @@
 ﻿using Management;
 using Newtonsoft.Json.Linq;
+using Platform.Tunnel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -65,6 +66,9 @@ namespace Definition._Issue
 		[SerializeField] int m_dcLocation;
 		[SerializeField] Vector3 m_positionVector;
 
+		/// <summary>
+		/// 손상정보의 발생 일시
+		/// </summary>
 		public string Date { get => m_date; set => m_date=value; }
 
 		public string IssueOrderCode { get => m_issueOrderCode; set => m_issueOrderCode=value; }
@@ -141,6 +145,9 @@ namespace Definition._Issue
 
 		#endregion
 
+		/// <summary>
+		/// 손상부재의 이름
+		/// </summary>
 		public string __PartName
 		{
 			get
@@ -167,6 +174,9 @@ namespace Definition._Issue
 			}
 		}
 
+		/// <summary>
+		/// 손상정보의 이름
+		/// </summary>
 		public string __IssueName
 		{
 			get
@@ -198,6 +208,9 @@ namespace Definition._Issue
 			}
 		}
 
+		/// <summary>
+		/// 손상정보의 위치
+		/// </summary>
 		public string __LocationName
 		{
 			get
@@ -241,6 +254,34 @@ namespace Definition._Issue
 				return "";
 			}
 		}
+
+		/// <summary>
+		/// 교량 :: 부재명에서 코드찾기
+		/// </summary>
+		public Platform.Bridge.Bridges.CodeLv4 __PartBridgeCode
+        {
+			get
+            {
+				//string pName = __PartName;
+				string pName = CdBridgeParts;
+
+				return Platform.Bridge.Bridges.GetPartCode(pName);
+            }
+        }
+
+		/// <summary>
+		/// 터널 :: 부재명에서 코드찾기
+		/// </summary>
+		public AdminViewer.Tunnel.TunnelCode __PartTunnelCode
+        {
+			get
+            {
+				//string pName = __PartName;
+				string pName = CdBridgeParts;
+
+				return Tunnels.GetPartCode(pName);
+            }
+        }
 
 		public void SetDmg(string _date, JToken _token)
 		{

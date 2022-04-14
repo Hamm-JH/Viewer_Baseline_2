@@ -24,6 +24,7 @@ namespace SmartInspect
     public class ModuleElement
     {
         public List<GameObject> m_mElements;
+        
 
         public DamageElement m_dmgElement;
         public RecoverElement m_rcvElement;
@@ -53,6 +54,11 @@ namespace SmartInspect
         /// 왼쪽 버튼 바 리스트
         /// </summary>
         public List<RProcessMenu> m_leftbar;
+
+        /// <summary>
+        /// 리스트 요소들
+        /// </summary>
+        public List<ListElement> m_listElements;
     }
 
     [System.Serializable]
@@ -84,6 +90,11 @@ namespace SmartInspect
         /// 왼쪽 버튼 바 리스트
         /// </summary>
         public List<RProcessMenu> m_leftbar;
+
+        /// <summary>
+        /// 리스트 요소들
+        /// </summary>
+        public List<ListElement> m_listElements;
     }
 
     #endregion

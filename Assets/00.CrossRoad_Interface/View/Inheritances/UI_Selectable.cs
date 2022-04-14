@@ -28,6 +28,12 @@ namespace View
 		[SerializeField] UIEventType eventType;
 		//[SerializeField] UniqueUIEventType m_unique;
 
+		public AUI RootUI
+        {
+			get => m_rootUI;
+			set => m_rootUI = value;
+        }
+
 		[Header("Linked UI Elements")]
 		/// <summary>
 		/// 자식 패널 객체

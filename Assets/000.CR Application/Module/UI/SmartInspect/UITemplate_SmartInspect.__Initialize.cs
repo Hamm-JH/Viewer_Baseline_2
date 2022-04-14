@@ -18,6 +18,16 @@ namespace Module.UI
         public void Initialize_AfterModuleInitialize()
         {
             ContentManager.Instance._API.RequestAddressData(API_GetAddress);
+
+            m_moduleElements.m_dmgElement.m_listElements.ForEach(x =>
+            {
+                x.Init();
+            });
+
+            m_moduleElements.m_rcvElement.m_listElements.ForEach(x =>
+            {
+                x.Init();
+            });
         }
 
         /// <summary>

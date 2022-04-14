@@ -86,7 +86,7 @@ namespace Module.WebAPI
 		{
 			// 데이터 세팅 인스턴스
 			DAddress data = new DAddress();
-			Debug.Log($"Hello Address");
+			//Debug.Log($"Hello Address");
 
 			{
 				JObject jObj = JObject.Parse(_data);
