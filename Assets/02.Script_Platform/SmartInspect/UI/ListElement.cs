@@ -7,6 +7,7 @@ namespace SmartInspect
     using Module.UI;
     using Management;
     using Management.Content;
+    using TMPro;
 
     /// <summary>
     /// SmartInspect의 UI 내부 리스트 요소 클래스
@@ -40,9 +41,15 @@ namespace SmartInspect
         public UITemplate_SmartInspect m_rootUI;
         public Transform m_contentRoot;
 
-        public void Init()
+        private TextMeshProUGUI titleText;
+        private string titleName;
+
+        public void Init(TextMeshProUGUI _title, string _tName)
         {
             //ContentManager.Instance._Model.DmgData
+
+            titleText = _title;
+            titleName = _tName;
 
             Debug.Log($"hello list {gameObject.name}");
 

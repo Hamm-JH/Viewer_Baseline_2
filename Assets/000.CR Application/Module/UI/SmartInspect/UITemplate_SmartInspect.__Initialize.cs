@@ -19,15 +19,8 @@ namespace Module.UI
         {
             ContentManager.Instance._API.RequestAddressData(API_GetAddress);
 
-            m_moduleElements.m_dmgElement.m_listElements.ForEach(x =>
-            {
-                x.Init();
-            });
-
-            m_moduleElements.m_rcvElement.m_listElements.ForEach(x =>
-            {
-                x.Init();
-            });
+            Initialize_UI_Panels();
+            
         }
 
         /// <summary>
@@ -43,6 +36,40 @@ namespace Module.UI
             General_SetAddress(data.nmAddress);     // 주소 할당
 
             API_RequestTexture(data.mp_fid, data.mp_ftype, data.mp_fgroup, API_getMainTexture);     // 텍스처 가져오기
+        }
+
+        private void Initialize_UI_Panels()
+        {
+            //m_moduleElements.m_dmgElement.m_listElements.ForEach(x =>
+            //{
+            //    x.Init();
+            //});
+
+            //m_moduleElements.m_rcvElement.m_listElements.ForEach(x =>
+            //{
+            //    x.Init();
+            //});
+
+            m_moduleElements.m_dmgElement.m_issueCountPanels.ForEach(x =>
+            {
+                x.m_listElement.Init(null, null);
+            });
+
+            m_moduleElements.m_dmgElement.m_issueListPanels.ForEach(x =>
+            {
+                x.m_listElement.Init(x.title, x.baseTitleName);
+            });
+
+            m_moduleElements.m_rcvElement.m_issueCountPanels.ForEach(x =>
+            {
+                x.m_listElement.Init(null, null);
+            });
+
+            m_moduleElements.m_rcvElement.m_issueListPanels.ForEach(x =>
+            {
+                x.m_listElement.Init(x.title, x.baseTitleName);
+            });
+
         }
     }
 }

@@ -16188,6 +16188,14 @@ MonoBehaviour:
       m_listElements:
       - {fileID: 3603725531781242837}
       - {fileID: 6811003053380244033}
+      m_issueCountPanels:
+      - root: {fileID: 9179171283897739796}
+        m_listElement: {fileID: 3603725531781242837}
+      m_issueListPanels:
+      - root: {fileID: 9179171282994506848}
+        title: {fileID: 9179171284928588719}
+        baseTitleName: "\uC190\uC0C1\uBAA9\uB85D"
+        m_listElement: {fileID: 6811003053380244033}
     m_rcvElement:
       root: {fileID: 919895828547061355}
       m_rcvCount: {fileID: 919895828001324171}
@@ -16220,6 +16228,20 @@ MonoBehaviour:
       - {fileID: 3890028287267419594}
       - {fileID: 328291770501808774}
       - {fileID: 6922974221022695469}
+      m_issueCountPanels:
+      - root: {fileID: 919895828001324171}
+        m_listElement: {fileID: 7452441743502742162}
+      - root: {fileID: 919895828700806718}
+        m_listElement: {fileID: 328291770501808774}
+      m_issueListPanels:
+      - root: {fileID: 919895828718924561}
+        title: {fileID: 919895827736336455}
+        baseTitleName: "\uBCF4\uC218\uBAA9\uB85D"
+        m_listElement: {fileID: 3890028287267419594}
+      - root: {fileID: 919895828184236909}
+        title: {fileID: 919895828412428509}
+        baseTitleName: "\uBCF4\uAC15\uBAA9\uB85D"
+        m_listElement: {fileID: 6922974221022695469}
   m_basePanel:
     m_header:
       objectBackground: {fileID: 919895829136460751}

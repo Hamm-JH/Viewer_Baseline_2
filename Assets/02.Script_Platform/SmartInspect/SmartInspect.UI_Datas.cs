@@ -24,7 +24,6 @@ namespace SmartInspect
     public class ModuleElement
     {
         public List<GameObject> m_mElements;
-        
 
         public DamageElement m_dmgElement;
         public RecoverElement m_rcvElement;
@@ -59,6 +58,16 @@ namespace SmartInspect
         /// 리스트 요소들
         /// </summary>
         public List<ListElement> m_listElements;
+
+        /// <summary>
+        /// 점검정보 파트별 카운트 패널
+        /// </summary>
+        public List<IssueCountPanel> m_issueCountPanels;
+
+        /// <summary>
+        /// 점검정보 리스트 요소들
+        /// </summary>
+        public List<IssueListPanel> m_issueListPanels;
     }
 
     [System.Serializable]
@@ -95,6 +104,42 @@ namespace SmartInspect
         /// 리스트 요소들
         /// </summary>
         public List<ListElement> m_listElements;
+
+        /// <summary>
+        /// 점검정보 파트별 카운트 패널
+        /// </summary>
+        public List<IssueCountPanel> m_issueCountPanels;
+
+        /// <summary>
+        /// 점검정보 리스트 요소들
+        /// </summary>
+        public List<IssueListPanel> m_issueListPanels;
+    }
+    
+    /// <summary>
+    /// 점검정보 파트별 카운트 패널
+    /// </summary>
+    [System.Serializable]
+    public class IssueCountPanel
+    {
+        public GameObject root;
+
+        public ListElement m_listElement;
+    }
+
+    /// <summary>
+    /// 점검정보 리스트 패널
+    /// </summary>
+    [System.Serializable]
+    public class IssueListPanel
+    {
+        public GameObject root;
+
+        public TextMeshProUGUI title;
+        public string baseTitleName;
+
+        public ListElement m_listElement;
+
     }
 
     #endregion

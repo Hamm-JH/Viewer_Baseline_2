@@ -13,6 +13,11 @@ namespace SmartInspect
         {
             int index = 1;
 
+            if(titleText != null)
+            {
+                titleText.text = $"{titleName} {_issues.Count}건";
+            }
+
             foreach (Definition._Issue.Issue issue in _issues)
             {
                 GameObject obj = Instantiate<GameObject>(Resources.Load<GameObject>("UI/SmartInspect/Inspect_Records"), m_contentRoot);
