@@ -26,7 +26,17 @@ namespace Module.UI
             PlatformCode pCode = MainManager.Instance.Platform;
 
             //if(Platforms.IsTunnelPlatform())
-            m_basePanel.m_header.partName.text = Definition.Projects.Parts.GetPartName(_obj.name);
+            if(_obj != null)
+            {
+                m_basePanel.m_header.partBackground.SetActive(true);
+                m_basePanel.m_header.partName.gameObject.SetActive(true);
+                m_basePanel.m_header.partName.text = Definition.Projects.Parts.GetPartName(_obj.name);
+            }
+            else
+            {
+                m_basePanel.m_header.partBackground.SetActive(false);
+                m_basePanel.m_header.partName.gameObject.SetActive(false);
+            }
         }
     }
 }

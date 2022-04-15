@@ -17,6 +17,7 @@ namespace SmartInspect
         public int m_requestIndex;
         public Definition._Issue.Issue m_issue;
         public UITemplate_SmartInspect m_rootUI;
+        public GameObject m_element;
 
         #region Part Count 
         /// <summary>
@@ -90,12 +91,16 @@ namespace SmartInspect
         /// 2 : rcv work
         /// </summary>
         [SerializeField] int m_eIndex = -1;
+        public Definition._Issue.Issue m_issue;
 
         public Data m_data;
 
         public void Init(Packet_Record _packet)
         {
             m_eIndex = _packet.m_requestIndex;
+            m_issue = _packet.m_issue;
+
+            _packet.m_element = gameObject;
 
             m_data.Init(_packet);
         }
@@ -217,7 +222,9 @@ namespace SmartInspect
             tx_date.text = _packet.m_issue.DateDmg;
 
             btn_image.RootUI = _packet.m_rootUI;
+            btn_image.ChildPanel = _packet.m_element;
             btn_detail.RootUI = _packet.m_rootUI;
+            btn_detail.ChildPanel = _packet.m_element;
 
         }
     }
@@ -238,10 +245,12 @@ namespace SmartInspect
 
             tx_number.text = _packet.m_elementNumber.ToString();
             tx_partName.text = _packet.m_issue.__PartName;
-            tx_repairName.text = _packet.m_issue.RcvDescription;
+            tx_repairName.text = $"{_packet.m_issue.__IssueName}보수";
+            //tx_repairName.text = _packet.m_issue.RcvDescription;
             tx_date.text = _packet.m_issue.DateRcvEnd;
 
             btn_image.RootUI = _packet.m_rootUI;
+            btn_image.ChildPanel = _packet.m_element;
         }
     }
 }

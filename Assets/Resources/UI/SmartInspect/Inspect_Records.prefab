@@ -218,7 +218,7 @@ MonoBehaviour:
   m_isInteractable: 0
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 0}
-  eventType: 0
+  eventType: 848
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_isInteractable: 0
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 0}
-  eventType: 0
+  eventType: 849
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -1652,7 +1652,7 @@ MonoBehaviour:
   m_isInteractable: 0
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 0}
-  eventType: 0
+  eventType: 848
   m_uiFXs: []
   m_uiHoverElements: []
   t_surfaceCode: 
@@ -2446,6 +2446,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_eIndex: -1
+  m_issue:
+    m_date: 
+    m_issueOrderCode: 
+    m_cdBridge: 
+    m_cdBridgeParts: 
+    m_nmUser: 
+    m_dcMemberSurface: 
+    m__dcLocation: 
+    m__issueCode: 
+    m_ynRecover: 
+    m_issueStatus: 
+    m__positionVector: 
+    m_width: 
+    m_height: 
+    m_depth: 
+    m_dcRemark: 
+    m_dcRecover: 
+    m_dateDmg: 
+    m_dateRcvStart: 
+    m_dateRcvEnd: 
+    m_fgroup: 
+    m_imgs: []
+    m_issueCode: 0
+    m_dcLocation: 0
+    m_positionVector: {x: 0, y: 0, z: 0}
   m_data:
     m_partCount:
       root: {fileID: 2757255870350665855}

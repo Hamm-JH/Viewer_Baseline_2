@@ -224,6 +224,26 @@ namespace Management.Events.Inputs
 				m_clickEvent.Invoke(null);
 				ContentManager.Instance.OnSelect_3D(null);
 			}
+			else if(Platforms.IsSmartInspectPlatform(pCode))
+            {
+				m_clickEvent.Invoke(null);
+
+				Module_Interaction interaction = Content.SmartInspectManager.Instance.Module<Module_Interaction>(ModuleID.Interaction);
+
+				UITemplate_SmartInspect ui;
+				foreach (var value in interaction.UiInstances)
+				{
+					// 각 UI 개체 중에서 UITemplate_SmartInspect에 해당하는 개체가 있는지 확인한다. 존재하는 경우
+					if (Utilities.Objects.TryGetValue<UITemplate_SmartInspect>(value.gameObject, out ui))
+					{
+						ui.Input_Select3DObject(null);
+					}
+				}
+			}
+			else
+            {
+				throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+            }
 		} 
 
 	}

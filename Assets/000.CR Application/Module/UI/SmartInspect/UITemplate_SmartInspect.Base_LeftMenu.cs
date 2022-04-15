@@ -98,8 +98,9 @@ namespace Module.UI
 
         #endregion
 
-        #region Button Set on/off
+        #region Button Set on/off (삭제 필요)
 
+        // TODO 이 블록 삭제
         /// <summary>
         /// 삭제???????????????????????
         /// </summary>

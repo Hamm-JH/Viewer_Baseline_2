@@ -163,8 +163,21 @@ namespace Module.UI
 					Event_Toggle_ChildPanel(1, _setter.ChildPanel);
 					break;
 
-					#endregion
-			}
-		}
+				#endregion
+
+				#region Ins_Panel
+
+				case UIEventType.Ins_Panel_OnImage:
+					Panel_SetImage(_setter);
+					break;
+
+				case UIEventType.Ins_Panel_OnDetail:
+					Panel_SetDetail(_setter);
+					break;
+
+                #endregion
+
+            }
+        }
 	}
 }

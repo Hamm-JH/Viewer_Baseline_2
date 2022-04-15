@@ -68,6 +68,11 @@ namespace SmartInspect
         /// 점검정보 리스트 요소들
         /// </summary>
         public List<IssueListPanel> m_issueListPanels;
+
+        /// <summary>
+        /// 자세한 점검정보 패널
+        /// </summary>
+        public List<IssueDetailPanel> m_issueDetailPanels;
     }
 
     [System.Serializable]
@@ -140,6 +145,20 @@ namespace SmartInspect
 
         public ListElement m_listElement;
 
+    }
+
+    /// <summary>
+    /// 자세한 점검정보 패널
+    /// </summary>
+    [System.Serializable]
+    public class IssueDetailPanel
+    {
+        public GameObject root;
+        public TextMeshProUGUI m_titlePartName;
+        public TextMeshProUGUI m_width;
+        public TextMeshProUGUI m_height;
+        public TextMeshProUGUI m_depth;
+        public TextMeshProUGUI m_description;
     }
 
     #endregion

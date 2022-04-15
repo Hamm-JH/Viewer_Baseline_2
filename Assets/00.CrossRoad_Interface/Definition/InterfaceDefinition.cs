@@ -97,6 +97,9 @@ namespace Definition
 		Ins_MRcv_LBar_3StatusInfo = 0x342,
 		Ins_MRcv_LBar_4Dimension = 0x343,
 		Ins_MRcv_LBar_5DrawingPrint = 0x344,
+
+		Ins_Panel_OnImage = 0x350,
+		Ins_Panel_OnDetail = 0x351,
 	}
 
 	public enum ModuleID
