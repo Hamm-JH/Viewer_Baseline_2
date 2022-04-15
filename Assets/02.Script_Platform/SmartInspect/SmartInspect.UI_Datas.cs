@@ -57,7 +57,7 @@ namespace SmartInspect
         /// <summary>
         /// 리스트 요소들
         /// </summary>
-        public List<ListElement> m_listElements;
+        //public List<ListElement> m_listElements;
 
         /// <summary>
         /// 점검정보 파트별 카운트 패널
@@ -103,7 +103,7 @@ namespace SmartInspect
         /// <summary>
         /// 리스트 요소들
         /// </summary>
-        public List<ListElement> m_listElements;
+        //public List<ListElement> m_listElements;
 
         /// <summary>
         /// 점검정보 파트별 카운트 패널

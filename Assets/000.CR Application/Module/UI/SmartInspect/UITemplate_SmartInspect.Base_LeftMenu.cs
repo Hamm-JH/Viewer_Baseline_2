@@ -23,7 +23,7 @@ namespace Module.UI
             LeftMenu_SetTogglePanel(currIndex);
 
             // dmg button 상태 활성화
-            LeftMenu_SetToggleButton(currIndex);
+            //LeftMenu_SetToggleButton(currIndex);
 
             // Dmg 모드 활성화 실행
             ModDmg_Active();
@@ -42,7 +42,7 @@ namespace Module.UI
             LeftMenu_SetTogglePanel(currIndex);
 
             // rcv button 상태 활성화
-            LeftMenu_SetToggleButton(currIndex);
+            //LeftMenu_SetToggleButton(currIndex);
 
             // rcv 모드 활성화 실행
             ModRcv_Active();
@@ -55,7 +55,7 @@ namespace Module.UI
         {
             int currIndex = LeftMenu_StatusChange(2);
             LeftMenu_SetTogglePanel(currIndex);
-            LeftMenu_SetToggleButton(currIndex);
+            //LeftMenu_SetToggleButton(currIndex);
         }
 
         #region Panel On/Off
@@ -100,8 +100,14 @@ namespace Module.UI
 
         #region Button Set on/off
 
+        /// <summary>
+        /// 삭제???????????????????????
+        /// </summary>
+        /// <param name="index"></param>
         private void LeftMenu_SetToggleButton(int index)
         {
+            // ********************************************* //
+
             LeftMenu_AllOnOffButton(false);
 
             switch(index)
