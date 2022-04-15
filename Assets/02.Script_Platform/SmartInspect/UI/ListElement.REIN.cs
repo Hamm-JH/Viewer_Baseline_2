@@ -32,5 +32,10 @@ namespace SmartInspect
 
             SetIssueList(2, issues);
         }
+
+        private void REIN_Image_Init()
+        {
+            Debug.Log("REIN_Image_Init");
+        }
     }
 }

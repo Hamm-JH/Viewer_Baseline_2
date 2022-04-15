@@ -182,6 +182,10 @@ namespace Management.Events.Inputs
 				m_clickEvent.Invoke(_obj);
 				ContentManager.Instance.OnSelect_Issue(_obj);
 			}
+			else
+            {
+				throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+            }
 		}
 
 		public void StartEvent_SelectUI(Dictionary<InputEventType, AEventData> _sEvents, List<RaycastResult> _results)

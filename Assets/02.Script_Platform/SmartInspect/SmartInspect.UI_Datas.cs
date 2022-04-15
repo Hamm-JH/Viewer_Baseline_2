@@ -351,6 +351,11 @@ namespace SmartInspect
     public class ImagePopup
     {
         public GameObject root;
+
+        public TextMeshProUGUI m_date;
+
+        public ListElement m_issueImagePanel;
+
     }
 
     #endregion

@@ -32,5 +32,10 @@ namespace SmartInspect
 
             SetIssueList(2, issues);
         }
+
+        private void RCV_Image_Init()
+        {
+            Debug.Log("RCV_Image_Init");
+        }
     }
 }

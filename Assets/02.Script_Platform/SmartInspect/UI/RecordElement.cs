@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace SmartInspect
 {
+    using Module.WebAPI;
     using TMPro;
     using View;
 
@@ -47,6 +48,21 @@ namespace SmartInspect
 
         #endregion
 
+        #region IMG - List
+
+        public string m_fgroup;
+        public string m_fid;
+        public string m_ftype;
+
+        #endregion
+
+        /// <summary>
+        /// DMG, RCV, REIN - part count
+        /// </summary>
+        /// <param name="_rIndex"></param>
+        /// <param name="_lNumber"></param>
+        /// <param name="_partName"></param>
+        /// <param name="_rootUI"></param>
         public Packet_Record(int _rIndex, int _lNumber, string _partName, UITemplate_SmartInspect _rootUI)
         {
             m_requestIndex = _rIndex;
@@ -55,6 +71,12 @@ namespace SmartInspect
             m_rootUI = _rootUI;
         }
 
+        /// <summary>
+        /// ALL - IMG
+        /// </summary>
+        /// <param name="_rIndex"></param>
+        /// <param name="_issue"></param>
+        /// <param name="_rootUI"></param>
         public Packet_Record(int _rIndex, Definition._Issue.Issue _issue, UITemplate_SmartInspect _rootUI)
         {
             m_requestIndex = _rIndex;
@@ -62,8 +84,19 @@ namespace SmartInspect
             m_rootUI = _rootUI;
         }
 
+        public Packet_Record(int _rIndex, string _fgroup, string _fid, string _ftype, Definition._Issue.Issue _issue,
+            UITemplate_SmartInspect _rootUI)
+        {
+            m_requestIndex = _rIndex;
+            m_fgroup = _fgroup;
+            m_fid = _fid;
+            m_ftype = _ftype;
+            m_issue = _issue;
+            m_rootUI = _rootUI;
+        }
+
         /// <summary>
-        /// Dmg
+        /// DMG, RCV, REIN - part list
         /// </summary>
         /// <param name="_rIndex"></param>
         /// <param name="_number"></param>
@@ -89,6 +122,7 @@ namespace SmartInspect
         /// 0 : part count
         /// 1 : dmg work
         /// 2 : rcv work
+        /// 3 : img work
         /// </summary>
         [SerializeField] int m_eIndex = -1;
         public Definition._Issue.Issue m_issue;
@@ -124,6 +158,9 @@ namespace SmartInspect
         [Header("보수보강 - 작업정보")]
         public RCV_WorkElement m_rcvWork;
 
+        [Header("점검정보 - 이미지 리스트")]
+        public IMG_WorkElement m_imgWork;
+
         public void Init(Packet_Record _packet)
         {
             Select_Element(_packet.m_requestIndex);
@@ -131,6 +168,7 @@ namespace SmartInspect
             m_partCount.Init(_packet);
             m_dmgWork.Init(_packet);
             m_rcvWork.Init(_packet);
+            m_imgWork.Init(_packet);
         }
 
         public void Select_Element(int _index)
@@ -138,12 +176,14 @@ namespace SmartInspect
             bool isPCount = false;
             bool isDWork = false;
             bool isRWork = false;
+            bool isImgWork = false;
             
             switch(_index)
             {
                 case 0: isPCount = true;    break;
                 case 1: isDWork = true;    break;
                 case 2: isRWork = true;    break;
+                case 3: isImgWork = true;   break;
             }
 
             if(isPCount)
@@ -174,6 +214,16 @@ namespace SmartInspect
             {
                 GameObject.Destroy(m_rcvWork.root);
                 m_rcvWork.root = null;
+            }
+
+            if(isImgWork)
+            {
+                m_imgWork.root.SetActive(true);
+            }
+            else
+            {
+                GameObject.Destroy(m_imgWork.root);
+                m_imgWork.root = null;
             }
         }
     }
@@ -251,6 +301,37 @@ namespace SmartInspect
 
             btn_image.RootUI = _packet.m_rootUI;
             btn_image.ChildPanel = _packet.m_element;
+        }
+    }
+
+    [System.Serializable]
+    public class IMG_WorkElement
+    {
+        public GameObject root;
+        public RawImage m_rImage;
+        public TextMeshProUGUI m_workerName;
+        public TextMeshProUGUI m_description;
+
+        public void Init(Packet_Record _packet)
+        {
+            if (root == null) return;
+
+            //m_rImage; // root에서 이미지 할당 요청
+            string fgroup = _packet.m_fgroup;
+            string fid = _packet.m_fid;
+            string ftype = _packet.m_ftype;
+            string imgArgument = string.Format("fid={0}&ftype={1}&fgroup={2}",  fid, ftype, fgroup);
+            Management.Content.SmartInspectManager.Instance.Module<Module_WebAPI>(Definition.ModuleID.WebAPI)
+                .RequestSinglePicture(imgArgument, m_rImage, SetSinglePicture);
+
+            m_workerName.text = _packet.m_issue.NmUser;
+            m_description.text = _packet.m_issue.DmgDescription;
+
+        }
+
+        private void SetSinglePicture(RawImage _rImage, Texture2D _texture2D)
+        {
+            _rImage.texture = _texture2D;
         }
     }
 }

@@ -49,5 +49,10 @@ namespace SmartInspect
             SetIssueList(1, issues);
         }
 
+        private void DMG_Image_Init()
+        {
+            Debug.Log("DMG_Image_Init");
+        }
+
     }
 }

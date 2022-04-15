@@ -23,6 +23,7 @@ namespace SmartInspect
         {
             PartCount,
             IssueList,
+            Image,
         }
 
         /// <summary>
@@ -74,7 +75,19 @@ namespace SmartInspect
             }
         }
 
-        
+        public void Init(Definition._Issue.Issue _issue)
+        {
+            ClearElement();
+
+            switch(m_template)
+            {
+                case Template.Image:
+                    IMG_Init(_issue);
+                    break;
+            }
+            
+
+        }
 
         /// <summary>
         /// 기존 요소에 있는 객체들 지우기
