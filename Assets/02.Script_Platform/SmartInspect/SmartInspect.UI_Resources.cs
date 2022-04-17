@@ -73,6 +73,7 @@ namespace SmartInspect
 		public Resource_ProcessMenu m_processMenu;
 		public Resource_LeftBar_Dmg m_dmg_leftbar;
 		public Resource_LeftBar_Rcv m_rcv_leftbar;
+		public Resource_LeftBar_Adm m_adm_leftbar;
 	}
 
 	#endregion --------- main -----------
@@ -250,5 +251,62 @@ namespace SmartInspect
 			targetImg_bg.SetImage(img_bg, isOn);
 			targetImg_main.SetImage(img_main, isOn);
         }
+	}
+
+	[System.Serializable]
+	public class Resource_LeftBar_Adm
+	{
+		[Header("Total Maintenance")]
+		public RImage l1_bgImage;
+		public RImage l1_mainImage;
+
+		[Header("Maintenance Timeline")]
+		public RImage l2_bgImage;
+		public RImage l2_mainImage;
+
+		[Header("Status Info")]
+		public RImage l3_bgImage;
+		public RImage l3_mainImage;
+
+		[Header("Report")]
+		public RImage l4_bgImage;
+		public RImage l4_mainImage;
+
+		public void SetImage(Image img_bg, Image img_main, int index, bool isOn)
+		{
+			RImage targetImg_bg = null;
+			RImage targetImg_main = null;
+
+			switch (index)
+			{
+				case 0:
+					targetImg_bg = l1_bgImage;
+					targetImg_main = l1_mainImage;
+					break;
+
+				case 1:
+					targetImg_bg = l2_bgImage;
+					targetImg_main = l2_mainImage;
+					break;
+
+				case 2:
+					targetImg_bg = l3_bgImage;
+					targetImg_main = l3_mainImage;
+					break;
+
+				case 3:
+					targetImg_bg = l4_bgImage;
+					targetImg_main = l4_mainImage;
+					break;
+			}
+
+			if (targetImg_bg == null || targetImg_main == null)
+			{
+				throw new Definition.Exceptions.ImagesNotAssigned();
+			}
+
+			targetImg_bg.SetImage(img_bg, isOn);
+			targetImg_main.SetImage(img_main, isOn);
+		}
 	}
 }

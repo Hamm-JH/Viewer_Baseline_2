@@ -98,6 +98,11 @@ namespace Definition
 		Ins_MRcv_LBar_4Dimension = 0x343,
 		Ins_MRcv_LBar_5DrawingPrint = 0x344,
 
+		Ins_MAdm_LBar_1TotalMaintenance = 0x346,
+		Ins_MAdm_LBar_2MaintenanceTimeline = 0x347,
+		Ins_MAdm_LBar_3StatusInfo = 0x348,
+		Ins_MAdm_LBar_4Report = 0x349,
+
 		Ins_Panel_OnImage = 0x350,
 		Ins_Panel_OnDetail = 0x351,
 	}

@@ -70,6 +70,10 @@ namespace Module.UI
                 x.m_listElement.Init(x.title, x.baseTitleName);
             });
 
+            m_moduleElements.m_admElement.m_issueCountPanel.m_barCharts.ForEach(x =>
+            {
+                x.Init();
+            });
         }
     }
 }

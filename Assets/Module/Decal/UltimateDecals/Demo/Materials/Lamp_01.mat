@@ -8,13 +8,14 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Lamp_01
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -128,7 +129,7 @@ Material:
     - _ReceiveShadows: 1
     - _SM: 0
     - _SR: 0.15
-    - _Smoothness: 0.5
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -141,7 +142,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _AtlasData: {r: 1, g: 1, b: 0, a: 0}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.3088235, g: 0.3088235, b: 0.3088235, a: 1}
     - _Color: {r: 0.30882353, g: 0.30882353, b: 0.30882353, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _ScaleOffset: {r: 1, g: 1, b: 0, a: 0}

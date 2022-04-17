@@ -27,6 +27,7 @@ namespace SmartInspect
 
         public DamageElement m_dmgElement;
         public RecoverElement m_rcvElement;
+        public AdministElement m_admElement;
     }
 
     [System.Serializable]
@@ -120,6 +121,37 @@ namespace SmartInspect
         /// </summary>
         public List<IssueListPanel> m_issueListPanels;
     }
+
+    [System.Serializable]
+    public class AdministElement
+	{
+        public GameObject root;
+
+        /// <summary>
+        /// 왼쪽 버튼 바 리스트
+        /// </summary>
+        public List<RProcessMenu> m_leftbar;
+
+        /// <summary>
+        /// 종류별 집계
+        /// </summary>
+        public GameObject m_TotalMaintenance;
+
+        /// <summary>
+        /// 이력
+        /// </summary>
+        public GameObject m_MaintenanceTimeline;
+
+        /// <summary>
+        /// 종류별 집계 패널 인스턴스
+        /// </summary>
+        public TotalIssueCountPanel m_issueCountPanel;
+
+        /// <summary>
+        /// 타임라인 패널 인스턴스
+        /// </summary>
+        public TimelinePanel m_timelinePanel;
+    }
     
     /// <summary>
     /// 점검정보 파트별 카운트 패널
@@ -159,6 +191,26 @@ namespace SmartInspect
         public TextMeshProUGUI m_height;
         public TextMeshProUGUI m_depth;
         public TextMeshProUGUI m_description;
+    }
+
+    /// <summary>
+    /// 점검정보 종류별 집계
+    /// </summary>
+    [System.Serializable]
+    public class TotalIssueCountPanel
+	{
+        public GameObject root;
+
+        public List<Inspect_BarChart> m_barCharts;
+	}
+
+    /// <summary>
+    /// 이력
+    /// </summary>
+    [System.Serializable]
+    public class TimelinePanel
+	{
+        public GameObject root;
     }
 
     #endregion

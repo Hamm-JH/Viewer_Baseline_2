@@ -54,8 +54,13 @@ namespace Module.UI
         private void LeftMenu_SetSetting()
         {
             int currIndex = LeftMenu_StatusChange(2);
+
+            // adm panel 켠다
             LeftMenu_SetTogglePanel(currIndex);
             //LeftMenu_SetToggleButton(currIndex);
+
+            // adm 모드 활성화 실행
+            ModAdm_Active();
         }
 
         #region Panel On/Off
@@ -82,7 +87,7 @@ namespace Module.UI
                     break;
 
                 case 2:
-
+                    m_moduleElements.m_admElement.root.SetActive(true);
                     break;
             }
         }

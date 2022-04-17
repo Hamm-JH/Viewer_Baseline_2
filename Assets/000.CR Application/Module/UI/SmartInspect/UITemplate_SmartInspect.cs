@@ -115,6 +115,26 @@ namespace Module.UI
 
 				#endregion
 
+				#region Module Adm
+
+				case UIEventType.Ins_MAdm_LBar_1TotalMaintenance:
+					MAdm_LBar_1ToggleTotalMaintenance();
+					break;
+
+				case UIEventType.Ins_MAdm_LBar_2MaintenanceTimeline:
+					MAdm_LBar_2ToggleMaintenanceTimeline();
+					break;
+
+				case UIEventType.Ins_MAdm_LBar_3StatusInfo:
+					MAdm_LBar_3ToggleInfo();
+					break;
+
+				case UIEventType.Ins_MAdm_LBar_4Report:
+					MAdm_LBar_4PrintReport();
+					break;
+
+				#endregion
+
 				#region ButtonBar
 
 				case UIEventType.View_Home:
