@@ -45,7 +45,33 @@ namespace Management
 
 		public List<AModule> Modules { get => m_modules; set => m_modules=value; }
 
+		private List<AModule> _moduleIndex;
 		private Dictionary<ModuleID, AModule> moduleIndex;
+
+		public T Module<T>() where T : AModule
+        {
+			//AModule result;
+			AModule result = _moduleIndex.Find(x => x.GetType() == typeof(T));
+			if(result != null)
+            {
+				T t = (T)result;
+				return t;
+            }
+			else
+            {
+				T t = (T)Modules.Find(x => x.GetType() == typeof(T));
+				if(t != null)
+                {
+					_moduleIndex.Add(t);
+					return t;
+                }
+				else
+                {
+					throw new Definition.Exceptions.ModuleNotInstantiated();
+                }
+            }
+
+        }
 
 		public T Module<T>(ModuleID _id) where T : AModule
         {
@@ -168,6 +194,7 @@ namespace Management
 
         private void Awake()
         {
+			_moduleIndex = new List<AModule>();
 			moduleIndex = new Dictionary<ModuleID, AModule>();
         }
 

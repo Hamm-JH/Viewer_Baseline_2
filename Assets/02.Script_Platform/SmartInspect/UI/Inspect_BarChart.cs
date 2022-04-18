@@ -21,7 +21,7 @@ namespace SmartInspect
 
 		public void Init()
 		{
-			//Debug.Log("Hello");
+			Debug.Log("Hello bar chart");
 
 			m_barChart = GetComponent<BarChart>();
 			Module_Model model = SmartInspectManager.Instance.Module<Module_Model>(Definition.ModuleID.Model);

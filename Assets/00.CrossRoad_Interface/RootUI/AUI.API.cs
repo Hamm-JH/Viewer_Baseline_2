@@ -6,6 +6,9 @@ namespace Module.UI
 {
     using Data.API;
     using Management;
+    using Module.Model;
+    using Module.WebAPI;
+    using System.Data;
     using UnityEngine.Events;
 
     public abstract partial class AUI : AModule
@@ -35,5 +38,11 @@ namespace Module.UI
 
 			ContentManager.Instance._API.RequestMainPicture(argument, _callback);
 		}
+
+		public void API_requestHistoryData(UnityAction<DataTable> _action)
+        {
+			//Module_Model model = ContentManager.Instance.Module<Module_Model>();
+			ContentManager.Instance.Module<Module_WebAPI>().RequestHistoryData(_action);
+        }
 	}
 }

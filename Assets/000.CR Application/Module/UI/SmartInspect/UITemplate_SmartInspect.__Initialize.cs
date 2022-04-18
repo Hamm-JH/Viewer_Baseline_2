@@ -74,6 +74,11 @@ namespace Module.UI
             {
                 x.Init();
             });
+
+            m_moduleElements.m_admElement.m_timelinePanel.m_graphFeeds.ForEach(x =>
+            {
+                x.Init();
+            });
         }
     }
 }

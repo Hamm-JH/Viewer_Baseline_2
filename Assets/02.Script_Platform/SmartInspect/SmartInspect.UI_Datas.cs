@@ -211,6 +211,8 @@ namespace SmartInspect
     public class TimelinePanel
 	{
         public GameObject root;
+
+        public List<GraphChartFeed> m_graphFeeds;
     }
 
     #endregion

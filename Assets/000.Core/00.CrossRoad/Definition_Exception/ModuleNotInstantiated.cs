@@ -16,6 +16,11 @@ namespace Definition.Exceptions
             m_Message = $"module [{_id.ToString()}] is not instantiated";
         }
 
+        public ModuleNotInstantiated(object _obj)
+        {
+            m_Message = $"module [{_obj.GetType().ToString()}] is not instantiated";
+        }
+
         public ModuleNotInstantiated(string message) : base(message)
         {
             m_Message = message;

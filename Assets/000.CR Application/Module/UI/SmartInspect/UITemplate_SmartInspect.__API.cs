@@ -2,6 +2,7 @@
 using Definition;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using View;
 
@@ -26,5 +27,10 @@ namespace Module.UI
         {
             General_SetMainImage(_image);
         }
+
+        //public void API_GetHistoryData(DataTable _table)
+        //{
+
+        //}
     }
 }
