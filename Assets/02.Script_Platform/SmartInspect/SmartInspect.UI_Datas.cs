@@ -213,6 +213,17 @@ namespace SmartInspect
         public GameObject root;
 
         public List<GraphChartFeed> m_graphFeeds;
+
+        /// <summary>
+        /// 0 : Y1 // 
+        /// 1 : Y5 //
+        /// 2 : Y10 //
+        /// 3 : Y50
+        /// </summary>
+        [Header("timeline data")]
+        public int m_yearIndex;
+
+        public List<RProcessMenu> m_yearButtons;
     }
 
     #endregion

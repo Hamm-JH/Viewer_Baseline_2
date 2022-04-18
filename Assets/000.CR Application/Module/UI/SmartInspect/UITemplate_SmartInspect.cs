@@ -133,6 +133,56 @@ namespace Module.UI
 					MAdm_LBar_4PrintReport();
 					break;
 
+				//-------------------------------------
+
+				case UIEventType.Ins_MAdm_TL_SelectYear1:
+					Ins_MAdm_TL_SelectYear1(_setter);
+					break;
+
+				case UIEventType.Ins_MAdm_TL_SelectYear5:
+					Ins_MAdm_TL_SelectYear5(_setter);
+					break;
+
+				case UIEventType.Ins_MAdm_TL_SelectYear10:
+					Ins_MAdm_TL_SelectYear10(_setter);
+					break;
+
+				case UIEventType.Ins_MAdm_TL_SelectYear50:
+					Ins_MAdm_TL_SelectYear50(_setter);
+					break;
+
+				//-------------------------------------
+
+				case UIEventType.Ins_MAdm_TL_SelectALL:
+					Ins_MAdm_TL_SelectALL(_setter);
+					break;
+
+				case UIEventType.Ins_MAdm_TL_SelectCrack:
+					Ins_MAdm_TL_SelectCrack(_setter);
+					break;
+
+				case UIEventType.Ins_MAdm_TL_SelectSpalling:
+					Ins_MAdm_TL_SelectSpalling(_setter);
+					break;
+
+				case UIEventType.Ins_MAdm_TL_SelectEfflorescence:
+					Ins_MAdm_TL_SelectEfflorescence(_setter);
+					break;
+
+				case UIEventType.Ins_MAdm_TL_SelectBreakage:
+					Ins_MAdm_TL_SelectBreakage(_setter);
+					break;
+
+				//-------------------------------------
+
+				case UIEventType.Ins_MAdm_TL_PrevYear:
+					Ins_MAdm_TL_PrevYear(_setter);
+					break;
+
+				case UIEventType.Ins_MAdm_TL_NextYear:
+					Ins_MAdm_TL_NextYear(_setter);
+					break;
+
 				#endregion
 
 				#region ButtonBar

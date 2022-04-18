@@ -23,12 +23,17 @@ public class GraphChartFeed : MonoBehaviour
     public GraphTemplate m_gTemplate;
     public HorizontalAxis m_horizontalAxis;
 
+    public int m_currYear;
+    public int m_currIssueIndex;
+
     public List<RecordInstance> m_records;
 
     // 발생한 이슈에 대한 집합
     Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, int>>> issueElements;
 
-    public void Init()
+	#region Init
+
+	public void Init()
     {
         m_gTemplate = GraphTemplate.Year1;
 
@@ -118,12 +123,14 @@ public class GraphChartFeed : MonoBehaviour
         SetDateTimePanel(DateTime.Today.Year, _issueIndex: 0, GraphTemplate.Year1);
     }
 
-    #region 1 Set Record Instances
-    /// <summary>
-    /// 세굴 삭제용 임시 메서드
-    /// </summary>
-    /// <param name="instance"></param>
-    private void ResetRecord(RecordInstance instance)
+	#endregion
+
+	#region 1 Set Record Instances
+	/// <summary>
+	/// 세굴 삭제용 임시 메서드
+	/// </summary>
+	/// <param name="instance"></param>
+	private void ResetRecord(RecordInstance instance)
     {
         instance.DScour_ErosionList = null;
         instance.RScour_ErosionList = null;
@@ -639,48 +646,121 @@ public class GraphChartFeed : MonoBehaviour
         //_inElement = newElement;
     }
 
-    #endregion
+	#endregion
 
-    #endregion
+	#endregion
+
+	#region ----- Interface -----
 
     /// <summary>
-    /// 생성하고자 하는 time panel을 만든다.
+    /// 연도 단위 버튼 선택시 실행
     /// </summary>
-    /// <param name="_year"></param>
-    /// <param name="_template"></param>
-    private void SetDateTimePanel(int _year, int _issueIndex, GraphTemplate _template)
+    /// <param name="_index"> 0 : Y1 // 1 : Y5 // 2 : Y10 / 3 : Y50</param>
+    public void Update_YearTemplate(int _index)
+	{
+        GraphTemplate template = GraphTemplate.Year1;
+        switch(_index)
+		{
+            case 0: template = GraphTemplate.Year1; break;
+            case 1: template = GraphTemplate.Year5; break;
+            case 2: template = GraphTemplate.Year10; break;
+            case 3: template = GraphTemplate.Year50; break;
+        }
+
+        SetDateTimePanel(m_currYear, m_currIssueIndex, template);
+	}
+
+    /// <summary>
+    /// 손상 종류 선택 버튼 클릭시 실행
+    /// </summary>
+    /// <param name="_index"> 0 : ALL // 1 : Crack // 2 : Spalling // 3 : Efflorescence // 4 : Breakage </param>
+    public void Update_IssueIndex(int _index)
+	{
+        m_currIssueIndex = _index;
+
+        SetDateTimePanel(m_currYear, m_currIssueIndex, m_gTemplate);
+	}
+
+    public void Update_PrevYear()
+	{
+        int difference = 0;
+        switch(m_gTemplate)
+		{
+            case GraphTemplate.Year1:   difference = 1; break;
+            case GraphTemplate.Year5:   difference = 5; break;
+            case GraphTemplate.Year10:   difference = 10; break;
+            case GraphTemplate.Year50:   difference = 50; break;
+        }
+
+        m_currYear -= difference;
+
+        if(m_currYear < DateTime.Now.Year - 50)
+		{
+            m_currYear = DateTime.Now.Year - 50;
+		}
+
+        SetDateTimePanel(m_currYear, m_currIssueIndex, m_gTemplate);
+	}
+
+    public void Update_NextYear()
+	{
+        int difference = 0;
+        switch (m_gTemplate)
+        {
+            case GraphTemplate.Year1: difference = 1; break;
+            case GraphTemplate.Year5: difference = 5; break;
+            case GraphTemplate.Year10: difference = 10; break;
+            case GraphTemplate.Year50: difference = 50; break;
+        }
+
+        m_currYear += difference;
+
+        if(m_currYear > DateTime.Now.Year)
+		{
+            m_currYear = DateTime.Now.Year;
+		}
+
+        SetDateTimePanel(m_currYear, m_currIssueIndex, m_gTemplate);
+    }
+
+	#endregion
+
+	/// <summary>
+	/// 생성하고자 하는 time panel을 만든다.
+	/// </summary>
+	/// <param name="_year"></param>
+	/// <param name="_template"></param>
+	private void SetDateTimePanel(int _year, int _issueIndex, GraphTemplate _template)
     {
+        m_currYear = _year;
+        m_currIssueIndex = _issueIndex;
         m_gTemplate = _template;
 
-        // TODO Debug
-        //SetDateTimePanel_Year1(_year, _issueIndex);
-        SetDateTimePanel_Year1(
-                    _year,
-                    _issueIndex: 0,
-                    _yearIndex: 1);
-        return;
-
+        int yearIndex = -1;
         switch(m_gTemplate)
-        {
+		{
             case GraphTemplate.Year1:
-                SetDateTimePanel_Year1(
-                    _year, 
-                    _issueIndex: _issueIndex, 
-                    _yearIndex: 0);
+                yearIndex = 0;
                 break;
 
-            //case GraphTemplate.Year5:
-            //    SetDateTimePanel_Year5(_year, _issueIndex);
-            //    break;
+            case GraphTemplate.Year5:
+                yearIndex = 1;
+                break;
 
-            //case GraphTemplate.Year10:
-            //    SetDateTimePanel_Year10(_year, _issueIndex);
-            //    break;
+            case GraphTemplate.Year10:
+                yearIndex = 2;
+                break;
 
-            //case GraphTemplate.Year50:
-            //    SetDateTimePanel_Year50(_year, _issueIndex);
-            //    break;
+            case GraphTemplate.Year50:
+                yearIndex = 3;
+                break;
         }
+        // TODO Debug
+        //SetDateTimePanel_Year1(_year, _issueIndex);
+        SetDateTimePanel_Year(
+                    _year: _year,
+                    _issueIndex: _issueIndex,
+                    _yearIndex: yearIndex);
     }
 
     /// <summary>
@@ -691,7 +771,7 @@ public class GraphChartFeed : MonoBehaviour
     /// <param name="_year"> 선택 연도 </param>
     /// <param name="_issueIndex"> ALL 0 // Crack 1 // Spall 2 // Effro 3 // Breakage 4 </param>
     /// <param name="_yearIndex"> Y1 0 // Y5 1 // Y10 2 // Y50 3 </param>
-    private void SetDateTimePanel_Year1(int _year, int _issueIndex, int _yearIndex)
+    private void SetDateTimePanel_Year(int _year, int _issueIndex, int _yearIndex)
     {
         // 모두 가져오기로 처리 :: 0
         // Crack :: 1
@@ -723,79 +803,34 @@ public class GraphChartFeed : MonoBehaviour
             }
 
             // ★★★ 모든 데이터 할당이 끝난 뒤, 그래프에 데이터 할당 요청
-            Set_YearGraph(dmgResult, rcvResult, _yearIndex);
+            Set_YearGraph(_tgYear: _year, dmgResult, rcvResult, _yearIndex);
         }
         // Crack
-        else if(_issueIndex == 1)
+        else if(_issueIndex == 1 || _issueIndex == 2 || _issueIndex == 3 || _issueIndex == 4)
         {
             dmgResult = CreateList(_yearIndex: _yearIndex);
             rcvResult = CreateList(_yearIndex: _yearIndex);
 
-            if(issueElements[IssueClass.Dmg].ContainsKey(IssueCode.Crack))
-            {
-                SetIndexPerIssue(_year, _yearIndex: _yearIndex, issueElements[IssueClass.Dmg][IssueCode.Crack], dmgResult);
+            IssueCode code = IssueCode.Null;
+            switch(_issueIndex)
+			{
+                case 1: code = IssueCode.Crack; break;
+                case 2: code = IssueCode.Spalling; break;
+                case 3: code = IssueCode.Efflorescense; break;
+                case 4: code = IssueCode.Breakage; break;
             }
 
-            if(issueElements[IssueClass.Rcv].ContainsKey(IssueCode.Crack))
+            if(issueElements[IssueClass.Dmg].ContainsKey(code))
             {
-                SetIndexPerIssue(_year, _yearIndex: _yearIndex, issueElements[IssueClass.Rcv][IssueCode.Crack], rcvResult);
+                SetIndexPerIssue(_year, _yearIndex: _yearIndex, issueElements[IssueClass.Dmg][code], dmgResult);
             }
 
-            Set_YearGraph(dmgResult, rcvResult, _yearIndex);
-        }
-        // Spalling
-        else if(_issueIndex == 2)
-        {
-            dmgResult = CreateList(_yearIndex: _yearIndex);
-            rcvResult = CreateList(_yearIndex: _yearIndex);
-
-            if (issueElements[IssueClass.Dmg].ContainsKey(IssueCode.Spalling))
+            if(issueElements[IssueClass.Rcv].ContainsKey(code))
             {
-                SetIndexPerIssue(_year, _yearIndex: _yearIndex, issueElements[IssueClass.Dmg][IssueCode.Spalling], dmgResult);
+                SetIndexPerIssue(_year, _yearIndex: _yearIndex, issueElements[IssueClass.Rcv][code], rcvResult);
             }
 
-            if (issueElements[IssueClass.Rcv].ContainsKey(IssueCode.Spalling))
-            {
-                SetIndexPerIssue(_year, _yearIndex: _yearIndex, issueElements[IssueClass.Rcv][IssueCode.Spalling], rcvResult);
-            }
-
-            Set_YearGraph(dmgResult, rcvResult, _yearIndex);
-        }
-        // Efflorescence
-        else if(_issueIndex == 3)
-        {
-            dmgResult = CreateList(_yearIndex: _yearIndex);
-            rcvResult = CreateList(_yearIndex: _yearIndex);
-
-            if (issueElements[IssueClass.Dmg].ContainsKey(IssueCode.Efflorescense))
-            {
-                SetIndexPerIssue(_year, _yearIndex: _yearIndex, issueElements[IssueClass.Dmg][IssueCode.Efflorescense], dmgResult);
-            }
-
-            if (issueElements[IssueClass.Rcv].ContainsKey(IssueCode.Efflorescense))
-            {
-                SetIndexPerIssue(_year, _yearIndex: _yearIndex, issueElements[IssueClass.Rcv][IssueCode.Efflorescense], rcvResult);
-            }
-
-            Set_YearGraph(dmgResult, rcvResult, _yearIndex);
-        }
-        // Breakage
-        else if(_issueIndex == 4)
-        {
-            dmgResult = CreateList(_yearIndex: _yearIndex);
-            rcvResult = CreateList(_yearIndex: _yearIndex);
-
-            if (issueElements[IssueClass.Dmg].ContainsKey(IssueCode.Breakage))
-            {
-                SetIndexPerIssue(_year, _yearIndex: _yearIndex, issueElements[IssueClass.Dmg][IssueCode.Breakage], dmgResult);
-            }
-
-            if (issueElements[IssueClass.Rcv].ContainsKey(IssueCode.Breakage))
-            {
-                SetIndexPerIssue(_year, _yearIndex: _yearIndex, issueElements[IssueClass.Rcv][IssueCode.Breakage], rcvResult);
-            }
-
-            Set_YearGraph(dmgResult, rcvResult, _yearIndex);
+            Set_YearGraph(_tgYear: _year, dmgResult, rcvResult, _yearIndex);
         }
 
         Debug.Log($"year {_year} :: index {_issueIndex}");
@@ -835,21 +870,6 @@ public class GraphChartFeed : MonoBehaviour
 
         return list;
     }
-
-    //private void SetDateTimePanel_Year5(int _year, int _index)
-    //{
-
-    //}
-
-    //private void SetDateTimePanel_Year10(int _year, int _index)
-    //{
-
-    //}
-
-    //private void SetDateTimePanel_Year50(int _year, int _index)
-    //{
-
-    //}
 
     #region Set Index per Issue
 
@@ -909,9 +929,6 @@ public class GraphChartFeed : MonoBehaviour
         {
             result[i] += prevCount;
         }
-        //if (_yearIndex == 0)
-        //{
-        //}
     }
 
     private int SetYearDifference(int _yearIndex)
@@ -1021,22 +1038,24 @@ public class GraphChartFeed : MonoBehaviour
         int index = 0;
 
         // 목표 연도와 date.Year간 차이값
+        // 2022 - 2022 = 0
+        // 2022 - 2017 = 5
         int yDifference = _tgYear - _date.Year;
 
         // 월차 2분
-        int mIndex = _date.Month / 6;
+        int mIndex = (_date.Month - 1) / 6;
 
         index = (5 - yDifference) * 2 + mIndex;
-        
-        //index = (int)(index + (day + count / 2) / count);
 
-        //// 특정 시점부터 끝까지
-        //for (int i = index; i < _result.Count; i++)
-        //{
-        //    // Value 값을 합산
-        //    _result[i] += _index;
-        //}
-    }
+		//index = (int)(index + (day + count / 2) / count);
+
+		// 특정 시점부터 끝까지
+		for (int i = index; i < _result.Count; i++)
+		{
+			// Value 값을 합산
+			_result[i] += _index;
+		}
+	}
 
 
     /// <summary>
@@ -1047,19 +1066,7 @@ public class GraphChartFeed : MonoBehaviour
     /// <param name="_result"></param>
     private void SetIndexPerDateIssue_Year10(DateTime _date, int _index, int _tgYear, List<int> _result)
     {
-        int index = 0;
-        int month = _date.Month;
-
-        int daysInMonth = DateTime.DaysInMonth(_date.Year, _date.Month);
-        int day = _date.Day;
-
-        // month 반영
-        index = (month - 1) * 4;
-
-        // day 반영
-        float count = daysInMonth / 4;
-        // day에 count / 2만큼 더하고 이를 count로 나누면 day에 대한 index 계산됨
-        index = (int)(index + (day + count / 2) / count);
+        int index = 10 - (_tgYear - _date.Year);
 
         // 특정 시점부터 끝까지
         for (int i = index; i < _result.Count; i++)
@@ -1077,19 +1084,7 @@ public class GraphChartFeed : MonoBehaviour
     /// <param name="_result"></param>
     private void SetIndexPerDateIssue_Year50(DateTime _date, int _index, int _tgYear, List<int> _result)
     {
-        int index = 0;
-        int month = _date.Month;
-
-        int daysInMonth = DateTime.DaysInMonth(_date.Year, _date.Month);
-        int day = _date.Day;
-
-        // month 반영
-        index = (month - 1) * 4;
-
-        // day 반영
-        float count = daysInMonth / 4;
-        // day에 count / 2만큼 더하고 이를 count로 나누면 day에 대한 index 계산됨
-        index = (int)(index + (day + count / 2) / count);
+        int index = (50 - (_tgYear - _date.Year)) / 5;
 
         // 특정 시점부터 끝까지
         for (int i = index; i < _result.Count; i++)
@@ -1097,26 +1092,6 @@ public class GraphChartFeed : MonoBehaviour
             // Value 값을 합산
             _result[i] += _index;
         }
-    }
-
-    private void SetDateTimePanels(ref Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, int>>> _elements)
-    {
-        Debug.Log("Hello time panel");
-        // 넘길때 필요한 정보
-        // - 최소, 최대 연도
-        // - 날짜 리스트
-        // - 뷰 옵션
-
-        //// 최소 연도 [0]
-        //// 최대 연도 [1]
-        //int[] minMaxYears = GetMinMaxYear(ref _elements);
-
-        ////ViewTypeOption // 시각화 옵션 확인
-        //// 연 단위 옵션
-        //SetPanel(
-        //    minMaxYear: minMaxYears,
-        //    viewOption: ViewTypeOption,
-        //    _elements: ref _elements);
     }
 
     void Start ()
@@ -1166,26 +1141,80 @@ public class GraphChartFeed : MonoBehaviour
         }
     }
 
-    #region Set Data Demo
+    #region Set Data to Graph
 
-    private void Demo_Set_Year1(GraphChartBase _graph, HorizontalAxis _hAxis)
-	{
-        _hAxis.MainDivisions.Total = 12;
+    //private void Demo_Set_Year1(GraphChartBase _graph, HorizontalAxis _hAxis)
+    //{
+    //    _hAxis.MainDivisions.Total = 12;
+    //
+    //    List<int> dmgIndexes = new List<int>();
+    //    List<int> rcvIndexes = new List<int>();
+    //
+    //	for (int i = 0; i < 49; i++)
+    //	{
+    //        dmgIndexes.Add(i);
+    //        rcvIndexes.Add(49 - i);
+    //	}
+    //
+    //    Demo_Set_Year1(_graph, "Player 1", dmgIndexes);
+    //    Demo_Set_Year1(_graph, "Player 2", rcvIndexes);
+    //}
 
-        List<int> dmgIndexes = new List<int>();
-        List<int> rcvIndexes = new List<int>();
+    //private void Demo_Set_Year5(GraphChartBase _graph, HorizontalAxis _hAxis)
+    //{
+    //    _hAxis.MainDivisions.Total = 10;
+    //
+    //    int currYear = 2023;
+    //    List<int> dmgIndexes = new List<int>();
+    //    List<int> rcvIndexes = new List<int>();
+    //
+    //    for (int i = 0; i < 11; i++)
+    //    {
+    //        dmgIndexes.Add(i);
+    //        rcvIndexes.Add(11 - i);
+    //    }
+    //
+    //    Demo_Set_Year5(_graph, "Player 1", currYear, dmgIndexes);
+    //    Demo_Set_Year5(_graph, "Player 2", currYear, rcvIndexes);
+    //}
 
-		for (int i = 0; i < 49; i++)
-		{
-            dmgIndexes.Add(i);
-            rcvIndexes.Add(49 - i);
-		}
+    //private void Demo_Set_Year10(GraphChartBase _graph, HorizontalAxis _hAxis)
+    //{
+    //    _hAxis.MainDivisions.Total = 10;
+    //
+    //    int currYear = 2023;
+    //    List<int> dmgIndexes = new List<int>();
+    //    List<int> rcvIndexes = new List<int>();
+    //
+    //    for (int i = 0; i < 11; i++)
+    //    {
+    //        dmgIndexes.Add(i);
+    //        rcvIndexes.Add(11 - i);
+    //    }
+    //
+    //    Demo_Set_Year10(_graph, "Player 1", currYear, dmgIndexes);
+    //    Demo_Set_Year10(_graph, "Player 2", currYear, rcvIndexes);
+    //}
 
-        Demo_Set_Year1(_graph, "Player 1", dmgIndexes);
-        Demo_Set_Year1(_graph, "Player 2", rcvIndexes);
-    }
+    //private void Demo_Set_Year50(GraphChartBase _graph, HorizontalAxis _hAxis)
+    //{
+    //    _hAxis.MainDivisions.Total = 10;
+    //
+    //    int currYear = 2023;
+    //    List<int> dmgIndexes = new List<int>();
+    //    List<int> rcvIndexes = new List<int>();
+    //
+    //    for (int i = 0; i < 11; i++)
+    //    {
+    //        dmgIndexes.Add(i);
+    //        rcvIndexes.Add(11 - i);
+    //    }
+    //
+    //    Demo_Set_Year50(_graph, "Player 1", currYear, dmgIndexes);
+    //    Demo_Set_Year50(_graph, "Player 2", currYear, rcvIndexes);
+    //}
 
-    private void Set_YearGraph(List<int> _dmgList, List<int> _rcvList, int _yearIndex)
+    private void Set_YearGraph(int _tgYear, List<int> _dmgList, List<int> _rcvList, int _yearIndex)
     {
         int division = 0;
         switch(_yearIndex)
@@ -1193,14 +1222,35 @@ public class GraphChartFeed : MonoBehaviour
             case 0: division = 12;  break;
             case 1:
             case 2:
-            case 3: division = 12;  break;
+            case 3: division = 10;  break;
         }
         m_horizontalAxis.MainDivisions.Total = division;
 
         GraphChartBase graph = GetComponent<GraphChartBase>();
 
-        Demo_Set_Year1(graph, "Player 1", _dmgList);
-        Demo_Set_Year1(graph, "Player 2", _rcvList);
+        switch(_yearIndex)
+		{
+            case 0:
+                Demo_Set_Year1(graph, "Player 1", _dmgList);
+                Demo_Set_Year1(graph, "Player 2", _rcvList);
+                break;
+
+            case 1:
+                Demo_Set_Year5(graph, "Player 1", _tgYear, _dmgList);
+                Demo_Set_Year5(graph, "Player 2", _tgYear, _rcvList);
+                break;
+
+            case 2:
+                Demo_Set_Year10(graph, "Player 1", _tgYear, _dmgList);
+                Demo_Set_Year10(graph, "Player 2", _tgYear, _rcvList);
+                break;
+
+            case 3:
+                Demo_Set_Year50(graph, "Player 1", _tgYear, _dmgList);
+                Demo_Set_Year50(graph, "Player 2", _tgYear, _rcvList);
+                break;
+        }
+        
     }
 
     /// <summary>
@@ -1236,23 +1286,7 @@ public class GraphChartFeed : MonoBehaviour
         _graph.DataSource.EndBatch();
 	}
 
-    private void Demo_Set_Year5(GraphChartBase _graph, HorizontalAxis _hAxis)
-	{
-        _hAxis.MainDivisions.Total = 10;
-
-        int currYear = 2023;
-        List<int> dmgIndexes = new List<int>();
-        List<int> rcvIndexes = new List<int>();
-
-        for (int i = 0; i < 11; i++)
-        {
-            dmgIndexes.Add(i);
-            rcvIndexes.Add(11 - i);
-        }
-
-        Demo_Set_Year5(_graph, "Player 1", currYear, dmgIndexes);
-        Demo_Set_Year5(_graph, "Player 2", currYear, rcvIndexes);
-    }
+    
 
     /// <summary>
     /// index count 11
@@ -1288,23 +1322,7 @@ public class GraphChartFeed : MonoBehaviour
         _graph.DataSource.EndBatch();
     }
 
-    private void Demo_Set_Year10(GraphChartBase _graph, HorizontalAxis _hAxis)
-	{
-        _hAxis.MainDivisions.Total = 10;
-
-        int currYear = 2023;
-        List<int> dmgIndexes = new List<int>();
-        List<int> rcvIndexes = new List<int>();
-
-        for (int i = 0; i < 11; i++)
-        {
-            dmgIndexes.Add(i);
-            rcvIndexes.Add(11 - i);
-        }
-
-        Demo_Set_Year10(_graph, "Player 1", currYear, dmgIndexes);
-        Demo_Set_Year10(_graph, "Player 2", currYear, rcvIndexes);
-    }
+    
 
     private void Demo_Set_Year10(GraphChartBase _graph, string _cName, int _currYear, List<int> _indexes)
 	{
@@ -1328,23 +1346,7 @@ public class GraphChartFeed : MonoBehaviour
         _graph.DataSource.EndBatch();
     }
 
-    private void Demo_Set_Year50(GraphChartBase _graph, HorizontalAxis _hAxis)
-	{
-        _hAxis.MainDivisions.Total = 10;
-
-        int currYear = 2023;
-        List<int> dmgIndexes = new List<int>();
-        List<int> rcvIndexes = new List<int>();
-
-        for (int i = 0; i < 11; i++)
-        {
-            dmgIndexes.Add(i);
-            rcvIndexes.Add(11 - i);
-        }
-
-        Demo_Set_Year50(_graph, "Player 1", currYear, dmgIndexes);
-        Demo_Set_Year50(_graph, "Player 2", currYear, rcvIndexes);
-    }
+    
 
     private void Demo_Set_Year50(GraphChartBase _graph, string _cName, int _currYear, List<int> _indexes)
 	{
@@ -1363,11 +1365,6 @@ public class GraphChartFeed : MonoBehaviour
             {
                 _graph.HorizontalValueToStringMap[i+1] = $"|";
             }
-            //string k2 = _indexes[i].ToString();
-            //if (i%4 != 0)
-            //{
-            //_graph.HorizontalValueToStringMap[i+1] = "";
-            //}
         }
 
         _graph.DataSource.EndBatch();

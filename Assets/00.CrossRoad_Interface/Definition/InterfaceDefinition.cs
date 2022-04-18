@@ -105,6 +105,19 @@ namespace Definition
 
 		Ins_Panel_OnImage = 0x350,
 		Ins_Panel_OnDetail = 0x351,
+
+		Ins_MAdm_TL_SelectYear1 = 0x352,
+		Ins_MAdm_TL_SelectYear5 = 0x353,
+		Ins_MAdm_TL_SelectYear10 = 0x354,
+		Ins_MAdm_TL_SelectYear50 = 0x355,
+		Ins_MAdm_TL_SelectALL = 0x356,
+		Ins_MAdm_TL_SelectCrack = 0x357,
+		Ins_MAdm_TL_SelectSpalling = 0x358,
+		Ins_MAdm_TL_SelectEfflorescence = 0x359,
+		Ins_MAdm_TL_SelectBreakage = 0x35a,
+		
+		Ins_MAdm_TL_PrevYear = 0x35b,
+		Ins_MAdm_TL_NextYear = 0x35c,
 	}
 
 	public enum ModuleID
