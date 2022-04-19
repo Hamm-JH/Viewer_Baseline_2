@@ -250,6 +250,11 @@ namespace Module.UI
 					Panel_SetDetail(_setter);
 					break;
 
+					// issue count 변경
+				case UIEventType.Ins_Panel_OnSelectCount:
+					Ins_Panel_OnSelectCount(_setter);
+					break;
+
                 #endregion
 
             }

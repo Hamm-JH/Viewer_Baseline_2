@@ -10,10 +10,19 @@ namespace View
 	using Module.UI;
 	using UnityEngine.EventSystems;
 	using UnityEngine.UI;
+	using AdminViewer.Tunnel;
+	using static Platform.Bridge.Bridges;
 
 	public partial class UI_Selectable : Interactable,
 		IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 	{
+		[System.Serializable]
+		public class Datas
+		{
+			public CodeLv4 m_bridgeIssueCode;
+			public TunnelCode m_tunnelCode;
+		}
+
 		public override GameObject Target
 		{
 			get => gameObject;
@@ -26,7 +35,14 @@ namespace View
 
 		[SerializeField] AUI m_rootUI;
 		[SerializeField] UIEventType eventType;
+		[SerializeField] Datas m_data;
 		//[SerializeField] UniqueUIEventType m_unique;
+
+		public Datas Data
+		{
+			get => m_data;
+			set => m_data = value;
+		}
 
 		public AUI RootUI
         {

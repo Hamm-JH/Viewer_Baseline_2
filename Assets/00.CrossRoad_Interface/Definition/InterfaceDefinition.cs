@@ -105,6 +105,7 @@ namespace Definition
 		Ins_MAdm_LBar_3StatusInfo = 0x348,
 		Ins_MAdm_LBar_4Report = 0x349,
 
+		Ins_Panel_OnSelectCount = 0x34f,
 		Ins_Panel_OnImage = 0x350,
 		Ins_Panel_OnDetail = 0x351,
 
