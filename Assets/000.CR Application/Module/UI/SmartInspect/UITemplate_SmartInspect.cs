@@ -155,22 +155,27 @@ namespace Module.UI
 
 				case UIEventType.Ins_MAdm_TL_SelectALL:
 					Ins_MAdm_TL_SelectALL(_setter);
+					Event_Toggle_ViewMode(_setter.ChildPanel);
 					break;
 
 				case UIEventType.Ins_MAdm_TL_SelectCrack:
 					Ins_MAdm_TL_SelectCrack(_setter);
+					Event_Toggle_ViewMode(_setter.ChildPanel);
 					break;
 
 				case UIEventType.Ins_MAdm_TL_SelectSpalling:
 					Ins_MAdm_TL_SelectSpalling(_setter);
+					Event_Toggle_ViewMode(_setter.ChildPanel);
 					break;
 
 				case UIEventType.Ins_MAdm_TL_SelectEfflorescence:
 					Ins_MAdm_TL_SelectEfflorescence(_setter);
+					Event_Toggle_ViewMode(_setter.ChildPanel);
 					break;
 
 				case UIEventType.Ins_MAdm_TL_SelectBreakage:
 					Ins_MAdm_TL_SelectBreakage(_setter);
+					Event_Toggle_ViewMode(_setter.ChildPanel);
 					break;
 
 				//-------------------------------------

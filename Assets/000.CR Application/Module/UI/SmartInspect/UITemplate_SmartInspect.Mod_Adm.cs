@@ -1,7 +1,9 @@
 ﻿using Definition;
+using SmartInspect;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using View;
 
 namespace Module.UI
@@ -72,21 +74,48 @@ namespace Module.UI
             // 리소스 준비 필요..
 
             m_moduleElements.m_admElement.m_timelinePanel.m_graphFeeds[0].Update_YearTemplate(_index: 0);
+
+            int tIndex = 0;
+            _Ins_MAdm_TL_toggleYear(tIndex);
 		}
 
         private void Ins_MAdm_TL_SelectYear5(Interactable _setter)
         {
             m_moduleElements.m_admElement.m_timelinePanel.m_graphFeeds[0].Update_YearTemplate(_index: 1);
+
+            int tIndex = 1;
+            _Ins_MAdm_TL_toggleYear(tIndex);
         }
 
         private void Ins_MAdm_TL_SelectYear10(Interactable _setter)
         {
             m_moduleElements.m_admElement.m_timelinePanel.m_graphFeeds[0].Update_YearTemplate(_index: 2);
+
+            int tIndex = 2;
+            _Ins_MAdm_TL_toggleYear(tIndex);
         }
 
         private void Ins_MAdm_TL_SelectYear50(Interactable _setter)
         {
             m_moduleElements.m_admElement.m_timelinePanel.m_graphFeeds[0].Update_YearTemplate(_index: 3);
+
+            int tIndex = 3;
+            _Ins_MAdm_TL_toggleYear(tIndex);
+        }
+
+        private void _Ins_MAdm_TL_toggleYear(int _tIndex)
+        {
+            List<RProcessMenu> menus = m_moduleElements.m_admElement.m_timelinePanel.m_yearButtons;
+
+            int index = menus.Count;
+            for (int i = 0; i < index; i++)
+            {
+                bool isHighlight = false;
+                if(i == _tIndex)    isHighlight = true;
+
+                m_uiResources.m_adm_timeline.SetImage(menus[i].btn_menu.GetComponent<Image>(), menus[i].txts[0], i, isHighlight);
+            }
+
         }
 
 

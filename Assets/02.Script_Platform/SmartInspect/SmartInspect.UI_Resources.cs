@@ -73,6 +73,7 @@ namespace SmartInspect
 		public Resource_ProcessMenu m_processMenu;
 		public Resource_LeftBar_Dmg m_dmg_leftbar;
 		public Resource_LeftBar_Rcv m_rcv_leftbar;
+		public Resource_Adm_Timeline m_adm_timeline;
 		public Resource_LeftBar_Adm m_adm_leftbar;
 	}
 
@@ -252,6 +253,56 @@ namespace SmartInspect
 			targetImg_main.SetImage(img_main, isOn);
         }
 	}
+
+	[System.Serializable]
+	public class Resource_Adm_Timeline
+    {
+		public Sprite y1_bgSprite_default;
+		public Sprite y1_bgSprite_highlight;
+
+		public Sprite y5_bgSprite_default;
+		public Sprite y5_bgSprite_highlight;
+
+		public Sprite y10_bgSprite_default;
+		public Sprite y10_bgSprite_highlight;
+
+		public Sprite y50_bgSprite_default;
+		public Sprite y50_bgSprite_highlight;
+
+		public Color bgDefault;
+		public Color bgHighlight;
+
+		public Color txDefault;
+		public Color txHighlight;
+
+		public void SetImage(Image img_bg, TextMeshProUGUI txt_main, int _btnIndex, bool isOn)
+        {
+			Sprite target = null;
+			switch(_btnIndex)
+            {
+				case 0:
+					target = isOn ? y1_bgSprite_highlight : y1_bgSprite_default;
+					break;
+
+				case 1:
+					target = isOn ? y5_bgSprite_highlight : y5_bgSprite_default;
+					break;
+
+				case 2:
+					target = isOn ? y10_bgSprite_highlight : y10_bgSprite_default;
+					break;
+
+				case 3:
+					target = isOn ? y50_bgSprite_highlight : y50_bgSprite_default;
+					break;
+			}
+
+			img_bg.sprite = target;
+			img_bg.color = isOn ? bgHighlight : bgDefault;
+			txt_main.color = isOn ? txHighlight : txDefault;
+			
+        }
+    }
 
 	[System.Serializable]
 	public class Resource_LeftBar_Adm

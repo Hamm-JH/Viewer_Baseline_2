@@ -9,6 +9,7 @@ namespace SmartInspect
     using Module.WebAPI;
     using TMPro;
     using View;
+    using static Platform.Bridge.Bridges;
 
     /// <summary>
     /// 레코드 패킷 인스턴스
@@ -125,6 +126,9 @@ namespace SmartInspect
         /// 3 : img work
         /// </summary>
         [SerializeField] int m_eIndex = -1;
+        public CodeLv4 m_codeBridge;
+        //public 
+
         public Definition._Issue.Issue m_issue;
 
         public Data m_data;

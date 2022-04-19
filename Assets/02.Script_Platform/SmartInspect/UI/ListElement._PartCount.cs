@@ -148,15 +148,19 @@ namespace SmartInspect
             // 변수 순회
             foreach (AdminViewer.Tunnel.TunnelCode key in _result.Keys)
             {
-                // 각 요소마다 새 인스턴스 생성, 생성된 인스턴스 부모할당
-                GameObject obj = Instantiate<GameObject>(Resources.Load<GameObject>("UI/SmartInspect/Inspect_Records"), m_contentRoot);
-                RecordElement element = obj.GetComponent<RecordElement>();
-                string pName = Tunnels.GetCodeName(key);
+                // 요소의 값이 0이 아닐 경우에만 index를 생성한다.
+                if(_result[key] != 0)
+                {
+                    // 각 요소마다 새 인스턴스 생성, 생성된 인스턴스 부모할당
+                    GameObject obj = Instantiate<GameObject>(Resources.Load<GameObject>("UI/SmartInspect/Inspect_Records"), m_contentRoot);
+                    RecordElement element = obj.GetComponent<RecordElement>();
+                    string pName = Tunnels.GetCodeName(key);
 
-                // 초기화를 위한 패킷 생성
-                Packet_Record packet = new Packet_Record(0, _result[key], pName, m_rootUI);
+                    // 초기화를 위한 패킷 생성
+                    Packet_Record packet = new Packet_Record(0, _result[key], pName, m_rootUI);
 
-                element.Init(packet);
+                    element.Init(packet);
+                }
             }
         }
 

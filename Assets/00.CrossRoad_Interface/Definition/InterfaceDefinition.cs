@@ -85,6 +85,8 @@ namespace Definition
 
 		Ins_Top_Profile = 0x310,
 
+		Ins_Panel_PerIssueCount = 0x311,
+
 		/// <summary>
 		/// Module Dmg LBar 1
 		/// </summary>

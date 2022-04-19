@@ -11,6 +11,7 @@ namespace Platform.Bridge
 
 		public enum CodeLv4
 		{
+			ALL = -1,
 			Null = 0,
 			GD = 1,
 			CB = 2,

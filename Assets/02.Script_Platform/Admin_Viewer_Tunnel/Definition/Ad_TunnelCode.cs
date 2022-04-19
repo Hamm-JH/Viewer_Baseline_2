@@ -9,6 +9,7 @@ namespace AdminViewer.Tunnel
 	/// </summary>
 	public enum TunnelCode
 	{
+		ALL = -2,
 		Null = -1,
 		// 기타
 
