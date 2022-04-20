@@ -926,6 +926,43 @@ MonoBehaviour:
     m_imageURL: 
     m_historyURL: 
     m_keyCode: 
+  - m_platform: 258
+    m_graphic: 0
+    mouseData:
+      dragBoundary: 1.5
+      dragInvert: {x: 1, y: -1}
+      focusInvert: 1
+      clickBtnIndex: 0
+      dragBtnIndex: 1
+      bMaxOffsetDistance: 50
+      bOrbitSpeed: 15
+      bPanSpeed: 0.5
+      bZoomSpeed: 10
+    keyboardData:
+      keyFront: 119
+      keyBack: 115
+      keyLeft: 97
+      keyRight: 100
+      keyUp: 101
+      keyDown: 113
+      keyBoost: 304
+      keyCtrl: 306
+    cameraData:
+      bMaxOffsetDistance: 50
+      bOrbitSpeed: 15
+      bPanSpeed: 0.5
+      bZoomSpeed: 3
+    m_moduleList: 1000000030000000
+    m_functionCode: 1100000030000000
+    m_url: 
+    m_baseURL: 
+    m_modelURI: http://wesmart.synology.me:45001/3dmodel/20211202-00000283.gltf
+    m_addressURI: 
+    m_issueDmgURI: 
+    m_issueRcvURI: 
+    m_imageURL: 
+    m_historyURL: 
+    m_keyCode: 
 --- !u!1 &1245156187
 GameObject:
   m_ObjectHideFlags: 0

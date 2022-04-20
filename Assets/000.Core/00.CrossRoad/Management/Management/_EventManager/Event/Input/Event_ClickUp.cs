@@ -182,6 +182,10 @@ namespace Management.Events.Inputs
 				m_clickEvent.Invoke(_obj);
 				ContentManager.Instance.OnSelect_Issue(_obj);
 			}
+			else if(Platforms.IsSmartInspectPlatform(pCode))
+            {
+				m_clickEvent.Invoke(_obj);
+			}
 			else
             {
 				throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
