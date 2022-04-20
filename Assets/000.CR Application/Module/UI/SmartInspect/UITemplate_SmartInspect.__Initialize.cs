@@ -40,35 +40,8 @@ namespace Module.UI
 
         private void Initialize_UI_Panels()
         {
-            //m_moduleElements.m_dmgElement.m_listElements.ForEach(x =>
-            //{
-            //    x.Init();
-            //});
-
-            //m_moduleElements.m_rcvElement.m_listElements.ForEach(x =>
-            //{
-            //    x.Init();
-            //});
-
-            m_moduleElements.m_dmgElement.m_issueCountPanels.ForEach(x =>
-            {
-                x.m_listElement.Init(null, null);
-            });
-
-            m_moduleElements.m_dmgElement.m_issueListPanels.ForEach(x =>
-            {
-                x.m_listElement.Init(x.title, x.baseTitleName);
-            });
-
-            m_moduleElements.m_rcvElement.m_issueCountPanels.ForEach(x =>
-            {
-                x.m_listElement.Init(null, null);
-            });
-
-            m_moduleElements.m_rcvElement.m_issueListPanels.ForEach(x =>
-            {
-                x.m_listElement.Init(x.title, x.baseTitleName);
-            });
+            _Initialize_UI_Dmg_Panels();
+            _Initialize_UI_Rcv_Panels();
 
             m_moduleElements.m_admElement.m_issueCountPanel.m_barCharts.ForEach(x =>
             {
@@ -79,6 +52,47 @@ namespace Module.UI
             {
                 x.Init();
             });
+        }
+
+        private void _Initialize_UI_Dmg_Panels()
+        {
+            m_moduleElements.m_dmgElement.m_issueCountPanels.ForEach(x =>
+            {
+                x.m_listElement.Init(null, null, x.m_pBar, x.m_pBarText,
+                    m_moduleElements.m_dmgElement.m_issueListPanels[0].m_listElement
+                    );
+            });
+
+            m_moduleElements.m_dmgElement.m_issueListPanels.ForEach(x =>
+            {
+                x.m_listElement.Init(x.title, x.baseTitleName, 
+                    m_moduleElements.m_dmgElement.m_issueCountPanels[0].m_pBar,
+                    m_moduleElements.m_dmgElement.m_issueCountPanels[0].m_pBarText,
+                    m_moduleElements.m_dmgElement.m_issueListPanels[0].m_listElement);
+            });
+        }
+
+        private void _Initialize_UI_Rcv_Panels()
+        {
+            List<SmartInspect.IssueCountPanel> cPanels = m_moduleElements.m_rcvElement.m_issueCountPanels;
+            int index = cPanels.Count;
+            for (int i = 0; i < index; i++)
+            {
+                cPanels[i].m_listElement.Init(
+                    null, null, cPanels[i].m_pBar, cPanels[i].m_pBarText,
+                    m_moduleElements.m_rcvElement.m_issueListPanels[i].m_listElement
+                    );
+            }
+
+            List<SmartInspect.IssueListPanel> iPanels = m_moduleElements.m_rcvElement.m_issueListPanels;
+            index = iPanels.Count;
+            for (int i = 0; i < index; i++)
+            {
+                iPanels[i].m_listElement.Init(iPanels[i].title, iPanels[i].baseTitleName,
+                    m_moduleElements.m_rcvElement.m_issueCountPanels[i].m_pBar,
+                    m_moduleElements.m_rcvElement.m_issueCountPanels[i].m_pBarText,
+                    iPanels[i].m_listElement);
+            }
         }
     }
 }

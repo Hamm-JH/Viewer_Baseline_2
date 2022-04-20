@@ -18,12 +18,16 @@ namespace SmartInspect
                 titleText.text = $"{titleName} {_issues.Count}건";
             }
 
+
+            _countData.m_pBar.ChangeValue(  (int)(((float)_issues.Count / _countData.m_maxIssueCount) * 100)  );
+            _countData.m_pBar_Text.text = $"{_issues.Count}";
+
             foreach (Definition._Issue.Issue issue in _issues)
             {
                 GameObject obj = Instantiate<GameObject>(Resources.Load<GameObject>("UI/SmartInspect/Inspect_Records"), m_contentRoot);
                 RecordElement element = obj.GetComponent<RecordElement>();
 
-                Packet_Record packet = new Packet_Record(_rIndex, index++, issue, m_rootUI);
+                Packet_Record packet = new Packet_Record(_rIndex, index++, issue, _countData.m_tgElement, m_rootUI);
 
                 element.Init(packet);
             }

@@ -385,25 +385,5 @@ namespace Issue
         }
 
         public abstract void SetObject<T>(T _data);
-
-        private void OnMouseDown()
-        {
-            //AIssue issue = gameObject.GetComponent<AIssue>();
-            //if (issue.GetType().Equals(typeof(DamagedIssue)))
-            //{
-            //    //Manager.EventClassifier.Instance.OnEvent<DamagedIssue>(Control.Status.Click, gameObject.GetComponent<DamagedIssue>());
-
-            //    //Control.Order<DamagedIssue> order = new Control.Order<DamagedIssue>(Control.Status.Down, issue as DamagedIssue);
-            //    //Manager.EventClassifier.Instance.OnEvent<DamagedIssue>(order);
-
-            //}
-            //else if (issue.GetType().Equals(typeof(RecoveredIssue)))
-            //{
-            //    //Manager.EventClassifier.Instance.OnEvent<RecoveredIssue>(Control.Status.Click, gameObject.GetComponent<RecoveredIssue>());
-
-            //    //Control.Order<RecoveredIssue> order = new Control.Order<RecoveredIssue>(Control.Status.Down, issue as RecoveredIssue);
-            //    //Manager.EventClassifier.Instance.OnEvent<RecoveredIssue>(order);
-            //}
-        }
     }
 }

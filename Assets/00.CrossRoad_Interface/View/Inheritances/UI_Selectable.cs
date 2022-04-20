@@ -12,13 +12,17 @@ namespace View
 	using UnityEngine.UI;
 	using AdminViewer.Tunnel;
 	using static Platform.Bridge.Bridges;
+    using static SmartInspect.ListElement;
+    using SmartInspect;
 
-	public partial class UI_Selectable : Interactable,
+    public partial class UI_Selectable : Interactable,
 		IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 	{
 		[System.Serializable]
 		public class Datas
 		{
+			public ListElement m_issueListElement;
+
 			public CodeLv4 m_bridgeIssueCode;
 			public TunnelCode m_tunnelCode;
 		}
@@ -48,6 +52,12 @@ namespace View
         {
 			get => m_rootUI;
 			set => m_rootUI = value;
+        }
+
+		public UIEventType EventType
+        {
+			get => eventType;
+			set => eventType = value;
         }
 
 		[Header("Linked UI Elements")]

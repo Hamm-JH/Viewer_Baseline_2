@@ -279,7 +279,9 @@ namespace Definition._Issue
 				//string pName = __PartName;
 				string pName = CdBridgeParts;
 
-				return Tunnels.GetPartCode(pName);
+				//Debug.Log(pName);
+				AdminViewer.Tunnel.TunnelCode code = Tunnels.GetPartCode(pName);
+				return code;
             }
         }
 

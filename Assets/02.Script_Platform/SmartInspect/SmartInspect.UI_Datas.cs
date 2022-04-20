@@ -159,9 +159,26 @@ namespace SmartInspect
     [System.Serializable]
     public class IssueCountPanel
     {
+        /// <summary>
+        /// 카운트 패널 루트
+        /// </summary>
         public GameObject root;
 
+        /// <summary>
+        /// 카운트 패널 배치용 내부 리스트 패널
+        /// </summary>
         public ListElement m_listElement;
+
+        /// <summary>
+        /// 프로그레스바 
+        /// </summary>
+        public Michsky.UI.ModernUIPack.ProgressBar m_pBar;
+
+        /// <summary>
+        /// 프로그레스바 텍스트
+        /// </summary>
+        public TextMeshProUGUI m_pBarText;
+
     }
 
     /// <summary>

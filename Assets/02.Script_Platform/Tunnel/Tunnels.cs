@@ -27,7 +27,7 @@ namespace Platform.Tunnel
 			TunnelCode result = TunnelCode.Null;
 
 			string param = _value.Split(',')[2];
-
+			//Debug.Log(param);
 			switch (param)
 			{
 				#region ETC

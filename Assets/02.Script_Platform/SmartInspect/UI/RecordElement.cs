@@ -6,10 +6,14 @@ using UnityEngine.UI;
 
 namespace SmartInspect
 {
+    using AdminViewer.Tunnel;
+    using Definition;
+    using Management;
     using Module.WebAPI;
     using TMPro;
     using View;
     using static Platform.Bridge.Bridges;
+    using static SmartInspect.ListElement;
 
     /// <summary>
     /// 레코드 패킷 인스턴스
@@ -21,7 +25,13 @@ namespace SmartInspect
         public UITemplate_SmartInspect m_rootUI;
         public GameObject m_element;
 
-        #region Part Count 
+        #region Part Count
+
+        public ListElement m_listElement;
+
+        public CodeLv4 m_bPartCode;
+        public TunnelCode m_tPartCode;
+
         /// <summary>
         /// part count 카운트
         /// </summary>
@@ -57,19 +67,50 @@ namespace SmartInspect
 
         #endregion
 
+        public int packetDebugger;
+
         /// <summary>
-        /// DMG, RCV, REIN - part count
+        /// DMG, RCV, REIN - 교량 part count
         /// </summary>
         /// <param name="_rIndex"></param>
         /// <param name="_lNumber"></param>
         /// <param name="_partName"></param>
         /// <param name="_rootUI"></param>
-        public Packet_Record(int _rIndex, int _lNumber, string _partName, UITemplate_SmartInspect _rootUI)
+        public Packet_Record(int _rIndex, int _lNumber, string _partName,
+            CodeLv4 _bPartCode, ListElement _element, UITemplate_SmartInspect _rootUI)
         {
             m_requestIndex = _rIndex;
             m_listedNumber = _lNumber;
             m_pc_name = _partName;
+
+            m_bPartCode = _bPartCode;
+            m_listElement = _element;
+
             m_rootUI = _rootUI;
+
+            packetDebugger = 1;
+        }
+
+        /// <summary>
+        /// DMG, RCV, REIN - 터널 part count
+        /// </summary>
+        /// <param name="_rIndex"></param>
+        /// <param name="_lNumber"></param>
+        /// <param name="_partName"></param>
+        /// <param name="_rootUI"></param>
+        public Packet_Record(int _rIndex, int _lNumber, string _partName,
+            TunnelCode _tPartCode, ListElement _element, UITemplate_SmartInspect _rootUI)
+        {
+            m_requestIndex = _rIndex;
+            m_listedNumber = _lNumber;
+            m_pc_name = _partName;
+
+            m_tPartCode = _tPartCode;
+            m_listElement = _element;
+
+            m_rootUI = _rootUI;
+
+            packetDebugger = 1;
         }
 
         /// <summary>
@@ -83,6 +124,8 @@ namespace SmartInspect
             m_requestIndex = _rIndex;
             m_issue = _issue;
             m_rootUI = _rootUI;
+
+            packetDebugger = 2;
         }
 
         public Packet_Record(int _rIndex, string _fgroup, string _fid, string _ftype, Definition._Issue.Issue _issue,
@@ -94,6 +137,8 @@ namespace SmartInspect
             m_ftype = _ftype;
             m_issue = _issue;
             m_rootUI = _rootUI;
+
+            packetDebugger = 3;
         }
 
         /// <summary>
@@ -103,12 +148,16 @@ namespace SmartInspect
         /// <param name="_number"></param>
         /// <param name="_issue"></param>
         /// <param name="_rootUI"></param>
-        public Packet_Record(int _rIndex, int _number, Definition._Issue.Issue _issue, UITemplate_SmartInspect _rootUI)
+        public Packet_Record(int _rIndex, int _number, Definition._Issue.Issue _issue, ListElement _element, UITemplate_SmartInspect _rootUI)
         {
             m_requestIndex = _rIndex;
             m_elementNumber = _number;
             m_issue = _issue;
             m_rootUI = _rootUI;
+
+            m_listElement = _element;
+
+            packetDebugger = 4;
         }
     }
 
@@ -250,6 +299,23 @@ namespace SmartInspect
             tx_Count.text = _packet.m_listedNumber.ToString();
             tx_Title.text = _packet.m_pc_name;
             btn_detail.RootUI = _packet.m_rootUI;
+
+            btn_detail.EventType = UIEventType.Ins_Panel_OnSelectCount;
+            btn_detail.Data.m_issueListElement = _packet.m_listElement;
+
+            PlatformCode pCode = MainManager.Instance.Platform;
+            if(Platforms.IsBridgePlatform(pCode))
+            {
+                btn_detail.Data.m_bridgeIssueCode = _packet.m_bPartCode;
+            }
+            else if(Platforms.IsTunnelPlatform(pCode))
+            {
+                btn_detail.Data.m_tunnelCode = _packet.m_tPartCode;
+            }
+            else
+            {
+                throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+            }
         }
     }
 

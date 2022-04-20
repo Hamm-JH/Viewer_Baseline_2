@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Definition;
+using Management;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,10 +29,24 @@ namespace SmartInspect
 
         private void REIN_IssueList_Init()
         {
-            // issue 리스트를 가져온다.
-            List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory);
+            PlatformCode pCode = MainManager.Instance.Platform;
 
-            SetIssueList(2, issues);
+            if(Platforms.IsBridgePlatform(pCode))
+            {
+                // issue 리스트를 가져온다.
+                List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory, _countData.m_bCode);
+                SetIssueList(2, issues);
+            }
+            else if(Platforms.IsTunnelPlatform(pCode))
+            {
+                List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory, _countData.m_tCode);
+                SetIssueList(2, issues);
+            }
+            else
+            {
+                throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+            }
+            //SetIssueList(2, issues);
         }
 
         private void REIN_Image_Init()

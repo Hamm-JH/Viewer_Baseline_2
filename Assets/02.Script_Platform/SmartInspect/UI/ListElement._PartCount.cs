@@ -20,29 +20,36 @@ namespace SmartInspect
             PlatformCode pCode = MainManager.Instance.Platform;
             if (Platforms.IsBridgePlatform(pCode))
             {
-                // 분류 코드 리스트 갖고온다.
+                // 1 분류 코드 리스트 갖고온다.
                 List<Bridges.CodeLv4> cList = Bridges.GetCodeList();
-                // 손상정보 리스트도 갖고온다.
-                List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory);
+                // 2 손상정보 리스트도 갖고온다.
+                List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory, _countData.m_bCode);
                 //SmartInspectManager.Instance.Module<Module_Model>(ModuleID.Model).DmgData;
 
-                // 분류 코드 리스트 기반으로 요소 리스트를 생성한다.
+                // 3 분류 코드 리스트 기반으로 요소 리스트를 생성한다.
                 Dictionary<Bridges.CodeLv4, int> result = GetCountList_Bridge(cList, issues);
 
+                // 4 리스트 생성
                 SetCountList_Bridge(result);
+
+                _countData.m_pBar.ChangeValue(100);
+                _countData.m_pBar_Text.text = $"{issues.Count}";
             }
             else if (Platforms.IsTunnelPlatform(pCode))
             {
                 // 분류 코드 리스트 갖고온다.
                 List<AdminViewer.Tunnel.TunnelCode> cList = Tunnels.GetCodeList();
                 // 손상정보 리스트도 갖고온다.
-                List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory);
+                List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory, _countData.m_tCode);
                 //SmartInspectManager.Instance.Module<Module_Model>(ModuleID.Model).DmgData;
 
                 // 분류 코드 리스트 기반으로 요소 리스트를 생성한다.
                 Dictionary<AdminViewer.Tunnel.TunnelCode, int> result = GetCountList_Tunnel(cList, issues);
 
                 SetCountList_Tunnel(result);
+
+                _countData.m_pBar.ChangeValue(100);
+                _countData.m_pBar_Text.text = $"{issues.Count}";
             }
             else
             {
@@ -54,6 +61,12 @@ namespace SmartInspect
 
         #region Bridge - part count
 
+        /// <summary>
+        /// 3 이슈 분류
+        /// </summary>
+        /// <param name="_cList"></param>
+        /// <param name="_issues"></param>
+        /// <returns></returns>
         private Dictionary<Bridges.CodeLv4, int> GetCountList_Bridge(
             List<Bridges.CodeLv4> _cList, List<Definition._Issue.Issue> _issues)
         {
@@ -82,7 +95,7 @@ namespace SmartInspect
         }
 
         /// <summary>
-        /// 교량 :: 카운트 리스트 요소 생성
+        /// 4 교량 :: 카운트 리스트 요소 생성
         /// </summary>
         /// <param name="_result"></param>
         private void SetCountList_Bridge(Dictionary<Bridges.CodeLv4, int> _result)
@@ -94,8 +107,8 @@ namespace SmartInspect
                 GameObject obj = Instantiate<GameObject>(Resources.Load<GameObject>("UI/SmartInspect/Inspect_Records"), m_contentRoot);
                 RecordElement element = obj.GetComponent<RecordElement>();
                 string pName = Bridges.ConvertLv4String(key);
-
-                Packet_Record packet = new Packet_Record(0, _result[key], pName, m_rootUI);
+                
+                Packet_Record packet = new Packet_Record(0, _result[key], pName, key, this, m_rootUI);
 
                 element.Init(packet);
             }
@@ -157,7 +170,7 @@ namespace SmartInspect
                     string pName = Tunnels.GetCodeName(key);
 
                     // 초기화를 위한 패킷 생성
-                    Packet_Record packet = new Packet_Record(0, _result[key], pName, m_rootUI);
+                    Packet_Record packet = new Packet_Record(0, _result[key], pName, key, _countData.m_tgElement, m_rootUI);
 
                     element.Init(packet);
                 }

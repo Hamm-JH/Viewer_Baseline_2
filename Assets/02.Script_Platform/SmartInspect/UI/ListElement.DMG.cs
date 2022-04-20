@@ -39,14 +39,23 @@ namespace SmartInspect
         {
             // 단일 이슈 단위로 정보를 배치하는 작업을 수행한다.
 
-            // issue 리스트를 가져온다.
-            List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory);
+            PlatformCode pCode = MainManager.Instance.Platform;
+
+            if(Platforms.IsBridgePlatform(pCode))
+            {
+                // issue 리스트를 가져온다.
+                List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory, _countData.m_bCode);
+                SetIssueList(1, issues);
+            }
+            else if(Platforms.IsTunnelPlatform(pCode))
+            {
+                List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory, _countData.m_tCode);
+                SetIssueList(1, issues);
+            }
 
             // 가져온 리스트 개별 단위로 순회한다.
             // 단일 이슈에 대한 인스턴스 생성
             // 패킷 생성후 실행
-
-            SetIssueList(1, issues);
         }
 
         private void DMG_Image_Init()
