@@ -10,6 +10,7 @@ namespace Definition
 	public enum UIEventType
 	{
 		Null = 0,
+		NotWork,
 
 		/// <summary>
 		/// UI 토글
@@ -121,6 +122,28 @@ namespace Definition
 		
 		Ins_MAdm_TL_PrevYear = 0x35b,
 		Ins_MAdm_TL_NextYear = 0x35c,
+	}
+
+	public enum Inspect_EventType
+    {
+		NotWork,
+
+		BtnBar_01_Home,
+		BtnBar_02_ViewPort,
+		BtnBar_03_OrthoView,
+		BtnBar_04_ShowAll,
+		BtnBar_05_Hide,
+		BtnBar_06_Isolate,
+		BtnBar_07_Setting,
+		BtnBar_08_SwitchBar,
+
+		ViewPort_01_ISO,
+		ViewPort_02_TOP,
+		ViewPort_03_SIDE,
+		ViewPort_04_BOTTOM,
+
+		OrthoMode_01_OrthoView,
+		OrthoMode_02_PerspectiveView,
 	}
 
 	public enum ModuleID

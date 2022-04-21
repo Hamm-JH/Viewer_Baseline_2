@@ -192,10 +192,12 @@ namespace Module.UI
 
 				#region ButtonBar
 
+				// btnBar 01
 				case UIEventType.View_Home:
 					// 초기 화면으로 복귀
 					Event_View_Home();
 					Event_Toggle_ChildPanel(1, _setter.ChildPanel);
+					ButtonBar_OnSelect(_setter);
 					break;
 
 				case UIEventType.Toggle:
@@ -259,5 +261,125 @@ namespace Module.UI
 
             }
         }
-	}
+
+        public override void GetUIEvent(Inspect_EventType _uType, Interactable _setter)
+        {
+            switch(_uType)
+            {
+				//--------------------------------------------------
+
+				case Inspect_EventType.BtnBar_01_Home:
+                    {
+						Event_View_Home();
+						Event_Toggle_ChildPanel(1, _setter.ChildPanel);
+						ButtonBar_OnSelect(_setter);	// ButtonBar 토글
+                    }
+					break;
+
+				case Inspect_EventType.BtnBar_02_ViewPort:
+                    {
+						Event_Toggle_ChildPanel(1, _setter.ChildPanel);
+						Event_Toggle_ViewMode(_setter.ChildPanel);
+						ButtonBar_OnSelect(_setter);
+                    }
+					break;
+
+				case Inspect_EventType.BtnBar_03_OrthoView:
+                    {
+						Event_Toggle_ChildPanel(1, _setter.ChildPanel);
+						Event_Toggle_ViewMode(_setter.ChildPanel);
+						ButtonBar_OnSelect(_setter);
+					}
+					break;
+
+				case Inspect_EventType.BtnBar_04_ShowAll:
+                    {
+						Event_Mode_ShowAll();
+						Event_Toggle_ChildPanel(1, _setter.ChildPanel);
+						ButtonBar_OnSelect(_setter);
+					}
+					break;
+
+				case Inspect_EventType.BtnBar_05_Hide:
+                    {
+						Event_Mode_HideIsolate(_uType);
+						Event_Toggle_ChildPanel(1, _setter.ChildPanel);
+						ButtonBar_OnSelect(_setter);
+					}
+					break;
+
+				case Inspect_EventType.BtnBar_06_Isolate:
+                    {
+						Event_Mode_HideIsolate(_uType);
+						Event_Toggle_ChildPanel(1, _setter.ChildPanel);
+						ButtonBar_OnSelect(_setter);
+					}
+					break;
+
+				case Inspect_EventType.BtnBar_07_Setting:
+                    {
+						Event_Toggle_ChildPanel(1, _setter.ChildPanel);
+						Event_Toggle_ViewMode(_setter.ChildPanel);
+						ButtonBar_OnSelect(_setter);
+					}
+					break;
+
+				case Inspect_EventType.BtnBar_08_SwitchBar:	break;
+
+				//--------------------------------------------------
+
+				case Inspect_EventType.ViewPort_01_ISO:
+                    {
+						Event_Toggle_ViewMode(UIEventType.Viewport_ViewMode_ISO);
+						Viewport_OnSelect(_setter);
+						Event_Toggle_ViewMode(_setter.ChildPanel);
+					}
+					break;
+
+				case Inspect_EventType.ViewPort_02_TOP:
+                    {
+						Event_Toggle_ViewMode(UIEventType.Viewport_ViewMode_TOP);
+						Viewport_OnSelect(_setter);
+						Event_Toggle_ViewMode(_setter.ChildPanel);
+					}
+					break;
+
+				case Inspect_EventType.ViewPort_03_SIDE:
+                    {
+						Event_Toggle_ViewMode(UIEventType.Viewport_ViewMode_SIDE);
+						Viewport_OnSelect(_setter);
+						Event_Toggle_ViewMode(_setter.ChildPanel);
+					}
+					break;
+
+				case Inspect_EventType.ViewPort_04_BOTTOM:
+                    {
+						Event_Toggle_ViewMode(UIEventType.Viewport_ViewMode_BOTTOM);
+						Viewport_OnSelect(_setter);
+						Event_Toggle_ViewMode(_setter.ChildPanel);
+					}
+					break;
+
+				//--------------------------------------------------
+
+				case Inspect_EventType.OrthoMode_01_OrthoView:
+                    {
+						Event_ToggleOrthoView(true);
+						OrthoMode_OnSelect(_setter);
+						Event_Toggle_ViewMode(_setter.ChildPanel);
+					}
+					break;
+
+				case Inspect_EventType.OrthoMode_02_PerspectiveView:
+                    {
+						Event_ToggleOrthoView(false);
+						OrthoMode_OnSelect(_setter);
+						Event_Toggle_ViewMode(_setter.ChildPanel);
+					}
+					break;
+
+				//--------------------------------------------------
+			}
+		}
+    }
 }

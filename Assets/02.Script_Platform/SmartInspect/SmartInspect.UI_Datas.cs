@@ -13,6 +13,7 @@ namespace SmartInspect
     [System.Serializable]
     public class RProcessMenu
     {
+        public bool isSelected;
         public Button btn_menu;
         public List<Image> imgs;
         public List<TextMeshProUGUI> txts;
@@ -357,6 +358,8 @@ namespace SmartInspect
     {
         public List<GameObject> m_subPanels;
 
+        public List<RProcessMenu> m_btnMenu_bottomBar;
+
         public ViewPort m_viewport;
         public Orthographic m_orthographic;
         public Zoom m_zoom;
@@ -370,6 +373,8 @@ namespace SmartInspect
         public GameObject btn_2Top;
         public GameObject btn_3Side;
         public GameObject btn_4Bottom;
+
+        public List<RProcessMenu> m_btnMenu_viewMode;
     }
 
     [System.Serializable]
@@ -378,6 +383,8 @@ namespace SmartInspect
         public GameObject root;
         public GameObject btn_1Orthographic;
         public GameObject btn_2Perspective;
+
+        public List<RProcessMenu> m_btnMenu_orthoMode;
     }
 
     

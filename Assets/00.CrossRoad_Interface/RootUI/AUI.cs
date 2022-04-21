@@ -48,6 +48,7 @@ namespace Module.UI
 		/// <param name="_setter"></param>
 		
 		public abstract void GetUIEvent(UIEventType _uType, Interactable _setter);
+		public virtual void GetUIEvent(Inspect_EventType _uType, Interactable _setter) { }
 
 		/// <summary>
 		/// 

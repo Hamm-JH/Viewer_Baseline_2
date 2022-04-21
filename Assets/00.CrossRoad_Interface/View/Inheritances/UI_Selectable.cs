@@ -21,6 +21,11 @@ namespace View
 		[System.Serializable]
 		public class Datas
 		{
+			/// <summary>
+			/// ButtonBar 사용
+			/// </summary>
+			public int m_toggleIndex;
+
 			public ListElement m_issueListElement;
 
 			public CodeLv4 m_bridgeIssueCode;
@@ -39,6 +44,7 @@ namespace View
 
 		[SerializeField] AUI m_rootUI;
 		[SerializeField] UIEventType eventType;
+		[SerializeField] Inspect_EventType inspect_eventType;
 		[SerializeField] Datas m_data;
 		//[SerializeField] UniqueUIEventType m_unique;
 
@@ -60,7 +66,13 @@ namespace View
 			set => eventType = value;
         }
 
-		[Header("Linked UI Elements")]
+        public Inspect_EventType Inspect_eventType 
+		{ 
+			get => inspect_eventType; 
+			set => inspect_eventType = value; 
+		}
+
+        [Header("Linked UI Elements")]
 		/// <summary>
 		/// 자식 패널 객체
 		/// </summary>
@@ -111,6 +123,7 @@ namespace View
             }
 
 			m_rootUI.GetUIEvent(eventType, this);
+			m_rootUI.GetUIEvent(Inspect_eventType, this);
 		}
 
 		public override void OnDeselect<T1, T2>(T1 t1, T2 t2)

@@ -7,6 +7,19 @@ namespace SmartInspect
     using TMPro;
     using UnityEngine.UI;
 
+	/// <summary>
+	/// 버튼 리소스
+	/// </summary>
+	[System.Serializable]
+	public class CR_Button
+    {
+		public RImage img_bg;
+		public RImage img_icon;
+    }
+
+	/// <summary>
+	/// 단일 이미지 리소스
+	/// </summary>
 	[System.Serializable]
 	public class RImage
 	{
@@ -18,19 +31,38 @@ namespace SmartInspect
 
 		public void SetImage(Image _source, bool isSelected)
 		{
-			if(isSelected)
-			{
-				_source.sprite = sprite_selected;
-				_source.color = color_selected;
-			}
-			else
-			{
-				_source.sprite = sprite_normal;
-				_source.color = color_normal;
-			}
+			SetSprite(_source, isSelected);
+			SetColor(_source, isSelected);
 		}
+
+		public void SetSprite(Image _source, bool isSelected)
+        {
+			if(isSelected)
+            {
+				_source.sprite = sprite_selected;
+            }
+			else
+            {
+				_source.sprite = sprite_normal;
+            }
+        }
+
+		public void SetColor(Image _source, bool isSelected)
+        {
+			if(isSelected)
+            {
+				_source.color = color_selected;
+            }
+			else
+            {
+				_source.color = color_normal;
+            }
+        }
 	}
 
+	/// <summary>
+	/// 단일 텍스트 리소스
+	/// </summary>
 	[System.Serializable]
 	public class RText
     {
@@ -75,6 +107,7 @@ namespace SmartInspect
 		public Resource_LeftBar_Rcv m_rcv_leftbar;
 		public Resource_Adm_Timeline m_adm_timeline;
 		public Resource_LeftBar_Adm m_adm_leftbar;
+		public Resource_Bottombar m_bottomBar;
 	}
 
 	#endregion --------- main -----------
@@ -360,4 +393,80 @@ namespace SmartInspect
 			targetImg_main.SetImage(img_main, isOn);
 		}
 	}
+
+	[System.Serializable]
+	public class Resource_Bottombar
+    {
+		public GameObject root;
+
+		/// <summary>
+		/// 버튼 바 리스트
+		/// </summary>
+		[Header("버튼 바 리스트")]
+		public GameObject m_rootBtnBar;
+		public List<CR_Button> m_button_bars;
+
+		[Header("뷰 모드 리스트")]
+		public GameObject m_rootViewMode;
+		public List<CR_Button> m_viewModes;
+
+		[Header("뷰 모드 리스트")]
+		public GameObject m_rootOrthoMode;
+		public List<CR_Button> m_orthoModes;
+
+		/// <summary>
+		/// 목표 객체 On/Off
+		/// </summary>
+		/// <param name="img_bg"></param>
+		/// <param name="img_icon"></param>
+		/// <param name="index"></param>
+		/// <param name="isOn"></param>
+		public void SetColor_btnBar(Image img_bg, Image img_icon, int index, bool isOn)
+        {
+			m_button_bars[index].img_bg.SetColor(img_bg, isOn);
+			m_button_bars[index].img_icon.SetColor(img_icon, isOn);
+        }
+
+		/// <summary>
+		/// 선택된 객체를 켜고 나머지는 끈다.
+		/// </summary>
+		/// <param name="img_bg"></param>
+		/// <param name="img_icon"></param>
+		/// <param name="index"></param>
+		public void SetColor_btnViewMode(Image img_bg, Image img_icon, int index, bool isOn)
+        {
+			m_viewModes[index].img_bg.SetColor(img_bg, isOn);
+			m_viewModes[index].img_icon.SetColor(img_icon, isOn);
+
+			//int rIndex = m_viewModes.Count;
+            //for (int i = 0; i < rIndex; i++)
+            //{
+			//	bool isTarget = index == i ? true : false;
+			//	
+			//	m_viewModes[i].img_bg.SetColor(img_bg, isTarget);
+			//	m_viewModes[i].img_icon.SetColor(img_icon, isTarget);
+            //}
+        }
+
+		/// <summary>
+		/// 선택된 객체를 켜고 나머지는 끈다.
+		/// </summary>
+		/// <param name="img_bg"></param>
+		/// <param name="img_icon"></param>
+		/// <param name="index"></param>
+		public void SetColor_btnOrthoMode(Image img_bg, Image img_icon, int index, bool isOn)
+        {
+			m_orthoModes[index].img_bg.SetColor(img_bg, isOn);
+			m_orthoModes[index].img_icon.SetColor(img_icon, isOn);
+
+			//int rIndex = m_orthoModes.Count;
+            //for (int i = 0; i < rIndex; i++)
+            //{
+			//	bool isTarget = index == i ? true : false;
+			//
+			//	m_orthoModes[i].img_bg.SetColor(img_bg, isTarget);
+			//	m_orthoModes[i].img_icon.SetColor(img_icon, isTarget);
+            //}
+        }
+    }
 }

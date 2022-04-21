@@ -103,14 +103,18 @@ namespace SmartInspect
             // 변수 순회
             foreach (Bridges.CodeLv4 key in _result.Keys)
             {
-                // 각 요소마다 새 인스턴스 생성, 생성된 인스턴스 부모할당
-                GameObject obj = Instantiate<GameObject>(Resources.Load<GameObject>("UI/SmartInspect/Inspect_Records"), m_contentRoot);
-                RecordElement element = obj.GetComponent<RecordElement>();
-                string pName = Bridges.ConvertLv4String(key);
+                // 요소의 값이 0이 아닐 경우에만 index를 생성한다.
+                if(_result[key] != 0)
+                {
+                    // 각 요소마다 새 인스턴스 생성, 생성된 인스턴스 부모할당
+                    GameObject obj = Instantiate<GameObject>(Resources.Load<GameObject>("UI/SmartInspect/Inspect_Records"), m_contentRoot);
+                    RecordElement element = obj.GetComponent<RecordElement>();
+                    string pName = Bridges.ConvertLv4String(key);
                 
-                Packet_Record packet = new Packet_Record(0, _result[key], pName, key, this, m_rootUI);
+                    Packet_Record packet = new Packet_Record(0, _result[key], pName, key, _countData.m_tgElement, m_rootUI);
 
-                element.Init(packet);
+                    element.Init(packet);
+                }
             }
         }
 
