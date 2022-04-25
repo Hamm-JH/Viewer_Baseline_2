@@ -281,6 +281,9 @@ namespace SmartInspect
         }
     }
 
+    /// <summary>
+    /// 부재분류별 손상개수
+    /// </summary>
     [System.Serializable]
     public class PartCount
     {
@@ -384,6 +387,7 @@ namespace SmartInspect
 
         private void Set_UIInstance(UI_Selectable _resource, Packet_Record _packet)
         {
+            _resource.Data.m_issueListElement = _packet.m_listElement;
             _resource.RootUI = _packet.m_rootUI;
             _resource.ChildPanel = _packet.m_element;
         }

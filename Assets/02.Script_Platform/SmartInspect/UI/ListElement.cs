@@ -50,6 +50,8 @@ namespace SmartInspect
             public TunnelCode m_tCode;
 
             public ListElement m_tgElement;
+
+            public List<RecordElement> m_elements;
         }
 
         public Template m_template;
@@ -61,6 +63,12 @@ namespace SmartInspect
         private string titleName;
 
         [SerializeField] private CountData _countData;
+
+        public CountData _CountData
+		{
+            get => _countData;
+            set => _countData = value;
+		}
 
         public void Init(TextMeshProUGUI _title, string _tName, 
             Michsky.UI.ModernUIPack.ProgressBar _pBar, TextMeshProUGUI _pBarText, ListElement _tgElement)
@@ -164,6 +172,8 @@ namespace SmartInspect
         /// </summary>
         private void ClearElement()
         {
+            _countData.m_elements = new List<RecordElement>();
+
             int index = m_contentRoot.childCount;
 
             for (int i = 0; i < index; i++)

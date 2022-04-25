@@ -114,6 +114,8 @@ namespace SmartInspect
                     Packet_Record packet = new Packet_Record(0, _result[key], pName, key, _countData.m_tgElement, m_rootUI);
 
                     element.Init(packet);
+
+                    _countData.m_elements.Add(element);
                 }
             }
         }
@@ -177,6 +179,8 @@ namespace SmartInspect
                     Packet_Record packet = new Packet_Record(0, _result[key], pName, key, _countData.m_tgElement, m_rootUI);
 
                     element.Init(packet);
+
+                    _countData.m_elements.Add(element);
                 }
             }
         }

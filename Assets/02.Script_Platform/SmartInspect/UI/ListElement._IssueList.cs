@@ -30,6 +30,8 @@ namespace SmartInspect
                 Packet_Record packet = new Packet_Record(_rIndex, index++, issue, _countData.m_tgElement, m_rootUI);
 
                 element.Init(packet);
+
+                _countData.m_elements.Add(element);
             }
         }
     }

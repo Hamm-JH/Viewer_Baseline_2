@@ -151,7 +151,7 @@ MonoBehaviour:
     m_bridgeIssueCode: 0
     m_tunnelCode: 0
   m_resource:
-    m_useResource: 0
+    m_useResource: 1
     m_onDefault: {r: 1, g: 1, b: 1, a: 0}
     m_onSelect: {r: 0.17254902, g: 0.1882353, b: 0.27450982, a: 1}
   m_uiFXs: []

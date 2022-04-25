@@ -25,6 +25,8 @@ namespace SmartInspect
                 Packet_Record packet = new Packet_Record(3, fgroup, fid, ftype, _issue, m_rootUI);
 
                 element.Init(packet);
+
+                _countData.m_elements.Add(element);
             }
         }
     }
