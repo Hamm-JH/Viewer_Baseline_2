@@ -35,6 +35,9 @@ namespace Management
 				throw new Definition.Exceptions.PlatformNotDefinedException(_pCode);
             }
 
+			SceneManager.LoadScene(sceneName.ToString());
+
+#if UNITY_EDITOR
 			EditorBuildSettingsScene[] scenes = EditorBuildSettings.scenes;
 			int index = scenes.Length;
             for (int i = 0; i < index; i++)
@@ -50,6 +53,7 @@ namespace Management
 
 			// 여기 넘어왔다는 뜻은 맞는 scene이 없다는뜻
 			throw new Definition.Exceptions.SceneNotExisted(sceneName);
+#endif
 
 		}
 	}
