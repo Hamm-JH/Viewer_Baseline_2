@@ -15,9 +15,19 @@ namespace Module.UI
         /// </summary>
         public void ModAdm_Active()
 		{
+            ModAdm_ResetBasePosition();
+
             ModAdm_TogglePanel(0, true);
             ModAdm_TogglePanel(1, true);
             ModAdm_TogglePanel(2, false);
+        }
+
+        private void ModAdm_ResetBasePosition()
+        {
+            if (!m_moduleElements.m_admElement.root.activeSelf) return;
+
+            m_moduleElements.m_admElement.m_issueCountPanel.ReturnBasePosition();
+            m_moduleElements.m_admElement.m_timelinePanel.ReturnBasePosition();
         }
 
         /// <summary>

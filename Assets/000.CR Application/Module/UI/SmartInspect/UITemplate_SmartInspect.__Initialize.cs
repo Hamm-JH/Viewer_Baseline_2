@@ -42,22 +42,15 @@ namespace Module.UI
         {
             _Initialize_UI_Dmg_Panels();
             _Initialize_UI_Rcv_Panels();
-
-            m_moduleElements.m_admElement.m_issueCountPanel.m_barCharts.ForEach(x =>
-            {
-                x.Init();
-            });
-
-            m_moduleElements.m_admElement.m_timelinePanel.m_graphFeeds.ForEach(x =>
-            {
-                x.Init();
-            });
+            _Initialize_UI_Setting_Panels();
         }
 
         private void _Initialize_UI_Dmg_Panels()
         {
             m_moduleElements.m_dmgElement.m_issueCountPanels.ForEach(x =>
             {
+                
+                x.DraggableInit();
                 x.m_listElement.Init(null, null, x.m_pBar, x.m_pBarText,
                     m_moduleElements.m_dmgElement.m_issueListPanels[0].m_listElement
                     );
@@ -65,10 +58,16 @@ namespace Module.UI
 
             m_moduleElements.m_dmgElement.m_issueListPanels.ForEach(x =>
             {
+                x.DraggableInit();
                 x.m_listElement.Init(x.title, x.baseTitleName, 
                     m_moduleElements.m_dmgElement.m_issueCountPanels[0].m_pBar,
                     m_moduleElements.m_dmgElement.m_issueCountPanels[0].m_pBarText,
                     m_moduleElements.m_dmgElement.m_issueListPanels[0].m_listElement);
+            });
+
+            m_moduleElements.m_dmgElement.m_issueDetailPanels.ForEach(x =>
+            {
+                x.DraggableInit();
             });
         }
 
@@ -78,6 +77,7 @@ namespace Module.UI
             int index = cPanels.Count;
             for (int i = 0; i < index; i++)
             {
+                cPanels[i].DraggableInit();
                 cPanels[i].m_listElement.Init(
                     null, null, cPanels[i].m_pBar, cPanels[i].m_pBarText,
                     m_moduleElements.m_rcvElement.m_issueListPanels[i].m_listElement
@@ -88,11 +88,27 @@ namespace Module.UI
             index = iPanels.Count;
             for (int i = 0; i < index; i++)
             {
+                iPanels[i].DraggableInit();
                 iPanels[i].m_listElement.Init(iPanels[i].title, iPanels[i].baseTitleName,
                     m_moduleElements.m_rcvElement.m_issueCountPanels[i].m_pBar,
                     m_moduleElements.m_rcvElement.m_issueCountPanels[i].m_pBarText,
                     iPanels[i].m_listElement);
             }
+        }
+
+        private void _Initialize_UI_Setting_Panels()
+        {
+            m_moduleElements.m_admElement.m_issueCountPanel.DraggableInit();
+            m_moduleElements.m_admElement.m_issueCountPanel.m_barCharts.ForEach(x =>
+            {
+                x.Init();
+            });
+
+            m_moduleElements.m_admElement.m_timelinePanel.DraggableInit();
+            m_moduleElements.m_admElement.m_timelinePanel.m_graphFeeds.ForEach(x =>
+            {
+                x.Init();
+            });
         }
     }
 }

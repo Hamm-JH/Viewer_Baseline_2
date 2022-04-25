@@ -13,11 +13,35 @@ namespace Module.UI
         /// </summary>
         public void ModRcv_Active()
         {
+            ModRcv_ResetBasePosition();
+
             ModRcv_TogglePanel(0, true);
-            ModRcv_TogglePanel(1, true);
+            ModRcv_TogglePanel(1, false);   // TODO 보강 정보 삭제 예정
             ModRcv_TogglePanel(2, false);
             ModRcv_TogglePanel(3, false);
             ModRcv_TogglePanel(4, false);
+        }
+
+        private void ModRcv_ResetBasePosition()
+        {
+            if (!m_moduleElements.m_rcvElement.root.activeSelf) return;
+
+            m_moduleElements.m_rcvElement.m_issueCountPanels.ForEach(x => x.ReturnBasePosition());
+            m_moduleElements.m_rcvElement.m_issueListPanels.ForEach(x => x.ReturnBasePosition());
+        }
+
+        private void ModRcv_ToggleIssueList()
+        {
+            if (!m_moduleElements.m_rcvElement.root.activeSelf) return;
+
+            m_moduleElements.m_rcvElement.m_issueListPanels.ForEach(x => x.root.SetActive(!x.root.activeSelf));
+        }
+
+        private void ModRcv_ToggleIssueList(bool isOn)
+        {
+            if (!m_moduleElements.m_rcvElement.root.activeSelf) return;
+
+            m_moduleElements.m_rcvElement.m_issueListPanels.ForEach(x => x.root.SetActive(isOn));
         }
 
         /// <summary>
@@ -54,6 +78,7 @@ namespace Module.UI
                     result.Add(m_moduleElements.m_rcvElement.m_rcvList);
                     break;
 
+                // TODO 보강 정보 삭제 예정
                 case 1:
                     result = new List<GameObject>();
                     result.Add(m_moduleElements.m_rcvElement.m_reinCount);
@@ -69,9 +94,5 @@ namespace Module.UI
             return result;
         }
 
-        //private void _ModRcv_Set_Leftbar(int index, bool isOn)
-        //{
-        //    MRcv_ToggleLBar(index, isOn);
-        //}
     }
 }

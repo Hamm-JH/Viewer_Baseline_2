@@ -30,6 +30,15 @@ namespace SmartInspect
         public RecoverElement m_rcvElement;
         public AdministElement m_admElement;
     }
+    
+    public interface Draggable
+    {
+        Vector2 BaseUIPosition { get; set; }
+
+        void DraggableInit();
+
+        void ReturnBasePosition();
+    }
 
     [System.Serializable]
     public class DamageElement
@@ -158,7 +167,7 @@ namespace SmartInspect
     /// 점검정보 파트별 카운트 패널
     /// </summary>
     [System.Serializable]
-    public class IssueCountPanel
+    public class IssueCountPanel : Draggable
     {
         /// <summary>
         /// 카운트 패널 루트
@@ -180,13 +189,26 @@ namespace SmartInspect
         /// </summary>
         public TextMeshProUGUI m_pBarText;
 
+        [SerializeField] protected Vector2 m_baseUIPosition;
+
+        public Vector2 BaseUIPosition { get => m_baseUIPosition; set => m_baseUIPosition = value; }
+
+        public void DraggableInit()
+        {
+            BaseUIPosition = root.GetComponent<RectTransform>().position;
+        }
+
+        public void ReturnBasePosition()
+        {
+            root.GetComponent<RectTransform>().position = BaseUIPosition;
+        }
     }
 
     /// <summary>
     /// 점검정보 리스트 패널
     /// </summary>
     [System.Serializable]
-    public class IssueListPanel
+    public class IssueListPanel : Draggable
     {
         public GameObject root;
 
@@ -195,13 +217,26 @@ namespace SmartInspect
 
         public ListElement m_listElement;
 
+        [SerializeField] protected Vector2 m_baseUIPosition;
+
+        public Vector2 BaseUIPosition { get => m_baseUIPosition; set => m_baseUIPosition = value; }
+
+        public void DraggableInit()
+        {
+            BaseUIPosition = root.GetComponent<RectTransform>().position;
+        }
+
+        public void ReturnBasePosition()
+        {
+            root.GetComponent<RectTransform>().position = BaseUIPosition;
+        }
     }
 
     /// <summary>
     /// 자세한 점검정보 패널
     /// </summary>
     [System.Serializable]
-    public class IssueDetailPanel
+    public class IssueDetailPanel : Draggable
     {
         public GameObject root;
         public TextMeshProUGUI m_titlePartName;
@@ -209,24 +244,52 @@ namespace SmartInspect
         public TextMeshProUGUI m_height;
         public TextMeshProUGUI m_depth;
         public TextMeshProUGUI m_description;
+
+        [SerializeField] protected Vector2 m_baseUIPosition;
+
+        public Vector2 BaseUIPosition { get => m_baseUIPosition; set => m_baseUIPosition = value; }
+
+        public void DraggableInit()
+        {
+            BaseUIPosition = root.GetComponent<RectTransform>().position;
+        }
+
+        public void ReturnBasePosition()
+        {
+            root.GetComponent<RectTransform>().position = BaseUIPosition;
+        }
     }
 
     /// <summary>
     /// 점검정보 종류별 집계
     /// </summary>
     [System.Serializable]
-    public class TotalIssueCountPanel
+    public class TotalIssueCountPanel : Draggable
 	{
         public GameObject root;
 
         public List<Inspect_BarChart> m_barCharts;
-	}
+
+        [SerializeField] protected Vector2 m_baseUIPosition;
+
+        public Vector2 BaseUIPosition { get => m_baseUIPosition; set => m_baseUIPosition = value; }
+
+        public void DraggableInit()
+        {
+            BaseUIPosition = root.GetComponent<RectTransform>().position;
+        }
+
+        public void ReturnBasePosition()
+        {
+            root.GetComponent<RectTransform>().position = BaseUIPosition;
+        }
+    }
 
     /// <summary>
     /// 이력
     /// </summary>
     [System.Serializable]
-    public class TimelinePanel
+    public class TimelinePanel : Draggable
 	{
         public GameObject root;
 
@@ -242,6 +305,20 @@ namespace SmartInspect
         public int m_yearIndex;
 
         public List<RProcessMenu> m_yearButtons;
+
+        [SerializeField] protected Vector2 m_baseUIPosition;
+
+        public Vector2 BaseUIPosition { get => m_baseUIPosition; set => m_baseUIPosition = value; }
+
+        public void DraggableInit()
+        {
+            BaseUIPosition = root.GetComponent<RectTransform>().position;
+        }
+
+        public void ReturnBasePosition()
+        {
+            root.GetComponent<RectTransform>().position = BaseUIPosition;
+        }
     }
 
     #endregion

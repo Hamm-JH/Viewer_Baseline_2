@@ -289,7 +289,9 @@ namespace SmartInspect
         public Image background;
         public TextMeshProUGUI tx_Count;
         public TextMeshProUGUI tx_Title;
-        public UI_Selectable btn_detail; 
+        public UI_Selectable btn_detail;
+
+        public List<UI_Selectable> btns_detail;
 
         public void Init(Packet_Record _packet)
         {
@@ -298,19 +300,44 @@ namespace SmartInspect
             //tx_Title.text = "";   // 타이틀 텍스트 (지간, 경간 같은거)
             tx_Count.text = _packet.m_listedNumber.ToString();
             tx_Title.text = _packet.m_pc_name;
-            btn_detail.RootUI = _packet.m_rootUI;
 
-            btn_detail.EventType = UIEventType.Ins_Panel_OnSelectCount;
-            btn_detail.Data.m_issueListElement = _packet.m_listElement;
+            Set_UIInstance(btn_detail, _packet);
+
+            btns_detail.ForEach(x => Set_UIInstance(x, _packet));
+
+            //btn_detail.RootUI = _packet.m_rootUI;
+            //btn_detail.EventType = UIEventType.Ins_Panel_OnSelectCount;
+            //btn_detail.Data.m_issueListElement = _packet.m_listElement;
+
+            //PlatformCode pCode = MainManager.Instance.Platform;
+            //if(Platforms.IsBridgePlatform(pCode))
+            //{
+            //    btn_detail.Data.m_bridgeIssueCode = _packet.m_bPartCode;
+            //}
+            //else if(Platforms.IsTunnelPlatform(pCode))
+            //{
+            //    btn_detail.Data.m_tunnelCode = _packet.m_tPartCode;
+            //}
+            //else
+            //{
+            //    throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+            //}
+        }
+
+        private void Set_UIInstance(UI_Selectable _resource, Packet_Record _packet)
+        {
+            _resource.RootUI = _packet.m_rootUI;
+            _resource.EventType = UIEventType.Ins_Panel_OnSelectCount;
+            _resource.Data.m_issueListElement = _packet.m_listElement;
 
             PlatformCode pCode = MainManager.Instance.Platform;
-            if(Platforms.IsBridgePlatform(pCode))
+            if (Platforms.IsBridgePlatform(pCode))
             {
-                btn_detail.Data.m_bridgeIssueCode = _packet.m_bPartCode;
+                _resource.Data.m_bridgeIssueCode = _packet.m_bPartCode;
             }
-            else if(Platforms.IsTunnelPlatform(pCode))
+            else if (Platforms.IsTunnelPlatform(pCode))
             {
-                btn_detail.Data.m_tunnelCode = _packet.m_tPartCode;
+                _resource.Data.m_tunnelCode = _packet.m_tPartCode;
             }
             else
             {
@@ -331,6 +358,8 @@ namespace SmartInspect
         public UI_Selectable btn_image;
         public UI_Selectable btn_detail;
 
+        public List<UI_Selectable> btns_ui;
+
         public void Init(Packet_Record _packet)
         {
             if (root == null) return;
@@ -341,11 +370,22 @@ namespace SmartInspect
             tx_locName.text = _packet.m_issue.__LocationName;
             tx_date.text = _packet.m_issue.DateDmg;
 
-            btn_image.RootUI = _packet.m_rootUI;
-            btn_image.ChildPanel = _packet.m_element;
-            btn_detail.RootUI = _packet.m_rootUI;
-            btn_detail.ChildPanel = _packet.m_element;
+            btns_ui.ForEach(x =>
+            {
+                Set_UIInstance(x, _packet);
+            });
 
+            //btn_image.RootUI = _packet.m_rootUI;
+            //btn_image.ChildPanel = _packet.m_element;
+            //btn_detail.RootUI = _packet.m_rootUI;
+            //btn_detail.ChildPanel = _packet.m_element;
+
+        }
+
+        private void Set_UIInstance(UI_Selectable _resource, Packet_Record _packet)
+        {
+            _resource.RootUI = _packet.m_rootUI;
+            _resource.ChildPanel = _packet.m_element;
         }
     }
 

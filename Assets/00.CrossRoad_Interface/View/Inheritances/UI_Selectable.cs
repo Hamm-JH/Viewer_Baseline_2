@@ -32,6 +32,15 @@ namespace View
 			public TunnelCode m_tunnelCode;
 		}
 
+		[System.Serializable]
+		public class Resource
+        {
+			public bool m_useResource;
+			public Color m_onDefault = Color.white;
+			public Color m_onSelect = Color.white;
+        }
+
+
 		public override GameObject Target
 		{
 			get => gameObject;
@@ -46,6 +55,7 @@ namespace View
 		[SerializeField] UIEventType eventType;
 		[SerializeField] Inspect_EventType inspect_eventType;
 		[SerializeField] Datas m_data;
+		[SerializeField] Resource m_resource;
 		//[SerializeField] UniqueUIEventType m_unique;
 
 		public Datas Data
@@ -109,9 +119,12 @@ namespace View
 			}
 		}
 
-		public override void OnDeselect()
+        #region Button
+
+        public override void OnDeselect()
 		{
 			Debug.Log($"OnDeselect : {this.name}");
+			Toggle_Status(false);
 		}
 
 		public override void OnSelect()
@@ -124,6 +137,7 @@ namespace View
 
 			m_rootUI.GetUIEvent(eventType, this);
 			m_rootUI.GetUIEvent(Inspect_eventType, this);
+			Toggle_Status(true);
 		}
 
 		public override void OnDeselect<T1, T2>(T1 t1, T2 t2)
@@ -131,11 +145,25 @@ namespace View
 
 		}
 
-		/// <summary>
-		/// 슬라이더 값 변경시 실행
-		/// </summary>
-		/// <param name="_value"></param>
-		public override void OnChangeValue(float _value)
+		private void Toggle_Status(bool isOn)
+        {
+			if (!m_resource.m_useResource) return;
+
+			if(m_btn != null)
+            {
+				m_btn.GetComponent<Image>().color = isOn ? m_resource.m_onSelect : m_resource.m_onDefault;
+            }
+        }
+
+        #endregion
+
+        #region Slider
+
+        /// <summary>
+        /// 슬라이더 값 변경시 실행
+        /// </summary>
+        /// <param name="_value"></param>
+        public override void OnChangeValue(float _value)
 		{
 			if (eventType == UIEventType.Null)
 			{
@@ -146,9 +174,11 @@ namespace View
 			m_rootUI.GetUIEvent(_value, eventType, this);
 		}
 
-		#region Enable Disable
+        #endregion
 
-		private void OnEnable()
+        #region Enable Disable
+
+        private void OnEnable()
 		{
 			m_uiHoverElements.ForEach(x => x.SetActive(false));
 		}

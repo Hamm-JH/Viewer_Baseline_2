@@ -21,13 +21,45 @@ namespace Module.UI
             //MDmg_ToggleLBar(1, true);     // 손상정보 리스트 패널 동기화
             //MDmg_ToggleLBar(2, false);    // objStatus 패널 동기화
 
+            ModDmg_ResetBasePosition();
+
             ModDmg_TogglePanel(0, true);
             //m_moduleElements.m_dmgElement.m_dmgCount.SetActive(false);
             //MDmg_ToggleLBar(0, true);
 
-            ModDmg_TogglePanel(1, true);
+            ModDmg_TogglePanel(1, false);   // 220425 :: 리스트 정보는 나중에 켜는걸로
             ModDmg_TogglePanel(2, false);
             ModDmg_TogglePanel(3, false);
+        }
+
+        private void ModDmg_ResetBasePosition()
+        {
+            if (!m_moduleElements.m_dmgElement.root.activeSelf) return;
+
+            m_moduleElements.m_dmgElement.m_issueCountPanels.ForEach(x => x.ReturnBasePosition());
+            m_moduleElements.m_dmgElement.m_issueListPanels.ForEach(x => x.ReturnBasePosition());
+            m_moduleElements.m_dmgElement.m_issueDetailPanels.ForEach(x => x.ReturnBasePosition());
+        }
+
+        private void ModDmg_ToggleIssueList()
+        {
+            if (!m_moduleElements.m_dmgElement.root.activeSelf) return;
+
+            m_moduleElements.m_dmgElement.m_issueListPanels.ForEach(x => x.root.SetActive(!x.root.activeSelf));
+        }
+
+        private void ModDmg_ToggleIssueList(bool isOn)
+        {
+            if (!m_moduleElements.m_dmgElement.root.activeSelf) return;
+
+            m_moduleElements.m_dmgElement.m_issueListPanels.ForEach(x => x.root.SetActive(isOn));
+        }
+
+        private void ModDmg_ToggleIssueDetail(bool isOn)
+        {
+            if (!m_moduleElements.m_dmgElement.root.activeSelf) return;
+
+            m_moduleElements.m_dmgElement.m_issueDetailPanels.ForEach(x => x.root.SetActive(isOn));
         }
 
         /// <summary>

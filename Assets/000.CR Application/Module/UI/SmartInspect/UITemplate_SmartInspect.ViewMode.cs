@@ -16,6 +16,10 @@ namespace Module.UI
 		public void Event_View_Home()
 		{
 			ContentManager.Instance.SetCameraCenterPosition();
+
+			ModDmg_ResetBasePosition();
+			ModRcv_ResetBasePosition();
+			ModAdm_ResetBasePosition();
 		}
 
 		public void Event_Toggle_ChildPanel(int index, GameObject ChildPanel)

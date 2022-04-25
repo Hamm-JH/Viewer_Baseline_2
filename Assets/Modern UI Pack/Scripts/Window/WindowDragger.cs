@@ -73,6 +73,7 @@ namespace Michsky.UI.ModernUIPack
 
         public void OnDrag(PointerEventData data)
         {
+            // TODO Floating panel :: 패널 드래그 영역 오차 보간
             Vector2 localPointerPosition;
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(DragAreaInternal, data.position, data.pressEventCamera, out localPointerPosition))
             {

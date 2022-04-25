@@ -19,6 +19,13 @@ namespace Module.UI
 
             Debug.Log("Hello count");
 
+            // IssueList 패널 활성
+            ModDmg_ToggleIssueList(true);
+            ModRcv_ToggleIssueList(true);
+
+            // IssueDetail 패널 비활성
+            ModDmg_ToggleIssueDetail(false);
+
             PlatformCode pCode = MainManager.Instance.Platform;
 
             if(Platforms.IsBridgePlatform(pCode))
@@ -37,5 +44,7 @@ namespace Module.UI
             }
 
 		}
+
+
     }
 }
