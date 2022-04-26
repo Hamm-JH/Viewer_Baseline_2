@@ -26,7 +26,15 @@ namespace View
 			/// </summary>
 			public int m_toggleIndex;
 
+			/// <summary>
+			/// 이벤트 발생을 전달하는 리스트 인스턴스
+			/// </summary>
 			public ListElement m_issueListElement;
+
+			/// <summary>
+			/// 이벤트 발생시 UI 상태를 변경하기 위한 리스트 인스턴스
+			/// </summary>
+			public ListElement m_resourceListElement;
 
 			public CodeLv4 m_bridgeIssueCode;
 			public TunnelCode m_tunnelCode;
@@ -124,7 +132,6 @@ namespace View
         public override void OnDeselect()
 		{
 			Debug.Log($"OnDeselect : {this.name}");
-			Toggle_Status(false);
 		}
 
 		public override void OnSelect()
@@ -134,10 +141,11 @@ namespace View
 				Debug.LogError($"{this.name} needs event");
 				return;
             }
+			Debug.Log(this.name);
 
 			m_rootUI.GetUIEvent(eventType, this);
 			m_rootUI.GetUIEvent(Inspect_eventType, this);
-			Toggle_Status(true);
+			Toggle_Status();
 		}
 
 		public override void OnDeselect<T1, T2>(T1 t1, T2 t2)
@@ -145,17 +153,65 @@ namespace View
 
 		}
 
-		private void Toggle_Status(bool isOn)
+		private void Toggle_Status()
         {
 			if (!m_resource.m_useResource) return;
 
-			if(m_btn != null)
-            {
-				m_btn.GetComponent<Image>().color = isOn ? m_resource.m_onSelect : m_resource.m_onDefault;
-            }
+			//Data.m_resourceListElement;
 
+			if (Data.m_resourceListElement != null)
+			{
+				Data.m_resourceListElement._CountData.m_elements.ForEach(x =>
+				{
+					x.m_data.m_partCount.btns_detail.ForEach(x =>
+					{
+						x.Toggle_btnColor(false);
+					});
+
+					x.m_data.m_dmgWork.btns_ui.ForEach(x =>
+					{
+						x.Toggle_btnColor(false);
+					});
+
+					x.m_data.m_rcvWork.btns_ui.ForEach(x =>
+					{
+						x.Toggle_btnColor(false);
+					});
+				});
+			}
+
+
+
+			//if (Data.m_issueListElement != null)
+            //{
+			//	Data.m_issueListElement._CountData.m_elements.ForEach(x =>
+			//	{
+			//		x.m_data.m_dmgWork.btns_ui.ForEach(x =>
+			//		{
+			//			x.Toggle_btnColor(false);
+			//		});
+			//
+			//		x.m_data.m_rcvWork.btns_ui.ForEach(x =>
+			//		{
+			//			x.Toggle_btnColor(false);
+			//		});
+			//	});
+            //}
+
+
+			Toggle_btnColor(true);
 			// TODO 0425 Toggle
         }
+
+		public void Toggle_btnColor(bool isOn)
+        {
+			if (!m_resource.m_useResource) return;
+
+			if (m_btn != null)
+			{
+				m_btn.GetComponent<Image>().color = isOn ? m_resource.m_onSelect : m_resource.m_onDefault;
+			}
+		}
 
         #endregion
 

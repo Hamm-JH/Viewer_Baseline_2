@@ -27,7 +27,15 @@ namespace SmartInspect
 
         #region Part Count
 
+        /// <summary>
+        /// 이벤트 발생을 전달하는 리스트 인스턴스
+        /// </summary>
         public ListElement m_listElement;
+
+        /// <summary>
+        /// record element가 속한 ui 표시를 변경할 리스트 인스턴스
+        /// </summary>
+        public ListElement m_resourceElement;
 
         public CodeLv4 m_bPartCode;
         public TunnelCode m_tPartCode;
@@ -77,7 +85,7 @@ namespace SmartInspect
         /// <param name="_partName"></param>
         /// <param name="_rootUI"></param>
         public Packet_Record(int _rIndex, int _lNumber, string _partName,
-            CodeLv4 _bPartCode, ListElement _element, UITemplate_SmartInspect _rootUI)
+            CodeLv4 _bPartCode, ListElement _element, ListElement _resourceElement, UITemplate_SmartInspect _rootUI)
         {
             m_requestIndex = _rIndex;
             m_listedNumber = _lNumber;
@@ -85,6 +93,7 @@ namespace SmartInspect
 
             m_bPartCode = _bPartCode;
             m_listElement = _element;
+            m_resourceElement = _resourceElement;
 
             m_rootUI = _rootUI;
 
@@ -99,7 +108,7 @@ namespace SmartInspect
         /// <param name="_partName"></param>
         /// <param name="_rootUI"></param>
         public Packet_Record(int _rIndex, int _lNumber, string _partName,
-            TunnelCode _tPartCode, ListElement _element, UITemplate_SmartInspect _rootUI)
+            TunnelCode _tPartCode, ListElement _element, ListElement _resourceElement, UITemplate_SmartInspect _rootUI)
         {
             m_requestIndex = _rIndex;
             m_listedNumber = _lNumber;
@@ -107,6 +116,7 @@ namespace SmartInspect
 
             m_tPartCode = _tPartCode;
             m_listElement = _element;
+            m_resourceElement = _resourceElement;
 
             m_rootUI = _rootUI;
 
@@ -148,7 +158,8 @@ namespace SmartInspect
         /// <param name="_number"></param>
         /// <param name="_issue"></param>
         /// <param name="_rootUI"></param>
-        public Packet_Record(int _rIndex, int _number, Definition._Issue.Issue _issue, ListElement _element, UITemplate_SmartInspect _rootUI)
+        public Packet_Record(int _rIndex, int _number, Definition._Issue.Issue _issue, 
+            ListElement _element, ListElement _resourceElement, UITemplate_SmartInspect _rootUI)
         {
             m_requestIndex = _rIndex;
             m_elementNumber = _number;
@@ -156,6 +167,7 @@ namespace SmartInspect
             m_rootUI = _rootUI;
 
             m_listElement = _element;
+            m_resourceElement = _resourceElement;
 
             packetDebugger = 4;
         }
@@ -332,6 +344,7 @@ namespace SmartInspect
             _resource.RootUI = _packet.m_rootUI;
             _resource.EventType = UIEventType.Ins_Panel_OnSelectCount;
             _resource.Data.m_issueListElement = _packet.m_listElement;
+            _resource.Data.m_resourceListElement = _packet.m_resourceElement;
 
             PlatformCode pCode = MainManager.Instance.Platform;
             if (Platforms.IsBridgePlatform(pCode))
@@ -358,10 +371,10 @@ namespace SmartInspect
         public TextMeshProUGUI tx_partName;
         public TextMeshProUGUI tx_locName;
         public TextMeshProUGUI tx_date;
-        public UI_Selectable btn_image;
-        public UI_Selectable btn_detail;
+        public UI_Selectable btn_image;     // TODO btns_ui 이관
+        public UI_Selectable btn_detail;    // TODO btns_ui 이관
 
-        public List<UI_Selectable> btns_ui;
+        public List<UI_Selectable> btns_ui; 
 
         public void Init(Packet_Record _packet)
         {
@@ -388,6 +401,7 @@ namespace SmartInspect
         private void Set_UIInstance(UI_Selectable _resource, Packet_Record _packet)
         {
             _resource.Data.m_issueListElement = _packet.m_listElement;
+            _resource.Data.m_resourceListElement = _packet.m_resourceElement;
             _resource.RootUI = _packet.m_rootUI;
             _resource.ChildPanel = _packet.m_element;
         }
@@ -401,7 +415,9 @@ namespace SmartInspect
         public TextMeshProUGUI tx_partName;
         public TextMeshProUGUI tx_repairName;
         public TextMeshProUGUI tx_date;
-        public UI_Selectable btn_image;
+        public UI_Selectable btn_image; // TODO 삭제 대상
+
+        public List<UI_Selectable> btns_ui;
 
         public void Init(Packet_Record _packet)
         {
@@ -413,8 +429,20 @@ namespace SmartInspect
             //tx_repairName.text = _packet.m_issue.RcvDescription;
             tx_date.text = _packet.m_issue.DateRcvEnd;
 
-            btn_image.RootUI = _packet.m_rootUI;
-            btn_image.ChildPanel = _packet.m_element;
+            btns_ui.ForEach(x =>
+            {
+                Set_UIInstance(x, _packet);
+            });
+
+            //btn_image.RootUI = _packet.m_rootUI;
+            //btn_image.ChildPanel = _packet.m_element;
+        }
+
+        private void Set_UIInstance(UI_Selectable _resource, Packet_Record _packet)
+        {
+            _resource.Data.m_issueListElement = _packet.m_listElement;
+            _resource.RootUI = _packet.m_rootUI;
+            _resource.ChildPanel = _packet.m_element;
         }
     }
 

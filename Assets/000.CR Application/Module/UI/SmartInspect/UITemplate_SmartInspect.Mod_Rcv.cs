@@ -75,14 +75,14 @@ namespace Module.UI
                 case 0:
                     result = new List<GameObject>();
                     result.Add(m_moduleElements.m_rcvElement.m_rcvCount);
-                    result.Add(m_moduleElements.m_rcvElement.m_rcvList);
+                    //result.Add(m_moduleElements.m_rcvElement.m_rcvList);    // 둘 다 같이 끄고 키는 구조 변경
                     break;
 
                 // TODO 보강 정보 삭제 예정
                 case 1:
                     result = new List<GameObject>();
                     result.Add(m_moduleElements.m_rcvElement.m_reinCount);
-                    result.Add(m_moduleElements.m_rcvElement.m_reinList);
+                    //result.Add(m_moduleElements.m_rcvElement.m_reinList);
                     break;
 
                 case 2:

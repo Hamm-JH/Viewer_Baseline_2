@@ -18,7 +18,7 @@ namespace Module.UI
             bool isToggle = !m_moduleElements.m_rcvElement.m_rcvCount.activeSelf;
 
             m_moduleElements.m_rcvElement.m_rcvCount.SetActive(isToggle);
-            m_moduleElements.m_rcvElement.m_rcvList.SetActive(isToggle);
+            //m_moduleElements.m_rcvElement.m_rcvList.SetActive(isToggle);
 
             MRcv_ToggleLBar(0, isToggle);
         }

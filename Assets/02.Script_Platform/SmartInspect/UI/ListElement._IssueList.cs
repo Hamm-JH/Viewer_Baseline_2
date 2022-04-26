@@ -27,7 +27,7 @@ namespace SmartInspect
                 GameObject obj = Instantiate<GameObject>(Resources.Load<GameObject>("UI/SmartInspect/Inspect_Records"), m_contentRoot);
                 RecordElement element = obj.GetComponent<RecordElement>();
 
-                Packet_Record packet = new Packet_Record(_rIndex, index++, issue, _countData.m_tgElement, m_rootUI);
+                Packet_Record packet = new Packet_Record(_rIndex, index++, issue, _countData.m_tgElement, _countData.m_toggleResourceElement, m_rootUI);
 
                 element.Init(packet);
 

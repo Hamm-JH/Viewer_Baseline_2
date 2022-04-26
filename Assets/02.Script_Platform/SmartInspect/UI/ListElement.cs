@@ -49,7 +49,15 @@ namespace SmartInspect
             public CodeLv4 m_bCode;
             public TunnelCode m_tCode;
 
+            /// <summary>
+            /// 이벤트 발생시 이벤트를 전달하는 목표 리스트 관리 인스턴스
+            /// </summary>
             public ListElement m_tgElement;
+
+            /// <summary>
+            /// 이벤트 발생시 이 요소가 속한 리스트 관리 인스턴스 
+            /// </summary>
+            public ListElement m_toggleResourceElement;
 
             public List<RecordElement> m_elements;
         }
@@ -81,6 +89,7 @@ namespace SmartInspect
             _countData.m_pBar = _pBar;
             _countData.m_pBar_Text = _pBarText;
             _countData.m_tgElement = _tgElement;
+            _countData.m_toggleResourceElement = this;
 
             // 기본값 할당해두기
             _countData.m_bCode = CodeLv4.ALL;
@@ -184,6 +193,12 @@ namespace SmartInspect
 
         #region General
 
+        /// <summary>
+        /// 교량 :: 카테고리별로 점검정보 리스트를 할당한다.
+        /// </summary>
+        /// <param name="_category"></param>
+        /// <param name="_bCode"></param>
+        /// <returns></returns>
         private List<Definition._Issue.Issue> GetIssueList(Category _category, CodeLv4 _bCode)
         {
             List<Definition._Issue.Issue> list = new List<Definition._Issue.Issue>();
@@ -254,6 +269,12 @@ namespace SmartInspect
             return list;
         }
 
+        /// <summary>
+        /// 터널 :: 카테고리별로 점검정보 리스트를 할당한다.
+        /// </summary>
+        /// <param name="_category"></param>
+        /// <param name="_tCode"></param>
+        /// <returns></returns>
         private List<Definition._Issue.Issue> GetIssueList(Category _category, TunnelCode _tCode)
         {
             List<Definition._Issue.Issue> list = new List<Definition._Issue.Issue>();
@@ -324,15 +345,12 @@ namespace SmartInspect
             return list;
         }
 
-        //private bool IsTargetIssue(Definition._Issue.Issue _issue)
-        //{
-        //    bool result = false;
-
-
-
-        //    return result;
-        //}
-
+        /// <summary>
+        /// 교량 :: 단일 정보가 목표 정보를 가지고 있는가?
+        /// </summary>
+        /// <param name="_issue"></param>
+        /// <param name="_bCode"></param>
+        /// <returns></returns>
         private bool IsTargetIssue(Definition._Issue.Issue _issue, CodeLv4 _bCode)
         {
             bool result = false;
@@ -349,6 +367,12 @@ namespace SmartInspect
             return result;
         }
 
+        /// <summary>
+        /// 터널 :: 단일 정보가 목표 정보를 가지고 있는가?
+        /// </summary>
+        /// <param name="_issue"></param>
+        /// <param name="_tCode"></param>
+        /// <returns></returns>
         private bool IsTargetIssue(Definition._Issue.Issue _issue, TunnelCode _tCode)
         {
             bool result = false;

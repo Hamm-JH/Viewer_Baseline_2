@@ -111,7 +111,7 @@ namespace SmartInspect
                     RecordElement element = obj.GetComponent<RecordElement>();
                     string pName = Bridges.ConvertLv4String(key);
                 
-                    Packet_Record packet = new Packet_Record(0, _result[key], pName, key, _countData.m_tgElement, m_rootUI);
+                    Packet_Record packet = new Packet_Record(0, _result[key], pName, key, _countData.m_tgElement, _countData.m_toggleResourceElement, m_rootUI);
 
                     element.Init(packet);
 
@@ -176,7 +176,7 @@ namespace SmartInspect
                     string pName = Tunnels.GetCodeName(key);
 
                     // 초기화를 위한 패킷 생성
-                    Packet_Record packet = new Packet_Record(0, _result[key], pName, key, _countData.m_tgElement, m_rootUI);
+                    Packet_Record packet = new Packet_Record(0, _result[key], pName, key, _countData.m_tgElement, _countData.m_toggleResourceElement, m_rootUI);
 
                     element.Init(packet);
 
