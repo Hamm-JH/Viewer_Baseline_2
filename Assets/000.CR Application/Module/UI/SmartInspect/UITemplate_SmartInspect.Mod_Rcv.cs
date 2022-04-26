@@ -20,6 +20,7 @@ namespace Module.UI
             ModRcv_TogglePanel(2, false);
             ModRcv_TogglePanel(3, false);
             ModRcv_TogglePanel(4, false);
+            ModRcv_TogglePanel(5, false);   // TODO 1번 이관 예정
         }
 
         private void ModRcv_ResetBasePosition()
@@ -88,6 +89,18 @@ namespace Module.UI
                 case 2:
                     result = new List<GameObject>();
                     result.Add(m_general.m_objStatus.root);
+                    break;
+
+                    // 3
+                    // 4
+
+                    // TODO 임시 :: 1번으로 이전
+                case 5:
+                    result = new List<GameObject>();
+                    m_moduleElements.m_rcvElement.m_issueListPanels.ForEach(x =>
+                    {
+                        result.Add(x.root);
+                    });
                     break;
             }
 

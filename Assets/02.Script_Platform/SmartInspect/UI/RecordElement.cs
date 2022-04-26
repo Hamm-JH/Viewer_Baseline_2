@@ -304,7 +304,6 @@ namespace SmartInspect
         public Image background;
         public TextMeshProUGUI tx_Count;
         public TextMeshProUGUI tx_Title;
-        public UI_Selectable btn_detail;
 
         public List<UI_Selectable> btns_detail;
 
@@ -316,27 +315,8 @@ namespace SmartInspect
             tx_Count.text = _packet.m_listedNumber.ToString();
             tx_Title.text = _packet.m_pc_name;
 
-            Set_UIInstance(btn_detail, _packet);
 
             btns_detail.ForEach(x => Set_UIInstance(x, _packet));
-
-            //btn_detail.RootUI = _packet.m_rootUI;
-            //btn_detail.EventType = UIEventType.Ins_Panel_OnSelectCount;
-            //btn_detail.Data.m_issueListElement = _packet.m_listElement;
-
-            //PlatformCode pCode = MainManager.Instance.Platform;
-            //if(Platforms.IsBridgePlatform(pCode))
-            //{
-            //    btn_detail.Data.m_bridgeIssueCode = _packet.m_bPartCode;
-            //}
-            //else if(Platforms.IsTunnelPlatform(pCode))
-            //{
-            //    btn_detail.Data.m_tunnelCode = _packet.m_tPartCode;
-            //}
-            //else
-            //{
-            //    throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
-            //}
         }
 
         private void Set_UIInstance(UI_Selectable _resource, Packet_Record _packet)
@@ -371,8 +351,6 @@ namespace SmartInspect
         public TextMeshProUGUI tx_partName;
         public TextMeshProUGUI tx_locName;
         public TextMeshProUGUI tx_date;
-        public UI_Selectable btn_image;     // TODO btns_ui 이관
-        public UI_Selectable btn_detail;    // TODO btns_ui 이관
 
         public List<UI_Selectable> btns_ui; 
 
@@ -390,12 +368,6 @@ namespace SmartInspect
             {
                 Set_UIInstance(x, _packet);
             });
-
-            //btn_image.RootUI = _packet.m_rootUI;
-            //btn_image.ChildPanel = _packet.m_element;
-            //btn_detail.RootUI = _packet.m_rootUI;
-            //btn_detail.ChildPanel = _packet.m_element;
-
         }
 
         private void Set_UIInstance(UI_Selectable _resource, Packet_Record _packet)
@@ -415,7 +387,6 @@ namespace SmartInspect
         public TextMeshProUGUI tx_partName;
         public TextMeshProUGUI tx_repairName;
         public TextMeshProUGUI tx_date;
-        public UI_Selectable btn_image; // TODO 삭제 대상
 
         public List<UI_Selectable> btns_ui;
 
@@ -427,20 +398,19 @@ namespace SmartInspect
             tx_partName.text = _packet.m_issue.__PartName;
             tx_repairName.text = $"{_packet.m_issue.__IssueName}보수";
             //tx_repairName.text = _packet.m_issue.RcvDescription;
+
             tx_date.text = _packet.m_issue.DateRcvEnd;
 
             btns_ui.ForEach(x =>
             {
                 Set_UIInstance(x, _packet);
             });
-
-            //btn_image.RootUI = _packet.m_rootUI;
-            //btn_image.ChildPanel = _packet.m_element;
         }
 
         private void Set_UIInstance(UI_Selectable _resource, Packet_Record _packet)
         {
             _resource.Data.m_issueListElement = _packet.m_listElement;
+            _resource.Data.m_resourceListElement = _packet.m_resourceElement;
             _resource.RootUI = _packet.m_rootUI;
             _resource.ChildPanel = _packet.m_element;
         }

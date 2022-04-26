@@ -18,7 +18,7 @@ namespace Module.UI
             bool isToggle = !m_moduleElements.m_rcvElement.m_rcvCount.activeSelf;
 
             m_moduleElements.m_rcvElement.m_rcvCount.SetActive(isToggle);
-            //m_moduleElements.m_rcvElement.m_rcvList.SetActive(isToggle);
+            m_moduleElements.m_rcvElement.m_rcvList.SetActive(false);
 
             MRcv_ToggleLBar(0, isToggle);
         }
@@ -85,6 +85,7 @@ namespace Module.UI
                     img_bg = m_moduleElements.m_rcvElement.m_leftbar[0].imgs[0];
                     break;
 
+                    // TODO 삭제예정 (버튼 안씀)
                 case 1:
                     img_main = m_moduleElements.m_rcvElement.m_leftbar[1].btn_menu.image;
                     img_bg = m_moduleElements.m_rcvElement.m_leftbar[1].imgs[0];
@@ -106,9 +107,12 @@ namespace Module.UI
                     break;
             }
 
-            if(img_bg == null || img_main == null)
+            if(index != 5)
             {
-                throw new Definition.Exceptions.ImagesNotAssigned();
+                if(img_bg == null || img_main == null)
+                {
+                    throw new Definition.Exceptions.ImagesNotAssigned();
+                }
             }
 
             m_uiResources.m_rcv_leftbar.SetImage(img_bg, img_main, index, isOn);

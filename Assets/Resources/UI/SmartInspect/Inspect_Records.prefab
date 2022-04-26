@@ -194,7 +194,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 422, y: -0.28848267}
+  m_AnchoredPosition: {x: 463, y: -0.28848267}
   m_SizeDelta: {x: 16, y: 13}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &12296219632541551
@@ -328,7 +328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &12296219684922476
 RectTransform:
   m_ObjectHideFlags: 0
@@ -630,7 +630,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 328.35498, y: 0}
+  m_AnchoredPosition: {x: 364.355, y: 0}
   m_SizeDelta: {x: 77, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &12296219966987589
@@ -765,7 +765,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 93.5, y: 0}
-  m_SizeDelta: {x: 109.5, y: 0}
+  m_SizeDelta: {x: 145.5, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &12296220536671739
 CanvasRenderer:
@@ -898,7 +898,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 208, y: 0}
+  m_AnchoredPosition: {x: 244, y: 0}
   m_SizeDelta: {x: 115.35, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &12296220739050335
@@ -1553,7 +1553,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &449834238569614925
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2035,7 +2035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3331,14 +3331,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d774f003ce195c14b99e37929d1c89b9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f81cdca5645a35146b1f9b658291accb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3417,7 +3417,7 @@ MonoBehaviour:
     m_tunnelCode: 0
   m_resource:
     m_useResource: 1
-    m_onDefault: {r: 1, g: 1, b: 1, a: 1}
+    m_onDefault: {r: 1, g: 1, b: 1, a: 0}
     m_onSelect: {r: 0.18039216, g: 0.1882353, b: 0.19215687, a: 1}
   m_uiFXs: []
   m_uiHoverElements: []
@@ -4008,7 +4008,6 @@ MonoBehaviour:
       background: {fileID: 2757255871323600837}
       tx_Count: {fileID: 2757255871421586374}
       tx_Title: {fileID: 2757255870678333702}
-      btn_detail: {fileID: 2757255871133664035}
       btns_detail:
       - {fileID: 1803809898352666752}
       - {fileID: 2757255871133664035}
@@ -4019,8 +4018,6 @@ MonoBehaviour:
       tx_partName: {fileID: 12296220536671732}
       tx_locName: {fileID: 12296220739050328}
       tx_date: {fileID: 12296219966987590}
-      btn_image: {fileID: 12296219632541546}
-      btn_detail: {fileID: 12296219684922771}
       btns_ui:
       - {fileID: 12296219632541546}
       - {fileID: 12296219684922771}
@@ -4031,7 +4028,6 @@ MonoBehaviour:
       tx_partName: {fileID: 449834237420492807}
       tx_repairName: {fileID: 449834239132091125}
       tx_date: {fileID: 449834237930864434}
-      btn_image: {fileID: 449834239095822411}
       btns_ui:
       - {fileID: 449834239095822411}
       - {fileID: 7426342739540064618}
@@ -4206,7 +4202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.8745098, b: 0.81960785, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4317,7 +4313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.8745098, b: 0.81960785, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

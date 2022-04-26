@@ -277,10 +277,11 @@ namespace SmartInspect
 					break;
 			}
 
+			if (index == 5) return;
 			if(targetImg_bg == null || targetImg_main == null)
-            {
+			{
 				throw new Definition.Exceptions.ImagesNotAssigned();
-            }
+			}
 
 			targetImg_bg.SetImage(img_bg, isOn);
 			targetImg_main.SetImage(img_main, isOn);
