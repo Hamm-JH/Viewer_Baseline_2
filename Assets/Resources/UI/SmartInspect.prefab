@@ -1209,8 +1209,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9179171283769520183}
-  - {fileID: 9179171284835961049}
-  - {fileID: 9179171283637196119}
   - {fileID: 9179171284565783090}
   m_Father: {fileID: 1023511090890707380}
   m_RootOrder: 3
@@ -1895,6 +1893,7 @@ MonoBehaviour:
   eventType: 16
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -2046,6 +2045,7 @@ MonoBehaviour:
   eventType: 16
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -3852,6 +3852,7 @@ MonoBehaviour:
   eventType: 784
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -4502,6 +4503,7 @@ MonoBehaviour:
   eventType: 847
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 7452441743502742162}
     m_resourceListElement: {fileID: 0}
@@ -4863,6 +4865,7 @@ MonoBehaviour:
   eventType: 833
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -5095,6 +5098,7 @@ MonoBehaviour:
   eventType: 847
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 328291770501808774}
     m_resourceListElement: {fileID: 0}
@@ -6533,6 +6537,7 @@ MonoBehaviour:
   eventType: 768
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -6896,6 +6901,7 @@ MonoBehaviour:
   eventType: 835
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -7276,6 +7282,7 @@ MonoBehaviour:
   eventType: 769
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -7849,6 +7856,7 @@ MonoBehaviour:
   eventType: 832
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -10491,6 +10499,7 @@ MonoBehaviour:
   eventType: 834
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -11772,6 +11781,7 @@ MonoBehaviour:
   eventType: 16
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -12710,6 +12720,7 @@ MonoBehaviour:
   eventType: 770
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -12862,6 +12873,7 @@ MonoBehaviour:
   eventType: 836
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -14613,6 +14625,7 @@ MonoBehaviour:
   eventType: 16
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -14992,6 +15005,7 @@ MonoBehaviour:
   eventType: 16
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -23065,6 +23079,7 @@ MonoBehaviour:
   eventType: 856
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -23485,6 +23500,7 @@ MonoBehaviour:
   eventType: 859
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -23637,6 +23653,7 @@ MonoBehaviour:
   eventType: 860
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -23997,6 +24014,7 @@ MonoBehaviour:
   eventType: 0
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -24149,6 +24167,7 @@ MonoBehaviour:
   eventType: 858
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -24301,6 +24320,7 @@ MonoBehaviour:
   eventType: 857
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -24664,6 +24684,7 @@ MonoBehaviour:
   eventType: 854
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -25100,6 +25121,7 @@ MonoBehaviour:
   eventType: 855
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -25750,6 +25772,7 @@ MonoBehaviour:
   eventType: 0
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -26394,6 +26417,7 @@ MonoBehaviour:
   eventType: 0
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -26624,6 +26648,7 @@ MonoBehaviour:
   eventType: 0
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -43199,6 +43224,7 @@ MonoBehaviour:
   eventType: 839
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -47775,6 +47801,7 @@ MonoBehaviour:
   eventType: 16
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -50723,6 +50750,7 @@ MonoBehaviour:
   eventType: 853
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -51502,6 +51530,7 @@ MonoBehaviour:
   eventType: 851
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -54974,6 +55003,7 @@ MonoBehaviour:
   eventType: 852
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -55260,6 +55290,7 @@ MonoBehaviour:
   eventType: 838
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -55711,6 +55742,7 @@ MonoBehaviour:
   eventType: 850
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -56433,6 +56465,7 @@ MonoBehaviour:
   eventType: 841
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -56586,6 +56619,7 @@ MonoBehaviour:
   eventType: 840
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -56738,6 +56772,7 @@ MonoBehaviour:
   eventType: 16
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -57053,6 +57088,7 @@ MonoBehaviour:
   eventType: 16
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -59880,6 +59916,7 @@ MonoBehaviour:
   eventType: 1
   inspect_eventType: 6
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 5
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -60842,6 +60879,7 @@ MonoBehaviour:
   eventType: 1
   inspect_eventType: 13
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -62602,6 +62640,7 @@ MonoBehaviour:
   eventType: 1
   inspect_eventType: 12
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 3
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -63708,6 +63747,7 @@ MonoBehaviour:
   eventType: 800
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -64435,6 +64475,7 @@ MonoBehaviour:
   eventType: 16
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -64798,6 +64839,7 @@ MonoBehaviour:
   eventType: 1
   inspect_eventType: 11
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 2
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -65836,13 +65878,13 @@ RectTransform:
   - {fileID: 9179171283829208314}
   - {fileID: 9179171284545065079}
   - {fileID: 9179171283227380385}
-  m_Father: {fileID: 1512369996269336907}
-  m_RootOrder: 2
+  m_Father: {fileID: 9179171283769520183}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -18, y: 202.79999}
-  m_SizeDelta: {x: -1764.9773, y: 130.26001}
+  m_AnchoredPosition: {x: -20, y: 159.75446}
+  m_SizeDelta: {x: -306.9773, y: 130.26001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9179171283637196137
 CanvasRenderer:
@@ -66702,6 +66744,7 @@ MonoBehaviour:
   eventType: 1
   inspect_eventType: 4
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 3
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -66854,6 +66897,7 @@ MonoBehaviour:
   eventType: 16
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -67402,6 +67446,8 @@ RectTransform:
   - {fileID: 9179171284170688245}
   - {fileID: 9179171284074980129}
   - {fileID: 9179171284756369055}
+  - {fileID: 9179171284835961049}
+  - {fileID: 9179171283637196119}
   m_Father: {fileID: 1512369996269336907}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -68043,6 +68089,7 @@ MonoBehaviour:
   eventType: 0
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -68347,6 +68394,7 @@ MonoBehaviour:
   eventType: 1
   inspect_eventType: 14
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 1
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -69207,6 +69255,7 @@ MonoBehaviour:
   eventType: 0
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -70350,6 +70399,7 @@ MonoBehaviour:
   eventType: 1
   inspect_eventType: 9
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -70580,6 +70630,7 @@ MonoBehaviour:
   eventType: 1
   inspect_eventType: 7
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 6
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -71094,6 +71145,7 @@ MonoBehaviour:
   eventType: 801
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -71989,6 +72041,7 @@ MonoBehaviour:
   eventType: 1
   inspect_eventType: 5
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 4
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -72770,11 +72823,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isInteractable: 0
-  childPanel: {fileID: 0}
+  childPanel: {fileID: 9179171283769520180}
   m_rootUI: {fileID: 1189003012812113477}
-  eventType: 0
+  eventType: 1
   inspect_eventType: 8
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -73572,6 +73626,7 @@ MonoBehaviour:
   eventType: 0
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -73949,6 +74004,7 @@ MonoBehaviour:
   eventType: 16
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -74325,6 +74381,7 @@ MonoBehaviour:
   eventType: 1
   inspect_eventType: 10
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 1
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -74899,6 +74956,7 @@ MonoBehaviour:
   eventType: 16
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -76532,6 +76590,7 @@ MonoBehaviour:
   eventType: 1
   inspect_eventType: 3
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 2
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -76731,7 +76790,7 @@ RectTransform:
   - {fileID: 9179171283139580162}
   - {fileID: 9179171284185610962}
   m_Father: {fileID: 1512369996269336907}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -77435,6 +77494,7 @@ MonoBehaviour:
   eventType: 1
   inspect_eventType: 1
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -78309,6 +78369,7 @@ MonoBehaviour:
   eventType: 802
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -79439,13 +79500,13 @@ RectTransform:
   - {fileID: 9179171284516405558}
   - {fileID: 9179171284166769972}
   - {fileID: 9179171283390099459}
-  m_Father: {fileID: 1512369996269336907}
-  m_RootOrder: 1
+  m_Father: {fileID: 9179171283769520183}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -103, y: 248}
-  m_SizeDelta: {x: -1813.2673, y: 224.34009}
+  m_AnchoredPosition: {x: -105, y: 204.95447}
+  m_SizeDelta: {x: -355.26733, y: 224.34009}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9179171284835961051
 CanvasRenderer:
@@ -79625,6 +79686,7 @@ MonoBehaviour:
   eventType: 1
   inspect_eventType: 2
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 1
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -79852,6 +79914,7 @@ MonoBehaviour:
   eventType: 16
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -80785,6 +80848,7 @@ MonoBehaviour:
   eventType: 0
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 0}
     m_resourceListElement: {fileID: 0}
@@ -81664,6 +81728,7 @@ MonoBehaviour:
   eventType: 847
   inspect_eventType: 0
   m_data:
+    m_isMovedDown: 0
     m_toggleIndex: 0
     m_issueListElement: {fileID: 6811003053380244033}
     m_resourceListElement: {fileID: 0}

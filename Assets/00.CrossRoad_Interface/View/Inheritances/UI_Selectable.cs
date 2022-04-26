@@ -21,6 +21,9 @@ namespace View
 		[System.Serializable]
 		public class Datas
 		{
+			[Header("ButtonBar switch")]
+			public bool m_isMovedDown;
+
 			/// <summary>
 			/// ButtonBar 사용
 			/// </summary>
@@ -141,7 +144,7 @@ namespace View
 				Debug.LogError($"{this.name} needs event");
 				return;
             }
-			Debug.Log(this.name);
+			//Debug.Log(this.name);
 
 			m_rootUI.GetUIEvent(eventType, this);
 			m_rootUI.GetUIEvent(Inspect_eventType, this);

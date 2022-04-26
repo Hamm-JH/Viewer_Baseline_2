@@ -324,7 +324,12 @@ namespace Module.UI
 					}
 					break;
 
-				case Inspect_EventType.BtnBar_08_SwitchBar:	break;
+				case Inspect_EventType.BtnBar_08_SwitchBar:
+                    {
+						ButtonBar_MoveUI(_setter);
+
+					}
+					break;
 
 				//--------------------------------------------------
 

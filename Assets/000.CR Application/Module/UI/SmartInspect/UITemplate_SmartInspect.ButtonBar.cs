@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace Module.UI
 {
     using Definition;
+    using DG.Tweening;
     using UnityEngine;
     using UnityEngine.UI;
     using View;
@@ -33,6 +34,25 @@ namespace Module.UI
                 m_uiResources.m_bottomBar.SetColor_btnBar(img_bg, img_icon, i, isTarget);
 
             }
+        }
+        
+        private void ButtonBar_MoveUI(Interactable _ui)
+        {
+            UI_Selectable ui = (UI_Selectable)_ui;
+
+            if(ui.Data.m_isMovedDown)
+            {
+                ui.Data.m_isMovedDown = false;
+                ui.ChildPanel.transform.DOMoveY(43, 1);
+            }
+            else
+            {
+                ui.Data.m_isMovedDown = true;
+                ui.ChildPanel.transform.DOMoveY(-96, 1);
+            }
+            //Debug.Log(ui.ChildPanel.transform.position);
+            // 43 up
+            // -96 down
         }
     }
 }
