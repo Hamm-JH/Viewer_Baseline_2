@@ -5,32 +5,63 @@ using UnityEngine;
 namespace Platform.Tunnel
 {
     using AdminViewer.Tunnel;
+    using Definition;
 
     public static class Tunnel_Materials
     {
-		public static void Set(MeshRenderer source, TunnelCode _tCode)
+		public static void Set(MeshRenderer source, GraphicCode _gCode, TunnelCode _tCode )
         {
-			Material[] mats = Set(_tCode);
+			Material[] mats = Set(_gCode, _tCode);
 
 			source.materials = mats;
         }
 
-        public static Material[] Set(TunnelCode _tCode)
+        private static Material[] Set(GraphicCode _gCode, TunnelCode _tCode)
         {
-            List<Material> result = new List<Material>();
+			Material[] result = null;
 
-            string basePath = "Projects/Tunnel/Materials";
-
-            switch(_tCode)
+			switch(_gCode)
             {
-                #region ETC
+				case GraphicCode.Single_Color:
+					result = Set_SingleColor(_tCode);
+					break;
 
-                case TunnelCode.ETC_EmergencyCall:
-                    {
-                        result.Add(Resources.Load<Material>($"{basePath}/ETC_EmergencyCall"));
-                        result.Add(Resources.Load<Material>($"{basePath}/Steel"));
-                    }
-                    break;
+				case GraphicCode.Platform_Texturing:
+					result = Set_PlatformTexturing(_tCode);
+					break;
+
+				default:
+					throw new Definition.Exceptions.GraphicCodeNotDefined(_gCode);
+            }
+
+			return result;
+        }
+
+		private static Material[] Set_SingleColor(TunnelCode _tCode)
+        {
+			List<Material> result = new List<Material>();
+
+			result.Add(Resources.Load<Material>($"Projects/Tunnel/Materials/Default"));
+
+			return result.ToArray();
+        }
+
+		private static Material[] Set_PlatformTexturing(TunnelCode _tCode)
+        {
+			List<Material> result = new List<Material>();
+
+			string basePath = "Projects/Tunnel/Materials";
+
+			switch (_tCode)
+			{
+				#region ETC
+
+				case TunnelCode.ETC_EmergencyCall:
+					{
+						result.Add(Resources.Load<Material>($"{basePath}/ETC_EmergencyCall"));
+						result.Add(Resources.Load<Material>($"{basePath}/Steel"));
+					}
+					break;
 
 				case TunnelCode.ETC_EmergencyExit:
 					{
@@ -140,6 +171,6 @@ namespace Platform.Tunnel
 			}
 
 			return result.ToArray();
-        }
+		}
     }
 }

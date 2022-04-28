@@ -703,7 +703,7 @@ MonoBehaviour:
     _content: {fileID: 0}
   _data:
     m_platform: 0
-    m_graphic: 0
+    m_graphic: 1
     mouseData:
       dragBoundary: 1.5
       dragInvert: {x: 1, y: -1}
@@ -742,7 +742,7 @@ MonoBehaviour:
   m_templateIndex: 0
   _templateDatas:
   - m_platform: 49
-    m_graphic: 0
+    m_graphic: 2
     mouseData:
       dragBoundary: 1.5
       dragInvert: {x: 1, y: -1}

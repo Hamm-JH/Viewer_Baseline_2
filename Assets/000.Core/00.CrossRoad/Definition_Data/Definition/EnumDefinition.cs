@@ -31,10 +31,7 @@ namespace Definition
 	public enum GraphicCode
 	{
 		NotDef = -1,
-		Template00 = 0x00,
-		Template10 = 0x10,
-		Template20 = 0x20,
-		Template30 = 0x30,
+		Null = 0,
 
 		/// <summary>
 		/// 지정된 단일 색상으로 처리

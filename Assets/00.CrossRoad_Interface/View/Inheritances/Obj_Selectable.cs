@@ -76,13 +76,25 @@ namespace View
 			if (!IsInteractable) return;
 
 			//Debug.Log($"OnDeselect : {this.name}");
-			PlatformCode platform = MainManager.Instance.Platform;
+			PlatformCode pCode = MainManager.Instance.Platform;
 			
 			
 			MeshRenderer render;
 			if (gameObject.TryGetComponent<MeshRenderer>(out render))
 			{
-				Materials.Set(render, ColorType.Default1, render.material.color.a);
+				GraphicCode gCode = MainManager.Instance.Graphic;
+
+
+				if(Platforms.IsBridgePlatform(pCode))
+                {
+					Materials.Set(render, ColorType.Default1, render.material.color.a);
+					throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+                }
+				else if(Platforms.IsTunnelPlatform(pCode))
+                {
+					Platform.Tunnel.Tunnel_Materials.Set(render, gCode, Platform.Tunnel.Tunnels.GetPartCode(this.name));
+                }
+
 			}
 		}
 

@@ -160,6 +160,8 @@ namespace Platform.Tunnel
 
 				case "M_L_SwI":
 				case "M_R_SwI":
+				//case "M_L_Swl":
+				//case "M_R_Swl":
 				case "M_L_SwO":
 				case "M_R_SwO":
 					{

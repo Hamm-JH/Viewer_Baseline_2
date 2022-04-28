@@ -286,6 +286,8 @@ namespace Module.Model
 		/// <param name="_objs"></param>
 		private void SetModelObjects(List<GameObject> _objs)
 		{
+			GraphicCode gCode = MainManager.Instance.Graphic;
+
 			_objs.ForEach(x =>
 			{
 				MeshFilter mf;
@@ -302,9 +304,13 @@ namespace Module.Model
 
 				if(x.TryGetComponent<MeshRenderer>(out render))
 				{
-					Material mat = Materials.Set(MaterialType.Default);
-					mat.color = Colors.Set(ColorType.Default1, 1);
-					render.material = mat;
+					TunnelCode tCode = Tunnels.GetPartCode(x.name);
+
+					Tunnel_Materials.Set(render, gCode, tCode);
+
+					//Material mat = Materials.Set(MaterialType.Default);
+					//mat.color = Colors.Set(ColorType.Default1, 1);
+					//render.material = mat;
 				}
 
 			});
@@ -415,13 +421,13 @@ namespace Module.Model
 
 			if (obj.TryGetComponent<MeshRenderer>(out render))
 			{
-				//Debug.Log(obj.name);
-				//Definition.TunnelObjectType
-				TunnelCode tCode = Tunnels.GetPartCode(obj.name);
-				//Definition.TunnelObjectType param = Utilities.NameParameter.GetMatParameter(obj.name, 1);
+                //Debug.Log(obj.name);
+                //Definition.TunnelObjectType
+                //TunnelCode tCode = Tunnels.GetPartCode(obj.name);
+                Definition.TunnelObjectType param = Utilities.NameParameter.GetMatParameter(obj.name, 1);
 
-				Platform.Tunnel.Tunnel_Materials.Set(render, tCode);
-                //Utilities.ReturnMaterial.SetMaterials(render, param);
+                //Platform.Tunnel.Tunnel_Materials.Set(render, tCode);
+                Utilities.ReturnMaterial.SetMaterials(render, param);
 
                 if (!IsInExceptionList(obj.name))
 				{
