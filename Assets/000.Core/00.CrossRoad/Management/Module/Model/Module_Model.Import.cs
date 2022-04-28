@@ -45,6 +45,10 @@ namespace Module.Model
 			{
 				InitializeObjectBridge(root);
 			}
+			else
+            {
+				throw new Definition.Exceptions.PlatformNotDefinedException(platform);
+            }
 
 			// Model Import 모듈 작업 완료
 			ContentManager.Instance.CheckInitModuleComplete(ID);

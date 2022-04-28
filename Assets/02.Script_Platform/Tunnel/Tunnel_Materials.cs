@@ -8,6 +8,13 @@ namespace Platform.Tunnel
 
     public static class Tunnel_Materials
     {
+		public static void Set(MeshRenderer source, TunnelCode _tCode)
+        {
+			Material[] mats = Set(_tCode);
+
+			source.materials = mats;
+        }
+
         public static Material[] Set(TunnelCode _tCode)
         {
             List<Material> result = new List<Material>();

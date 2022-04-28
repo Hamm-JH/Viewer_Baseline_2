@@ -10,6 +10,7 @@ namespace SmartInspect
     using TMPro;
     using static Platform.Bridge.Bridges;
     using AdminViewer.Tunnel;
+    using Platform.Tunnel;
 
     /// <summary>
     /// SmartInspect의 UI 내부 리스트 요소 클래스

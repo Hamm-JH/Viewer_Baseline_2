@@ -35,6 +35,17 @@ namespace Definition
 		Template10 = 0x10,
 		Template20 = 0x20,
 		Template30 = 0x30,
+
+		/// <summary>
+		/// 지정된 단일 색상으로 처리
+		/// </summary>
+		Single_Color,
+
+		/// <summary>
+		/// 플랫폼별 텍스처링
+		/// </summary>
+		Platform_Texturing,
+
 	}
 
 	/// <summary>

@@ -8,7 +8,8 @@ namespace Module.Model
 {
 	using Definition;
 	using EPOOutline;
-	using Test;
+    using Platform.Tunnel;
+    using Test;
 
 	/// <summary>
 	/// 템플릿
@@ -416,11 +417,13 @@ namespace Module.Model
 			{
 				//Debug.Log(obj.name);
 				//Definition.TunnelObjectType
-				Definition.TunnelObjectType param = Utilities.NameParameter.GetMatParameter(obj.name, 1);
+				TunnelCode tCode = Tunnels.GetPartCode(obj.name);
+				//Definition.TunnelObjectType param = Utilities.NameParameter.GetMatParameter(obj.name, 1);
 
-				Utilities.ReturnMaterial.SetMaterials(render, param);
+				Platform.Tunnel.Tunnel_Materials.Set(render, tCode);
+                //Utilities.ReturnMaterial.SetMaterials(render, param);
 
-				if (!IsInExceptionList(obj.name))
+                if (!IsInExceptionList(obj.name))
 				{
 					obj.gameObject.AddComponent<MeshCollider>().convex = false;
 				}

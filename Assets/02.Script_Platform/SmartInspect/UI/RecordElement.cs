@@ -10,6 +10,7 @@ namespace SmartInspect
     using Definition;
     using Management;
     using Module.WebAPI;
+    using Platform.Tunnel;
     using TMPro;
     using View;
     using static Platform.Bridge.Bridges;

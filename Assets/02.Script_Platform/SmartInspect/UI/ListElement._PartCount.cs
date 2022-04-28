@@ -38,13 +38,13 @@ namespace SmartInspect
             else if (Platforms.IsTunnelPlatform(pCode))
             {
                 // 분류 코드 리스트 갖고온다.
-                List<AdminViewer.Tunnel.TunnelCode> cList = Tunnels.GetCodeList();
+                List<TunnelCode> cList = Tunnels.GetCodeList();
                 // 손상정보 리스트도 갖고온다.
                 List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory, _countData.m_tCode);
                 //SmartInspectManager.Instance.Module<Module_Model>(ModuleID.Model).DmgData;
 
                 // 분류 코드 리스트 기반으로 요소 리스트를 생성한다.
-                Dictionary<AdminViewer.Tunnel.TunnelCode, int> result = GetCountList_Tunnel(cList, issues);
+                Dictionary<TunnelCode, int> result = GetCountList_Tunnel(cList, issues);
 
                 SetCountList_Tunnel(result);
 
@@ -130,10 +130,10 @@ namespace SmartInspect
         /// <param name="_cList"></param>
         /// <param name="_issues"></param>
         /// <returns></returns>
-        private Dictionary<AdminViewer.Tunnel.TunnelCode, int> GetCountList_Tunnel(
-            List<AdminViewer.Tunnel.TunnelCode> _cList, List<Definition._Issue.Issue> _issues)
+        private Dictionary<TunnelCode, int> GetCountList_Tunnel(
+            List<TunnelCode> _cList, List<Definition._Issue.Issue> _issues)
         {
-            Dictionary<AdminViewer.Tunnel.TunnelCode, int> result = new Dictionary<AdminViewer.Tunnel.TunnelCode, int>();
+            Dictionary<TunnelCode, int> result = new Dictionary<TunnelCode, int>();
 
             // result에 dictionary 요소 추가
             _cList.ForEach(x =>
@@ -145,7 +145,7 @@ namespace SmartInspect
             foreach (Definition._Issue.Issue issue in _issues)
             {
                 // 이 정보의 코드를 가져온다.
-                AdminViewer.Tunnel.TunnelCode code = issue.__PartTunnelCode;
+                TunnelCode code = issue.__PartTunnelCode;
 
                 // 코드가 result 키에 속할 경우
                 if (result.ContainsKey(code))
@@ -162,10 +162,10 @@ namespace SmartInspect
         /// 터널 :: 카운트 리스트 요소 생성
         /// </summary>
         /// <param name="_result"></param>
-        private void SetCountList_Tunnel(Dictionary<AdminViewer.Tunnel.TunnelCode, int> _result)
+        private void SetCountList_Tunnel(Dictionary<TunnelCode, int> _result)
         {
             // 변수 순회
-            foreach (AdminViewer.Tunnel.TunnelCode key in _result.Keys)
+            foreach (TunnelCode key in _result.Keys)
             {
                 // 요소의 값이 0이 아닐 경우에만 index를 생성한다.
                 if(_result[key] != 0)

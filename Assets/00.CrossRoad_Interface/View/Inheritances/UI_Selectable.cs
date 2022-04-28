@@ -14,6 +14,7 @@ namespace View
 	using static Platform.Bridge.Bridges;
     using static SmartInspect.ListElement;
     using SmartInspect;
+    using Platform.Tunnel;
 
     public partial class UI_Selectable : Interactable,
 		IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler

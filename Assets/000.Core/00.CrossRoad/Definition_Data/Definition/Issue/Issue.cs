@@ -272,7 +272,7 @@ namespace Definition._Issue
 		/// <summary>
 		/// 터널 :: 부재명에서 코드찾기
 		/// </summary>
-		public AdminViewer.Tunnel.TunnelCode __PartTunnelCode
+		public TunnelCode __PartTunnelCode
         {
 			get
             {
@@ -280,7 +280,7 @@ namespace Definition._Issue
 				string pName = CdBridgeParts;
 
 				//Debug.Log(pName);
-				AdminViewer.Tunnel.TunnelCode code = Tunnels.GetPartCode(pName);
+				TunnelCode code = Tunnels.GetPartCode(pName);
 				return code;
             }
         }

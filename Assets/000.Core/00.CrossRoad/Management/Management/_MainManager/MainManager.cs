@@ -57,6 +57,11 @@ namespace Management
 			get => _core._Platform;
 		}
 
+		public GraphicCode Graphic
+        {
+			get => _core.GraphicMode;
+        }
+
 		public ContentManager Content
 		{
 			get => _content.Content;
