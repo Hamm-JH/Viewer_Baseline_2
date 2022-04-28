@@ -94,6 +94,10 @@ namespace View
                 {
 					Platform.Tunnel.Tunnel_Materials.Set(render, gCode, Platform.Tunnel.Tunnels.GetPartCode(this.name));
                 }
+				else
+                {
+					throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+                }
 
 			}
 		}
