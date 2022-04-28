@@ -83,6 +83,18 @@ namespace Definition
 			return false;
 		}
 
+		public static bool IsDemoWebViewer(PlatformCode _pCode)
+        {
+			switch(_pCode)
+            {
+				case PlatformCode.PC_Viewer_Bridge:
+				case PlatformCode.PC_Viewer_Tunnel:
+					return true;
+            }
+
+			return false;
+        }
+
 		public static bool IsDemoAdminViewer(PlatformCode _pCode)
 		{
 			switch(_pCode)

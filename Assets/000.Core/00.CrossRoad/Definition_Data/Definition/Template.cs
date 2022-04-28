@@ -10,7 +10,11 @@ namespace Definition
 		{
 			List<GameObject> list = new List<GameObject>();
 
-			if (Platforms.IsDemoAdminViewer(_pCode))
+			if(Platforms.IsDemoWebViewer(_pCode))
+            {
+				list.Add(Resources.Load<GameObject>("UI/BottomBar - DemoWeb"));
+            }
+			else if (Platforms.IsDemoAdminViewer(_pCode))
 			{
 				list.Add(Resources.Load<GameObject>("UI/UITemplate_0328 2"));
 				list.Add(Resources.Load<GameObject>("UI/UI_AdminViewer"));

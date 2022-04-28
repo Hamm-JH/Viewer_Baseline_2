@@ -91,10 +91,18 @@ namespace Management.Events.Inputs
 					}
 				}
 			}
-			else if(Platforms.IsViewerPlatform(pCode))
-			{
+			else if(Platforms.IsDemoWebViewer(pCode))
+            {
 				ContentManager.Instance.OnSelect_3D(_obj);
 			}
+			//else if(Platforms.IsViewerPlatform(pCode))
+			//{
+			//	ContentManager.Instance.OnSelect_3D(_obj);
+			//}
+			else
+            {
+				throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+            }
 		}
 
 		private void StartEvent_KeymapSelectIssue(GameObject _obj, Dictionary<InputEventType, AEventData> _sEvents)
@@ -107,10 +115,18 @@ namespace Management.Events.Inputs
 
 				m_clickEvent.Invoke(_obj);
 			}
-			else if(Platforms.IsViewerPlatform(pCode))
-			{
+			else if(Platforms.IsDemoWebViewer(pCode))
+            {
 				ContentManager.Instance.OnSelect_Issue(_obj);
 			}
+			//else if(Platforms.IsViewerPlatform(pCode))
+			//{
+			//	ContentManager.Instance.OnSelect_Issue(_obj);
+			//}
+			else
+            {
+				throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+            }
 		}
 
 		private void StartEvent_KeymapSelectNull()
@@ -121,12 +137,20 @@ namespace Management.Events.Inputs
 			{
 				m_clickEvent.Invoke(null);
 			}
-			else if(Platforms.IsViewerPlatform(pCode))
-			{
+			else if(Platforms.IsDemoWebViewer(pCode))
+            {
 				m_clickEvent.Invoke(null);
 				ContentManager.Instance.OnSelect_3D(null);
 			}
-
+			//else if(Platforms.IsViewerPlatform(pCode))
+			//{
+			//	m_clickEvent.Invoke(null);
+			//	ContentManager.Instance.OnSelect_3D(null);
+			//}
+			else
+            {
+				throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+            }
 		}
 	}
 }

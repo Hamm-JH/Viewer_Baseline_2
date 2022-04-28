@@ -14,7 +14,12 @@ namespace Management
 		{
 			Definition.SceneName sceneName = SceneName.NotDef;
 
-			if(Platforms.IsDemoAdminViewer(_pCode))
+			
+			if(Platforms.IsDemoWebViewer(_pCode))
+            {
+				sceneName = SceneName.Viewer;
+			}
+			else if(Platforms.IsDemoAdminViewer(_pCode))
 			{
 				sceneName = SceneName.AdminViewer;
 			}
@@ -22,10 +27,10 @@ namespace Management
 			{
 				sceneName = SceneName.Maker;
 			}
-			else if(Platforms.IsViewerPlatform(_pCode))
-			{
-				sceneName = SceneName.Viewer;
-			}
+			//else if(Platforms.IsViewerPlatform(_pCode))
+			//{
+			//	sceneName = SceneName.Viewer;
+			//}
 			else if(Platforms.IsSmartInspectPlatform(_pCode))
             {
 				sceneName = SceneName.SmartInspectViewer;

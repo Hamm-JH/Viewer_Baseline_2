@@ -138,11 +138,16 @@ namespace Management.Events.Inputs
 				}
 				
 			}
-			else if(Platforms.IsViewerPlatform(pCode))
-			{
+			else if(Platforms.IsDemoWebViewer(pCode))
+            {
 				m_clickEvent.Invoke(_obj);
 				ContentManager.Instance.OnSelect_3D(_obj);
 			}
+			//else if(Platforms.IsViewerPlatform(pCode))
+			//{
+			//	m_clickEvent.Invoke(_obj);
+			//	ContentManager.Instance.OnSelect_3D(_obj);
+			//}
 			else if(Platforms.IsSmartInspectPlatform(pCode))
             {
 				Debug.Log($"***** Hello inspect platform");
@@ -177,11 +182,16 @@ namespace Management.Events.Inputs
 			{
 				m_clickEvent.Invoke(_obj);
 			}
-			else if(Platforms.IsViewerPlatform(pCode))
-			{
+			else if(Platforms.IsDemoWebViewer(pCode))
+            {
 				m_clickEvent.Invoke(_obj);
 				ContentManager.Instance.OnSelect_Issue(_obj);
 			}
+			//else if(Platforms.IsViewerPlatform(pCode))
+			//{
+			//	m_clickEvent.Invoke(_obj);
+			//	ContentManager.Instance.OnSelect_Issue(_obj);
+			//}
 			else if(Platforms.IsSmartInspectPlatform(pCode))
             {
 				m_clickEvent.Invoke(_obj);
@@ -227,11 +237,16 @@ namespace Management.Events.Inputs
 
 				ContentManager.Instance.Toggle_ChildTabs(1);
 			}
-			else if(Platforms.IsViewerPlatform(pCode))
-			{
+			else if(Platforms.IsDemoWebViewer(pCode))
+            {
 				m_clickEvent.Invoke(null);
 				ContentManager.Instance.OnSelect_3D(null);
 			}
+			//else if(Platforms.IsViewerPlatform(pCode))
+			//{
+			//	m_clickEvent.Invoke(null);
+			//	ContentManager.Instance.OnSelect_3D(null);
+			//}
 			else if(Platforms.IsSmartInspectPlatform(pCode))
             {
 				m_clickEvent.Invoke(null);
