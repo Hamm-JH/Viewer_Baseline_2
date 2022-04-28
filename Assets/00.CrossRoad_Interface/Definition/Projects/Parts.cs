@@ -6,6 +6,9 @@ namespace Definition.Projects
 {
 	using Management;
 	
+	/// <summary>
+	/// 부재명에 대한 컨트롤
+	/// </summary>
     public static class Parts
     {
 		public static string GetPartName(string _value)

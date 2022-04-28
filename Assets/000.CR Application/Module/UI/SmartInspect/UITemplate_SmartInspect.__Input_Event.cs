@@ -9,12 +9,6 @@ namespace Module.UI
 {
     public partial class UITemplate_SmartInspect : AUI
     {
-        // 입력 이벤트에서 UI에 전달 필요한 메서드를 전달한다.
-
-        //public void InputEvent_In()
-        //{
-
-        //}
 
         /// <summary>
         /// 3D 객체 선택 이벤트 받음
