@@ -156,15 +156,21 @@ namespace Definition
 
         public static void ToOpaqueMode(MeshRenderer render)
         {
+            //UnityEditor.Rendering.Universal.ShaderGUI.SimpleLitGUI
             {
                 Material[] bef = render.materials;
                 for (int i = 0; i < bef.Length; i++)
                 {
-                    bef[i].SetFloat("_Mode", 0.0f);
+                    //bef[i].SetFloat("_Mode", 0.0f);
                     bef[i].SetOverrideTag("RenderType", "Opaque");
+					bef[i].SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+					bef[i].SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+                    bef[i].SetInt("_Surface", 0);
+                    bef[i].SetInt("_ZWrite", 1);
                     bef[i].doubleSidedGI = false;
-
-                    bef[i].DisableKeyword("_ALPHAPREMULTIPLY_ON");
+                    //bef[i].DisableKeyword("_ALPHATEST_ON"); 
+                    //bef[i].DisableKeyword("_ALPHABLEND_ON");
+                    //bef[i].DisableKeyword("_ALPHAPREMULTIPLY_ON");
                     bef[i].SetShaderPassEnabled("SHADOWCASTER", true);
 
                     bef[i].renderQueue = 2000;
@@ -174,9 +180,11 @@ namespace Definition
                     //bef[i].SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One); 
                     //bef[i].SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero); 
                     //bef[i].SetInt("_ZWrite", 1); 
+                    ////bef[i].doubleSidedGI = false;
                     //bef[i].DisableKeyword("_ALPHATEST_ON"); 
                     //bef[i].DisableKeyword("_ALPHABLEND_ON");
                     //bef[i].DisableKeyword("_ALPHAPREMULTIPLY_ON");
+                    ////bef[i].SetShaderPassEnabled("SHADOWCASTER", true);
                     //bef[i].renderQueue = 2000;
 
                 }
@@ -214,13 +222,18 @@ namespace Definition
                 Material[] bef = render.materials;
                 for (int i = 0; i < bef.Length; i++)
                 {
-                    bef[i].SetFloat("_Mode", 3.0f);
+                    //bef[i].SetFloat("_Mode", 3.0f);
                     bef[i].SetOverrideTag("RenderType", "Transparent");
-                    bef[i].doubleSidedGI = true;
-
+					bef[i].SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha); 
+					bef[i].SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                    bef[i].SetInt("_Surface", 1);
+					bef[i].SetInt("_ZWrite", 0);
+					bef[i].doubleSidedGI = true;
+                    //bef[i].DisableKeyword("_ALPHATEST_ON"); 
+                    //bef[i].DisableKeyword("_ALPHABLEND_ON"); 
+                    //bef[i].EnableKeyword("_ALPHAPREMULTIPLY_ON");
                     bef[i].SetShaderPassEnabled("SHADOWCASTER", false);
 
-                    bef[i].EnableKeyword("_ALPHAPREMULTIPLY_ON");
                     bef[i].renderQueue = 3000;
 
 
