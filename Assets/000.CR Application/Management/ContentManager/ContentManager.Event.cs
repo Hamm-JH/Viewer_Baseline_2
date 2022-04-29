@@ -129,8 +129,14 @@ namespace Management
 			}
 		}
 
+		/// <summary>
+		/// 모델 객체의 재질 상태를 리셋
+		/// </summary>
 		public void Reset_ModelObject()
 		{
+			PlatformCode pCode = MainManager.Instance.Platform;
+			GraphicCode gCode = MainManager.Instance.Graphic;
+
 			foreach(GameObject obj in _ModelObjects)
 			{
 				obj.SetActive(true);
@@ -138,11 +144,24 @@ namespace Management
 				MeshRenderer render;
 				if (obj.TryGetComponent<MeshRenderer>(out render))
 				{
-					Material mat = render.material;
-					Color colr = mat.color;
+					//Material mat = render.material;
+					//Color colr = mat.color;
 
-					Materials.Set(render, ColorType.Default1, 1);
-					//render.material.SetColor("_Color", new Color(colr.r, colr.g, colr.b, 1));
+					if(Platforms.IsBridgePlatform(pCode))
+                    {
+						Platform.Bridge.Bridge_Materials.Set(render, gCode, obj.name);
+                    }
+					else if(Platforms.IsTunnelPlatform(pCode))
+                    {
+						Platform.Tunnel.TunnelCode tCode = Platform.Tunnel.Tunnels.GetPartCode(obj.name);
+
+						Platform.Tunnel.Tunnel_Materials.Set(render, gCode, tCode);
+                    }
+					else
+                    {
+						throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+                    }
+					//Materials.Set(render, ColorType.Default1, 1);
 
 					Materials.ToOpaqueMode(render);
 				}

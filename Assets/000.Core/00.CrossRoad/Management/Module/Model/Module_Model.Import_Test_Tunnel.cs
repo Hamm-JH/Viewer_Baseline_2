@@ -315,7 +315,7 @@ namespace Module.Model
 
 			});
 
-
+			Materials.Init(MaterialType.Default);
 		}
 
 		#endregion

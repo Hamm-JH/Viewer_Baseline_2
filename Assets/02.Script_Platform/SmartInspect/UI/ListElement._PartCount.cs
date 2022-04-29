@@ -21,13 +21,13 @@ namespace SmartInspect
             if (Platforms.IsBridgePlatform(pCode))
             {
                 // 1 분류 코드 리스트 갖고온다.
-                List<Bridges.CodeLv4> cList = Bridges.GetCodeList();
+                List<BridgeCode> cList = Bridges.GetCodeList();
                 // 2 손상정보 리스트도 갖고온다.
                 List<Definition._Issue.Issue> issues = GetIssueList(m_catrgory, _countData.m_bCode);
                 //SmartInspectManager.Instance.Module<Module_Model>(ModuleID.Model).DmgData;
 
                 // 3 분류 코드 리스트 기반으로 요소 리스트를 생성한다.
-                Dictionary<Bridges.CodeLv4, int> result = GetCountList_Bridge(cList, issues);
+                Dictionary<BridgeCode, int> result = GetCountList_Bridge(cList, issues);
 
                 // 4 리스트 생성
                 SetCountList_Bridge(result);
@@ -67,10 +67,10 @@ namespace SmartInspect
         /// <param name="_cList"></param>
         /// <param name="_issues"></param>
         /// <returns></returns>
-        private Dictionary<Bridges.CodeLv4, int> GetCountList_Bridge(
-            List<Bridges.CodeLv4> _cList, List<Definition._Issue.Issue> _issues)
+        private Dictionary<BridgeCode, int> GetCountList_Bridge(
+            List<BridgeCode> _cList, List<Definition._Issue.Issue> _issues)
         {
-            Dictionary<Bridges.CodeLv4, int> result = new Dictionary<Bridges.CodeLv4, int>();
+            Dictionary<BridgeCode, int> result = new Dictionary<BridgeCode, int>();
 
             // result에 dictionary 요소 추가
             _cList.ForEach(x =>
@@ -81,7 +81,7 @@ namespace SmartInspect
             foreach (Definition._Issue.Issue issue in _issues)
             {
                 // 이 정보의 코드를 가져온다.
-                Bridges.CodeLv4 code = issue.__PartBridgeCode;
+                BridgeCode code = issue.__PartBridgeCode;
 
                 // 코드가 result 키에 속할 경우
                 if (result.ContainsKey(code))
@@ -98,10 +98,10 @@ namespace SmartInspect
         /// 4 교량 :: 카운트 리스트 요소 생성
         /// </summary>
         /// <param name="_result"></param>
-        private void SetCountList_Bridge(Dictionary<Bridges.CodeLv4, int> _result)
+        private void SetCountList_Bridge(Dictionary<BridgeCode, int> _result)
         {
             // 변수 순회
-            foreach (Bridges.CodeLv4 key in _result.Keys)
+            foreach (BridgeCode key in _result.Keys)
             {
                 // 요소의 값이 0이 아닐 경우에만 index를 생성한다.
                 if(_result[key] != 0)

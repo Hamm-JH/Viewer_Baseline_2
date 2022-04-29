@@ -11,6 +11,7 @@ namespace SmartInspect
     using static Platform.Bridge.Bridges;
     using AdminViewer.Tunnel;
     using Platform.Tunnel;
+    using Platform.Bridge;
 
     /// <summary>
     /// SmartInspect의 UI 내부 리스트 요소 클래스
@@ -47,7 +48,7 @@ namespace SmartInspect
             public TextMeshProUGUI m_pBar_Text;
 
             public int m_maxIssueCount;
-            public CodeLv4 m_bCode;
+            public BridgeCode m_bCode;
             public TunnelCode m_tCode;
 
             /// <summary>
@@ -93,7 +94,7 @@ namespace SmartInspect
             _countData.m_toggleResourceElement = this;
 
             // 기본값 할당해두기
-            _countData.m_bCode = CodeLv4.ALL;
+            _countData.m_bCode = BridgeCode.ALL;
             _countData.m_tCode = TunnelCode.ALL;
 
             Debug.Log($"hello list {gameObject.name}");
@@ -119,7 +120,7 @@ namespace SmartInspect
             }
         }
 
-        public void ResetList(CodeLv4 _bCode)
+        public void ResetList(BridgeCode _bCode)
         {
             _countData.m_bCode = _bCode;
 
@@ -200,7 +201,7 @@ namespace SmartInspect
         /// <param name="_category"></param>
         /// <param name="_bCode"></param>
         /// <returns></returns>
-        private List<Definition._Issue.Issue> GetIssueList(Category _category, CodeLv4 _bCode)
+        private List<Definition._Issue.Issue> GetIssueList(Category _category, BridgeCode _bCode)
         {
             List<Definition._Issue.Issue> list = new List<Definition._Issue.Issue>();
 
@@ -220,7 +221,7 @@ namespace SmartInspect
                     }
                 });
 
-                if(_bCode == CodeLv4.ALL)
+                if(_bCode == BridgeCode.ALL)
                 {
                     _countData.m_maxIssueCount = list.Count;
                 }
@@ -238,7 +239,7 @@ namespace SmartInspect
                     }
                 });
 
-                if (_bCode == CodeLv4.ALL)
+                if (_bCode == BridgeCode.ALL)
                 {
                     _countData.m_maxIssueCount = list.Count;
                 }
@@ -256,7 +257,7 @@ namespace SmartInspect
                     }
                 });
 
-                if (_bCode == CodeLv4.ALL)
+                if (_bCode == BridgeCode.ALL)
                 {
                     _countData.m_maxIssueCount = list.Count;
                 }
@@ -352,7 +353,7 @@ namespace SmartInspect
         /// <param name="_issue"></param>
         /// <param name="_bCode"></param>
         /// <returns></returns>
-        private bool IsTargetIssue(Definition._Issue.Issue _issue, CodeLv4 _bCode)
+        private bool IsTargetIssue(Definition._Issue.Issue _issue, BridgeCode _bCode)
         {
             bool result = false;
 
@@ -360,7 +361,7 @@ namespace SmartInspect
             {
                 result = true;
             }
-            else if(_bCode == CodeLv4.ALL)
+            else if(_bCode == BridgeCode.ALL)
             {
                 result = true;
             }

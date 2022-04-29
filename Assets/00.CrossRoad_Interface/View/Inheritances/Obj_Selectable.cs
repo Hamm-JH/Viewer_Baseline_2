@@ -87,8 +87,9 @@ namespace View
 
 				if(Platforms.IsBridgePlatform(pCode))
                 {
-					Materials.Set(render, ColorType.Default1, render.material.color.a);
-					throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+					Platform.Bridge.Bridge_Materials.Set(render, gCode, this.name);
+					//Materials.Set(render, ColorType.Default1, render.material.color.a);
+					//throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
                 }
 				else if(Platforms.IsTunnelPlatform(pCode))
                 {
@@ -142,6 +143,8 @@ namespace View
 		{
 			if (!IsInteractable) return;
 
+			GraphicCode gCode = MainManager.Instance.Graphic;
+
 			// 최종 확인
 			if(_uiType == UIEventType.Slider_Model_Transparency)
 			{
@@ -156,7 +159,7 @@ namespace View
 					Color colr = mat.color;
 					bool thisOpaque = colr.a > boundary ? true : false;
 
-					Materials.Set(render, ColorType.Default1, _value);
+					Materials.Set(render, gCode, ColorType.Default1, _value, false);
 					//render.material.SetColor("_Color", new Color(colr.r, colr.g, colr.b, _value));
 
 					if (isOpaque && !thisOpaque)
@@ -176,6 +179,8 @@ namespace View
 		private void OnDeselect_3dModel(PlatformCode _pCode, UIEventType _uiType, bool _isHide)
 		{
 			if (!IsInteractable) return;
+
+			GraphicCode gCode = MainManager.Instance.Graphic;
 
 			if(_uiType == UIEventType.Mode_Hide || _uiType == UIEventType.Mode_Hide_Off 
 				|| _uiType == UIEventType.Mode_Isolate || _uiType == UIEventType.Mode_Isolate_Off)
@@ -220,9 +225,9 @@ namespace View
 							{
 								Materials.ToFadeMode(render);
 
-								Materials.Set(render, ColorType.Default1, hideValue);
+                                Materials.Set(render, gCode, ColorType.Default1, hideValue, false);
 
-								obj.SetActive(isOn);
+                                obj.SetActive(isOn);
 							}
 							else
 							{
@@ -236,8 +241,8 @@ namespace View
 									Materials.ToFadeMode(render);
 								}
 
-								Materials.Set(render, ColorType.Default1, colr.a);
-							}
+                                Materials.Set(render, gCode, ColorType.Default1, colr.a, false);
+                            }
 
 						}
 					}
@@ -279,7 +284,7 @@ namespace View
 							{
 								Materials.ToFadeMode(render);
 
-								Materials.Set(render, ColorType.Default1, hideValue);
+								Materials.Set(render, gCode, ColorType.Default1, hideValue, false);
 
 								obj.SetActive(isOn);
 							}
@@ -295,7 +300,7 @@ namespace View
 									Materials.ToFadeMode(render);
 								}
 
-								Materials.Set(render, ColorType.Default1, colr.a);
+								Materials.Set(render, gCode, ColorType.Default1, colr.a, false);
 							}
 
 						}
@@ -332,6 +337,8 @@ namespace View
 		{
 			if (!IsInteractable) return;
 
+			GraphicCode gCode = MainManager.Instance.Graphic;
+
 			//Debug.Log($"OnSelect : {this.name}");
 
 			// 등록 모드 진입 또는 핀모드엔 색변경 중단
@@ -348,7 +355,7 @@ namespace View
 				{
 					Color colr = render.material.color;
 
-					Materials.Set(render, ColorType.Selected1, render.material.color.a);
+					Materials.Set(render, gCode, ColorType.Selected1, render.material.color.a, true);
 				}
 			}
 		}

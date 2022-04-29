@@ -258,7 +258,7 @@ namespace Definition._Issue
 		/// <summary>
 		/// 교량 :: 부재명에서 코드찾기
 		/// </summary>
-		public Platform.Bridge.Bridges.CodeLv4 __PartBridgeCode
+		public Platform.Bridge.BridgeCode __PartBridgeCode
         {
 			get
             {

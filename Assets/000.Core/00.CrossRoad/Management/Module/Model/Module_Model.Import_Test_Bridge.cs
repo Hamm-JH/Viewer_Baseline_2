@@ -11,11 +11,12 @@ namespace Module.Model
 	using TMPro;
 	using UnityEngine.UI;
 	using Legacy.UI;
+    using Platform.Bridge;
 
-	/// <summary>
-	/// 템플릿
-	/// </summary>
-	public partial class Module_Model : AModule
+    /// <summary>
+    /// 템플릿
+    /// </summary>
+    public partial class Module_Model : AModule
 	{
 		[Header("Bridge")]
 		[SerializeField] GameObject m_bRootObj;
@@ -106,6 +107,8 @@ namespace Module.Model
 
 		private void SetObjectsMaterialNCollider(GameObject _root3DObject)
 		{
+            Materials.Init(MaterialType.Default);
+
 			#region 변수 선언부
 			// 3D 객체 아래의 모든 자식객체 수집
 			Transform[] objTransforms = _root3DObject.gameObject.GetComponentsInChildren<Transform>();
@@ -117,9 +120,14 @@ namespace Module.Model
 			ModelObjects = new List<GameObject>();
 
 			Dictionary<string, int> multiSplitIndex = new Dictionary<string, int>();
-			#endregion
+            #endregion
 
-			#region 모든 객체의 material, collider를 할당한다.
+            #region 모든 객체의 material, collider를 할당한다.
+
+            GraphicCode gCode = MainManager.Instance.Graphic;
+            BridgeCode bCode = BridgeCode.Null;
+            BridgeCodeDetail bCodeDetail = BridgeCodeDetail.Null;
+
 
 			// Material을 할당해야 하는 객체에 Material, Collider 할당
 			// [반복] material을 가진 모든 자식객체
@@ -130,13 +138,23 @@ namespace Module.Model
 				string[] splitObjectString = selected_objTransforms[i].name.Split(',');
 
 				string name = splitObjectString[0];
+                bCode = Bridges.GetPartCode(name);
+                bCodeDetail = Bridges.GetPartCodeDetail(name);
 
-				// [조건] 분할 문자열이 2개 : (객체명 문자열 1, material 정보 1) 객체가 한 개의 Material을 필요로 하는 경우
-				if (splitObjectString.Length == 2)
+                //Debug.Log($"Tag:: {name}");
+                //Debug.Log($"Tag:: {bCode}");    // 다 잘뜸
+                //Debug.Log($"Tag:: {bCodeDetail}");
+                //Debug.Log($"Tag:: {name.Split('_').Length}");   // 모두 4
+
+                // [조건] 분할 문자열이 2개 : (객체명 문자열 1, material 정보 1) 객체가 한 개의 Material을 필요로 하는 경우
+                if (splitObjectString.Length == 2)
 				{
-					selected_objTransforms[i].GetComponent<MeshRenderer>().material = Materials.Set(MaterialType.Default);
+                    //----------
+                    Bridge_Materials.Set(selected_objTransforms[i].GetComponent<MeshRenderer>(), gCode, selected_objTransforms[i].name);
+                    //Bridge_Materials.Set(selected_objTransforms[i].GetComponent<MeshRenderer>(), gCode, bCode, bCodeDetail);
+                    //selected_objTransforms[i].GetComponent<MeshRenderer>().material = Materials.Set(MaterialType.Default);
 
-					selected_objTransforms[i].gameObject.AddComponent<MeshCollider>().convex = true;
+                    selected_objTransforms[i].gameObject.AddComponent<MeshCollider>().convex = true;
 					selected_objTransforms[i].gameObject.AddComponent<Obj_Selectable>();
 					ModelObjects.Add(selected_objTransforms[i].gameObject);
 				}
@@ -151,9 +169,12 @@ namespace Module.Model
 					{
 						multiSplitIndex[splitObjectString[0]]++;
 
-						selected_objTransforms[i].GetComponent<MeshRenderer>().material = Materials.Set(MaterialType.Default);
+                        //----------
+                        Bridge_Materials.Set(selected_objTransforms[i].GetComponent<MeshRenderer>(), gCode, selected_objTransforms[i].name);
+                        //Bridge_Materials.Set(selected_objTransforms[i].GetComponent<MeshRenderer>(), gCode, bCode, bCodeDetail);
+                        //selected_objTransforms[i].GetComponent<MeshRenderer>().material = Materials.Set(MaterialType.Default);
 
-						selected_objTransforms[i].gameObject.AddComponent<MeshCollider>().convex = true;
+                        selected_objTransforms[i].gameObject.AddComponent<MeshCollider>().convex = true;
 						selected_objTransforms[i].gameObject.AddComponent<Obj_Selectable>();
 						ModelObjects.Add(selected_objTransforms[i].gameObject);
 					}
@@ -169,9 +190,12 @@ namespace Module.Model
 						multiSplitIndex.Add(splitObjectString[0], stringIndex);
 						multiSplitIndex[splitObjectString[0]]++;
 
-						selected_objTransforms[i].GetComponent<MeshRenderer>().material = Materials.Set(MaterialType.Default);
+                        //----------
+                        Bridge_Materials.Set(selected_objTransforms[i].GetComponent<MeshRenderer>(), gCode, selected_objTransforms[i].name);
+                        //Bridge_Materials.Set(selected_objTransforms[i].GetComponent<MeshRenderer>(), gCode, bCode, bCodeDetail);
+                        //selected_objTransforms[i].GetComponent<MeshRenderer>().material = Materials.Set(MaterialType.Default);
 
-						selected_objTransforms[i].gameObject.AddComponent<MeshCollider>().convex = true;
+                        selected_objTransforms[i].gameObject.AddComponent<MeshCollider>().convex = true;
 						selected_objTransforms[i].gameObject.AddComponent<Obj_Selectable>();
 						ModelObjects.Add(selected_objTransforms[i].gameObject);
 					}

@@ -10,6 +10,7 @@ namespace SmartInspect
     using Definition;
     using Management;
     using Module.WebAPI;
+    using Platform.Bridge;
     using Platform.Tunnel;
     using TMPro;
     using View;
@@ -38,7 +39,7 @@ namespace SmartInspect
         /// </summary>
         public ListElement m_resourceElement;
 
-        public CodeLv4 m_bPartCode;
+        public BridgeCode m_bPartCode;
         public TunnelCode m_tPartCode;
 
         /// <summary>
@@ -86,7 +87,7 @@ namespace SmartInspect
         /// <param name="_partName"></param>
         /// <param name="_rootUI"></param>
         public Packet_Record(int _rIndex, int _lNumber, string _partName,
-            CodeLv4 _bPartCode, ListElement _element, ListElement _resourceElement, UITemplate_SmartInspect _rootUI)
+            BridgeCode _bPartCode, ListElement _element, ListElement _resourceElement, UITemplate_SmartInspect _rootUI)
         {
             m_requestIndex = _rIndex;
             m_listedNumber = _lNumber;
@@ -188,7 +189,7 @@ namespace SmartInspect
         /// 3 : img work
         /// </summary>
         [SerializeField] int m_eIndex = -1;
-        public CodeLv4 m_codeBridge;
+        public BridgeCode m_codeBridge;
         //public 
 
         public Definition._Issue.Issue m_issue;

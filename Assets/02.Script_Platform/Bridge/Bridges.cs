@@ -9,75 +9,75 @@ namespace Platform.Bridge
 	{
 		#region Code 
 
-		public enum CodeLv4
-		{
-			ALL = -1,
-			Null = 0,
-			GD = 1,
-			CB = 2,
-			SL = 3,
-			DS = 4,
-			GR = 5,
-			GF = 6,
-			JI = 7,
-			AB = 8,
-			PI = 9,
-			BE = 10,
-			FT = 11
-		}
+		//public enum BridgeCode
+		//{
+		//	ALL = -1,
+		//	Null = 0,
+		//	GD = 1,
+		//	CB = 2,
+		//	SL = 3,
+		//	DS = 4,
+		//	GR = 5,
+		//	GF = 6,
+		//	JI = 7,
+		//	AB = 8,
+		//	PI = 9,
+		//	BE = 10,
+		//	FT = 11
+		//}
 
-		public enum CodeLv5
-		{
-			Null = 0,
+		//public enum BridgeCodeDetail
+		//{
+		//	Null = 0,
 
-			// 거더, 가로보 lv5
-			PSCI25 = 1,
-			PSCI30,
-			RCT25,
+		//	// 거더, 가로보 lv5
+		//	PSCI25 = 1,
+		//	PSCI30,
+		//	RCT25,
 
-			// 슬라브 lv5
-			PSCI,
-			RCT,
-			RA,
-			RCS,
+		//	// 슬라브 lv5
+		//	PSCI,
+		//	RCT,
+		//	RA,
+		//	RCS,
 
-			// 포장 lv5
-			AP,
-			CP,
+		//	// 포장 lv5
+		//	AP,
+		//	CP,
 
-			// 난간 lv5
-			GRC,
-			GRS,
-			GR,
-			CU,
+		//	// 난간 lv5
+		//	GRC,
+		//	GRS,
+		//	GR,
+		//	CU,
 
-			// 신축이음 lv5
-			MO,
-			NB,
-			RI,
-			TRP,
+		//	// 신축이음 lv5
+		//	MO,
+		//	NB,
+		//	RI,
+		//	TRP,
 
-			// 교대 lv5
-			SGA,
-			RTA,
-			RBA,        // 추가
-						//RA
+		//	// 교대 lv5
+		//	SGA,
+		//	RTA,
+		//	RBA,        // 추가
+		//				//RA
 
-			// 교각 lv5
-			WLP,
-			TP,
-			RAP,
-			RBP,
-			//RTA
-			//RA
+		//	// 교각 lv5
+		//	WLP,
+		//	TP,
+		//	RAP,
+		//	RBP,
+		//	//RTA
+		//	//RA
 
-			// 받침 lv5
-			RUP,
-			POT,
+		//	// 받침 lv5
+		//	RUP,
+		//	POT,
 
-			// 기초 lv5
-			MAT
-		}
+		//	// 기초 lv5
+		//	MAT
+		//}
 
 		#endregion
 
@@ -138,12 +138,25 @@ namespace Platform.Bridge
 			return result;
 		}
 
-		public static CodeLv4 GetPartCode(string _name)
+		public static BridgeCode GetPartCode(string _name)
         {
-			CodeLv4 result = CodeLv4.Null;
+			BridgeCode result = BridgeCode.Null;
 
 			string arg1 = _name.Split('_')[1];
 			result = ConvertLv4Code(arg1);
+
+			return result;
+        }
+
+		public static BridgeCodeDetail GetPartCodeDetail(string _name)
+        {
+			BridgeCodeDetail result = BridgeCodeDetail.Null;
+
+			string[] args = _name.Split('_');
+			if(args.Length >= 3)
+            {
+				result = ConvertLv5Code(args[2]);
+			}
 
 			return result;
         }
@@ -152,7 +165,7 @@ namespace Platform.Bridge
 		{
 			string result = "";
 
-			CodeLv4 lv4 = ConvertLv4Code(_arg);
+			BridgeCode lv4 = ConvertLv4Code(_arg);
 			result = ConvertLv4String(lv4);
 			
 			return result;
@@ -162,129 +175,129 @@ namespace Platform.Bridge
 		{
 			string result = "";
 
-			CodeLv5 lv5 = ConvertLv5Code(_value);
+			BridgeCodeDetail lv5 = ConvertLv5Code(_value);
 			result = ConvertLv5String(lv5);
 
 			return result;
 		}
 
-		public static CodeLv4 ConvertLv4Code(string arg)
+		public static BridgeCode ConvertLv4Code(string arg)
 		{
-			CodeLv4 lv4;
+			BridgeCode lv4;
 
-			if (Enum.TryParse<CodeLv4>(arg, out lv4))
+			if (Enum.TryParse<BridgeCode>(arg, out lv4))
 			{
 				return lv4;
 			}
 			else
 			{
-				return CodeLv4.Null;
+				return BridgeCode.Null;
 			}
 		}
 
-		public static CodeLv5 ConvertLv5Code(string arg)
+		public static BridgeCodeDetail ConvertLv5Code(string arg)
 		{
-			CodeLv5 lv5;
+			BridgeCodeDetail lv5;
 
-			if (Enum.TryParse<CodeLv5>(arg, out lv5))
+			if (Enum.TryParse<BridgeCodeDetail>(arg, out lv5))
 			{
 				return lv5;
 			}
 			else
 			{
-				return CodeLv5.Null;
+				return BridgeCodeDetail.Null;
 			}
 		}
 
-		public static List<CodeLv4> GetCodeList()
+		public static List<BridgeCode> GetCodeList()
         {
-			List<CodeLv4> list = new List<CodeLv4>();
+			List<BridgeCode> list = new List<BridgeCode>();
 
-			list.Add(CodeLv4.GD);
-			list.Add(CodeLv4.CB);
-			list.Add(CodeLv4.SL);
-			list.Add(CodeLv4.DS);
-			list.Add(CodeLv4.GR);
-			list.Add(CodeLv4.GF);
-			list.Add(CodeLv4.JI);
-			list.Add(CodeLv4.AB);
-			list.Add(CodeLv4.PI);
-			list.Add(CodeLv4.BE);
-			list.Add(CodeLv4.FT);
+			list.Add(BridgeCode.GD);
+			list.Add(BridgeCode.CB);
+			list.Add(BridgeCode.SL);
+			list.Add(BridgeCode.DS);
+			list.Add(BridgeCode.GR);
+			list.Add(BridgeCode.GF);
+			list.Add(BridgeCode.JI);
+			list.Add(BridgeCode.AB);
+			list.Add(BridgeCode.PI);
+			list.Add(BridgeCode.BE);
+			list.Add(BridgeCode.FT);
 
 			return list;
         }
 
-		public static string ConvertLv4String(CodeLv4 code)
+		public static string ConvertLv4String(BridgeCode code)
 		{
 			switch (code)
 			{
-				case CodeLv4.GD: return "거더";
-				case CodeLv4.CB: return "가로보";
-				case CodeLv4.SL: return "슬라브";
-				case CodeLv4.DS: return "포장";
-				case CodeLv4.GR: return "난간";
-				case CodeLv4.GF: return "방호시설";
-				case CodeLv4.JI: return "신축이음";
-				case CodeLv4.AB: return "교대";
-				case CodeLv4.PI: return "교각";
-				case CodeLv4.BE: return "받침";
-				case CodeLv4.FT: return "기초";
-				default: return CodeLv4.Null.ToString();
+				case BridgeCode.GD: return "거더";
+				case BridgeCode.CB: return "가로보";
+				case BridgeCode.SL: return "슬라브";
+				case BridgeCode.DS: return "포장";
+				case BridgeCode.GR: return "난간";
+				case BridgeCode.GF: return "방호시설";
+				case BridgeCode.JI: return "신축이음";
+				case BridgeCode.AB: return "교대";
+				case BridgeCode.PI: return "교각";
+				case BridgeCode.BE: return "받침";
+				case BridgeCode.FT: return "기초";
+				default: return BridgeCode.Null.ToString();
 			}
 		}
 
-		public static string ConvertLv5String(CodeLv5 code)
+		public static string ConvertLv5String(BridgeCodeDetail code)
 		{
 			switch (code)
 			{
 				// 거더, 가로보
-				case CodeLv5.PSCI25: return string.Format($"PSCI 25m");
-				case CodeLv5.PSCI30: return string.Format($"PSCI 30m");
-				case CodeLv5.RCT25: return string.Format($"RCT 25m");
+				case BridgeCodeDetail.PSCI25: return string.Format($"PSCI 25m");
+				case BridgeCodeDetail.PSCI30: return string.Format($"PSCI 30m");
+				case BridgeCodeDetail.RCT25: return string.Format($"RCT 25m");
 
 				// 슬라브
-				case CodeLv5.PSCI: return string.Format($"PSCI");
-				case CodeLv5.RCT: return string.Format($"RCT");
-				case CodeLv5.RA: return string.Format($"라멘교");
-				case CodeLv5.RCS: return string.Format($"RCS");
+				case BridgeCodeDetail.PSCI: return string.Format($"PSCI");
+				case BridgeCodeDetail.RCT: return string.Format($"RCT");
+				case BridgeCodeDetail.RA: return string.Format($"라멘교");
+				case BridgeCodeDetail.RCS: return string.Format($"RCS");
 
 				// 포장
-				case CodeLv5.AP: return string.Format($"아스팔트");
-				case CodeLv5.CP: return string.Format($"콘크리트");
+				case BridgeCodeDetail.AP: return string.Format($"아스팔트");
+				case BridgeCodeDetail.CP: return string.Format($"콘크리트");
 
 				// 난간
-				case CodeLv5.GRC: return string.Format($"콘크리트");
-				case CodeLv5.GRS: return string.Format($"강재형");
+				case BridgeCodeDetail.GRC: return string.Format($"콘크리트");
+				case BridgeCodeDetail.GRS: return string.Format($"강재형");
 
 				// 방호시설 (난간)
-				case CodeLv5.GR: return string.Format($"방호벽");
-				case CodeLv5.CU: return string.Format($"연석");
+				case BridgeCodeDetail.GR: return string.Format($"방호벽");
+				case BridgeCodeDetail.CU: return string.Format($"연석");
 
 				// 신축이음
-				case CodeLv5.MO: return string.Format($"모노셀");
-				case CodeLv5.NB: return string.Format($"엔비조인트");
-				case CodeLv5.RI: return string.Format($"레일조인트");
-				case CodeLv5.TRP: return string.Format($"트렌스플렉스");
+				case BridgeCodeDetail.MO: return string.Format($"모노셀");
+				case BridgeCodeDetail.NB: return string.Format($"엔비조인트");
+				case BridgeCodeDetail.RI: return string.Format($"레일조인트");
+				case BridgeCodeDetail.TRP: return string.Format($"트렌스플렉스");
 
 				// 교대
-				case CodeLv5.SGA: return string.Format($"반중력식");
-				case CodeLv5.RTA: return string.Format($"역T형");
-				case CodeLv5.RBA: return string.Format($"라멘교");
+				case BridgeCodeDetail.SGA: return string.Format($"반중력식");
+				case BridgeCodeDetail.RTA: return string.Format($"역T형");
+				case BridgeCodeDetail.RBA: return string.Format($"라멘교");
 
 				// 교각
-				case CodeLv5.WLP: return string.Format($"벽체형");
-				case CodeLv5.TP: return string.Format($"T형");
-				case CodeLv5.RAP: return string.Format($"라멘형");
-				case CodeLv5.RBP: return string.Format($"라멘교");
+				case BridgeCodeDetail.WLP: return string.Format($"벽체형");
+				case BridgeCodeDetail.TP: return string.Format($"T형");
+				case BridgeCodeDetail.RAP: return string.Format($"라멘형");
+				case BridgeCodeDetail.RBP: return string.Format($"라멘교");
 
 				// 받침
-				case CodeLv5.RUP: return string.Format($"탄성");
-				case CodeLv5.POT: return string.Format($"포트");
+				case BridgeCodeDetail.RUP: return string.Format($"탄성");
+				case BridgeCodeDetail.POT: return string.Format($"포트");
 
 				// 기초
-				case CodeLv5.MAT: return string.Format($"MAT");
-				default: return CodeLv5.Null.ToString();
+				case BridgeCodeDetail.MAT: return string.Format($"MAT");
+				default: return BridgeCodeDetail.Null.ToString();
 			}
 		}
 	}

@@ -15,6 +15,7 @@ namespace View
     using static SmartInspect.ListElement;
     using SmartInspect;
     using Platform.Tunnel;
+    using Platform.Bridge;
 
     public partial class UI_Selectable : Interactable,
 		IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
@@ -40,7 +41,7 @@ namespace View
 			/// </summary>
 			public ListElement m_resourceListElement;
 
-			public CodeLv4 m_bridgeIssueCode;
+			public BridgeCode m_bridgeIssueCode;
 			public TunnelCode m_tunnelCode;
 		}
 

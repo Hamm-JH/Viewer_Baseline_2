@@ -301,14 +301,14 @@ namespace Issue
 
         public string ConvertPartName(string partName)
         {
-            //MODBS_Library.CodeLv4 lv4 = MODBS_Library.CodeLv4.Null;
+            //MODBS_Library.BridgeCode lv4 = MODBS_Library.BridgeCode.Null;
 
             //string[] args = partName.Split('_');
             //if (args.Length > 2)
             //{
-            //    if (Enum.TryParse<MODBS_Library.CodeLv4>(args[1], out lv4))
+            //    if (Enum.TryParse<MODBS_Library.BridgeCode>(args[1], out lv4))
             //    {
-            //        if (!lv4.Equals(MODBS_Library.CodeLv4.Null))
+            //        if (!lv4.Equals(MODBS_Library.BridgeCode.Null))
             //        {
             //            string name = MODBS_Library.LevelCodeConverter.ConvertLv4String(lv4);
             //            Debug.Log(name);

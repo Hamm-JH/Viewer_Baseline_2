@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &32494252
 Transform:
   m_ObjectHideFlags: 0
@@ -779,7 +779,7 @@ MonoBehaviour:
     m_historyURL: 
     m_keyCode: 
   - m_platform: 50
-    m_graphic: 0
+    m_graphic: 2
     mouseData:
       dragBoundary: 1.5
       dragInvert: {x: 1, y: -1}

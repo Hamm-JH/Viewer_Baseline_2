@@ -6,6 +6,28 @@ namespace Definition
 {
 	public static class Colors
 	{
+		/// <summary>
+		/// 기존의 색을 유지하고, 투명도만 조정한다.
+		/// </summary>
+		/// <param name="type"></param>
+		/// <param name="_tgColor"></param>
+		/// <param name="_alpha"></param>
+		/// <returns></returns>
+		public static Color Set(ColorType type, Color _tgColor, float _alpha)
+        {
+			Color color = _tgColor;
+
+			color = new Color(color.r, color.g, color.b, _alpha);
+
+			return color;
+        }
+
+		/// <summary>
+		/// 설정된 색을 사용한다.
+		/// </summary>
+		/// <param name="type"></param>
+		/// <param name="_alpha"></param>
+		/// <returns></returns>
 		public static Color Set(ColorType type, float _alpha)
 		{
 			Color color = default(Color);
