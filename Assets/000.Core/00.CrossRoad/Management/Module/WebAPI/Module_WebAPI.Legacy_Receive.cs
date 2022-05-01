@@ -52,7 +52,14 @@ namespace Module.WebAPI
 
                 // T
                 case ReceiveRequestCode.InformationWidthChange: // 정보창 폭 변경 수신
-                    Func_InformationWidthChange(Parsers.Parse<float>(arguments[1]));
+                    if(arguments.Length >= 2)
+					{
+                        Func_InformationWidthChange(Parsers.Parse<float>(arguments[1]));
+					}
+                    else
+					{
+                        Func_InformationWidthChange();
+                    }
                     break;
 
                 #endregion
@@ -182,11 +189,20 @@ namespace Module.WebAPI
             }
         }
 
-		#endregion
+        #endregion
 
-		#region InformationWidthChange
+        #region InformationWidthChange
 
-		private void Func_InformationWidthChange(float _value)
+        private void Func_InformationWidthChange()
+        {
+            //float width = _value;
+
+            //ContentManager.Instance.GetRightWebUIWidth(width);
+
+            Debug.Log($"[Receive.InformationWidthChange] : width {0}");
+        }
+
+        private void Func_InformationWidthChange(float _value)
         {
             float width = _value;
 

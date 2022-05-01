@@ -816,7 +816,7 @@ MonoBehaviour:
     m_historyURL: 
     m_keyCode: 
   - m_platform: 18
-    m_graphic: 0
+    m_graphic: 2
     mouseData:
       dragBoundary: 1.5
       dragInvert: {x: 1, y: -1}
@@ -853,7 +853,7 @@ MonoBehaviour:
     m_historyURL: 
     m_keyCode: 
   - m_platform: 19
-    m_graphic: 0
+    m_graphic: 2
     mouseData:
       dragBoundary: 1.5
       dragInvert: {x: 1, y: -1}
@@ -890,7 +890,7 @@ MonoBehaviour:
     m_historyURL: 
     m_keyCode: 
   - m_platform: 257
-    m_graphic: 0
+    m_graphic: 2
     mouseData:
       dragBoundary: 1.5
       dragInvert: {x: 1, y: -1}
