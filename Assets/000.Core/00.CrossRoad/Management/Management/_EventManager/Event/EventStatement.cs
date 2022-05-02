@@ -21,12 +21,18 @@ namespace Management.Events
 		[SerializeField] GameObject m_pinModeObj;
 		[SerializeField] GameObject m_pinModePin;
 
+		/// <summary>
+		/// 모듈 리스트
+		/// </summary>
 		public List<ModuleCode> ModuleList
 		{ 
 			get => m_moduleList; 
 			set => m_moduleList=value; 
 		}
 
+		/// <summary>
+		/// 모듈 코드에 대응하는 상태 인스턴스 
+		/// </summary>
 		public Dictionary<ModuleCode, AModuleStatus> ModuleStatus
 		{
 			get => m_moduleStatus;
@@ -133,7 +139,7 @@ namespace Management.Events
 		}
 
 		/// <summary>
-		/// 모듈코드에 대응하는 모듈 상태 인스턴스를 받는다.
+		/// 관리자뷰어 :: 모듈코드에 대응하는 모듈 상태 인스턴스를 받는다.
 		/// </summary>
 		/// <param name="_mCode"></param>
 		/// <param name="_mStatus"></param>

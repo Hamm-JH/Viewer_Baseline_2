@@ -46,7 +46,7 @@ namespace Module.WebAPI
                     break;
 
                 // R
-                case ReceiveRequestCode.SelectObject6Shape:     // 6면 객체 선택
+                case ReceiveRequestCode.SelectObject6Shape:     // 6면 객체 선택 // 사용자가 6면중 하나를 선택할때 발생
                     Func_Receive_SelectObject6Shape(arguments[1]);
                     break;
 
@@ -137,7 +137,8 @@ namespace Module.WebAPI
             else if (objIssue)
             {
                 // 점검정보 선택 이벤트를 전달
-                Debug.LogError("TODO");
+                ContentManager.Instance.SelectIssue(objIssue, true);
+                Debug.Log($"[Receive.SelectIssue] : objectName {objIssue.name}");
             }
 
         }
@@ -300,7 +301,8 @@ namespace Module.WebAPI
             MainManager.Instance.UpdateCamData_maxOffset(bound.size.magnitude);
 
             // TODO 0308 표면값 추출
-            List<string> codes = new List<string> { "Top" };
+            List<string> codes = GetSurfaceStrings(_obj);
+            //List<string> codes = new List<string> { "Top" };
             //List<string> codes = Dim.DimScript.Instance.RequestAvailableSurface();
 
             string _fCode = codes.First();
@@ -315,6 +317,28 @@ namespace Module.WebAPI
             ContentManager.Instance.Toggle_Issues(IssueVisualizeOption.SelectedTarget);
 
             yield break;
+        }
+
+        /// <summary>
+        /// 초기화 해야하는 객체의 표시가능 표면을 
+        /// </summary>
+        /// <param name="_target"></param>
+        /// <returns></returns>
+        private List<string> GetSurfaceStrings(GameObject _target)
+        {
+            List<string> result = new List<string>();
+
+            PlatformCode pCode = MainManager.Instance.Platform;
+            if(Platforms.IsBridgePlatform(pCode))
+            {
+                result = Platform.Bridge.Bridges.GetPartSurfaces(_target);
+            }
+            else if(Platforms.IsTunnelPlatform(pCode))
+            {
+                result = Platform.Tunnel.Tunnels.GetPartSurfaces(_target);
+            }
+
+            return result;
         }
 
         #endregion

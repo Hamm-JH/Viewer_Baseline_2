@@ -31,6 +31,8 @@ namespace Management.Events
 		{
 			Obj_Selectable sObj;
 			Issue_Selectable iObj;
+			IItem item;
+
 
 			if (Selected3D.TryGetComponent<Obj_Selectable>(out sObj))
 			{
@@ -111,6 +113,26 @@ namespace Management.Events
 				StatusCode = _success;
 				return;
 			}
+			//// 다른 어떤 아이템을 선택한 경우
+			//else if(Selected3D.TryGetComponent<IItem>(out item))
+            //{
+			//	if(_Items.IsLocationElement(Selected3D))
+            //    {
+			//		// 캐시 객체가 있는지 확인한다.
+			//		if(EventManager.Instance._CachePin == null)
+            //        {
+			//			// 선택 객체의 위치 ?
+			//			//m_hit.point
+			//
+			//			//GameObject obj = _Items.CreateCachePin(m_hit);
+			//			EventManager.Instance._CachePin = _Items.CreateCachePin(m_hit);
+			//		}
+			//		else
+            //        {
+			//			_Items.MoveCachePin(EventManager.Instance._CachePin, m_hit);
+            //        }
+            //    }
+            //}
 		}
 
 		#region Click - 객체 선택

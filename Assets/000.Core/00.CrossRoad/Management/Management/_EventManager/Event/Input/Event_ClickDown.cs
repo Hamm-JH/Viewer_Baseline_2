@@ -99,26 +99,26 @@ namespace Management.Events.Inputs
 		/// <param name="_mousePos"></param>
 		/// <param name="obj"></param>
 		/// <param name="_hit"></param>
-		private void Get_Collect3DObject(Vector3 _mousePos, out GameObject obj, out RaycastHit _hit, out List<RaycastResult> _results)
-		{
-			obj = null;
+		//private void Get_Collect3DObject(Vector3 _mousePos, out GameObject obj, out RaycastHit _hit, out List<RaycastResult> _results)
+		//{
+		//	obj = null;
 
-			//RaycastHit _hit = default(RaycastHit);
-			GameObject _selected3D = Get_GameObject3D(_mousePos, out _hit);
-			_results = Get_GameObjectUI(_mousePos);
+		//	//RaycastHit _hit = default(RaycastHit);
+		//	GameObject _selected3D = Get_GameObject3D(_mousePos, out _hit);
+		//	_results = Get_GameObjectUI(_mousePos);
 
-			if (_results.Count != 0)
-			{
+		//	if (_results.Count != 0)
+		//	{
 
-			}
-			else
-			{
-				if (_selected3D != null)
-				{
-					obj = _selected3D;
-				}
-			}
-		}
+		//	}
+		//	else
+		//	{
+		//		if (_selected3D != null)
+		//		{
+		//			obj = _selected3D;
+		//		}
+		//	}
+		//}
 
 		/// <summary>
 		/// 3D 객체를 마우스 위치에서 가져옴

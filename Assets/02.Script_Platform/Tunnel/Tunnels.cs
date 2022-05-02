@@ -8,7 +8,233 @@ namespace Platform.Tunnel
 
 	public static class Tunnels
 	{
-		
+		public static List<string> GetPartSurfaces(GameObject _obj)
+		{
+			List<string> result = new List<string>();
+
+			string top = "Top";
+			string bottom = "Bottom";
+			string front = "Front";
+			string back = "Back";
+			string left = "Left";
+			string right = "Right";
+
+			string param = _obj.name.Split(',')[2];
+			//Debug.Log(param);
+			switch (param)
+			{
+				#region ETC
+				case "Etc_L_T1":
+				case "Etc_L_T2":
+				case "Etc_L_F":
+				case "Etc_L_Ec":
+				case "Etc_L_Ex":
+					{
+						result.Add(front);
+                    }
+
+					break;
+
+				case "Etc_R_T1":
+				case "Etc_R_T2":
+				case "Etc_R_F":
+				case "Etc_R_Ec":
+				case "Etc_R_Ex":
+					{
+						result.Add(back);
+					}
+					break;
+				#endregion
+
+				#region LIGHT
+				case "L_L_C":
+				case "L_R_C":
+				case "L_C":
+				case "L_L_Si":
+				case "L_R_Si":
+					{
+						result.Add(top);
+					}
+					break;
+				#endregion
+
+				#region WALL
+				case "S_R_Div":
+				case "E_L_Div":
+					{
+						result.Add(top);
+					}
+					break;
+
+				case "S_C_Ga":
+                case "S_L_GaIn":
+                case "S_L_rW0":
+                case "S_L_rW45":
+				case "S_R_Ga":
+				case "S_R_GaIn":
+				case "S_R_rW45":
+					{
+						result.Add(left);
+                    }
+					break;
+
+				case "S_L_rW90":
+                    {
+						result.Add(front);
+                    }
+					break;
+
+				case "S_R_rW90":
+                    {
+						result.Add(back);
+                    }
+					break;
+
+				case "S_C_Sl":
+                case "S_L_SlIn":
+                case "S_L_SlOut":
+                case "S_L_Sl45":
+				case "S_R_SlIn":
+				case "S_R_SlOut":
+				case "S_R_rW0":
+				case "S_R_Sl45":
+					{
+						result.Add(left);
+                    }
+					break;
+
+				case "S_L_Sl90":
+                    {
+						result.Add(back);
+                    }
+					break;
+
+				case "S_R_Sl90":
+					{
+						result.Add(back);
+					}
+					break;
+
+
+				case "E_C_Ga":
+				case "E_L_GaIn":
+				case "E_L_rW0":
+				case "E_L_rW45":
+				case "E_R_Ga":
+				case "E_R_GaIn":
+				case "E_R_rW0":
+				case "E_R_rW45":
+                    {
+						result.Add(right);
+                    }
+					break;
+
+				case "E_L_rW90":
+                    {
+						result.Add(back);
+                    }
+					break;
+
+				case "E_R_rW90":
+                    {
+						result.Add(front);
+                    }
+					break;
+
+				case "E_C_Sl":
+				case "E_L_SlIn":
+				case "E_L_SlOut":
+				case "E_L_Sl45":
+				case "E_R_SlIn":
+				case "E_R_SlOut":
+				case "E_R_Sl45":
+                    {
+						result.Add(right);
+                    }
+					break;
+
+				case "E_L_Sl90":
+                    {
+						result.Add(back);
+                    }
+					break;
+
+				case "E_R_Sl90":
+					{
+						result.Add(front);
+					}
+					break;				
+				
+				#endregion
+
+				#region MAIN
+				case "M_L_DIn":
+				case "M_L_DOut":
+				case "M_R_DIn":
+				case "M_R_DOut":
+					{
+						result.Add(bottom);
+					}
+					break;
+
+				case "M_L_Co":
+				case "M_R_Co":
+					{
+						result.Add(bottom);
+					}
+					break;
+
+				case "M_P":
+					{
+						result.Add(bottom);
+					}
+					break;
+
+				case "M_L_SwI":
+				case "M_L_SwO":
+                    {
+						result.Add(front);
+                    }
+					break;
+
+				case "M_R_SwI":
+				case "M_R_SwO":
+					{
+						result.Add(back);
+					}
+					break;
+
+				case "M_Ce":
+				case "M_L_Ce":
+				case "M_R_Ce":
+					{
+						result.Add(top);
+					}
+					break;
+				#endregion
+
+				#region JET
+				case "J_L_JL":
+				case "J_C_JC":
+				case "J_R_JR":
+					{
+						result.Add(top);
+					}
+					break;
+
+					#endregion
+
+			}
+			//// TODO 여기서 부재 표시가능면 추출
+			//result.Add("Top");
+			//result.Add("Bottom");
+			//result.Add("Front");
+			//result.Add("Back");
+			//result.Add("Left");
+			//result.Add("Right");
+
+			return result;
+		}
 
 		public static string GetName(string _value)
 		{

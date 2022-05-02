@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -739,7 +739,7 @@ MonoBehaviour:
     m_imageURL: 
     m_historyURL: 
     m_keyCode: 
-  m_templateIndex: 0
+  m_templateIndex: 1
   _templateDatas:
   - m_platform: 49
     m_graphic: 2
@@ -804,8 +804,8 @@ MonoBehaviour:
       bOrbitSpeed: 15
       bPanSpeed: 0.5
       bZoomSpeed: 10
-    m_moduleList: 10000000
-    m_functionCode: 11000000
+    m_moduleList: 1000000060000000
+    m_functionCode: 1100000061000000
     m_url: 
     m_baseURL: 
     m_modelURI: http://wesmart.synology.me:45000/3dmodel/20211102-00000066.gltf

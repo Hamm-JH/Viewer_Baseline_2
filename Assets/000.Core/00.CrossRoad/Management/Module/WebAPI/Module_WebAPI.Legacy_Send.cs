@@ -52,9 +52,13 @@ namespace Module.WebAPI
                 // Pin 선택시 Location 정보 넘기는
                 case SendRequestCode.SelectSurfaceLocation:   // 완 ; 9면 선택
                     {
-                        LimitArgument(SendRequestCode.SelectSurfaceLocation.ToString(), 1, arguments);
+                        LimitArgument(SendRequestCode.SelectSurfaceLocation.ToString(), 2, arguments);
 
-                        Func_SelectSurfaceLocation(Parsers.Parse<string>(arguments[0]));
+                        Vector3 arg2 = (Vector3)arguments[1];
+
+                        Func_SelectSurfaceLocation(
+                            (Parsers.Parse<int>(arguments[0])).ToString(),
+                            Parsers.Parse<Vector3>(arguments[1]));
                     }
                     break;
 
@@ -82,15 +86,20 @@ namespace Module.WebAPI
                 objectName = _obj.name;
             }
 
-            List<string> codes = ContentManager.Instance.RequestAvailableSurface();
             string code = "";
-            int index = codes.Count;
-            for (int i = 0; i < index; i++)
+
+            if(_obj != null)
             {
-                code += $"{codes[i]}";
-                if (i != index-1)
+                //List<string> codes = ContentManager.Instance.RequestAvailableSurface();
+                List<string> codes = GetSurfaceStrings(_obj);
+                int index = codes.Count;
+                for (int i = 0; i < index; i++)
                 {
-                    code += ",";
+                    code += $"{codes[i]}";
+                    if (i != index-1)
+                    {
+                        code += ",";
+                    }
                 }
             }
 
@@ -166,7 +175,7 @@ namespace Module.WebAPI
         }
 
         // - :: 진행중 :: 이 코드가 여기서 데이터를 수동으로 수집하는 과정이 필요할까?
-        private void Func_SelectSurfaceLocation(string _locationCode)
+        private void Func_SelectSurfaceLocation(string _locationCode, Vector3 _position)
         {
             // 잘 보니 데이터를 할당하는 과정이 써져있는데.. 그냥 이벤트 걸렸을때 이벤트 관리자에서 데이터 빼와서 데이터 할당하고 보내면 되지않나..?
 
@@ -182,7 +191,7 @@ namespace Module.WebAPI
 			//Issue_Selectable issueEntity = ContentManager.Instance.CacheIssueEntity;
 			//ContentManager.Instance.CacheIssueEntity.SwitchRender(true);
 			//string positionVector = string.Format($"{issueEntity.transform.position.x.ToString()},{issueEntity.transform.position.y.ToString()},{issueEntity.transform.position.z.ToString()}");
-            string positionVector = string.Format($"{0.1f},{0.1f},{0.1f}");
+            string positionVector = string.Format($"{_position.x},{_position.y},{_position.z}");
             //issueEntity.Issue._PositionVector = positionVector;
 
             Debug.Log($"SendRequest SelectSurfaceLocation : locationCode {locationCode}, positionVector {positionVector}");

@@ -7,8 +7,11 @@ namespace Items
 	using Test;
 
 	[RequireComponent(typeof(MeshRenderer))]
-	public class LocationElement : MonoBehaviour
+	public class LocationElement : MonoBehaviour, IItem
 	{
+		/// <summary>
+		/// Location °ü¸®ÀÚ
+		/// </summary>
 		[SerializeField] Controller_LocationGuide m_controller;
 
 		Renderer m_render;

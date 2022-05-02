@@ -32,6 +32,12 @@ namespace Items
 			gameObject.SetActive(_mList.Contains(ModuleCode.Work_Pinmode));
 		}
 
+		/// <summary>
+		/// 가이드 큐브 업 아이템 활성화
+		/// </summary>
+		/// <param name="_target"></param>
+		/// <param name="_baseAngle"></param>
+		/// <param name="_uType"></param>
 		public override void SetGuide(GameObject _target, Vector3 _baseAngle, UIEventType _uType)
 		{
 			Bounds bound = _target.GetComponent<MeshRenderer>().bounds;

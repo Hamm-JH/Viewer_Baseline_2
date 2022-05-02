@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Platform.Bridge
 {
+	using System;
+
 	public static class Bridges
 	{
 		#region Code 
@@ -80,6 +81,20 @@ namespace Platform.Bridge
 		//}
 
 		#endregion
+
+		public static List<string> GetPartSurfaces(GameObject _obj)
+        {
+			List<string> result = new List<string>();
+
+			result.Add("Top");
+			result.Add("Bottom");
+			result.Add("Front");
+			result.Add("Back");
+			result.Add("Left");
+			result.Add("Right");
+
+			return result;
+        }
 
 		public static string GetName(string _value)
 		{

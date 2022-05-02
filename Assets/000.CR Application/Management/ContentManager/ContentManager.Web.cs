@@ -93,7 +93,7 @@ namespace Management
 		/// 웹에서 점검정보 선택
 		/// </summary>
 		/// <param name="transform"></param>
-		/// <param name="v"></param>
+		/// <param name="v"> ? </param>
 		internal void SelectIssue(GameObject _obj, bool _v)
 		{
 			EventManager.Instance.OnEvent(new EventData_API(
