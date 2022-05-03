@@ -12,6 +12,7 @@ namespace Platform.Feature.Camera
 
         public float maxOffsetDistance = 2000f;
         public float orbitSpeed = 15f;
+        public float freeSpeed = 15f;
         public float panSpeed = .5f;
         public float zoomSpeed = 10f;
         [SerializeField] private Vector3 targetOffset = Vector3.zero;
@@ -39,6 +40,11 @@ namespace Platform.Feature.Camera
             if (target != null) transform.LookAt(target);
         }
 
+        /// <summary>
+        /// DRAG 발생
+        /// </summary>
+        /// <param name="btn"></param>
+        /// <param name="delta"></param>
         private void InDrag(int btn, Vector2 delta)
 		{
             Transform _target;
@@ -81,8 +87,12 @@ namespace Platform.Feature.Camera
 			{
                 if(CamMode == CameraModes.BIM_ISO)
 				{
-                    OnRotate(targetPosition, delta, orbitSpeed);
+                    OnOrbitRotate(targetPosition, delta, orbitSpeed);
 				}
+                else if(CamMode == CameraModes.OnlyRotate)
+                {
+                    OnSelfRotate(delta, freeSpeed);
+                }
             }
             else if(btn == 1)
 			{
@@ -96,10 +106,21 @@ namespace Platform.Feature.Camera
 				{
                     OnPanning(targetPosition, delta, panSpeed, targetOffset, maxOffsetDistance);
 				}
+                // 제자리 회전만 하겠다.
+                else if(CamMode == CameraModes.OnlyRotate)
+                {
+
+                }
             }
 		}
 
-        private void OnRotate(Vector3 _tPos, Vector2 _delta, float _orbitSpeed)
+        /// <summary>
+        /// 궤도회전
+        /// </summary>
+        /// <param name="_tPos"></param>
+        /// <param name="_delta"></param>
+        /// <param name="_orbitSpeed"></param>
+        private void OnOrbitRotate(Vector3 _tPos, Vector2 _delta, float _orbitSpeed)
 		{
             transform.RotateAround(_tPos, Vector3.up, _delta.x * _orbitSpeed);
 
@@ -110,6 +131,43 @@ namespace Platform.Feature.Camera
             transform.RotateAround(_tPos, transform.right, pitchDelta);
         }
 
+        /// <summary>
+        /// 자유회전
+        /// </summary>
+        /// <param name="_delta"></param>
+        /// <param name="_freeSpeed"></param>
+        private void OnSelfRotate(Vector2 _delta, float _freeSpeed)
+        {
+            //float pitchAngle = Vector3.Angle(Vector3.up, new Vector3(_delta.x, 0, 0));
+
+            //Vector3 moveDelta = new Vector3(_delta.y, _delta.x);
+            //transform.Rotate(Vector3.up);
+
+            Vector3 angle = transform.rotation.eulerAngles;
+            transform.rotation = Quaternion.Euler(
+                angle.x + _delta.y * freeSpeed,
+                angle.y + _delta.x * freeSpeed,
+                angle.z);
+
+            //float pitchAngle = Vector3.Angle(Vector3.up, transform.forward);
+            //float pitchDelta = _delta.y * freeSpeed;
+            //float newAngle = Mathf.Clamp(pitchAngle + pitchDelta, 0f, 180f);
+            //pitchDelta = newAngle - pitchAngle;
+
+            ////float pitch = 
+            //transform.Rotate(transform.right, pitchDelta);
+
+
+        }
+
+        /// <summary>
+        /// 패닝 이동
+        /// </summary>
+        /// <param name="_tPos"></param>
+        /// <param name="_delta"></param>
+        /// <param name="_panSpeed"></param>
+        /// <param name="_targetOffset"></param>
+        /// <param name="_maxOffsetDistance"></param>
         private void OnPanning(Vector3 _tPos, Vector2 _delta, float _panSpeed, Vector3 _targetOffset, float _maxOffsetDistance)
 		{
             float distance = _Distance / 10;

@@ -16,6 +16,7 @@ namespace Module.UI
 		public void Event_View_Home()
 		{
 			ContentManager.Instance.SetCameraCenterPosition();
+			MainManager.Instance.UpdateCameraMode(Definition.Control.CameraModes.BIM_ISO);
 		}
 
 		public void Event_Toggle_ChildPanel(int index, GameObject ChildPanel)

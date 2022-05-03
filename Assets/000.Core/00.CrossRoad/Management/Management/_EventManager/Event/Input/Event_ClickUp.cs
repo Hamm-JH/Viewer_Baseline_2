@@ -1,4 +1,4 @@
-using Definition;
+ï»¿using Definition;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,8 @@ using UnityEngine;
 
 namespace Management.Events.Inputs
 {
-	using Items;
+    using Definition.Control;
+    using Items;
     using Module.Interaction;
     using Module.Model;
     using Module.UI;
@@ -19,23 +20,23 @@ namespace Management.Events.Inputs
 	public class Event_ClickUp : EventData_Input
 	{
 		/// <summary>
-		/// À§Ä¡ ¿ä¼Ò µ¥ÀÌÅÍ (ÀúÀå¿ë)
+		/// ìœ„ì¹˜ ìš”ì†Œ ë°ì´í„° (ì €ì¥ìš©)
 		/// </summary>
 		[System.Serializable]
 		public class LocationElementData
         {
 			/// <summary>
-			/// À§Ä¡ °´Ã¼°¡ ¼±ÅÃµÇ¾ú´Â°¡?
+			/// ìœ„ì¹˜ ê°ì²´ê°€ ì„ íƒë˜ì—ˆëŠ”ê°€?
 			/// </summary>
 			public bool m_isLocationSelected = false;
 
 			/// <summary>
-			/// À§Ä¡ °´Ã¼ ÀÓ½Ã collider onoff
+			/// ìœ„ì¹˜ ê°ì²´ ì„ì‹œ collider onoff
 			/// </summary>
 			public GameObject m_locationObject;
 
 			/// <summary>
-			/// À§Ä¡ ÀÎµ¦½º¸¦ °¡Áø´Ù.
+			/// ìœ„ì¹˜ ì¸ë±ìŠ¤ë¥¼ ê°€ì§„ë‹¤.
 			/// </summary>
 			public int m_locationIndex;
 
@@ -52,7 +53,7 @@ namespace Management.Events.Inputs
 		UnityEvent<GameObject> m_clickEvent;
 
 		/// <summary>
-		/// À§Ä¡¿ä¼Ò µ¥ÀÌÅÍ°¡ ÀâÇûÀ» °æ¿ì »ı¼ºµÇ´Â °´Ã¼
+		/// ìœ„ì¹˜ìš”ì†Œ ë°ì´í„°ê°€ ì¡í˜”ì„ ê²½ìš° ìƒì„±ë˜ëŠ” ê°ì²´
 		/// </summary>
 		LocationElementData locData = null;
 
@@ -87,7 +88,7 @@ namespace Management.Events.Inputs
 			{
 				Func_Input_clickSuccessUp(_success);
 			}
-			// ºó °ø°£À» ´©¸¥ °æ¿ì
+			// ë¹ˆ ê³µê°„ì„ ëˆ„ë¥¸ ê²½ìš°
 			else if (m_results.Count == 0)
 			{
 				//Element = null;
@@ -95,7 +96,7 @@ namespace Management.Events.Inputs
 				StatusCode = Status.Pass;
 				//StatusCode = _fail;
 			}
-			// UI °´Ã¼¸¦ ´©¸¥ °æ¿ì m_results.Count != 0
+			// UI ê°ì²´ë¥¼ ëˆ„ë¥¸ ê²½ìš° m_results.Count != 0
 			else
 			{
 				//Element = null;
@@ -104,39 +105,39 @@ namespace Management.Events.Inputs
 			}
 
 			PlatformCode pCode = MainManager.Instance.Platform;
-			if (!Platforms.IsDemoWebViewer(pCode)) return;  // ¾Æ·¡ ÄÚµå´Â µ¥¸ğ À¥ ºä¾î¿¡¼­ µ¿ÀÛÇÔ.
+			if (!Platforms.IsDemoWebViewer(pCode)) return;  // ì•„ë˜ ì½”ë“œëŠ” ë°ëª¨ ì›¹ ë·°ì–´ì—ì„œ ë™ì‘í•¨.
 
 
 			if (Selected3D == null) return;
 
-			// ¼±ÅÃÇÑ °´Ã¼°¡ ¾ÆÀÌÅÛ °´Ã¼ÀÎ°¡?
+			// ì„ íƒí•œ ê°ì²´ê°€ ì•„ì´í…œ ê°ì²´ì¸ê°€?
 			IItem item;
 			if(Selected3D.TryGetComponent<IItem>(out item))
             {
-				// ÀÌ °´Ã¼´Â locationElement¸¦ Æ÷ÇÔÇÏ´Â°¡?
+				// ì´ ê°ì²´ëŠ” locationElementë¥¼ í¬í•¨í•˜ëŠ”ê°€?
 				if(_Items.IsLocationElement(Selected3D))
                 {
-					// locationElement¿¡¼­ À§Ä¡°ªÀ» °ËÃâÇÑ´Ù.
+					// locationElementì—ì„œ ìœ„ì¹˜ê°’ì„ ê²€ì¶œí•œë‹¤.
 					int locIndex = ((LocationElement)item).Index;
 
-					// ½Å±Ô locationElementData¸¦ »ı¼ºÇÏ°í, °ËÃâÇÑ Á¤º¸¸¦ ÀúÀåÇÑ´Ù.
+					// ì‹ ê·œ locationElementDataë¥¼ ìƒì„±í•˜ê³ , ê²€ì¶œí•œ ì •ë³´ë¥¼ ì €ì¥í•œë‹¤.
 					locData = new LocationElementData();
 
 					locData.m_locationIndex = locIndex;
 					locData.m_locationObject = Selected3D;
 
-					// ÀÓ½Ã·Î collider²û
+					// ì„ì‹œë¡œ colliderë”
 					locData.m_locationObject.GetComponent<Collider>().enabled = false;
 
-					// ´Ù½Ã collider ¼öÇà
+					// ë‹¤ì‹œ collider ìˆ˜í–‰
 					Get_Collect3DObject(m_clickPosition, out m_selected3D, out m_hit, out m_results);
 
-					// ´Ù½Ã Selected3D ¿¬»ê ¼öÇà
+					// ë‹¤ì‹œ Selected3D ì—°ì‚° ìˆ˜í–‰
 					if (Selected3D != null)
 					{
 						Func_Input_clickSuccessUp(_success);
 					}
-					// ºó °ø°£À» ´©¸¥ °æ¿ì
+					// ë¹ˆ ê³µê°„ì„ ëˆ„ë¥¸ ê²½ìš°
 					else if (m_results.Count == 0)
 					{
 						//Element = null;
@@ -144,7 +145,7 @@ namespace Management.Events.Inputs
 						StatusCode = Status.Pass;
 						//StatusCode = _fail;
 					}
-					// UI °´Ã¼¸¦ ´©¸¥ °æ¿ì m_results.Count != 0
+					// UI ê°ì²´ë¥¼ ëˆ„ë¥¸ ê²½ìš° m_results.Count != 0
 					else
 					{
 						//Element = null;
@@ -152,7 +153,7 @@ namespace Management.Events.Inputs
 						StatusCode = Status.Pass;
 					}
 
-					// collider ´Ù½Ã È°¼ºÈ­
+					// collider ë‹¤ì‹œ í™œì„±í™”
 					locData.m_locationObject.GetComponent<Collider>().enabled = true;
 				}
             }
@@ -170,21 +171,21 @@ namespace Management.Events.Inputs
 
 				if (obj.TryGetComponent<Obj_Selectable>(out sObj))
 				{
-					StartEvent_SelectObject(Elements.Last().Target);
+					StartEvent_SelectObject(Elements.Last().Target, _sEvents);
 					//m_clickEvent.Invoke(Elements.Last().Target);
 					//ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
 				}
 				else if (obj.TryGetComponent<Issue_Selectable>(out iObj))
 				{
-					StartEvent_SelectIssue(Elements.Last().Target);
+					StartEvent_SelectIssue(Elements.Last().Target, _sEvents);
 					//m_clickEvent.Invoke(Elements.Last().Target);
 					//ContentManager.Instance.OnSelect_Issue(Elements.Last().Target);
 				}
 			}
-			// UI ¶Ç´Â ºó °ø°£À» ¼±ÅÃÇÑ °æ¿ì
+			// UI ë˜ëŠ” ë¹ˆ ê³µê°„ì„ ì„ íƒí•œ ê²½ìš°
 			else
 			{
-				// UI ¼±ÅÃÀÇ °á°ú°¡ 0 ÀÌ»óÀÎ °æ¿ì
+				// UI ì„ íƒì˜ ê²°ê³¼ê°€ 0 ì´ìƒì¸ ê²½ìš°
 				if (Results.Count != 0)
 				{
 					StartEvent_SelectUI(_sEvents, Results);
@@ -207,41 +208,50 @@ namespace Management.Events.Inputs
 			}
 		}
 
-		public void StartEvent_SelectObject(GameObject _obj)
+		public void StartEvent_SelectObject(GameObject _obj, Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			PlatformCode pCode = MainManager.Instance.Platform;
 
 			if(Platforms.IsDemoAdminViewer(pCode))
 			{
-				// °´Ã¼´Â 34´Ü°è¿¡¼­ ´­¸®¸é ¾ÈµÊ.
+				// ê°ì²´ëŠ” 34ë‹¨ê³„ì—ì„œ ëˆŒë¦¬ë©´ ì•ˆë¨.
 				AModuleStatus aStat = EventManager.Instance._Statement.GetModuleStatus(ModuleCode.Issue_Administration);
 				if(aStat != null)
 				{
-					// ÇöÀç »óÅÂ°¡ ±âº» °ü¸®¸ğµå(1 2 5)ÀÎ°¡?
+					// í˜„ì¬ ìƒíƒœê°€ ê¸°ë³¸ ê´€ë¦¬ëª¨ë“œ(1 2 5)ì¸ê°€?
 					if (aStat.IsDefaultAdministrationMode())
 					{
 						m_clickEvent.Invoke(_obj);
 					}
-					// ÁöÁ¤¸ğµå (3 4)
+					// ì§€ì •ëª¨ë“œ (3 4)
 					else { }
 				}
 				
 			}
 			else if(Platforms.IsDemoWebViewer(pCode))
             {
-				// À§Ä¡ µ¥ÀÌÅÍ°¡ nullÀÏ °æ¿ì
+				// ìœ„ì¹˜ ë°ì´í„°ê°€ nullì¼ ê²½ìš°
 				if(locData == null)
                 {
+					GameObject currObj = null;
+					GameObject selectedObj = null;
+					// ë™ì¼í•œ ê°ì²´ë¥¼ ì„ íƒí•œ ê²½ìš°.
+					if(_Events.IsSameObjectSelected(Elements, _sEvents, out currObj, out selectedObj))
+                    {
+						Cameras.SetCameraDOTweenPosition(MainManager.Instance.MainCamera, currObj);
+						Cameras.SetCameraMode(CameraModes.OnlyRotate);	
+                    }
+
 					m_clickEvent.Invoke(_obj);
 					ContentManager.Instance.OnSelect_3D(_obj);
                 }
-				// À§Ä¡ µ¥ÀÌÅÍ°¡ nullÀÌ ¾Æ´Ñ °æ¿ì
+				// ìœ„ì¹˜ ë°ì´í„°ê°€ nullì´ ì•„ë‹Œ ê²½ìš°
 				else if(locData != null)
                 {
-					//locData.m_locationIndex	// ÀÎµ¦½º
-					//m_hit.point; // Å¬¸¯À§Ä¡
+					//locData.m_locationIndex	// ì¸ë±ìŠ¤
+					//m_hit.point; // í´ë¦­ìœ„ì¹˜
 
-					// Ä³½Ã °´Ã¼°¡ ÀÖ´ÂÁö È®ÀÎ
+					// ìºì‹œ ê°ì²´ê°€ ìˆëŠ”ì§€ í™•ì¸
 					if(EventManager.Instance._CachePin == null)
                     {
 						EventManager.Instance._CachePin = _Items.CreateCachePin(m_hit);
@@ -273,7 +283,7 @@ namespace Management.Events.Inputs
 				UITemplate_SmartInspect ui;
 				foreach(var value in interaction.UiInstances)
                 {
-					// °¢ UI °³Ã¼ Áß¿¡¼­ UITemplate_SmartInspect¿¡ ÇØ´çÇÏ´Â °³Ã¼°¡ ÀÖ´ÂÁö È®ÀÎÇÑ´Ù. Á¸ÀçÇÏ´Â °æ¿ì
+					// ê° UI ê°œì²´ ì¤‘ì—ì„œ UITemplate_SmartInspectì— í•´ë‹¹í•˜ëŠ” ê°œì²´ê°€ ìˆëŠ”ì§€ í™•ì¸í•œë‹¤. ì¡´ì¬í•˜ëŠ” ê²½ìš°
 					if(Utilities.Objects.TryGetValue<UITemplate_SmartInspect>(value.gameObject, out ui))
                     {
 						ui.Input_Select3DObject(_obj);
@@ -287,7 +297,7 @@ namespace Management.Events.Inputs
             }
 		}
 
-		public void StartEvent_SelectIssue(GameObject _obj)
+		public void StartEvent_SelectIssue(GameObject _obj, Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			PlatformCode pCode = MainManager.Instance.Platform;
 
@@ -321,12 +331,12 @@ namespace Management.Events.Inputs
 
 			if(Platforms.IsDemoAdminViewer(pCode))
 			{
-				// ui ¼±ÅÃ¸®½ºÆ® 0 ¾Æ´Ï°í clickDownÀÌ ÀÖ´Â°¡?
+				// ui ì„ íƒë¦¬ìŠ¤íŠ¸ 0 ì•„ë‹ˆê³  clickDownì´ ìˆëŠ”ê°€?
 				if (Results.Count != 0 && _sEvents.ContainsKey(InputEventType.Input_clickDown)) 
 				{
 					AModuleStatus aStat = EventManager.Instance._Statement.GetModuleStatus(ModuleCode.Issue_Administration);
 
-					// null ¾Æ´Ï°í ÁöÁ¤¸ğµå(3 4)ÀÎ°¡?
+					// null ì•„ë‹ˆê³  ì§€ì •ëª¨ë“œ(3 4)ì¸ê°€?
 					if (aStat != null && !aStat.IsDefaultAdministrationMode())
 					{
 						List<RaycastResult> hits = _sEvents[InputEventType.Input_clickDown].Results;
@@ -369,7 +379,7 @@ namespace Management.Events.Inputs
 				UITemplate_SmartInspect ui;
 				foreach (var value in interaction.UiInstances)
 				{
-					// °¢ UI °³Ã¼ Áß¿¡¼­ UITemplate_SmartInspect¿¡ ÇØ´çÇÏ´Â °³Ã¼°¡ ÀÖ´ÂÁö È®ÀÎÇÑ´Ù. Á¸ÀçÇÏ´Â °æ¿ì
+					// ê° UI ê°œì²´ ì¤‘ì—ì„œ UITemplate_SmartInspectì— í•´ë‹¹í•˜ëŠ” ê°œì²´ê°€ ìˆëŠ”ì§€ í™•ì¸í•œë‹¤. ì¡´ì¬í•˜ëŠ” ê²½ìš°
 					if (Utilities.Objects.TryGetValue<UITemplate_SmartInspect>(value.gameObject, out ui))
 					{
 						ui.Input_Select3DObject(null);

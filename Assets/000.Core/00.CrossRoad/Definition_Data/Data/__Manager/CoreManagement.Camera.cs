@@ -51,6 +51,11 @@ namespace Definition.Data
 			CameraMode = _modes;
 		}
 
+		public void SetCameraMode(CameraModes _mode)
+        {
+			CameraMode = _mode;
+        }
+
 		public void SetCameraPosition(Bounds centerBounds, Canvas rootCanvas, UIEventType eventType, 
 			Vector3 _baseAngle = default(Vector3))
 		{

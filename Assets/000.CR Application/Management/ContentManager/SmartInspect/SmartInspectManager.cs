@@ -12,7 +12,7 @@ namespace Management.Content
             base.OnCreate();
 
             // DOTween √ ±‚»≠
-            DOTween.Init();
+            //DOTween.Init();
         }
     }
 }

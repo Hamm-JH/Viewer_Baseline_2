@@ -241,6 +241,10 @@ namespace Module.WebAPI
             }
         }
 
+        /// <summary>
+        /// 핀모드 OnOff
+        /// </summary>
+        /// <param name="isMode"></param>
         private void Toggle_ChangePinMode(bool isMode)
 		{
             var moduleList = EventManager.Instance._ModuleList;
@@ -316,6 +320,9 @@ namespace Module.WebAPI
             // 선택된 객체에 해당하는 손상/보강 객체만 표시하기
             ContentManager.Instance.Toggle_Issues(IssueVisualizeOption.SelectedTarget);
 
+            // 핀모드 Off
+            Toggle_ChangePinMode(false);
+
             yield break;
         }
 
@@ -353,6 +360,9 @@ namespace Module.WebAPI
 			{
                 moduleList.Remove(ModuleCode.WorkQueue);
                 moduleList.Remove(ModuleCode.Work_Pinmode);
+
+                // 핀모드 off
+                Toggle_ChangePinMode(false);
 
                 StartCoroutine(FinishRequestMode());
             }

@@ -17,7 +17,8 @@ namespace Platform.Feature.Camera
 			if (_mode == CameraModes.BIM_ISO
 				|| _mode == CameraModes.BIM_Top
 				|| _mode == CameraModes.BIM_Side
-				|| _mode == CameraModes.BIM_Bottom)
+				|| _mode == CameraModes.BIM_Bottom
+				|| _mode == CameraModes.OnlyRotate)
 			{
 				this.enabled = true;
 			}
@@ -76,6 +77,7 @@ namespace Platform.Feature.Camera
 			Debug.Log($"***** data : {_camData.bMaxOffsetDistance}");
 			maxOffsetDistance = _camData.bMaxOffsetDistance;
 			orbitSpeed = _camData.bOrbitSpeed;
+			freeSpeed = _camData.bFreeSpeed;	// TODO :: 임시. 궤도회전 속도값을 차용
 			panSpeed = _camData.bPanSpeed;
 			zoomSpeed = _camData.bZoomSpeed;
 		}
