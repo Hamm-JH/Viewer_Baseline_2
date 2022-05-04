@@ -99,7 +99,6 @@ namespace Definition
 
                 case MaterialType.White:
                     throw new System.Exception("White ±¸Çö");
-                    break;
 
                 case MaterialType.ObjDefault1:
                     result = Resources.Load<Material>("3D/ObjMat");

@@ -105,7 +105,7 @@ namespace Indicator.Element
             {
                 image.texture = _texture;
             }
-            catch (System.Exception e) 
+            catch (System.Exception)
             {
 
             }

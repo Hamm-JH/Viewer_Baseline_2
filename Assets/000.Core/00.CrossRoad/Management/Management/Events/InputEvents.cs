@@ -15,7 +15,7 @@ namespace Management.Events
 	[System.Serializable]
 	public class InputEvents : IEvents
 	{
-		public InputEvents(Mouse.Data _mouse, Keyboard.Data _keyboard)
+		public InputEvents(Mouse.Data _mouse, Keyboard.Data _keyboard, Touchpad.Data _touchpad)
 		{
 			this.clickEvent = new UnityEvent<InputEventType, int, Vector3>();
 			this.dragEvent = new UnityEvent<InputEventType, int, Vector2>();
@@ -24,6 +24,7 @@ namespace Management.Events
 
 			MouseData = _mouse;
 			KeyboardData = _keyboard;
+			TouchpadData = _touchpad;
 		}
 
 		/// <summary>

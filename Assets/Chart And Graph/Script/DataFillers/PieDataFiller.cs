@@ -96,17 +96,20 @@ public class PieDataFiller : MonoBehaviour
         }
     }
 
+    [Obsolete]
     void Start()
     {
         if (FillOnStart)
             Fill();
     }
 
+    [Obsolete]
     public void Fill()
     {
         Fill(null);
     }
 
+    [Obsolete]
     public void Fill(WWWForm postData)
     {
         StartCoroutine(GetData(postData));
@@ -159,11 +162,14 @@ public class PieDataFiller : MonoBehaviour
             return UnityWebRequest.Get(RemoteUrl);
         return UnityWebRequest.Post(RemoteUrl, postData);
     }
+
+    [Obsolete]
     IEnumerator GetData(WWWForm postData)
     {
         using (UnityWebRequest webRequest = CreateRequest(postData))
         {
             yield return webRequest.SendWebRequest();
+            
             if (webRequest.isNetworkError)
                 Debug.LogError("Bar Data Filler : URL request failed ," + webRequest.error);
             else

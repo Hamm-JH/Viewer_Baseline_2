@@ -42,7 +42,7 @@ namespace Test
 
 			if(Input.GetMouseButtonDown(0))
 			{
-				RaycastHit hit;
+				//RaycastHit hit;
 				List<RaycastHit> hits;
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 

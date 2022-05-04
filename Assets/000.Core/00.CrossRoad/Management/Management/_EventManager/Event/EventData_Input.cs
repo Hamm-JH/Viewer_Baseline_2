@@ -31,7 +31,7 @@ namespace Management.Events
 		{
 			Obj_Selectable sObj;
 			Issue_Selectable iObj;
-			IItem item;
+			//IItem item;
 
 
 			if (Selected3D.TryGetComponent<Obj_Selectable>(out sObj))

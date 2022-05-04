@@ -157,7 +157,7 @@ namespace Module.UI
 
         private int LeftMenu_StatusChange(int index)
         {
-            int result = -2;
+            //int result = -2;
             int currIndex = m_eventBase.m_index;
 
             // 같은 인덱스를 또 눌렀을 경우

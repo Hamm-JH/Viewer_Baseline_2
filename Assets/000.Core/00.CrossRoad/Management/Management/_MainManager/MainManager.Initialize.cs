@@ -38,12 +38,12 @@ namespace Management
 			InitCoreData(_data);
 
 			// 입력 인스턴스 초기화
-			InitInputResource(_core._Platform);
+			InitInputResource(_core._Platforms);
 
 			// 카메라 리소스 초기화
 			InitCameraResource(_core.CameraMode, cameraExecuteEvents);
 
-			Load_Scene(_core._Platform);
+			Load_Scene(_core._Platforms);
 		}
 
 		#endregion
@@ -52,7 +52,7 @@ namespace Management
 
 		private void InitCoreData(CoreData _data)
 		{
-			_core._Platform = _data.Platform;
+			_core._Platforms = _data.Platform;
 			_core.GraphicMode = _data.Graphic;
 		}
 
@@ -73,15 +73,16 @@ namespace Management
 			// :: 플랫폼 코드만으로 해결이 안됨.
 
 			// TODO 기기 검색코드 작성
-			if(Platforms.IsPCPlatform(_pCode))
+			if(Platforms.IsMobilePlatform(_pCode))
+            {
+				InitSingleInputResource<Platform.Feature._Input.Touchpad>("touchpad");
+				//Debug.LogError("아직 Mobile 코드가 작성되지 않았습니다. 작성 후 업데이트 필요함.");
+			}
+			else if(Platforms.IsPCPlatform(_pCode))
             {
 				InitSingleInputResource<Platform.Feature._Input.Mouse>("mouse");
 				InitSingleInputResource<Platform.Feature._Input.Keyboard>("keyboard");
             }
-			else if(Platforms.IsMobilePlatform(_pCode))
-            {
-				Debug.LogError("아직 Mobile 코드가 작성되지 않았습니다. 작성 후 업데이트 필요함.");
-			}
 			else
             {
 				throw new Definition.Exceptions.PlatformNotDefinedException(_pCode);
