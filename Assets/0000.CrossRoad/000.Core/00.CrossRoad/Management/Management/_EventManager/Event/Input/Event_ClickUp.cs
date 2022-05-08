@@ -170,13 +170,13 @@ namespace Management.Events.Inputs
 
 				if (obj.TryGetComponent<Obj_Selectable>(out sObj))
 				{
-					StartEvent_SelectObject(Elements.Last().Target);
+					StartEvent_SelectObject(Elements.Last().Target, _sEvents);
 					//m_clickEvent.Invoke(Elements.Last().Target);
 					//ContentManager.Instance.OnSelect_3D(Elements.Last().Target);
 				}
 				else if (obj.TryGetComponent<Issue_Selectable>(out iObj))
 				{
-					StartEvent_SelectIssue(Elements.Last().Target);
+					StartEvent_SelectIssue(Elements.Last().Target, _sEvents);
 					//m_clickEvent.Invoke(Elements.Last().Target);
 					//ContentManager.Instance.OnSelect_Issue(Elements.Last().Target);
 				}
@@ -207,7 +207,7 @@ namespace Management.Events.Inputs
 			}
 		}
 
-		public void StartEvent_SelectObject(GameObject _obj)
+		public void StartEvent_SelectObject(GameObject _obj, Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			PlatformCode pCode = MainManager.Instance.Platform;
 
@@ -234,6 +234,18 @@ namespace Management.Events.Inputs
                 {
 					m_clickEvent.Invoke(_obj);
 					ContentManager.Instance.OnSelect_3D(_obj);
+
+					string curr = Elements.First().Target.name;
+					string selected = "";
+					if(_sEvents.ContainsKey(InputEventType.Input_clickSuccessUp))
+					{
+						selected = _sEvents[InputEventType.Input_clickSuccessUp].Elements.First().Target.name;
+					}
+
+					if (curr == selected)
+					{
+						Debug.Log("같은 객체를 선택함");
+					}
                 }
 				// 위치 데이터가 null이 아닌 경우
 				else if(locData != null)
@@ -287,7 +299,7 @@ namespace Management.Events.Inputs
             }
 		}
 
-		public void StartEvent_SelectIssue(GameObject _obj)
+		public void StartEvent_SelectIssue(GameObject _obj, Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			PlatformCode pCode = MainManager.Instance.Platform;
 
