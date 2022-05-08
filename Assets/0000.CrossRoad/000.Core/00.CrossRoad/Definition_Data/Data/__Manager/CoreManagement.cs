@@ -41,7 +41,7 @@ namespace Definition.Data
 		[SerializeField] GraphicCode m_graphicMode;
 		[SerializeField] CameraModes m_cameraMode;
 
-		public PlatformCode _Platform
+		public PlatformCode _Platforms
 		{ 
 			get => m_platform;
 			set => m_platform=value;

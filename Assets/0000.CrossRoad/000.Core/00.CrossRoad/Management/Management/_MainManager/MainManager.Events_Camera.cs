@@ -5,7 +5,8 @@ using UnityEngine;
 namespace Management
 {
 	using Definition;
-	using UnityEngine.Events;
+    using Definition.Control;
+    using UnityEngine.Events;
 
 	public partial class MainManager : IManager<MainManager>
 	{
@@ -19,6 +20,11 @@ namespace Management
 		{
 			_core.SetCameraMode(_eventType);
 		}
+
+		public void UpdateCameraMode(CameraModes _mode)
+        {
+			_core.SetCameraMode(_mode);
+        }
 
 		public void SetCameraPosition(Bounds centerBounds, Canvas rootCanvas, 
 			UIEventType eventType = UIEventType.Viewport_ViewMode_ISO)
@@ -51,5 +57,7 @@ namespace Management
 			_value = _value * 0.8f;
 			_core.Cameras.ForEach(x => x.SetData_MaxOffset(_value));
 		}
+
+		
 	}
 }

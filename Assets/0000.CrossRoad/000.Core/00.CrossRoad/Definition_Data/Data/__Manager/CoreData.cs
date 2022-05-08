@@ -25,9 +25,11 @@ namespace Definition.Data
 		[Header("Input Value")]
 		[SerializeField] Mouse.Data mouseData;
 		[SerializeField] Keyboard.Data keyboardData;
+		[SerializeField] Touchpad.Data touchpadData;
 
 		public Mouse.Data MouseData { get => mouseData; set => mouseData=value; }
 		public Keyboard.Data KeyboardData { get => keyboardData; set => keyboardData=value; }
+		public Touchpad.Data TouchpadData { get => touchpadData; set => touchpadData = value; }
 
 		[SerializeField] ICamera.Data cameraData;
 		public ICamera.Data CameraData { get => cameraData; set => cameraData=value; }
@@ -60,8 +62,9 @@ namespace Definition.Data
 		public string ImageURL { get => m_imageURL; set => m_imageURL=value; }
 		public string HistoryURL { get => m_historyURL; set => m_historyURL=value; }
 		public string KeyCode { get => m_keyCode; set => m_keyCode=value; }
+        
 
-		//20211202-00000283
+        //20211202-00000283
 
-	}
+    }
 }

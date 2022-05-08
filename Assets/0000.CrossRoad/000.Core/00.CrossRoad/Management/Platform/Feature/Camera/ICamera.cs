@@ -19,6 +19,7 @@ namespace Platform.Feature.Camera
 			#region BIM Camera
 			public float bMaxOffsetDistance;// = 2000f;
 			public float bOrbitSpeed;// = 15f;
+			public float bFreeSpeed;// = 10f;
 			public float bPanSpeed;// = .5f;
 			public float bZoomSpeed;// = 10f;
 			#endregion

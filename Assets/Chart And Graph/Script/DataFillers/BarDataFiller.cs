@@ -141,17 +141,20 @@ public class BarDataFiller : MonoBehaviour
         }
     }
 
+    [Obsolete]
     void Start()
     {
         if (FillOnStart)
             Fill();
     }
 
+    [Obsolete]
     public void Fill()
     {
         Fill(null);
     }
 
+    [Obsolete]
     public void Fill(WWWForm postData)
     {
         StartCoroutine(GetData(postData));
@@ -218,6 +221,8 @@ public class BarDataFiller : MonoBehaviour
             return UnityWebRequest.Get(RemoteUrl);
         return UnityWebRequest.Post(RemoteUrl, postData);
     }
+
+    [Obsolete]
     IEnumerator GetData(WWWForm postData)
     {
         using (UnityWebRequest webRequest = CreateRequest(postData))

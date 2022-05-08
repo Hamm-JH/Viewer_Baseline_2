@@ -42,7 +42,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RendererFeatures:
   - {fileID: -5547363639339810604}
-  - {fileID: 11400000, guid: 3ce0dc2eb68e6934b8714bdd5f50848f, type: 2}
+  - {fileID: 11400000, guid: 8713b811a8cf90e46a8368516c1ca871, type: 2}
   m_RendererFeatureMap: d4803b4529ce03b340f3ad0000000000
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}

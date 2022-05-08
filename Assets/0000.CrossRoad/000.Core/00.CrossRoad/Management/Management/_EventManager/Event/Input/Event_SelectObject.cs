@@ -14,9 +14,11 @@ namespace Management.Events.Inputs
 	{
 		GameObject m_inAPISelected;
 		UnityEvent<GameObject> m_clickEvent;
-		bool m_isPassAPI;
+#pragma warning disable IDE0044 // 읽기 전용 한정자 추가
+        bool m_isPassAPI;
+#pragma warning restore IDE0044 // 읽기 전용 한정자 추가
 
-		public Event_SelectObject(InputEventType _eventType,
+        public Event_SelectObject(InputEventType _eventType,
 			GameObject _obj, UnityEvent<GameObject> _event)
 		{
 			StatusCode = Status.Ready;

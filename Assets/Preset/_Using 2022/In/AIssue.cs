@@ -331,7 +331,7 @@ namespace Issue
 
         public string Convert9Location(int locationIndex)
         {
-            string result = "";
+            //string result = "";
             switch (locationIndex)
             {
                 case 1: return "상단좌측";

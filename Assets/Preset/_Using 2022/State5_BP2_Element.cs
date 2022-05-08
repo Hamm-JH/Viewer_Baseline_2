@@ -963,7 +963,7 @@ namespace Indicator.Element
 
         private int CompareOfDays(DateTime startDate, DateTime endDate)
         {
-            int result = 0;
+            //int result = 0;
 
             TimeSpan TS = endDate - startDate;
 

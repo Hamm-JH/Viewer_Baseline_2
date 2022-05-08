@@ -27,7 +27,7 @@ namespace Module.UI
 				ContentManager.Instance.SetModuleStatus(mCode, _mStatus);
 
 				// 1 캐시 객체
-				GameObject cache = null;
+				//GameObject cache = null;
 				List<GameObject> caches = new List<GameObject>();
 
 				// 3 메인 카메라, 서브 카메라

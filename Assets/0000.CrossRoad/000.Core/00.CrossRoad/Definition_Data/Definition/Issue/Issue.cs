@@ -302,7 +302,6 @@ namespace Definition._Issue
 			string k_DcLocation			= "";
 			string k_IssueCode			= "";
 
-			string kYnRecover			= "";
 			string kIssueStatus			= "";
 			string k_PositionVector		= "";
 			string kDateDmg				= "";
@@ -324,9 +323,8 @@ namespace Definition._Issue
 				kDcMemberSurface	= "dcDamageMemberSurface";
 				k_DcLocation		= "dcLocation";
 				k_IssueCode			= "fgDA001";
-
-				kYnRecover			= "";
-				kIssueStatus		= "dcGrade";
+               
+				kIssueStatus = "dcGrade";
 				k_PositionVector	= "dcPinLocation";
 				kDateDmg			= "dtCheck";
 				kWidth				= "noDamageWidth";
@@ -347,9 +345,8 @@ namespace Definition._Issue
 				kDcMemberSurface    = "dcDamageMemberSurface";
 				k_DcLocation        = "dcLocation";
 				k_IssueCode         = "fgDA001";
-
-				kYnRecover          = "";
-				kIssueStatus        = "dcGrade";
+               
+				kIssueStatus = "dcGrade";
 				k_PositionVector    = "dcPinLocation";
 				kDateDmg            = "dtCheck";
 				kWidth              = "noDamageWidth";
@@ -417,7 +414,7 @@ namespace Definition._Issue
 			
 			string kYnRecover		= "";
 			string k_PositionVector	= "";
-			string kIssueStatus		= "";
+
 			string kDateRcvStart	= "";
 			string kDateRcvEnd		= "";
 			string kWidth			= "";
@@ -443,8 +440,8 @@ namespace Definition._Issue
 									
 				kYnRecover			= "ynRecover";
 				k_PositionVector	= "dcPinLocation";
-				kIssueStatus		= "";
-				kDateRcvStart		= "dtStart";
+               
+				kDateRcvStart = "dtStart";
 				kDateRcvEnd			= "dtEnd";
 				kWidth				= "noDamageWidth";
 				kHeight				= "noDamageHeight";
@@ -468,8 +465,8 @@ namespace Definition._Issue
 
 				kYnRecover          = "ynRecover";
 				k_PositionVector    = "dcPinLocation";
-				kIssueStatus        = "";
-				kDateRcvStart       = "dtStart";
+                
+				kDateRcvStart = "dtStart";
 				kDateRcvEnd         = "dtEnd";
 				kWidth              = "noDamageWidth";
 				kHeight             = "noDamageHeight";

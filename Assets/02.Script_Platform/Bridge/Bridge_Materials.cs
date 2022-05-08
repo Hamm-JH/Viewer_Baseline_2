@@ -55,7 +55,7 @@ namespace Platform.Bridge
             List<Material> result = new List<Material>();
 
             string basePath = "Projects/Bridge/Materials";
-            string AddPath = "";
+            //string AddPath = "";
 
             List<string> mList = new List<string>();
             List<string> spls = _name.Split(',').ToList();
@@ -71,14 +71,6 @@ namespace Platform.Bridge
             {
                 result.Add(Resources.Load<Material>($"{basePath}/{x[0]}/{x}"));
             });
-            //switch (_bCode)
-            //{
-            //    case BridgeCode.FT:
-            //        {
-            //            result.Add(Resources.Load<Material>)
-            //        }
-            //        break;
-            //}
 
             //return Set_SingleColor(_name);
             return result.ToArray();

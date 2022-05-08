@@ -54,7 +54,7 @@ namespace Management
 
 		public PlatformCode Platform
 		{
-			get => _core._Platform;
+			get => _core._Platforms;
 		}
 
 		public GraphicCode Graphic

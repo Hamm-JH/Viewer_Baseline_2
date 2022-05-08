@@ -10,8 +10,9 @@ namespace Management
 	using Platform.Feature.Camera;
 	using UnityEngine.Events;
 	using Definition.Data;
+    using DG.Tweening;
 
-	public partial class MainManager : IManager<MainManager>
+    public partial class MainManager : IManager<MainManager>
 	{
 		// Start is called before the first frame update
 		void Start()
@@ -27,6 +28,8 @@ namespace Management
 		public override void OnCreate()
 		{
 			Debug.Log("OnCreate");
+
+			DOTween.Init();
 
 			// 설정 데이터값을 요청한다.
 			// 데이터 설정이 끝나면 시스템 인스턴스를 초기화한다.

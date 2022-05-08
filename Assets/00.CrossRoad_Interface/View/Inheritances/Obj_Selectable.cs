@@ -12,8 +12,10 @@ namespace View
 
 	public class Obj_Selectable : Interactable
 	{
-		UIEventType _uiEventType;
-		Outlinable m_outlinable;
+#pragma warning disable IDE0052 // 읽지 않은 private 멤버 제거
+        UIEventType _uiEventType;
+#pragma warning restore IDE0052 // 읽지 않은 private 멤버 제거
+        Outlinable m_outlinable;
 		Bounds m_bounds;
 
 		private void Start()

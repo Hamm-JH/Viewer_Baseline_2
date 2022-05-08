@@ -19,7 +19,8 @@ namespace Management
 		{
 			inputEvents = new Events.InputEvents(
 				_mouse: _data.MouseData,
-				_keyboard: _data.KeyboardData );
+				_keyboard: _data.KeyboardData,
+				_touchpad: _data.TouchpadData);
 
 			cameraExecuteEvents = new Events.CameraEvents(
 				_camera: _data.CameraData );

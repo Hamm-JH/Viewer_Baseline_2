@@ -1,0 +1,4 @@
+﻿[*.{cs,vb}]
+
+# IDE0040: 접근성 한정자 추가
+dotnet_diagnostic.IDE0040.severity = none
