@@ -83,7 +83,19 @@ namespace Management.Events.Inputs
 
 		private void OnDrag(Dictionary<InputEventType, AEventData> _sEvents)
 		{
-			m_dragEvent.Invoke(m_btn, m_delta);
+			PlatformCode pCode = MainManager.Instance.Platform;
+
+			if(Platforms.IsDemoWebViewer(pCode))
+            {
+				if (ModuleCodes.IsWorkQueueProcess()) return;
+
+				m_dragEvent.Invoke(m_btn, m_delta);
+			}
+			else
+            {
+				m_dragEvent.Invoke(m_btn, m_delta);
+			}
+
 		}
 
 		public override void OnProcess(List<ModuleCode> _mList)

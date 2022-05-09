@@ -2,8 +2,7 @@ mergeInto(LibraryManager.library, {
 
   // Webviewer
   UnityRequest: function (arg) {
-    
-    //ClickButton(Pointer_stringify(arg))
+    ClickButton(Pointer_stringify(arg))
   },
 
   // --------------------------------------------

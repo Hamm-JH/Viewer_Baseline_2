@@ -11,6 +11,8 @@ namespace Module.UI
 
 	public partial class UITemplate_Tunnel : AUI
 	{
+		public GameObject m_buttonBar;
+
 		[SerializeField] Text m_segment;
 		[SerializeField] Text m_line;
 		[SerializeField] Text m_description;

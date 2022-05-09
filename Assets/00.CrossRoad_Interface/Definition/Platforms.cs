@@ -130,7 +130,7 @@ namespace Definition
 		{
 			switch(_pCode)
             {
-				case PlatformCode.PC_Viewer_Tunnel:
+				//case PlatformCode.PC_Viewer_Tunnel:
 				case PlatformCode.Mobile_Template1:
 					return true;
             }

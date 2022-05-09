@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -627,6 +627,10 @@ MonoBehaviour:
       keyDown: 0
       keyBoost: 0
       keyCtrl: 0
+    touchpadData:
+      dragBoundary: 5
+      dragInvert: {x: 1, y: -1}
+      focusBoundary: 10
     cameraData:
       bMaxOffsetDistance: 0
       bOrbitSpeed: 0
@@ -668,6 +672,10 @@ MonoBehaviour:
       keyDown: 0
       keyBoost: 0
       keyCtrl: 0
+    touchpadData:
+      dragBoundary: 5
+      dragInvert: {x: 1, y: -1}
+      focusBoundary: 10
     cameraData:
       bMaxOffsetDistance: 0
       bOrbitSpeed: 0
@@ -725,6 +733,10 @@ MonoBehaviour:
       keyDown: 113
       keyBoost: 304
       keyCtrl: 0
+    touchpadData:
+      dragBoundary: 5
+      dragInvert: {x: 1, y: -1}
+      focusBoundary: 10
     cameraData:
       bMaxOffsetDistance: 50
       bOrbitSpeed: 15
@@ -765,6 +777,10 @@ MonoBehaviour:
       keyDown: 113
       keyBoost: 304
       keyCtrl: 306
+    touchpadData:
+      dragBoundary: 5
+      dragInvert: {x: 1, y: -1}
+      focusBoundary: 10
     cameraData:
       bMaxOffsetDistance: 50
       bOrbitSpeed: 15
@@ -803,6 +819,10 @@ MonoBehaviour:
       keyDown: 113
       keyBoost: 304
       keyCtrl: 306
+    touchpadData:
+      dragBoundary: 5
+      dragInvert: {x: 1, y: -1}
+      focusBoundary: 10
     cameraData:
       bMaxOffsetDistance: 50
       bOrbitSpeed: 15
@@ -841,6 +861,10 @@ MonoBehaviour:
       keyDown: 113
       keyBoost: 304
       keyCtrl: 306
+    touchpadData:
+      dragBoundary: 5
+      dragInvert: {x: 1, y: -1}
+      focusBoundary: 10
     cameraData:
       bMaxOffsetDistance: 50
       bOrbitSpeed: 15
@@ -879,6 +903,10 @@ MonoBehaviour:
       keyDown: 113
       keyBoost: 304
       keyCtrl: 306
+    touchpadData:
+      dragBoundary: 5
+      dragInvert: {x: 1, y: -1}
+      focusBoundary: 10
     cameraData:
       bMaxOffsetDistance: 50
       bOrbitSpeed: 15
@@ -917,6 +945,10 @@ MonoBehaviour:
       keyDown: 113
       keyBoost: 304
       keyCtrl: 306
+    touchpadData:
+      dragBoundary: 5
+      dragInvert: {x: 1, y: -1}
+      focusBoundary: 10
     cameraData:
       bMaxOffsetDistance: 50
       bOrbitSpeed: 15
@@ -955,6 +987,10 @@ MonoBehaviour:
       keyDown: 113
       keyBoost: 304
       keyCtrl: 306
+    touchpadData:
+      dragBoundary: 5
+      dragInvert: {x: 1, y: -1}
+      focusBoundary: 10
     cameraData:
       bMaxOffsetDistance: 50
       bOrbitSpeed: 15

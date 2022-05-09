@@ -6,7 +6,8 @@ namespace Module.WebAPI
 {
     using Definition;
     using Management;
-	using System;
+    using Module.Interaction;
+    using System;
 	using System.Linq;
 	using Utilities;
 	using View;
@@ -315,7 +316,12 @@ namespace Module.WebAPI
 
             // 선택 객체 제외하고 모두 끄기 (Isolate)
             ContentManager.Instance.Cache_SelectedObject();
+            ContentManager.Instance.Reset_ModelObject();
+            //ContentManager.Instance.
             ContentManager.Instance.Toggle_ModelObject(UIEventType.Mode_Isolate_Off, ToggleType.Isolate);
+
+            // 버튼 바를 아래로 내린다.
+            ContentManager.Instance.ButtonBar_Toggle(false);
 
             // 선택된 객체에 해당하는 손상/보강 객체만 표시하기
             ContentManager.Instance.Toggle_Issues(IssueVisualizeOption.SelectedTarget);
@@ -382,6 +388,8 @@ namespace Module.WebAPI
             ContentManager.Instance.SetCameraCenterPosition();
             ContentManager.Instance.Reset_ModelObject();
 
+            // 버튼 바 올리기
+            ContentManager.Instance.ButtonBar_Toggle(true);
             // TODO 0307 Dim 비활성화
             //ContentManager.Instance.Toggle_Dimension(false);
 

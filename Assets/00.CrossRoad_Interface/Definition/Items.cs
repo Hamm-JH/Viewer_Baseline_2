@@ -1,4 +1,4 @@
-using Items;
+ï»¿using Items;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +6,12 @@ using UnityEngine;
 namespace Definition
 {
     /// <summary>
-    /// ¾î¶² ¾ÆÀÌÅÛÀÎÁö ÆÄ¾ÇÇÏ´Â ÄÚµå
+    /// ì–´ë–¤ ì•„ì´í…œì¸ì§€ íŒŒì•…í•˜ëŠ” ì½”ë“œ
     /// </summary>
     public static class _Items
     {
         /// <summary>
-        /// ÀÌ ¾ÆÀÌÅÛÀº ¾ÆÀÌÅÛ ¿ä¼ÒÀÎ°¡?
+        /// ì´ ì•„ì´í…œì€ ì•„ì´í…œ ìš”ì†Œì¸ê°€?
         /// </summary>
         /// <param name="_item"></param>
         /// <returns></returns>
@@ -26,7 +26,7 @@ namespace Definition
             return false;
         }
         
-        // ÀÓ½Ã º¯¼ö¸¦ »ı¼ºÇÏ°í ÇÒ´çÇÑ´Ù.
+        // ì„ì‹œ ë³€ìˆ˜ë¥¼ ìƒì„±í•˜ê³  í• ë‹¹í•œë‹¤.
         public static GameObject CreateCachePin(RaycastHit _hit)
         {
             GameObject result = GameObject.CreatePrimitive(PrimitiveType.Cube);

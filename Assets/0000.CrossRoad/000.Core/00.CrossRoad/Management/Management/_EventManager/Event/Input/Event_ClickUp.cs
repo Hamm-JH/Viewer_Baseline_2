@@ -230,9 +230,16 @@ namespace Management.Events.Inputs
 			}
 			else if(Platforms.IsDemoWebViewer(pCode))
             {
+				//// 등록 모드 진입 또는 핀모드엔 색변경 중단
+				//var _mList = EventManager.Instance._ModuleList;
+				//// 핀 모드일 경우 중단
+				//if (_mList.Contains(ModuleCode.WorkQueue) || _mList.Contains(ModuleCode.Work_Pinmode)) return;
+
 				// 위치 데이터가 null일 경우
-				if(locData == null)
+				if (locData == null)
                 {
+					if (ModuleCodes.IsWorkQueueProcess()) return;
+
 					GameObject currObj = null;
 					GameObject selectedObj = null;
 					// 동일한 객체를 선택한 경우.
@@ -254,7 +261,8 @@ namespace Management.Events.Inputs
 
 					if (curr == selected)
 					{
-						Debug.Log("���� ��ü�� ������");
+						Debug.Log("two objects are same");
+						//Debug.Log("���� ��ü�� ������");
 					}
                 }
 				// 위치 데이터가 null이 아닌 경우
@@ -319,6 +327,8 @@ namespace Management.Events.Inputs
 			}
 			else if(Platforms.IsDemoWebViewer(pCode))
             {
+				if (ModuleCodes.IsWorkQueueProcess()) return;
+
 				m_clickEvent.Invoke(_obj);
 				ContentManager.Instance.OnSelect_Issue(_obj);
 			}
@@ -374,6 +384,8 @@ namespace Management.Events.Inputs
 			}
 			else if(Platforms.IsDemoWebViewer(pCode))
             {
+				if (ModuleCodes.IsWorkQueueProcess()) return;
+
 				m_clickEvent.Invoke(null);
 				ContentManager.Instance.OnSelect_3D(null);
 			}
