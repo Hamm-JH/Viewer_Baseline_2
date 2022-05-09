@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,17 +7,17 @@ namespace Module
 	using Definition;
 
 	/// <summary>
-	/// ½ÇÇà °¡´ÉÇÑ ¸ğµâÀÇ º£ÀÌ½º ÀÎÅÍÆäÀÌ½º
+	/// ì‹¤í–‰ ê°€ëŠ¥í•œ ëª¨ë“ˆì˜ ë² ì´ìŠ¤ ì¸í„°í˜ì´ìŠ¤
 	/// </summary>
 	public interface IModule
 	{
 		/// <summary>
-		/// ¸ğµâÀÇ ID
+		/// ëª¨ë“ˆì˜ ID
 		/// </summary>
 		public ModuleID ID { get; set; }
 
 		/// <summary>
-		/// ¸ğµâÀÇ ÇöÀç ±â´É
+		/// ëª¨ë“ˆì˜ í˜„ì¬ ê¸°ëŠ¥
 		/// </summary>
 		public FunctionCode Function { get; set; }
 

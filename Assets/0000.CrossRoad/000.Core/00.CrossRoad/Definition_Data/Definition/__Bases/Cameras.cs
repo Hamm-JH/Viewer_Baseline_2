@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,12 +13,12 @@ namespace Definition
 	public static class Cameras
 	{
         /// <summary>
-        /// Ä«¸Ş¶óÀÇ ÀÌµ¿ À§Ä¡¸¦ ÇÒ´çÇÏ´Â ÄÚµå
+        /// ì¹´ë©”ë¼ì˜ ì´ë™ ìœ„ì¹˜ë¥¼ í• ë‹¹í•˜ëŠ” ì½”ë“œ
         /// </summary>
         private static Transform m_toTransform;
 
         /// <summary>
-        /// Ä«¸Ş¶ó ¼¼ÆÃ
+        /// ì¹´ë©”ë¼ ì„¸íŒ…
         /// </summary>
         /// <param name="_code"></param>
         public static void SetCamera(string _code)
@@ -41,7 +41,7 @@ namespace Definition
 		{
             Bounds _b = ContentManager.Instance._CenterBounds;
 
-            // Å°¸Ê¿ë bounds ¼¼ÆÃ
+            // í‚¤ë§µìš© bounds ì„¸íŒ…
             Bounds bForKeymap = new Bounds();
             bForKeymap.center = _b.center;
             bForKeymap.size = _b.size * 0.37f;
@@ -85,7 +85,7 @@ namespace Definition
             Vector3 center = _cBounds.center;
             Vector3 size = _cBounds.size;
 
-            // Ä«¸Ş¶ó À§Ä¡ Á¤Áß¾Ó¿¡ µÎ´Â °æ¿ì
+            // ì¹´ë©”ë¼ ìœ„ì¹˜ ì •ì¤‘ì•™ì— ë‘ëŠ” ê²½ìš°
             {
                 //CameraPoint.transform.position = center;
 
@@ -94,7 +94,7 @@ namespace Definition
                 _cam.transform.rotation = Quaternion.Euler(_baseAngle/* + Angle.Set(eventType)*/);
                 _cam.transform.Rotate(Angle.Set(_uType));
 
-                // ½ºÅ©¸° ºñÀ²°è»ê
+                // ìŠ¤í¬ë¦° ë¹„ìœ¨ê³„ì‚°
                 float ratio = 0f;
                 RectTransform _rectT;
                 if (_canvas.TryGetComponent<RectTransform>(out _rectT))
@@ -105,10 +105,10 @@ namespace Definition
                     ratio = width > height ? width / height : height / width;
                 }
 
-                // size¿¡ µû¶ó °Å¸® ÀÌµ¿ °ø½Ä Àû¿ë
-                //Debug.LogError("Size¿¡ µû¶ó °Å¸® ÀÌµ¿ °ø½Ä Àû¿ë"); // O
+                // sizeì— ë”°ë¼ ê±°ë¦¬ ì´ë™ ê³µì‹ ì ìš©
+                //Debug.LogError("Sizeì— ë”°ë¼ ê±°ë¦¬ ì´ë™ ê³µì‹ ì ìš©"); // O
 
-                // sizeÀÇ ¹İÀı, * ·çÆ®2 ¸¸Å­ ¸Ö¾îÁ®¾ß ÇÔ
+                // sizeì˜ ë°˜ì ˆ, * ë£¨íŠ¸2 ë§Œí¼ ë©€ì–´ì ¸ì•¼ í•¨
                 float distance = Vector3.Distance(center, _cBounds.min);
 
                 _cam.orthographicSize = distance;
@@ -124,14 +124,14 @@ namespace Definition
 
             Bounds _bound = new Bounds();
 
-            // ´ë»ó °´Ã¼ÀÇ °æ°è°ËÃâ
+            // ëŒ€ìƒ ê°ì²´ì˜ ê²½ê³„ê²€ì¶œ
             MeshRenderer render;
             if(_toGameObject.TryGetComponent<MeshRenderer>(out render))
             {
                 _bound = render.bounds;
             }
 
-            // ¸ñÇ¥Á¡ ÇÒ´ç
+            // ëª©í‘œì  í• ë‹¹
             SetToTransform(currObject.transform, _toGameObject.transform, _bound, ContentManager.Instance._Canvas);
 
             _cam.transform.DOMove(m_toTransform.position, 1);
@@ -139,10 +139,10 @@ namespace Definition
         }
 
         /// <summary>
-        /// Ä«¸Ş¶ó ÀÌµ¿ ¸ñÀûÁö¸¦ ¼¼ÆÃÇÏ´Â Transform º¯¼ö ¼¼ÆÃ
+        /// ì¹´ë©”ë¼ ì´ë™ ëª©ì ì§€ë¥¼ ì„¸íŒ…í•˜ëŠ” Transform ë³€ìˆ˜ ì„¸íŒ…
         /// </summary>
-        /// <param name="_targetBound"> ¸ñÇ¥ °´Ã¼ÀÇ °æ°è </param>
-        /// <param name="_baseAngle"> Ä«¸Ş¶óÀÇ from angle </param>
+        /// <param name="_targetBound"> ëª©í‘œ ê°ì²´ì˜ ê²½ê³„ </param>
+        /// <param name="_baseAngle"> ì¹´ë©”ë¼ì˜ from angle </param>
         /// <param name="_canvas"></param>
         private static void SetToTransform(Transform _fromTransform, Transform _toTransform, Bounds _targetBound, Canvas _canvas)
         {
@@ -150,7 +150,7 @@ namespace Definition
             {
                 InitToTransform();
             }
-            // º¸°íÀÚ ÇÏ´Â ¸ñÇ¥ °´Ã¼ÀÇ Áß½É, Å©±â¸¦ ±¸ÇÑ´Ù.
+            // ë³´ê³ ì í•˜ëŠ” ëª©í‘œ ê°ì²´ì˜ ì¤‘ì‹¬, í¬ê¸°ë¥¼ êµ¬í•œë‹¤.
             //Vector3 center = _targetBound.center;
             //Vector3 size = _targetBound.size;
 
@@ -158,20 +158,20 @@ namespace Definition
 
             if(Platforms.IsBridgePlatform(pCode))
             {
-                // ¸ñÇ¥ °´Ã¼¸¦ ºÁ¾ß ÇÏ´Â ´ë»ó °´Ã¼ _fromTransform°ú m_toTransformÀ» µ¿±âÈ­ÇÑ´Ù.
+                // ëª©í‘œ ê°ì²´ë¥¼ ë´ì•¼ í•˜ëŠ” ëŒ€ìƒ ê°ì²´ _fromTransformê³¼ m_toTransformì„ ë™ê¸°í™”í•œë‹¤.
                 m_toTransform.position = _fromTransform.position;
                 m_toTransform.rotation = _fromTransform.rotation;
 
-                // from À§Ä¡¿¡¼­ to À§Ä¡¸¦ ¹Ù¶óº»´Ù.
+                // from ìœ„ì¹˜ì—ì„œ to ìœ„ì¹˜ë¥¼ ë°”ë¼ë³¸ë‹¤.
                 m_toTransform.LookAt(_toTransform);
 
-                // ¸ñÇ¥ È¸Àü°¢µµ¸¦ °ËÃâÇÑ´Ù.
+                // ëª©í‘œ íšŒì „ê°ë„ë¥¼ ê²€ì¶œí•œë‹¤.
                 Quaternion targetAngle = m_toTransform.rotation;
 
-                // to À§Ä¡·Î À§Ä¡ º¯°æÇÑ´Ù.
+                // to ìœ„ì¹˜ë¡œ ìœ„ì¹˜ ë³€ê²½í•œë‹¤.
                 m_toTransform.position = _toTransform.position;
 
-                // ½ºÅ©¸° ºñÀ² °è»ê
+                // ìŠ¤í¬ë¦° ë¹„ìœ¨ ê³„ì‚°
                 float ratio = 0f;
                 RectTransform _rectT;
                 if(_canvas.TryGetComponent<RectTransform>(out _rectT))
@@ -182,35 +182,35 @@ namespace Definition
                     ratio = width > height ? width / height : height / width;
                 }
 
-                // size ¹İÀı¸¸Å­ ¸Ö¾îÁö°Ô ÇÑ´Ù.
+                // size ë°˜ì ˆë§Œí¼ ë©€ì–´ì§€ê²Œ í•œë‹¤.
                 float distance = Vector3.Distance(_targetBound.center, _targetBound.min);
 
-                // ÀÏÁ¤ °Å¸®¸¸Å­ ¸Ö¾îÁö°Ô ÇÑ´Ù.
+                // ì¼ì • ê±°ë¦¬ë§Œí¼ ë©€ì–´ì§€ê²Œ í•œë‹¤.
                 m_toTransform.Translate(Vector3.back * distance * 1.4f * (ratio * 0.8f));
 
-                // ¸ñÇ¥Á¡ ÁöÁ¤¿Ï·á.
+                // ëª©í‘œì  ì§€ì •ì™„ë£Œ.
             }
             else if(Platforms.IsTunnelPlatform(pCode))
             {
-                // ±âÁØ À§Ä¡·Î ÀÌµ¿ÇÑ´Ù.
+                // ê¸°ì¤€ ìœ„ì¹˜ë¡œ ì´ë™í•œë‹¤.
                 m_toTransform.position = _fromTransform.position;
                 m_toTransform.rotation = _fromTransform.rotation;
 
-                // toTransform¿¡¼­ Segment °´Ã¼¸¦ Ã£´Â´Ù.
+                // toTransformì—ì„œ Segment ê°ì²´ë¥¼ ì°¾ëŠ”ë‹¤.
                 Transform segment = _toTransform.parent.parent;
 
-                // segment À§Ä¡ + y5¸¸Å­ ÀÌµ¿
+                // segment ìœ„ì¹˜ + y5ë§Œí¼ ì´ë™
                 m_toTransform.position = segment.position + new Vector3(0, 2, 0);
 
-                // ÀÌ À§Ä¡¿¡¼­ º¸°íÀÚ ÇÏ´Â °´Ã¼¸¦ ÃÄ´Ùº»´Ù.
+                // ì´ ìœ„ì¹˜ì—ì„œ ë³´ê³ ì í•˜ëŠ” ê°ì²´ë¥¼ ì³ë‹¤ë³¸ë‹¤.
                 m_toTransform.LookAt(_targetBound.center);
             }
 
 
-            // ±³·®ÀÇ °æ¿ì´Â À§ÀÇ ½ÄÀ¸·Î Á¾·áµÊ.
-            // ÇÏÁö¸¸ ÅÍ³ÎÀÇ °æ¿ì´Â
-            // to_Transform À§Ä¡´Â °æ°£Á¡
-            // to_Transform °¢µµ´Â ¸ñÇ¥ 
+            // êµëŸ‰ì˜ ê²½ìš°ëŠ” ìœ„ì˜ ì‹ìœ¼ë¡œ ì¢…ë£Œë¨.
+            // í•˜ì§€ë§Œ í„°ë„ì˜ ê²½ìš°ëŠ”
+            // to_Transform ìœ„ì¹˜ëŠ” ê²½ê°„ì 
+            // to_Transform ê°ë„ëŠ” ëª©í‘œ 
         }
 
         private static void InitToTransform()
@@ -223,14 +223,14 @@ namespace Definition
 
         #region Set CameraMode
 
-        // Ä«¸Ş¶ó ¸ğµå¸¦ º¯°æÇÑ´Ù.
+        // ì¹´ë©”ë¼ ëª¨ë“œë¥¼ ë³€ê²½í•œë‹¤.
         public static void SetCameraMode(CameraModes _mode)
         {
             PlatformCode pCode = MainManager.Instance.Platform;
 
             if(Platforms.IsBridgePlatform(pCode))
             {
-                // ±³·® ÇÃ·§ÆûÀÇ °æ¿ì Ä«¸Ş¶ó ¸ğµå º¯È­´Â ¾ø´Ù.
+                // êµëŸ‰ í”Œë«í¼ì˜ ê²½ìš° ì¹´ë©”ë¼ ëª¨ë“œ ë³€í™”ëŠ” ì—†ë‹¤.
             }
             else if(Platforms.IsTunnelPlatform(pCode))
             {

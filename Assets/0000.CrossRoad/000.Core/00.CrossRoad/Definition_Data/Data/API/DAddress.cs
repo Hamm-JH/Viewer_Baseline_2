@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,35 +7,35 @@ namespace Data.API
 	public class DAddress : AAPI
 	{
 		/// <summary>
-		/// ÅÍ³Î ÇüÅÂ (¾ÆÄ¡, ¹Ú½º)
+		/// í„°ë„ í˜•íƒœ (ì•„ì¹˜, ë°•ìŠ¤)
 		/// </summary>
 		public string fgUF001;
 
 		/// <summary>
-		/// ÅÍ³Î ÀçÁú (ÄÜÅ©¸®Æ®)
+		/// í„°ë„ ì¬ì§ˆ (ì½˜í¬ë¦¬íŠ¸)
 		/// </summary>
 		public string fgLM001;
 
 		/// <summary>
-		/// ÅÍ³Î ÁÖ¼Ò
+		/// í„°ë„ ì£¼ì†Œ
 		/// </summary>
 		public string nmAddress;
 
 		/// <summary>
-		/// ÅÍ³Î ÀÌ¸§
+		/// í„°ë„ ì´ë¦„
 		/// </summary>
 		public string nmTunnel;
 
 		/// <summary>
-		/// ÁÖ »çÁø id
+		/// ì£¼ ì‚¬ì§„ id
 		/// </summary>
 		public string mp_fid;
 		/// <summary>
-		/// ÁÖ »çÁø ftype
+		/// ì£¼ ì‚¬ì§„ ftype
 		/// </summary>
 		public string mp_ftype;
 		/// <summary>
-		/// ÁÖ »çÁø ±×·ì
+		/// ì£¼ ì‚¬ì§„ ê·¸ë£¹
 		/// </summary>
 		public string mp_fgroup;
 

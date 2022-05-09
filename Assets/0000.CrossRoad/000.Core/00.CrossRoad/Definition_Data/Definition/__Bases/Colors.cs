@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ namespace Definition
 	public static class Colors
 	{
 		/// <summary>
-		/// ±âÁ¸ÀÇ »öÀ» À¯ÁöÇÏ°í, Åõ¸íµµ¸¸ Á¶Á¤ÇÑ´Ù.
+		/// ê¸°ì¡´ì˜ ìƒ‰ì„ ìœ ì§€í•˜ê³ , íˆ¬ëª…ë„ë§Œ ì¡°ì •í•œë‹¤.
 		/// </summary>
 		/// <param name="type"></param>
 		/// <param name="_tgColor"></param>
@@ -23,7 +23,7 @@ namespace Definition
         }
 
 		/// <summary>
-		/// ¼³Á¤µÈ »öÀ» »ç¿ëÇÑ´Ù.
+		/// ì„¤ì •ëœ ìƒ‰ì„ ì‚¬ìš©í•œë‹¤.
 		/// </summary>
 		/// <param name="type"></param>
 		/// <param name="_alpha"></param>
