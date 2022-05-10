@@ -6,6 +6,7 @@ namespace Module.Item
 {
 	using Definition;
     using Management;
+    using Module.Model;
 
     public partial class Module_Items : AModule
 	{
@@ -69,7 +70,9 @@ namespace Module.Item
 					m_compass.UiRoot = uiCompassRoot;
 					m_compass.CompassPitch = 60;
 
-					// TODO ***** 시작점, 종료점 
+					// TODO ***** 시작점, 종료점
+					StartCoroutine(Try_GetTrsTunnel(m_compass));
+					//m_compass.AddCompass(ContentManager.Instance.Module<Module_Model>().Trs_tunnel);
 
 					m_itemList.Add(m_compass);
                 }
@@ -82,5 +85,21 @@ namespace Module.Item
 			// Item들을 이 모듈 아래로 모음
 			obj.transform.SetParent(transform);
 		}
+
+		private IEnumerator Try_GetTrsTunnel(Items.Controller_Compass _compass)
+        {
+			while(true)
+            {
+				List<Transform> trs = ContentManager.Instance.Module<Module_Model>().Trs_tunnel;
+				if (trs != null && trs.Count == 2)
+                {
+					_compass.AddCompass(trs);
+					break;
+                }
+				yield return new WaitForEndOfFrame();
+            }
+
+			yield break;
+        }
 	}
 }

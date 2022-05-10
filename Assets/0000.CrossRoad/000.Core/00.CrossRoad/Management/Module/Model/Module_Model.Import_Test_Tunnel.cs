@@ -25,6 +25,21 @@ namespace Module.Model
 
 		private List<GameObject> toDelete;
 
+		[HideInInspector]
+		public GameObject tunnel_first;
+		[HideInInspector]
+		public GameObject tunnel_last;
+
+		public List<Transform> Trs_tunnel
+        {
+			get
+            {
+				List<Transform> trs = new List<Transform>();
+				if(tunnel_first != null) trs.Add(tunnel_first.transform);
+				if(tunnel_last != null) trs.Add(tunnel_last.transform);
+				return trs;
+            }
+        }
 
 		public void InitializeObjectTunnel(GameObject _root)
 		{
@@ -104,6 +119,33 @@ namespace Module.Model
 
 				SetLines(rootModel.GetChild(i), i+1);
 			}
+
+			Transform first;
+			Transform last;
+
+			PlatformCode pCode = MainManager.Instance.Platform;
+			if(Platforms.IsTunnelPlatform(pCode))
+            {
+				if(index != 0)
+                {
+					Debug.Log(rootModel.GetChild(0).name);
+
+					first = rootModel.GetChild(0);
+					last = rootModel.GetChild(index - 1);
+
+					GameObject goFirst = new GameObject("first");
+					goFirst.transform.position = first.position;
+					goFirst.transform.rotation = first.rotation;
+					goFirst.transform.Translate(Vector3.right * 10);
+					tunnel_first = goFirst;
+
+					GameObject goLast = new GameObject("last");
+					goLast.transform.position = last.position;
+					goLast.transform.rotation = last.rotation;
+					goLast.transform.Translate(Vector3.left * 20);
+					tunnel_last = goLast;
+                }
+            }
 		}
 
 		/// <summary>
