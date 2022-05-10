@@ -95,9 +95,12 @@ namespace Module.WebAPI
 			}
 		}
 
+#if UNITY_EDITOR
 		private void Update()
 		{
 			CheckReceiveInput();
 		}
+#endif
+
 	}
 }

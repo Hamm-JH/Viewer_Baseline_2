@@ -7,6 +7,7 @@ namespace Management
 	using Definition;
 	using Module;
     using Module.Interaction;
+    using Module.Item;
     using Module.UI;
 
     public partial class ContentManager : IManager<ContentManager>
@@ -203,6 +204,14 @@ namespace Management
 			if(Platforms.IsDemoAdminViewer(pCode))
             {
 				Debug.Log("모듈 초기화후 초기화");
+            }
+			else if(Platforms.IsDemoWebViewer(pCode))
+            {
+				Module_Items item = Module<Module_Items>(ModuleID.Item);
+				if(item != null)
+                {
+					item.OnAfterInitialize();
+                }
             }
 			else if(Platforms.IsSmartInspectPlatform(pCode))
             {

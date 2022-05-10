@@ -18,6 +18,10 @@ namespace Definition
 				case FunctionCode.Item_LocationGuide:
 					result = Resources.Load<GameObject>("Items/LocationGuide");
 					break;
+
+				case FunctionCode.Item_Compass:
+					result = Resources.Load<GameObject>("Items/CompassController");
+					break;
 			}
 
 			return result;

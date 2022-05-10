@@ -15,6 +15,7 @@ namespace Test
 		// Update is called once per frame
 		void Update()
 		{
+#if UNITY_EDITOR
 			if(Input.GetKeyDown(KeyCode.Keypad1))
 			{
 				m_tester.SetMode(Definition.UIEventType.Viewport_ViewMode_TOP);
@@ -39,6 +40,7 @@ namespace Test
 			{
 				m_tester.SetMode(Definition.UIEventType.Viewport_ViewMode_SIDE_RIGHT);
 			}
+#endif
 
 			if(Input.GetMouseButtonDown(0))
 			{

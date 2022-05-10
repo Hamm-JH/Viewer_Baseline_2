@@ -201,5 +201,6 @@ namespace Definition
 		Graphic = 0x51,
 
 		Item_LocationGuide = 0x61,
+		Item_Compass = 0x62,
 	}
 }

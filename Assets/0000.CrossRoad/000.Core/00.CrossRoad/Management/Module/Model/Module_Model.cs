@@ -6,7 +6,8 @@ namespace Module.Model
 {
 	using Definition;
 	using Management;
-	using static Module.WebAPI.Module_WebAPI;
+    using System.Linq;
+    using static Module.WebAPI.Module_WebAPI;
 
 	/// <summary>
 	/// 모델 처리 모듈 
@@ -48,13 +49,13 @@ namespace Module.Model
 		{
 			//Debug.LogError($"{this.GetType().ToString()} Run");
 
-			if(Function == FunctionCode.Model_Import)
+			if(Functions.First() == FunctionCode.Model_Import)
 			{
 				// 모델 임포트를 위해 컨텐츠 관리자에 URI 수집시 실행시킬 메서드를 보낸다.
 				ContentManager.Instance.RunModule_ModelImport(OnImport);
 				//ContentManager.Instance.CheckInitModuleComplete(ID);		// 내부에서 처리함
 			}
-			else if(Function == FunctionCode.Model_Export)
+			else if(Functions.First() == FunctionCode.Model_Export)
 			{
 				ContentManager.Instance.CheckInitModuleComplete(ID);
 			}

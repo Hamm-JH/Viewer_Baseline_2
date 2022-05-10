@@ -5,11 +5,12 @@ using UnityEngine;
 namespace Module
 {
 	using Definition;
+    using System;
 
-	/// <summary>
-	/// 모듈 관리코드
-	/// </summary>
-	public static class _Module
+    /// <summary>
+    /// 모듈 관리코드
+    /// </summary>
+    public static class _Module
 	{
 		/// <summary>
 		/// 리스트 단위로 모듈 생성
@@ -22,16 +23,97 @@ namespace Module
 
 			foreach(ModuleID id in _modules)
 			{
-				FunctionCode function = Match_Single(id, _functions);
+				foreach(FunctionCode _function in _functions)
+                {
+					FunctionCode function = Match_Single(id, _function);
+					
+					Debug.Log(function);
 
-				// 기능 코드가 Null이 아닐때만 생성 시작
-				if(function != FunctionCode.Null)
-				{
-					AModule mod = Create(id, function);
-					mod.OnCreate(id, function);
-					_objs.Add(mod);
-				}
+					// 기능 코드가 Null이 아닐때만 생성 시작
+					if(function != FunctionCode.Null)
+					{
+						// 모듈 리스트에 해당 모듈이 존재하지 않는 경우에만 실행
+						if(!IsInModule(id, _objs))
+						{
+							AModule mod = Create(id, function);
+							mod.OnCreate(id, function);
+							_objs.Add(mod);
+						}
+						else
+						{
+							AModule mod = GetModule(id, _objs);
+							mod.OnCreate(id, function);
+						}
+
+					}
+                }
+
 			}
+		}
+
+		private static AModule GetModule(ModuleID _id, List<AModule> _modules)
+        {
+			foreach(AModule module in _modules)
+            {
+				if(module.ID == _id)
+                {
+					return module;
+                }
+			}
+
+			throw new System.Exception($"Module code not creatable :: id : {_id.ToString()}");
+		}
+
+		private static bool IsInModule(ModuleID _id, List<AModule> _modules)
+        {
+			bool result = false;
+
+			_modules.ForEach(x =>
+			{
+				if(_id == ModuleID.Model)
+                {
+					result = IsInModule<Model.Module_Model>(_modules);
+				}
+				else if (_id == ModuleID.Interaction)
+				{
+					result = IsInModule<Interaction.Module_Interaction>(_modules);
+				}
+				else if (_id == ModuleID.WebAPI)
+				{
+					result = IsInModule<WebAPI.Module_WebAPI>(_modules);
+				}
+				else if (_id == ModuleID.Graphic)
+				{
+					result = IsInModule<Graphic.Module_Graphic>(_modules);
+				}
+				else if (_id == ModuleID.Item)
+				{
+					result = IsInModule<Item.Module_Items>(_modules);
+				}
+				else
+				{
+					throw new System.Exception($"Module code not creatable :: id : {_id.ToString()}");
+				}
+			});
+
+			return result;
+        }
+
+		private static bool IsInModule<T>(List<AModule> _modules) where T : class
+		{
+			bool result = false;
+
+			T t = null;
+
+			_modules.ForEach(x =>
+			{
+				if (x.TryGetComponent<T>(out t))
+				{
+					result = true;
+				}
+			});
+
+			return result;
 		}
 
 		/// <summary>
@@ -100,6 +182,16 @@ namespace Module
 			return FunctionCode.Null;
 		}
 
+		public static FunctionCode Match_Single(ModuleID _module, FunctionCode _function)
+        {
+			if(IsMatch(_module, _function))
+            {
+				return _function;
+            }
+
+			return FunctionCode.Null;
+        }
+
 		/// <summary>
 		/// 기능 코드가 모듈에 맞는 코드인가?
 		/// </summary>
@@ -143,6 +235,7 @@ namespace Module
 				switch(_function)
 				{
 					case FunctionCode.Item_LocationGuide:
+					case FunctionCode.Item_Compass:
 						return true;
 				}
 			}

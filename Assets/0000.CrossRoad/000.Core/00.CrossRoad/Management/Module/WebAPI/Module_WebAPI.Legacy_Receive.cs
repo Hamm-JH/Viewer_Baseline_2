@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Module.WebAPI
 {
     using Definition;
+    using Definition.Control;
     using Management;
     using Module.Interaction;
     using System;
@@ -162,7 +163,7 @@ namespace Module.WebAPI
         private void Func_Receive_SelectObject6Shape(string _code)
         {
             // 현재 선택된 객체 가져오기
-            GameObject selectedObj = ContentManager.Instance._SelectedObj;
+            GameObject selectedObj = EventManager.Instance._CacheObject;
 
             // 객체가 선택되지 않았으면 실행되지 않음
             if (selectedObj == null)
@@ -384,6 +385,7 @@ namespace Module.WebAPI
             Bounds bound = ContentManager.Instance._Model.CenterBounds;
             MainManager.Instance.ResetCamdata_targetOffset();
             MainManager.Instance.UpdateCamData_maxOffset(bound.size.magnitude);
+            Cameras.SetCameraMode(CameraModes.BIM_ISO);
 
             ContentManager.Instance.SetCameraCenterPosition();
             ContentManager.Instance.Reset_ModelObject();

@@ -1,87 +1,87 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Platform.Tunnel
 {
 	/// <summary>
-	/// ÅÍ³Î ÄÚµå
+	/// í„°ë„ ì½”ë“œ
 	/// </summary>
 	public enum TunnelCode
 	{
 		ALL = -2,
 		Null = -1,
-		// ±âÅ¸
+		// ê¸°íƒ€
 
 		/// <summary>
-		/// ºñ»óÀüÈ­
+		/// ë¹„ìƒì „í™”
 		/// </summary>
 		ETC_EmergencyCall = 7,
 
 		/// <summary>
-		/// ¼ÒÈ­Àü
+		/// ì†Œí™”ì „
 		/// </summary>
 		ETC_fireplug = 9,
 
 		/// <summary>
-		/// ºñ»ó±¸
+		/// ë¹„ìƒêµ¬
 		/// </summary>
 		ETC_EmergencyExit = 16,
 		ETC_IndicatorLight1,
 		ETC_IndicatorLight2,
 
 		/// <summary>
-		/// ¹è¼ö·Î
+		/// ë°°ìˆ˜ë¡œ
 		/// </summary>
 		MAIN_Drain = 5,
 
 		/// <summary>
-		/// µ¤°³
+		/// ë®ê°œ
 		/// </summary>
 		MAIN_Cover,
 
 		/// <summary>
-		/// Æ÷Àå
+		/// í¬ì¥
 		/// </summary>
 		MAIN_Paving = 15,
 
 		/// <summary>
-		/// Ãøº®
+		/// ì¸¡ë²½
 		/// </summary>
 		MAIN_SideWall = 20,
 
 		/// <summary>
-		/// ÃµÀå
+		/// ì²œì¥
 		/// </summary>
 		MAIN_Ceiling = 13,
 
 		/// <summary>
-		/// Áß¾ÓºĞ¸®´ë
+		/// ì¤‘ì•™ë¶„ë¦¬ëŒ€
 		/// </summary>
 		MAIN_CorrugatedSteel,
 
 		/// <summary>
-		/// Á¶¸í
+		/// ì¡°ëª…
 		/// </summary>
 		LIGHT = 11,
 
 		/// <summary>
-		/// ÆÒ
+		/// íŒ¬
 		/// </summary>
 		JET = 4,
 
 		/// <summary>
-		/// Áß¾ÓºĞ¸®´ë
+		/// ì¤‘ì•™ë¶„ë¦¬ëŒ€
 		/// </summary>
 		WALL_CentralReservation = 12,
 
 		/// <summary>
-		/// ¿Ëº®
+		/// ì˜¹ë²½
 		/// </summary>
 		WALL_Gate = 10,
 
 		/// <summary>
-		/// »ç¸é
+		/// ì‚¬ë©´
 		/// </summary>
 		WALL_Slope = 8
 

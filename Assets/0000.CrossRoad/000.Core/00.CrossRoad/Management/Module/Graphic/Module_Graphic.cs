@@ -5,8 +5,9 @@ using UnityEngine;
 namespace Module.Graphic
 {
 	using Definition;
+    using Management;
 
-	public partial class Module_Graphic : AModule
+    public partial class Module_Graphic : AModule
 	{
 		// 스카이 박스 그래픽 컨트롤
 		// 전체 그래픽 톤 관리
@@ -17,13 +18,16 @@ namespace Module.Graphic
 		void Start()
 		{
 			OnCreate(ModuleID.Graphic, FunctionCode.Graphic);
+
+			
 		}
 
 		public override void OnStart()
 		{
 			Debug.LogWarning($"{this.GetType().ToString()} OnStart");
-			
+
 			// TODO 0222 : 그래픽 템플릿별 스타일 적용
+			ContentManager.Instance.CheckInitModuleComplete(ID);
 		}
 	}
 }

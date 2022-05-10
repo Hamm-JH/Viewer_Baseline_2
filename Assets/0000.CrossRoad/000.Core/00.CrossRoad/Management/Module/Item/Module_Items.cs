@@ -13,7 +13,7 @@ namespace Module.Item
 
 
 		Items.Controller_LocationGuide m_guide;
-
+		Items.Controller_Compass m_compass;
 		
 	}
 }

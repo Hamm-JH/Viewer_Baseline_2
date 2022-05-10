@@ -16,10 +16,15 @@ namespace Module
 		/// </summary>
 		public ModuleID ID { get; set; }
 
+        /// <summary>
+        /// 모듈의 현재 기능
+        /// </summary>
+        //public FunctionCode Function { get; set; }
+
 		/// <summary>
-		/// 모듈의 현재 기능
+		/// 모듈 기능, 아이템 리스트
 		/// </summary>
-		public FunctionCode Function { get; set; }
+        public List<FunctionCode> Functions { get; set; }
 
 		void OnCreate(ModuleID _id, FunctionCode _code);
 	}

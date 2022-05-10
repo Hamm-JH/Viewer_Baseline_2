@@ -5,9 +5,20 @@ using UnityEngine;
 namespace Module.Item
 {
 	using Definition;
+    using Management;
 
-	public partial class Module_Items : AModule
+    public partial class Module_Items : AModule
 	{
+		public void CreateItems(List<FunctionCode> _fCodes)
+        {
+			_fCodes.ForEach(x => CreateItem(x));
+        }
+
+		public void CreateItems_After(List<FunctionCode> _fCodes)
+        {
+			_fCodes.ForEach(x => CreateItem_After(x));
+        }
+
 		public void CreateItem(FunctionCode _fCode)
 		{
 			GameObject obj = null;
@@ -20,6 +31,52 @@ namespace Module.Item
 
 				// 관리를 위해 아이템리스트 업데이트
 				m_itemList.Add(m_guide);
+			}
+			else if(_fCode == FunctionCode.Item_Compass)
+            {
+				return;
+            }
+
+			// Item들을 이 모듈 아래로 모음
+			obj.transform.SetParent(transform);
+		}
+
+		public void CreateItem_After(FunctionCode _fCode)
+        {
+			GameObject obj = null;
+
+			PlatformCode pCode = MainManager.Instance.Platform;
+
+			// guide 코드 
+			if (_fCode == Definition.FunctionCode.Item_LocationGuide)
+			{
+				return;
+			}
+			else if (_fCode == FunctionCode.Item_Compass)
+			{
+				if(Platforms.IsDemoWebViewer(pCode))
+                {
+					Canvas canvas = ContentManager.Instance._Canvas;
+					Camera cam = MainManager.Instance.MainCamera;
+					// 컴퍼스 초기화용
+
+					GameObject uiCompassRoot = Instantiate<GameObject>(Resources.Load<GameObject>("Items/Compass"), canvas.transform);
+
+					obj = Instantiate<GameObject>(ItemList.Load(_fCode));
+					m_compass = obj.GetComponent<Items.Controller_Compass>();
+
+					m_compass.Me = cam.transform;
+					m_compass.UiRoot = uiCompassRoot;
+					m_compass.CompassPitch = 60;
+
+					// TODO ***** 시작점, 종료점 
+
+					m_itemList.Add(m_compass);
+                }
+				else
+                {
+					return;
+                }
 			}
 
 			// Item들을 이 모듈 아래로 모음

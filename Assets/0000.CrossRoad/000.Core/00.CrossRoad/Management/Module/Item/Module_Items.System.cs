@@ -9,6 +9,11 @@ namespace Module.Item
 
 	public partial class Module_Items : AModule
 	{
+		public void OnAfterInitialize()
+        {
+			CreateItems_After(Functions);
+        }
+
 		/// <summary>
 		/// TODO :: 추후 Items 리스트는 n개 이상의 리소스를 받아올 예정.
 		/// 여러개의 functionCode를 처리할 수 있게 코드 업데이트 필요함.
@@ -19,10 +24,13 @@ namespace Module.Item
 
 			m_itemList = new List<Items.AItem>();
 
-			CreateItem(m_currentFunction);
+			CreateItems(Functions);
+			//CreateItem(m_currentFunction);
 
 			// TODO 0309 코드 리디렉션 정리
 			OnUpdateState(EventManager.Instance._ModuleList);
+
+			ContentManager.Instance.CheckInitModuleComplete(ID);
 		}
 
 		/// <summary>

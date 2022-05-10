@@ -20,6 +20,7 @@ namespace Test
 		[Header("00000000-00000000")]
 		public string debug_rcvCode;
 
+#if UNITY_EDITOR
 		// Update is called once per frame
 		void Update()
 		{
@@ -28,6 +29,7 @@ namespace Test
 				OnDebug();
 			}
 		}
+#endif
 
 		private void OnDebug()
 		{
