@@ -560,6 +560,50 @@ MonoBehaviour:
     m_moduleList: 
     m_pinModeObj: {fileID: 0}
     m_pinModePin: {fileID: 0}
+--- !u!1 &868928089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 868928091}
+  - component: {fileID: 868928090}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &868928090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868928089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4840b2f4899217d4db659a99ecf24a22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorset: {fileID: 11400000, guid: 86ffd50319b35a243bdcd765a8628202, type: 2}
+--- !u!4 &868928091
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868928089}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &902421342
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,8 +831,8 @@ MonoBehaviour:
       bFreeSpeed: 10
       bPanSpeed: 0.5
       bZoomSpeed: 10
-    m_moduleList: 100000006000000060000000
-    m_functionCode: 110000006100000062000000
+    m_moduleList: 1000000060000000
+    m_functionCode: 1100000061000000
     m_url: 
     m_baseURL: 
     m_modelURI: http://wesmart.synology.me:45001/3dmodel/20211202-00000283.gltf

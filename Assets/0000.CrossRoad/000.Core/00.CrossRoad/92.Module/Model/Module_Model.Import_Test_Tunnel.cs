@@ -137,12 +137,22 @@ namespace Module.Model
 					goFirst.transform.position = first.position;
 					goFirst.transform.rotation = first.rotation;
 					goFirst.transform.Translate(Vector3.right * 10);
+
+					Vector3 firstPos = goFirst.transform.position;
+					Vector3 firstAngle = goFirst.transform.rotation.eulerAngles;
+					goFirst.transform.rotation = Quaternion.Euler(firstAngle.x, firstAngle.y - 90, firstAngle.z);
+					goFirst.transform.position = new Vector3(firstPos.x, firstPos.y + 4, firstPos.z);
 					tunnel_first = goFirst;
 
 					GameObject goLast = new GameObject("last");
 					goLast.transform.position = last.position;
 					goLast.transform.rotation = last.rotation;
 					goLast.transform.Translate(Vector3.left * 20);
+
+					Vector3 lastPos = goLast.transform.position;
+					Vector3 lastAngle = goLast.transform.root.eulerAngles;
+					goLast.transform.rotation = Quaternion.Euler(lastAngle.x, lastAngle.y + 90, lastAngle.z);
+					goLast.transform.position = new Vector3(lastPos.x, lastPos.y + 4, lastPos.z);
 					tunnel_last = goLast;
                 }
             }

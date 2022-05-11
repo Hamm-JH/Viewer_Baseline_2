@@ -50,6 +50,11 @@ namespace Module.UI
 		public abstract void GetUIEvent(UIEventType _uType, Interactable _setter);
 		public virtual void GetUIEvent(Inspect_EventType _uType, Interactable _setter) { }
 
+		public virtual void GetUIEvent<T>(T _type, Interactable _setter)
+        {
+
+        }
+
 		/// <summary>
 		/// 
 		/// </summary>

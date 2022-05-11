@@ -59,14 +59,14 @@ namespace Platform.Tunnel
 				case TunnelCode.ETC_EmergencyCall:
 					{
 						result.Add(Resources.Load<Material>($"{basePath}/ETC_EmergencyCall"));
-						result.Add(Resources.Load<Material>($"{basePath}/Steel"));
+						//result.Add(Resources.Load<Material>($"{basePath}/Steel"));
 					}
 					break;
 
 				case TunnelCode.ETC_EmergencyExit:
 					{
-						result.Add(Resources.Load<Material>($"{basePath}/ETC_EmergencyExit"));
-						result.Add(Resources.Load<Material>($"{basePath}/Concrete"));
+                        //result.Add(Resources.Load<Material>($"{basePath}/Concrete"));
+                        result.Add(Resources.Load<Material>($"{basePath}/ETC_EmergencyExit"));
 					}
 					break;
 

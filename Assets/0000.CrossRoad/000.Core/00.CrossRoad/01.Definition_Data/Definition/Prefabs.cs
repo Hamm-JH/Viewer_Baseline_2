@@ -6,7 +6,7 @@ namespace Definition
 {
 	public static class Prefabs
 	{
-		public static bool Set(PrefabType type, out GameObject result)
+		public static bool TrySet(PrefabType type, out GameObject result)
 		{
 			result = null;
 

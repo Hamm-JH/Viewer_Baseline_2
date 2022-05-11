@@ -10,14 +10,43 @@ namespace Definition
 	{
 		public static void Set(MeshRenderer _render, TextureType _tType)
 		{
+			string texKey = GetTexKey();
+			//string texKey = "";
+
+			//RenderPipelineType pipeline = RenderPipelineUtil.GetRenderPipeline();
+			//if(pipeline == RenderPipelineType.URP)
+			//{
+			//	texKey = "_BaseMap";
+			//}
+			//else if(pipeline == RenderPipelineType.BuiltIn)
+			//{
+			//	texKey = "_MainTex";
+			//}
+			//else
+			//{
+			//	texKey = "_BaseMap";
+			//}
+
+			_render.material.SetTexture(texKey, Set(_tType));
+		}
+
+		public static void Set(Material _mat, TextureType _tType)
+        {
+			string texKey = GetTexKey();
+
+			_mat.SetTexture(texKey, Set(_tType));
+		}
+
+		private static string GetTexKey()
+        {
 			string texKey = "";
 
 			RenderPipelineType pipeline = RenderPipelineUtil.GetRenderPipeline();
-			if(pipeline == RenderPipelineType.URP)
+			if (pipeline == RenderPipelineType.URP)
 			{
 				texKey = "_BaseMap";
 			}
-			else if(pipeline == RenderPipelineType.BuiltIn)
+			else if (pipeline == RenderPipelineType.BuiltIn)
 			{
 				texKey = "_MainTex";
 			}
@@ -26,8 +55,8 @@ namespace Definition
 				texKey = "_BaseMap";
 			}
 
-			_render.material.SetTexture(texKey, Set(_tType));
-		}
+			return texKey;
+        }
 
 		public static Texture Set(TextureType _type)
 		{

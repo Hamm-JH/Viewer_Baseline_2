@@ -117,11 +117,12 @@ namespace Module.Model
 		{
 			_issues.ForEach(x =>
 			{
-				GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-				obj.name = x.IssueOrderCode;
-				obj.transform.position = x.PositionVector;
-				obj.transform.rotation = Quaternion.Euler(new Vector3(45, 45, 0));
-				obj.AddComponent<Issue_Selectable>().Issue = x;
+				GameObject obj = Issues.CreateIssue(1, _webT, x);
+				//GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+				//obj.name = x.IssueOrderCode;
+				//obj.transform.position = x.PositionVector;
+				//obj.transform.rotation = Quaternion.Euler(new Vector3(45, 45, 0));
+				//obj.AddComponent<Issue_Selectable>().Issue = x;
 
 				// todo 0228 색상값도 고민해야함.
 
@@ -137,13 +138,13 @@ namespace Module.Model
 					mType = MaterialType.Issue_rcv;
 				}
 
-				MeshRenderer render;
-				if(obj.TryGetComponent<MeshRenderer>(out render))
-				{
-					render.material = Materials.Set(mType);
-					// TODO 0228 :: 손상 변환테이블 만들고 추후 적용
-					Textures.Set(render, TextureType.crack);
-				}
+				//MeshRenderer render;
+				//if(obj.TryGetComponent<MeshRenderer>(out render))
+				//{
+				//	render.material = Materials.Set(mType);
+				//	// TODO 0228 :: 손상 변환테이블 만들고 추후 적용
+				//	Textures.Set(render, TextureType.crack);
+				//}
 			});
 		}
 

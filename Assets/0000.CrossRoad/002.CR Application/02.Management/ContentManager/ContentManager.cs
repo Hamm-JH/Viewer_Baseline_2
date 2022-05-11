@@ -273,6 +273,10 @@ namespace Management
 			get
 			{
 				GameObject obj = _SelectedObj;
+				if(obj == null)
+                {
+					obj = EventManager.Instance._CacheObject;
+                }
 				// Tunnel
 				return obj.transform.parent.parent.rotation.eulerAngles;
 			}

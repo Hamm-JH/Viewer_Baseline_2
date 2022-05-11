@@ -25,6 +25,11 @@ namespace Definition
         {
             GameObject obj = ContentManager.Instance._SelectedObj;
 
+            if(obj == null)
+            {
+                obj = EventManager.Instance._CacheObject;
+            }
+
             ViewRotations vCode = ViewRotations.Null;
             Vector3 angle = ContentManager.Instance._SelectedAngle;
             //Vector3 angle = obj.transform.parent.parent.rotation.eulerAngles;
@@ -136,6 +141,14 @@ namespace Definition
 
             _cam.transform.DOMove(m_toTransform.position, 1);
             _cam.transform.DORotateQuaternion(m_toTransform.rotation, 1);
+        }
+
+        public static void SetCameraDOTweenPosition_Compass(Camera _cam, GameObject _toGameObject)
+        {
+            GameObject currObject = _cam.gameObject;
+
+            _cam.transform.DOMove(_toGameObject.transform.position, 1);
+            _cam.transform.DORotateQuaternion(_toGameObject.transform.rotation, 1);
         }
 
         /// <summary>

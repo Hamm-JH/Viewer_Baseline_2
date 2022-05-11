@@ -272,6 +272,9 @@ namespace Definition
 		Issue_dmg = 0x21,
 		Issue_rcv = 0x22,
 
+		Decal_dmg = 0x30,
+		Decal_rcv = 0x31,
+
 		White = 0x91,
 		ObjDefault1 = 0x99,
 	}

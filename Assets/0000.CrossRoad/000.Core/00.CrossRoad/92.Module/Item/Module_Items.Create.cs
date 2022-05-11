@@ -6,6 +6,7 @@ namespace Module.Item
 {
 	using Definition;
     using Management;
+    using Module.Graphic;
     using Module.Model;
 
     public partial class Module_Items : AModule
@@ -61,13 +62,15 @@ namespace Module.Item
 					Camera cam = MainManager.Instance.MainCamera;
 					// 컴퍼스 초기화용
 
+					Module_Graphic graphic = ContentManager.Instance.Module<Module_Graphic>();
+
 					GameObject uiCompassRoot = Instantiate<GameObject>(Resources.Load<GameObject>("Items/Compass"), canvas.transform);
 
 					obj = Instantiate<GameObject>(ItemList.Load(_fCode));
 					m_compass = obj.GetComponent<Items.Controller_Compass>();
 
 					m_compass.Me = cam.transform;
-					m_compass.UiRoot = uiCompassRoot;
+					m_compass.CompassUIRoot = uiCompassRoot;
 					m_compass.CompassPitch = 60;
 
 					// TODO ***** 시작점, 종료점
@@ -88,12 +91,14 @@ namespace Module.Item
 
 		private IEnumerator Try_GetTrsTunnel(Items.Controller_Compass _compass)
         {
+			Module_Graphic graphic = ContentManager.Instance.Module<Module_Graphic>();
+
 			while(true)
             {
 				List<Transform> trs = ContentManager.Instance.Module<Module_Model>().Trs_tunnel;
 				if (trs != null && trs.Count == 2)
                 {
-					_compass.AddCompass(trs);
+					_compass.AddCompass(trs, graphic);
 					break;
                 }
 				yield return new WaitForEndOfFrame();

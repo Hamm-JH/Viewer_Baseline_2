@@ -180,7 +180,8 @@ namespace Module.WebAPI
             // 잘 보니 데이터를 할당하는 과정이 써져있는데.. 그냥 이벤트 걸렸을때 이벤트 관리자에서 데이터 빼와서 데이터 할당하고 보내면 되지않나..?
 
             string locationCode = _locationCode;
-            int locationIndex = int.Parse(locationCode);
+            int locationIndex = int.Parse(locationCode) + 1;
+            locationCode = locationIndex.ToString();
 
             //ContentManager.Instance.CacheIssueEntity.issueData.DcLocation = locationIndex;
 

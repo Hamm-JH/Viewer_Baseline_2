@@ -27,11 +27,13 @@ namespace Module
                 {
 					FunctionCode function = Match_Single(id, _function);
 					
-					Debug.Log(function);
+					//Debug.Log(function);
 
 					// 기능 코드가 Null이 아닐때만 생성 시작
 					if(function != FunctionCode.Null)
 					{
+						Definition.Debuggers.Log_ModuleFunction.Log(id, function);
+
 						// 모듈 리스트에 해당 모듈이 존재하지 않는 경우에만 실행
 						if(!IsInModule(id, _objs))
 						{

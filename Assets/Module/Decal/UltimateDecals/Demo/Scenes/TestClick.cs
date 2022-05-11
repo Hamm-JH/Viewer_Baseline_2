@@ -25,26 +25,42 @@ namespace Snippets
 				{
 					Debug.Log(hit.collider.name);
 
-					GameObject _obj;
-					if (Prefabs.Set(PrefabType.Decal, out _obj))
-					{
-						UltimateDecal _decal = _obj.GetComponent<UltimateDecal>();
+					SetDecal(hit.point, hit.normal, mat);
 
-						_decal.material = mat;
-						_obj.transform.position = hit.point;
-						_obj.transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * _obj.transform.rotation;
-						UD_Manager.UpdateDecal(_decal);
-					}
-				}
+                    //GameObject _obj;
+                    //if (Prefabs.TrySet(PrefabType.Decal, out _obj))
+                    //{
+                    //    UltimateDecal _decal = _obj.GetComponent<UltimateDecal>();
+
+                    //    _decal.material = mat;
+                    //    _obj.transform.position = hit.point;
+                    //    _obj.transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * _obj.transform.rotation;
+                    //    UD_Manager.UpdateDecal(_decal);
+                    //}
+                }
 			}
 		}
+
+		private void SetDecal(Vector3 _hitPoint, Vector3 _hitNormal, Material _mat)
+        {
+			GameObject obj;
+			if(Prefabs.TrySet(PrefabType.Decal, out obj))
+            {
+				UltimateDecal decal = obj.GetComponent<UltimateDecal>();
+
+				decal.material = _mat;
+				obj.transform.position = _hitPoint;
+				obj.transform.rotation = Quaternion.FromToRotation(transform.up, _hitNormal) * obj.transform.rotation;
+				UD_Manager.UpdateDecal(decal);
+            }
+        }
 
 		private void SetDecal(RaycastHit _hit)
 		{
 			Debug.Log(_hit.collider.name);
 
 			GameObject _obj;
-			if (Prefabs.Set(PrefabType.Decal, out _obj))
+			if (Prefabs.TrySet(PrefabType.Decal, out _obj))
 			{
 				UltimateDecal _decal = _obj.GetComponent<UltimateDecal>();
 

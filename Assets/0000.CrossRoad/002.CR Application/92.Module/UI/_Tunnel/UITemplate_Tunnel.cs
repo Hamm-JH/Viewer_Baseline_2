@@ -6,7 +6,8 @@ namespace Module.UI
 {
     using Data.API;
     using Definition;
-	using UnityEngine.UI;
+    using Management;
+    using UnityEngine.UI;
 	using View;
 
 	public partial class UITemplate_Tunnel : AUI
@@ -33,7 +34,24 @@ namespace Module.UI
 			
 		}
 
-		public override void GetUIEvent(float _value, UIEventType _uType, Interactable _setter)
+        public override void GetUIEvent<T>(T _type, Interactable _setter)
+        {
+            if(typeof(T) == typeof(UIEventType))
+            {
+				Debug.Log(typeof(UIEventType).Name);
+            }
+			else if(typeof(T) == typeof(Compass_EventType))
+            {
+				Compass_EventType type = (Compass_EventType)(object)_type;
+				GetUIEvent(type, _setter);
+            }
+			else
+            {
+				throw new System.Exception("EventType not defined");
+            }
+        }
+
+        public override void GetUIEvent(float _value, UIEventType _uType, Interactable _setter)
 		{
 			switch (_uType)
 			{
@@ -49,12 +67,18 @@ namespace Module.UI
 
 		public override void GetUIEvent(UIEventType _uType, Interactable _setter)
 		{
+			PlatformCode pCode = MainManager.Instance.Platform;
+
 			switch (_uType)
 			{
 				case UIEventType.View_Home:
 					// 초기 화면으로 복귀
 					Event_View_Home();
 					Event_Toggle_ChildPanel(1, _setter.ChildPanel);
+					if(Platforms.IsDemoWebViewer(pCode))
+                    {
+						Event_Mode_ShowAll();
+					}
 					break;
 
 				case UIEventType.Toggle:
@@ -102,6 +126,17 @@ namespace Module.UI
 					break;
 			}
 		}
+
+		public void GetUIEvent(Compass_EventType _type, Interactable _setter)
+        {
+			switch(_type)
+            {
+				case Compass_EventType.Compass_FirstPosition:
+				case Compass_EventType.Compass_LastPosition:
+					Compass_SetPosition(_type, _setter);
+					break;
+            }
+        }
 
         public override void API_GetAddress(AAPI _data)
         {

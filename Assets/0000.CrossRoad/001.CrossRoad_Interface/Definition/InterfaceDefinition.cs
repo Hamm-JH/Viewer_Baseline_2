@@ -146,6 +146,14 @@ namespace Definition
 		OrthoMode_02_PerspectiveView,
 	}
 
+	public enum Compass_EventType
+    {
+		NotWork,
+
+		Compass_FirstPosition,
+		Compass_LastPosition,
+    }
+
 	public enum ModuleID
 	{
 		NotDef = -1,

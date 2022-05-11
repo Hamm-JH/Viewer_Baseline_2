@@ -49,6 +49,8 @@ namespace Module.WebAPI
 
                 // R
                 case ReceiveRequestCode.SelectObject6Shape:     // 6면 객체 선택 // 사용자가 6면중 하나를 선택할때 발생
+                    Debug.Log($"arg0 : {arguments[0]}");
+                    Debug.Log($"arg1 : {arguments[1]}");
                     Func_Receive_SelectObject6Shape(arguments[1]);
                     break;
 
@@ -165,12 +167,12 @@ namespace Module.WebAPI
             // 현재 선택된 객체 가져오기
             GameObject selectedObj = EventManager.Instance._CacheObject;
 
-            // 객체가 선택되지 않았으면 실행되지 않음
-            if (selectedObj == null)
-			{
-                Debug.LogError("6Shape :: Object not set");
-                return;
-			}
+            //// 객체가 선택되지 않았으면 실행되지 않음
+            //if (selectedObj == null)
+			//{
+            //    Debug.LogError("6Shape :: Object not set");
+            //    return;
+			//}
 
             Cameras.SetCamera(_code);
 
