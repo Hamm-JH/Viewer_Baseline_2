@@ -91,7 +91,33 @@ namespace Definition
                     }
                     break;
 
+                case MaterialType.Decal_dmg:
+                    {
+                        if (pipeline == RenderPipelineType.BuiltIn)
+                        {
+                            MAT_DAMAGE = Resources.Load<Material>("3D/Issue/BltIn/Issue_dmg");
+                        }
+                        else if (pipeline == RenderPipelineType.URP)
+                        {
+                            MAT_DAMAGE = Resources.Load<Material>("3D/Issue/URP/Issue_decal_dmg");
+                        }
+                        result = MAT_DAMAGE;
+                    }
+                    break;
 
+                case MaterialType.Decal_rcv:
+                    {
+                        if (pipeline == RenderPipelineType.BuiltIn)
+                        {
+                            MAT_RECOVER = Resources.Load<Material>("3D/Issue/BltIn/Issue_rcv");
+                        }
+                        else if (pipeline == RenderPipelineType.URP)
+                        {
+                            MAT_RECOVER = Resources.Load<Material>("3D/Issue/URP/Issue_decal_rcv");
+                        }
+                        result = MAT_RECOVER;
+                    }
+                    break;
 
                 case MaterialType.Default1:
                     result = Resources.Load<Material>("3D/DefaultMat");
