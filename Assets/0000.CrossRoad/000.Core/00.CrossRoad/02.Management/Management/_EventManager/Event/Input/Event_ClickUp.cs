@@ -281,7 +281,7 @@ namespace Management.Events.Inputs
 						_Items.MoveCachePin(EventManager.Instance._CachePin, m_hit);
                     }
 
-					ContentManager.Instance.Module<Module_WebAPI>().SendRequest(SendRequestCode.SelectSurfaceLocation, locData.m_locationIndex, m_hit.point);
+					ContentManager.Instance.Module<Module_WebAPI>().SendRequest(SendRequestCode.SelectSurfaceLocation, locData.m_locationIndex, m_hit.point, m_hit.normal);
 
 					locData = null;
                 }
