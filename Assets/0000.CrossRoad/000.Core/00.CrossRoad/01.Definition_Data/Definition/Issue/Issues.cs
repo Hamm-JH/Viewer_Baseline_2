@@ -112,15 +112,15 @@ namespace Definition
             switch (_webT)
             {
                 case WebType.Issue_Dmg:
-                    mType = MaterialType.Issue_dmg;
+                    mType = MaterialType.Decal_dmg;
                     break;
 
                 case WebType.Issue_Rcv:
-                    mType = MaterialType.Issue_rcv;
+                    mType = MaterialType.Decal_rcv;
                     break;
 
                 default:
-                    mType = MaterialType.Issue_dmg;
+                    mType = MaterialType.Decal_dmg;
                     break;
             }
 
