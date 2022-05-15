@@ -91,6 +91,20 @@ namespace Definition
                     }
                     break;
 
+                case MaterialType.Decal:
+                    {
+                        if (pipeline == RenderPipelineType.BuiltIn)
+                        {
+                            MAT_DAMAGE = Resources.Load<Material>("3D/Issue/BltIn/Issue_dmg");
+                        }
+                        else if (pipeline == RenderPipelineType.URP)
+                        {
+                            MAT_DAMAGE = Resources.Load<Material>("3D/Issue/URP/Issue_decal");
+                        }
+                        result = MAT_DAMAGE;
+                    }
+                    break;
+
                 case MaterialType.Decal_dmg:
                     {
                         if (pipeline == RenderPipelineType.BuiltIn)

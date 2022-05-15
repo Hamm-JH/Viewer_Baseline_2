@@ -62,6 +62,12 @@ namespace Bearroll.UltimateDecals {
 			}
 		}
 
+		public void DoDestroy()
+        {
+			Destroy(instance);
+			instance = null;
+        }
+
 		void OnEnable() {
 
 			if (instance != null && instance != this) {

@@ -29,11 +29,11 @@ namespace Management
 		{
 			Debug.Log("OnCreate");
 
-			DOTween.Init();
+            DOTween.Init();
 
-			// 설정 데이터값을 요청한다.
-			// 데이터 설정이 끝나면 시스템 인스턴스를 초기화한다.
-			RequestDataset(SetSystemInstance);
+            // 설정 데이터값을 요청한다.
+            // 데이터 설정이 끝나면 시스템 인스턴스를 초기화한다.
+            RequestDataset(SetSystemInstance);
 		}
 
 		/// <summary>

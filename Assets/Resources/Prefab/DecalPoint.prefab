@@ -49,7 +49,7 @@ MonoBehaviour:
   type: 1
   order: 0
   atlasIndex: 0
-  material: {fileID: 0}
+  material: {fileID: 2100000, guid: f946ffd0f24a9ab4a89bac1cc61142c6, type: 2}
 --- !u!65 &3149841891449961917
 BoxCollider:
   m_ObjectHideFlags: 0

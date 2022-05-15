@@ -58,8 +58,8 @@ namespace Module.WebAPI
 
                         Func_SelectSurfaceLocation(
                             (Parsers.Parse<int>(arguments[0])).ToString(),
-                            Parsers.Parse<Vector3>(arguments[1]),
-                            Parsers.Parse<Vector3>(arguments[2]));
+                            _position: Parsers.Parse<Vector3>(arguments[1]),
+                            _rotation: Parsers.Parse<Vector3>(arguments[2]));
                     }
                     break;
 
@@ -194,10 +194,13 @@ namespace Module.WebAPI
 			//ContentManager.Instance.CacheIssueEntity.SwitchRender(true);
 			//string positionVector = string.Format($"{issueEntity.transform.position.x.ToString()},{issueEntity.transform.position.y.ToString()},{issueEntity.transform.position.z.ToString()}");
             string positionVector = string.Format($"{_position.x},{_position.y},{_position.z}");
+            string rotationVector = string.Format($"{_rotation.x},{_rotation.y},{_rotation.z}");
+
             //issueEntity.Issue._PositionVector = positionVector;
 
-            Debug.Log($"SendRequest SelectSurfaceLocation : locationCode {locationCode}, positionVector {positionVector}");
-            string arg = string.Format("SelectSurfaceLocation/{0}/{1}", locationCode, positionVector);
+            Debug.Log($"SendRequest SelectSurfaceLocation : locationCode {locationCode}, positionVector {positionVector}, rotationVector {rotationVector}");
+            string arg = string.Format("SelectSurfaceLocation/{0}/{1}/{2}", locationCode, positionVector, rotationVector);
+
 #if UNITY_EDITOR
             //WebPage.ReceiveRequest(arg);
             //SendRequest(SendRequestCode.SetPinVector);

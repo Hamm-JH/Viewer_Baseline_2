@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Management
 {
-	using Definition;
+    using Bearroll.UltimateDecals;
+    using Definition;
 	using Module;
     using Module.Interaction;
     using Module.Item;
@@ -66,7 +67,7 @@ namespace Management
 			// 3. 각 모듈에 기능 실행 (Do) 진행
 			// 4. 각 모듈에서 필요 데이터 알아서 가져가기
 
-			
+			//UD_Manager.instance.DoDestroy();
 
 			// 1. 모듈 리스트 생성
 			List<AModule> mods = CreateModules(_cData.ModuleLists, _cData.FunctionCodes);

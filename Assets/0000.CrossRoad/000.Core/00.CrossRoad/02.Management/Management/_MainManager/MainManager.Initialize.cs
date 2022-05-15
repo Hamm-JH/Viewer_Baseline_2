@@ -10,8 +10,9 @@ namespace Management
 	using Definition;
 	using Definition.Control;
 	using Definition.Data;
+    using Bearroll.UltimateDecals;
 
-	public partial class MainManager : IManager<MainManager>
+    public partial class MainManager : IManager<MainManager>
 	{
 		#region 0-1 데이터 입력 단계
 
@@ -27,6 +28,8 @@ namespace Management
 
 		private void SetSystemInstance(CoreData _finishedData)
 		{
+			//UD_Manager.instance.DoDestroy();
+
 			_data = _finishedData;
 
 			// 초기 시작시 이벤트 초기화

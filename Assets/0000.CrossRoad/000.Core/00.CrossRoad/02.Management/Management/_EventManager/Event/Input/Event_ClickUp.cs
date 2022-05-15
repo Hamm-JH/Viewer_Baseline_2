@@ -274,14 +274,15 @@ namespace Management.Events.Inputs
 					// 캐시 객체가 있는지 확인
 					if(EventManager.Instance._CachePin == null)
                     {
-						EventManager.Instance._CachePin = _Items.CreateCachePin(m_hit);
+						EventManager.Instance._CachePin = _Items.CreateCachePin(m_hit, _isDecal: true);
                     }
 					else
                     {
-						_Items.MoveCachePin(EventManager.Instance._CachePin, m_hit);
+						_Items.MoveCachePin(EventManager.Instance._CachePin, m_hit, _isDecal: true);
                     }
 
-					ContentManager.Instance.Module<Module_WebAPI>().SendRequest(SendRequestCode.SelectSurfaceLocation, locData.m_locationIndex, m_hit.point, m_hit.normal);
+					ContentManager.Instance.Module<Module_WebAPI>().SendRequest(SendRequestCode.SelectSurfaceLocation, 
+						locData.m_locationIndex, m_hit.point, EventManager.Instance._CachePin.transform.rotation.eulerAngles);
 
 					locData = null;
                 }
