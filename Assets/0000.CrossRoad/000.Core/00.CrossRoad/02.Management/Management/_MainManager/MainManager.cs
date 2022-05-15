@@ -42,6 +42,13 @@ namespace Management
 
 		#region 주 관리자에서 요청할 데이터를 프로퍼티로 전달하는 구간
 
+		[SerializeField]
+		private bool test_isIssueDecal;
+		public bool Test_IsIssueDecal
+        {
+			get => test_isIssueDecal;
+        }
+
 		public Camera MainCamera
 		{
 			get => _core.MainCam;

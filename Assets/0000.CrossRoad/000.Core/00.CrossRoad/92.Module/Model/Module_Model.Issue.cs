@@ -117,7 +117,8 @@ namespace Module.Model
 		{
 			_issues.ForEach(x =>
 			{
-				GameObject obj = Issues.CreateIssue(1, _webT, x);
+				int _iIndex = MainManager.Instance.Test_IsIssueDecal ? 1 : 0;
+				GameObject obj = Issues.CreateIssue(_iIndex, _webT, x);
 				//GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
 				//obj.name = x.IssueOrderCode;
 				//obj.transform.position = x.PositionVector;
