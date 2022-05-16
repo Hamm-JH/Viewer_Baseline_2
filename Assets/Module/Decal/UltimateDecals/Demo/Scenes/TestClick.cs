@@ -44,7 +44,7 @@ namespace Snippets
 		private void SetDecal(Vector3 _hitPoint, Vector3 _hitNormal, Material _mat)
         {
 			GameObject obj;
-			if(Prefabs.TrySet(PrefabType.Decal, out obj))
+			if(Prefabs.TrySet(PrefabType.UltimateDecal, out obj))
             {
 				UltimateDecal decal = obj.GetComponent<UltimateDecal>();
 
@@ -60,7 +60,7 @@ namespace Snippets
 			Debug.Log(_hit.collider.name);
 
 			GameObject _obj;
-			if (Prefabs.TrySet(PrefabType.Decal, out _obj))
+			if (Prefabs.TrySet(PrefabType.UltimateDecal, out _obj))
 			{
 				UltimateDecal _decal = _obj.GetComponent<UltimateDecal>();
 

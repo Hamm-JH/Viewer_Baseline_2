@@ -91,7 +91,7 @@ namespace Definition
                     }
                     break;
 
-                case MaterialType.Decal:
+                case MaterialType.UltimateDecal:
                     {
                         if (pipeline == RenderPipelineType.BuiltIn)
                         {
@@ -105,7 +105,7 @@ namespace Definition
                     }
                     break;
 
-                case MaterialType.Decal_dmg:
+                case MaterialType.UltimateDecal_dmg:
                     {
                         if (pipeline == RenderPipelineType.BuiltIn)
                         {
@@ -113,14 +113,14 @@ namespace Definition
                         }
                         else if (pipeline == RenderPipelineType.URP)
                         {
-                            MAT_DAMAGE = Resources.Load<Material>("3D/Issue/URP/EmissiveArrow 1");
-                            //MAT_DAMAGE = Resources.Load<Material>("3D/Issue/URP/Issue_decal_dmg");
+                            //MAT_DAMAGE = Resources.Load<Material>("3D/Issue/URP/EmissiveArrow 1");
+                            MAT_DAMAGE = Resources.Load<Material>("3D/Issue/URP/Issue_decal_dmg");
                         }
                         result = MAT_DAMAGE;
                     }
                     break;
 
-                case MaterialType.Decal_rcv:
+                case MaterialType.UltimateDecal_rcv:
                     {
                         if (pipeline == RenderPipelineType.BuiltIn)
                         {
@@ -129,6 +129,49 @@ namespace Definition
                         else if (pipeline == RenderPipelineType.URP)
                         {
                             MAT_RECOVER = Resources.Load<Material>("3D/Issue/URP/Issue_decal_rcv");
+                        }
+                        result = MAT_RECOVER;
+                    }
+                    break;
+
+                case MaterialType.EasyDecal:
+                    {
+                        if (pipeline == RenderPipelineType.BuiltIn)
+                        {
+                            MAT_DAMAGE = Resources.Load<Material>("3D/Issue/BltIn/Issue_dmg");
+                        }
+                        else if (pipeline == RenderPipelineType.URP)
+                        {
+                            MAT_DAMAGE = Resources.Load<Material>("3D/Issue/URP/Issue_EasyDecal");
+                        }
+                        result = MAT_DAMAGE;
+                    }
+                    break;
+
+                case MaterialType.EasyDecal_dmg:
+                    {
+                        if (pipeline == RenderPipelineType.BuiltIn)
+                        {
+                            MAT_DAMAGE = Resources.Load<Material>("3D/Issue/BltIn/Issue_dmg");
+                        }
+                        else if (pipeline == RenderPipelineType.URP)
+                        {
+                            //MAT_DAMAGE = Resources.Load<Material>("3D/Issue/URP/EmissiveArrow 1");
+                            MAT_DAMAGE = Resources.Load<Material>("3D/Issue/URP/Issue_EasyDecal_dmg");
+                        }
+                        result = MAT_DAMAGE;
+                    }
+                    break;
+
+                case MaterialType.EasyDecal_rcv:
+                    {
+                        if (pipeline == RenderPipelineType.BuiltIn)
+                        {
+                            MAT_RECOVER = Resources.Load<Material>("3D/Issue/BltIn/Issue_rcv");
+                        }
+                        else if (pipeline == RenderPipelineType.URP)
+                        {
+                            MAT_RECOVER = Resources.Load<Material>("3D/Issue/URP/Issue_EasyDecal_rcv");
                         }
                         result = MAT_RECOVER;
                     }

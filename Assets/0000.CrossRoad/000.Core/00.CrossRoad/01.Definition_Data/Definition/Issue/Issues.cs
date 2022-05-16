@@ -1,11 +1,13 @@
-using Bearroll.UltimateDecals;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using View;
 
 namespace Definition
 {
+    using Bearroll.UltimateDecals;
+    using ch.sycoforge.Decal;
+    using View;
+
     public static class Issues
     {
         public static GameObject CreateIssue(int _index, WebType _webT, _Issue.Issue _issue)
@@ -16,7 +18,8 @@ namespace Definition
             }
             else if(_index == 1)
             {
-                return CreateIssue_Decal(_webT, _issue);
+                return CreateIssue_EasyDecal(_webT, _issue);
+                //return CreateIssue_UltimateDecal(_webT, _issue);
             }
             else
             {
@@ -29,7 +32,8 @@ namespace Definition
             GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
             obj.name = _issue.IssueOrderCode;
             obj.transform.position = _issue.PositionVector;
-            obj.transform.rotation = Quaternion.Euler(new Vector3(45, 45, 0));
+            obj.transform.rotation = Quaternion.Euler(_issue.RotationVector);
+            //obj.transform.rotation = Quaternion.Euler(new Vector3(45, 45, 0));
             obj.AddComponent<Issue_Selectable>().Issue = _issue;
 
             MeshRenderer render;
@@ -83,11 +87,74 @@ namespace Definition
             return obj;
         }
 
-        private static GameObject CreateIssue_Decal(WebType _webT, _Issue.Issue _issue)
+        private static GameObject CreateIssue_EasyDecal(WebType _webT, _Issue.Issue _issue)
+        {
+            GameObject obj = null;
+
+            if(!Prefabs.TrySet(PrefabType.EasyDecal, out obj))
+            {
+                throw new System.Exception("Prefab not existed");
+            }
+
+            EasyDecal decal = obj.GetComponent<EasyDecal>();
+
+            obj.name = _issue.IssueOrderCode;
+            obj.transform.position = _issue.PositionVector;
+            obj.transform.rotation = Quaternion.Euler(_issue.RotationVector); // TODO 각도 초기화 코드 적용
+            //obj.transform.rotation = Quaternion.Euler(new Vector3(45, 45, 45)); // TODO 각도 초기화 코드 적용
+            obj.AddComponent<Issue_Selectable>().Issue = _issue;
+
+            MaterialType mType;
+            switch (_webT)
+            {
+                case WebType.Issue_Dmg:
+                    mType = MaterialType.EasyDecal_dmg;
+                    break;
+
+                case WebType.Issue_Rcv:
+                    mType = MaterialType.EasyDecal_rcv;
+                    break;
+
+                default:
+                    mType = MaterialType.EasyDecal_dmg;
+                    break;
+            }
+
+            TextureType tType;
+            switch (_issue.IssueCode)
+            {
+                case _Issue.IssueCodes.Crack:
+                    tType = TextureType.crack;
+                    break;
+
+                case _Issue.IssueCodes.Spalling:
+                    tType = TextureType.bagli;
+                    break;
+
+                case _Issue.IssueCodes.Efflorescence:
+                    tType = TextureType.baegtae;
+                    break;
+
+                case _Issue.IssueCodes.breakage:
+                    tType = TextureType.damage;
+                    break;
+
+                default:
+                    tType = TextureType.crack;
+                    break;
+            }
+
+            Material mat = Materials.Set(mType);
+            Textures.Set(mat, tType);
+            decal.DecalMaterial = Materials.Set(mType);
+            return obj;
+        }
+
+        private static GameObject CreateIssue_UltimateDecal(WebType _webT, _Issue.Issue _issue)
         {
             GameObject obj = null;
             
-            if(!Prefabs.TrySet(PrefabType.Decal, out obj))
+            if(!Prefabs.TrySet(PrefabType.UltimateDecal, out obj))
             {
                 throw new System.Exception("Prefab not existed");
             }
@@ -96,7 +163,8 @@ namespace Definition
 
             obj.name = _issue.IssueOrderCode;
             obj.transform.position = _issue.PositionVector;
-            obj.transform.rotation = Quaternion.Euler(new Vector3(45, 45, 0));
+            obj.transform.rotation = Quaternion.Euler(_issue.RotationVector);
+            //obj.transform.rotation = Quaternion.Euler(new Vector3(45, 45, 0));
             obj.AddComponent<Issue_Selectable>().Issue = _issue;
 
             //MeshRenderer render;
@@ -112,15 +180,15 @@ namespace Definition
             switch (_webT)
             {
                 case WebType.Issue_Dmg:
-                    mType = MaterialType.Decal_dmg;
+                    mType = MaterialType.UltimateDecal_dmg;
                     break;
 
                 case WebType.Issue_Rcv:
-                    mType = MaterialType.Decal_rcv;
+                    mType = MaterialType.UltimateDecal_rcv;
                     break;
 
                 default:
-                    mType = MaterialType.Decal_dmg;
+                    mType = MaterialType.UltimateDecal_dmg;
                     break;
             }
 

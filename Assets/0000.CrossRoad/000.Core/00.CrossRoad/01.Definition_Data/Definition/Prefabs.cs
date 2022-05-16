@@ -12,8 +12,12 @@ namespace Definition
 
 			switch(type)
 			{
-				case PrefabType.Decal:
+				case PrefabType.UltimateDecal:
 					result = GameObject.Instantiate(Resources.Load<GameObject>("Prefab/DecalPoint"));
+					break;
+
+				case PrefabType.EasyDecal:
+					result = GameObject.Instantiate(Resources.Load<GameObject>("Prefab/EasyDecal"));
 					break;
 			}
 

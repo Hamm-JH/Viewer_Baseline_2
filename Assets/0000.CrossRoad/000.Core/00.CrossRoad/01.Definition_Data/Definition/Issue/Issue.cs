@@ -48,6 +48,7 @@ namespace Definition._Issue
 		[SerializeField] string m_ynRecover;
 		[SerializeField] string m_issueStatus;
 		[SerializeField] string m__positionVector;
+		[SerializeField] string m__rotationVector;
 
 		[SerializeField] string m_width;
 		[SerializeField] string m_height;
@@ -65,6 +66,7 @@ namespace Definition._Issue
 		[SerializeField] IssueCodes m_issueCode;
 		[SerializeField] int m_dcLocation;
 		[SerializeField] Vector3 m_positionVector;
+		[SerializeField] Vector3 m_rotationVector;
 
 		/// <summary>
 		/// 손상정보의 발생 일시
@@ -126,6 +128,31 @@ namespace Definition._Issue
 			}
 		}
 
+		public string _RotationVector
+        {
+			get => m__rotationVector;
+			set
+            {
+				m__rotationVector = value;
+				string[] vStr = m__rotationVector.Split(',');
+				if(vStr.Length != 3)
+                {
+					m__rotationVector = "45,45,45";
+					vStr = m__rotationVector.Split(',');
+                }
+				
+
+				Vector3 rot = new Vector3(
+					float.Parse(vStr[0]),
+					float.Parse(vStr[1]),
+					float.Parse(vStr[2])
+					);
+
+				m_rotationVector = rot;
+
+            }
+        }
+
 		public string Width { get => m_width; set => m_width=value; }
 		public string Height { get => m_height; set => m_height=value; }
 		public string Depth { get => m_depth; set => m_depth=value; }
@@ -140,7 +167,8 @@ namespace Definition._Issue
 		public List<ImgIndex> Imgs { get => m_imgs; set => m_imgs=value; }
 
 		public int DcLocation { get => m_dcLocation; set => m_dcLocation=value; }
-		public Vector3 PositionVector { get => m_positionVector; set => m_positionVector=value; }
+		public Vector3 PositionVector { get => m_positionVector; set => m_positionVector = value; }
+		public Vector3 RotationVector { get => m_rotationVector; set => m_rotationVector = value; }
 		public IssueCodes IssueCode { get => m_issueCode; set => m_issueCode=value; }
 
 		#endregion
@@ -304,6 +332,7 @@ namespace Definition._Issue
 
 			string kIssueStatus			= "";
 			string k_PositionVector		= "";
+			string k_RotationVector		= "";
 			string kDateDmg				= "";
 			string kWidth				= "";
 			string kHeight				= "";
@@ -326,6 +355,7 @@ namespace Definition._Issue
                
 				kIssueStatus = "dcGrade";
 				k_PositionVector	= "dcPinLocation";
+				k_RotationVector	= "dcRotation";
 				kDateDmg			= "dtCheck";
 				kWidth				= "noDamageWidth";
 				kHeight				= "noDamageHeight";
@@ -348,6 +378,7 @@ namespace Definition._Issue
                
 				kIssueStatus = "dcGrade";
 				k_PositionVector    = "dcPinLocation";
+				k_RotationVector	= "dcRotation";
 				kDateDmg            = "dtCheck";
 				kWidth              = "noDamageWidth";
 				kHeight             = "noDamageHeight";
@@ -372,6 +403,7 @@ namespace Definition._Issue
 			YnRecover            = "";
 			IssueStatus          =   _token.SelectToken(kIssueStatus).ToString();
 			_PositionVector      =  _token.SelectToken(k_PositionVector).ToString();
+			_RotationVector		 = _token.SelectToken(k_RotationVector).ToString();
 			DateDmg          = _token.SelectToken(kDateDmg).ToString();
 			Width                =   _token.SelectToken(kWidth).ToString();
 			Height               =   _token.SelectToken(kHeight).ToString();

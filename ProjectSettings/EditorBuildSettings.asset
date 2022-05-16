@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scene/_2 Viewer/SmartInspectViewer.unity
     guid: 0ad20d2a663a1434996f2d8154a4e854
+  - enabled: 1
+    path: Assets/01.Scene/Test/DecalTest/DecalTest.unity
+    guid: 06a896d469043b04ab3e347184cb50c9
   m_configObjects: {}

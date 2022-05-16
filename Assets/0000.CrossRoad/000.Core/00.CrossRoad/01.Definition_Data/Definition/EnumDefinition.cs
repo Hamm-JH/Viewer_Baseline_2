@@ -272,9 +272,13 @@ namespace Definition
 		Issue_dmg = 0x21,
 		Issue_rcv = 0x22,
 
-		Decal = 0x30,
-		Decal_dmg = 0x31,
-		Decal_rcv = 0x32,
+		UltimateDecal = 0x30,
+		UltimateDecal_dmg = 0x31,
+		UltimateDecal_rcv = 0x32,
+
+		EasyDecal = 0x40,
+		EasyDecal_dmg = 0x41,
+		EasyDecal_rcv = 0x42,
 
 		White = 0x91,
 		ObjDefault1 = 0x99,
@@ -291,8 +295,8 @@ namespace Definition
 
 	public enum PrefabType
 	{
-		Decal = 0x10,
-
+		UltimateDecal = 0x10,
+		EasyDecal = 0x11,
 	}
 
 	public enum LayerNames
