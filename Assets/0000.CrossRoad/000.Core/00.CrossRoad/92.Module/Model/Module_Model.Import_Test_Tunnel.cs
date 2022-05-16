@@ -10,11 +10,12 @@ namespace Module.Model
 	using EPOOutline;
     using Platform.Tunnel;
     using Test;
+    using UnityEditor;
 
-	/// <summary>
-	/// 템플릿
-	/// </summary>
-	public partial class Module_Model : AModule
+    /// <summary>
+    /// 템플릿
+    /// </summary>
+    public partial class Module_Model : AModule
 	{
 		[Header("_Tunnel")]
 		//public GameObject trashCan;
@@ -344,6 +345,8 @@ namespace Module.Model
 			{
 				MeshFilter mf;
 				MeshRenderer render;
+
+				x.isStatic = true; //StaticEditorFlags.OccluderStatic;
 
 				x.AddComponent<View.Obj_Selectable>();
 				MeshCollider coll = x.AddComponent<MeshCollider>();

@@ -50,6 +50,8 @@ namespace Management
 		{
 			// 컨텐츠 관리자 전달
 			MainManager.Instance.SetContentManager(this, OnUpdate_System);
+
+			UD_Manager.Restart();
 		}
 
 		/// <summary>

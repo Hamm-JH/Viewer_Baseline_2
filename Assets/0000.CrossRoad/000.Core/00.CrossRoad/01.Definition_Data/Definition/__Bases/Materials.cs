@@ -113,7 +113,8 @@ namespace Definition
                         }
                         else if (pipeline == RenderPipelineType.URP)
                         {
-                            MAT_DAMAGE = Resources.Load<Material>("3D/Issue/URP/Issue_decal_dmg");
+                            MAT_DAMAGE = Resources.Load<Material>("3D/Issue/URP/EmissiveArrow 1");
+                            //MAT_DAMAGE = Resources.Load<Material>("3D/Issue/URP/Issue_decal_dmg");
                         }
                         result = MAT_DAMAGE;
                     }

@@ -81,7 +81,8 @@ namespace View
 		public override void OnSelect()
 		{
 			// 이슈정보 선택 처리
-			Debug.LogError("Issue Selectable Onselect");
+			//Debug.LogError("Issue Selectable Onselect");
+			Debug.Log("Issue Selectable Onselect");
 		}
 
 
