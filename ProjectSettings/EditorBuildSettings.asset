@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Module/Waypoint Indicators/Demo/Scenes/_root.unity
+    guid: 57c29fef368cb95478f221bd300cc0dc
+  - enabled: 1
+    path: Assets/Module/Waypoint Indicators/Demo/Scenes/Scene_1.unity
+    guid: ce5f1deb6feefb74da42e6ec9e871f7c
+  - enabled: 1
+    path: Assets/Module/Waypoint Indicators/Demo/Scenes/Scene_2.unity
+    guid: 3baef934cfc4bf746a24eb9d4656ea49
+  - enabled: 1
+    path: Assets/Module/Waypoint Indicators/Demo/Scenes/Scene_3.unity
+    guid: ea5274d7f0f55964ea1db916329ee65f
+  - enabled: 1
     path: Assets/01.Scene/_1 Initializer/Initializer.unity
     guid: 47045276f93f50a42b2348ee3a010da9
   - enabled: 1
