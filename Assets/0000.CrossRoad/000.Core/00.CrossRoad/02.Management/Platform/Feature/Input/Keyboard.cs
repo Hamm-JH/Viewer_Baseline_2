@@ -1,4 +1,4 @@
-using Definition;
+ï»¿using Definition;
 using Management;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,48 +8,48 @@ namespace Platform.Feature._Input
 {
 	public partial class Keyboard : IInput
 	{
-		#region Pre-defined »çÀü Á¤ÀÇ
+		#region Pre-defined ì‚¬ì „ ì •ì˜
 
 		[System.Serializable]
 		public class Data
 		{
 			/// <summary>
-			/// Àü¹æ ÀÌµ¿ Å°
+			/// ì „ë°© ì´ë™ í‚¤
 			/// </summary>
 			public KeyCode keyFront;
 
 			/// <summary>
-			/// ÈÄ¹æ ÀÌµ¿ Å°
+			/// í›„ë°© ì´ë™ í‚¤
 			/// </summary>
 			public KeyCode keyBack;
 
 			/// <summary>
-			/// ¿ŞÂÊ ÀÌµ¿ Å°
+			/// ì™¼ìª½ ì´ë™ í‚¤
 			/// </summary>
 			public KeyCode keyLeft;
 
 			/// <summary>
-			/// ¿À¸¥ÂÊ ÀÌµ¿ Å°
+			/// ì˜¤ë¥¸ìª½ ì´ë™ í‚¤
 			/// </summary>
 			public KeyCode keyRight;
 
 			/// <summary>
-			/// À§ÂÊ ÀÌµ¿ Å°
+			/// ìœ„ìª½ ì´ë™ í‚¤
 			/// </summary>
 			public KeyCode keyUp;
 
 			/// <summary>
-			/// ¾Æ·¡ÂÊ ÀÌµ¿ Å°
+			/// ì•„ë˜ìª½ ì´ë™ í‚¤
 			/// </summary>
 			public KeyCode keyDown;
 
 			/// <summary>
-			/// ºÎ½ºÆ® Å°
+			/// ë¶€ìŠ¤íŠ¸ í‚¤
 			/// </summary>
 			public KeyCode keyBoost;
 
 			/// <summary>
-			/// ÄÁÆ®·Ñ Å°
+			/// ì»¨íŠ¸ë¡¤ í‚¤
 			/// </summary>
 			public KeyCode keyCtrl;
 		}
@@ -66,8 +66,7 @@ namespace Platform.Feature._Input
 			}
 			catch
 			{
-				// TODO :: ´Ù¸¥ Ã¢À¸·Î »ç¿ëÀÚ°¡ ÀÔ·ÂÀÌ ³Ñ¾î°¬À»¶§ pause ÄÚµå Ãß°¡ÇÏ±â
-				//Debug.LogError("´Ù¸¥ Ã¢ ¿­¾îµÎ°í ´Ù¸¥ Áş ÇÏ¸é ÀÌº¥Æ®°¡ Æ¢´Â °æ¿ì°¡ ÀÖÀ½.");
+				// TODO :: ë‹¤ë¥¸ ì°½ìœ¼ë¡œ ì‚¬ìš©ìê°€ ì…ë ¥ì´ ë„˜ì–´ê°”ì„ë•Œ pause ì½”ë“œ ì¶”ê°€í•˜ê¸°. ë‹¤ë¥¸ ì°½ ì—´ì–´ë‘ê³  ë‹¤ë¥¸ ì§“ í•˜ë©´ ì´ë²¤íŠ¸ê°€ íŠ€ëŠ” ê²½ìš°ê°€ ìˆìŒ
 				newKeyCodes = new List<KeyData>();
 			}
 		}
@@ -75,14 +74,14 @@ namespace Platform.Feature._Input
 		#region fields
 
 		/// <summary>
-		/// Å° ÀÔ·Â ¸®½ºÆ®
+		/// í‚¤ ì…ë ¥ ë¦¬ìŠ¤íŠ¸
 		/// </summary>
 		List<KeyData> keyCodes;
 		List<KeyData> newKeyCodes;
 
 		#endregion
 
-		#region Å° Ã¼Å©
+		#region í‚¤ ì²´í¬
 
 		private KeyData CheckKeyData(KeyCode _kCode)
 		{
@@ -117,7 +116,7 @@ namespace Platform.Feature._Input
 		}
 
 		/// <summary>
-		/// Å°º¸µå ¼³Á¤ Å°¿¡ ´ëÀÀÇÏ´Â ÀÌº¥Æ® Ã¼Å© ¼öÇà
+		/// í‚¤ë³´ë“œ ì„¤ì • í‚¤ì— ëŒ€ì‘í•˜ëŠ” ì´ë²¤íŠ¸ ì²´í¬ ìˆ˜í–‰
 		/// </summary>
 		private void KeyCheck()
 		{
@@ -155,14 +154,14 @@ namespace Platform.Feature._Input
 				// stay
 				m_InputEvents.keyEvent.Invoke(Definition.InputEventType.Input_key, newKeyCodes);
 			}
-			// ÀÌÀü Å° ÀÔ·Â ÀÖ¾úÀ½ && ÇöÀç Å° ÀÔ·Â ¾øÀ½ :: ClickUp (¸ğµç Å° ÀÔ·Â ¾ø´Â »óÅÂ)
+			// ì´ì „ í‚¤ ì…ë ¥ ìˆì—ˆìŒ && í˜„ì¬ í‚¤ ì…ë ¥ ì—†ìŒ :: ClickUp (ëª¨ë“  í‚¤ ì…ë ¥ ì—†ëŠ” ìƒíƒœ)
 			else if(keyCodes.Count != 0 && newKeyCodes.Count == 0)
 			{
 				m_InputEvents.keyEvent.Invoke(InputEventType.Input_key, null);
 			}
 			//str += "4";
 
-			// ¾÷µ¥ÀÌÆ®
+			// ì—…ë°ì´íŠ¸
 			keyCodes = newKeyCodes;
 			//Debug.LogWarning(str);
 		}

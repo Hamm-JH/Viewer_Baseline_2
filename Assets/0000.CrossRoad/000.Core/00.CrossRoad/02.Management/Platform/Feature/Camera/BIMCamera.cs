@@ -1,4 +1,4 @@
-using Definition;
+ï»¿using Definition;
 using Definition.Control;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace Platform.Feature.Camera
 	public partial class BIMCamera : ICamera
 	{
 		/// <summary>
-		/// Ä«¸Ş¶ó ¸ğµå º¯°æ
+		/// ì¹´ë©”ë¼ ëª¨ë“œ ë³€ê²½
 		/// </summary>
 		/// <param name="_mode"></param>
 		protected override void ChangeCameraMode(CameraModes _mode)
@@ -77,7 +77,7 @@ namespace Platform.Feature.Camera
 			Debug.Log($"***** data : {_camData.bMaxOffsetDistance}");
 			maxOffsetDistance = _camData.bMaxOffsetDistance;
 			orbitSpeed = _camData.bOrbitSpeed;
-			freeSpeed = _camData.bFreeSpeed;	// TODO :: ÀÓ½Ã. ±ËµµÈ¸Àü ¼Óµµ°ªÀ» Â÷¿ë
+			freeSpeed = _camData.bFreeSpeed;	// TODO :: Temp ì„ì‹œ. ê¶¤ë„íšŒì „ ì†ë„ê°’ì„ ì°¨ìš©
 			panSpeed = _camData.bPanSpeed;
 			zoomSpeed = _camData.bZoomSpeed;
 		}

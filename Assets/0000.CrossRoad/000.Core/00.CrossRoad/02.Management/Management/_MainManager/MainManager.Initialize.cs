@@ -64,18 +64,11 @@ namespace Management
 		/// </summary>
 		public void InitInputResource(PlatformCode _pCode)
 		{
-			// TODO : ★ 빌드의 입력장치가 정해졌을때 장치입력을 받는 인스턴스를 생성하도록 개편
-			//int platformIndex = (int)_pCode / 0x10;
-
-			// platformIndex table
-			// 1 : WebGL
-			// 2 : Mobile
-			// 3 : PC
+			// TODO :: 2nd :: ★ 빌드의 입력장치가 정해졌을때 장치입력을 받는 인스턴스를 생성하도록 개편
 
 			// 같은 WebGL이지만 구동되는 기기가 다르면 다른 플랫폼으로 쳐야한다.
 			// :: 플랫폼 코드만으로 해결이 안됨.
 
-			// TODO 기기 검색코드 작성
 			if(Platforms.IsMobilePlatform(_pCode))
             {
 				InitSingleInputResource<Platform.Feature._Input.Touchpad>("touchpad");
@@ -90,14 +83,6 @@ namespace Management
             {
 				throw new Definition.Exceptions.PlatformNotDefinedException(_pCode);
             }
-			//if (platformIndex == 1 || platformIndex == 3) // webgl
-			//{
-			//}
-			//else if (platformIndex == 2)        // mobile
-			//{
-			//	// TODO Input Mobile
-			//	Debug.LogError("아직 Mobile 코드가 작성되지 않았습니다. 작성 후 업데이트 필요함.");
-			//}
 		}
 
 		private void InitSingleInputResource<T>(string name) where T : IInput

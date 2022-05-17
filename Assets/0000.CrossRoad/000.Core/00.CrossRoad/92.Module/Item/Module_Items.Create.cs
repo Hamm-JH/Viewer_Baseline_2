@@ -73,9 +73,7 @@ namespace Module.Item
 					m_compass.CompassUIRoot = uiCompassRoot;
 					m_compass.CompassPitch = 60;
 
-					// TODO ***** 시작점, 종료점
 					StartCoroutine(Try_GetTrsTunnel(m_compass));
-					//m_compass.AddCompass(ContentManager.Instance.Module<Module_Model>().Trs_tunnel);
 
 					m_itemList.Add(m_compass);
                 }

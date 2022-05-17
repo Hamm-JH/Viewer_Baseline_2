@@ -26,7 +26,7 @@ namespace Module.Graphic
 		{
 			Debug.LogWarning($"{this.GetType().ToString()} OnStart");
 
-			// TODO 0222 : 그래픽 템플릿별 스타일 적용
+			// TODO 0517 : 그래픽 템플릿별 스타일 적용
 			ContentManager.Instance.CheckInitModuleComplete(ID);
 		}
 	}
