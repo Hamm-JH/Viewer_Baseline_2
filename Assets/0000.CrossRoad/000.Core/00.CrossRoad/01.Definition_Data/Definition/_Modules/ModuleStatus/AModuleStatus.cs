@@ -13,7 +13,7 @@ namespace Definition
 		/// <summary>
 		/// 관리 모드에서 임시 캐싱용 객체
 		/// </summary>
-		public GameObject m_cacheObject;
+		//public GameObject m_cacheObject;
 
 		public List<GameObject> m_cacheObjects;
 
@@ -25,7 +25,7 @@ namespace Definition
 		public AModuleStatus()
 		{
 			// 초기값 null
-			m_cacheObject = null;
+			//m_cacheObject = null;
 			m_cacheObjects = null;
 
 			// 초기 값은 view1
@@ -64,10 +64,10 @@ namespace Definition
 		/// 현재 선택된 객체를 캐싱한다.
 		/// </summary>
 		/// <param name="_selected"></param>
-		public void CachingObject(GameObject _selected)
-		{
-			m_cacheObject = _selected;
-		}
+		//public void CachingObject(GameObject _selected)
+		//{
+		//	m_cacheObject = _selected;
+		//}
 
 		public void CachingObjects(List<GameObject> _selecteds)
         {
@@ -78,10 +78,10 @@ namespace Definition
 		/// 캐싱 객체를 가져온다.
 		/// </summary>
 		/// <returns></returns>
-		public GameObject GetCache()
-		{
-			return m_cacheObject;
-		}
+		//public GameObject GetCache()
+		//{
+		//	return m_cacheObject;
+		//}
 
 		public List<GameObject> GetCaches()
         {
@@ -91,10 +91,10 @@ namespace Definition
 		/// <summary>
 		/// 캐시를 지운다.
 		/// </summary>
-		public void RemoveCache()
-		{
-			m_cacheObject = null;
-		}
+		//public void RemoveCache()
+		//{
+		//	m_cacheObject = null;
+		//}
 
 		public void RemoveCaches()
         {

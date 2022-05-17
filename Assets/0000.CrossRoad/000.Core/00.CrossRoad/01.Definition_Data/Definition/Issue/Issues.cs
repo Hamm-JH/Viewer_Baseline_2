@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,7 +55,7 @@ namespace Definition
                         break;
                 }
 
-                // TODO 0511 : ¼Õ»ó º¯È¯Å×ÀÌºí ¸¸µé°í ÃßÈÄ Àû¿ë
+                // TODO 0511 : ì†ìƒ ë³€í™˜í…Œì´ë¸” ë§Œë“¤ê³  ì¶”í›„ ì ìš©
                 TextureType tType;
                 switch(_issue.IssueCode)
                 {
@@ -100,9 +100,25 @@ namespace Definition
 
             obj.name = _issue.IssueOrderCode;
             obj.transform.position = _issue.PositionVector;
-            obj.transform.rotation = Quaternion.Euler(_issue.RotationVector); // TODO °¢µµ ÃÊ±âÈ­ ÄÚµå Àû¿ë
-            //obj.transform.rotation = Quaternion.Euler(new Vector3(45, 45, 45)); // TODO °¢µµ ÃÊ±âÈ­ ÄÚµå Àû¿ë
+            obj.transform.rotation = Quaternion.Euler(_issue.RotationVector);
             obj.AddComponent<Issue_Selectable>().Issue = _issue;
+
+            Items.Item_waypoint wp;
+            if(obj.TryGetComponent<Items.Item_waypoint>(out wp))
+            {
+                if(_webT == WebType.Issue_Dmg)
+                {
+                    wp.SetColor(new Color(0xee / 255f, 0x57 / 255f, 0x30 / 255f, 1));
+                }
+                else if(_webT == WebType.Issue_Rcv)
+                {
+                    wp.SetColor(new Color(0x3e / 255f, 0xb0 / 255f, 0xc9 / 255f, 1));
+                }
+                else
+                {
+                    Debug.LogWarning("--- WebTypeì´ dmg, rcvê°€ ì•„ë‹˜. ---");
+                }
+            }
 
             MaterialType mType;
             switch (_webT)
@@ -164,17 +180,7 @@ namespace Definition
             obj.name = _issue.IssueOrderCode;
             obj.transform.position = _issue.PositionVector;
             obj.transform.rotation = Quaternion.Euler(_issue.RotationVector);
-            //obj.transform.rotation = Quaternion.Euler(new Vector3(45, 45, 0));
             obj.AddComponent<Issue_Selectable>().Issue = _issue;
-
-            //MeshRenderer render;
-            //if(obj.TryGetComponent<MeshRenderer>(out render))
-            //{
-                
-
-            //    render.material = Materials.Set(mType);
-            //    Textures.Set(render, tType);
-            //}
 
             MaterialType mType;
             switch (_webT)
@@ -192,7 +198,7 @@ namespace Definition
                     break;
             }
 
-            // TODO 0511 : ¼Õ»ó º¯È¯Å×ÀÌºí ¸¸µé°í ÃßÈÄ Àû¿ë
+            // TODO 0511 : ì†ìƒ ë³€í™˜í…Œì´ë¸” ë§Œë“¤ê³  ì¶”í›„ ì ìš©
             TextureType tType;
             switch (_issue.IssueCode)
             {
@@ -220,8 +226,8 @@ namespace Definition
             Material mat = Materials.Set(mType);
             Textures.Set(mat, tType);
             decal.material = mat;
-            //UD_Manager.Restart();
-            UD_Manager.UpdateDecal(decal);
+
+            //UD_Manager.UpdateDecal(decal);
             return obj;
         }
     }

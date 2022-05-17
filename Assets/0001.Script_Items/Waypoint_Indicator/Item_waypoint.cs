@@ -23,10 +23,10 @@ namespace Items
 
             public void SetColor(Color _color)
             {
-                mainIcon_waypoint.onScreenSpriteColor = Color.white;
-                mainIcon_waypoint.offScreenSpriteColor = Color.white;
-                effect_waypoint.onScreenGameObjectColor = Color.white;
-                effect_waypoint.offScreenGameObjectColor = Color.white;
+                mainIcon_waypoint.onScreenSpriteColor = _color;
+                mainIcon_waypoint.offScreenSpriteColor = _color;
+                effect_waypoint.onScreenGameObjectColor = _color;
+                effect_waypoint.offScreenGameObjectColor = _color;
             }
         }
 

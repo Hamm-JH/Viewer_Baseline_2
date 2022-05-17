@@ -43,7 +43,7 @@ namespace Module.UI
 				// 기본 관리모드인가? (1, 2, 5 상태)
 				if (aStatus.IsDefaultAdministrationMode())
 				{
-					aStatus.RemoveCache();
+					//aStatus.RemoveCache();	// TODO : 지워야 되나?
 
 					mCam.cullingMask = Layers.SetMask(0);
 					sCam.cullingMask = Layers.SetMask(0);
