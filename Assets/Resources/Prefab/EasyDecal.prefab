@@ -52,7 +52,7 @@ MonoBehaviour:
   showBoundaryBox: 0
   boundaryBoxColor: {r: 0.9150943, g: 0.59603894, b: 0.11654504, a: 0.38431373}
   parentSize: {x: 200, y: 200}
-  displayRangeMin: 15
+  displayRangeMin: 0
   displayRangeMax: 1000
   raycastTarget: 1
   enableSprite: 1
@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 7652492790731228455}
   - component: {fileID: 7652492790731228452}
   - component: {fileID: 8507300491603273761}
+  - component: {fileID: 2059469113}
   m_Layer: 0
   m_Name: EasyDecal
   m_TagString: Untagged
@@ -460,7 +461,7 @@ MonoBehaviour:
   surfaceRotation: 0
   quality: 1
   sharedMesh: {fileID: 0}
-  instanceID: -1116080
+  instanceID: -1139054
 --- !u!65 &8507300491603273761
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -474,6 +475,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2059469113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7652492790731228454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e1e1fa976f1b5488b8676f9d48d00f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_issueWayPoint:
+    mainIcon_waypoint: {fileID: 242999926}
+    effect_waypoint: {fileID: 896992985}
 --- !u!1 &7652492791474763474
 GameObject:
   m_ObjectHideFlags: 0
