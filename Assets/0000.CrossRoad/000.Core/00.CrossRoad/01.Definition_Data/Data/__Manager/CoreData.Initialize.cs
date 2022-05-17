@@ -68,7 +68,9 @@ namespace Definition.Data
 			else if(Platforms.IsBridgePlatform(Platform))
 			{
 #if UNITY_EDITOR
-				_url = "http://wesmart.synology.me:45000/unity/UnityWeb/?cdBridge=20211102-00000051&cdBridgeSub=20211102-00000052";
+				//_url = "http://wesmart.synology.me:45000/unity/UnityWeb/?cdBridge=20211102-00000051&cdBridgeSub=20211102-00000052";
+				//_url = "http://wesmart.synology.me:55000/unity/UnityWeb/?cdBridge=20211102-00000051&cdBridgeSub=20211102-00000052";
+				_url = "http://wesmart.synology.me:55000/unity/UnityWeb/?cdBridge=20211102-00000026&cdBridgeSub=20211102-00000027";
 #else
 						_url = Application.absoluteURL;
 #endif
