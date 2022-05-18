@@ -222,8 +222,6 @@ namespace Module.Model
             {
                 ContentManager.Instance.SetCameraCenterPosition();
 
-                //ContentManager.Instance.CompCheck(4);
-
                 ContentManager.Instance.Container.m_dimView.Initial2DSet(m_bRootObj);
                     //DimViewManager.Instance.Initial2DSet(_2DObject: (GameObject)args[0]);
                 //MaterialChange();

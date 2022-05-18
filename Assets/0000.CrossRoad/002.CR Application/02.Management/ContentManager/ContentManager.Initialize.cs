@@ -13,33 +13,6 @@ namespace Management
 
     public partial class ContentManager : IManager<ContentManager>
 	{
-		bool dmgComp = false;
-		bool rcvComp = false;
-		bool itfComp = false;
-		bool modComp = false;
-		//bool evtComp = false;
-
-		/// <summary>
-		/// UIManager 완료 시점 파악을 위한 메서드
-		/// 1 dmg, 2 rcv, 3 interface 4 model 5 event 완료 체크
-		/// </summary>
-		/// <param name="_index"></param>
-		//public void CompCheck(int _index)
-		//{
-		//	switch(_index)
-		//	{
-		//		case 1:	dmgComp = true;	break;
-		//		case 2: rcvComp = true; break;
-		//		case 3: itfComp = true; break;
-		//		case 4: modComp = true; break;
-		//		//case 5:	evtComp = true; break;
-		//	}
-
-		//	if(dmgComp && rcvComp && itfComp && modComp/* && evtComp*/)
-		//	{
-		//		//_Interaction.LoadModuleComplete();
-		//	}
-		//}
 
 		private Dictionary<ModuleID, bool> m_mChecker;
 

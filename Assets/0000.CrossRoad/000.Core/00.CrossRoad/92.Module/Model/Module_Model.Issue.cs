@@ -92,16 +92,6 @@ namespace Module.Model
 			SetIssuesInRoot(_iObjs);
 
 			CollectAllIssues(IssueObjs, _iObjs);
-
-			// TODO 야매 compcheck 1, 2
-			if(isDmg)
-			{
-				//ContentManager.Instance.CompCheck(1);
-			}
-			else
-			{
-				//ContentManager.Instance.CompCheck(2);
-			}
 		}
 
 		private void InitRootIssue(out GameObject _root)
