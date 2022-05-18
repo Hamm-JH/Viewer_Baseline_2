@@ -1719,7 +1719,7 @@ public class IMDrawMeshLineRendererSimple : IMDrawLineRenderer
 
 #if false
 
-// ASSET_TODO:
+// TODO:
 // - Develop a more advanced version of line renderer which can handle lines of different thickness.
 // - Camera.WorldToScreenPoint and Camera.ScreenToWorldPoint are exceptionally slow, create replacements and potentially move the screen space/world space math to the vertex shader.
 // - Line renderers to have their own unique inspector parameters.

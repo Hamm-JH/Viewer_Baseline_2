@@ -34,10 +34,6 @@ namespace Management
 
 				case InputEventType.Input_clickSuccessUp:
 					{
-						// TODO :: 1ST :: ★ 이벤트 선택의 분기구조 개선
-						// 1. 모든 이벤트에 대해 MultiCondition 확인
-						// 2. MultiContition일 경우, 아닐 경우 이벤트 실행 분기 설정
-
 						// Caching
 						// 허공 선택시
 						// UI 선택시
@@ -54,9 +50,10 @@ namespace Management
 								AddEvent<InputEventType, AEventData>(_currEvent.EventType, _currEvent, _sEvents, true);
 
 								// 다중 객체의 OnSelect 시행
-								// TODO :: 1ST :: ★ 일단 단일 객체 이벤트로 대체
+								// TODO 0228 :: 일단 단일 객체 이벤트로 대체
 								_sEvents[InputEventType.Input_clickSuccessUp].Elements.ForEach(x => x.OnSelect());
 								_sEvents[InputEventType.Input_clickSuccessUp].DoEvent(_sEvents);
+								//_currEvent.DoEvent();
 							}
 							// 빈 공간을 누른 경우
 							else

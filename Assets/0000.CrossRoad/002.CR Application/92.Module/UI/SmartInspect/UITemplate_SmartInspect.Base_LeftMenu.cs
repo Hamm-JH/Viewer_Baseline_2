@@ -105,51 +105,51 @@ namespace Module.UI
 
         #region Button Set on/off (삭제 필요)
 
-        // TODO :: CHECK :: 이 블록 삭제
+        // TODO 이 블록 삭제
         /// <summary>
         /// 삭제???????????????????????
         /// </summary>
         /// <param name="index"></param>
-        //private void LeftMenu_SetToggleButton(int index)
-        //{
-        //    // ********************************************* //
+        private void LeftMenu_SetToggleButton(int index)
+        {
+            // ********************************************* //
 
-        //    LeftMenu_AllOnOffButton(false);
+            LeftMenu_AllOnOffButton(false);
 
-        //    switch(index)
-        //    {
-        //        case 0:
-        //            LeftMenu_SetSingleButton(m_basePanel.m_processMenus.menus[0], true, 0);
-        //            break;
+            switch(index)
+            {
+                case 0:
+                    LeftMenu_SetSingleButton(m_basePanel.m_processMenus.menus[0], true, 0);
+                    break;
 
-        //        case 1:
-        //            LeftMenu_SetSingleButton(m_basePanel.m_processMenus.menus[1], true, 1);
-        //            break;
+                case 1:
+                    LeftMenu_SetSingleButton(m_basePanel.m_processMenus.menus[1], true, 1);
+                    break;
 
-        //        case 2:
-        //            LeftMenu_SetSingleButton(m_basePanel.m_processMenus.menus[2], true, 2);
-        //            break;
-        //    }
-        //}
+                case 2:
+                    LeftMenu_SetSingleButton(m_basePanel.m_processMenus.menus[2], true, 2);
+                    break;
+            }
+        }
 
-        //private void LeftMenu_AllOnOffButton(bool isOn)
-        //{
-        //    m_basePanel.m_processMenus.menus.ForEach(x =>
-        //    {
-        //        LeftMenu_SetSingleButton(x, isOn, 9);
-        //    });
-        //}
+        private void LeftMenu_AllOnOffButton(bool isOn)
+        {
+            m_basePanel.m_processMenus.menus.ForEach(x =>
+            {
+                LeftMenu_SetSingleButton(x, isOn, 9);
+            });
+        }
 
-        //private void LeftMenu_SetSingleButton(ProcessMenu _menu, bool isOn, int debugIndex)
-        //{
-        //    // TODO :: CHECK :: SmartInspect UI LeftMenu 이미지세팅 바꾸기 예정
-        //    Debug.LogError($"LeftMenu [{debugIndex}] 이미지세팅 바꾸기 예정");
+        private void LeftMenu_SetSingleButton(ProcessMenu _menu, bool isOn, int debugIndex)
+        {
+            // TODO SmartInspect UI LeftMenu 이미지세팅 바꾸기 예정
+            Debug.LogError($"LeftMenu [{debugIndex}] 이미지세팅 바꾸기 예정");
 
-        //    //_menu.btn_menu = null;    // 버튼 메뉴 변경
-        //    //_menu.img_main = null;    // 주 이미지 변경
-        //    //_menu.img_side = null;    // 사이드바 이미지 변경
-        //    //_menu.txt_desc = null;    // 설명 텍스트 변경
-        //}
+            //_menu.btn_menu = null;    // 버튼 메뉴 변경
+            //_menu.img_main = null;    // 주 이미지 변경
+            //_menu.img_side = null;    // 사이드바 이미지 변경
+            //_menu.txt_desc = null;    // 설명 텍스트 변경
+        }
 
         #endregion
 

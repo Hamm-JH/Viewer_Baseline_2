@@ -95,9 +95,9 @@ namespace I0plus.XduiUnity.Importer.Editor
             if (scrollRect)
             {
                 // scrollRectをもっているなら、ScrollBarを探してみる
-                // ASSET_TODO: 探すスクロールバーの名前は設定している
+                // TODO: 探すスクロールバーの名前は設定している
                 var scrollbars = selfAndSiblings
-                    .Where(goElem => goElem.Item2 is ScrollbarElement) // 兄弟の中wからScrollbarを探す
+                    .Where(goElem => goElem.Item2 is ScrollbarElement) // 兄弟の中からScrollbarを探す
                     .Select(goElem => goElem.Item1.GetComponent<Scrollbar>()) // ScrollbarコンポーネントをSelect
                     .ToList();
                 scrollbars.ForEach(scrollbar =>

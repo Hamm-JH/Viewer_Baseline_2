@@ -40,7 +40,7 @@ namespace Module.WebAPI
                     }
                     break;
 
-                case SendRequestCode.SelectObject6Shape:
+                case SendRequestCode.SelectObject6Shape:      // TODO lst UW / 면 방향 카메라 이동
                     {
                         LimitArgument(SendRequestCode.SelectObject6Shape.ToString(), 1, arguments);
 
@@ -48,6 +48,8 @@ namespace Module.WebAPI
                     }
                     break;
 
+                // TODO Date 0928 : 객체 선택 위치 넘기는거 고민 필요
+                // Pin 선택시 Location 정보 넘기는
                 case SendRequestCode.SelectSurfaceLocation:   // 완 ; 9면 선택
                     {
                         LimitArgument(SendRequestCode.SelectSurfaceLocation.ToString(), 3, arguments);
@@ -151,7 +153,7 @@ namespace Module.WebAPI
         {
             string shapeCode = _shapeCode;
 
-            // 6면 선택시 해당 객체의 특정 부재의 특정 6면의 정보 반환
+            // TODO 1020 : 6면 선택시 해당 객체의 특정 부재의 특정 6면의 정보 반환
             List<string> targetIssueList = ContentManager.Instance.GetTargetIssues(shapeCode);
 
             string stringResult = "";
@@ -164,6 +166,7 @@ namespace Module.WebAPI
                 stringResult += targetIssueList[i];
             }
 
+            // TODO 1019 140
             Debug.Log($"[Send.SelectObject6Shape] : Arg shapeCode {shapeCode}");
             string arg = string.Format("SelectObject6Shape/{0}/{1}", shapeCode, stringResult);
 #if UNITY_EDITOR

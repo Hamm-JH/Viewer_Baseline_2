@@ -50,7 +50,7 @@ namespace Module.UI
 
 					SetObjectToDefaultLayer(objs);			// 모든 객체 레이어 기본
 
-					// TODO :: 2ND :: 카메라 중심잡기..?
+					// TODO 카메라 중심잡기..?
 				}
 				// 특수 보기상태인가? (3, 4 상태)
 				else
@@ -76,6 +76,8 @@ namespace Module.UI
 					//SetObjectSelectedLayer(cache);          // 선택 객체 레이어 캐시레이어
 					SetObjectsSelectedLayer(caches);
 
+					// TODO 캐시 위치로 카메라 중심잡기
+					//SetFocusSelectedObject(cache, mCam);
 					SetFocusSelectedObjects(caches, mCam);
 				}
 			}

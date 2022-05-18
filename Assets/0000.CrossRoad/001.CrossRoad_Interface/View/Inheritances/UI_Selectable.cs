@@ -207,6 +207,7 @@ namespace View
 
 
 			Toggle_btnColor(true);
+			// TODO 0425 Toggle
         }
 
 		public void Toggle_btnColor(bool isOn)

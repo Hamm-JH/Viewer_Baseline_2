@@ -39,7 +39,7 @@ namespace UnityGLTF.Extensions
 			node.Scale = new GLTF.Math.Vector3(scale.x, scale.y, scale.z);
 		}
 
-		// ASSET_TODO : move to utility class
+		// todo: move to utility class
 		public static void GetTRSProperties(GLTF.Math.Matrix4x4 mat, out Vector3 position, out Quaternion rotation,
 			out Vector3 scale)
 		{

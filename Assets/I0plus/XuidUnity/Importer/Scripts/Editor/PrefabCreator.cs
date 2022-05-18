@@ -78,7 +78,7 @@ namespace I0plus.XduiUnity.Importer.Editor
                         {
                             // NestedPrefabの子供を転送しようとするとエラーになるため、
                             // 非アクティブにする
-                            // ASSET_TODO: unusedといった名前をつけるか検討
+                            //TODO: unusedといった名前をつけるか検討
                             go.SetActive(false);
                         }
                     }
@@ -104,7 +104,7 @@ namespace I0plus.XduiUnity.Importer.Editor
                 //if we haven't created a prefab out of the referenced GO we do so now
                 if (PrefabUtility.GetPrefabAssetType(prefab) == PrefabAssetType.NotAPrefab)
                 {
-                    // ASSET_TODO: Ugly path generation
+                    //TODO: Ugly path generation
                     var nestedPrefabDirectory = Path.Combine(Application.dataPath.Replace("Assets", ""),
                         Path.Combine(Path.Combine(EditorUtil.GetOutputPrefabsFolderAssetPath()), "Components"));
 

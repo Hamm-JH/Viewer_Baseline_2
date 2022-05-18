@@ -304,7 +304,7 @@ namespace Indicator
         /// <param name="_issue"></param>
         protected override void SetElements(List<AIssue> _issue)
         {
-            // 0215 : 교량에 대한 전체 Issue의 이력정보 필요
+            // TODO 0215 : 교량에 대한 전체 Issue의 이력정보 필요
             //Manager.JSONManager.Instance.LoadHistory(Manager.JSONLoadType.TotalHistory, Manager.MainManager.Instance.BridgeCode, "");
         }
 

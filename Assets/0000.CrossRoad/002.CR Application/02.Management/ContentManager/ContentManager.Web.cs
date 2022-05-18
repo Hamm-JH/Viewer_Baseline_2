@@ -155,6 +155,12 @@ namespace Management
 			throw new NotImplementedException();
 		}
 
+		// TODO 치수선 On/Off
+		//internal void Toggle_Dimension(bool _isOn)
+		//{
+
+		//}
+
 		// 점검정보 On/Off
 		internal void Toggle_Issues(IssueVisualizeOption _option)
 		{
@@ -184,7 +190,8 @@ namespace Management
 		{
 			List<string> result = new List<string> { "Crack,1", "Spalling,3" };
 
-			// TODO :: CHECK :: ★★ 선택 객체, 선택 면의 존재하는 손상정보 반환하기
+			// TODO 테스트용 더미 데이터
+			//Debug.LogError("GetTargetissues");
 
 			return result;
 		}

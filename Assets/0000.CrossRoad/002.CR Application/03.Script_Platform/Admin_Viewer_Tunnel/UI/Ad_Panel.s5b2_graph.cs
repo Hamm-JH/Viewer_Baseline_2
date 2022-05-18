@@ -1,4 +1,4 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ namespace AdminViewer.UI
 	public partial class Ad_Panel : MonoBehaviour
 	{
 
-        #region ë‚ ì§œ ë¶„ë¥˜ë³€ìˆ˜
+        #region ³¯Â¥ ºĞ·ùº¯¼ö
 
         public enum IssueClass
         {
@@ -25,7 +25,7 @@ namespace AdminViewer.UI
         }
 
         /// <summary>
-        /// ì‹œê°í™” ì˜µì…˜
+        /// ½Ã°¢È­ ¿É¼Ç
         /// </summary>
         public enum ViewTypeGraph
         {
@@ -38,15 +38,15 @@ namespace AdminViewer.UI
 
         Dictionary<int, List<RecordInstance>> sortByYears;
 
-        // [ì†ìƒ, ë³´ìˆ˜] [ì†ìƒ íƒ€ì… (ê· ì—´, ë°•ë¦¬, ë°±íƒœ, íŒŒì†)] [ë‚ ì§œ] [
-        // ì†ìƒ, ë‚ ì§œ, ì¹´ìš´íŠ¸
+        // [¼Õ»ó, º¸¼ö] [¼Õ»ó Å¸ÀÔ (±Õ¿­, ¹Ú¸®, ¹éÅÂ, ÆÄ¼Õ)] [³¯Â¥] [
+        // ¼Õ»ó, ³¯Â¥, Ä«¿îÆ®
         // raw data
         //public Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, int>>> dateTimeIssues;
 
         public List<dateElement> dateTimeIssues;
 
         /// <summary>
-        /// RawDataì— ì“¸ ì •ë³´ì§‘í•©
+        /// RawData¿¡ ¾µ Á¤º¸ÁıÇÕ
         /// </summary>
         public class dateElement
         {
@@ -88,50 +88,50 @@ namespace AdminViewer.UI
         //public Dictionary<IssueClass, Dictionary<IssueCode, List<int>>> dateByYears;
 
         /// <summary>
-        /// ì—°ë„ë³„ë¡œ ì •ë³´ë¥¼ ë‚˜ì—´í•œ ë¦¬ìŠ¤íŠ¸ (ë‚ ì§œë¥¼ ë¦¬ìŠ¤íŠ¸ì˜ ì¸ë±ìŠ¤ ê°’ìœ¼ë¡œ ëŒ€ì²´í•¨)
+        /// ¿¬µµº°·Î Á¤º¸¸¦ ³ª¿­ÇÑ ¸®½ºÆ® (³¯Â¥¸¦ ¸®½ºÆ®ÀÇ ÀÎµ¦½º °ªÀ¸·Î ´ëÃ¼ÇÔ)
         /// </summary>
         //public Dictionary<int, List<dateElement>> dateByYears;
 
-        // -- ì—°ë„ë³€í™˜ì˜ ê²°ê³¼ê°’ í˜•íƒœ
+        // -- ¿¬µµº¯È¯ÀÇ °á°ú°ª ÇüÅÂ
 
         /// <summary>
-        /// ì†ìƒì •ë³´ì— í•„ìš”í•¨
+        /// ¼Õ»óÁ¤º¸¿¡ ÇÊ¿äÇÔ
         /// </summary>
         public class finalSortElement
         {
-            public DateTime startDate;  // ì‹œì‘ì¼
-            public DateTime endDate;    // ì¢…ë£Œì¼
+            public DateTime startDate;  // ½ÃÀÛÀÏ
+            public DateTime endDate;    // Á¾·áÀÏ
             public int count;           // count
         }
 
-        // ì´ í´ë˜ìŠ¤ì—ì„œ í•˜ëŠ” í–‰ìœ„ëŠ” ë‹¤ìŒê³¼ ê°™ë‹¤.
-        // - ë°ì´í„°ë¥¼ ë‚ ì§œ, ì‹œê°„ ë‹¨ìœ„ë¡œ ì •ë ¬í•œë‹¤.
-        // - ì •ë ¬í•œ ë°ì´í„°ë¥¼ ë‹¤ì‹œ ì†ìƒê³¼ ë³´ìˆ˜ì •ë³´ì— ë§ê²Œ ë¶„ë°°í•œë‹¤.
-        // - íŒ¨ë„ì„ ìƒì„±í•˜ê¸°ì— ì•ì„œ ë‘ ê°€ì§€ ì˜µì…˜ì„ ê³ ë ¤í•œë‹¤.
-        // -- ì‹œê°í™” ì˜µì…˜ (1ë…„, 5ë…„, 10ë…„, ì „ì²´)
+        // ÀÌ Å¬·¡½º¿¡¼­ ÇÏ´Â ÇàÀ§´Â ´ÙÀ½°ú °°´Ù.
+        // - µ¥ÀÌÅÍ¸¦ ³¯Â¥, ½Ã°£ ´ÜÀ§·Î Á¤·ÄÇÑ´Ù.
+        // - Á¤·ÄÇÑ µ¥ÀÌÅÍ¸¦ ´Ù½Ã ¼Õ»ó°ú º¸¼öÁ¤º¸¿¡ ¸Â°Ô ºĞ¹èÇÑ´Ù.
+        // - ÆĞ³ÎÀ» »ı¼ºÇÏ±â¿¡ ¾Õ¼­ µÎ °¡Áö ¿É¼ÇÀ» °í·ÁÇÑ´Ù.
+        // -- ½Ã°¢È­ ¿É¼Ç (1³â, 5³â, 10³â, ÀüÃ¼)
         // 
 
-        // ë‘ ê°œì˜ dictionaryë¥¼ ì¤€ë¹„í•œë‹¤.
+        // µÎ °³ÀÇ dictionary¸¦ ÁØºñÇÑ´Ù.
 
-        // ë°œìƒí•œ ì´ìŠˆì— ëŒ€í•œ ì§‘í•©
+        // ¹ß»ıÇÑ ÀÌ½´¿¡ ´ëÇÑ ÁıÇÕ
         Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, int>>> issueElements;
 
-        // ë³´ìˆ˜ì •ë³´ì˜ ì§‘í•©
+        // º¸¼öÁ¤º¸ÀÇ ÁıÇÕ
         //Dictionary<IssueCode, Dictionary<DateTime, int>> rElements;
-        // ì†ìƒì •ë³´ì˜ ì§‘í•©
+        // ¼Õ»óÁ¤º¸ÀÇ ÁıÇÕ
         //Dictionary<IssueCode, Dictionary<DateTime, int>> dElements;
 
-        // - í•˜ë‚˜ëŠ” ë³´ìˆ˜ì •ë³´ (1ë‚ ì§œ, ìˆ«ì ì¹´ìš´íŠ¸)
-        // -- ë³´ìˆ˜ì •ë³´ì˜ ê²½ìš° ë³´ìˆ˜ì •ë³´ë§Œ ì†ìƒíƒ€ì… ë‹¨ìœ„ë¡œ ì´ 4ê°œì˜ ë³€ìˆ˜ë¥¼ ë¬¶ì–´ë‚¸ë‹¤.
+        // - ÇÏ³ª´Â º¸¼öÁ¤º¸ (1³¯Â¥, ¼ıÀÚ Ä«¿îÆ®)
+        // -- º¸¼öÁ¤º¸ÀÇ °æ¿ì º¸¼öÁ¤º¸¸¸ ¼Õ»óÅ¸ÀÔ ´ÜÀ§·Î ÃÑ 4°³ÀÇ º¯¼ö¸¦ ¹­¾î³½´Ù.
         //Dictionary<DateTime, int> rCrackElements;
         //Dictionary<DateTime, int> rEffloresElements;
         //Dictionary<DateTime, int> rSpallingElements;
         //Dictionary<DateTime, int> rBreakageElements;
 
-        // - í•˜ë‚˜ëŠ” ì†ìƒì •ë³´ (1ë‚ ì§œ, ìˆ«ì ì¹´ìš´íŠ¸)
-        // -- ì†ìƒì •ë³´ì˜ ê²½ìš° ì†ìƒì •ë³´, ë³´ìˆ˜ì •ë³´ ëª¨ë‘ ì†ìƒíƒ€ì… ë‹¨ìœ„ë¡œ ì´ 4ê°œì˜ ë³€ìˆ˜ë¥¼ ë¬¶ì–´ë‚¸ë‹¤.
-        // -- ì´ë•Œ ì†ìƒíƒ€ì…ì€ ì¹´ìš´íŠ¸ë¥¼ +ë¡œ ë„£ê³ 
-        // -- ë³´ìˆ˜íƒ€ì…ì€ ì¹´ìš´íŠ¸ë¥¼ -ë¡œ ë„£ëŠ”ë‹¤.
+        // - ÇÏ³ª´Â ¼Õ»óÁ¤º¸ (1³¯Â¥, ¼ıÀÚ Ä«¿îÆ®)
+        // -- ¼Õ»óÁ¤º¸ÀÇ °æ¿ì ¼Õ»óÁ¤º¸, º¸¼öÁ¤º¸ ¸ğµÎ ¼Õ»óÅ¸ÀÔ ´ÜÀ§·Î ÃÑ 4°³ÀÇ º¯¼ö¸¦ ¹­¾î³½´Ù.
+        // -- ÀÌ¶§ ¼Õ»óÅ¸ÀÔÀº Ä«¿îÆ®¸¦ +·Î ³Ö°í
+        // -- º¸¼öÅ¸ÀÔÀº Ä«¿îÆ®¸¦ -·Î ³Ö´Â´Ù.
         //Dictionary<DateTime, int> dCrackElements;
         //Dictionary<DateTime, int> dEffloresElements;
         //Dictionary<DateTime, int> dSpallingElements;
@@ -153,21 +153,21 @@ namespace AdminViewer.UI
         public GameObject prevYBtn;
         public GameObject nextYBtn;
 
-        [Header("elementê°€ ë°°ì¹˜ë˜ëŠ” transform")]
+        [Header("element°¡ ¹èÄ¡µÇ´Â transform")]
         public RectTransform rcvElement;
         public RectTransform dmgElement;
 
-        [Header("element ë°°ì¹˜ì‹œ ìˆ˜í‰ ê°€ì´ë“œë¼ì¸ (ì´ìŠˆë¶„ë¥˜)")]
+        [Header("element ¹èÄ¡½Ã ¼öÆò °¡ÀÌµå¶óÀÎ (ÀÌ½´ºĞ·ù)")]
         public List<RectTransform> rcvRows;
         public List<RectTransform> dmgRows;
 
-        [Header("element ë°°ì¹˜ì‹œ ìˆ˜ì§ ê°€ì´ë“œë¼ì¸ (ë‚ ì§œë¶„ë¥˜)")]
+        [Header("element ¹èÄ¡½Ã ¼öÁ÷ °¡ÀÌµå¶óÀÎ (³¯Â¥ºĞ·ù)")]
         public List<RectTransform> rcvColumns;
         public List<RectTransform> dmgColumns;
 
         public Transform YearGridPanel;
 
-        // ì—°ë„ë³„ íŒ¨ë„ í• ë‹¹
+        // ¿¬µµº° ÆĞ³Î ÇÒ´ç
         [SerializeField] bool isMain;
         private Dictionary<int, Transform> yearDictionary;
 
@@ -191,7 +191,7 @@ namespace AdminViewer.UI
 
         public void ChangeViewType(int code)
         {
-            // ì„ íƒí•œ ë²„íŠ¼ì˜ ë³€ìˆ˜ë¥¼ í• ë‹¹í•œë‹¤.
+            // ¼±ÅÃÇÑ ¹öÆ°ÀÇ º¯¼ö¸¦ ÇÒ´çÇÑ´Ù.
             ViewTypeGraph clicked = ViewTypeGraph.NULL;
             switch (code)
             {
@@ -202,7 +202,7 @@ namespace AdminViewer.UI
                 default: clicked = ViewTypeGraph.NULL; break;
             }
 
-            // ê°™ì€ ìƒíƒœë¥¼ ì„ íƒí•˜ì§€ ì•Šê³ , ì„ íƒ ë²„íŠ¼ê°’ì´ NULLì´ ì•„ë‹Œ ê²½ìš° ì´ë²¤íŠ¸ ì‹¤í–‰
+            // °°Àº »óÅÂ¸¦ ¼±ÅÃÇÏÁö ¾Ê°í, ¼±ÅÃ ¹öÆ°°ªÀÌ NULLÀÌ ¾Æ´Ñ °æ¿ì ÀÌº¥Æ® ½ÇÇà
             if (clicked != ViewTypeOption && clicked != ViewTypeGraph.NULL)
             {
                 ViewTypeOption = clicked;
@@ -217,15 +217,15 @@ namespace AdminViewer.UI
         #region overrides
         public void SetPanelElements(List<AIssue> _issue)
         {
-            // ì‹œê°í™” ì •ë³´ ì´ˆê¸°ê°’ ì„¤ì •
-            // Awakeì— ì´ˆê¸°ê°’ í• ë‹¹í•˜ëŠ”ê±¸ë¡œ ë³€ê²½
+            // ½Ã°¢È­ Á¤º¸ ÃÊ±â°ª ¼³Á¤
+            // Awake¿¡ ÃÊ±â°ª ÇÒ´çÇÏ´Â°É·Î º¯°æ
             //ViewTypeOption = ViewType.Year_1;
 
             //SetSubElement(_issue, l2Indicator);
 
             ClearElements();
 
-            SetChangeYearBtn();     // ì—°ë„ ë³€í™˜ ë²„íŠ¼ ì˜µì…˜ë³„ ì„¤ì •
+            SetChangeYearBtn();     // ¿¬µµ º¯È¯ ¹öÆ° ¿É¼Çº° ¼³Á¤
 
             SetElements(_issue);
 
@@ -236,7 +236,7 @@ namespace AdminViewer.UI
         //{
         //    ClearElements();
 
-        //    SetChangeYearBtn();     // ì—°ë„ ë³€í™˜ ë²„íŠ¼ ì˜µì…˜ë³„ ì„¤ì •
+        //    SetChangeYearBtn();     // ¿¬µµ º¯È¯ ¹öÆ° ¿É¼Çº° ¼³Á¤
 
         //    SetElements(_issue);
         //}
@@ -303,12 +303,12 @@ namespace AdminViewer.UI
         #endregion
 
         /// <summary>
-        /// êµëŸ‰ ì†ìƒ ì´ë ¥ ë¶ˆëŸ¬ì˜¤ê¸° ìš”ì²­
+        /// ±³·® ¼Õ»ó ÀÌ·Â ºÒ·¯¿À±â ¿äÃ»
         /// </summary>
         /// <param name="_issue"></param>
         protected void SetElements(List<AIssue> _issue)
         {
-            // 0215 : êµëŸ‰ì— ëŒ€í•œ ì „ì²´ Issueì˜ ì´ë ¥ì •ë³´ í•„ìš”
+            // TODO 0215 : ±³·®¿¡ ´ëÇÑ ÀüÃ¼ IssueÀÇ ÀÌ·ÂÁ¤º¸ ÇÊ¿ä
             //Manager.JSONManager.Instance.LoadHistory(Manager.JSONLoadType.TotalHistory, Manager.MainManager.Instance.BridgeCode, "");
         }
 
@@ -322,28 +322,28 @@ namespace AdminViewer.UI
         #endregion
 
         /// <summary>
-        /// IssueLoaderì—ì„œ ê°“ ë°›ì•„ì˜¨ ì´ë ¥ì •ë³´ë¥¼ ì •ë¦¬í•˜ëŠ” êµ¬ê°„
+        /// IssueLoader¿¡¼­ °« ¹Ş¾Æ¿Â ÀÌ·ÂÁ¤º¸¸¦ Á¤¸®ÇÏ´Â ±¸°£
         /// </summary>
         /// <param name="_dataTable"></param>
         public void GetHistoryTable(DataTable _dataTable)
         {
-            // ë©”ì¸
+            // ¸ŞÀÎ
             SetHistoryTable(_dataTable);
 
-            // ì„œë¸Œ ë°ì´í„° ì „ë‹¬
+            // ¼­ºê µ¥ÀÌÅÍ Àü´Ş
             ContentManager.Instance.Function_S5b2_SetSubHistoryTable(_dataTable);
         }
 
         public void SetSubHistoryTable(DataTable _dataTable)
 		{
-            // ì„œë¸Œ
+            // ¼­ºê
             SetHistoryTable(_dataTable);
         }
 
         private void SetHistoryTable(DataTable _dataTable)
 		{
             ClearElements();
-            SetChangeYearBtn();     // ì—°ë„ ë³€í™˜ ë²„íŠ¼ ì˜µì…˜ë³„ ì„¤ì •
+            SetChangeYearBtn();     // ¿¬µµ º¯È¯ ¹öÆ° ¿É¼Çº° ¼³Á¤
             //GetHistoryTable(_dataTable);
 
             List<RecordInstance> _recordInstanceList = new List<RecordInstance>();
@@ -372,7 +372,7 @@ namespace AdminViewer.UI
                 _record.RBreakageList = SetRowToList(_dataTable.Rows[i]["Rdamage"]);
                 _record.RScour_ErosionList = SetRowToList(_dataTable.Rows[i]["Rsegul"]);
 
-                // ì„¸êµ´ ì—†ì• ê¸°
+                // ¼¼±¼ ¾ø¾Ö±â
                 ResetRecord(_record);
 
                 if (!IsNullInstance(_record) == true)
@@ -381,17 +381,20 @@ namespace AdminViewer.UI
                 }
             }
 
-            // ë°ì´í„° ë‚ ì§œ, ì¹´ìš´íŠ¸ ì •ë ¬ë‹¨ê³„
+            // µ¥ÀÌÅÍ ³¯Â¥, Ä«¿îÆ® Á¤·Ä´Ü°è
             SetDateTimeIssue(
                 _list: _recordInstanceList,
                 _elements: ref issueElements);
 
+            // TODO : ÃßÈÄ 1³â, 5³â, 10³â, ÀüÃ¼ Á¶°ÇÀ» °Ç´Ù
+            // 1³â ¸ÕÀú ÀÛ¾÷
+            // ÆĞ³Î »ı¼º / µ¥ÀÌÅÍ Àü´Ş ´Ü°è
             SetDateTimePanels(ref issueElements);
         }
 
         #region Set Record Instances
         /// <summary>
-        /// ì„¸êµ´ ì‚­ì œìš© ì„ì‹œ ë©”ì„œë“œ
+        /// ¼¼±¼ »èÁ¦¿ë ÀÓ½Ã ¸Ş¼­µå
         /// </summary>
         /// <param name="instance"></param>
         private void ResetRecord(RecordInstance instance)
@@ -401,7 +404,7 @@ namespace AdminViewer.UI
         }
 
         /// <summary>
-        /// í• ë‹¹ëœê²Œ ì—†ëŠ” ì¸ìŠ¤í„´ìŠ¤ì¸ì§€ í™•ì¸
+        /// ÇÒ´çµÈ°Ô ¾ø´Â ÀÎ½ºÅÏ½ºÀÎÁö È®ÀÎ
         /// </summary>
         /// <param name="instance"></param>
         /// <returns></returns>
@@ -443,43 +446,43 @@ namespace AdminViewer.UI
         }
         #endregion
 
-        #region Set DateTime Issue ì´ˆê¸° (ë‚ ì§œ, ë°œìƒ íšŒìˆ˜) ì •ë ¬
+        #region Set DateTime Issue ÃÊ±â (³¯Â¥, ¹ß»ı È¸¼ö) Á¤·Ä
         /// <summary>
-        /// ë‚ ì§œ ì •ë ¬ëœ ì†ìƒ, ë³´ê°• ì •ë³´ ì—…ë°ì´íŠ¸
+        /// ³¯Â¥ Á¤·ÄµÈ ¼Õ»ó, º¸°­ Á¤º¸ ¾÷µ¥ÀÌÆ®
         /// </summary>
         /// <param name="_list"></param>
         /// <param name="_elements"></param>
         private void SetDateTimeIssue(List<RecordInstance> _list, ref Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, int>>> _elements)
         {
-            // ê¸°ì¡´ DateTime, intë¥¼ ê°€ì§€ëŠ” _elementëŠ” ìµœì¢… ì¶œë ¥ì •ë³´ë¡œ ë‘ê³ , ì¤‘ë³µì •ë³´ ì œê±°ë¥¼ ìœ„í•´ ìƒˆ Dictionaryë¥¼ ì‚¬ìš©í•œë‹¤.
+            // ±âÁ¸ DateTime, int¸¦ °¡Áö´Â _element´Â ÃÖÁ¾ Ãâ·ÂÁ¤º¸·Î µÎ°í, Áßº¹Á¤º¸ Á¦°Å¸¦ À§ÇØ »õ Dictionary¸¦ »ç¿ëÇÑ´Ù.
 
             Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, dateElement>>> _rawData = InitRawData();
 
             int index = _list.Count;
             for (int i = index - 1; i >= 0; i--)
             {
-                // Raw Data ì´ˆê¸° ì •ë ¬
+                // Raw Data ÃÊ±â Á¤·Ä
                 SetSingleDateTime(_list[i], ref _rawData);
             }
 
 
-            // ì¤‘ë³µëœ ì •ë³´ë“¤ì„ ì •ë¦¬í•œë‹¤.
+            // Áßº¹µÈ Á¤º¸µéÀ» Á¤¸®ÇÑ´Ù.
             ClearDuplicatedData(ref _rawData);
 
-            // rawData ì •ìƒ ì…ë ¥ í™•ì¸
-            // - ì—‘ì…€ ì°¸ì¡°
+            // rawData Á¤»ó ÀÔ·Â È®ÀÎ
+            // - ¿¢¼¿ ÂüÁ¶
             //DebugRawData(ref _rawData);
 
-            // ì •ë ¬ëœ rawData -> _elementsë¡œ ì „ë‹¬
+            // Á¤·ÄµÈ rawData -> _elements·Î Àü´Ş
             SetElementsData(ref _rawData, ref _elements);
 
-            // ë‚ ì§œ ìˆœìœ¼ë¡œ ì¶œë ¥ë˜ëŠ”ì§€ í™•ì¸
+            // ³¯Â¥ ¼øÀ¸·Î Ãâ·ÂµÇ´ÂÁö È®ÀÎ
             DebugElements(ref _elements);
         }
 
-        #region Raw Data ì´ˆê¸°í™”, ì´ˆê¸° ì •ë ¬
+        #region Raw Data ÃÊ±âÈ­, ÃÊ±â Á¤·Ä
         /// <summary>
-        /// ì¤‘ê°„ì²˜ë¦¬ìš© ë°ì´í„°ì…‹ ì´ˆê¸°í™”
+        /// Áß°£Ã³¸®¿ë µ¥ÀÌÅÍ¼Â ÃÊ±âÈ­
         /// </summary>
         /// <returns></returns>
         private Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, dateElement>>> InitRawData()
@@ -503,13 +506,13 @@ namespace AdminViewer.UI
         }
 
         /// <summary>
-        /// ì†ìƒì •ë³´ë³„ë¡œ ì´ë ¥ì •ë³´ë¥¼ í• ë‹¹í•œë‹¤.
+        /// ¼Õ»óÁ¤º¸º°·Î ÀÌ·ÂÁ¤º¸¸¦ ÇÒ´çÇÑ´Ù.
         /// </summary>
         /// <param name="_record"></param>
         /// <param name="_target"></param>
         private void SetSingleDateTime(RecordInstance _record, ref Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, dateElement>>> _target)
         {
-            // ì‹œê°„ ê°’ìœ¼ë¡œ ì¸í•œ ì˜¤ë™ì‘ ë°©ì§€
+            // ½Ã°£ °ªÀ¸·Î ÀÎÇÑ ¿Àµ¿ÀÛ ¹æÁö
             DateTime date = new DateTime(_record.dateTime.Year, _record.dateTime.Month, _record.dateTime.Day);
 
             if (_record.DCrackList != null)
@@ -594,7 +597,7 @@ namespace AdminViewer.UI
         }
 
         /// <summary>
-        /// ê°œë³„ ì´ë ¥ì •ë³´ë¥¼ Dictionaryì— í• ë‹¹í•œë‹¤.
+        /// °³º° ÀÌ·ÂÁ¤º¸¸¦ Dictionary¿¡ ÇÒ´çÇÑ´Ù.
         /// </summary>
         /// <param name="_count"></param>
         /// <param name="_date"></param>
@@ -614,7 +617,7 @@ namespace AdminViewer.UI
             {
                 if (_class == IssueClass.Rcv)
                 {
-                    // ë³´ìˆ˜ ì •ë³´ì˜ ê°œìˆ˜ë§Œí¼ ì¹´ìš´íŠ¸ ê°’ì„ ì–‘ìˆ˜ë¡œ ì ìš©í•œë‹¤.
+                    // º¸¼ö Á¤º¸ÀÇ °³¼ö¸¸Å­ Ä«¿îÆ® °ªÀ» ¾ç¼ö·Î Àû¿ëÇÑ´Ù.
                     if (!_target[IssueClass.Rcv][_code].ContainsKey(_date))
                     {
                         _target[IssueClass.Rcv][_code].Add(_date, finalElement);
@@ -626,7 +629,7 @@ namespace AdminViewer.UI
                 }
                 else if (_class == IssueClass.Dmg)
                 {
-                    // ì†ìƒ ì •ë³´ì˜ ê°œìˆ˜ë§Œí¼ ì¹´ìš´íŠ¸ ê°’ì„ ì–‘ìˆ˜ë¡œ ì ìš©í•œë‹¤.
+                    // ¼Õ»ó Á¤º¸ÀÇ °³¼ö¸¸Å­ Ä«¿îÆ® °ªÀ» ¾ç¼ö·Î Àû¿ëÇÑ´Ù.
                     if (!_target[IssueClass.Dmg][_code].ContainsKey(_date))
                     {
                         _target[IssueClass.Dmg][_code].Add(_date, finalElement);
@@ -689,15 +692,15 @@ namespace AdminViewer.UI
 
         #endregion
 
-        #region ClearDuplicatedData ì¤‘ë³µëœ ì´ìŠˆì •ë³´ ì •ë¦¬
+        #region ClearDuplicatedData Áßº¹µÈ ÀÌ½´Á¤º¸ Á¤¸®
 
         /// <summary>
-        /// ì¤‘ë³µëœ ì´ìŠˆë“¤ì„ ì •ë¦¬í•œë‹¤.
+        /// Áßº¹µÈ ÀÌ½´µéÀ» Á¤¸®ÇÑ´Ù.
         /// </summary>
         /// <param name="_target"></param>
         private void ClearDuplicatedData(ref Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, dateElement>>> _target)
         {
-            // ì†ìƒ ì •ë³´ë“¤ì—ì„œ ì¤‘ë³µì„ ì œê±°í•œë‹¤.
+            // ¼Õ»ó Á¤º¸µé¿¡¼­ Áßº¹À» Á¦°ÅÇÑ´Ù.
             foreach (IssueCode key in _target[IssueClass.Dmg].Keys)
             {
                 //Debug.Log($"Class Dmg");
@@ -706,19 +709,19 @@ namespace AdminViewer.UI
         }
 
         /// <summary>
-        /// ì†ìƒì •ë³´ë“¤ì—ì„œ ì¤‘ë³µëœ ì •ë³´ë“¤ì„ ì •ë¦¬í•œë‹¤.
+        /// ¼Õ»óÁ¤º¸µé¿¡¼­ Áßº¹µÈ Á¤º¸µéÀ» Á¤¸®ÇÑ´Ù.
         /// </summary>
         /// <param name="_target"></param>
         private void ClearDuplicatedData_PerDmgIssueCode(Dictionary<DateTime, dateElement> _target)
         {
-            // ì¤‘ë³µ í™•ì¸ìš© ë³€ìˆ˜
+            // Áßº¹ È®ÀÎ¿ë º¯¼ö
             Dictionary<string, dateElement> keyChecker = new Dictionary<string, dateElement>();
 
-            // ë‚ ì§œ ë‹¨ìœ„ë¡œ í‚¤ê°’ ë°˜ë³µ
+            // ³¯Â¥ ´ÜÀ§·Î Å°°ª ¹İº¹
             foreach (DateTime key in _target.Keys)
             {
 
-				// ë¦¬ìŠ¤íŠ¸ ìš”ì†Œ í• ë‹¹
+				// ¸®½ºÆ® ¿ä¼Ò ÇÒ´ç
 				List<Definition._Issue.Issue> _issues = _target[key]._issues;
 
                 int index = _issues.Count;
@@ -728,54 +731,54 @@ namespace AdminViewer.UI
                     {
 
 
-                        // í‚¤ê°’ì— ì´ìŠˆ ì½”ë“œê°€ ì¡´ì¬í•˜ëŠ”ê°€?
+                        // Å°°ª¿¡ ÀÌ½´ ÄÚµå°¡ Á¸ÀçÇÏ´Â°¡?
                         if (!keyChecker.ContainsKey(_issues[i].IssueOrderCode))
                         {
-                            // ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê²½ìš°
-                            // - keyCheckerì— ê°’ ì¶”ê°€
+                            // Á¸ÀçÇÏÁö ¾Ê´Â °æ¿ì
+                            // - keyChecker¿¡ °ª Ãß°¡
                             keyChecker.Add(_issues[i].IssueOrderCode, _target[key]);
                         }
                         else
                         {
-                            // ì†ìƒ ì½”ë“œí‚¤ í• ë‹¹
+                            // ¼Õ»ó ÄÚµåÅ° ÇÒ´ç
                             string _key = _issues[i].IssueOrderCode;
 
                             //-----------------------------------------------
-                            // checkì˜ ë‚ ì§œì™€ ê°™ì€ target ìš”ì†Œê°„ ë‚ ì§œë¹„êµ
-                            // ë‚ ì§œê°€ ë¹ ë¥¸ ìª½ì˜ ìš”ì†Œë¥¼ ì‚´ë¦¬ê³ 
-                            // ë‚ ì§œê°€ ëŠë¦° ìª½ì˜ ìš”ì†Œë¥¼ ì—†ì•¤ë‹¤
+                            // checkÀÇ ³¯Â¥¿Í °°Àº target ¿ä¼Ò°£ ³¯Â¥ºñ±³
+                            // ³¯Â¥°¡ ºü¸¥ ÂÊÀÇ ¿ä¼Ò¸¦ »ì¸®°í
+                            // ³¯Â¥°¡ ´À¸° ÂÊÀÇ ¿ä¼Ò¸¦ ¾ø¾Ø´Ù
 
-                            // ì¡´ì¬í•˜ëŠ” ê²½ìš°
-                            // - ì„œë¡œì˜ ë‚ ì§œë¥¼ ë¹„êµí•œë‹¤.
+                            // Á¸ÀçÇÏ´Â °æ¿ì
+                            // - ¼­·ÎÀÇ ³¯Â¥¸¦ ºñ±³ÇÑ´Ù.
                             DateTime beforeDateTime = keyChecker[_key]._date;
                             DateTime nowDateTime = _target[key]._date;
 
                             int dateCount = beforeDateTime.CompareTo(nowDateTime);
 
-                            // beforeê°’ì´ ë” ì¼ì°ì¸ ê²½ìš°
+                            // before°ªÀÌ ´õ ÀÏÂïÀÎ °æ¿ì
                             if (dateCount < 0)
                             {
-                                // ì´í›„ ê°’ì— ê´€í•´
-                                _target[key]._count--;  // ì¹´ìš´íŠ¸ 1 ê°ì†Œ
-                                RemoveListElement(_key, ref _target[key]._issues);      // - ì´í›„ ê°’ recordIssue ì‚­ì œ
+                                // ÀÌÈÄ °ª¿¡ °üÇØ
+                                _target[key]._count--;  // Ä«¿îÆ® 1 °¨¼Ò
+                                RemoveListElement(_key, ref _target[key]._issues);      // - ÀÌÈÄ °ª recordIssue »èÁ¦
                             }
-                            // ë‘ ë‚ ì§œê°€ ê°™ì€ê²½ìš°
+                            // µÎ ³¯Â¥°¡ °°Àº°æ¿ì
                             else if (dateCount == 0)
                             {
-                                // ë‚ ì´ ê°™ìœ¼ë¯€ë¡œ ì¹´ìš´íŠ¸ ê°’ë§Œ ëº€ë‹¤
+                                // ³¯ÀÌ °°À¸¹Ç·Î Ä«¿îÆ® °ª¸¸ »«´Ù
                                 _target[key]._count--;
                             }
-                            // nowê°’ì´ ë” ì¼ì°ì¸ ê²½ìš°
+                            // now°ªÀÌ ´õ ÀÏÂïÀÎ °æ¿ì
                             else
                             {
-                                // ì´ì „ ê°’ì— ê´€í•´
-                                keyChecker[_key]._count--;  // ì¹´ìš´íŠ¸ 1 ê°ì†Œ
-                                RemoveListElement(_key, ref keyChecker[_key]._issues);  // - ì´ì „ ê°’ recordIssue ì‚­ì œ
-                                // - ì´ì „ ê°’ dictionary í‚¤ê°’ìœ¼ë¡œ ì‚­ì œ
+                                // ÀÌÀü °ª¿¡ °üÇØ
+                                keyChecker[_key]._count--;  // Ä«¿îÆ® 1 °¨¼Ò
+                                RemoveListElement(_key, ref keyChecker[_key]._issues);  // - ÀÌÀü °ª recordIssue »èÁ¦
+                                // - ÀÌÀü °ª dictionary Å°°ªÀ¸·Î »èÁ¦
                                 keyChecker.Remove(_key);
 
-                                // ì´í›„ ê°’ì— ê´€í•´
-                                // - dictionaryì— ì¶”ê°€
+                                // ÀÌÈÄ °ª¿¡ °üÇØ
+                                // - dictionary¿¡ Ãß°¡
                                 keyChecker.Add(_issues[i].IssueOrderCode, _target[key]);
                             }
 
@@ -786,7 +789,7 @@ namespace AdminViewer.UI
         }
 
         /// <summary>
-        /// ì¤‘ë³µìœ¼ë¡œ í™•ì¸ëœ ë¦¬ìŠ¤íŠ¸ì˜ ìš”ì†Œë¥¼ ì‚­ì œí•œë‹¤.
+        /// Áßº¹À¸·Î È®ÀÎµÈ ¸®½ºÆ®ÀÇ ¿ä¼Ò¸¦ »èÁ¦ÇÑ´Ù.
         /// </summary>
         /// <param name="codeKey"></param>
         /// <param name="_list"></param>
@@ -881,14 +884,14 @@ namespace AdminViewer.UI
         }
 
         /// <summary>
-        /// ì •ë ¬ ê²°ê³¼ ì¹´ìš´íŠ¸ê°€ 0ì´ ëœ ìš”ì†Œë¥¼ ì œê±°í•œë‹¤.
+        /// Á¤·Ä °á°ú Ä«¿îÆ®°¡ 0ÀÌ µÈ ¿ä¼Ò¸¦ Á¦°ÅÇÑ´Ù.
         /// </summary>
         /// <param name="_inElement"></param>
         private void Clear0CountDataElement(ref Dictionary<DateTime, int> _inElement, IssueClass _class)
         {
             Dictionary<DateTime, int> newElement = new Dictionary<DateTime, int>();
 
-            // foreach ë°˜ë³µì¤‘ì— Removeê°€ ë¶ˆê°€ëŠ¥í•´ ìƒˆ ë³€ìˆ˜ë¥¼ ë§Œë“¤ê³  ê±°ê¸°ì— ì˜¬ë°”ë¥¸ ë³€ìˆ˜ë§Œ í• ë‹¹í›„ ë°ì´í„° ë³€í™˜
+            // foreach ¹İº¹Áß¿¡ Remove°¡ ºÒ°¡´ÉÇØ »õ º¯¼ö¸¦ ¸¸µé°í °Å±â¿¡ ¿Ã¹Ù¸¥ º¯¼ö¸¸ ÇÒ´çÈÄ µ¥ÀÌÅÍ º¯È¯
             foreach (DateTime key in _inElement.Keys)
             {
                 if (_inElement[key] != 0)
@@ -897,14 +900,14 @@ namespace AdminViewer.UI
                 }
             }
 
-            // ê¸°ì¡´ ë³€ìˆ˜ ì´ˆê¸°í™”
+            // ±âÁ¸ º¯¼ö ÃÊ±âÈ­
             _inElement.Clear();
 
             foreach (DateTime key in newElement.Keys)
             {
                 _inElement.Add(key, newElement[key]);
             }
-            // ì •ë¦¬ëœ ë³€ìˆ˜ë¡œ í• ë‹¹
+            // Á¤¸®µÈ º¯¼ö·Î ÇÒ´ç
             //_inElement = newElement;
         }
 
@@ -914,17 +917,17 @@ namespace AdminViewer.UI
 
         private void SetDateTimePanels(ref Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, int>>> _elements)
         {
-            // ë„˜ê¸¸ë•Œ í•„ìš”í•œ ì •ë³´
-            // - ìµœì†Œ, ìµœëŒ€ ì—°ë„
-            // - ë‚ ì§œ ë¦¬ìŠ¤íŠ¸
-            // - ë·° ì˜µì…˜
+            // ³Ñ±æ¶§ ÇÊ¿äÇÑ Á¤º¸
+            // - ÃÖ¼Ò, ÃÖ´ë ¿¬µµ
+            // - ³¯Â¥ ¸®½ºÆ®
+            // - ºä ¿É¼Ç
 
-            // ìµœì†Œ ì—°ë„ [0]
-            // ìµœëŒ€ ì—°ë„ [1]
+            // ÃÖ¼Ò ¿¬µµ [0]
+            // ÃÖ´ë ¿¬µµ [1]
             int[] minMaxYears = GetMinMaxYear(ref _elements);
 
-            //ViewTypeOption // ì‹œê°í™” ì˜µì…˜ í™•ì¸
-            // ì—° ë‹¨ìœ„ ì˜µì…˜
+            //ViewTypeOption // ½Ã°¢È­ ¿É¼Ç È®ÀÎ
+            // ¿¬ ´ÜÀ§ ¿É¼Ç
             SetPanel(
                 minMaxYear: minMaxYears,
                 viewOption: ViewTypeOption,
@@ -932,7 +935,7 @@ namespace AdminViewer.UI
         }
 
         /// <summary>
-        /// ìµœì†Œ / ìµœëŒ€ ì—°ë„ ë°˜í™˜
+        /// ÃÖ¼Ò / ÃÖ´ë ¿¬µµ ¹İÈ¯
         /// </summary>
         /// <param name="_elements"></param>
         /// <returns></returns>
@@ -948,7 +951,7 @@ namespace AdminViewer.UI
                 {
                     foreach (DateTime _date in _elements[key][_key].Keys)
                     {
-                        // ì—°ë„ ì·¨í•©
+                        // ¿¬µµ ÃëÇÕ
                         if (years.ContainsKey(_date.Year))
                         {
                             years[_date.Year]++;
@@ -977,16 +980,16 @@ namespace AdminViewer.UI
         }
 
         /// <summary>
-        /// ì˜µì…˜ì— ë”°ë¼ íŒ¨ë„ìƒì„±
-        /// ìµœì†Œ, ìµœëŒ€ ì—°ë„ / ë‚ ì§œ ë³€ìˆ˜ë“¤ ìƒì„±ëœ íŒ¨ë„ì— ì „ë‹¬
+        /// ¿É¼Ç¿¡ µû¶ó ÆĞ³Î»ı¼º
+        /// ÃÖ¼Ò, ÃÖ´ë ¿¬µµ / ³¯Â¥ º¯¼öµé »ı¼ºµÈ ÆĞ³Î¿¡ Àü´Ş
         /// </summary>
         /// <param name="minMaxYear"></param>
         /// <param name="viewOption"></param>
         /// <param name="_elements"></param>
         private void SetPanel(int[] minMaxYear, ViewTypeGraph viewOption, ref Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, int>>> _elements)
         {
-            // ìµœëŒ€ ì—°ë„ë¡œ íƒ€ì´í‹€ ì„¸íŒ…
-            // ì˜µì…˜ë³„ë¡œ ì—°ë„ íƒ€ì´í‹€ëª… ë³€ê²½
+            // ÃÖ´ë ¿¬µµ·Î Å¸ÀÌÆ² ¼¼ÆÃ
+            // ¿É¼Çº°·Î ¿¬µµ Å¸ÀÌÆ²¸í º¯°æ
             if (minMaxYear[1] == 0)
             {
                 minMaxYear[0] = DateTime.Now.Year;
@@ -995,10 +998,10 @@ namespace AdminViewer.UI
 
             SetYear(minMaxYear[1], viewOption);
 
-            // í˜„ì¬ ì—°ë„ ë³€ìˆ˜ ìµœì‹  ì—°ë„ë¡œ í• ë‹¹
+            // ÇöÀç ¿¬µµ º¯¼ö ÃÖ½Å ¿¬µµ·Î ÇÒ´ç
             currentYear = minMaxYear[1];
 
-            // ì˜µì…˜ë³„ë¡œ ì—°ë„ ì¸ë±ìŠ¤ë¥¼ í• ë‹¹í•œë‹¤.
+            // ¿É¼Çº°·Î ¿¬µµ ÀÎµ¦½º¸¦ ÇÒ´çÇÑ´Ù.
             List<int> yIndex = GetYearIndex(minMaxYear, viewOption);
 
             string prefabName = GetPrefabName(viewOption);
@@ -1161,19 +1164,19 @@ namespace AdminViewer.UI
         {
             if (_type == ViewTypeGraph.Year_1)
             {
-                titleYear.text = $"{year}ë…„";
+                titleYear.text = $"{year}³â";
             }
             else if (_type == ViewTypeGraph.Year_5)
             {
-                titleYear.text = $"{year-5} ~ {year}ë…„";
+                titleYear.text = $"{year-5} ~ {year}³â";
             }
             else if (_type == ViewTypeGraph.Year_10)
             {
-                titleYear.text = $"{year-10} ~ {year}ë…„";
+                titleYear.text = $"{year-10} ~ {year}³â";
             }
             else if (_type == ViewTypeGraph.Year_Total)
             {
-                titleYear.text = $"{year-100} ~ {year}ë…„";
+                titleYear.text = $"{year-100} ~ {year}³â";
             }
         }
 

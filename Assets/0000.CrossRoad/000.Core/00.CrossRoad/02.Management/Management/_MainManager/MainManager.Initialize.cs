@@ -64,7 +64,7 @@ namespace Management
 		/// </summary>
 		public void InitInputResource(PlatformCode _pCode)
 		{
-			// TODO :: 2ND :: ★ 빌드의 입력장치가 정해졌을때 장치입력을 받는 인스턴스를 생성하도록 개편
+			// TODO :: 2nd :: ★ 빌드의 입력장치가 정해졌을때 장치입력을 받는 인스턴스를 생성하도록 개편
 
 			// 같은 WebGL이지만 구동되는 기기가 다르면 다른 플랫폼으로 쳐야한다.
 			// :: 플랫폼 코드만으로 해결이 안됨.

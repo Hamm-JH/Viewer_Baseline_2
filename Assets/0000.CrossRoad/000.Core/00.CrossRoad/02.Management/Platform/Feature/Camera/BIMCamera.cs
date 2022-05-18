@@ -77,7 +77,7 @@ namespace Platform.Feature.Camera
 			Debug.Log($"***** data : {_camData.bMaxOffsetDistance}");
 			maxOffsetDistance = _camData.bMaxOffsetDistance;
 			orbitSpeed = _camData.bOrbitSpeed;
-			freeSpeed = _camData.bFreeSpeed;
+			freeSpeed = _camData.bFreeSpeed;	// TODO :: Temp 임시. 궤도회전 속도값을 차용
 			panSpeed = _camData.bPanSpeed;
 			zoomSpeed = _camData.bZoomSpeed;
 		}

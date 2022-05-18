@@ -1,4 +1,4 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace View
@@ -61,7 +61,7 @@ namespace View
             eType_compass = _eType;
             RootUI = _aui;
 
-            // TODO :: CHECK :: Module_Graphic í™œì„±í™” 1 : ìƒ‰ ì§€ì •
+            // TODO Module_Graphic È°¼ºÈ­ 1 : »ö ÁöÁ¤
             m_uiColor.color_default = new Color(0x2b / 255f, 0x70 / 255f, 0xc6 / 255f, 1);
             m_uiColor.color_hover = new Color(0x1a / 255f, 0x5f / 255f, 0xac / 255f, 0.8f);
             m_uiColor.color_select = new Color(0x1a / 255f, 0x5f / 255f, 0xac / 255f, 1);
