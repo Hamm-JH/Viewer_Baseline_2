@@ -12,7 +12,7 @@ namespace Module.Graphic
 		// 스카이 박스 그래픽 컨트롤
 		// 전체 그래픽 톤 관리
 
-		// TODO :: Graphic 모듈에서 ColorTable 관리
+		// TODO :: CHECK :: Graphic 모듈에서 ColorTable 관리, 0517 : 그래픽 템플릿별 스타일 적용
 
 		// Start is called before the first frame update
 		void Start()
@@ -26,7 +26,6 @@ namespace Module.Graphic
 		{
 			Debug.LogWarning($"{this.GetType().ToString()} OnStart");
 
-			// TODO 0517 : 그래픽 템플릿별 스타일 적용
 			ContentManager.Instance.CheckInitModuleComplete(ID);
 		}
 	}

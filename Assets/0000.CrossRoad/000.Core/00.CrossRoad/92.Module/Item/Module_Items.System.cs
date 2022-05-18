@@ -25,9 +25,7 @@ namespace Module.Item
 			m_itemList = new List<Items.AItem>();
 
 			CreateItems(Functions);
-			//CreateItem(m_currentFunction);
 
-			// TODO 0309 코드 리디렉션 정리
 			OnUpdateState(EventManager.Instance._ModuleList);
 
 			ContentManager.Instance.CheckInitModuleComplete(ID);

@@ -155,7 +155,7 @@ namespace Platform.Feature._Input
 
                 OnDebug($"touch delta : {delta}");
 
-                // TODO 터치패드 : 델타 값에 대한 보간이 필요하다.
+                // TODO :: CHECK :: 터치패드 : 델타 값에 대한 보간이 필요하다.
                 // 이동거리 합산
                 deltaDistance += new Vector2(Mathf.Abs(delta.x), Mathf.Abs(delta.y));
 

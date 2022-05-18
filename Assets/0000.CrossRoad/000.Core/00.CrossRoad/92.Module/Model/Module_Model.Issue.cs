@@ -96,11 +96,11 @@ namespace Module.Model
 			// TODO 야매 compcheck 1, 2
 			if(isDmg)
 			{
-				ContentManager.Instance.CompCheck(1);
+				//ContentManager.Instance.CompCheck(1);
 			}
 			else
 			{
-				ContentManager.Instance.CompCheck(2);
+				//ContentManager.Instance.CompCheck(2);
 			}
 		}
 

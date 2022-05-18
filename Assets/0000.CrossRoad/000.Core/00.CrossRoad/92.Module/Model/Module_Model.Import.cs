@@ -36,7 +36,6 @@ namespace Module.Model
 			Transform[] children = Model.transform.GetComponentsInChildren<Transform>();
 			SetChildren(children);
 
-			// TODO 0223
 			if(Platforms.IsTunnelPlatform(platform))
 			{
 				InitializeObjectTunnel(root);
@@ -52,8 +51,6 @@ namespace Module.Model
 
 			// Model Import 모듈 작업 완료
 			ContentManager.Instance.CheckInitModuleComplete(ID);
-			//ContentManager.Instance.SetCameraCenterPosition();
-			
 		}
 
 		private void SetChildren(Transform[] children)

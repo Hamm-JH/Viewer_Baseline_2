@@ -88,7 +88,7 @@ namespace Module.UI
 			//ContentManager.Instance.CreateNewModule(ModuleCode.Issue_Administration);
 
 			// TODO 야매 CompCheck 3
-			ContentManager.Instance.CompCheck(3);
+			//ContentManager.Instance.CompCheck(3);
 		}
 
 		/// <summary>
