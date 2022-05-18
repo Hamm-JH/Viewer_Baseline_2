@@ -409,7 +409,7 @@ namespace Module.Model
 			// 서브메쉬가 정의된 객체인지 확인하는 변수
 			bool isInSubMesh = false;
 
-			// TODO : 1014 현재 기타 객체의 경우에만 SubMesh가 정의되어있음
+			// 터널 부재 기타(Etc_) 객체의 경우에만 SubMesh가 정의되어있음
 			if (obj.name.Contains("Etc_"))
 			{
 				isInSubMesh = true;
@@ -459,7 +459,7 @@ namespace Module.Model
 
 			Mesh result = CombineMeshes(filters.ToArray());
 
-			// TODO 1014 : 결과물 메쉬를 기반으로 obj 객체의 Mesh를 교체한다.
+			// TODO :: CHECK :: 결과물 메쉬를 기반으로 obj 객체의 Mesh를 교체한다.
 			// 자식 객체들을 trashCan으로 보낸다.
 		}
 

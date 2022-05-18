@@ -41,7 +41,7 @@ namespace I0plus.XduiUnity.Importer.Editor
             {
                 toggle.targetGraphic = targetImage;
                 targetImageObject = targetImage.gameObject;
-                //TODO: 強制的にActiveにする
+                // ASSET_TODO: 強制的にActiveにする
                 targetImageObject.SetActive(true);
             }
 
@@ -54,7 +54,7 @@ namespace I0plus.XduiUnity.Importer.Editor
                 if (graphicImage.gameObject.activeSelf)
                     toggle.isOn = true;
                 else
-                    //TODO: 強制的にActiveにする
+                    // ASSET_TODO: 強制的にActiveにする
                     graphicImage.gameObject.SetActive(true);
             }
 

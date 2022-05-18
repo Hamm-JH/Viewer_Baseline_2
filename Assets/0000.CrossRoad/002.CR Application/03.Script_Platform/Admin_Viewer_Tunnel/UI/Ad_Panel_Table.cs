@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,7 +34,7 @@ namespace AdminViewer.UI
 		#region Set Table
 
 		/// <summary>
-		/// Å¸ÀÔÄÚµå¿¡ µû¶ó ÀÌº¥Æ® ºĞ±â
+		/// íƒ€ì…ì½”ë“œì— ë”°ë¼ ì´ë²¤íŠ¸ ë¶„ê¸°
 		/// </summary>
 		/// <param name="_pType"></param>
 		/// <param name="_uType"></param>
@@ -88,13 +88,13 @@ namespace AdminViewer.UI
 				}
 				else if(m_pType == Ad_PanelType.s5b1)
 				{
-					// Å×ÀÌºí ¿ä¼Ò°¡ ¾Æ´Ï¸é ¿©±â¼­ ½ÇÇà ¾ÈÇÔ
-					Debug.LogError("Å×ÀÌºí ¿ä¼Ò°¡ ¾Æ´Ï¸é ¿©±â¼­ ½ÇÇà ¾ÈÇÔ");
+					// í…Œì´ë¸” ìš”ì†Œê°€ ì•„ë‹ˆë©´ ì—¬ê¸°ì„œ ì‹¤í–‰ ì•ˆí•¨
+					Debug.LogError("í…Œì´ë¸” ìš”ì†Œê°€ ì•„ë‹ˆë©´ ì—¬ê¸°ì„œ ì‹¤í–‰ ì•ˆí•¨");
 				}
 				else if(m_pType == Ad_PanelType.s5b2)
 				{
-					// Å×ÀÌºí ¿ä¼Ò°¡ ¾Æ´Ï¸é ¿©±â¼­ ½ÇÇà ¾ÈÇÔ
-					Debug.LogError("Å×ÀÌºí ¿ä¼Ò°¡ ¾Æ´Ï¸é ¿©±â¼­ ½ÇÇà ¾ÈÇÔ");
+					// í…Œì´ë¸” ìš”ì†Œê°€ ì•„ë‹ˆë©´ ì—¬ê¸°ì„œ ì‹¤í–‰ ì•ˆí•¨
+					Debug.LogError("í…Œì´ë¸” ìš”ì†Œê°€ ì•„ë‹ˆë©´ ì—¬ê¸°ì„œ ì‹¤í–‰ ì•ˆí•¨");
 				}
 				else
 				{
@@ -102,7 +102,7 @@ namespace AdminViewer.UI
 				}
 			}
 
-			// À§ÀÇ ¸ğµç °æ¿ì¿¡ °É¸®Áö ¾ÊÀ¸¸é Å×ÀÌºí ºñÈ°¼º
+			// ìœ„ì˜ ëª¨ë“  ê²½ìš°ì— ê±¸ë¦¬ì§€ ì•Šìœ¼ë©´ í…Œì´ë¸” ë¹„í™œì„±
 			//gameObject.SetActive(false);
 		}
 
@@ -112,7 +112,7 @@ namespace AdminViewer.UI
 		}
 
 		/// <summary>
-		/// »óÅÂ2¹ø bmÆĞ³Î
+		/// ìƒíƒœ2ë²ˆ bmíŒ¨ë„
 		/// </summary>
 		public void SetTable_s2_bm()
 		{
@@ -132,7 +132,7 @@ namespace AdminViewer.UI
 		}
 
 		/// <summary>
-		/// »óÅÂ3¹ø b1ÆĞ³Î
+		/// ìƒíƒœ3ë²ˆ b1íŒ¨ë„
 		/// </summary>
 		public void SetTable_s3_b1()
 		{
@@ -151,7 +151,7 @@ namespace AdminViewer.UI
 		}
 
 		/// <summary>
-		/// »óÅÂ4¹ø b1ÆĞ³Î
+		/// ìƒíƒœ4ë²ˆ b1íŒ¨ë„
 		/// </summary>
 		public void SetTable_s4_b1()
 		{
@@ -170,7 +170,7 @@ namespace AdminViewer.UI
 		}
 
 		/// <summary>
-		/// »óÅÂ4¹ø b2ÆĞ³Î
+		/// ìƒíƒœ4ë²ˆ b2íŒ¨ë„
 		/// </summary>
 		public void SetTable_s4_b2()
 		{
@@ -189,7 +189,7 @@ namespace AdminViewer.UI
 		}
 
 		/// <summary>
-		/// »óÅÂ5¹ø s5m1ÆĞ³Î
+		/// ìƒíƒœ5ë²ˆ s5m1íŒ¨ë„
 		/// </summary>
 		public void SetTable_s5_s5m1()
 		{
@@ -279,7 +279,7 @@ namespace AdminViewer.UI
 
 		private void GetTableData_s4_b2()
 		{
-			// º¸°­Á¤º¸´Â ºó °ø°£ Ãâ·Â
+			// ë³´ê°•ì •ë³´ëŠ” ë¹ˆ ê³µê°„ ì¶œë ¥
 			SetTableData(new List<Issue>());
 		}
 
@@ -376,18 +376,15 @@ namespace AdminViewer.UI
 			GameObject elem = Instantiate<GameObject>(Resources.Load<GameObject>("UI/UIElement/ContentElements"), rContent.transform);
 			Ad_TableElement elemCode = elem.GetComponent<Ad_TableElement>();
 
-			// TODO :: ¿ä¼Ò ÄÚµå µ¿ÀÛ ¼öÇà
 			elemCode.SetTableElement(m_pType, m_uType, m_rootUI);
 
 			tElems.Add(elemCode);
 		}
 
-		public void AddElement(/* ÇÊ¿ä µ¥ÀÌÅÍ */)
+		public void AddElement(/* í•„ìš” ë°ì´í„° */)
 		{
 			GameObject elem = Instantiate<GameObject>(Resources.Load<GameObject>("UI/UIElement/ContentElements"), rContent.transform);
 			Ad_TableElement elemCode = elem.GetComponent<Ad_TableElement>();
-
-			// TODO :: ¿ä¼Ò ÄÚµå µ¿ÀÛ ¼öÇà
 
 			tElems.Add(elemCode);
 		}

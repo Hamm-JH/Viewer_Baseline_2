@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,9 +12,9 @@ namespace View
 
 	public class Obj_Selectable : Interactable
 	{
-#pragma warning disable IDE0052 // ÀĞÁö ¾ÊÀº private ¸â¹ö Á¦°Å
+#pragma warning disable IDE0052 // ì½ì§€ ì•Šì€ private ë©¤ë²„ ì œê±°
         UIEventType _uiEventType;
-#pragma warning restore IDE0052 // ÀĞÁö ¾ÊÀº private ¸â¹ö Á¦°Å
+#pragma warning restore IDE0052 // ì½ì§€ ì•Šì€ private ë©¤ë²„ ì œê±°
         Outlinable m_outlinable;
 		Bounds m_bounds;
 
@@ -38,7 +38,6 @@ namespace View
 			{
 				string _name = gameObject.name;
 
-				// todo ?? ¿©±â¼­ ÄÁÅÙÃ÷ °ü¸®ÀÚ ¾²´Â°Ô ¸Â³ª..
 				List<GameObject> lst = ContentManager.Instance._ModelObjects;
 
 				List<GameObject> result = lst.FindAll(x => x.name == _name);
@@ -147,7 +146,7 @@ namespace View
 
 			GraphicCode gCode = MainManager.Instance.Graphic;
 
-			// ÃÖÁ¾ È®ÀÎ
+			// ìµœì¢… í™•ì¸
 			if(_uiType == UIEventType.Slider_Model_Transparency)
 			{
 				float boundary = 0.8f;
@@ -195,14 +194,14 @@ namespace View
 					List<GameObject> objs = Targets;
 					foreach (GameObject obj in objs)
 					{
-						// Mode_HideÀÇ °æ¿ì¿¡´Â, ¼û±è ´ë»ó Á¦¿ÜÇÏ°í ´Ù¸¥ °´Ã¼µéÀº ¸ğµÎ ÇöÀç ¾ËÆÄ°ª °¡Áü
+						// Mode_Hideì˜ ê²½ìš°ì—ëŠ”, ìˆ¨ê¹€ ëŒ€ìƒ ì œì™¸í•˜ê³  ë‹¤ë¥¸ ê°ì²´ë“¤ì€ ëª¨ë‘ í˜„ì¬ ì•ŒíŒŒê°’ ê°€ì§
 						// Mode_Hide ? Hide :: 0.1f, NotHide :: alpha
-						// Mode_IsolateÀÇ °æ¿ì¿¡´Â, ¼û±è ´ë»óÀº ÇöÀç ¾ËÆÄ°ª °¡Áü, ¼û±è Á¦¿Ü´ë»óÀº 0.1f
+						// Mode_Isolateì˜ ê²½ìš°ì—ëŠ”, ìˆ¨ê¹€ ëŒ€ìƒì€ í˜„ì¬ ì•ŒíŒŒê°’ ê°€ì§, ìˆ¨ê¹€ ì œì™¸ëŒ€ìƒì€ 0.1f
 						// Mode_Isolate ?
 
-						// Ä«¸£³ë¸Ê Á¤·Ä °á°ú
-						// _isHide :: falseÀÎ °æ¿ì¿¡´Â ¸ğµÎ color.a Àû¿ë
-						// _isHide :: trueÀÎ °æ¿ì¿¡´Â ¸ğµÎ a :: 0.1f Àû¿ë
+						// ì¹´ë¥´ë…¸ë§µ ì •ë ¬ ê²°ê³¼
+						// _isHide :: falseì¸ ê²½ìš°ì—ëŠ” ëª¨ë‘ color.a ì ìš©
+						// _isHide :: trueì¸ ê²½ìš°ì—ëŠ” ëª¨ë‘ a :: 0.1f ì ìš©
 
 						float hideValue = 0f;
 						bool isOn = true;
@@ -233,7 +232,7 @@ namespace View
 							}
 							else
 							{
-								// TODO ¸ÅÁ÷³Ñ¹ö Åõ¸í °æ°è°ª ¹ÛÀ¸·Î »©±â
+								// TODO :: CHECK :: ë§¤ì§ë„˜ë²„ íˆ¬ëª… ê²½ê³„ê°’ ë°–ìœ¼ë¡œ ë¹¼ê¸°
 								if(colr.a > 0.8f)
 								{
 									Materials.ToOpaqueMode(render);
@@ -254,14 +253,14 @@ namespace View
 					List<GameObject> objs = Targets;
 					foreach (GameObject obj in objs)
 					{
-						// Mode_HideÀÇ °æ¿ì¿¡´Â, ¼û±è ´ë»ó Á¦¿ÜÇÏ°í ´Ù¸¥ °´Ã¼µéÀº ¸ğµÎ ÇöÀç ¾ËÆÄ°ª °¡Áü
+						// Mode_Hideì˜ ê²½ìš°ì—ëŠ”, ìˆ¨ê¹€ ëŒ€ìƒ ì œì™¸í•˜ê³  ë‹¤ë¥¸ ê°ì²´ë“¤ì€ ëª¨ë‘ í˜„ì¬ ì•ŒíŒŒê°’ ê°€ì§
 						// Mode_Hide ? Hide :: 0.1f, NotHide :: alpha
-						// Mode_IsolateÀÇ °æ¿ì¿¡´Â, ¼û±è ´ë»óÀº ÇöÀç ¾ËÆÄ°ª °¡Áü, ¼û±è Á¦¿Ü´ë»óÀº 0.1f
+						// Mode_Isolateì˜ ê²½ìš°ì—ëŠ”, ìˆ¨ê¹€ ëŒ€ìƒì€ í˜„ì¬ ì•ŒíŒŒê°’ ê°€ì§, ìˆ¨ê¹€ ì œì™¸ëŒ€ìƒì€ 0.1f
 						// Mode_Isolate ?
 
-						// Ä«¸£³ë¸Ê Á¤·Ä °á°ú
-						// _isHide :: falseÀÎ °æ¿ì¿¡´Â ¸ğµÎ color.a Àû¿ë
-						// _isHide :: trueÀÎ °æ¿ì¿¡´Â ¸ğµÎ a :: 0.1f Àû¿ë
+						// ì¹´ë¥´ë…¸ë§µ ì •ë ¬ ê²°ê³¼
+						// _isHide :: falseì¸ ê²½ìš°ì—ëŠ” ëª¨ë‘ color.a ì ìš©
+						// _isHide :: trueì¸ ê²½ìš°ì—ëŠ” ëª¨ë‘ a :: 0.1f ì ìš©
 
 						float hideValue = 0f;
 						bool isOn = true;
@@ -292,7 +291,7 @@ namespace View
 							}
 							else
 							{
-								// TODO ¸ÅÁ÷³Ñ¹ö Åõ¸í °æ°è°ª ¹ÛÀ¸·Î »©±â
+								// TODO :: CHECK :: ë§¤ì§ë„˜ë²„ íˆ¬ëª… ê²½ê³„ê°’ ë°–ìœ¼ë¡œ ë¹¼ê¸°
 								if (colr.a > 0.8f)
 								{
 									Materials.ToOpaqueMode(render);
@@ -343,9 +342,9 @@ namespace View
 
 			//Debug.Log($"OnSelect : {this.name}");
 
-			// µî·Ï ¸ğµå ÁøÀÔ ¶Ç´Â ÇÉ¸ğµå¿£ »öº¯°æ Áß´Ü
+			// ë“±ë¡ ëª¨ë“œ ì§„ì… ë˜ëŠ” í•€ëª¨ë“œì—” ìƒ‰ë³€ê²½ ì¤‘ë‹¨
 			var _mList = EventManager.Instance._ModuleList;
-			// ÇÉ ¸ğµåÀÏ °æ¿ì Áß´Ü
+			// í•€ ëª¨ë“œì¼ ê²½ìš° ì¤‘ë‹¨
 			if (_mList.Contains(ModuleCode.WorkQueue) || _mList.Contains(ModuleCode.Work_Pinmode)) return;
 
 			PlatformCode platform = MainManager.Instance.Platform;

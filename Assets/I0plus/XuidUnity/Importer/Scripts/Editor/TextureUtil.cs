@@ -154,7 +154,7 @@ namespace I0plus.XduiUnity.Importer.Editor
                 var moveX = sourceMoveX ?? 0;
                 var moveY = sourceMoveY ?? 0;
                 // 左下座標系に変換する
-                // TODO:METALは変換しなくて良いらしい（未確認）
+                // ASSET_TODO:METALは変換しなくて良いらしい（未確認）
                 moveY = destTexture.height - sourceTexture.height - moveY;
                 var readHeight = sourceTexture.height;
                 var readY = 0;

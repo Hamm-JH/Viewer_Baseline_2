@@ -673,7 +673,7 @@ namespace GLTF.Schema
 		MAT4
 	}
 
-	// todo: this should be a union
+	// ASSET_TODO : this should be a union
 	public struct NumericArray
 	{
 		public int[] AsInts;

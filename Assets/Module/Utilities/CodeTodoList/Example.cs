@@ -1,18 +1,18 @@
 ﻿//You can delete this file as its only purpose is to show you an example on how to use the tool ;)
 
-//AUDIO : trigger explosion sfx
-//AUDIO : Need a loop for the wind sfx
+//AUDIO : EX) trigger explosion sfx
+//AUDIO : EX)Need a loop for the wind sfx
 
-//FIX : Sometimes gives an error here
-//FIX : NullRef if reload scene
+//FIX : EX) Sometimes gives an error here
+//FIX : EX) NullRef if reload scene
 
-//TODO : Open inventory window
-//TODO : Enable ennemy on the minimap
+//TODO : EX) Open inventory window
+//TODO : EX) Enable ennemy on the minimap
 
-//OPTIM : Memory footprint can be reduced here
-//OPTIM : This recursive check is not optimal
-//OPTIM : Clean that, i did it in a rush...
+//OPTIM : EX) Memory footprint can be reduced here
+//OPTIM : EX) This recursive check is not optimal
+//OPTIM : EX) Clean that, i did it in a rush...
 
-//VISUAL : Trigger cool fire particles
-//VISUAL : Enable the character trail FX
-//VISUAL : Maybe add some sparks on hit ?
+//VISUAL : EX) Trigger cool fire particles
+//VISUAL : EX) Enable the character trail FX
+//VISUAL : EX) Maybe add some sparks on hit ?

@@ -6,7 +6,7 @@ namespace GLTF
 	{
 		public AccessorId AccessorId { get; set; }
 		public NumericArray AccessorContent { get; set; }
-		public byte[] Buffer { get; set; }   // todo: should change to IntPtr?
+		public byte[] Buffer { get; set; }   // ASSET_TODO : should change to IntPtr?
 
 		public AttributeAccessor()
 		{

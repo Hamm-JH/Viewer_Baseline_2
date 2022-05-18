@@ -193,7 +193,7 @@ namespace I0plus.XduiUnity.Importer.Editor
             // imageElementを探し､それがコンポーネント化のオプションをもっているか検索
             foreach (var createdChild in createdChildren)
             {
-                //TODO: item1がDestroyされていれば、コンティニューの処理が必要
+                // ASSET_TODO: item1がDestroyされていれば、コンティニューの処理が必要
                 if (!(createdChild.Item2 is ImageElement)) continue;
                 var imageElement = (ImageElement) createdChild.Item2;
                 if (imageElement.ComponentJson == null) continue;
@@ -280,7 +280,7 @@ namespace I0plus.XduiUnity.Importer.Editor
                 string[] splitter = {"."};
                 var sourceProperties = propertyPath.Split(splitter, StringSplitOptions.None);
 
-                //TODO: さすがにfor内に入れるべき
+                // ASSET_TODO: さすがにfor内に入れるべき
                 var infos = type.GetMember(sourceProperties[0]);
                 if (infos.Length == 0) return null;
                 type = infos[0].GetReturnType();
@@ -725,7 +725,8 @@ namespace I0plus.XduiUnity.Importer.Editor
             if ((b = scrollRect.GetBool("vertical")) != null) scrollRectComponent.vertical = b.Value;
 
             //この時点ではScrollbarを探すことができないため、Pass2で探している
-            //TODO:さがしているところではクラス名をつかってさがしていない
+            // ASSSET_
+            // ASSET_TODO:さがしているところではクラス名をつかってさがしていない
         }
 
         public static void SetupRectTransform(GameObject root, Dictionary<string, object> rectTransformJson)
