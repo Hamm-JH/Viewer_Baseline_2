@@ -8,8 +8,6 @@ namespace Definition
 
 	public class AModuleStatus
 	{
-		// TODO :: 관리코드 모듈 영역으로 추상화 필요
-
 		/// <summary>
 		/// 관리 모드에서 임시 캐싱용 객체
 		/// </summary>

@@ -16,11 +16,11 @@ namespace Module.UI
             ModRcv_ResetBasePosition();
 
             ModRcv_TogglePanel(0, true);
-            ModRcv_TogglePanel(1, false);   // TODO 보강 정보 삭제 예정
+            ModRcv_TogglePanel(1, false);   // TODO :: CHECK :: 1번 보강 정보 삭제 예정
             ModRcv_TogglePanel(2, false);
             ModRcv_TogglePanel(3, false);
             ModRcv_TogglePanel(4, false);
-            ModRcv_TogglePanel(5, false);   // TODO 1번 이관 예정
+            ModRcv_TogglePanel(5, false);   // TODO :: CHECK :: 5번 <- 1번 이관 예정
         }
 
         private void ModRcv_ResetBasePosition()
@@ -79,7 +79,7 @@ namespace Module.UI
                     //result.Add(m_moduleElements.m_rcvElement.m_rcvList);    // 둘 다 같이 끄고 키는 구조 변경
                     break;
 
-                // TODO 보강 정보 삭제 예정
+                // TODO :: CHECK :: 보강 정보 삭제 예정
                 case 1:
                     result = new List<GameObject>();
                     result.Add(m_moduleElements.m_rcvElement.m_reinCount);
@@ -94,7 +94,7 @@ namespace Module.UI
                     // 3
                     // 4
 
-                    // TODO 임시 :: 1번으로 이전
+                    // TODO :: CHECK :: 1번으로 이전
                 case 5:
                     result = new List<GameObject>();
                     m_moduleElements.m_rcvElement.m_issueListPanels.ForEach(x =>

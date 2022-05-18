@@ -40,7 +40,7 @@ namespace GLTF
 			return ParseString(gltfContent);
 		}
 
-		// todo optimize: this can have a caching system where GLTFRoot stores data about JSON offset of a GLB
+		// OPTIM :: this can have a caching system where GLTFRoot stores data about JSON offset of a GLB
 		public static void ExtractBinaryChunk(byte[] gltfBinary, int binaryChunkIndex, out byte[] glbBuffer)
 		{
 			GLBHeader header = ParseGLBHeader(gltfBinary);

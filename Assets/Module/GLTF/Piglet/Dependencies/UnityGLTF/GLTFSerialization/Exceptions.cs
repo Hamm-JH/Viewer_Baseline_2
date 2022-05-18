@@ -28,7 +28,7 @@ namespace GLTF
 #endif
 	}
 
-	// todo blgross unity - move over when doing unity layer
+	// ASSET_TODO blgross unity - move over when doing unity layer
 	[Serializable()]
 	public class ShaderNotFoundException : Exception
 	{

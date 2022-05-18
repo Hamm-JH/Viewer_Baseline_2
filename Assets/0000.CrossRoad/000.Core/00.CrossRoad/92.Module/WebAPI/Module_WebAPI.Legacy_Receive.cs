@@ -308,9 +308,8 @@ namespace Module.WebAPI
             MainManager.Instance.ResetCamdata_targetOffset();
             MainManager.Instance.UpdateCamData_maxOffset(bound.size.magnitude);
 
-            // TODO 0308 표면값 추출
             List<string> codes = GetSurfaceStrings(_obj);
-            //List<string> codes = new List<string> { "Top" };
+            //List<string> codes = new List<string> { "Top", "Bottom", "Front", "Back", "Left", "Right" };
             //List<string> codes = Dim.DimScript.Instance.RequestAvailableSurface();
 
             string _fCode = codes.First();
@@ -379,7 +378,6 @@ namespace Module.WebAPI
 
         private IEnumerator FinishRequestMode()
         {
-            // TODO 0307 카메라 세팅 변경 (기존 참조)
             ContentManager.Instance.Function_ToggleOrthoView(false);
 
             yield return null;
@@ -394,8 +392,6 @@ namespace Module.WebAPI
 
             // 버튼 바 올리기
             ContentManager.Instance.ButtonBar_Toggle(true);
-            // TODO 0307 Dim 비활성화
-            //ContentManager.Instance.Toggle_Dimension(false);
 
             ContentManager.Instance.Remove_Cache();
 

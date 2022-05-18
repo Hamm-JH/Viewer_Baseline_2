@@ -1,4 +1,4 @@
-using Definition;
+ï»¿using Definition;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -52,8 +52,7 @@ namespace Module.UI
         /// </summary>
         private void MRcv_LBar_4Dimension()
         {
-            // TODO 4 Dimension ¸Þ¼­µå ÀÛ¾÷¿¹Á¤
-            Debug.LogError($"4 Dimension ¸Þ¼­µå ÀÛ¾÷¿¹Á¤");
+            Debug.LogError($"4 Dimension ë©”ì„œë“œ ìž‘ì—…ì˜ˆì •");
             MRcv_ToggleLBar(3, false);
         }
 
@@ -62,8 +61,7 @@ namespace Module.UI
         /// </summary>
         private void MRcv_LBar_5DrawingPrint()
         {
-            // TODO 5 DrawingPrint ¸Þ¼­µå ÀÛ¾÷¿¹Á¤
-            Debug.LogError($"5 DrawingPrint ¸Þ¼­µå ÀÛ¾÷¿¹Á¤");
+            Debug.LogError($"5 DrawingPrint ë©”ì„œë“œ ìž‘ì—…ì˜ˆì •");
             MRcv_ToggleLBar(4, false);
         }
 
@@ -85,7 +83,7 @@ namespace Module.UI
                     img_bg = m_moduleElements.m_rcvElement.m_leftbar[0].imgs[0];
                     break;
 
-                    // TODO »èÁ¦¿¹Á¤ (¹öÆ° ¾È¾¸)
+                    // TODO :: CHECK :: ì‚­ì œì˜ˆì • (ë²„íŠ¼ ì•ˆì”€)
                 case 1:
                     img_main = m_moduleElements.m_rcvElement.m_leftbar[1].btn_menu.image;
                     img_bg = m_moduleElements.m_rcvElement.m_leftbar[1].imgs[0];

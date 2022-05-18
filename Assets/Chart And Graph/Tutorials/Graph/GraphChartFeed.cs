@@ -1,4 +1,4 @@
-#define Graph_And_Chart_PRO
+ï»¿#define Graph_And_Chart_PRO
 using UnityEngine;
 using ChartAndGraph;
 using System.Collections.Generic;
@@ -28,7 +28,7 @@ public class GraphChartFeed : MonoBehaviour
 
     public List<RecordInstance> m_records;
 
-    // ¹ß»ıÇÑ ÀÌ½´¿¡ ´ëÇÑ ÁıÇÕ
+    // ë°œìƒí•œ ì´ìŠˆì— ëŒ€í•œ ì§‘í•©
     Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, int>>> issueElements;
 
 	#region Init
@@ -41,7 +41,7 @@ public class GraphChartFeed : MonoBehaviour
 
         //issueElements = new Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, int>>>();
 
-        // µ¥ÀÌÅÍ ¿äÃ»
+        // ë°ì´í„° ìš”ì²­
         uiRoot.API_requestHistoryData(GetHistoryData);
     }
 
@@ -101,7 +101,7 @@ public class GraphChartFeed : MonoBehaviour
             _record.RBreakageList = SetRowToList(_table.Rows[i]["Rdamage"]);
             _record.RScour_ErosionList = SetRowToList(_table.Rows[i]["Rsegul"]);
 
-            // ¼¼±¼ ¾ø¾Ö±â
+            // ì„¸êµ´ ì—†ì• ê¸°
             ResetRecord(_record);
 
             if (!IsNullInstance(_record) == true)
@@ -110,15 +110,10 @@ public class GraphChartFeed : MonoBehaviour
             }
         }
 
-        // µ¥ÀÌÅÍ ³¯Â¥, Ä«¿îÆ® Á¤·Ä´Ü°è
+        // ë°ì´í„° ë‚ ì§œ, ì¹´ìš´íŠ¸ ì •ë ¬ë‹¨ê³„
         SetDateTimeIssue(
             _list: m_records,
             _elements: ref issueElements);
-
-        // TODO : ÃßÈÄ 1³â, 5³â, 10³â, ÀüÃ¼ Á¶°ÇÀ» °Ç´Ù
-        // 1³â ¸ÕÀú ÀÛ¾÷
-        // ÆĞ³Î »ı¼º / µ¥ÀÌÅÍ Àü´Ş ´Ü°è
-        //SetDateTimePanels(ref issueElements);
 
         SetDateTimePanel(DateTime.Today.Year, _issueIndex: 0, GraphTemplate.Year1);
     }
@@ -127,7 +122,7 @@ public class GraphChartFeed : MonoBehaviour
 
 	#region 1 Set Record Instances
 	/// <summary>
-	/// ¼¼±¼ »èÁ¦¿ë ÀÓ½Ã ¸Ş¼­µå
+	/// ì„¸êµ´ ì‚­ì œìš© ì„ì‹œ ë©”ì„œë“œ
 	/// </summary>
 	/// <param name="instance"></param>
 	private void ResetRecord(RecordInstance instance)
@@ -137,7 +132,7 @@ public class GraphChartFeed : MonoBehaviour
     }
 
     /// <summary>
-    /// ÇÒ´çµÈ°Ô ¾ø´Â ÀÎ½ºÅÏ½ºÀÎÁö È®ÀÎ
+    /// í• ë‹¹ëœê²Œ ì—†ëŠ” ì¸ìŠ¤í„´ìŠ¤ì¸ì§€ í™•ì¸
     /// </summary>
     /// <param name="instance"></param>
     /// <returns></returns>
@@ -179,43 +174,43 @@ public class GraphChartFeed : MonoBehaviour
     }
     #endregion
 
-    #region 2 Set DateTime Issue ÃÊ±â (³¯Â¥, ¹ß»ı È¸¼ö) Á¤·Ä
+    #region 2 Set DateTime Issue ì´ˆê¸° (ë‚ ì§œ, ë°œìƒ íšŒìˆ˜) ì •ë ¬
     /// <summary>
-    /// ³¯Â¥ Á¤·ÄµÈ ¼Õ»ó, º¸°­ Á¤º¸ ¾÷µ¥ÀÌÆ®
+    /// ë‚ ì§œ ì •ë ¬ëœ ì†ìƒ, ë³´ê°• ì •ë³´ ì—…ë°ì´íŠ¸
     /// </summary>
     /// <param name="_list"></param>
     /// <param name="_elements"></param>
     private void SetDateTimeIssue(List<RecordInstance> _list, ref Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, int>>> _elements)
     {
-        // ±âÁ¸ DateTime, int¸¦ °¡Áö´Â _element´Â ÃÖÁ¾ Ãâ·ÂÁ¤º¸·Î µÎ°í, Áßº¹Á¤º¸ Á¦°Å¸¦ À§ÇØ »õ Dictionary¸¦ »ç¿ëÇÑ´Ù.
+        // ê¸°ì¡´ DateTime, intë¥¼ ê°€ì§€ëŠ” _elementëŠ” ìµœì¢… ì¶œë ¥ì •ë³´ë¡œ ë‘ê³ , ì¤‘ë³µì •ë³´ ì œê±°ë¥¼ ìœ„í•´ ìƒˆ Dictionaryë¥¼ ì‚¬ìš©í•œë‹¤.
 
         Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, dateElement>>> _rawData = InitRawData();
 
         int index = _list.Count;
         for (int i = index - 1; i >= 0; i--)
         {
-            // Raw Data ÃÊ±â Á¤·Ä
+            // Raw Data ì´ˆê¸° ì •ë ¬
             SetSingleDateTime(_list[i], ref _rawData);
         }
 
 
-        // Áßº¹µÈ Á¤º¸µéÀ» Á¤¸®ÇÑ´Ù.
+        // ì¤‘ë³µëœ ì •ë³´ë“¤ì„ ì •ë¦¬í•œë‹¤.
         ClearDuplicatedData(ref _rawData);
 
-        // rawData Á¤»ó ÀÔ·Â È®ÀÎ
-        // - ¿¢¼¿ ÂüÁ¶
+        // rawData ì •ìƒ ì…ë ¥ í™•ì¸
+        // - ì—‘ì…€ ì°¸ì¡°
         //DebugRawData(ref _rawData);
 
-        // Á¤·ÄµÈ rawData -> _elements·Î Àü´Ş
+        // ì •ë ¬ëœ rawData -> _elementsë¡œ ì „ë‹¬
         SetElementsData(ref _rawData, ref _elements);
 
-        // ³¯Â¥ ¼øÀ¸·Î Ãâ·ÂµÇ´ÂÁö È®ÀÎ
+        // ë‚ ì§œ ìˆœìœ¼ë¡œ ì¶œë ¥ë˜ëŠ”ì§€ í™•ì¸
         DebugElements(ref _elements);
     }
 
-    #region Raw Data ÃÊ±âÈ­, ÃÊ±â Á¤·Ä
+    #region Raw Data ì´ˆê¸°í™”, ì´ˆê¸° ì •ë ¬
     /// <summary>
-    /// Áß°£Ã³¸®¿ë µ¥ÀÌÅÍ¼Â ÃÊ±âÈ­
+    /// ì¤‘ê°„ì²˜ë¦¬ìš© ë°ì´í„°ì…‹ ì´ˆê¸°í™”
     /// </summary>
     /// <returns></returns>
     private Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, dateElement>>> InitRawData()
@@ -241,13 +236,13 @@ public class GraphChartFeed : MonoBehaviour
     
 
     /// <summary>
-    /// ¼Õ»óÁ¤º¸º°·Î ÀÌ·ÂÁ¤º¸¸¦ ÇÒ´çÇÑ´Ù.
+    /// ì†ìƒì •ë³´ë³„ë¡œ ì´ë ¥ì •ë³´ë¥¼ í• ë‹¹í•œë‹¤.
     /// </summary>
     /// <param name="_record"></param>
     /// <param name="_target"></param>
     private void SetSingleDateTime(RecordInstance _record, ref Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, dateElement>>> _target)
     {
-        // ½Ã°£ °ªÀ¸·Î ÀÎÇÑ ¿Àµ¿ÀÛ ¹æÁö
+        // ì‹œê°„ ê°’ìœ¼ë¡œ ì¸í•œ ì˜¤ë™ì‘ ë°©ì§€
         DateTime date = new DateTime(_record.dateTime.Year, _record.dateTime.Month, _record.dateTime.Day);
 
         if (_record.DCrackList != null)
@@ -332,7 +327,7 @@ public class GraphChartFeed : MonoBehaviour
     }
 
     /// <summary>
-    /// °³º° ÀÌ·ÂÁ¤º¸¸¦ Dictionary¿¡ ÇÒ´çÇÑ´Ù.
+    /// ê°œë³„ ì´ë ¥ì •ë³´ë¥¼ Dictionaryì— í• ë‹¹í•œë‹¤.
     /// </summary>
     /// <param name="_count"></param>
     /// <param name="_date"></param>
@@ -352,7 +347,7 @@ public class GraphChartFeed : MonoBehaviour
         {
             if (_class == IssueClass.Rcv)
             {
-                // º¸¼ö Á¤º¸ÀÇ °³¼ö¸¸Å­ Ä«¿îÆ® °ªÀ» ¾ç¼ö·Î Àû¿ëÇÑ´Ù.
+                // ë³´ìˆ˜ ì •ë³´ì˜ ê°œìˆ˜ë§Œí¼ ì¹´ìš´íŠ¸ ê°’ì„ ì–‘ìˆ˜ë¡œ ì ìš©í•œë‹¤.
                 if (!_target[IssueClass.Rcv][_code].ContainsKey(_date))
                 {
                     _target[IssueClass.Rcv][_code].Add(_date, finalElement);
@@ -364,7 +359,7 @@ public class GraphChartFeed : MonoBehaviour
             }
             else if (_class == IssueClass.Dmg)
             {
-                // ¼Õ»ó Á¤º¸ÀÇ °³¼ö¸¸Å­ Ä«¿îÆ® °ªÀ» ¾ç¼ö·Î Àû¿ëÇÑ´Ù.
+                // ì†ìƒ ì •ë³´ì˜ ê°œìˆ˜ë§Œí¼ ì¹´ìš´íŠ¸ ê°’ì„ ì–‘ìˆ˜ë¡œ ì ìš©í•œë‹¤.
                 if (!_target[IssueClass.Dmg][_code].ContainsKey(_date))
                 {
                     _target[IssueClass.Dmg][_code].Add(_date, finalElement);
@@ -427,15 +422,15 @@ public class GraphChartFeed : MonoBehaviour
 
     #endregion
 
-    #region ClearDuplicatedData Áßº¹µÈ ÀÌ½´Á¤º¸ Á¤¸®
+    #region ClearDuplicatedData ì¤‘ë³µëœ ì´ìŠˆì •ë³´ ì •ë¦¬
 
     /// <summary>
-    /// Áßº¹µÈ ÀÌ½´µéÀ» Á¤¸®ÇÑ´Ù.
+    /// ì¤‘ë³µëœ ì´ìŠˆë“¤ì„ ì •ë¦¬í•œë‹¤.
     /// </summary>
     /// <param name="_target"></param>
     private void ClearDuplicatedData(ref Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, dateElement>>> _target)
     {
-        // ¼Õ»ó Á¤º¸µé¿¡¼­ Áßº¹À» Á¦°ÅÇÑ´Ù.
+        // ì†ìƒ ì •ë³´ë“¤ì—ì„œ ì¤‘ë³µì„ ì œê±°í•œë‹¤.
         foreach (IssueCode key in _target[IssueClass.Dmg].Keys)
         {
             //Debug.Log($"Class Dmg");
@@ -444,19 +439,19 @@ public class GraphChartFeed : MonoBehaviour
     }
 
     /// <summary>
-    /// ¼Õ»óÁ¤º¸µé¿¡¼­ Áßº¹µÈ Á¤º¸µéÀ» Á¤¸®ÇÑ´Ù.
+    /// ì†ìƒì •ë³´ë“¤ì—ì„œ ì¤‘ë³µëœ ì •ë³´ë“¤ì„ ì •ë¦¬í•œë‹¤.
     /// </summary>
     /// <param name="_target"></param>
     private void ClearDuplicatedData_PerDmgIssueCode(Dictionary<DateTime, dateElement> _target)
     {
-        // Áßº¹ È®ÀÎ¿ë º¯¼ö
+        // ì¤‘ë³µ í™•ì¸ìš© ë³€ìˆ˜
         Dictionary<string, dateElement> keyChecker = new Dictionary<string, dateElement>();
 
-        // ³¯Â¥ ´ÜÀ§·Î Å°°ª ¹İº¹
+        // ë‚ ì§œ ë‹¨ìœ„ë¡œ í‚¤ê°’ ë°˜ë³µ
         foreach (DateTime key in _target.Keys)
         {
 
-            // ¸®½ºÆ® ¿ä¼Ò ÇÒ´ç
+            // ë¦¬ìŠ¤íŠ¸ ìš”ì†Œ í• ë‹¹
             List<Definition._Issue.Issue> _issues = _target[key]._issues;
 
             int index = _issues.Count;
@@ -466,54 +461,54 @@ public class GraphChartFeed : MonoBehaviour
                 {
 
 
-                    // Å°°ª¿¡ ÀÌ½´ ÄÚµå°¡ Á¸ÀçÇÏ´Â°¡?
+                    // í‚¤ê°’ì— ì´ìŠˆ ì½”ë“œê°€ ì¡´ì¬í•˜ëŠ”ê°€?
                     if (!keyChecker.ContainsKey(_issues[i].IssueOrderCode))
                     {
-                        // Á¸ÀçÇÏÁö ¾Ê´Â °æ¿ì
-                        // - keyChecker¿¡ °ª Ãß°¡
+                        // ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê²½ìš°
+                        // - keyCheckerì— ê°’ ì¶”ê°€
                         keyChecker.Add(_issues[i].IssueOrderCode, _target[key]);
                     }
                     else
                     {
-                        // ¼Õ»ó ÄÚµåÅ° ÇÒ´ç
+                        // ì†ìƒ ì½”ë“œí‚¤ í• ë‹¹
                         string _key = _issues[i].IssueOrderCode;
 
                         //-----------------------------------------------
-                        // checkÀÇ ³¯Â¥¿Í °°Àº target ¿ä¼Ò°£ ³¯Â¥ºñ±³
-                        // ³¯Â¥°¡ ºü¸¥ ÂÊÀÇ ¿ä¼Ò¸¦ »ì¸®°í
-                        // ³¯Â¥°¡ ´À¸° ÂÊÀÇ ¿ä¼Ò¸¦ ¾ø¾Ø´Ù
+                        // checkì˜ ë‚ ì§œì™€ ê°™ì€ target ìš”ì†Œê°„ ë‚ ì§œë¹„êµ
+                        // ë‚ ì§œê°€ ë¹ ë¥¸ ìª½ì˜ ìš”ì†Œë¥¼ ì‚´ë¦¬ê³ 
+                        // ë‚ ì§œê°€ ëŠë¦° ìª½ì˜ ìš”ì†Œë¥¼ ì—†ì•¤ë‹¤
 
-                        // Á¸ÀçÇÏ´Â °æ¿ì
-                        // - ¼­·ÎÀÇ ³¯Â¥¸¦ ºñ±³ÇÑ´Ù.
+                        // ì¡´ì¬í•˜ëŠ” ê²½ìš°
+                        // - ì„œë¡œì˜ ë‚ ì§œë¥¼ ë¹„êµí•œë‹¤.
                         DateTime beforeDateTime = keyChecker[_key]._date;
                         DateTime nowDateTime = _target[key]._date;
 
                         int dateCount = beforeDateTime.CompareTo(nowDateTime);
 
-                        // before°ªÀÌ ´õ ÀÏÂïÀÎ °æ¿ì
+                        // beforeê°’ì´ ë” ì¼ì°ì¸ ê²½ìš°
                         if (dateCount < 0)
                         {
-                            // ÀÌÈÄ °ª¿¡ °üÇØ
-                            _target[key]._count--;  // Ä«¿îÆ® 1 °¨¼Ò
-                            RemoveListElement(_key, ref _target[key]._issues);      // - ÀÌÈÄ °ª recordIssue »èÁ¦
+                            // ì´í›„ ê°’ì— ê´€í•´
+                            _target[key]._count--;  // ì¹´ìš´íŠ¸ 1 ê°ì†Œ
+                            RemoveListElement(_key, ref _target[key]._issues);      // - ì´í›„ ê°’ recordIssue ì‚­ì œ
                         }
-                        // µÎ ³¯Â¥°¡ °°Àº°æ¿ì
+                        // ë‘ ë‚ ì§œê°€ ê°™ì€ê²½ìš°
                         else if (dateCount == 0)
                         {
-                            // ³¯ÀÌ °°À¸¹Ç·Î Ä«¿îÆ® °ª¸¸ »«´Ù
+                            // ë‚ ì´ ê°™ìœ¼ë¯€ë¡œ ì¹´ìš´íŠ¸ ê°’ë§Œ ëº€ë‹¤
                             _target[key]._count--;
                         }
-                        // now°ªÀÌ ´õ ÀÏÂïÀÎ °æ¿ì
+                        // nowê°’ì´ ë” ì¼ì°ì¸ ê²½ìš°
                         else
                         {
-                            // ÀÌÀü °ª¿¡ °üÇØ
-                            keyChecker[_key]._count--;  // Ä«¿îÆ® 1 °¨¼Ò
-                            RemoveListElement(_key, ref keyChecker[_key]._issues);  // - ÀÌÀü °ª recordIssue »èÁ¦
-                                                                                    // - ÀÌÀü °ª dictionary Å°°ªÀ¸·Î »èÁ¦
+                            // ì´ì „ ê°’ì— ê´€í•´
+                            keyChecker[_key]._count--;  // ì¹´ìš´íŠ¸ 1 ê°ì†Œ
+                            RemoveListElement(_key, ref keyChecker[_key]._issues);  // - ì´ì „ ê°’ recordIssue ì‚­ì œ
+                                                                                    // - ì´ì „ ê°’ dictionary í‚¤ê°’ìœ¼ë¡œ ì‚­ì œ
                             keyChecker.Remove(_key);
 
-                            // ÀÌÈÄ °ª¿¡ °üÇØ
-                            // - dictionary¿¡ Ãß°¡
+                            // ì´í›„ ê°’ì— ê´€í•´
+                            // - dictionaryì— ì¶”ê°€
                             keyChecker.Add(_issues[i].IssueOrderCode, _target[key]);
                         }
 
@@ -524,7 +519,7 @@ public class GraphChartFeed : MonoBehaviour
     }
 
     /// <summary>
-    /// Áßº¹À¸·Î È®ÀÎµÈ ¸®½ºÆ®ÀÇ ¿ä¼Ò¸¦ »èÁ¦ÇÑ´Ù.
+    /// ì¤‘ë³µìœ¼ë¡œ í™•ì¸ëœ ë¦¬ìŠ¤íŠ¸ì˜ ìš”ì†Œë¥¼ ì‚­ì œí•œë‹¤.
     /// </summary>
     /// <param name="codeKey"></param>
     /// <param name="_list"></param>
@@ -619,14 +614,14 @@ public class GraphChartFeed : MonoBehaviour
     }
 
     /// <summary>
-    /// Á¤·Ä °á°ú Ä«¿îÆ®°¡ 0ÀÌ µÈ ¿ä¼Ò¸¦ Á¦°ÅÇÑ´Ù.
+    /// ì •ë ¬ ê²°ê³¼ ì¹´ìš´íŠ¸ê°€ 0ì´ ëœ ìš”ì†Œë¥¼ ì œê±°í•œë‹¤.
     /// </summary>
     /// <param name="_inElement"></param>
     private void Clear0CountDataElement(ref Dictionary<DateTime, int> _inElement, IssueClass _class)
     {
         Dictionary<DateTime, int> newElement = new Dictionary<DateTime, int>();
 
-        // foreach ¹İº¹Áß¿¡ Remove°¡ ºÒ°¡´ÉÇØ »õ º¯¼ö¸¦ ¸¸µé°í °Å±â¿¡ ¿Ã¹Ù¸¥ º¯¼ö¸¸ ÇÒ´çÈÄ µ¥ÀÌÅÍ º¯È¯
+        // foreach ë°˜ë³µì¤‘ì— Removeê°€ ë¶ˆê°€ëŠ¥í•´ ìƒˆ ë³€ìˆ˜ë¥¼ ë§Œë“¤ê³  ê±°ê¸°ì— ì˜¬ë°”ë¥¸ ë³€ìˆ˜ë§Œ í• ë‹¹í›„ ë°ì´í„° ë³€í™˜
         foreach (DateTime key in _inElement.Keys)
         {
             if (_inElement[key] != 0)
@@ -635,14 +630,14 @@ public class GraphChartFeed : MonoBehaviour
             }
         }
 
-        // ±âÁ¸ º¯¼ö ÃÊ±âÈ­
+        // ê¸°ì¡´ ë³€ìˆ˜ ì´ˆê¸°í™”
         _inElement.Clear();
 
         foreach (DateTime key in newElement.Keys)
         {
             _inElement.Add(key, newElement[key]);
         }
-        // Á¤¸®µÈ º¯¼ö·Î ÇÒ´ç
+        // ì •ë¦¬ëœ ë³€ìˆ˜ë¡œ í• ë‹¹
         //_inElement = newElement;
     }
 
@@ -653,7 +648,7 @@ public class GraphChartFeed : MonoBehaviour
 	#region ----- Interface -----
 
     /// <summary>
-    /// ¿¬µµ ´ÜÀ§ ¹öÆ° ¼±ÅÃ½Ã ½ÇÇà
+    /// ì—°ë„ ë‹¨ìœ„ ë²„íŠ¼ ì„ íƒì‹œ ì‹¤í–‰
     /// </summary>
     /// <param name="_index"> 0 : Y1 // 1 : Y5 // 2 : Y10 / 3 : Y50</param>
     public void Update_YearTemplate(int _index)
@@ -671,7 +666,7 @@ public class GraphChartFeed : MonoBehaviour
 	}
 
     /// <summary>
-    /// ¼Õ»ó Á¾·ù ¼±ÅÃ ¹öÆ° Å¬¸¯½Ã ½ÇÇà
+    /// ì†ìƒ ì¢…ë¥˜ ì„ íƒ ë²„íŠ¼ í´ë¦­ì‹œ ì‹¤í–‰
     /// </summary>
     /// <param name="_index"> 0 : ALL // 1 : Crack // 2 : Spalling // 3 : Efflorescence // 4 : Breakage </param>
     public void Update_IssueIndex(int _index)
@@ -726,7 +721,7 @@ public class GraphChartFeed : MonoBehaviour
 	#endregion
 
 	/// <summary>
-	/// »ı¼ºÇÏ°íÀÚ ÇÏ´Â time panelÀ» ¸¸µç´Ù.
+	/// ìƒì„±í•˜ê³ ì í•˜ëŠ” time panelì„ ë§Œë“ ë‹¤.
 	/// </summary>
 	/// <param name="_year"></param>
 	/// <param name="_template"></param>
@@ -755,7 +750,7 @@ public class GraphChartFeed : MonoBehaviour
                 yearIndex = 3;
                 break;
         }
-        // TODO Debug
+        
         //SetDateTimePanel_Year1(_year, _issueIndex);
         SetDateTimePanel_Year(
                     _year: _year,
@@ -764,16 +759,16 @@ public class GraphChartFeed : MonoBehaviour
     }
 
     /// <summary>
-    /// _year :: ¼±ÅÃ ¿¬µµ
-    /// _issueIndex :: ALL, Crack, Spall, Effro, Breakage ¼±ÅÃ
+    /// _year :: ì„ íƒ ì—°ë„
+    /// _issueIndex :: ALL, Crack, Spall, Effro, Breakage ì„ íƒ
     /// _yearIndex :; Y1 0 // Y5 1 // Y10 2 // Y50 3
     /// </summary>
-    /// <param name="_year"> ¼±ÅÃ ¿¬µµ </param>
+    /// <param name="_year"> ì„ íƒ ì—°ë„ </param>
     /// <param name="_issueIndex"> ALL 0 // Crack 1 // Spall 2 // Effro 3 // Breakage 4 </param>
     /// <param name="_yearIndex"> Y1 0 // Y5 1 // Y10 2 // Y50 3 </param>
     private void SetDateTimePanel_Year(int _year, int _issueIndex, int _yearIndex)
     {
-        // ¸ğµÎ °¡Á®¿À±â·Î Ã³¸® :: 0
+        // ëª¨ë‘ ê°€ì ¸ì˜¤ê¸°ë¡œ ì²˜ë¦¬ :: 0
         // Crack :: 1
         // Spalling :: 2
         // Efflorescence :: 3
@@ -782,15 +777,15 @@ public class GraphChartFeed : MonoBehaviour
         List<int> dmgResult;
         List<int> rcvResult;
 
-        // ÀÏ´Ü dmg all
+        // ì¼ë‹¨ dmg all
         // ALL
         if(_issueIndex == 0)
         {
             dmgResult = CreateList(_yearIndex: _yearIndex);
             rcvResult = CreateList(_yearIndex: _yearIndex);
 
-            // ³¯Â¥ ±âÁØÀ¸·Î ÀÌÀü ³âµµµéÀÇ µ¥ÀÌÅÍ º¯È­·® ¼öÁı
-            //int prevIndex = 0;  // ½ÃÀÛ°ª ÇÒ´ç
+            // ë‚ ì§œ ê¸°ì¤€ìœ¼ë¡œ ì´ì „ ë…„ë„ë“¤ì˜ ë°ì´í„° ë³€í™”ëŸ‰ ìˆ˜ì§‘
+            //int prevIndex = 0;  // ì‹œì‘ê°’ í• ë‹¹
 
             foreach(IssueCode key in issueElements[IssueClass.Dmg].Keys)
             {
@@ -802,7 +797,7 @@ public class GraphChartFeed : MonoBehaviour
                 SetIndexPerIssue(_year, _yearIndex: _yearIndex, issueElements[IssueClass.Rcv][key], rcvResult);
             }
 
-            // ¡Ú¡Ú¡Ú ¸ğµç µ¥ÀÌÅÍ ÇÒ´çÀÌ ³¡³­ µÚ, ±×·¡ÇÁ¿¡ µ¥ÀÌÅÍ ÇÒ´ç ¿äÃ»
+            // â˜…â˜…â˜… ëª¨ë“  ë°ì´í„° í• ë‹¹ì´ ëë‚œ ë’¤, ê·¸ë˜í”„ì— ë°ì´í„° í• ë‹¹ ìš”ì²­
             Set_YearGraph(_tgYear: _year, dmgResult, rcvResult, _yearIndex);
         }
         // Crack
@@ -838,7 +833,7 @@ public class GraphChartFeed : MonoBehaviour
     }
 
     /// <summary>
-    /// ¸®½ºÆ® »ı¼º
+    /// ë¦¬ìŠ¤íŠ¸ ìƒì„±
     /// Y1 : 49
     /// Y5 : 10
     /// Y10 : 10
@@ -874,7 +869,7 @@ public class GraphChartFeed : MonoBehaviour
     #region Set Index per Issue
 
     /// <summary>
-    /// ¸®½ºÆ® °ª¿¡ µ¥ÀÌÅÍ ÇÒ´ç //
+    /// ë¦¬ìŠ¤íŠ¸ ê°’ì— ë°ì´í„° í• ë‹¹ //
     /// yearIndex
     /// 0 :: Y1 //
     /// 1 :: Y5 //
@@ -885,23 +880,23 @@ public class GraphChartFeed : MonoBehaviour
     /// <param name="result"></param>
     private void SetIndexPerIssue(int _tgYear, int _yearIndex, Dictionary<DateTime, int> _values, List<int> result)
     {
-        int prevCount = 0;  // ÀÌÀü ³âµµÀÇ Á¡°ËÁ¤º¸ÀÇ ÇÕ (ÇÕ»êÈÄ ¸ğµç ÀÌ½´¿¡ ´õÇÏ±â¿ë)
+        int prevCount = 0;  // ì´ì „ ë…„ë„ì˜ ì ê²€ì •ë³´ì˜ í•© (í•©ì‚°í›„ ëª¨ë“  ì´ìŠˆì— ë”í•˜ê¸°ìš©)
 
         int yearDifference = SetYearDifference(_yearIndex);
 
         // Y1
         foreach(DateTime _date in _values.Keys)
         {
-            // Å°°ªÀÇ ¿¬µµ°¡ ¸ñÇ¥ ¿¬µµº¸´Ù ÀÛÀ» °æ¿ì
+            // í‚¤ê°’ì˜ ì—°ë„ê°€ ëª©í‘œ ì—°ë„ë³´ë‹¤ ì‘ì„ ê²½ìš°
             if(IsPrevYear(_date.Year, _tgYear, yearDifference) /*_date.Year < _tgYear*/)
             {
-                // ÀÌÀü Á¤º¸ÇÕ¿¡ value°ª ´õÇÏ±â
+                // ì´ì „ ì •ë³´í•©ì— valueê°’ ë”í•˜ê¸°
                 prevCount += _values[_date];
             }
-            // Å°°ªÀÇ ¿¬µµ°¡ ¸ñÇ¥ ¿¬µµ¿Í °°À»¶§
+            // í‚¤ê°’ì˜ ì—°ë„ê°€ ëª©í‘œ ì—°ë„ì™€ ê°™ì„ë•Œ
             else if(IsTargetYear(_date.Year, _tgYear, yearDifference) /*_date.Year == _tgYear*/)
             {
-                // Key Value °ªÀ» ³Ñ°Ü¼­ º¯¼ö ÇÒ´ç
+                // Key Value ê°’ì„ ë„˜ê²¨ì„œ ë³€ìˆ˜ í• ë‹¹
                 switch(_yearIndex)
                 {
                     case 0:
@@ -924,7 +919,7 @@ public class GraphChartFeed : MonoBehaviour
             }
         }
 
-        // ¼öÁıµÈ ÀÌÀü ³âµµ µ¥ÀÌÅÍ¸¦ ¸ğµç °á°ú ¸®½ºÆ®¿¡ ÇÕ»ê
+        // ìˆ˜ì§‘ëœ ì´ì „ ë…„ë„ ë°ì´í„°ë¥¼ ëª¨ë“  ê²°ê³¼ ë¦¬ìŠ¤íŠ¸ì— í•©ì‚°
         for (int i = 0; i < result.Count; i++)
         {
             result[i] += prevCount;
@@ -958,7 +953,7 @@ public class GraphChartFeed : MonoBehaviour
     }
 
     /// <summary>
-    /// dateYear°¡ ÀÌÀü ³âµµ±º¿¡ ¼ÓÇÏ´Â°¡?
+    /// dateYearê°€ ì´ì „ ë…„ë„êµ°ì— ì†í•˜ëŠ”ê°€?
     /// </summary>
     /// <param name="_dateYear"></param>
     /// <param name="_tgYear"></param>
@@ -977,7 +972,7 @@ public class GraphChartFeed : MonoBehaviour
     }
 
     /// <summary>
-    /// dateYear°¡ ¸ñÇ¥ ¿¬µµ±º (ÇöÀç ³âµµ¸¦ Æ÷ÇÔ)À» Æ÷ÇÔÇÏ´Â°¡?
+    /// dateYearê°€ ëª©í‘œ ì—°ë„êµ° (í˜„ì¬ ë…„ë„ë¥¼ í¬í•¨)ì„ í¬í•¨í•˜ëŠ”ê°€?
     /// </summary>
     /// <param name="_dateYear"></param>
     /// <param name="_tgYear"></param>
@@ -998,7 +993,7 @@ public class GraphChartFeed : MonoBehaviour
     #endregion
 
     /// <summary>
-    /// ¸ñÇ¥³âµµ¿Í °°Àº Á¡°ËÁ¤º¸¸¦ ÇÒ´ç
+    /// ëª©í‘œë…„ë„ì™€ ê°™ì€ ì ê²€ì •ë³´ë¥¼ í• ë‹¹
     /// </summary>
     /// <param name="_date"></param>
     /// <param name="_index"></param>
@@ -1011,24 +1006,24 @@ public class GraphChartFeed : MonoBehaviour
         int daysInMonth = DateTime.DaysInMonth(_date.Year, _date.Month);
         int day = _date.Day;
 
-        // month ¹İ¿µ
+        // month ë°˜ì˜
         index = (month - 1) * 4;
         
-        // day ¹İ¿µ
+        // day ë°˜ì˜
         float count = daysInMonth / 4;
-        // day¿¡ count / 2¸¸Å­ ´õÇÏ°í ÀÌ¸¦ count·Î ³ª´©¸é day¿¡ ´ëÇÑ index °è»êµÊ
+        // dayì— count / 2ë§Œí¼ ë”í•˜ê³  ì´ë¥¼ countë¡œ ë‚˜ëˆ„ë©´ dayì— ëŒ€í•œ index ê³„ì‚°ë¨
         index = (int)(index + (day + count / 2) / count);
 
-        // Æ¯Á¤ ½ÃÁ¡ºÎÅÍ ³¡±îÁö
+        // íŠ¹ì • ì‹œì ë¶€í„° ëê¹Œì§€
         for (int i = index; i < _result.Count; i++)
         {
-            // Value °ªÀ» ÇÕ»ê
+            // Value ê°’ì„ í•©ì‚°
             _result[i] += _index;
         }
     }
 
     /// <summary>
-    /// ¸ñÇ¥³âµµ¿Í °°Àº Á¡°ËÁ¤º¸¸¦ ÇÒ´ç
+    /// ëª©í‘œë…„ë„ì™€ ê°™ì€ ì ê²€ì •ë³´ë¥¼ í• ë‹¹
     /// </summary>
     /// <param name="_date"></param>
     /// <param name="_index"></param>
@@ -1037,29 +1032,29 @@ public class GraphChartFeed : MonoBehaviour
     {
         int index = 0;
 
-        // ¸ñÇ¥ ¿¬µµ¿Í date.Year°£ Â÷ÀÌ°ª
+        // ëª©í‘œ ì—°ë„ì™€ date.Yearê°„ ì°¨ì´ê°’
         // 2022 - 2022 = 0
         // 2022 - 2017 = 5
         int yDifference = _tgYear - _date.Year;
 
-        // ¿ùÂ÷ 2ºĞ
+        // ì›”ì°¨ 2ë¶„
         int mIndex = (_date.Month - 1) / 6;
 
         index = (5 - yDifference) * 2 + mIndex;
 
 		//index = (int)(index + (day + count / 2) / count);
 
-		// Æ¯Á¤ ½ÃÁ¡ºÎÅÍ ³¡±îÁö
+		// íŠ¹ì • ì‹œì ë¶€í„° ëê¹Œì§€
 		for (int i = index; i < _result.Count; i++)
 		{
-			// Value °ªÀ» ÇÕ»ê
+			// Value ê°’ì„ í•©ì‚°
 			_result[i] += _index;
 		}
 	}
 
 
     /// <summary>
-    /// ¸ñÇ¥³âµµ¿Í °°Àº Á¡°ËÁ¤º¸¸¦ ÇÒ´ç
+    /// ëª©í‘œë…„ë„ì™€ ê°™ì€ ì ê²€ì •ë³´ë¥¼ í• ë‹¹
     /// </summary>
     /// <param name="_date"></param>
     /// <param name="_index"></param>
@@ -1068,16 +1063,16 @@ public class GraphChartFeed : MonoBehaviour
     {
         int index = 10 - (_tgYear - _date.Year);
 
-        // Æ¯Á¤ ½ÃÁ¡ºÎÅÍ ³¡±îÁö
+        // íŠ¹ì • ì‹œì ë¶€í„° ëê¹Œì§€
         for (int i = index; i < _result.Count; i++)
         {
-            // Value °ªÀ» ÇÕ»ê
+            // Value ê°’ì„ í•©ì‚°
             _result[i] += _index;
         }
     }
 
     /// <summary>
-    /// ¸ñÇ¥³âµµ¿Í °°Àº Á¡°ËÁ¤º¸¸¦ ÇÒ´ç
+    /// ëª©í‘œë…„ë„ì™€ ê°™ì€ ì ê²€ì •ë³´ë¥¼ í• ë‹¹
     /// </summary>
     /// <param name="_date"></param>
     /// <param name="_index"></param>
@@ -1086,10 +1081,10 @@ public class GraphChartFeed : MonoBehaviour
     {
         int index = (50 - (_tgYear - _date.Year)) / 5;
 
-        // Æ¯Á¤ ½ÃÁ¡ºÎÅÍ ³¡±îÁö
+        // íŠ¹ì • ì‹œì ë¶€í„° ëê¹Œì§€
         for (int i = index; i < _result.Count; i++)
         {
-            // Value °ªÀ» ÇÕ»ê
+            // Value ê°’ì„ í•©ì‚°
             _result[i] += _index;
         }
     }
