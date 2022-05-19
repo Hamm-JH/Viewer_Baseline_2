@@ -1,4 +1,5 @@
-﻿using Management;
+﻿using Items;
+using Management;
 using Newtonsoft.Json.Linq;
 using Platform.Tunnel;
 using System;
@@ -68,6 +69,8 @@ namespace Definition._Issue
 		[SerializeField] int m_dcLocation;
 		[SerializeField] Vector3 m_positionVector;
 		[SerializeField] Vector3 m_rotationVector;
+
+		[SerializeField] Item_waypoint m_waypoint;
 
 		/// <summary>
 		/// 이 issue가 손상이면 true 보수면 false
@@ -177,6 +180,10 @@ namespace Definition._Issue
 		public Vector3 RotationVector { get => m_rotationVector; set => m_rotationVector = value; }
 		public IssueCodes IssueCode { get => m_issueCode; set => m_issueCode=value; }
 
+		/// <summary>
+		/// waypoint 셋업을 위해 Issue_Selectable 생성시에 초기 할당하는 item변수
+		/// </summary>
+		public Item_waypoint Waypoint { get => m_waypoint; set => m_waypoint = value; }
 		#endregion
 
 		/// <summary>

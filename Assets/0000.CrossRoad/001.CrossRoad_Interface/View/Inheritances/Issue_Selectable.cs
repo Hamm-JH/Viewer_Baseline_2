@@ -6,7 +6,8 @@ namespace View
 {
 	using Definition;
 	using Definition._Issue;
-	using Management;
+    using Items;
+    using Management;
 	using System;
 
 	public class Issue_Selectable : Interactable
@@ -31,9 +32,7 @@ namespace View
 			}
 		}
 
-		//public override bool IsInteractable { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-
-		public override void OnChangeValue(float _value)
+        public override void OnChangeValue(float _value)
 		{
 			throw new System.NotImplementedException();
 		}

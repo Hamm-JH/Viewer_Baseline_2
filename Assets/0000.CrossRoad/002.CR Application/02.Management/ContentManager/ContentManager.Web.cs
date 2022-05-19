@@ -39,8 +39,15 @@ namespace Management
 				_API.SendRequest(SendRequestCode.SelectIssue,
 					iObj.Issue.IssueOrderCode,
 					iObj.Issue.CdBridgeParts,
-					iObj.Issue.YnRecover);
+					iObj.Issue.IsDmg
+					/*iObj.Issue.YnRecover*/);
 			}
+
+			if (iObj == null) return;
+
+			// TODO 손상정보가 존재할시 아래 선택지 필요
+			// 선택 객체가 손상인지, 보수인지 알아야 함(변경 완료)
+			// 선택 객체가 어떤 객체인지 이름을 알아야 함(이건 이미 있음)
 		}
 
 		public UseCase AppUseCase { get; internal set; }

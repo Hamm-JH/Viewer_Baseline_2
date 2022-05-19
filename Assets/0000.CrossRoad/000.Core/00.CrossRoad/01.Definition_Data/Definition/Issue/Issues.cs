@@ -84,6 +84,9 @@ namespace Definition
                 // 생성된 IssueSelectable을 각 waypoint에 할당한다.
                 wp.IssueWayPoint.SetIssueSelectable(issueSelectable);
 
+                // ui 관리를 위한 waypoint 셋업
+                _issue.Waypoint = wp;
+
                 if(_webT == WebType.Issue_Dmg)
                 {
                     wp.SetColor(new Color(0xee / 255f, 0x57 / 255f, 0x30 / 255f, 1));

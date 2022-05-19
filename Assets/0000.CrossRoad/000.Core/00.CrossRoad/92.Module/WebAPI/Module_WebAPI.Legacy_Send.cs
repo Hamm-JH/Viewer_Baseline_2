@@ -36,7 +36,7 @@ namespace Module.WebAPI
                         Func_SelectIssue(
                             Parsers.Parse<string>(arguments[0]),
                             Parsers.Parse<string>(arguments[1]),
-                            Parsers.Parse<string>(arguments[2]));
+                            Parsers.Parse<bool>(arguments[2]));
                     }
                     break;
 
@@ -130,11 +130,11 @@ namespace Module.WebAPI
 
 
         // O :; 손상 정보 선택 (위에 거랑 인자만 다른가?)
-        private void Func_SelectIssue(string _orderCode, string _partName, string _ynRecover)
+        private void Func_SelectIssue(string _orderCode, string _partName, bool _isDmg/*, string _ynRecover*/)
         {
             string issueOrderCode = _orderCode;
             string issuePartName = _partName;
-            string issueYnRecover = _ynRecover;
+            string issueYnRecover = _isDmg ? "n" : "y";// _ynRecover;
 
             string arg = string.Format($"SelectIssue/{issueOrderCode}/{issuePartName}/{issueYnRecover}");
             Debug.Log($"[Send.SelectIssue] // Arg :: {arg}");

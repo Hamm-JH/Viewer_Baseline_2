@@ -82,6 +82,16 @@ namespace Items
                     mainIcon_waypoint.onScreenSpriteColor = new Color(0x3e / 255f, 0xb0 / 255f, 0xc9 / 255f, 1);
                 }
             }
+
+            public void ToggleMain(bool _isOn)
+            {
+                mainIcon_waypoint.gameObject.SetActive(_isOn);
+            }
+
+            public void ToggleFx(bool _isOn)
+            {
+                effect_waypoint.gameObject.SetActive(_isOn);
+            }
         }
 
         [SerializeField]

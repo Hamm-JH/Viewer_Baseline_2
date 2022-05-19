@@ -66,7 +66,8 @@ namespace Module.Model
 			PlatformCode pCode = MainManager.Instance.Platform;
 			if(Platforms.IsDemoWebViewer(pCode))
             {
-
+				// 손상 정보용으로 초기 세팅
+				Issues.WP_Setup_Dmgs(DmgData, RcvData, AllIssues);
             }
         }
 	}

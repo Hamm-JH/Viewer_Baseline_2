@@ -371,6 +371,26 @@ namespace Management.Events.Inputs
 					}
 				}
 			}
+			else if(Platforms.IsDemoWebViewer(pCode))
+            {
+				if (Results.Count != 0)
+                {
+                    //Results.ForEach(x => Debug.Log($"ui name : {x.gameObject.name}"));
+                    Results.ForEach(x =>
+					{
+						UIIssue_Selectable uiIssue;
+						if(x.gameObject.transform.parent.TryGetComponent<UIIssue_Selectable>(out uiIssue))
+                        {
+							Debug.Log($"ui name : {x.gameObject.name}, contains UIIssue");
+							
+							// StartEvent_SelectIssue로 바로 리다이렉트하지 않고 여기서 손상정보 선택 이벤트 발생
+							ContentManager.Instance.OnSelect_Issue(uiIssue.IssueSelectable.gameObject);
+
+							//return;	// 한 번만 실행..
+                        }
+					});
+                }
+            }
 		}
 
 		public void StartEvent_SelectNull()
