@@ -93,6 +93,14 @@ namespace Module.WebAPI
 			{
 				ReceiveRequest("FinishRegisterMode");
 			}
+			else if(Input.GetKeyDown(KeyCode.A))
+            {
+				ReceiveRequest("ChangeTab/DMG");
+            }
+			else if (Input.GetKeyDown(KeyCode.S))
+			{
+				ReceiveRequest("ChangeTab/RCV");
+			}
 		}
 
 #if UNITY_EDITOR

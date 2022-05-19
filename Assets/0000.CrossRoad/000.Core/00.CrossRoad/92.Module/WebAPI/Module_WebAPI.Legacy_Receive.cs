@@ -8,6 +8,7 @@ namespace Module.WebAPI
     using Definition.Control;
     using Management;
     using Module.Interaction;
+    using Module.Model;
     using System;
 	using System.Linq;
 	using Utilities;
@@ -35,6 +36,10 @@ namespace Module.WebAPI
                 // Q
                 case ReceiveRequestCode.ResetIssue:
                     Func_ResetIssue();
+                    break;
+
+                case ReceiveRequestCode.ChangeTab:
+                    ChangeTab(arguments[1]);
                     break;
 
                 // W
@@ -118,11 +123,38 @@ namespace Module.WebAPI
             ContentManager.Instance.Reset_IssueObject();
         }
 
-		#endregion
+        #endregion
 
-		#region SelectObject
+        #region ChangeTab
 
-		private void Func_SelectObject(string _name)
+        private void ChangeTab(string _value)
+        {
+            GameObject selected = EventManager.Instance._SelectedObject;
+            Module_Model model = ContentManager.Instance.Module<Module_Model>();
+
+            List<Definition._Issue.Issue> dmgs = model.DmgData;
+            List<Definition._Issue.Issue> rcvs = model.RcvData;
+            List<Definition._Issue.Issue> all = model.AllIssues;
+
+            if (_value == "DMG")
+            {
+                Issues.WP_Setup_Dmgs_WithTarget(dmgs, rcvs, all, selected);
+            }
+            else if(_value == "RCV")
+            {
+                Issues.WP_Setup_Rcvs_WithTarget(dmgs, rcvs, all, selected);
+            }
+            else
+            {
+                Debug.LogError("unknown argument");
+            }
+        }
+
+        #endregion
+
+        #region SelectObject
+
+        private void Func_SelectObject(string _name)
         {
             GameObject obj3D;
             Find_3DObject(_name, out obj3D);

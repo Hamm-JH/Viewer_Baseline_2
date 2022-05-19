@@ -52,6 +52,7 @@ namespace Definition
         Null,
 
         ResetIssue,         // 손상/보강 리셋
+		ChangeTab,			// 탭 변경
 
         SelectObject,       // 3D 객체 선택
         SelectIssue,        // 손상/보강 선택
