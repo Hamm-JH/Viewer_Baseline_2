@@ -15,6 +15,7 @@ namespace Module.Model
 		[Header("Issue Datas")]
 		[SerializeField] private List<Issue> m_Dmg;
 		[SerializeField] private List<Issue> m_Rcv;
+		[SerializeField] private List<Issue> m_allIssues;
 
 		[SerializeField] private List<GameObject> m_dmgObjs;
 		[SerializeField] private List<GameObject> m_rcvObjs;
@@ -32,8 +33,10 @@ namespace Module.Model
 				return m_rootIssue;
 			}
 		}
+
 		public List<Issue> DmgData { get => m_Dmg; set => m_Dmg=value; }
 		public List<Issue> RcvData { get => m_Rcv; set => m_Rcv=value; }
+		public List<Issue> AllIssues { get => m_allIssues; set => m_allIssues = value; }
 
 		public List<GameObject> DmgObjs { get => m_dmgObjs; set => m_dmgObjs=value; }
 		public List<GameObject> RcvObjs { get => m_rcvObjs; set => m_rcvObjs=value; }
@@ -49,9 +52,11 @@ namespace Module.Model
 			}
 		}
 
-		#region Delete Issue
+        
 
-		public void DeleteIssues()
+        #region Delete Issue
+
+        public void DeleteIssues()
 		{
 			DmgData.Clear();
 			RcvData.Clear();
@@ -67,15 +72,20 @@ namespace Module.Model
 
 		public void GetIssue(WebType _webT, List<Issue> _issues)
 		{
+			if (m_allIssues == null) m_allIssues = new List<Issue>();
+
 			List<GameObject> _iObjs = new List<GameObject>();
 
 			bool isDmg = false;
+			// TODO :: ! :: 손상 한번, 보수 한번을 전제로 작성된 코드
 			switch (_webT)
 			{
 				case WebType.Issue_Dmg:
 					m_Dmg = _issues;
 					m_dmgObjs = new List<GameObject>();
 					_iObjs = m_dmgObjs;
+					// 모든 점검정보에 추가
+					m_allIssues.AddRange(m_Dmg);
 					isDmg = true;
 					break;
 
@@ -83,6 +93,8 @@ namespace Module.Model
 					m_Rcv = _issues;
 					m_rcvObjs = new List<GameObject>();
 					_iObjs = m_rcvObjs;
+					// 모든 점검정보에 추가
+					m_allIssues.AddRange(m_Rcv);
 					isDmg = false;
 					break;
 			}

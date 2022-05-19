@@ -60,5 +60,14 @@ namespace Module.Model
 				ContentManager.Instance.CheckInitModuleComplete(ID);
 			}
 		}
+
+		public void OnAfterInitialize()
+        {
+			PlatformCode pCode = MainManager.Instance.Platform;
+			if(Platforms.IsDemoWebViewer(pCode))
+            {
+
+            }
+        }
 	}
 }

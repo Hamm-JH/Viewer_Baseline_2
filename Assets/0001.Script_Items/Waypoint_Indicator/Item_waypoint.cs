@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace Items
 {
+    using View;
+
     public class Item_waypoint : MonoBehaviour
     {
         [System.Serializable]
@@ -11,6 +13,7 @@ namespace Items
         {
             public Waypoint_Indicator mainIcon_waypoint;
             public Waypoint_Indicator effect_waypoint;
+            public Issue_Selectable issue_Selectable;
 
             public bool IsNotNull()
             {
@@ -36,7 +39,48 @@ namespace Items
             /// <param name="_isCanSee"></param>
             public void ToggleIcon(bool _isCanSee)
             {
+                if(mainIcon_waypoint == null)
+                {
+                    Debug.LogError("mainIcon_waypoint is null");
+                    return;
+                }
+
                 mainIcon_waypoint.gameObject.SetActive(_isCanSee);
+            }
+
+            public void SetIssueSelectable(Issue_Selectable _selectable)
+            {
+                // MainIcon에만 Issue_Selectable을 할당한다.
+                // 호버링을 위해 이 객체를 UIIssue_Selectable로 보낸다.
+                mainIcon_waypoint.AddOnIssueSelectable(_selectable, this);
+            }
+
+            public void OnHover(bool _isDmg)
+            {
+                // 손상일 경우
+                if(_isDmg)
+                {
+                    mainIcon_waypoint.onScreenSpriteColor = new Color(0xec / 255f, 0x3a / 255f, 0x0c / 255f, 1);
+                }
+                // 보수일 경우
+                else
+                {
+                    mainIcon_waypoint.onScreenSpriteColor = new Color(0x1c / 255f, 0xb5 / 255f, 0xd6 / 255f, 1);
+                }
+            }
+
+            public void OffHover(bool _isDmg)
+            {
+                // 손상일 경우
+                if (_isDmg)
+                {
+                    mainIcon_waypoint.onScreenSpriteColor = new Color(0xee / 255f, 0x57 / 255f, 0x30 / 255f, 1);
+                }
+                // 보수일 경우
+                else
+                {
+                    mainIcon_waypoint.onScreenSpriteColor = new Color(0x3e / 255f, 0xb0 / 255f, 0xc9 / 255f, 1);
+                }
             }
         }
 
@@ -46,6 +90,7 @@ namespace Items
         public _IssueWayPoint IssueWayPoint { get => m_issueWayPoint; set => m_issueWayPoint = value; }
 
         [SerializeField] Camera cam;
+        [SerializeField] GameObject m_targetIssueObject;
 
         private void Start()
         {

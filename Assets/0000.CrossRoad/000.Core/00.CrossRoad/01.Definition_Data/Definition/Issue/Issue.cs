@@ -36,6 +36,7 @@ namespace Definition._Issue
 			public string ftype;
 		}
 		#region field
+		[SerializeField] bool m_isDmg;
 		[SerializeField] string m_date;
 
 		[SerializeField] string m_issueOrderCode;
@@ -67,6 +68,11 @@ namespace Definition._Issue
 		[SerializeField] int m_dcLocation;
 		[SerializeField] Vector3 m_positionVector;
 		[SerializeField] Vector3 m_rotationVector;
+
+		/// <summary>
+		/// 이 issue가 손상이면 true 보수면 false
+		/// </summary>
+		public bool IsDmg { get => m_isDmg; set => m_isDmg = value; }
 
 		/// <summary>
 		/// 손상정보의 발생 일시
@@ -313,7 +319,9 @@ namespace Definition._Issue
             }
         }
 
-		public void SetDmg(string _date, JToken _token)
+        
+
+        public void SetDmg(string _date, JToken _token)
 		{
 			Date = _date;
 
@@ -392,6 +400,7 @@ namespace Definition._Issue
 					kDmgDescription     = "dcRemark";
 				}
 
+				IsDmg = true;
 				IssueOrderCode       =  _token.SelectToken(kIssueOrderCode).ToString();
 				CdBridge             =  _token.SelectToken(kCdBridge).ToString();
 				CdBridgeParts        =  _token.SelectToken(kCdBridgeParts).ToString();
@@ -518,6 +527,7 @@ namespace Definition._Issue
 				kRcvDescription     = "dcRecover";
 			}
 
+			IsDmg = false;
 			IssueOrderCode   = _token.SelectToken(kIssueOrderCode).ToString();
 			CdBridge         = _token.SelectToken(kCdBridge).ToString();
 			CdBridgeParts    = _token.SelectToken(kCdBridgeParts).ToString();

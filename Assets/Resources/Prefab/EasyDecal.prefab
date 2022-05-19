@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7652492790731228455}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &242999926
 MonoBehaviour:
@@ -52,7 +52,7 @@ MonoBehaviour:
   showBoundaryBox: 0
   boundaryBoxColor: {r: 0.9150943, g: 0.59603894, b: 0.11654504, a: 0.38431373}
   parentSize: {x: 200, y: 200}
-  displayRangeMin: 15
+  displayRangeMin: 0
   displayRangeMax: 1000
   raycastTarget: 1
   enableSprite: 1
@@ -60,7 +60,7 @@ MonoBehaviour:
   offScreenSpriteRotates: 0
   onScreenSprite: {fileID: 21300000, guid: f682d924929cb584d8c97b5802d72610, type: 3}
   onScreenSpriteColor: {r: 1, g: 1, b: 0, a: 1}
-  onScreenSpriteSize: 0.2
+  onScreenSpriteSize: 0.14
   onScreenSpriteOffset: {x: 0, y: 0}
   onScreenSpriteRotation: 0
   onScreenSpriteFadeWithRange: 1
@@ -69,7 +69,7 @@ MonoBehaviour:
   onScreenSpriteHide: 0
   offScreenSprite: {fileID: 21300000, guid: f682d924929cb584d8c97b5802d72610, type: 3}
   offScreenSpriteColor: {r: 1, g: 1, b: 0, a: 1}
-  offScreenSpriteSize: 0.2
+  offScreenSpriteSize: 0.14
   offScreenSpriteOffset: {x: 0, y: 0}
   offScreenSpriteRotation: 0
   offScreenSpriteFadeWithRange: 1
@@ -153,6 +153,7 @@ MonoBehaviour:
   toggleCenteredSpriteOptions: 0
   toggleCenteredPrefabOptions: 0
   toggleRadiusGizmoOptions: 0
+  addon_issueSelectable: {fileID: 0}
 --- !u!1 &896992983
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,7 +183,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7652492790731228455}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &896992985
 MonoBehaviour:
@@ -234,7 +235,7 @@ MonoBehaviour:
   offScreenObjectRotates: 0
   onScreenGameObject: {fileID: 6963004335155820069, guid: a399e5a1d9aad3d41b077a4046e92a71, type: 3}
   onScreenGameObjectColor: {r: 1, g: 1, b: 0, a: 1}
-  onScreenGameObjectSize: 1
+  onScreenGameObjectSize: 0.5
   onScreenGameObjectOffset: {x: 0, y: 0}
   onScreenGameObjectRotation: 0
   onScreenGameObjectFadeWithRange: 0
@@ -243,7 +244,7 @@ MonoBehaviour:
   onScreenGameObjectHide: 0
   offScreenGameObject: {fileID: 6963004335155820069, guid: a399e5a1d9aad3d41b077a4046e92a71, type: 3}
   offScreenGameObjectColor: {r: 1, g: 1, b: 0, a: 1}
-  offScreenGameObjectSize: 1
+  offScreenGameObjectSize: 0.5
   offScreenGameObjectOffset: {x: 0, y: 0}
   offScreenGameObjectRotation: 0
   offScreenGameObjectFadeWithRange: 0
@@ -306,6 +307,7 @@ MonoBehaviour:
   toggleCenteredSpriteOptions: 0
   toggleCenteredPrefabOptions: 0
   toggleRadiusGizmoOptions: 0
+  addon_issueSelectable: {fileID: 0}
 --- !u!1 &7652492790731228454
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,6 +319,8 @@ GameObject:
   - component: {fileID: 7652492790731228455}
   - component: {fileID: 8507300491603273761}
   - component: {fileID: 2059469113}
+  - component: {fileID: 1532809328291827353}
+  - component: {fileID: 8817222359072462787}
   m_Layer: 0
   m_Name: EasyDecal
   m_TagString: Untagged
@@ -335,7 +339,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7652492791474763475}
   - {fileID: 242999924}
   - {fileID: 896992984}
   m_Father: {fileID: 0}
@@ -369,57 +372,37 @@ MonoBehaviour:
   m_issueWayPoint:
     mainIcon_waypoint: {fileID: 242999926}
     effect_waypoint: {fileID: 896992985}
---- !u!1 &7652492791474763474
-GameObject:
+    issue_Selectable: {fileID: 0}
+  cam: {fileID: 0}
+  m_targetIssueObject: {fileID: 0}
+--- !u!33 &1532809328291827353
+MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7652492791474763475}
-  - component: {fileID: 7652492791474763472}
-  m_Layer: 0
-  m_Name: SKINNED_PROC_PLANE
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &7652492791474763475
-Transform:
+  m_GameObject: {fileID: 7652492790731228454}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &8817222359072462787
+MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7652492791474763474}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7652492790731228455}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!137 &7652492791474763472
-SkinnedMeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7652492791474763474}
-  m_Enabled: 1
+  m_GameObject: {fileID: 7652492790731228454}
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 3
+  m_RayTracingMode: 2
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 4f279a3c168e57c4989140bd36a7ca05, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -440,15 +423,4 @@ SkinnedMeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  serializedVersion: 2
-  m_Quality: 0
-  m_UpdateWhenOffscreen: 0
-  m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 0}
-  m_Bones: []
-  m_BlendShapeWeights: []
-  m_RootBone: {fileID: 0}
-  m_AABB:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  m_DirtyAABB: 1
+  m_AdditionalVertexStreams: {fileID: 0}

@@ -9,6 +9,7 @@ namespace Management
 	using Module;
     using Module.Interaction;
     using Module.Item;
+    using Module.Model;
     using Module.UI;
 
     public partial class ContentManager : IManager<ContentManager>
@@ -183,6 +184,12 @@ namespace Management
             }
 			else if(Platforms.IsDemoWebViewer(pCode))
             {
+				Module_Model model = Module<Module_Model>();
+				if(model != null)
+                {
+					model.OnAfterInitialize();
+                }
+
 				Module_Items item = Module<Module_Items>(ModuleID.Item);
 				if(item != null)
                 {

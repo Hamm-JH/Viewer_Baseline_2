@@ -8,7 +8,7 @@ namespace Definition
     using ch.sycoforge.Decal;
     using View;
 
-    public static class Issues
+    public static partial class Issues
     {
         public enum ResourceType
         {
@@ -74,11 +74,16 @@ namespace Definition
             obj.name = _issue.IssueOrderCode;
             obj.transform.position = _issue.PositionVector;
             obj.transform.rotation = Quaternion.Euler(_issue.RotationVector);
-            obj.AddComponent<Issue_Selectable>().Issue = _issue;
+            Issue_Selectable issueSelectable = obj.AddComponent<Issue_Selectable>();
+            issueSelectable.Issue = _issue;
+
 
             Items.Item_waypoint wp;
             if(obj.TryGetComponent<Items.Item_waypoint>(out wp))
             {
+                // 생성된 IssueSelectable을 각 waypoint에 할당한다.
+                wp.IssueWayPoint.SetIssueSelectable(issueSelectable);
+
                 if(_webT == WebType.Issue_Dmg)
                 {
                     wp.SetColor(new Color(0xee / 255f, 0x57 / 255f, 0x30 / 255f, 1));

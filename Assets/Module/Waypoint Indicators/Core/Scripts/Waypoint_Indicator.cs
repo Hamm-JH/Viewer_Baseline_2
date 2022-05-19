@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using View;
+using Items;
 
 public class Waypoint_Indicator : MonoBehaviour
 {
@@ -2637,6 +2639,8 @@ public class Waypoint_Indicator : MonoBehaviour
             wpParentImage = wpParentRectTransform.gameObject.AddComponent<Image>();
             wpParentRectTransform.position = new Vector3(-1000f, -1000f, 0f); //This make sure the blinking box doesn't appear in bottom left at spawn
             wpParentRectTransform.localRotation = Quaternion.Euler(0, 0, 0);
+            wpParentGameObject.AddComponent<UIIssue_Selectable>();
+            AddOn_assignIssueSelectable(wpParentGameObject.GetComponent<UIIssue_Selectable>());
 
             //Set on or offscreen sprites, objects, text on load
             #region Screen Space Check
@@ -3458,6 +3462,57 @@ public class Waypoint_Indicator : MonoBehaviour
         rightEdgeDetected = false;
         leftEdgeDetected = true;
     }
+    #endregion
+
+    #region AddOn
+
+    [SerializeField] Issue_Selectable addon_issueSelectable = null;
+    [SerializeField] Item_waypoint._IssueWayPoint addon_hoveringItem = null;
+
+    /// <summary>
+    /// 데이터를 가지고 있는 IssueSelectable을 할당한다.
+    /// Hovering용 Item_waypoint._IssueWayPoint를 할당한다.
+    /// </summary>
+    /// <param name="_selectable"></param>
+    public void AddOnIssueSelectable(Issue_Selectable _selectable, Item_waypoint._IssueWayPoint _hoveringItem)
+    {
+        // mainIcon만 이 흐름에 들어옴
+
+        addon_issueSelectable = _selectable;
+        addon_hoveringItem = _hoveringItem;
+
+        // 이미 ui가 생성된 경우 아래의 경우를 따라간다.
+        if(wpParentGameObject != null)
+        {
+            UIIssue_Selectable uiIssueSelectable;
+            if(wpParentGameObject.TryGetComponent<UIIssue_Selectable>(out uiIssueSelectable))
+            {
+                AddOn_assignIssueSelectable(uiIssueSelectable);
+                //uiIssueSelectable.IssueSelectable = addon_issueSelectable;
+            }
+        }
+        // 아직 생성이 진행되지 않은 경우 그대로 종료 (자체 루프로 ui를 생성할 것이기 때문)
+        else
+        {
+
+        }
+    }
+
+    /// <summary>
+    /// Issue_Selectable(기존 데이터 인스턴스)을 존재하는 UIIssue_Selectable(중개자 인스턴스)에 할당한다.
+    /// </summary>
+    /// <param name="_uiIssue"></param>
+    private void AddOn_assignIssueSelectable(UIIssue_Selectable _uiIssue)
+    {
+        if(addon_issueSelectable != null)
+        {
+            _uiIssue.IssueSelectable = addon_issueSelectable;
+            _uiIssue.HoveringItem = addon_hoveringItem;
+        }
+    }
+
+    
+
     #endregion
 
 }
