@@ -322,106 +322,113 @@ namespace Definition._Issue
 
 		public void SetDmg(JToken _token)
 		{
-			string kIssueOrderCode = "";
-			string kCdBridge			= "";
-			string kCdBridgeParts		= "";
-			string kNmUser				= "";
-			string kDcMemberSurface		= "";
-			string k_DcLocation			= "";
-			string k_IssueCode			= "";
+			try
+            {
+				string kIssueOrderCode = "";
+				string kCdBridge			= "";
+				string kCdBridgeParts		= "";
+				string kNmUser				= "";
+				string kDcMemberSurface		= "";
+				string k_DcLocation			= "";
+				string k_IssueCode			= "";
 
-			string kIssueStatus			= "";
-			string k_PositionVector		= "";
-			string k_RotationVector		= "";
-			string kDateDmg				= "";
-			string kWidth				= "";
-			string kHeight				= "";
-			string kDepth				= "";
-			string kDmgDescription		= "";
-			string kFgroup				= "";
-			string kFid					= "";
-			string kFtype				= "";
+				string kIssueStatus			= "";
+				string k_PositionVector		= "";
+				string k_RotationVector		= "";
+				string kDateDmg				= "";
+				string kWidth				= "";
+				string kHeight				= "";
+				string kDepth				= "";
+				string kDmgDescription		= "";
+				string kFgroup				= "";
+				string kFid					= "";
+				string kFtype				= "";
 
-			PlatformCode pCode = MainManager.Instance.Platform;
-			if(Platforms.IsTunnelPlatform(pCode))
-			{
-				kIssueOrderCode     = "cdTunnelDamaged";
-				kCdBridge			= "cdTunnel";
-				kCdBridgeParts		= "cdTunnelParts";
-				kNmUser				= "nmUser";
-				kDcMemberSurface	= "dcDamageMemberSurface";
-				k_DcLocation		= "dcLocation";
-				k_IssueCode			= "fgDA001";
-               
-				kIssueStatus = "dcGrade";
-				k_PositionVector	= "dcPinLocation";
-				k_RotationVector	= "dcRotation";
-				kDateDmg			= "dtCheck";
-				kWidth				= "noDamageWidth";
-				kHeight				= "noDamageHeight";
-				kDepth				= "noDamageDepth";
-				kFgroup				= "fgroup";
-				kFid				= "fid";
-				kFtype				= "ftype";
-				
-				kDmgDescription		= "dcRemark";
-			}
-			else if(Platforms.IsBridgePlatform(pCode))
-			{
-				kIssueOrderCode     = "cdBridgeDamaged";
-				kCdBridge           = "cdBridge";
-				kCdBridgeParts      = "cdBridgeParts";
-				kNmUser             = "nmUser";
-				kDcMemberSurface    = "dcDamageMemberSurface";
-				k_DcLocation        = "dcLocation";
-				k_IssueCode         = "fgDA001";
-               
-				kIssueStatus = "dcGrade";
-				k_PositionVector    = "dcPinLocation";
-				k_RotationVector	= "dcRotation";
-				kDateDmg            = "dtCheck";
-				kWidth              = "noDamageWidth";
-				kHeight             = "noDamageHeight";
-				kDepth              = "noDamageDepth";
-				kFgroup             = "fgroup";
-				kFid                = "fid";
-				kFtype              = "ftype";
-				
-				kDmgDescription     = "dcRemark";
-			}
-
-			IssueOrderCode       =  _token.SelectToken(kIssueOrderCode).ToString();
-			CdBridge             =  _token.SelectToken(kCdBridge).ToString();
-			CdBridgeParts        =  _token.SelectToken(kCdBridgeParts).ToString();
-			NmUser               =   _token.SelectToken(kNmUser).ToString();
-			DcMemberSurface      =   _token.SelectToken(kDcMemberSurface).ToString();
-			_DcLocation          =   _token.SelectToken(k_DcLocation).ToString();
-			_IssueCode           =   _token.SelectToken(k_IssueCode).ToString();
-			//DcMemberSurface	= parseString(ParseCode.Surface, _token.SelectToken(JSON.IssueKey.dcDamageMemberSurface.ToString()).ToString());
-			//DcLocation			=      int.Parse(_token.SelectToken(JSON.IssueKey.dcLocation.ToString()).ToString());
-			//IssueCode			=       parseIssueCode(_token.SelectToken(JSON.IssueKey.fgDA001.ToString()).ToString());
-			YnRecover            = "";
-			IssueStatus          =   _token.SelectToken(kIssueStatus).ToString();
-			_PositionVector      =  _token.SelectToken(k_PositionVector).ToString();
-			_RotationVector		 = _token.SelectToken(k_RotationVector).ToString();
-			DateDmg          = _token.SelectToken(kDateDmg).ToString();
-			Width                =   _token.SelectToken(kWidth).ToString();
-			Height               =   _token.SelectToken(kHeight).ToString();
-			Depth                =   _token.SelectToken(kDepth).ToString();
-			Fgroup              =   _token.SelectToken(kFgroup).ToString();
-			DmgDescription          =   _token.SelectToken(kDmgDescription).ToString();
-
-			if(_token.SelectToken("files") != null && _token.SelectToken("files").ToString() != "")
-			{
-				JArray jImgArr = JArray.Parse(_token.SelectToken("files").ToString());
-				foreach(var arg in jImgArr)
+				PlatformCode pCode = MainManager.Instance.Platform;
+				if(Platforms.IsTunnelPlatform(pCode))
 				{
-					ImgIndex _index = new ImgIndex();
-					_index.fid = arg.SelectToken(kFid).ToString();
-					_index.ftype = arg.SelectToken(kFtype).ToString();
-					Imgs.Add(_index);
+					kIssueOrderCode     = "cdTunnelDamaged";
+					kCdBridge			= "cdTunnel";
+					kCdBridgeParts		= "cdTunnelParts";
+					kNmUser				= "nmUser";
+					kDcMemberSurface	= "dcDamageMemberSurface";
+					k_DcLocation		= "dcLocation";
+					k_IssueCode			= "fgDA001";
+               
+					kIssueStatus = "dcGrade";
+					k_PositionVector	= "dcPinLocation";
+					k_RotationVector	= "dcRotation";
+					kDateDmg			= "dtCheck";
+					kWidth				= "noDamageWidth";
+					kHeight				= "noDamageHeight";
+					kDepth				= "noDamageDepth";
+					kFgroup				= "fgroup";
+					kFid				= "fid";
+					kFtype				= "ftype";
+				
+					kDmgDescription		= "dcRemark";
 				}
-			}
+				else if(Platforms.IsBridgePlatform(pCode))
+				{
+					kIssueOrderCode     = "cdBridgeDamaged";
+					kCdBridge           = "cdBridge";
+					kCdBridgeParts      = "cdBridgeParts";
+					kNmUser             = "nmUser";
+					kDcMemberSurface    = "dcDamageMemberSurface";
+					k_DcLocation        = "dcLocation";
+					k_IssueCode         = "fgDA001";
+               
+					kIssueStatus = "dcGrade";
+					k_PositionVector    = "dcPinLocation";
+					k_RotationVector	= "dcRotation";
+					kDateDmg            = "dtCheck";
+					kWidth              = "noDamageWidth";
+					kHeight             = "noDamageHeight";
+					kDepth              = "noDamageDepth";
+					kFgroup             = "fgroup";
+					kFid                = "fid";
+					kFtype              = "ftype";
+				
+					kDmgDescription     = "dcRemark";
+				}
+
+				IssueOrderCode       =  _token.SelectToken(kIssueOrderCode).ToString();
+				CdBridge             =  _token.SelectToken(kCdBridge).ToString();
+				CdBridgeParts        =  _token.SelectToken(kCdBridgeParts).ToString();
+				NmUser               =   _token.SelectToken(kNmUser).ToString();
+				DcMemberSurface      =   _token.SelectToken(kDcMemberSurface).ToString();
+				_DcLocation          =   _token.SelectToken(k_DcLocation).ToString();
+				_IssueCode           =   _token.SelectToken(k_IssueCode).ToString();
+				//DcMemberSurface	= parseString(ParseCode.Surface, _token.SelectToken(JSON.IssueKey.dcDamageMemberSurface.ToString()).ToString());
+				//DcLocation			=      int.Parse(_token.SelectToken(JSON.IssueKey.dcLocation.ToString()).ToString());
+				//IssueCode			=       parseIssueCode(_token.SelectToken(JSON.IssueKey.fgDA001.ToString()).ToString());
+				YnRecover            = "";
+				IssueStatus          =   _token.SelectToken(kIssueStatus).ToString();
+				_PositionVector      =  _token.SelectToken(k_PositionVector).ToString();
+				_RotationVector		 = _token.SelectToken(k_RotationVector).ToString();
+				DateDmg          = _token.SelectToken(kDateDmg).ToString();
+				Width                =   _token.SelectToken(kWidth).ToString();
+				Height               =   _token.SelectToken(kHeight).ToString();
+				Depth                =   _token.SelectToken(kDepth).ToString();
+				Fgroup              =   _token.SelectToken(kFgroup).ToString();
+				DmgDescription          =   _token.SelectToken(kDmgDescription).ToString();
+
+				if(_token.SelectToken("files") != null && _token.SelectToken("files").ToString() != "")
+				{
+					JArray jImgArr = JArray.Parse(_token.SelectToken("files").ToString());
+					foreach(var arg in jImgArr)
+					{
+						ImgIndex _index = new ImgIndex();
+						_index.fid = arg.SelectToken(kFid).ToString();
+						_index.ftype = arg.SelectToken(kFtype).ToString();
+						Imgs.Add(_index);
+					}
+				}
+            }
+			catch (Exception e)
+            {
+				Debug.Log("error");
+            }
 			//if(JArray.Parse(_token.SelectToken("files").ToString()) != null)
 			//{
 			//}

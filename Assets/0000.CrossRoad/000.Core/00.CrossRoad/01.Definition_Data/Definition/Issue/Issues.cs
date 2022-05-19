@@ -99,7 +99,11 @@ namespace Definition
 
             Material mat = Materials.Set(mType);
             Textures.Set(mat, tType);
-            decal.DecalMaterial = Materials.Set(mType);
+
+            if(decal)
+            {
+                decal.DecalMaterial = Materials.Set(mType);
+            }
             return obj;
         }
 
@@ -126,7 +130,10 @@ namespace Definition
 
             Material mat = Materials.Set(mType);
             Textures.Set(mat, tType);
-            decal.material = mat;
+            if(decal)
+            {
+                decal.material = mat;
+            }
 
             //UD_Manager.UpdateDecal(decal);
             return obj;
