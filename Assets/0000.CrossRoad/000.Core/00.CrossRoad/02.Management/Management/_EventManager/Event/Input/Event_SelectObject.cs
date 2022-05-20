@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,9 +14,9 @@ namespace Management.Events.Inputs
 	{
 		GameObject m_inAPISelected;
 		UnityEvent<GameObject> m_clickEvent;
-#pragma warning disable IDE0044 // ÀĞ±â Àü¿ë ÇÑÁ¤ÀÚ Ãß°¡
+#pragma warning disable IDE0044 // ì½ê¸° ì „ìš© í•œì •ì ì¶”ê°€
         bool m_isPassAPI;
-#pragma warning restore IDE0044 // ÀĞ±â Àü¿ë ÇÑÁ¤ÀÚ Ãß°¡
+#pragma warning restore IDE0044 // ì½ê¸° ì „ìš© í•œì •ì ì¶”ê°€
 
         public Event_SelectObject(InputEventType _eventType,
 			GameObject _obj, UnityEvent<GameObject> _event)
@@ -28,31 +28,6 @@ namespace Management.Events.Inputs
 			m_clickEvent = _event;
 
 			m_isPassAPI = true;
-		}
-
-		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
-		{
-			if (Elements != null)
-			{
-				GameObject obj = Elements.Last().Target;
-
-				Obj_Selectable sObj;
-				Issue_Selectable iObj;
-
-				if (obj.TryGetComponent<Obj_Selectable>(out sObj))
-				{
-					StartEvent_KeymapSelectObject(Elements.Last().Target, _sEvents);
-				}
-				else if (obj.TryGetComponent<Issue_Selectable>(out iObj))
-				{
-					StartEvent_KeymapSelectIssue(Elements.Last().Target, _sEvents);
-				}
-			}
-			// ºó °ø°£À» ¼±ÅÃÇÑ °æ¿ì
-			else
-			{
-				StartEvent_KeymapSelectNull();
-			}
 		}
 
 		public override void OnProcess(List<ModuleCode> _mList)
@@ -67,7 +42,71 @@ namespace Management.Events.Inputs
 			}
 		}
 
-		private void StartEvent_KeymapSelectObject(GameObject _obj, Dictionary<InputEventType, AEventData> _sEvents)
+		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
+		{
+			PlatformCode pCode = MainManager.Instance.Platform;
+
+			if(Platforms.IsDemoWebViewer(pCode))
+            {
+				if(Elements != null)
+                {
+					GameObject obj = Elements.Last().Target;
+
+					Obj_Selectable sObj;
+
+					if(obj.TryGetComponent<Obj_Selectable>(out sObj))
+                    {
+						StartEvent_DemoWebViewer_SelectObject(obj, _sEvents);
+					}
+					else
+                    {
+						Debug.LogError("undefined access");
+                    }
+                }
+            }
+			else if(Platforms.IsDemoAdminViewer(pCode))
+            {
+				if (Elements != null)
+				{
+					GameObject obj = Elements.Last().Target;
+
+					Obj_Selectable sObj;
+					Issue_Selectable iObj;
+
+					if (obj.TryGetComponent<Obj_Selectable>(out sObj))
+					{
+						StartEvent_KeymapSelectObject(Elements.Last().Target, _sEvents);
+					}
+					else if (obj.TryGetComponent<Issue_Selectable>(out iObj))
+					{
+						StartEvent_KeymapSelectIssue(Elements.Last().Target, _sEvents);
+					}
+				}
+				// ë¹ˆ ê³µê°„ì„ ì„ íƒí•œ ê²½ìš°
+				else
+				{
+					StartEvent_KeymapSelectNull();
+				}
+            }
+		}
+
+
+        #region DemoWebViewer - Issue - select3DObject
+
+		private void StartEvent_DemoWebViewer_SelectObject(GameObject _obj, Dictionary<InputEventType, AEventData> _sEvents)
+        {
+			// ì„ íƒ ì´ë²¤íŠ¸ ì‹¤í–‰
+			m_clickEvent.Invoke(_obj);
+
+			// ì´ë²¤íŠ¸ ì„ íƒì •ë³´ ì „ë‹¬
+			ContentManager.Instance.OnSelect_3D(_obj);
+		}
+
+        #endregion
+
+        #region Keymap
+
+        private void StartEvent_KeymapSelectObject(GameObject _obj, Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			PlatformCode pCode = MainManager.Instance.Platform;
 
@@ -75,18 +114,18 @@ namespace Management.Events.Inputs
 			{
 				m_clickEvent.Invoke(_obj);
 
-				// API·Î Á¢±ÙÇÑ °³Ã¼°¡ ½ÇÇàÇÏ´Â ÀÌº¥Æ®
-				// Å°¸Ê Ä«¸Ş¶óÀÇ Å¸°Ù À§Ä¡ º¯°æ
-				ContentManager.Instance.Input_SelectObject(_obj);
+				// APIë¡œ ì ‘ê·¼í•œ ê°œì²´ê°€ ì‹¤í–‰í•˜ëŠ” ì´ë²¤íŠ¸
+				// í‚¤ë§µ ì¹´ë©”ë¼ì˜ íƒ€ê²Ÿ ìœ„ì¹˜ ë³€ê²½
+				ContentManager.Instance.Input_SelectObjectOnKeymap(_obj);
 
 				GameObject selected;
-				// ÀÌ ½ÃÁ¡¿¡ ÀÌÀü ¼±ÅÃ °³Ã¼°¡ Á¸ÀçÇÏ´Â °æ¿ì
+				// ì´ ì‹œì ì— ì´ì „ ì„ íƒ ê°œì²´ê°€ ì¡´ì¬í•˜ëŠ” ê²½ìš°
 				if(_sEvents.ContainsKey(InputEventType.Input_clickSuccessUp))
 				{
-					// ÀÌÀü ¼±ÅÃ °´Ã¼¸¦ ÇÒ´ç
+					// ì´ì „ ì„ íƒ ê°ì²´ë¥¼ í• ë‹¹
 					selected = _sEvents[InputEventType.Input_clickSuccessUp].Elements.Last().Target;
 
-					// ÇöÀç °´Ã¼¿Í ÀÌÀü °´Ã¼°¡ °°Àº °æ¿ì(´õºí Å¬¸¯À¸·Î Ä§)
+					// í˜„ì¬ ê°ì²´ì™€ ì´ì „ ê°ì²´ê°€ ê°™ì€ ê²½ìš°(ë”ë¸” í´ë¦­ìœ¼ë¡œ ì¹¨)
 					if(_obj == selected)
 					{
 						ContentManager.Instance._Interaction.ReInvokeStatusEvent();
@@ -113,7 +152,7 @@ namespace Management.Events.Inputs
 
 			if(Platforms.IsDemoAdminViewer(pCode))
 			{
-				ContentManager.Instance.Input_SelectObject(_obj);
+				ContentManager.Instance.Input_SelectObjectOnKeymap(_obj);
 
 				m_clickEvent.Invoke(_obj);
 			}
@@ -154,5 +193,6 @@ namespace Management.Events.Inputs
 				throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
             }
 		}
-	}
+        #endregion
+    }
 }

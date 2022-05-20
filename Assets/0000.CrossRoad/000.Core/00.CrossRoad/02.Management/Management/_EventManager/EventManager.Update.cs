@@ -108,6 +108,12 @@ namespace Management
 					}
 					break;
 
+				case InputEventType.Input_hover:
+                    {
+						_currEvent.DoEvent(_sEvents);
+                    }
+					break;
+
 				case InputEventType.Input_key:
 					{
 						_currEvent.DoEvent(_sEvents);

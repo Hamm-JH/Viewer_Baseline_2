@@ -118,6 +118,7 @@ namespace Platform.Feature._Input
 				return;
 			}
 
+			// 마우스 클릭시
 			if(Input.GetMouseButtonDown(btnIndex))
 			{
 				onClick = true;     // 클릭 시작
@@ -129,6 +130,7 @@ namespace Platform.Feature._Input
 				//{
 				//}
 			}
+			// 마우스 클릭중
 			else if(Input.GetMouseButton(btnIndex))
 			{
 				if(onClick)	// 클릭 상태 중에만 실행
@@ -155,6 +157,7 @@ namespace Platform.Feature._Input
 					}
 				}
 			}
+			// 마우스 클릭 업
 			else if(Input.GetMouseButtonUp(btnIndex))
 			{
 				//Debug.Log($"moused delta magnitude : {deltaDistance.magnitude}");
@@ -183,6 +186,11 @@ namespace Platform.Feature._Input
 				onClick = false;
 				deltaDistance = default(Vector2);
 			}
+			else
+            {
+				// hover 상태 판단.
+				SetHoverEvent(InputEventType.Input_hover, Input.mousePosition);
+			}
 		}
 
 		/// <summary>
@@ -205,5 +213,10 @@ namespace Platform.Feature._Input
 			//Debug.Log($"type : {type.ToString()}, pos : {pos}");
 			m_InputEvents.clickEvent.Invoke(type, btn, pos);
 		}
+
+		private void SetHoverEvent(InputEventType type, Vector3 pos)
+        {
+			m_InputEvents.hoverEvent.Invoke(type, pos);
+        }
 	}
 }

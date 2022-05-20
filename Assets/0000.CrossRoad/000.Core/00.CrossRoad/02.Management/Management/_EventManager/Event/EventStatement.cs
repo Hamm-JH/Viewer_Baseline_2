@@ -9,6 +9,25 @@ namespace Management.Events
 	[System.Serializable]
 	public class EventStatement : AEventData
 	{
+		[System.Serializable]
+		public class State_DemoWebViewer
+        {
+            /// <summary>
+            /// true : 손상 탭
+            /// false : 보수 탭
+            /// </summary>
+            private bool isDmgTab = true;
+
+            public bool IsDmgTab { get => isDmgTab; set => isDmgTab = value; }
+
+
+			public State_DemoWebViewer()
+            {
+				isDmgTab = true;
+            }
+
+        }
+
 		/// <summary>
 		/// 모듈 스택
 		/// </summary>
@@ -17,6 +36,11 @@ namespace Management.Events
 		/// 모듈코드에 대응하는 모듈 상태 인스턴스를 저장하는 변수
 		/// </summary>
 		[SerializeField] Dictionary<ModuleCode, AModuleStatus> m_moduleStatus;
+
+		/// <summary>
+		/// WebViewer에서 관리하는 상태 변수
+		/// </summary>
+		[SerializeField] State_DemoWebViewer m_state_demoWebViewer;
 
 		[SerializeField] GameObject m_pinModeObj;
 		[SerializeField] GameObject m_pinModePin;
@@ -39,6 +63,11 @@ namespace Management.Events
 			set => m_moduleStatus = value;
 		}
 
+		/// <summary>
+		/// WebViewer에서 관리하는 상태 변수
+		/// </summary>
+		public State_DemoWebViewer State_demoWebViewer { get => m_state_demoWebViewer; set => m_state_demoWebViewer = value; }
+
 		public GameObject CacheObject
 		{
 			get => m_pinModeObj;
@@ -50,12 +79,14 @@ namespace Management.Events
 			get => m_pinModePin;
 			set => m_pinModePin = value;
 		}
+        
 
-		public EventStatement()
+        public EventStatement()
 		{
 			EventType = InputEventType.Statement;
 			m_moduleList = new List<ModuleCode>();
 			m_moduleStatus = new Dictionary<ModuleCode, AModuleStatus>();
+			m_state_demoWebViewer = new State_DemoWebViewer();
 		}
 
 		public override void OnProcess(List<ModuleCode> _mList)
@@ -158,5 +189,9 @@ namespace Management.Events
 		}
 		//public void IsContainsModule(ModuleCode, )
 
+		public State_DemoWebViewer GetState_DemoWebViewer(int _index)
+        {
+			return State_demoWebViewer;
+        }
 	}
 }

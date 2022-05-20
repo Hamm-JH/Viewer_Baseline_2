@@ -15,6 +15,9 @@ namespace Items
             public Waypoint_Indicator effect_waypoint;
             public Issue_Selectable issue_Selectable;
 
+            public bool isMain;
+            public bool isEffect;
+
             public bool IsNotNull()
             {
                 bool result = false;
@@ -39,7 +42,7 @@ namespace Items
             /// <param name="_isCanSee"></param>
             public void ToggleIcon(bool _isCanSee)
             {
-                if(mainIcon_waypoint == null)
+                if(mainIcon_waypoint == null || mainIcon_waypoint.gameObject == null)
                 {
                     Debug.LogError("mainIcon_waypoint is null");
                     return;
@@ -86,11 +89,13 @@ namespace Items
             public void ToggleMain(bool _isOn)
             {
                 mainIcon_waypoint.gameObject.SetActive(_isOn);
+                isMain = _isOn;
             }
 
             public void ToggleFx(bool _isOn)
             {
                 effect_waypoint.gameObject.SetActive(_isOn);
+                isEffect = _isOn;
             }
         }
 
@@ -110,6 +115,7 @@ namespace Items
         private void Update()
         {
             if (!CheckObjectsInCameraFrustum()) return;
+            if (!IsObjectActiveSelf()) return;
 
             if (IsCameraCanLookUp())
             {
@@ -140,17 +146,83 @@ namespace Items
         private bool IsCameraCanLookUp()
         {
             bool result = false;
+            bool isTransparency = true;
 
-            RaycastHit hit;
+            RaycastHit[] hits;
+            //RaycastHit hit;
             Ray ray = cam.ScreenPointToRay(cam.WorldToScreenPoint(transform.position));
-            if (Physics.Raycast(ray, out hit))
-            {
+            MeshRenderer render;
 
-                if (hit.transform.gameObject == gameObject)
+
+            hits = Physics.RaycastAll(ray);
+            for (int i = 0; i < hits.Length; i++)
+            {
+                // 검출된 객체가 이 객체인 경우
+                if (hits[i].transform.gameObject == gameObject)
                 {
                     result = true;
+                    break;
+                }
+                else
+                {
+                    if (hits[i].transform.TryGetComponent<MeshRenderer>(out render))
+                    {
+                        // 알파값 1이면 불투명
+                        if (render.material.color.a == 1)
+                        {
+                            isTransparency = false;
+                            break;
+                        }
+                        // 알파값 1 미만이면 반투명
+                        else { }
+                    }
                 }
             }
+
+            // 모두 반투명이고, ray에 걸린게 1개 이상인가?
+            if (isTransparency && hits.Length != 0)
+            {
+                // 중간의 객체들이 모두 반투명이면
+                result = true;
+            }
+            // 중간에 불투명이 걸렸고, ray에 걸린게 1개 이상인가?
+            else if (!isTransparency && hits.Length != 0)
+            {
+                result = false;
+            }
+
+            // 반복 :: 검출 객체가 이 객체 -> 바로 result = true, break
+            // 반복 :: 검출 객체가 이 객체 아님 -> 반투명 : true, 불투명 : false
+
+            //if (Physics.Raycast(ray, out hit))
+            //{
+            //    // 검출된 객체는 이 객체인가
+            //    if (hit.transform.gameObject == gameObject)
+            //    {
+            //        result = true;
+            //    }
+            //    // 검출된 객체는 다른 객체인가
+            //    else
+            //    {
+
+            //    }
+            //}
+
+            return result;
+        }
+
+        private bool IsObjectActiveSelf()
+        {
+            bool result = false;
+
+            if(IssueWayPoint.isMain)
+            {
+                result = true;
+            }
+            //if(IssueWayPoint.mainIcon_waypoint.gameObject.activeSelf)
+            //{
+            //    result = true;
+            //}
 
             return result;
         }

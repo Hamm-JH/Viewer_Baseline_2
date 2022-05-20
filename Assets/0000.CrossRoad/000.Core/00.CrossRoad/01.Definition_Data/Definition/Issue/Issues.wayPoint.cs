@@ -12,6 +12,31 @@ namespace Definition
             _target.Waypoint.IssueWayPoint.ToggleFx(_isOnFx);
         }
 
+        public static void WP_Setup_target(
+            List<Definition._Issue.Issue> _dmgs,
+            List<Definition._Issue.Issue> _rcvs,
+            List<Definition._Issue.Issue> _all,
+            bool _isDmg,
+            string _targetName)
+        {
+            // 손상인 경우
+            if(_isDmg)
+            {
+                WP_Setup_Dmgs_WithTarget(_dmgs, _rcvs, _all, _targetName);
+            }
+            // 보수인 경우
+            else
+            {
+                WP_Setup_Rcvs_WithTarget(_dmgs, _rcvs, _all, _targetName);
+            }
+        }
+
+        /// <summary>
+        /// 모든 객체 On/Off
+        /// </summary>
+        /// <param name="_dmgs"></param>
+        /// <param name="_rcvs"></param>
+        /// <param name="_all"></param>
         public static void WP_Setup_ALL(
             List<Definition._Issue.Issue> _dmgs,
             List<Definition._Issue.Issue> _rcvs,
@@ -23,6 +48,30 @@ namespace Definition
             });
         }
 
+        public static void WP_Setup(
+            List<Definition._Issue.Issue> _dmgs,
+            List<Definition._Issue.Issue> _rcvs,
+            List<Definition._Issue.Issue> _all,
+            bool _isDmg)
+        {
+            if(_isDmg)
+            {
+                WP_Setup_Dmgs(_dmgs, _rcvs, _all);
+            }
+            else
+            {
+                WP_Setup_Rcvs(_dmgs, _rcvs, _all);
+            }
+        }
+
+        #region DMG
+
+        /// <summary>
+        /// 손상정보 On
+        /// </summary>
+        /// <param name="_dmgs"></param>
+        /// <param name="_rcvs"></param>
+        /// <param name="_all"></param>
         public static void WP_Setup_Dmgs(
             List<Definition._Issue.Issue> _dmgs,
             List<Definition._Issue.Issue> _rcvs,
@@ -39,17 +88,24 @@ namespace Definition
             });
         }
 
+        /// <summary>
+        /// 손상정보 & 특정 객체 On
+        /// </summary>
+        /// <param name="_dmgs"></param>
+        /// <param name="_rcvs"></param>
+        /// <param name="_all"></param>
+        /// <param name="_targetName"></param>
         public static void WP_Setup_Dmgs_WithTarget(
             List<Definition._Issue.Issue> _dmgs,
             List<Definition._Issue.Issue> _rcvs,
             List<Definition._Issue.Issue> _all,
-            GameObject _target)
+            string _targetName)
         {
             _dmgs.ForEach(x =>
             {
-                if(_target != null)
+                if(_targetName != null)
                 {
-                    if(_target.name == x.CdBridgeParts)
+                    if(_targetName == x.CdBridgeParts)
                     {
                         Setup(true, true, x);
                     }
@@ -60,16 +116,40 @@ namespace Definition
                 }
                 else
                 {
-                    Setup(true, true, x);
+                    Debug.LogError($"name is null");
                 }
             });
 
             _rcvs.ForEach(x =>
             {
-                Setup(false, false, x);
+                if(_targetName != null)
+                {
+                    if(_targetName == x.CdBridgeParts)
+                    {
+                        Setup(true, false, x);
+                    }
+                    else
+                    {
+                        Setup(false, false, x);
+                    }
+                }
+                else
+                {
+                    Debug.LogError($"name is null");
+                }
             });
         }
 
+        #endregion
+
+        #region RCV
+
+        /// <summary>
+        /// 보수정보 On
+        /// </summary>
+        /// <param name="_dmgs"></param>
+        /// <param name="_rcvs"></param>
+        /// <param name="_all"></param>
         public static void WP_Setup_Rcvs(
             List<Definition._Issue.Issue> _dmgs,
             List<Definition._Issue.Issue> _rcvs,
@@ -88,22 +168,43 @@ namespace Definition
             });
         }
 
+        /// <summary>
+        /// 보수정보 & 특정 객체 On
+        /// </summary>
+        /// <param name="_dmgs"></param>
+        /// <param name="_rcvs"></param>
+        /// <param name="_all"></param>
+        /// <param name="_targetName"></param>
         public static void WP_Setup_Rcvs_WithTarget(
             List<Definition._Issue.Issue> _dmgs,
             List<Definition._Issue.Issue> _rcvs,
             List<Definition._Issue.Issue> _all,
-            GameObject _target)
+            string _targetName)
         {
             _dmgs.ForEach(x =>
             {
-                Setup(false, false, x);
+                if(_targetName != null)
+                {
+                    if(_targetName == x.CdBridgeParts)
+                    {
+                        Setup(true, false, x);
+                    }
+                    else
+                    {
+                        Setup(false, false, x);
+                    }
+                }
+                else
+                {
+                    Debug.LogError($"name is null");
+                }
             });
 
             _rcvs.ForEach(x =>
             {
-                if(_target != null)
+                if(_targetName != null)
                 {
-                    if(_target.name == x.CdBridgeParts)
+                    if(_targetName == x.CdBridgeParts)
                     {
                         Setup(true, true, x);
                     }
@@ -114,11 +215,21 @@ namespace Definition
                 }
                 else
                 {
-                    Setup(true, true, x);
+                    Debug.LogError($"name is null");
                 }
             });
         }
 
+        #endregion 
+
+        /// <summary>
+        /// 특정객체 On 
+        /// TODO :: Issues.wayPoint :: WP_Setup_Object :: 존재 검토
+        /// </summary>
+        /// <param name="_dmgs"></param>
+        /// <param name="_rcvs"></param>
+        /// <param name="_all"></param>
+        /// <param name="_target"></param>
         public static void WP_Setup_Object(
             List<Definition._Issue.Issue> _dmgs,
             List<Definition._Issue.Issue> _rcvs,

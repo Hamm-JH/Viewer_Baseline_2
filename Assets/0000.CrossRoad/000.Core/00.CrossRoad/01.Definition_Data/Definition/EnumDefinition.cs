@@ -154,6 +154,11 @@ namespace Definition
 		Input_focus,
 
 		/// <summary>
+		/// 호버링 체크
+		/// </summary>
+		Input_hover,
+
+		/// <summary>
 		/// 키 입력
 		/// </summary>
 		Input_key,

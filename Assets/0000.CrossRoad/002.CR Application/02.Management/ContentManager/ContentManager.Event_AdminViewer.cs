@@ -50,7 +50,7 @@ namespace Management
                 _cam.gameObject.GetComponent<BIMCamera>());
         }
 
-        public void Input_SelectObject(GameObject _obj)
+        public void Input_SelectObjectOnKeymap(GameObject _obj)
 		{
 			m_container.m_keymap.m_keymapCamera.gameObject.GetComponent<BIMCamera>().OnSelect(_obj);
 		}

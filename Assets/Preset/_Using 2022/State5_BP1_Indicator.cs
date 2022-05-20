@@ -203,7 +203,7 @@ namespace Indicator
             // 최대 높이 * 인덱스 비율 = 0 ~ 1 비율 계산
 
             // sizeDelta.y에 최대 (높이 * 비율) 계산결과 반영
-            // anchoredPosition.y에 (높이 * 비율 / 2) 계산결과 반영
+            // _anchoredPosition.y에 (높이 * 비율 / 2) 계산결과 반영
 
             int index = dmgIndexes.Count;
             for (int i = 0; i < index; i++)

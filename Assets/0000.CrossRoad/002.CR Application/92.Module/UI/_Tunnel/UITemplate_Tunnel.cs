@@ -7,6 +7,7 @@ namespace Module.UI
     using Data.API;
     using Definition;
     using Management;
+    using TMPro;
     using UnityEngine.UI;
 	using View;
 
@@ -18,6 +19,9 @@ namespace Module.UI
 		[SerializeField] Text m_line;
 		[SerializeField] Text m_description;
 		[SerializeField] List<GameObject> childElements_1;
+
+		[SerializeField] GameObject m_hoverPanel;
+		[SerializeField] TextMeshProUGUI m_hoverText;
 
 		public override void OnStart()
 		{

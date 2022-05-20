@@ -131,6 +131,7 @@ namespace Module.WebAPI
         {
             GameObject selected = EventManager.Instance._SelectedObject;
             Module_Model model = ContentManager.Instance.Module<Module_Model>();
+            string selectedName = selected ? selected.name : null;
 
             List<Definition._Issue.Issue> dmgs = model.DmgData;
             List<Definition._Issue.Issue> rcvs = model.RcvData;
@@ -138,11 +139,11 @@ namespace Module.WebAPI
 
             if (_value == "DMG")
             {
-                Issues.WP_Setup_Dmgs_WithTarget(dmgs, rcvs, all, selected);
+                Issues.WP_Setup_Dmgs_WithTarget(dmgs, rcvs, all, selectedName);
             }
             else if(_value == "RCV")
             {
-                Issues.WP_Setup_Rcvs_WithTarget(dmgs, rcvs, all, selected);
+                Issues.WP_Setup_Rcvs_WithTarget(dmgs, rcvs, all, selectedName);
             }
             else
             {

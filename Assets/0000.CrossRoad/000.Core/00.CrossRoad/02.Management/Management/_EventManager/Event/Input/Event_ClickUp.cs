@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Management.Events.Inputs
 {
+	// _FLAG :: Event_ClickUp
     using Definition.Control;
     using Items;
     using Module.Interaction;
@@ -382,11 +383,33 @@ namespace Management.Events.Inputs
 						if(x.gameObject.transform.parent.TryGetComponent<UIIssue_Selectable>(out uiIssue))
                         {
 							Debug.Log($"ui name : {x.gameObject.name}, contains UIIssue");
-							
+
+							string partName = uiIssue.IssueSelectable.Issue.CdBridgeParts;
+
 							// StartEvent_SelectIssue로 바로 리다이렉트하지 않고 여기서 손상정보 선택 이벤트 발생
 							ContentManager.Instance.OnSelect_Issue(uiIssue.IssueSelectable.gameObject);
 
-							//return;	// 한 번만 실행..
+							// waypoint UI 이벤트 발생
+							Module_Model model = ContentManager.Instance.Module<Module_Model>();
+							List<Definition._Issue.Issue> dmgs = model.DmgData;
+							List<Definition._Issue.Issue> rcvs = model.RcvData;
+							List<Definition._Issue.Issue> all = model.AllIssues;
+
+							EventStatement.State_DemoWebViewer state = EventManager.Instance._Statement.GetState_DemoWebViewer(0);
+
+							Issues.WP_Setup_target(_dmgs: dmgs, _rcvs: rcvs, _all: all, state.IsDmgTab, partName);
+
+							// 이 손상정보에 해당하는 GameObject 객체 선택
+							GameObject _obj3D = model.ModelObjects.Find(x => x.name == partName);
+
+                            // 객체 선택 이벤트 실행
+                            EventManager.Instance.OnEvent(new EventData_API(
+                                _eventType: InputEventType.API_SelectObject,
+                                _obj: _obj3D,
+                                _event: MainManager.Instance.cameraExecuteEvents.selectEvent
+                                ));
+
+                            //return;	// 한 번만 실행..
                         }
 					});
                 }
@@ -409,6 +432,18 @@ namespace Management.Events.Inputs
 
 				m_clickEvent.Invoke(null);
 				ContentManager.Instance.OnSelect_3D(null);
+
+                {
+					Module_Model model = ContentManager.Instance.Module<Module_Model>();
+					List<Definition._Issue.Issue> dmgs = model.DmgData;
+					List<Definition._Issue.Issue> rcvs = model.RcvData;
+					List<Definition._Issue.Issue> all = model.AllIssues;
+
+					EventStatement.State_DemoWebViewer state = EventManager.Instance._Statement.GetState_DemoWebViewer(0);
+
+					// 현재 탭 상태와 연계해서 waypoint 상태 초기화
+					Issues.WP_Setup(_dmgs: dmgs, _rcvs: rcvs, _all: all, state.IsDmgTab);
+                }
 			}
 			//else if(Platforms.IsViewerPlatform(pCode))
 			//{

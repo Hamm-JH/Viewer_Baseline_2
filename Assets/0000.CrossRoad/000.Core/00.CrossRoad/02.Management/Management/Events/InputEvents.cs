@@ -20,6 +20,7 @@ namespace Management.Events
 			this.clickEvent = new UnityEvent<InputEventType, int, Vector3>();
 			this.dragEvent = new UnityEvent<InputEventType, int, Vector2>();
 			this.focusEvent = new UnityEvent<InputEventType, Vector3, float>();
+			this.hoverEvent = new UnityEvent<InputEventType, Vector3>();
 			this.keyEvent = new UnityEvent<InputEventType, List<KeyData>>();
 
 			MouseData = _mouse;
@@ -50,6 +51,12 @@ namespace Management.Events
 
 		/// <summary>
 		/// InputEventType	:: 이벤트 형식
+		/// Vector3			:: 호버링 체크 위치
+		/// </summary>
+		public UnityEvent<InputEventType, Vector3> hoverEvent;
+
+		/// <summary>
+		/// InputEventType	:: 이벤트 형식
 		/// List[KeyCode]	:: 키 리스트
 		/// </summary>
 		public UnityEvent<InputEventType, List<KeyData>> keyEvent;
@@ -59,6 +66,7 @@ namespace Management.Events
 			this.clickEvent = null;
 			this.dragEvent = null;
 			this.focusEvent = null;
+			this.hoverEvent = null;
 			this.keyEvent = null;
 		}
 	}
