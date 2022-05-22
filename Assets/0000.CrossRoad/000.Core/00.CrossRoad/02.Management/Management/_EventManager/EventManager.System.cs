@@ -53,5 +53,10 @@ namespace Management
 				_event.Add(_key, _eData);
 			}
 		}
+
+		public void DeleteEvent<K, V>(K _key, V _eData, Dictionary<K, V> _event) where V : AEventData
+        {
+			_event.Remove(_key);
+        }
 	}
 }

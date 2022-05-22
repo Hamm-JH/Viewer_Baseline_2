@@ -4,12 +4,40 @@ using UnityEngine;
 
 namespace Definition
 {
+    using Management;
+    using Management.Events;
+    using Module.Model;
+
     public static partial class Issues
     {
         private static void Setup(bool _isOnMain, bool _isOnFx, Definition._Issue.Issue _target)
         {
             _target.Waypoint.IssueWayPoint.ToggleMain(_isOnMain);
             _target.Waypoint.IssueWayPoint.ToggleFx(_isOnFx);
+        }
+
+        public static void WP_Setup_target(string _targetName)
+        {
+            Module_Model model = ContentManager.Instance.Module<Module_Model>();
+            List<Definition._Issue.Issue> dmgs = model.DmgData;
+            List<Definition._Issue.Issue> rcvs = model.RcvData;
+            List<Definition._Issue.Issue> all = model.AllIssues;
+
+            EventStatement.State_DemoWebViewer state = EventManager.Instance._Statement.GetState_DemoWebViewer(0);
+
+            WP_Setup_target(dmgs, rcvs, all, state.IsDmgTab, _targetName);
+        }
+
+        public static void WP_Setup()
+        {
+            Module_Model model = ContentManager.Instance.Module<Module_Model>();
+            List<Definition._Issue.Issue> dmgs = model.DmgData;
+            List<Definition._Issue.Issue> rcvs = model.RcvData;
+            List<Definition._Issue.Issue> all = model.AllIssues;
+
+            EventStatement.State_DemoWebViewer state = EventManager.Instance._Statement.GetState_DemoWebViewer(0);
+
+            WP_Setup(dmgs, rcvs, all, state.IsDmgTab);
         }
 
         public static void WP_Setup_target(

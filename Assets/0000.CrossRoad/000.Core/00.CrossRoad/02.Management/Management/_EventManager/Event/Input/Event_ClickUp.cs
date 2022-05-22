@@ -111,7 +111,7 @@ namespace Management.Events.Inputs
 
 			if (Selected3D == null) return;
 
-			// 선택한 객체가 아이템 객체인가?
+			// 선택한 객체가 아이템 객체인가? (9면 객체 검출에 사용)
 			IItem item;
 			if(Selected3D.TryGetComponent<IItem>(out item))
             {
@@ -202,10 +202,8 @@ namespace Management.Events.Inputs
 				}
 				else
 				{
-					StartEvent_SelectNull();
-					//m_clickEvent.Invoke(null);
-					//ContentManager.Instance.OnSelect_3D(null);
-				}
+					StartEvent_SelectNull(_sEvents);
+                }
 			}
 		}
 
@@ -252,6 +250,7 @@ namespace Management.Events.Inputs
 
 					m_clickEvent.Invoke(_obj);
 					ContentManager.Instance.OnSelect_3D(_obj);
+					Issues.WP_Setup_target(_obj.name);
 
 					string curr = Elements.First().Target.name;
 					string selected = "";
@@ -263,7 +262,6 @@ namespace Management.Events.Inputs
 					if (curr == selected)
 					{
 						Debug.Log("two objects are same");
-						//Debug.Log("���� ��ü�� ������");
 					}
                 }
 				// 위치 데이터가 null이 아닌 경우
@@ -389,15 +387,16 @@ namespace Management.Events.Inputs
 							// StartEvent_SelectIssue로 바로 리다이렉트하지 않고 여기서 손상정보 선택 이벤트 발생
 							ContentManager.Instance.OnSelect_Issue(uiIssue.IssueSelectable.gameObject);
 
-							// waypoint UI 이벤트 발생
+							//// waypoint UI 이벤트 발생
 							Module_Model model = ContentManager.Instance.Module<Module_Model>();
-							List<Definition._Issue.Issue> dmgs = model.DmgData;
-							List<Definition._Issue.Issue> rcvs = model.RcvData;
-							List<Definition._Issue.Issue> all = model.AllIssues;
+							//List<Definition._Issue.Issue> dmgs = model.DmgData;
+							//List<Definition._Issue.Issue> rcvs = model.RcvData;
+							//List<Definition._Issue.Issue> all = model.AllIssues;
 
-							EventStatement.State_DemoWebViewer state = EventManager.Instance._Statement.GetState_DemoWebViewer(0);
+							//EventStatement.State_DemoWebViewer state = EventManager.Instance._Statement.GetState_DemoWebViewer(0);
 
-							Issues.WP_Setup_target(_dmgs: dmgs, _rcvs: rcvs, _all: all, state.IsDmgTab, partName);
+							//Issues.WP_Setup_target(_dmgs: dmgs, _rcvs: rcvs, _all: all, state.IsDmgTab, partName);
+							Issues.WP_Setup_target(partName);
 
 							// 이 손상정보에 해당하는 GameObject 객체 선택
 							GameObject _obj3D = model.ModelObjects.Find(x => x.name == partName);
@@ -416,7 +415,7 @@ namespace Management.Events.Inputs
             }
 		}
 
-		public void StartEvent_SelectNull()
+		public void StartEvent_SelectNull(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			PlatformCode pCode = MainManager.Instance.Platform;
 
@@ -434,16 +433,17 @@ namespace Management.Events.Inputs
 				ContentManager.Instance.OnSelect_3D(null);
 
                 {
-					Module_Model model = ContentManager.Instance.Module<Module_Model>();
-					List<Definition._Issue.Issue> dmgs = model.DmgData;
-					List<Definition._Issue.Issue> rcvs = model.RcvData;
-					List<Definition._Issue.Issue> all = model.AllIssues;
-
-					EventStatement.State_DemoWebViewer state = EventManager.Instance._Statement.GetState_DemoWebViewer(0);
-
 					// 현재 탭 상태와 연계해서 waypoint 상태 초기화
-					Issues.WP_Setup(_dmgs: dmgs, _rcvs: rcvs, _all: all, state.IsDmgTab);
-                }
+					Issues.WP_Setup();
+					//Issues.WP_Setup(_dmgs: dmgs, _rcvs: rcvs, _all: all, state.IsDmgTab);
+
+					// 직전 상태가 선택 성공 상태가 존재할 경우 이 상태를 제거한다.
+					if(_sEvents.ContainsKey(InputEventType.Input_clickSuccessUp))
+                    {
+						EventManager.Instance.DeleteEvent<InputEventType, AEventData>
+							(InputEventType.Input_clickSuccessUp, _sEvents[InputEventType.Input_clickSuccessUp], _sEvents);
+                    }
+				}
 			}
 			//else if(Platforms.IsViewerPlatform(pCode))
 			//{
