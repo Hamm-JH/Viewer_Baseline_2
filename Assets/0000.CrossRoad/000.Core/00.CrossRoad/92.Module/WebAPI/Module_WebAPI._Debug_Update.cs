@@ -101,6 +101,10 @@ namespace Module.WebAPI
 			{
 				ReceiveRequest("ChangeTab/RCV");
 			}
+			else if (Input.GetKeyDown(KeyCode.D))
+			{
+				ReceiveRequest("SelectIssue/20220520-00000001");
+			}
 		}
 
 #if UNITY_EDITOR

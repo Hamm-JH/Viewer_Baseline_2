@@ -81,6 +81,7 @@ namespace Definition
             result.transform.position = _hit.point;
             result.transform.rotation = Quaternion.FromToRotation(Vector3.up, _hit.normal) * _hit.collider.gameObject.transform.rotation;
             result.GetComponent<Collider>().enabled = false;
+            result.transform.Translate(Vector3.up * 0.01f);
 
             return result;
         }

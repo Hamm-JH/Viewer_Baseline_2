@@ -7,9 +7,11 @@ namespace Management
 	using Definition;
 	using Management.Events;
 	using Management.Events.Inputs;
-	using System.Linq;
+    using Module.Model;
+    using System.Linq;
+    using View;
 
-	public partial class EventManager : IManager<EventManager>
+    public partial class EventManager : IManager<EventManager>
 	{
 		/// <summary>
 		/// 선택 이벤트 실행구간
@@ -193,7 +195,28 @@ namespace Management
 						// 이전에 선택했던 개체가 존재하는가?
 						if (_sEvents.ContainsKey(InputEventType.Input_clickSuccessUp))
 						{
-							_sEvents[InputEventType.Input_clickSuccessUp].Elements.ForEach(x => x.OnDeselect());
+							List<View.IInteractable> list = _sEvents[InputEventType.Input_clickSuccessUp].Elements;
+							int index = list.Count;
+                            for (int i = 0; i < index; i++)
+                            {
+								Obj_Selectable oObj;
+								Issue_Selectable iObj;
+
+								if(list[i].Target.TryGetComponent<Obj_Selectable>(out oObj))
+                                {
+									oObj.OnDeselect();
+                                }
+								else if(list[i].Target.TryGetComponent<Issue_Selectable>(out iObj))
+                                {
+									iObj.OnDeselect();
+									Module_Model model = ContentManager.Instance.Module<Module_Model>();
+									model.ModelObjects.Find(x => x.gameObject.name == iObj.Issue.CdBridgeParts).TryGetComponent<Obj_Selectable>(out oObj);
+
+									oObj.OnDeselect();
+                                }
+                            }
+
+							//_sEvents[InputEventType.Input_clickSuccessUp].Elements.ForEach(x => x.OnDeselect());
 						}
 					}
 					break;

@@ -41,15 +41,22 @@ namespace Management
 			}
 		}
 
+		//private GameObject m_selectedObject;
 		public GameObject _SelectedObject
 		{
 			get
 			{
 				GameObject obj = null;
 
+				//// 만약 현재 선택 객체가 없다면
+				//if(m_selectedObject == null)
+                //{
+                //}
+
 				AEventData _event;
 				if(EventStates.TryGetValue(InputEventType.Input_clickSuccessUp, out _event))
 				{
+					// 현재 ClickSuccessUp 객체가 존재하면
 					if(_event.Elements != null && _event.Elements.Count != 0)
 					{
 						obj = _event.Elements.Last().Target;
@@ -57,6 +64,11 @@ namespace Management
 				}
 				return obj;
 			}
+			//set
+            //{
+			//	// 바로 현재 선택객체 할당
+			//	m_selectedObject = value;
+            //}
 		}
 
 		public GameObject _CacheObject

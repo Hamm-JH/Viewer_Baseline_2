@@ -72,6 +72,14 @@ namespace Management.Events.Inputs
 			m_clickEvent = _event;
 		}
 
+		public Event_ClickUp(InputEventType _eventType, GameObject _obj)
+        {
+			m_selected3D = _obj;
+			Func_Input_clickSuccessUp(Status.Skip);	// Elements 업데이트
+
+
+        }
+
 		public override void OnProcess(List<ModuleCode> _mList)
 		{
 			Status _success = Status.Pass;
@@ -383,6 +391,8 @@ namespace Management.Events.Inputs
 							Debug.Log($"ui name : {x.gameObject.name}, contains UIIssue");
 
 							string partName = uiIssue.IssueSelectable.Issue.CdBridgeParts;
+
+							Debug.Log($"part name : {partName}");
 
 							// StartEvent_SelectIssue로 바로 리다이렉트하지 않고 여기서 손상정보 선택 이벤트 발생
 							ContentManager.Instance.OnSelect_Issue(uiIssue.IssueSelectable.gameObject);

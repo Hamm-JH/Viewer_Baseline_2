@@ -144,7 +144,9 @@ namespace Definition
                 }
                 else
                 {
-                    Debug.LogError($"name is null");
+                    // 웹에서 탭을 눌렀을때 선택된 개체가 없는 경우가 있다.
+                    //Debug.LogError($"name is null");
+                    Setup(true, true, x);
                 }
             });
 
@@ -163,7 +165,9 @@ namespace Definition
                 }
                 else
                 {
-                    Debug.LogError($"name is null");
+                    // 웹에서 탭을 눌렀을때 선택된 개체가 없는 경우가 있다.
+                    //Debug.LogError($"name is null");
+                    Setup(true, false, x);
                 }
             });
         }
@@ -224,7 +228,9 @@ namespace Definition
                 }
                 else
                 {
-                    Debug.LogError($"name is null");
+                    // 웹에서 탭을 눌렀을때 선택된 개체가 없는 경우가 있다.
+                    //Debug.LogError($"name is null");
+                    Setup(true, false, x);
                 }
             });
 
@@ -243,7 +249,9 @@ namespace Definition
                 }
                 else
                 {
-                    Debug.LogError($"name is null");
+                    // 웹에서 탭을 눌렀을때 선택된 개체가 없는 경우가 있다.
+                    //Debug.LogError($"name is null");
+                    Setup(true, true, x);
                 }
             });
         }

@@ -49,6 +49,7 @@ namespace Module.WebAPI
 
                 // E
                 case ReceiveRequestCode.SelectIssue:    // Issue 객체 선택
+                    // TODO :: CHECK :: 웹 뷰어에서 Issue 상세보기 선택시 접근하는 루트
                     Func_SelectIssue(arguments[1]);
                     break;
 
@@ -137,6 +138,7 @@ namespace Module.WebAPI
             List<Definition._Issue.Issue> rcvs = model.RcvData;
             List<Definition._Issue.Issue> all = model.AllIssues;
 
+            // Web에서 탭을 누르는 시점에 선택한 개체가 없는 경우도 존재한다.
             if (_value == "DMG")
             {
                 Issues.WP_Setup_Dmgs_WithTarget(dmgs, rcvs, all, selectedName);
@@ -169,6 +171,8 @@ namespace Module.WebAPI
                 // 객체 선택 이벤트를 전달
                 ContentManager.Instance.Select3DObject(obj3D);
                 Debug.Log($"[Receive.SelectObject] : objectName {obj3D.name}");
+
+
             }
             // 선택 객체 :: Issue 객체인 경우
             else if (objIssue)
@@ -286,13 +290,33 @@ namespace Module.WebAPI
 		{
             var moduleList = EventManager.Instance._ModuleList;
 
-            List<string> codes = new List<string> { "Top" };
-            string _fCode = codes.First();
+            GameObject obj = ContentManager.Instance._SelectedObj;
+
+            List<string> codes = new List<string>();
+            string _fCode = "";
+
+            if (obj != null)
+            {
+                //List<string> codes = ContentManager.Instance.RequestAvailableSurface();
+                codes = GetSurfaceStrings(obj);
+                _fCode = codes.First();
+                //int index = codes.Count;
+                //for (int i = 0; i < index; i++)
+                //{
+                //    _fCode += $"{codes[i]}";
+                //    if (i != index - 1)
+                //    {
+                //        _fCode += ",";
+                //    }
+                //}
+            }
+
+            //List<string> codes = new List<string> { "Top" };
             UIEventType uType = Parsers.OnParse(_fCode);
 
             if (isMode)
 			{
-                GameObject obj = ContentManager.Instance._SelectedObj;
+                //GameObject obj = ContentManager.Instance._SelectedObj;
                 Vector3 angle = ContentManager.Instance._SelectedAngle;
 
                 ContentManager.Instance._Items.SetGuide(obj, angle, uType);

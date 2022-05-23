@@ -23,7 +23,7 @@ namespace Definition
 				case UIEventType.Viewport_ViewMode_TOP:
 					if(Platforms.IsTunnelPlatform(pCode))
 					{
-						result = new Vector3(90, 0, 0);
+						result = new Vector3(-90, 0, 0);
 					}
 					else if(Platforms.IsBridgePlatform(pCode))
 					{
@@ -34,7 +34,7 @@ namespace Definition
 				case UIEventType.Viewport_ViewMode_BOTTOM:
 					if(Platforms.IsTunnelPlatform(pCode))
 					{
-						result = new Vector3(-90, 0, 0);
+						result = new Vector3(90, 0, 0);
 					}
 					else if(Platforms.IsBridgePlatform(pCode))
 					{
@@ -49,7 +49,7 @@ namespace Definition
 				case UIEventType.Viewport_ViewMode_SIDE_FRONT:
 					if(Platforms.IsTunnelPlatform(pCode))
 					{
-						result = new Vector3(0, 0, 0);
+						result = new Vector3(0, 180, 0);
 					}
 					else if(Platforms.IsBridgePlatform(pCode))
 					{
@@ -60,7 +60,7 @@ namespace Definition
 				case UIEventType.Viewport_ViewMode_SIDE_BACK:
 					if(Platforms.IsTunnelPlatform(pCode))
 					{
-						result = new Vector3(0, 180, 0);
+						result = new Vector3(0, 0, 0);
 					}
 					else if(Platforms.IsBridgePlatform(pCode))
 					{
@@ -69,11 +69,11 @@ namespace Definition
 					break;
 
 				case UIEventType.Viewport_ViewMode_SIDE_LEFT:
-					result = new Vector3(0, 90, 0);
+					result = new Vector3(0, -90, 0);
 					break;
 
 				case UIEventType.Viewport_ViewMode_SIDE_RIGHT:
-					result = new Vector3(0, -90, 0);
+					result = new Vector3(0, 90, 0);
 					break;
 			}
 

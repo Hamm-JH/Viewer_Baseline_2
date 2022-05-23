@@ -40,15 +40,18 @@ namespace Items
             /// 해당 객체가 카메라에 안보일 경우 Off
             /// </summary>
             /// <param name="_isCanSee"></param>
-            public void ToggleIcon(bool _isCanSee)
+            public void ToggleIcon(bool _isCanSee, string name )
             {
                 if(mainIcon_waypoint == null || mainIcon_waypoint.gameObject == null)
                 {
                     Debug.LogError("mainIcon_waypoint is null");
                     return;
                 }
-
-                mainIcon_waypoint.gameObject.SetActive(_isCanSee);
+                //Debug.Log(name);
+                if(mainIcon_waypoint != null && mainIcon_waypoint.gameObject != null)
+                {
+                    mainIcon_waypoint.gameObject.SetActive(_isCanSee);
+                }
             }
 
             public void SetIssueSelectable(Issue_Selectable _selectable)
@@ -114,16 +117,16 @@ namespace Items
 
         private void Update()
         {
-            if (!CheckObjectsInCameraFrustum()) return;
-            if (!IsObjectActiveSelf()) return;
+            //if (!CheckObjectsInCameraFrustum()) return;
+            ////if (!IsObjectActiveSelf()) return;
 
             if (IsCameraCanLookUp())
             {
-                IssueWayPoint.ToggleIcon(true);
+                IssueWayPoint.ToggleIcon(true, gameObject.name);
             }
             else
             {
-                IssueWayPoint.ToggleIcon(false);
+                IssueWayPoint.ToggleIcon(false, gameObject.name);
             }
         }
 
@@ -153,8 +156,8 @@ namespace Items
             Ray ray = cam.ScreenPointToRay(cam.WorldToScreenPoint(transform.position));
             MeshRenderer render;
 
-
-            hits = Physics.RaycastAll(ray);
+            float maxDistance = Vector3.Distance(cam.transform.position, transform.position);
+            hits = Physics.RaycastAll(ray, maxDistance);
             for (int i = 0; i < hits.Length; i++)
             {
                 // 검출된 객체가 이 객체인 경우
@@ -188,7 +191,16 @@ namespace Items
             // 중간에 불투명이 걸렸고, ray에 걸린게 1개 이상인가?
             else if (!isTransparency && hits.Length != 0)
             {
-                result = false;
+                // 2개 이상이지만, 해당 객체가 검출되지 않은 경우
+                if(!result)
+                {
+                    result = false;
+                }
+                // 2개 이상이지만, 해당 객체가 검출된 경우
+                else
+                {
+                    result = true;
+                }
             }
 
             // 반복 :: 검출 객체가 이 객체 -> 바로 result = true, break

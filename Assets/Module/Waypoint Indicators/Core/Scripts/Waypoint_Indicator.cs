@@ -723,7 +723,18 @@ public class Waypoint_Indicator : MonoBehaviour
                     //Destroys DISABLED WP Indicators from Canvas
                     //This is needed if ToggleVisibility() is being called and the Indicator is disabled/turned off
                     //Because GameObject.Find() won't work on disabled objects, we use mainCanvas.transform.Find()
-                    Destroy(mainCanvas.transform.Find(gameObject.name + "-WP-" + GetInstanceID()).gameObject);
+                    try
+                    {
+                        GameObject obj = mainCanvas.transform.Find(gameObject.name + "-WP-" + GetInstanceID()).gameObject;
+                        if(obj != null)
+                        {
+                            Destroy(obj);
+                        }
+                    }
+                    catch
+                    {
+
+                    }
                 }
             }
 

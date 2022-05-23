@@ -55,14 +55,20 @@ namespace View
         public void OnPointerEnter(PointerEventData eventData)
         {
             //Debug.Log($"{this.name} OnPointerEnter");
-            HoveringItem.OnHover(IssueSelectable.Issue.IsDmg);
+            if(IssueSelectable != null)
+            {
+                HoveringItem.OnHover(IssueSelectable.Issue.IsDmg);
+            }
         }
 
         // Hover end
         public void OnPointerExit(PointerEventData eventData)
         {
-            //Debug.Log($"{this.name} OnPointerExit");
-            HoveringItem.OffHover(IssueSelectable.Issue.IsDmg);
+            if(IssueSelectable != null)
+            {
+                //Debug.Log($"{this.name} OnPointerExit");
+                HoveringItem.OffHover(IssueSelectable.Issue.IsDmg);
+            }
         }
 
         private void OnEnable()
