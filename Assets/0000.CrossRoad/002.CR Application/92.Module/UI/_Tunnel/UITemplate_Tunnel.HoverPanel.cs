@@ -14,13 +14,18 @@ namespace Module.UI
 			//RectTransform cRect = _rootCanvas.GetComponent<RectTransform>();
 
 			// 4. 호버 패널
-			GameObject hPanel = m_hoverPanel;
+			GameObject hPanel = m_panelHover.m_hoverPanel;
+			//GameObject hPanel = m_hoverPanel;
 			hPanel.transform.SetParent(transform.parent);
 			// 4-1. 호버 패널 Rect
-			RectTransform hRect = m_hoverPanel.GetComponent<RectTransform>();
+			RectTransform hRect = hPanel.GetComponent<RectTransform>();
 
 			// 5. 호버 텍스트
-			TextMeshProUGUI hText = m_hoverText;
+			TextMeshProUGUI hText1 = m_panelHover.m_hoverText1;
+			TextMeshProUGUI hText2 = m_panelHover.m_hoverText2;
+			TextMeshProUGUI hText3 = m_panelHover.m_hoverText3;
+			TextMeshProUGUI hText4 = m_panelHover.m_hoverText4;
+			TextMeshProUGUI hText5 = m_panelHover.m_hoverText5;
 
 			hPanel.SetActive(true);
 
@@ -29,7 +34,8 @@ namespace Module.UI
 			//hRect.position = _screenMousePos;
 			HoverPanel_SetPanelPos(_rootCanvas.pixelRect, hRect, _screenMousePos, new Vector2(10, 10));
 
-			HoverPanel_SetPanelText(hText, _issue);
+			HoverPanel_SetPanelText(hText1, hText2, hText3, hText4, hText5,
+				_issue);
 			// 1. 캔버스
 			// 2. 마우스 위치 (스크린 위치)
 			// 3. 손상정보
@@ -37,7 +43,7 @@ namespace Module.UI
 
 		public void HoverPanel_OffHover()
         {
-			m_hoverPanel.SetActive(false);
+			m_panelHover.m_hoverPanel.SetActive(false);
         }
 
 		/// <summary>
@@ -145,17 +151,25 @@ namespace Module.UI
 			return result;
         }
 
-		private void HoverPanel_SetPanelText(TextMeshProUGUI _text, Definition._Issue.Issue _issue)
+		private void HoverPanel_SetPanelText(TextMeshProUGUI _text1, TextMeshProUGUI _text2, TextMeshProUGUI _text3, TextMeshProUGUI _text4, TextMeshProUGUI _text5,
+			Definition._Issue.Issue _issue)
         {
-			StringBuilder sb = new StringBuilder();
+			//StringBuilder sb = new StringBuilder();
 
-			sb.AppendLine($"등록자 : {_issue.NmUser}");
-			sb.AppendLine($"손상 분류 : {_issue.IssueCode}");
-			sb.AppendLine($"손상 부재 : {_issue.CdBridgeParts}");
-			sb.AppendLine($"손상 등급 : {_issue.IssueStatus}");
-			sb.AppendLine($"등록 일자 : {_issue.DateDmg}");
+			//sb.AppendLine($"등록자 : {_issue.NmUser}");
+			//sb.AppendLine($"손상 분류 : {_issue.IssueCode}");
+			//sb.AppendLine($"손상 부재 : {_issue.CdBridgeParts}");
+			//sb.AppendLine($"손상 등급 : {_issue.IssueStatus}");
+			//sb.AppendLine($"등록 일자 : {_issue.DateDmg}");
 
-			_text.text = sb.ToString();
+			//_text.text = sb.ToString();
+
+			_text1.text = _issue.NmUser;
+			_text2.text = _issue.IssueCode.ToString();
+			_text3.text = _issue.CdBridgeParts.ToString();
+			_text4.text = _issue.IssueStatus.ToString();
+			_text5.text = _issue.DateDmg;
+
 		}
 	}
 }

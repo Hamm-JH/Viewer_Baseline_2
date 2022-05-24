@@ -41,5 +41,46 @@ namespace Definition
 
             return result;
         }
+
+        /// <summary>
+        /// Event_ClickUp SelectUI 에서 현재 선택 객체가 같은 객체인지 확인하는 메서드
+        /// </summary>
+        /// <param name="_currSelected"></param>
+        /// <param name="_sEvents"></param>
+        /// <param name="_currObj"></param>
+        /// <param name="_selectedObj"></param>
+        /// <returns></returns>
+        public static bool IsSameObjectSelected(GameObject _currSelected, Dictionary<InputEventType, AEventData> _sEvents,
+            out GameObject _currObj, out GameObject _selectedObj)
+        {
+            bool result = false;
+
+            _currObj = null;
+            _selectedObj = null;
+
+            if(_currSelected == null)
+            {
+                return false;
+            }
+            else
+            {
+                _currObj = _currSelected;
+            }
+
+            if(_sEvents.ContainsKey(InputEventType.Input_clickSuccessUp))
+            {
+                _selectedObj = _sEvents[InputEventType.Input_clickSuccessUp].Elements.Last().Target;
+            }
+
+            if(_currObj != null || _selectedObj != null)
+            {
+                if(_currObj == _selectedObj)
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
     }
 }

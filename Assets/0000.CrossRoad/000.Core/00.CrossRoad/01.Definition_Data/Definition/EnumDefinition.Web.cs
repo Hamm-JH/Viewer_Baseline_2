@@ -65,6 +65,7 @@ namespace Definition
         InitializeRegisterMode, // 등록 모드 시작
         FinishRegisterMode,     // 등록 단계 종료
 
+
     }
 
 	public enum SceneStatus

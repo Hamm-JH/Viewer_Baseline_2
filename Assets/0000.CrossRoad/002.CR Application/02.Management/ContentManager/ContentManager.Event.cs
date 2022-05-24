@@ -37,6 +37,7 @@ namespace Management
 			Bounds _b = _CenterBounds;
 			Canvas _canvas = _Canvas;
 
+			MainManager.Instance.ResetCamdata_targetOffset();
 			MainManager.Instance.SetCameraPosition(_b, _canvas, eventType);
 		}
 

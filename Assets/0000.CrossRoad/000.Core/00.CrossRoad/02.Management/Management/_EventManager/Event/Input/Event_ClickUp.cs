@@ -250,6 +250,7 @@ namespace Management.Events.Inputs
 					GameObject currObj = null;
 					GameObject selectedObj = null;
 					// 동일한 객체를 선택한 경우.
+					Debug.Log(111);
 					if(_Events.IsSameObjectSelected(Elements, _sEvents, out currObj, out selectedObj))
                     {
 						Cameras.SetCameraDOTweenPosition(MainManager.Instance.MainCamera, currObj);
@@ -418,8 +419,19 @@ namespace Management.Events.Inputs
                                 _event: MainManager.Instance.cameraExecuteEvents.selectEvent
                                 ));
 
-                            //return;	// 한 번만 실행..
-                        }
+							GameObject currObj = null;
+							GameObject selectedObj = null;
+							Debug.Log(222);
+							//GameObject selected = EventManager.Instance._SelectedObject;
+
+							//if(_Events.IsSameObjectSelected(_obj3D, _sEvents, out currObj, out selectedObj))
+                            //{
+							//	Cameras.SetCameraDOTweenPosition(MainManager.Instance.MainCamera, currObj);
+							//	Cameras.SetCameraMode(CameraModes.OnlyRotate);
+							//}
+
+							//return;	// 한 번만 실행..
+						}
 					});
                 }
             }

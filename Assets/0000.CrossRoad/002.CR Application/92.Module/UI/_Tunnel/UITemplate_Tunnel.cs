@@ -13,6 +13,17 @@ namespace Module.UI
 
 	public partial class UITemplate_Tunnel : AUI
 	{
+		[System.Serializable]
+		public class Panel_Hover
+        {
+			public GameObject m_hoverPanel;
+			public TextMeshProUGUI m_hoverText1;
+			public TextMeshProUGUI m_hoverText2;
+			public TextMeshProUGUI m_hoverText3;
+			public TextMeshProUGUI m_hoverText4;
+			public TextMeshProUGUI m_hoverText5;
+		}
+
 		public GameObject m_buttonBar;
 
 		[SerializeField] Text m_segment;
@@ -20,8 +31,10 @@ namespace Module.UI
 		[SerializeField] Text m_description;
 		[SerializeField] List<GameObject> childElements_1;
 
-		[SerializeField] GameObject m_hoverPanel;
-		[SerializeField] TextMeshProUGUI m_hoverText;
+		[SerializeField] Panel_Hover m_panelHover;
+
+		//[SerializeField] GameObject m_hoverPanel;
+		//[SerializeField] TextMeshProUGUI m_hoverText;
 
 		public override void OnStart()
 		{

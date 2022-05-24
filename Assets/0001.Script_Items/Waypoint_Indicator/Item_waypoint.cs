@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,8 +36,8 @@ namespace Items
             }
 
             /// <summary>
-            /// ÇØ´ç °´Ã¼°¡ Ä«¸Ş¶ó¿¡ º¸ÀÏ °æ¿ì On
-            /// ÇØ´ç °´Ã¼°¡ Ä«¸Ş¶ó¿¡ ¾Èº¸ÀÏ °æ¿ì Off
+            /// í•´ë‹¹ ê°ì²´ê°€ ì¹´ë©”ë¼ì— ë³´ì¼ ê²½ìš° On
+            /// í•´ë‹¹ ê°ì²´ê°€ ì¹´ë©”ë¼ì— ì•ˆë³´ì¼ ê²½ìš° Off
             /// </summary>
             /// <param name="_isCanSee"></param>
             public void ToggleIcon(bool _isCanSee, string name )
@@ -56,19 +56,19 @@ namespace Items
 
             public void SetIssueSelectable(Issue_Selectable _selectable)
             {
-                // MainIcon¿¡¸¸ Issue_SelectableÀ» ÇÒ´çÇÑ´Ù.
-                // È£¹ö¸µÀ» À§ÇØ ÀÌ °´Ã¼¸¦ UIIssue_Selectable·Î º¸³½´Ù.
+                // MainIconì—ë§Œ Issue_Selectableì„ í• ë‹¹í•œë‹¤.
+                // í˜¸ë²„ë§ì„ ìœ„í•´ ì´ ê°ì²´ë¥¼ UIIssue_Selectableë¡œ ë³´ë‚¸ë‹¤.
                 mainIcon_waypoint.AddOnIssueSelectable(_selectable, this);
             }
 
             public void OnHover(bool _isDmg)
             {
-                // ¼Õ»óÀÏ °æ¿ì
+                // ì†ìƒì¼ ê²½ìš°
                 if(_isDmg)
                 {
                     mainIcon_waypoint.onScreenSpriteColor = new Color(0xec / 255f, 0x3a / 255f, 0x0c / 255f, 1);
                 }
-                // º¸¼öÀÏ °æ¿ì
+                // ë³´ìˆ˜ì¼ ê²½ìš°
                 else
                 {
                     mainIcon_waypoint.onScreenSpriteColor = new Color(0x1c / 255f, 0xb5 / 255f, 0xd6 / 255f, 1);
@@ -77,12 +77,12 @@ namespace Items
 
             public void OffHover(bool _isDmg)
             {
-                // ¼Õ»óÀÏ °æ¿ì
+                // ì†ìƒì¼ ê²½ìš°
                 if (_isDmg)
                 {
                     mainIcon_waypoint.onScreenSpriteColor = new Color(0xee / 255f, 0x57 / 255f, 0x30 / 255f, 1);
                 }
-                // º¸¼öÀÏ °æ¿ì
+                // ë³´ìˆ˜ì¼ ê²½ìš°
                 else
                 {
                     mainIcon_waypoint.onScreenSpriteColor = new Color(0x3e / 255f, 0xb0 / 255f, 0xc9 / 255f, 1);
@@ -158,9 +158,11 @@ namespace Items
 
             float maxDistance = Vector3.Distance(cam.transform.position, transform.position);
             hits = Physics.RaycastAll(ray, maxDistance);
+            //Debug.DrawRay(cam.transform.position, transform.position, Color.black);
+            Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.black);
             for (int i = 0; i < hits.Length; i++)
             {
-                // °ËÃâµÈ °´Ã¼°¡ ÀÌ °´Ã¼ÀÎ °æ¿ì
+                // ê²€ì¶œëœ ê°ì²´ê°€ ì´ ê°ì²´ì¸ ê²½ìš°
                 if (hits[i].transform.gameObject == gameObject)
                 {
                     result = true;
@@ -170,50 +172,50 @@ namespace Items
                 {
                     if (hits[i].transform.TryGetComponent<MeshRenderer>(out render))
                     {
-                        // ¾ËÆÄ°ª 1ÀÌ¸é ºÒÅõ¸í
+                        // ì•ŒíŒŒê°’ 1ì´ë©´ ë¶ˆíˆ¬ëª…
                         if (render.material.color.a == 1)
                         {
                             isTransparency = false;
                             break;
                         }
-                        // ¾ËÆÄ°ª 1 ¹Ì¸¸ÀÌ¸é ¹İÅõ¸í
+                        // ì•ŒíŒŒê°’ 1 ë¯¸ë§Œì´ë©´ ë°˜íˆ¬ëª…
                         else { }
                     }
                 }
             }
 
-            // ¸ğµÎ ¹İÅõ¸íÀÌ°í, ray¿¡ °É¸°°Ô 1°³ ÀÌ»óÀÎ°¡?
+            // ëª¨ë‘ ë°˜íˆ¬ëª…ì´ê³ , rayì— ê±¸ë¦°ê²Œ 1ê°œ ì´ìƒì¸ê°€?
             if (isTransparency && hits.Length != 0)
             {
-                // Áß°£ÀÇ °´Ã¼µéÀÌ ¸ğµÎ ¹İÅõ¸íÀÌ¸é
+                // ì¤‘ê°„ì˜ ê°ì²´ë“¤ì´ ëª¨ë‘ ë°˜íˆ¬ëª…ì´ë©´
                 result = true;
             }
-            // Áß°£¿¡ ºÒÅõ¸íÀÌ °É·È°í, ray¿¡ °É¸°°Ô 1°³ ÀÌ»óÀÎ°¡?
+            // ì¤‘ê°„ì— ë¶ˆíˆ¬ëª…ì´ ê±¸ë ¸ê³ , rayì— ê±¸ë¦°ê²Œ 1ê°œ ì´ìƒì¸ê°€?
             else if (!isTransparency && hits.Length != 0)
             {
-                // 2°³ ÀÌ»óÀÌÁö¸¸, ÇØ´ç °´Ã¼°¡ °ËÃâµÇÁö ¾ÊÀº °æ¿ì
+                // 2ê°œ ì´ìƒì´ì§€ë§Œ, í•´ë‹¹ ê°ì²´ê°€ ê²€ì¶œë˜ì§€ ì•Šì€ ê²½ìš°
                 if(!result)
                 {
                     result = false;
                 }
-                // 2°³ ÀÌ»óÀÌÁö¸¸, ÇØ´ç °´Ã¼°¡ °ËÃâµÈ °æ¿ì
+                // 2ê°œ ì´ìƒì´ì§€ë§Œ, í•´ë‹¹ ê°ì²´ê°€ ê²€ì¶œëœ ê²½ìš°
                 else
                 {
                     result = true;
                 }
             }
 
-            // ¹İº¹ :: °ËÃâ °´Ã¼°¡ ÀÌ °´Ã¼ -> ¹Ù·Î result = true, break
-            // ¹İº¹ :: °ËÃâ °´Ã¼°¡ ÀÌ °´Ã¼ ¾Æ´Ô -> ¹İÅõ¸í : true, ºÒÅõ¸í : false
+            // ë°˜ë³µ :: ê²€ì¶œ ê°ì²´ê°€ ì´ ê°ì²´ -> ë°”ë¡œ result = true, break
+            // ë°˜ë³µ :: ê²€ì¶œ ê°ì²´ê°€ ì´ ê°ì²´ ì•„ë‹˜ -> ë°˜íˆ¬ëª… : true, ë¶ˆíˆ¬ëª… : false
 
             //if (Physics.Raycast(ray, out hit))
             //{
-            //    // °ËÃâµÈ °´Ã¼´Â ÀÌ °´Ã¼ÀÎ°¡
+            //    // ê²€ì¶œëœ ê°ì²´ëŠ” ì´ ê°ì²´ì¸ê°€
             //    if (hit.transform.gameObject == gameObject)
             //    {
             //        result = true;
             //    }
-            //    // °ËÃâµÈ °´Ã¼´Â ´Ù¸¥ °´Ã¼ÀÎ°¡
+            //    // ê²€ì¶œëœ ê°ì²´ëŠ” ë‹¤ë¥¸ ê°ì²´ì¸ê°€
             //    else
             //    {
 
