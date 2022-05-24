@@ -20,6 +20,8 @@ namespace Module.UI
 		public void Event_Mode_ShowAll()
 		{
 			ContentManager.Instance.Reset_ModelObject();
+			m_sliders.ResetSlider_transparency();
+			m_sliders.ResetSlider_scale();
 		}
 
 		/// <summary>

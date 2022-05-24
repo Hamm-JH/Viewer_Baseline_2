@@ -6,8 +6,9 @@ namespace Definition.Data
 {
 	using Definition.Control;
 	using global::Platform.Feature.Camera;
+    using Management;
 
-	public partial class CoreManagement : IData
+    public partial class CoreManagement : IData
 	{
 		[Header("Resource :: Camera")]
 		[SerializeField] Camera mainCam;
@@ -90,7 +91,19 @@ namespace Definition.Data
 
 				mainCam.orthographicSize = distance;
 
-				mainCam.transform.Translate(Vector3.back * distance * 1.4f * (ratio * 0.8f));
+				PlatformCode pCode = MainManager.Instance.Platform;
+
+				float multiple = 1;
+				if (Platforms.IsTunnelPlatform(pCode))
+				{
+					multiple = 0.3f;
+				}
+				else if(Platforms.IsBridgePlatform(pCode))
+                {
+					multiple = 0.6f;
+                }
+
+				mainCam.transform.Translate(Vector3.back * distance * 1.4f * (ratio * multiple));
 			}
 		}
 	}

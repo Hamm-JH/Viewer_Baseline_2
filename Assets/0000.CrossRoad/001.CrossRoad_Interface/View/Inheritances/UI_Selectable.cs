@@ -236,6 +236,7 @@ namespace View
 			}
 
 			m_rootUI.GetUIEvent(_value, eventType, this);
+			m_rootUI.GetUIEvent(_value, Inspect_eventType, this);
 		}
 
         #endregion

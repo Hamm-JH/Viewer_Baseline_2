@@ -16,6 +16,8 @@ namespace Module.UI
 		public void Event_View_Home()
 		{
 			ContentManager.Instance.SetCameraCenterPosition();
+			m_sliders.ResetSlider_transparency();
+			m_sliders.ResetSlider_scale();
 			MainManager.Instance.UpdateCameraMode(Definition.Control.CameraModes.BIM_ISO);
 		}
 

@@ -43,7 +43,34 @@ namespace Module.UI
 		[Header("프로젝트 범용 패널")]
 		public GeneralElement m_general;
 
-		public override void GetUIEvent(UIEventType _uType, Interactable _setter)
+		public override void GetUIEvent(float _value, UIEventType _uType, Interactable _setter)
+		{
+			
+		}
+
+        public override void GetUIEvent(float _value, Inspect_EventType _uType, Interactable _setter)
+        {
+            switch(_uType)
+            {
+				case Inspect_EventType.Setting_01_IconSize:
+					Setting_SetIconSize(_value, _setter);
+					break;
+
+				case Inspect_EventType.Setting_02_ModelTransparency:
+					Setting_SetModelTransparency(_value, _setter);
+					break;
+
+				case Inspect_EventType.Setting_03_ZoomSensitivity:
+					Setting_SetZoomSensitivity(_value, _setter);
+					break;
+
+				case Inspect_EventType.Setting_04_FontSize:
+					Setting_SetFontSize(_value, _setter);
+					break;
+            }
+        }
+
+        public override void GetUIEvent(UIEventType _uType, Interactable _setter)
 		{
 			switch (_uType)
 			{

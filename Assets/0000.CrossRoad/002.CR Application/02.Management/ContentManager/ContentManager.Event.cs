@@ -120,13 +120,30 @@ namespace Management
 		{
 			_value = 0.2f + _value * 0.8f;
 
+			bool IsCanProcessDecal = false;
+			PlatformCode pCode = MainManager.Instance.Platform;
+			if(Platforms.IsDemoWebViewer(pCode))
+            {
+				IsCanProcessDecal = true;
+            }
+			else
+            {
+				Debug.LogWarning("Cannot process Decal platform");
+            }
+
 			foreach(GameObject obj in _IssueObjects)
 			{
 				Issue_Selectable selectable;
 				if(obj.TryGetComponent<Issue_Selectable>(out selectable))
 				{
 					selectable.OnDeselect<UIEventType, float>(UIEventType.Slider_Icon_Scale, _value);
+
+					if(IsCanProcessDecal)
+					{
+						selectable.Issue.Waypoint.IssueWayPoint.SetScale(_value);
+					}
 				}
+
 			}
 		}
 

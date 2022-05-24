@@ -2645,7 +2645,8 @@ public class Waypoint_Indicator : MonoBehaviour
             wpParentGameObject = new GameObject();
             wpParentGameObject.layer = 2;
             wpParentRectTransform = wpParentGameObject.AddComponent<RectTransform>();
-            wpParentRectTransform.transform.SetParent(mainCanvas.transform);
+            wpParentRectTransform.transform.SetParent(mainCanvas.transform.GetChild(0));
+            //wpParentRectTransform.transform.SetParent(mainCanvas.transform);
             wpParentRectTransform.name = gameObject.name + "-WP-" + GetInstanceID();
             wpParentImage = wpParentRectTransform.gameObject.AddComponent<Image>();
             wpParentRectTransform.position = new Vector3(-1000f, -1000f, 0f); //This make sure the blinking box doesn't appear in bottom left at spawn

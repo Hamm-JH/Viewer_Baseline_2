@@ -144,6 +144,11 @@ namespace Definition
 
 		OrthoMode_01_OrthoView,
 		OrthoMode_02_PerspectiveView,
+
+		Setting_01_IconSize,
+		Setting_02_ModelTransparency,
+		Setting_03_ZoomSensitivity,
+		Setting_04_FontSize
 	}
 
 	public enum Compass_EventType

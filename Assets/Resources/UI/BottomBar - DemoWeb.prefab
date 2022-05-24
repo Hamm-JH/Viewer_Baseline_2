@@ -2338,8 +2338,9 @@ MonoBehaviour:
     m_hoverText3: {fileID: 6061449981254845047}
     m_hoverText4: {fileID: 2659954384820591015}
     m_hoverText5: {fileID: 1126914998869138582}
-  m_hoverPanel: {fileID: 8503512604755243312}
-  m_hoverText: {fileID: 5497730933037283488}
+  m_sliders:
+    m_transparencySlider: {fileID: 9010556482132929929}
+    m_scaleSlider: {fileID: 8534698392416321792}
 --- !u!1 &1656513674134772918
 GameObject:
   m_ObjectHideFlags: 0
@@ -6307,7 +6308,7 @@ GameObject:
   - component: {fileID: 9010556482132929929}
   - component: {fileID: 4657853861928972274}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: TransparencySlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6812,7 +6813,7 @@ GameObject:
   - component: {fileID: 8534698392416321792}
   - component: {fileID: 5901501731847915631}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: ScaleSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

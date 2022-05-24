@@ -100,6 +100,12 @@ namespace Items
                 effect_waypoint.gameObject.SetActive(_isOn);
                 isEffect = _isOn;
             }
+
+            public void SetScale(float _value)
+            {
+                mainIcon_waypoint.onScreenSpriteSize = _value * 0.14f;
+                effect_waypoint.onScreenCenteredPrefabSize = _value * 0.5f;
+            }
         }
 
         [SerializeField]

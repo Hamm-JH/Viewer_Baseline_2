@@ -19,10 +19,7 @@ namespace Module.UI
 
         
 
-        public override void GetUIEvent(float _value, UIEventType _uType, Interactable _setter)
-        {
-            throw new System.NotImplementedException();
-        }
+        
 
         public override void OnModuleComplete()
         {

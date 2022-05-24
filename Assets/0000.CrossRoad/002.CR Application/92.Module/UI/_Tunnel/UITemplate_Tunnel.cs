@@ -24,6 +24,27 @@ namespace Module.UI
 			public TextMeshProUGUI m_hoverText5;
 		}
 
+		[System.Serializable]
+		public class Sliders
+        {
+			public Slider m_transparencySlider;
+			public Slider m_scaleSlider;
+
+			public void ResetSlider_transparency()
+            {
+				if (m_transparencySlider == null) return;
+
+				m_transparencySlider.value = 1;
+            }
+
+			public void ResetSlider_scale()
+			{
+				if (m_scaleSlider == null) return;
+
+				m_scaleSlider.value = 1;
+			}
+		}
+
 		public GameObject m_buttonBar;
 
 		[SerializeField] Text m_segment;
@@ -32,6 +53,7 @@ namespace Module.UI
 		[SerializeField] List<GameObject> childElements_1;
 
 		[SerializeField] Panel_Hover m_panelHover;
+		[SerializeField] Sliders m_sliders;
 
 		//[SerializeField] GameObject m_hoverPanel;
 		//[SerializeField] TextMeshProUGUI m_hoverText;
