@@ -108,8 +108,16 @@ namespace Module.WebAPI
 
 		private void Find_IssueObject(string _code, out GameObject _obj)
         {
-            _obj = ContentManager.Instance._IssueObjects.Find(
-                x => x == GameObject.Find(_code));
+            _obj = ContentManager.Instance._IssueObjects.Find(x => x.name == _code);
+            //_obj = ContentManager.Instance._IssueObjects.Find(x => x == GameObject.Find(_code));  // 터널에서 쓴 코드
+
+            //Debug.Log($"code : {_code}");
+            //List<GameObject> issues = ContentManager.Instance._IssueObjects;
+            //for (int i = 0; i < issues.Count; i++)
+            //{
+            //    Debug.Log($"issue : {issues[i].name}");
+            //}
+
         }
 
 		#endregion

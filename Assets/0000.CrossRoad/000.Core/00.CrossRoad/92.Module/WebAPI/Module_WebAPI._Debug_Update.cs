@@ -36,7 +36,7 @@ namespace Module.WebAPI
 			// X 특정 손상정보 선택
 			else if (Input.GetKeyDown(KeyCode.E))
 			{
-				ReceiveRequest("SelectIssue/20211206-00000039");
+				ReceiveRequest("SelectIssue/20211207-00000096/AP01_AB_RTA/n");
 			}
 			#endregion
 			#region 6Shape

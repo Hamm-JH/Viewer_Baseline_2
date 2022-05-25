@@ -128,7 +128,7 @@ namespace Management
             }
 			else
             {
-				Debug.LogWarning("Cannot process Decal platform");
+				throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
             }
 
 			foreach(GameObject obj in _IssueObjects)

@@ -94,6 +94,10 @@ namespace Management.Events.Inputs
 					StartEvent_KeymapSelectNull();
 				}
             }
+			else if(Platforms.IsSmartInspectPlatform(pCode))
+            {
+				Debug.Log($"11111");
+            }
 		}
 
 
@@ -145,7 +149,7 @@ namespace Management.Events.Inputs
 				Issues.WP_Setup_target(partName);
 
 				// 객체 선택 이벤트 실행
-				GameObject _obj3D = model.ModelObjects.Find(x => x.name == partName);
+				GameObject _obj3D = model.ModelObjects.Find(x => x.name.Contains(partName));
 
 				EventManager.Instance.OnEvent(new EventData_API(
 					_eventType: InputEventType.API_SelectObject,
@@ -155,13 +159,16 @@ namespace Management.Events.Inputs
 
 				// 현재 선택 객체 업데이트
 				EventManager em = EventManager.Instance;
-				EventManager.Instance.DeleteEvent<InputEventType, AEventData>(
-					InputEventType.Input_clickSuccessUp, _sEvents[InputEventType.Input_clickSuccessUp], EventManager.Instance.EventStates);
+				if(_sEvents.ContainsKey(InputEventType.Input_clickSuccessUp))
+                {
+					EventManager.Instance.DeleteEvent<InputEventType, AEventData>(
+						InputEventType.Input_clickSuccessUp, _sEvents[InputEventType.Input_clickSuccessUp], EventManager.Instance.EventStates);
 				
-				Event_ClickUp _event = new Event_ClickUp(InputEventType.Input_clickSuccessUp, _obj3D);
+					Event_ClickUp _event = new Event_ClickUp(InputEventType.Input_clickSuccessUp, _obj3D);
 
-				EventManager.Instance.AddEvent<InputEventType, AEventData>(InputEventType.Input_clickSuccessUp, _event,
-					EventManager.Instance.EventStates);
+					EventManager.Instance.AddEvent<InputEventType, AEventData>(InputEventType.Input_clickSuccessUp, _event,
+						EventManager.Instance.EventStates);
+                }
 				//EventManager.Instance._SelectedObject = _obj3D;
 			}
 		}

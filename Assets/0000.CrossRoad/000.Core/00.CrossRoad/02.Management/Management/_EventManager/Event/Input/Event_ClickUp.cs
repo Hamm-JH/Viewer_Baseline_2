@@ -302,6 +302,7 @@ namespace Management.Events.Inputs
 			//}
 			else if(Platforms.IsSmartInspectPlatform(pCode))
             {
+				Debug.Log("111111");
 				Debug.Log($"***** Hello inspect platform");
 				m_clickEvent.Invoke(_obj);
 				//Module_WebAPI api = Content.SmartInspectManager.Instance.Module<Module.WebAPI.Module_WebAPI>(ModuleID.WebAPI);
@@ -410,7 +411,7 @@ namespace Management.Events.Inputs
 							Issues.WP_Setup_target(partName);
 
 							// 이 손상정보에 해당하는 GameObject 객체 선택
-							GameObject _obj3D = model.ModelObjects.Find(x => x.name == partName);
+							GameObject _obj3D = model.ModelObjects.Find(x => x.name.Contains(partName));
 
                             // 객체 선택 이벤트 실행
                             EventManager.Instance.OnEvent(new EventData_API(
@@ -434,6 +435,14 @@ namespace Management.Events.Inputs
 						}
 					});
                 }
+            }
+			else if(Platforms.IsSmartInspectPlatform(pCode))
+            {
+				Debug.Log("11111");
+            }
+			else
+            {
+				throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
             }
 		}
 

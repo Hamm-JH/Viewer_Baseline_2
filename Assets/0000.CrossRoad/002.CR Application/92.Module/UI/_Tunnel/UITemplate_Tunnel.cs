@@ -118,6 +118,14 @@ namespace Module.UI
                     {
 						Event_Mode_ShowAll();
 					}
+					else if(Platforms.IsSmartInspectPlatform(pCode))
+                    {
+						Debug.Log("11111");
+                    }
+					else
+                    {
+						throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+                    }
 					break;
 
 				case UIEventType.Toggle:

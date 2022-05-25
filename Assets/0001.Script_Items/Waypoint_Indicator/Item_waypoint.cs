@@ -124,7 +124,15 @@ namespace Items
         private void Update()
         {
             //if (!CheckObjectsInCameraFrustum()) return;
-            ////if (!IsObjectActiveSelf()) return;
+            if (!IsObjectActiveSelf()) return;
+
+            bool isCanLookup = IsCameraCanLookUp();
+            bool isObjectActive = IsObjectActiveSelf();
+
+            // 보이는 상태에서 - 객체가 켜져있으면 켜기
+            // 보이는 상태에서 - 객체가 꺼져있으면 끄기
+            // 보이지 않는 상태에서 - 객체가 켜져있으면 켜기
+            // 보이지 않는 상태에서 - 객체가 꺼져있으면 끄기
 
             if (IsCameraCanLookUp())
             {

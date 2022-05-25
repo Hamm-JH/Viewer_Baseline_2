@@ -198,6 +198,12 @@ namespace Management
             }
 			else if(Platforms.IsSmartInspectPlatform(pCode))
             {
+				Module_Model model = Module<Module_Model>();
+				if(model != null)
+                {
+					model.OnAfterInitialize();
+                }
+
 				// Interaction 모듈을 찾는다.
 				Module_Interaction interaction = Module<Module_Interaction>(ModuleID.Interaction);
 				if (interaction != null)

@@ -209,10 +209,17 @@ namespace Management
 								else if(list[i].Target.TryGetComponent<Issue_Selectable>(out iObj))
                                 {
 									iObj.OnDeselect();
-									Module_Model model = ContentManager.Instance.Module<Module_Model>();
-									model.ModelObjects.Find(x => x.gameObject.name == iObj.Issue.CdBridgeParts).TryGetComponent<Obj_Selectable>(out oObj);
 
-									oObj.OnDeselect();
+									Module_Model model = ContentManager.Instance.Module<Module_Model>();
+									GameObject target = model.ModelObjects.Find(x => x.gameObject.name.Contains(iObj.Issue.CdBridgeParts)); //.TryGetComponent<Obj_Selectable>(out oObj);
+									if(target != null)
+                                    {
+										if(target.TryGetComponent<Obj_Selectable>(out oObj))
+                                        {
+											oObj.OnDeselect();	
+                                        }
+                                    }
+
                                 }
                             }
 

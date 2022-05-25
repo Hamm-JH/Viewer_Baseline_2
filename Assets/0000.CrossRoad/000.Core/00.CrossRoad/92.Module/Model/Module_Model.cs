@@ -69,6 +69,15 @@ namespace Module.Model
 				// 손상 정보용으로 초기 세팅
 				Issues.WP_Setup_Dmgs(DmgData, RcvData, AllIssues);
             }
+			else if(Platforms.IsSmartInspectPlatform(pCode))
+            {
+				Issues.WP_Setup_Dmgs(DmgData, RcvData, AllIssues);
+			}
+			else
+            {
+				throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+            }
+
         }
 	}
 }

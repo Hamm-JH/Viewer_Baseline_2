@@ -25,6 +25,9 @@ namespace Definition
 
             EventStatement.State_DemoWebViewer state = EventManager.Instance._Statement.GetState_DemoWebViewer(0);
 
+            //Debug.Log($"targetName ; {_targetName}");
+            //all.ForEach(x => Debug.Log($"partName : {x.CdBridgeParts}"));
+            
             WP_Setup_target(dmgs, rcvs, all, state.IsDmgTab, _targetName);
         }
 
@@ -133,7 +136,8 @@ namespace Definition
             {
                 if(_targetName != null)
                 {
-                    if(_targetName == x.CdBridgeParts)
+                    if(_targetName.Contains(x.CdBridgeParts))
+                    //if(_targetName == x.CdBridgeParts)
                     {
                         Setup(true, true, x);
                     }
@@ -154,7 +158,8 @@ namespace Definition
             {
                 if(_targetName != null)
                 {
-                    if(_targetName == x.CdBridgeParts)
+                    if(_targetName.Contains(x.CdBridgeParts))
+                    //if(_targetName == x.CdBridgeParts)
                     {
                         Setup(true, false, x);
                     }

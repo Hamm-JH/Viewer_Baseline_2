@@ -91,6 +91,14 @@ namespace Management.Events.Inputs
                     _uiDemoWeb.HoverPanel_OffHover();
                 }
             }
+            else if(Platforms.IsSmartInspectPlatform(pCode))
+            {
+                Debug.Log("22222");
+            }
+            else
+            {
+                throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+            }
 
         }
     }
