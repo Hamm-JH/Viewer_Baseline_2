@@ -19,6 +19,16 @@ namespace Management
 
 	public partial class ContentManager : IManager<ContentManager>
 	{
+		[System.Serializable]
+		public class GeneralSettings
+        {
+			[SerializeField] private float maxCameraDistance = 10;
+
+            public float MaxCameraDistance { get => maxCameraDistance; set => maxCameraDistance = value; }
+        }
+
+		public GeneralSettings generalSettings;
+
 		#region TODO 프로젝트별 데이터 컨테이너
 
 		[SerializeField] AContainer m_container;

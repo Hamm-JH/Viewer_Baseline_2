@@ -137,6 +137,9 @@ namespace Definition
 		BtnBar_07_Setting,
 		BtnBar_08_SwitchBar,
 
+		BtnBar_11_ZoomIn,
+		BtnBar_12_ZoomOut,
+
 		ViewPort_01_ISO,
 		ViewPort_02_TOP,
 		ViewPort_03_SIDE,
@@ -148,7 +151,9 @@ namespace Definition
 		Setting_01_IconSize,
 		Setting_02_ModelTransparency,
 		Setting_03_ZoomSensitivity,
-		Setting_04_FontSize
+		Setting_04_FontSize,
+
+		Image_Enlarge_Center,
 	}
 
 	public enum Compass_EventType

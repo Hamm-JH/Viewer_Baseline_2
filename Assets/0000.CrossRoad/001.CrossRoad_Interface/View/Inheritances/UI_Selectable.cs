@@ -43,6 +43,37 @@ namespace View
 
 			public BridgeCode m_bridgeIssueCode;
 			public TunnelCode m_tunnelCode;
+
+			[Header("Image Panel")]
+			[SerializeField] RectTransform thisRect;
+			public bool m_isEnlarged = false;
+
+			public void EnlargeImage()
+            {
+				// 축소 단계
+				if(m_isEnlarged)
+                {
+					m_isEnlarged = false;
+					RepositionImage();
+
+				}
+				else
+                {
+					m_isEnlarged = true;
+					Enlarge();
+
+				}
+            }
+
+			private void RepositionImage()
+            {
+				thisRect.localPosition = new Vector2(148, 94);
+            }
+
+			private void Enlarge()
+            {
+				thisRect.position = new Vector2(1600, 900);
+            }
 		}
 
 		[System.Serializable]

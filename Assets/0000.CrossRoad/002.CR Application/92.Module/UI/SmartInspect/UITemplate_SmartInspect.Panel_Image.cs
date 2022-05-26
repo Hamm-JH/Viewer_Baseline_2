@@ -29,5 +29,10 @@ namespace Module.UI
                 }
             }
         }
+
+        private void Panel_EnlargeImage(Interactable _setter)
+        {
+            ((UI_Selectable)_setter).Data.EnlargeImage();
+        }
     }
 }

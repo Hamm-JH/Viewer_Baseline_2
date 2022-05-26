@@ -5,12 +5,14 @@ using UnityEngine;
 
 namespace Management
 {
-	using Management.Events;
-	using UnityEngine.Events;
-	using View;
+    using Management.Content;
+    using Management.Events;
+    using UnityEngine.Events;
+    using View;
 
-	public partial class ContentManager : IManager<ContentManager>
+    public partial class ContentManager : IManager<ContentManager>
 	{
+        
 		public void CreateNewModule(ModuleCode mCode)
 		{
 			EventManager.Instance._Statement.CreateNewModule(mCode);
@@ -126,6 +128,10 @@ namespace Management
             {
 				IsCanProcessDecal = true;
             }
+			else if(Platforms.IsSmartInspectPlatform(pCode))
+            {
+				IsCanProcessDecal = true;
+			}
 			else
             {
 				throw new Definition.Exceptions.PlatformNotDefinedException(pCode);

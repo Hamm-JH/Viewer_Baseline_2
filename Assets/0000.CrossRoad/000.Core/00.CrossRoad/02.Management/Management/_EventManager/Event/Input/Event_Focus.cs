@@ -5,7 +5,10 @@ using UnityEngine;
 namespace Management.Events.Inputs
 {
 	using Definition;
-	using UnityEngine.Events;
+    using Management.Content;
+    using Module.Interaction;
+    using Module.UI;
+    using UnityEngine.Events;
 	using UnityEngine.EventSystems;
 	using UnityEngine.UI;
 
@@ -40,24 +43,45 @@ namespace Management.Events.Inputs
 
 			Get_Collect3DObject(Input.mousePosition, out m_selected3D, out m_hit, out m_results);
 
+			float _delta = m_focusDelta;
+			PlatformCode pCode = MainManager.Instance.Platform;
+			if (Platforms.IsDemoWebViewer(pCode)) 
+			{
+				_delta = m_focusDelta;
+			}
+			else if(Platforms.IsSmartInspectPlatform(pCode))
+            {
+				float zoomSensitivity = ((SmartInspectManager)(SmartInspectManager.Instance)).setting.ZoomSensitivity;
+
+				//Module_Interaction interaction = ContentManager.Instance.Module<Module_Interaction>();
+
+				//UITemplate_SmartInspect inspect = (UITemplate_SmartInspect)interaction.UiInstances[0];
+
+				_delta = m_focusDelta * zoomSensitivity;
+            }
+			else
+            {
+				throw new Definition.Exceptions.PlatformNotDefinedException(pCode);
+            }
+
 			if (Selected3D != null)
 			{
-				m_focusEvent.Invoke(m_focus, m_focusDelta);
+				m_focusEvent.Invoke(m_focus, _delta);
 			}
 			// 빈 공간을 누른 경우
 			else if (m_results.Count == 0)
 			{
-				m_focusEvent.Invoke(m_focus, m_focusDelta);
+				m_focusEvent.Invoke(m_focus, _delta);
 			}
 			// UI 객체를 누른 경우 m_results.Count != 0
 			else
 			{
-				PlatformCode pCode = MainManager.Instance.Platform;
+				pCode = MainManager.Instance.Platform;
 
 				if(Platforms.IsDemoAdminViewer(pCode))
                 {
 					Debug.LogError("포커스시 키맵 UI를 포커싱하는지 확인 필요");
-					ContentManager.Instance.Input_KeymapFocus(m_focus, m_focusDelta);
+					ContentManager.Instance.Input_KeymapFocus(m_focus, _delta);
                 }
 			}
 		}

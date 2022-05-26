@@ -426,6 +426,8 @@ namespace SmartInspect
         public TextMeshProUGUI m_workerName;
         public TextMeshProUGUI m_description;
 
+        public List<UI_Selectable> btns_ui;
+
         public void Init(Packet_Record _packet)
         {
             if (root == null) return;
@@ -441,11 +443,21 @@ namespace SmartInspect
             m_workerName.text = _packet.m_issue.NmUser;
             m_description.text = _packet.m_issue.DmgDescription;
 
+            btns_ui.ForEach(x =>
+            {
+                Set_UIInstance(x, _packet);
+            });
+
         }
 
         private void SetSinglePicture(RawImage _rImage, Texture2D _texture2D)
         {
             _rImage.texture = _texture2D;
+        }
+
+        private void Set_UIInstance(UI_Selectable _resource, Packet_Record _packet)
+        {
+            _resource.RootUI = _packet.m_rootUI;
         }
     }
 }

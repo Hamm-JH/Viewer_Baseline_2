@@ -8,6 +8,7 @@ using System.Data;
 using System;
 using static AdminViewer.UI.Ad_Panel;
 using Issue;
+using System.Linq;
 
 public class GraphChartFeed : MonoBehaviour
 {
@@ -525,14 +526,18 @@ public class GraphChartFeed : MonoBehaviour
     /// <param name="_list"></param>
     private void RemoveListElement(string codeKey, ref List<Definition._Issue.Issue> _list)
     {
-        int index = _list.Count;
-        for (int i = index - 1; i >= 0; i--)
+        if(_list.Last().IssueOrderCode == codeKey)
         {
-            if (_list[i].IssueOrderCode == codeKey)
-            {
-                _list.RemoveAt(i);
-            }
+            _list.Remove(_list.Last());
         }
+        //int index = _list.Count;
+        //for (int i = index - 1; i >= 0; i--)
+        //{
+        //    if (_list[i].IssueOrderCode == codeKey)
+        //    {
+        //        _list.RemoveAt(i);
+        //    }
+        //}
     }
 
     #endregion

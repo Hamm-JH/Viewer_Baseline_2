@@ -108,6 +108,7 @@ namespace SmartInspect
 		public Resource_Adm_Timeline m_adm_timeline;
 		public Resource_LeftBar_Adm m_adm_leftbar;
 		public Resource_Bottombar m_bottomBar;
+		public Resource_GeneralPanel m_general;
 	}
 
 	#endregion --------- main -----------
@@ -469,5 +470,18 @@ namespace SmartInspect
 			//	m_orthoModes[i].img_icon.SetColor(img_icon, isTarget);
             //}
         }
+    }
+
+	[System.Serializable]
+	public class Resource_GeneralPanel
+    {
+		[Header("Large Image panel")]
+		public GameObject m_largeImage_Panel;
+
+		public Image m_largeImage_background;
+
+		public RectTransform m_largeImage_transform;
+		public RawImage m_largeImage_image;
+
     }
 }

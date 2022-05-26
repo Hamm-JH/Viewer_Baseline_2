@@ -490,6 +490,7 @@ namespace SmartInspect
         public Setting m_setting;
         public ObjectStatus m_objStatus;
         public ImagePopup m_imgPopup;
+        public Panel_Hover m_panelHover;
     }
 
     [System.Serializable]
@@ -522,6 +523,17 @@ namespace SmartInspect
 
         public ListElement m_issueImagePanel;
 
+    }
+
+    [System.Serializable]
+    public class Panel_Hover
+    {
+        public GameObject m_hoverPanel;
+        public TextMeshProUGUI m_hoverText1;
+        public TextMeshProUGUI m_hoverText2;
+        public TextMeshProUGUI m_hoverText3;
+        public TextMeshProUGUI m_hoverText4;
+        public TextMeshProUGUI m_hoverText5;
     }
 
     #endregion

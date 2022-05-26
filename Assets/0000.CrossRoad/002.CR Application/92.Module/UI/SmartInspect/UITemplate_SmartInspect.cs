@@ -358,6 +358,18 @@ namespace Module.UI
 					}
 					break;
 
+				case Inspect_EventType.BtnBar_11_ZoomIn:
+                    {
+						ButtonBar_ZoomIn();
+					}
+					break;
+
+				case Inspect_EventType.BtnBar_12_ZoomOut:
+                    {
+						ButtonBar_ZoomOut();
+                    }
+					break;
+
 				//--------------------------------------------------
 
 				case Inspect_EventType.ViewPort_01_ISO:
@@ -411,6 +423,12 @@ namespace Module.UI
 					break;
 
 				//--------------------------------------------------
+
+				case Inspect_EventType.Image_Enlarge_Center:
+                    {
+						Panel_EnlargeImage(_setter);
+                    }
+					break;
 			}
 		}
     }

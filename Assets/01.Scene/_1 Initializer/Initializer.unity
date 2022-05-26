@@ -1003,7 +1003,7 @@ MonoBehaviour:
     m_imageURL: 
     m_historyURL: 
     m_keyCode: 
-  m_templateIndex: 5
+  m_templateIndex: 0
   _templateDatas:
   - m_platform: 49
     m_graphic: 2
@@ -1216,7 +1216,7 @@ MonoBehaviour:
     m_historyURL: 
     m_keyCode: 
   - m_platform: 258
-    m_graphic: 0
+    m_graphic: 2
     mouseData:
       dragBoundary: 1.5
       dragInvert: {x: 1, y: -1}

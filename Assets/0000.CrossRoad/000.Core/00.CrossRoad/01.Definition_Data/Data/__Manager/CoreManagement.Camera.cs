@@ -103,7 +103,11 @@ namespace Definition.Data
 					multiple = 0.6f;
                 }
 
-				mainCam.transform.Translate(Vector3.back * distance * 1.4f * (ratio * multiple));
+				float totalDistance = distance * 1.4f * (ratio * multiple);
+				ContentManager.Instance.generalSettings.MaxCameraDistance = totalDistance;
+
+				mainCam.transform.Translate(Vector3.back * totalDistance);
+				//mainCam.transform.Translate(Vector3.back * distance * 1.4f * (ratio * multiple));
 			}
 		}
 	}
