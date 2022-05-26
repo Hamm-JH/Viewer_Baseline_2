@@ -2933,7 +2933,7 @@ MonoBehaviour:
   childPanel: {fileID: 0}
   m_rootUI: {fileID: 0}
   eventType: 1
-  inspect_eventType: 21
+  inspect_eventType: 0
   m_data:
     m_isMovedDown: 0
     m_toggleIndex: 0

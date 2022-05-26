@@ -98,21 +98,34 @@ namespace Management.Events.Inputs
                 UIIssue_Selectable uiIssue;
                 m_results.ForEach(x =>
                 {
-                    if (x.gameObject.transform.parent.TryGetComponent<UIIssue_Selectable>(out uiIssue))
+                    //Debug.Log($"ray result : {x.gameObject.name}");
+
+                    if (m_results.Count == 1)
                     {
-                        // 이 개체가 카메라에 바로 보이고 있는가?
-                        if(uiIssue.HoveringItem.IsLookup)
+                        if (x.gameObject.transform.parent.TryGetComponent<UIIssue_Selectable>(out uiIssue))
                         {
-                            //Debug.Log(x.gameObject.transform.parent.name);
-                            // MainIcon인 경우 - mainIcon만 IssueSelectable을 가지고있다.
-                            if (uiIssue.IssueSelectable != null)
+                            //Debug.Log($"count : {m_results.Count}");
+                            //Debug.Log($"object name : {x.gameObject.name}");
+
+                            // 이 개체가 카메라에 바로 보이고 있는가?
+                            if (uiIssue.HoveringItem.IsLookup)
                             {
-                                //m_camera.WorldToScreenPoint(m_mousePosition);
-                                _ui.HoverPanel_OnHover(ContentManager.Instance._Canvas, m_mousePosition, uiIssue.IssueSelectable.Issue);
-                                return;
+                                //Debug.Log(x.gameObject.transform.parent.name);
+                                // MainIcon인 경우 - mainIcon만 IssueSelectable을 가지고있다.
+                                if (uiIssue.IssueSelectable != null)
+                                {
+                                    //m_camera.WorldToScreenPoint(m_mousePosition);
+                                    _ui.HoverPanel_OnHover(ContentManager.Instance._Canvas, m_mousePosition, uiIssue.IssueSelectable.Issue);
+                                    return;
+                                }
                             }
                         }
                     }
+                    else
+                    {
+                        _ui.HoverPanel_OffHover();
+                    }
+                    
                 });
 
                 if (m_results.Count == 0)
