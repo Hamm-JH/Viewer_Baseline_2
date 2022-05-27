@@ -136,7 +136,7 @@ namespace Module.WebAPI
 
         #region ChangeTab
 
-        private void ChangeTab(string _value)
+        public void ChangeTab(string _value)
         {
             GameObject selected = EventManager.Instance._SelectedObject;
             Module_Model model = ContentManager.Instance.Module<Module_Model>();
@@ -146,14 +146,39 @@ namespace Module.WebAPI
             List<Definition._Issue.Issue> rcvs = model.RcvData;
             List<Definition._Issue.Issue> all = model.AllIssues;
 
+            PlatformCode pCode = MainManager.Instance.Platform;
+            bool isOnTarget = false;
+            if (Platforms.IsDemoWebViewer(pCode))
+            {
+                isOnTarget = true;
+            }
+
             // Web에서 탭을 누르는 시점에 선택한 개체가 없는 경우도 존재한다.
             if (_value == "DMG")
             {
-                Issues.WP_Setup_Dmgs_WithTarget(dmgs, rcvs, all, selectedName);
+                if(isOnTarget)
+                {
+                    Issues.WP_Setup_Dmgs_WithTarget(dmgs, rcvs, all, selectedName);
+                }
+                else
+                {
+                    Issues.WP_Setup_Dmgs_WithTarget(dmgs, rcvs, all, null);
+                }
             }
             else if(_value == "RCV")
             {
-                Issues.WP_Setup_Rcvs_WithTarget(dmgs, rcvs, all, selectedName);
+                if(isOnTarget)
+                {
+                    Issues.WP_Setup_Rcvs_WithTarget(dmgs, rcvs, all, selectedName);
+                }
+                else
+                {
+                    Issues.WP_Setup_Rcvs_WithTarget(dmgs, rcvs, all, null);
+                }
+            }
+            else if(_value == "ALL")
+            {
+                Issues.WP_Setup_ALL(dmgs, rcvs, all);
             }
             else
             {

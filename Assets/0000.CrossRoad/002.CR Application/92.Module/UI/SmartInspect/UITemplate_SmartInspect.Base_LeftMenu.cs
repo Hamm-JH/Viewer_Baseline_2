@@ -1,4 +1,6 @@
 ﻿using Definition;
+using Management;
+using Module.WebAPI;
 using SmartInspect;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +27,8 @@ namespace Module.UI
             // dmg button 상태 활성화
             //LeftMenu_SetToggleButton(currIndex);
 
+            ContentManager.Instance.Module<Module_WebAPI>().ChangeTab("DMG");
+
             // Dmg 모드 활성화 실행
             ModDmg_Active();
         }
@@ -44,6 +48,8 @@ namespace Module.UI
             // rcv button 상태 활성화
             //LeftMenu_SetToggleButton(currIndex);
 
+            ContentManager.Instance.Module<Module_WebAPI>().ChangeTab("RCV");
+
             // rcv 모드 활성화 실행
             ModRcv_Active();
         }
@@ -58,6 +64,8 @@ namespace Module.UI
             // adm panel 켠다
             LeftMenu_SetTogglePanel(currIndex);
             //LeftMenu_SetToggleButton(currIndex);
+
+            ContentManager.Instance.Module<Module_WebAPI>().ChangeTab("ALL");
 
             // adm 모드 활성화 실행
             ModAdm_Active();

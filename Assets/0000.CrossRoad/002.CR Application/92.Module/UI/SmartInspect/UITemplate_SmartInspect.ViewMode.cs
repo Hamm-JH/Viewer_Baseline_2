@@ -20,6 +20,8 @@ namespace Module.UI
 			ModDmg_ResetBasePosition();
 			ModRcv_ResetBasePosition();
 			ModAdm_ResetBasePosition();
+
+			ContentManager.Instance.Reset_ModelObject();
 		}
 
 		public void Event_Toggle_ChildPanel(int index, GameObject ChildPanel)

@@ -20,6 +20,15 @@ namespace Management
 		/// <param name="_currEvent"></param>
 		private void UpdateNewEvent(Dictionary<InputEventType, AEventData> _sEvents, AEventData _currEvent)
 		{
+			if(isMultiCondition(_sEvents))
+            {
+				DoMultiConditionEvent(_sEvents, _currEvent);
+			}
+			else
+            {
+				DoSingleConditionEvent(_sEvents, _currEvent);
+			}
+
 			switch (_currEvent.EventType)
 			{
 				case InputEventType.Input_clickDown:
@@ -145,7 +154,6 @@ namespace Management
 			}
 		}
 
-
 		/// <summary>
 		/// Click + 다중 선택 조건 확인
 		/// </summary>
@@ -177,6 +185,16 @@ namespace Management
 
 			return result;
 		}
+
+		private void DoMultiConditionEvent(Dictionary<InputEventType, AEventData> _sEvents, AEventData _currEvent)
+        {
+
+        }
+
+		private void DoSingleConditionEvent(Dictionary<InputEventType, AEventData> _sEvents, AEventData _currEvent)
+        {
+
+        }
 
 		/// <summary>
 		/// 선택 해제 이벤트 실행구간
