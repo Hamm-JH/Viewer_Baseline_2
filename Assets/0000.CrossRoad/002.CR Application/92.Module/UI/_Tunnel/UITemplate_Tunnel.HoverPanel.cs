@@ -21,6 +21,7 @@ namespace Module.UI
 			RectTransform hRect = hPanel.GetComponent<RectTransform>();
 
 			// 5. 호버 텍스트
+			TextMeshProUGUI title = m_panelHover.m_title;
 			TextMeshProUGUI hText1 = m_panelHover.m_hoverText1;
 			TextMeshProUGUI hText2 = m_panelHover.m_hoverText2;
 			TextMeshProUGUI hText3 = m_panelHover.m_hoverText3;
@@ -34,7 +35,7 @@ namespace Module.UI
 			//hRect.position = _screenMousePos;
 			HoverPanel_SetPanelPos(_rootCanvas.pixelRect, hRect, _screenMousePos, new Vector2(10, 10));
 
-			HoverPanel_SetPanelText(hText1, hText2, hText3, hText4, hText5,
+			HoverPanel_SetPanelText(title, hText1, hText2, hText3, hText4, hText5,
 				_issue);
 			// 1. 캔버스
 			// 2. 마우스 위치 (스크린 위치)
@@ -151,7 +152,7 @@ namespace Module.UI
 			return result;
         }
 
-		private void HoverPanel_SetPanelText(TextMeshProUGUI _text1, TextMeshProUGUI _text2, TextMeshProUGUI _text3, TextMeshProUGUI _text4, TextMeshProUGUI _text5,
+		private void HoverPanel_SetPanelText(TextMeshProUGUI _title, TextMeshProUGUI _text1, TextMeshProUGUI _text2, TextMeshProUGUI _text3, TextMeshProUGUI _text4, TextMeshProUGUI _text5,
 			Definition._Issue.Issue _issue)
         {
 			//StringBuilder sb = new StringBuilder();
@@ -163,6 +164,15 @@ namespace Module.UI
 			//sb.AppendLine($"등록 일자 : {_issue.DateDmg}");
 
 			//_text.text = sb.ToString();
+
+			if (_issue.IsDmg)
+            {
+				_title.text = "손상정보";
+            }
+			else
+            {
+				_title.text = "보수정보";
+			}
 
 			_text1.text = _issue.NmUser;
 			_text2.text = _issue.IssueCode.ToString();

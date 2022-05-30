@@ -17,6 +17,7 @@ namespace Module.UI
 		public class Panel_Hover
         {
 			public GameObject m_hoverPanel;
+			public TextMeshProUGUI m_title;
 			public TextMeshProUGUI m_hoverText1;
 			public TextMeshProUGUI m_hoverText2;
 			public TextMeshProUGUI m_hoverText3;
@@ -174,7 +175,21 @@ namespace Module.UI
 			}
 		}
 
-		public void GetUIEvent(Compass_EventType _type, Interactable _setter)
+        public override void GetUIEvent(Inspect_EventType _uType, Interactable _setter)
+        {
+            switch(_uType)
+            {
+				case Inspect_EventType.BtnBar_11_ZoomIn:
+					ButtonBar_ZoomIn();
+					break;
+
+				case Inspect_EventType.BtnBar_12_ZoomOut:
+					ButtonBar_ZoomOut();
+					break;
+			}
+        }
+
+        public void GetUIEvent(Compass_EventType _type, Interactable _setter)
         {
 			switch(_type)
             {

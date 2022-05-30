@@ -359,9 +359,11 @@ namespace ChartAndGraph
             double xScroll = GetScrollOffset(0);
             double yScroll = GetScrollOffset(1);
             double xSize = maxX - minX;
+            //double ySize = 20;
             double ySize = maxY - minY;
             double xOut = minX + xScroll + xSize;
-            double yOut = minY + yScroll + ySize;
+            double yOut = 20;
+            //double yOut = minY + yScroll + ySize;
 
             DoubleVector3 min = new DoubleVector3(xScroll + minX, yScroll + minY);
             DoubleVector3 max = new DoubleVector3(xOut, yOut);

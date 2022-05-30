@@ -70,18 +70,25 @@ namespace Management.Events.Inputs
             {
                 _uiDemo = (UITemplate_Tunnel)interaction.UiInstances[0];
 
+
                 UIIssue_Selectable uiIssue;
                 m_results.ForEach(x =>
                 {
-                    if(x.gameObject.transform.parent.TryGetComponent<UIIssue_Selectable>(out uiIssue))
+                    if(m_results.Count == 1)
                     {
-                        //Debug.Log(x.gameObject.transform.parent.name);
-                        // MainIcon인 경우 - mainIcon만 IssueSelectable을 가지고있다.
-                        if(uiIssue.IssueSelectable != null)
+                        if(x.gameObject.transform.parent.TryGetComponent<UIIssue_Selectable>(out uiIssue))
                         {
-                            //m_camera.WorldToScreenPoint(m_mousePosition);
-                            _uiDemo.HoverPanel_OnHover(ContentManager.Instance._Canvas, m_mousePosition, uiIssue.IssueSelectable.Issue);
-                            return;
+                            if(uiIssue.HoveringItem.IsLookup)
+                            {
+                                //Debug.Log(x.gameObject.transform.parent.name);
+                                // MainIcon인 경우 - mainIcon만 IssueSelectable을 가지고있다.
+                                if(uiIssue.IssueSelectable != null)
+                                {
+                                    //m_camera.WorldToScreenPoint(m_mousePosition);
+                                    _uiDemo.HoverPanel_OnHover(ContentManager.Instance._Canvas, m_mousePosition, uiIssue.IssueSelectable.Issue);
+                                    return;
+                                }
+                            }
                         }
                     }
                 });

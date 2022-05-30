@@ -187,11 +187,14 @@ public class GraphChartFeed : MonoBehaviour
 
         Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, dateElement>>> _rawData = InitRawData();
 
+        int maxCount = 0;
+
         int index = _list.Count;
         for (int i = index - 1; i >= 0; i--)
         {
+            int count = 0;
             // Raw Data 초기 정렬
-            SetSingleDateTime(_list[i], ref _rawData);
+            SetSingleDateTime(_list[i], ref _rawData, out count);
         }
 
 
@@ -241,8 +244,12 @@ public class GraphChartFeed : MonoBehaviour
     /// </summary>
     /// <param name="_record"></param>
     /// <param name="_target"></param>
-    private void SetSingleDateTime(RecordInstance _record, ref Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, dateElement>>> _target)
+    private void SetSingleDateTime(RecordInstance _record, ref Dictionary<IssueClass, Dictionary<IssueCode, Dictionary<DateTime, dateElement>>> _target, out int _maxCount)
     {
+        _maxCount = 0;
+        int cDmg = 0;
+        int cRcv = 0;
+
         // 시간 값으로 인한 오동작 방지
         DateTime date = new DateTime(_record.dateTime.Year, _record.dateTime.Month, _record.dateTime.Day);
 
@@ -254,6 +261,8 @@ public class GraphChartFeed : MonoBehaviour
                 _class: IssueClass.Dmg, _code: IssueCode.Crack,
                 _issues: _record.DCrackList,
                 ref _target);
+
+            cDmg += _record.DCrackList.Count;
         }
 
         if (_record.DEfflorescenceList != null)
@@ -264,6 +273,8 @@ public class GraphChartFeed : MonoBehaviour
                 _class: IssueClass.Dmg, _code: IssueCode.Efflorescense,
                 _issues: _record.DEfflorescenceList,
                 ref _target);
+
+            cDmg += _record.DEfflorescenceList.Count;
         }
 
         if (_record.DSpallingList != null)
@@ -274,6 +285,8 @@ public class GraphChartFeed : MonoBehaviour
                 _class: IssueClass.Dmg, _code: IssueCode.Spalling,
                 _issues: _record.DSpallingList,
                 ref _target);
+
+            cDmg += _record.DSpallingList.Count;
         }
 
         if (_record.DBreakageList != null)
@@ -284,6 +297,8 @@ public class GraphChartFeed : MonoBehaviour
                 _class: IssueClass.Dmg, _code: IssueCode.Breakage,
                 _issues: _record.DBreakageList,
                 ref _target);
+
+            cDmg += _record.DBreakageList.Count;
         }
 
         if (_record.RCrackList != null)
@@ -294,6 +309,8 @@ public class GraphChartFeed : MonoBehaviour
                 _class: IssueClass.Rcv, _code: IssueCode.Crack,
                 _issues: _record.RCrackList,
                 ref _target);
+
+            cRcv += _record.RCrackList.Count;
         }
 
         if (_record.REfflorescenceList != null)
@@ -304,6 +321,8 @@ public class GraphChartFeed : MonoBehaviour
                 _class: IssueClass.Rcv, _code: IssueCode.Efflorescense,
                 _issues: _record.REfflorescenceList,
                 ref _target);
+
+            cRcv += _record.REfflorescenceList.Count;
         }
 
         if (_record.RSpallingList != null)
@@ -314,6 +333,8 @@ public class GraphChartFeed : MonoBehaviour
                 _class: IssueClass.Rcv, _code: IssueCode.Spalling,
                 _issues: _record.RSpallingList,
                 ref _target);
+
+            cRcv += _record.RSpallingList.Count;
         }
 
         if (_record.RBreakageList != null)
@@ -324,6 +345,17 @@ public class GraphChartFeed : MonoBehaviour
                 _class: IssueClass.Rcv, _code: IssueCode.Breakage,
                 _issues: _record.RBreakageList,
                 ref _target);
+
+            cRcv += _record.RBreakageList.Count;
+        }
+
+        if (cDmg >= cRcv)
+        {
+            _maxCount = cDmg;
+        }
+        else
+        {
+            _maxCount = cRcv;
         }
     }
 
