@@ -20,6 +20,7 @@ namespace View
     public partial class UI_Selectable : Interactable,
 		IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 	{
+
 		[System.Serializable]
 		public class Datas
 		{
@@ -96,6 +97,7 @@ namespace View
 		Slider m_slider;
 
 		[SerializeField] AUI m_rootUI;
+		[SerializeField] EventCode m_EventCodes;
 		[SerializeField] UIEventType eventType;
 		[SerializeField] Inspect_EventType inspect_eventType;
 		[SerializeField] Datas m_data;
@@ -150,16 +152,21 @@ namespace View
 
 		private void Start()
 		{
+			Button btn;
+			Slider slider;
+
 			// 버튼이 존재한다면, 버튼의 클릭 이벤트를 Conditional Branch에 연결한다.
-			if (gameObject.TryGetComponent<Button>(out m_btn))
+			if (gameObject.TryGetComponent<Button>(out btn))
 			{
-				m_btn.onClick.AddListener(new UnityAction(OnSelect));
+				m_btn = btn;
+				btn.onClick.AddListener(new UnityAction(OnSelect));
 			}
 
 			// 슬라이더가 존재한다면, 슬라이더의 슬라이딩 이벤트를 Conditional Branch에 연결한다.
-			if (gameObject.TryGetComponent<Slider>(out m_slider))
+			if (gameObject.TryGetComponent<Slider>(out slider))
 			{
-				m_slider.onValueChanged.AddListener(new UnityAction<float>(OnChangeValue));
+				m_slider = slider;
+				slider.onValueChanged.AddListener(new UnityAction<float>(OnChangeValue));
 			}
 		}
 
@@ -182,6 +189,8 @@ namespace View
 			m_rootUI.GetUIEvent(eventType, this);
 			m_rootUI.GetUIEvent(Inspect_eventType, this);
 			Toggle_Status();
+
+			m_EventCodes.OnSelect(m_rootUI, this);
 		}
 
 		public override void OnDeselect<T1, T2>(T1 t1, T2 t2)
@@ -268,6 +277,8 @@ namespace View
 
 			m_rootUI.GetUIEvent(_value, eventType, this);
 			m_rootUI.GetUIEvent(_value, Inspect_eventType, this);
+
+			m_EventCodes.OnChangeValue(_value, m_rootUI, this);
 		}
 
         #endregion

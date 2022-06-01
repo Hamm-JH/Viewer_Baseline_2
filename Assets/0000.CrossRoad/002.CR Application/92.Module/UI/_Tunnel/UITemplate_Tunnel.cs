@@ -105,7 +105,12 @@ namespace Module.UI
 			}
 		}
 
-		public override void GetUIEvent(UIEventType _uType, Interactable _setter)
+        public override void GetUIEvent(float _value, Inspect_EventType _uType, Interactable _setter)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void GetUIEvent(UIEventType _uType, Interactable _setter)
 		{
 			PlatformCode pCode = MainManager.Instance.Platform;
 

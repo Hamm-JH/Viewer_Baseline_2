@@ -29,13 +29,22 @@ namespace Module.UI
 			throw new System.NotImplementedException();
 		}
 
-		public override void GetUIEvent(float _value, UIEventType _uType, Interactable _setter)
+        public override void GetUIEvent(Inspect_EventType _uType, Interactable _setter)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void GetUIEvent(float _value, UIEventType _uType, Interactable _setter)
 		{
 			throw new System.NotImplementedException();
 		}
 
+        public override void GetUIEvent(float _value, Inspect_EventType _uType, Interactable _setter)
+        {
+            throw new System.NotImplementedException();
+        }
 
-		public override void SetObjectData_Tunnel(GameObject selected)
+        public override void SetObjectData_Tunnel(GameObject selected)
 		{
 			
 		}

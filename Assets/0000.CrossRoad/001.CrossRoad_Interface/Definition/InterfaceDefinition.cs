@@ -156,6 +156,22 @@ namespace Definition
 		Image_Enlarge_Center,
 	}
 
+	public enum BottomBar_EventType
+    {
+		NotWork = 0,
+
+		Btn1_CameraMode = 1,
+		Btn2_ViewPosition = 2,
+		Btn3_OrthoMode = 3,
+		Btn4_ShowMode = 4,
+		Btn5_Pan = 5,
+		Btn6_Setting = 6,
+		Btn7_Info = 7,
+
+		ZoomIn,
+		ZoomOut,
+    }
+
 	public enum Compass_EventType
     {
 		NotWork,
