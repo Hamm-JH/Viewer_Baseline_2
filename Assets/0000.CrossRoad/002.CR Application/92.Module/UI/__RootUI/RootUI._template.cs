@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Module.UI
 {
+    using Data.API;
     using Definition;
+    using UnityEngine;
     using View;
-    using Management;
 
-    public partial class Element_BottomBar : AElement
+    public partial class RootUI : AUI
     {
 
     }

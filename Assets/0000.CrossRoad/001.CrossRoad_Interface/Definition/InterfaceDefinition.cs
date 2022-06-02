@@ -168,8 +168,35 @@ namespace Definition
 		Btn6_Setting = 6,
 		Btn7_Info = 7,
 
-		ZoomIn,
-		ZoomOut,
+		ZoomIn = 10,
+		ZoomOut = 11,
+
+		CameraMode_1Home = 20,
+		CameraMode_2Outside = 21,
+		CameraMode_3Inside = 22,
+
+		View_ISO = 30,
+		View_Top = 31,
+		View_Side = 32,
+		View_Bottom = 33,
+
+		Ortho_Orthogonal = 40,
+		Ortho_Perspective = 41,
+
+		Show_ShowAll = 50,
+		Show_Hide = 51,
+		Show_Isolate = 52,
+
+		Function_ElementOff = 60,
+		Function_ElementOn = 61,
+		Function_Toggle = 62,
+
+		Setting_IconSize = 70,
+		Setting_ModelTransparency = 71,
+		Setting_ZoomSensitivity = 72,
+		Setting_FontSize = 73,
+
+
     }
 
 	public enum Compass_EventType

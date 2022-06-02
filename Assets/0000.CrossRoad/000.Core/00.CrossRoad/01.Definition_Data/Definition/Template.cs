@@ -12,8 +12,8 @@ namespace Definition
 
 			if(Platforms.IsDemoWebViewer(_pCode))
             {
-				//list.Add(Resources.Load<GameObject>("UI/BottomBar - DemoWeb"));
-				list.Add(Resources.Load<GameObject>("UI/UIElement/BottomBar"));
+                list.Add(Resources.Load<GameObject>("UI/BottomBar - DemoWeb"));
+                //list.Add(Resources.Load<GameObject>("UI/UIElement/BottomBar"));
 			}
 			else if (Platforms.IsDemoAdminViewer(_pCode))
 			{

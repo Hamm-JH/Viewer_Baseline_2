@@ -10,6 +10,9 @@ namespace Module.UI
 
     public partial class Element_BottomBar : AElement
     {
+        private void Pan_1Pan(Interactable _setter)
+        {
 
+        }
     }
 }
