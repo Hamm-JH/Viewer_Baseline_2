@@ -156,6 +156,11 @@ namespace Definition
 		Image_Enlarge_Center,
 	}
 
+	//----------------------------------------------------
+
+	/// <summary>
+	/// Element :: 하단 바의 이벤트 정의
+	/// </summary>
 	public enum BottomBar_EventType
     {
 		NotWork = 0,
@@ -195,9 +200,20 @@ namespace Definition
 		Setting_ModelTransparency = 71,
 		Setting_ZoomSensitivity = 72,
 		Setting_FontSize = 73,
-
-
     }
+
+	/// <summary>
+	/// Element :: 호버링 패널의 이벤트 정의
+	/// </summary>
+	public enum Hover_EventType
+    {
+		NotWork = 0,
+
+		OnHover = 1,
+		OffHover = 2,
+    }
+
+	//----------------------------------------------------
 
 	public enum Compass_EventType
     {

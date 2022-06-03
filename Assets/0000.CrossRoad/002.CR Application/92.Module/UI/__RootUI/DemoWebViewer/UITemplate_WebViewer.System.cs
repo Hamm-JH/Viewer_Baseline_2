@@ -8,8 +8,9 @@ namespace Module.UI
     using UnityEngine;
     using View;
 
-    public partial class UITemplate_WebViewer : AUI
+    public partial class UITemplate_WebViewer : RootUI
     {
 
+        
     }
 }

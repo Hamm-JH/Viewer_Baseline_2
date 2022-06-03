@@ -250,7 +250,7 @@ namespace Management.Events.Inputs
 					GameObject currObj = null;
 					GameObject selectedObj = null;
 					// 동일한 객체를 선택한 경우.
-					Debug.Log(111);
+					//Debug.Log(111);
 					if(_Events.IsSameObjectSelected(Elements, _sEvents, out currObj, out selectedObj))
                     {
 						Cameras.SetCameraDOTweenPosition(MainManager.Instance.MainCamera, currObj);

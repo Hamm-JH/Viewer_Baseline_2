@@ -19,7 +19,7 @@ namespace Module.UI
 
         public override void GetUIEvent(BottomBar_EventType _type, Interactable _setter)
         {
-            Debug.Log(_type.ToString());
+            //Debug.Log(_type.ToString());
             switch(_type)
             {
                 #region BottomBar
