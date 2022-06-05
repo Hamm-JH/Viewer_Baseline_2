@@ -18,6 +18,8 @@ namespace Module.UI
             MainManager.Instance.UpdateCameraMode(Definition.Control.CameraModes.BIM_ISO);
 
             Show_All(_setter);
+
+            _Resource.Toggle_Group(1, _setter.gameObject);
         }
 
         private void Camera_2Outside(Interactable _setter)
@@ -28,6 +30,8 @@ namespace Module.UI
             {
 
             }
+
+            _Resource.Toggle_Group(1, _setter.gameObject);
         }
 
         private void Camera_3Inside(Interactable _setter)
@@ -38,6 +42,8 @@ namespace Module.UI
             {
 
             }
+
+            _Resource.Toggle_Group(1, _setter.gameObject);
         }
     }
 }

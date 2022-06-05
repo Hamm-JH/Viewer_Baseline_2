@@ -17,6 +17,8 @@ namespace Module.UI
             _Settings.ResetSlider_iconSize();
 
             _Children.Off();
+
+            _Resource.Toggle_Group(4, _setter.gameObject);
         }
 
         private void Show_Hide(Interactable _setter)
@@ -24,6 +26,8 @@ namespace Module.UI
             ContentManager.Instance.Toggle_ModelObject(UIEventType.Mode_Hide, ToggleType.Hide);
 
             _Children.Off();
+
+            _Resource.Toggle_Group(4, _setter.gameObject);
         }
 
         private void Show_Isolate(Interactable _setter)
@@ -31,6 +35,8 @@ namespace Module.UI
             ContentManager.Instance.Toggle_ModelObject(UIEventType.Mode_Isolate, ToggleType.Isolate);
 
             _Children.Off();
+
+            _Resource.Toggle_Group(4, _setter.gameObject);
         }
     }
 }

@@ -12,6 +12,64 @@ namespace Module.UI
     public partial class Element_BottomBar : AElement
     {
 		[System.Serializable]
+		public class State_Image
+        {
+			public Color m_defaultColor;
+			public Color m_selectedColor;
+			public Sprite m_defaultSprite;
+			public Sprite m_selectedSprite;
+
+			public void Set_Default(Image _tg)
+            {
+				_tg.sprite = m_defaultSprite;
+				_tg.color = m_defaultColor;
+            }
+
+			public void Set_Selected(Image _tg)
+            {
+				_tg.sprite = m_selectedSprite;
+				_tg.color = m_selectedColor;
+			}
+        }
+
+		[System.Serializable]
+		public class Group_Element
+        {
+			public List<Image> m_img;
+
+			public void On(State_Image _state)
+			{
+				m_img.ForEach(x =>
+				{
+					_state.Set_Selected(x);
+				});
+			}
+
+			public void Off(State_Image _state)
+			{
+				m_img.ForEach(x =>
+				{
+					_state.Set_Default(x);
+				});
+			}
+
+			public void Toggle(GameObject _tg, State_Image _state)
+			{
+				m_img.ForEach(x =>
+				{
+					if (x.gameObject == _tg)
+					{
+						_state.Set_Selected(x);
+					}
+					else
+					{
+						_state.Set_Default(x);
+					}
+				});
+			}
+		}
+
+		[System.Serializable]
 		public class Children
         {
 			[SerializeField] List<GameObject> list;
@@ -100,10 +158,55 @@ namespace Module.UI
 			}
 		}
 
+		[System.Serializable]
+		public class Resource
+        {
+			[Header("State")]
+			public State_Image m_bottomBarState;
+			public State_Image m_subElementState;
+
+			/*
+			 * 0 bottomBar
+			 * 1 camera
+			 * 2 view
+			 * 3 orthogonal
+			 * 4 show
+			 */
+			[Header("elements")]
+			public List<Group_Element> m_groups;
+
+			public List<GameObject> m_defaultGroup;
+
+			public void On_Group(int index)
+            {
+				m_groups[index].On(index == 0 ? m_bottomBarState : m_subElementState);
+            }
+
+			public void Off_Group(int index)
+            {
+				m_groups[index].Off(index == 0 ? m_bottomBarState : m_subElementState);
+			}
+
+			public void Toggle_Group(int index, GameObject _tg)
+            {
+				m_groups[index].Toggle(_tg, index == 0 ? m_bottomBarState: m_subElementState);
+			}
+
+			public void Reset()
+            {
+                for (int i = 0; i < m_groups.Count; i++)
+                {
+					m_groups[i].Toggle(m_defaultGroup[i], i == 0 ? m_bottomBarState : m_subElementState);
+                }
+            }
+        }
+
 		[SerializeField] Children children;
 		[SerializeField] Settings settings;
+		[SerializeField] Resource resource;
 
         public Children _Children { get => children; set => children = value; }
         public Settings _Settings { get => settings; set => settings = value; }
+        public Resource _Resource { get => resource; set => resource = value; }
     }
 }
