@@ -5,12 +5,41 @@ using UnityEngine;
 namespace Module.UI
 {
 	using Definition;
+    using Definition.Data;
     using System;
     using View;
 
     public abstract partial class AUI : AModule
     {
-		
+		/// <summary>
+		/// 전달변수만 존재하는 이벤트 발생
+		/// </summary>
+		/// <typeparam name="T"> 이벤트 타입 </typeparam>
+		/// <typeparam name="V"> 전달변수 타입 </typeparam>
+		/// <param name="_type"> 이벤트 </param>
+		/// <param name="_value"> 전달변수 </param>
+		public void GetUIEventPacket<T>(T _type, APacket _value)
+        {
+			switch (typeof(T))
+			{
+				case Type type when type == typeof(UIEventType):
+					GetUIEventPacket((UIEventType)(object)_type, _value);
+					break;
+
+				case Type type when type == typeof(Inspect_EventType):
+					GetUIEventPacket((Inspect_EventType)(object)_type, _value);
+					break;
+
+				case Type type when type == typeof(BottomBar_EventType):
+					GetUIEventPacket((BottomBar_EventType)(object)_type, _value);
+					break;
+
+				case Type type when type == typeof(Hover_EventType):
+					GetUIEventPacket((Hover_EventType)(object)_type, _value);
+					break;
+			}
+		}
+
 		/// <summary>
 		/// 버튼 이벤트 분배
 		/// </summary>
@@ -31,6 +60,10 @@ namespace Module.UI
 
 				case Type type when type == typeof(BottomBar_EventType):
 					GetUIEvent((BottomBar_EventType)(object)_type, _setter);
+					break;
+
+				case Type type when type == typeof(Hover_EventType):
+					GetUIEvent((Hover_EventType)(object)_type, _setter);
 					break;
             }
 		}
@@ -58,6 +91,10 @@ namespace Module.UI
 					GetUIEvent(_value, (BottomBar_EventType)(object)_type, _setter);
 					break;
 
+				case Type type when type == typeof(Hover_EventType):
+					GetUIEvent(_value, (Hover_EventType)(object)_type, _setter);
+					break;
+
 			}
 		}
 
@@ -69,7 +106,7 @@ namespace Module.UI
 		public abstract void GetUIEvent(UIEventType _uType, Interactable _setter);
 		public abstract void GetUIEvent(Inspect_EventType _uType, Interactable _setter);
 		public virtual void GetUIEvent(BottomBar_EventType _type, Interactable _setter) { }
-
+		public virtual void GetUIEvent(Hover_EventType _type, Interactable _setter) { }
 
 		/// <summary>
 		/// 슬라이더 이벤트 분배
@@ -78,9 +115,14 @@ namespace Module.UI
 		/// <param name="_uType"></param>
 		/// <param name="_setter"></param>
 		public abstract void GetUIEvent(float _value, UIEventType _uType, Interactable _setter);
-
 		public abstract void GetUIEvent(float _value, Inspect_EventType _uType, Interactable _setter);
 		public virtual void GetUIEvent(float _value, BottomBar_EventType _type, Interactable _setter) { }
+		public virtual void GetUIEvent(float _value, Hover_EventType _type, Interactable _setter) { }
+
+		public virtual void GetUIEventPacket(UIEventType _type, APacket _value) { }
+		public virtual void GetUIEventPacket(Inspect_EventType _type, APacket _value) { }
+		public virtual void GetUIEventPacket(BottomBar_EventType _type, APacket _value) { }
+		public virtual void GetUIEventPacket(Hover_EventType _type, APacket _value) { }
 
 		/// <summary>
 		/// 전달변수가 V인 이벤트 발생
@@ -92,14 +134,7 @@ namespace Module.UI
 		/// <param name="_setter"> 이벤트 실행자 </param>
 		public virtual void GetUIEvent<T, V>(T _type, V _value, Interactable _setter) { }
 
-		/// <summary>
-		/// 전달변수만 존재하는 이벤트 발생
-		/// </summary>
-		/// <typeparam name="T"> 이벤트 타입 </typeparam>
-		/// <typeparam name="V"> 전달변수 타입 </typeparam>
-		/// <param name="_type"> 이벤트 </param>
-		/// <param name="_value"> 전달변수 </param>
-		public virtual void GetUIEvent<T, V>(T _type, V _value) { }
+		
 
 		/// <summary>
 		/// 이벤트 타입만 존재하는 이벤트 발생

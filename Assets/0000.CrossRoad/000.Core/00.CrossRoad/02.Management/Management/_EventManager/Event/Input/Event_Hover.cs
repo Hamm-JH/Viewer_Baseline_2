@@ -68,9 +68,7 @@ namespace Management.Events.Inputs
             PlatformCode pCode = MainManager.Instance.Platform;
             if(Platforms.IsDemoWebViewer(pCode))
             {
-                _uiDemo = (UITemplate_Tunnel)interaction.UiInstances[0];
-
-
+                UITemplate_WebViewer _ui = interaction.UiInstances[0].gameObject.GetComponent<UITemplate_WebViewer>();
                 UIIssue_Selectable uiIssue;
                 m_results.ForEach(x =>
                 {
@@ -85,7 +83,11 @@ namespace Management.Events.Inputs
                                 if (uiIssue.IssueSelectable != null)
                                 {
                                     //m_camera.WorldToScreenPoint(m_mousePosition);
-                                    _uiDemo.HoverPanel_OnHover(ContentManager.Instance._Canvas, m_mousePosition, uiIssue.IssueSelectable.Issue);
+                                    _ui.GetUIEventPacket(Hover_EventType.OnHover,
+                                        new Definition.Data.Packet_HoverEvent(
+                                            ContentManager.Instance._Canvas,
+                                            m_mousePosition,
+                                            uiIssue.IssueSelectable.Issue)); //.HoverPanel_OnHover(ContentManager.Instance._Canvas, m_mousePosition, uiIssue.IssueSelectable.Issue);
                                     return;
                                 }
                             }
@@ -95,8 +97,42 @@ namespace Management.Events.Inputs
 
                 if (m_results.Count == 0)
                 {
-                    _uiDemo.HoverPanel_OffHover();
+                    _ui.GetUIEventPacket(Hover_EventType.OffHover,
+                                        new Definition.Data.Packet_HoverEvent(
+                                            ContentManager.Instance._Canvas,
+                                            m_mousePosition,
+                                            null));
                 }
+
+                //return;
+                //_uiDemo = (UITemplate_Tunnel)interaction.UiInstances[0];
+
+                ////UIIssue_Selectable uiIssue;
+                //m_results.ForEach(x =>
+                //{
+                //    if (m_results.Count == 1)
+                //    {
+                //        if (x.gameObject.transform.parent.TryGetComponent<UIIssue_Selectable>(out uiIssue))
+                //        {
+                //            if (uiIssue.HoveringItem.IsLookup)
+                //            {
+                //                //Debug.Log(x.gameObject.transform.parent.name);
+                //                // MainIcon인 경우 - mainIcon만 IssueSelectable을 가지고있다.
+                //                if (uiIssue.IssueSelectable != null)
+                //                {
+                //                    //m_camera.WorldToScreenPoint(m_mousePosition);
+                //                    _uiDemo.HoverPanel_OnHover(ContentManager.Instance._Canvas, m_mousePosition, uiIssue.IssueSelectable.Issue);
+                //                    return;
+                //                }
+                //            }
+                //        }
+                //    }
+                //});
+
+                //if (m_results.Count == 0)
+                //{
+                //    _uiDemo.HoverPanel_OffHover();
+                //}
             }
             else if(Platforms.IsSmartInspectPlatform(pCode))
             {

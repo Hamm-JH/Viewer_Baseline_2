@@ -5,6 +5,7 @@ namespace Module.UI
 {
     using Data.API;
     using Definition;
+    using Definition.Data;
     using UnityEngine;
     using View;
 
@@ -28,6 +29,11 @@ namespace Module.UI
         public override void GetUIEvent(float _value, Inspect_EventType _uType, Interactable _setter)
         {
 
+        }
+
+        public override void GetUIEventPacket(Hover_EventType _type, APacket _value)
+        {
+            Elements.ForEach(x => x.GetUIEventPacket<Hover_EventType>(_type, _value));
         }
     }
 }
