@@ -36,12 +36,28 @@ namespace Module.UI
 		public class Group_Element
         {
 			public List<Image> m_img;
+			public List<bool> m_pinned;
 
 			public void On(State_Image _state)
 			{
 				m_img.ForEach(x =>
 				{
 					_state.Set_Selected(x);
+				});
+			}
+
+			public void On(GameObject _tg, State_Image _state)
+            {
+				m_img.ForEach(x =>
+				{
+					if (x.gameObject == _tg)
+					{
+						_state.Set_Selected(x);
+					}
+					else
+					{
+						_state.Set_Default(x);
+					}
 				});
 			}
 
@@ -180,6 +196,11 @@ namespace Module.UI
 			public void On_Group(int index)
             {
 				m_groups[index].On(index == 0 ? m_bottomBarState : m_subElementState);
+            }
+
+			public void On_Group(int index, GameObject _tg)
+            {
+				m_groups[index].On(_tg, index == 0 ? m_bottomBarState : m_subElementState);
             }
 
 			public void Off_Group(int index)

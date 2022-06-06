@@ -33,6 +33,7 @@ namespace Definition.Control
 		BIM_BACK = 0x35,		// BIM 측후면 뷰 모드
 		BIM_LEFT = 0x36,		// BIM 측좌면 뷰 모드
 		BIM_RIGHT = 0x37,		// BIM 측우면 뷰 모드
+		BIM_Panning = 0x38,		// BIM 패닝
 
 		OnlyRotate = 0x40,		// 제자리에서 회전만 수행
 	}

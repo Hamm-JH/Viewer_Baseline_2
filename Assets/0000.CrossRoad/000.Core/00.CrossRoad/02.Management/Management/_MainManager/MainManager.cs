@@ -69,6 +69,12 @@ namespace Management
 			get => _core.GraphicMode;
         }
 
+		public CameraModes CurrentCameraMode
+        {
+			get => _core.CameraMode;
+			set => _core.CameraMode = value;
+        }
+
 		public ContentManager Content
 		{
 			get => _content.Content;

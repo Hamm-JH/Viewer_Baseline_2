@@ -34,6 +34,13 @@ namespace Module.UI
 
             if(Platforms.IsTunnelPlatform(pCode))
             {
+                GameObject obj = EventManager.Instance._SelectedObject;
+
+                if(obj != null)
+                {
+
+                    Cameras.SetCameraDOTweenPosition(MainManager.Instance.MainCamera, obj);
+                }
 
             }
 
@@ -46,8 +53,16 @@ namespace Module.UI
 
             if(Platforms.IsTunnelPlatform(pCode))
             {
+                GameObject obj = EventManager.Instance._SelectedObject;
+
+                if (obj != null)
+                {
+                    MainManager.Instance.CurrentCameraMode = Definition.Control.CameraModes.OnlyRotate;
+                    Cameras.SetCameraDOTweenPosition(MainManager.Instance.MainCamera, obj);
+                }
 
             }
+
 
             _Resource.Toggle_Group(1, _setter.gameObject);
         }

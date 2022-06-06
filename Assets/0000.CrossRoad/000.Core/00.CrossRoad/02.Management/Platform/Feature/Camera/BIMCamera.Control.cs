@@ -89,6 +89,10 @@ namespace Platform.Feature.Camera
 				{
                     OnOrbitRotate(targetPosition, delta, orbitSpeed);
 				}
+                else if(CamMode == CameraModes.BIM_Panning)
+                {
+                    OnPanning(targetPosition, delta, panSpeed, targetOffset, maxOffsetDistance);
+                }
                 else if(CamMode == CameraModes.OnlyRotate)
                 {
                     OnSelfRotate(delta, freeSpeed);

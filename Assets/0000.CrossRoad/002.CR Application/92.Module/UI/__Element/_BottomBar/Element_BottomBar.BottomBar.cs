@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,6 +38,16 @@ namespace Module.UI
         {
             _Children.Off();
             _Resource.Toggle_Group(0, _setter.gameObject);
+
+            // 카메라 모드 변경
+            if (MainManager.Instance.CurrentCameraMode == Definition.Control.CameraModes.BIM_Panning)
+            {
+                MainManager.Instance.CurrentCameraMode = Definition.Control.CameraModes.BIM_ISO;
+            }
+            else
+            {
+                MainManager.Instance.CurrentCameraMode = Definition.Control.CameraModes.BIM_Panning;
+            }
         }
 
         private void Bar_6Setting(Interactable _setter)
