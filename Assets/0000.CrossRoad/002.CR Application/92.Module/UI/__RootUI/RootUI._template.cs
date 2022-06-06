@@ -8,7 +8,7 @@ namespace Module.UI
     using UnityEngine;
     using View;
 
-    public partial class RootUI : AUI
+    public abstract partial class RootUI : AUI
     {
 
     }

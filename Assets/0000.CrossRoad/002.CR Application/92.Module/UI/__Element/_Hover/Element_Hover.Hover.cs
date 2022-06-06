@@ -175,7 +175,7 @@ namespace Module.UI
 
 			_text1.text = _issue.NmUser;
 			_text2.text = _issue.IssueCode.ToString();
-			_text3.text = _issue.CdBridgeParts.ToString();
+			_text3.text = _issue.__PartName.ToString();
 			_text4.text = _issue.IssueStatus.ToString();
 			_text5.text = _issue.DateDmg;
 

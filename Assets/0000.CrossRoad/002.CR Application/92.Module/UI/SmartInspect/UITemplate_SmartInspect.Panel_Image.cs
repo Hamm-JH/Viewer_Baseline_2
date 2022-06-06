@@ -8,7 +8,7 @@ namespace Module.UI
     using SmartInspect;
     using View;
 
-    public partial class UITemplate_SmartInspect : AUI
+    public partial class UITemplate_SmartInspect : RootUI
     {
         private void Panel_SetImage(Interactable _setter)
         {

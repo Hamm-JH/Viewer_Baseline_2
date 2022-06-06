@@ -851,7 +851,11 @@ namespace ChartAndGraph
             RaiseDataChanged();
         }
         
-        
+        public void Override_SetMaxValue(string category, int _value)
+        {
+            mData[category].MaxY = _value;
+        }
+
         double IInternalGraphData.GetMaxValue(int axis, bool dataValue)
         {
             return GetMaxValue(axis, dataValue);

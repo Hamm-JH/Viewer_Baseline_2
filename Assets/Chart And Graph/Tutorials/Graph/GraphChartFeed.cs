@@ -813,6 +813,7 @@ public class GraphChartFeed : MonoBehaviour
 
         List<int> dmgResult;
         List<int> rcvResult;
+        int maxYIndex = 0;
 
         // 일단 dmg all
         // ALL
@@ -834,8 +835,10 @@ public class GraphChartFeed : MonoBehaviour
                 SetIndexPerIssue(_year, _yearIndex: _yearIndex, issueElements[IssueClass.Rcv][key], rcvResult);
             }
 
+            maxYIndex = (int)GetMaxIndex(dmgResult, rcvResult);
+
             // ★★★ 모든 데이터 할당이 끝난 뒤, 그래프에 데이터 할당 요청
-            Set_YearGraph(_tgYear: _year, dmgResult, rcvResult, _yearIndex);
+            Set_YearGraph(_tgYear: _year, dmgResult, rcvResult, _yearIndex, maxYIndex);
         }
         // Crack
         else if(_issueIndex == 1 || _issueIndex == 2 || _issueIndex == 3 || _issueIndex == 4)
@@ -862,7 +865,9 @@ public class GraphChartFeed : MonoBehaviour
                 SetIndexPerIssue(_year, _yearIndex: _yearIndex, issueElements[IssueClass.Rcv][code], rcvResult);
             }
 
-            Set_YearGraph(_tgYear: _year, dmgResult, rcvResult, _yearIndex);
+            maxYIndex = (int)GetMaxIndex(dmgResult, rcvResult);
+
+            Set_YearGraph(_tgYear: _year, dmgResult, rcvResult, _yearIndex, maxYIndex);
         }
 
         Debug.Log($"year {_year} :: index {_issueIndex}");
@@ -901,6 +906,34 @@ public class GraphChartFeed : MonoBehaviour
         }
 
         return list;
+    }
+
+    private uint GetMaxIndex(List<int> _dmgs, List<int> _rcvs)
+    {
+        uint result = 0;
+
+        _dmgs.ForEach(x =>
+        {
+            if (result < x)
+            {
+                result = (uint)x;
+            }
+        });
+
+        _rcvs.ForEach(x =>
+        {
+            if (result < x)
+            {
+                result = (uint)x;
+            }
+        });
+
+        if(result < 10)
+        {
+            result = 10;
+        }
+
+        return result;
     }
 
     #region Set Index per Issue
@@ -1131,78 +1164,7 @@ public class GraphChartFeed : MonoBehaviour
 
     #region Set Data to Graph
 
-    //private void Demo_Set_Year1(GraphChartBase _graph, HorizontalAxis _hAxis)
-    //{
-    //    _hAxis.MainDivisions.Total = 12;
-    //
-    //    List<int> dmgIndexes = new List<int>();
-    //    List<int> rcvIndexes = new List<int>();
-    //
-    //	for (int i = 0; i < 49; i++)
-    //	{
-    //        dmgIndexes.Add(i);
-    //        rcvIndexes.Add(49 - i);
-    //	}
-    //
-    //    Demo_Set_Year1(_graph, "Player 1", dmgIndexes);
-    //    Demo_Set_Year1(_graph, "Player 2", rcvIndexes);
-    //}
-
-    //private void Demo_Set_Year5(GraphChartBase _graph, HorizontalAxis _hAxis)
-    //{
-    //    _hAxis.MainDivisions.Total = 10;
-    //
-    //    int currYear = 2023;
-    //    List<int> dmgIndexes = new List<int>();
-    //    List<int> rcvIndexes = new List<int>();
-    //
-    //    for (int i = 0; i < 11; i++)
-    //    {
-    //        dmgIndexes.Add(i);
-    //        rcvIndexes.Add(11 - i);
-    //    }
-    //
-    //    Demo_Set_Year5(_graph, "Player 1", currYear, dmgIndexes);
-    //    Demo_Set_Year5(_graph, "Player 2", currYear, rcvIndexes);
-    //}
-
-    //private void Demo_Set_Year10(GraphChartBase _graph, HorizontalAxis _hAxis)
-    //{
-    //    _hAxis.MainDivisions.Total = 10;
-    //
-    //    int currYear = 2023;
-    //    List<int> dmgIndexes = new List<int>();
-    //    List<int> rcvIndexes = new List<int>();
-    //
-    //    for (int i = 0; i < 11; i++)
-    //    {
-    //        dmgIndexes.Add(i);
-    //        rcvIndexes.Add(11 - i);
-    //    }
-    //
-    //    Demo_Set_Year10(_graph, "Player 1", currYear, dmgIndexes);
-    //    Demo_Set_Year10(_graph, "Player 2", currYear, rcvIndexes);
-    //}
-
-    //private void Demo_Set_Year50(GraphChartBase _graph, HorizontalAxis _hAxis)
-    //{
-    //    _hAxis.MainDivisions.Total = 10;
-    //
-    //    int currYear = 2023;
-    //    List<int> dmgIndexes = new List<int>();
-    //    List<int> rcvIndexes = new List<int>();
-    //
-    //    for (int i = 0; i < 11; i++)
-    //    {
-    //        dmgIndexes.Add(i);
-    //        rcvIndexes.Add(11 - i);
-    //    }
-    //
-    //    Demo_Set_Year50(_graph, "Player 1", currYear, dmgIndexes);
-    //    Demo_Set_Year50(_graph, "Player 2", currYear, rcvIndexes);
-    //}
-
-    private void Set_YearGraph(int _tgYear, List<int> _dmgList, List<int> _rcvList, int _yearIndex)
+    private void Set_YearGraph(int _tgYear, List<int> _dmgList, List<int> _rcvList, int _yearIndex, int _maxYIndex)
     {
         int division = 0;
         switch(_yearIndex)
@@ -1219,23 +1181,23 @@ public class GraphChartFeed : MonoBehaviour
         switch(_yearIndex)
 		{
             case 0:
-                Demo_Set_Year1(graph, "Player 1", _dmgList);
-                Demo_Set_Year1(graph, "Player 2", _rcvList);
+                Demo_Set_Year1(graph, "Player 1", _dmgList, _maxYIndex);
+                Demo_Set_Year1(graph, "Player 2", _rcvList, _maxYIndex);
                 break;
 
             case 1:
-                Demo_Set_Year5(graph, "Player 1", _tgYear, _dmgList);
-                Demo_Set_Year5(graph, "Player 2", _tgYear, _rcvList);
+                Demo_Set_Year5(graph, "Player 1", _tgYear, _dmgList, _maxYIndex);
+                Demo_Set_Year5(graph, "Player 2", _tgYear, _rcvList, _maxYIndex);
                 break;
 
             case 2:
-                Demo_Set_Year10(graph, "Player 1", _tgYear, _dmgList);
-                Demo_Set_Year10(graph, "Player 2", _tgYear, _rcvList);
+                Demo_Set_Year10(graph, "Player 1", _tgYear, _dmgList, _maxYIndex);
+                Demo_Set_Year10(graph, "Player 2", _tgYear, _rcvList, _maxYIndex);
                 break;
 
             case 3:
-                Demo_Set_Year50(graph, "Player 1", _tgYear, _dmgList);
-                Demo_Set_Year50(graph, "Player 2", _tgYear, _rcvList);
+                Demo_Set_Year50(graph, "Player 1", _tgYear, _dmgList, _maxYIndex);
+                Demo_Set_Year50(graph, "Player 2", _tgYear, _rcvList, _maxYIndex);
                 break;
         }
         
@@ -1247,7 +1209,7 @@ public class GraphChartFeed : MonoBehaviour
     /// <param name="_graph"></param>
     /// <param name="_cName"></param>
     /// <param name="_indexes"></param>
-    private void Demo_Set_Year1(GraphChartBase _graph, string _cName, List<int> _indexes)
+    private void Demo_Set_Year1(GraphChartBase _graph, string _cName, List<int> _indexes, int _maxYIndex)
 	{
         _graph.DataSource.StartBatch();
 
@@ -1271,6 +1233,8 @@ public class GraphChartFeed : MonoBehaviour
 			//}
 		}
 
+        _graph.DataSource.Override_SetMaxValue(_cName, _maxYIndex);
+
         _graph.DataSource.EndBatch();
 	}
 
@@ -1283,7 +1247,7 @@ public class GraphChartFeed : MonoBehaviour
     /// <param name="_cName"></param>
     /// <param name="_currYear"></param>
     /// <param name="_indexes"></param>
-    private void Demo_Set_Year5(GraphChartBase _graph, string _cName, int _currYear, List<int> _indexes)
+    private void Demo_Set_Year5(GraphChartBase _graph, string _cName, int _currYear, List<int> _indexes, int _maxYIndex)
 	{
         _graph.DataSource.StartBatch();
 
@@ -1306,13 +1270,14 @@ public class GraphChartFeed : MonoBehaviour
             //_graph.HorizontalValueToStringMap[i+1] = "";
             //}
         }
+        _graph.DataSource.Override_SetMaxValue(_cName, _maxYIndex);
 
         _graph.DataSource.EndBatch();
     }
 
     
 
-    private void Demo_Set_Year10(GraphChartBase _graph, string _cName, int _currYear, List<int> _indexes)
+    private void Demo_Set_Year10(GraphChartBase _graph, string _cName, int _currYear, List<int> _indexes, int _maxYIndex)
 	{
         _graph.DataSource.StartBatch();
 
@@ -1331,12 +1296,14 @@ public class GraphChartFeed : MonoBehaviour
             //}
         }
 
+        _graph.DataSource.Override_SetMaxValue(_cName, _maxYIndex);
+
         _graph.DataSource.EndBatch();
     }
 
     
 
-    private void Demo_Set_Year50(GraphChartBase _graph, string _cName, int _currYear, List<int> _indexes)
+    private void Demo_Set_Year50(GraphChartBase _graph, string _cName, int _currYear, List<int> _indexes, int _maxYIndex)
 	{
         _graph.DataSource.StartBatch();
 
@@ -1354,6 +1321,8 @@ public class GraphChartFeed : MonoBehaviour
                 _graph.HorizontalValueToStringMap[i+1] = $"|";
             }
         }
+
+        _graph.DataSource.Override_SetMaxValue(_cName, _maxYIndex);
 
         _graph.DataSource.EndBatch();
     }

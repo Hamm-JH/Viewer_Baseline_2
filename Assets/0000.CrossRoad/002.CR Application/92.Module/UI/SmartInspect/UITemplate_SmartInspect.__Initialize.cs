@@ -10,7 +10,7 @@ namespace Module.UI
     using View;
 
 
-    public partial class UITemplate_SmartInspect : AUI
+    public partial class UITemplate_SmartInspect : RootUI
     {
         /// <summary>
         /// 모듈 세팅이 완료된 시점에서 초기화를 수행한다.

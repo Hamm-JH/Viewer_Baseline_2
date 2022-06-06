@@ -6,7 +6,7 @@ using View;
 
 namespace Module.UI
 {
-    public partial class UITemplate_SmartInspect : AUI
+    public partial class UITemplate_SmartInspect : RootUI
     {
         private void TopMenu_ToggleProfile()
         {

@@ -2256,7 +2256,7 @@ GameObject:
   - component: {fileID: 7513815144370465186}
   - component: {fileID: 3465243174689442990}
   m_Layer: 5
-  m_Name: Hover element
+  m_Name: Element - Hover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

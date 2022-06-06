@@ -8,7 +8,7 @@ namespace Module.UI
     using UnityEngine.UI;
     using View;
 
-    public partial class UITemplate_SmartInspect : AUI
+    public partial class UITemplate_SmartInspect : RootUI
     {
         /// <summary>
         /// module rcv toggle repairList panel

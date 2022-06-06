@@ -20,6 +20,12 @@ namespace Module.UI
             Show_All(_setter);
 
             _Resource.Toggle_Group(1, _setter.gameObject);
+
+            PlatformCode pCode = MainManager.Instance.Platform;
+            if(Platforms.IsSmartInspectPlatform(pCode))
+            {
+                ((UITemplate_SmartInspect)RootUI).Event_View_Home();
+            }
         }
 
         private void Camera_2Outside(Interactable _setter)

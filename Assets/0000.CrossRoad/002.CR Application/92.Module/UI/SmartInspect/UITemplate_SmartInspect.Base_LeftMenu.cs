@@ -11,7 +11,7 @@ using View;
 
 namespace Module.UI
 {
-    public partial class UITemplate_SmartInspect : AUI
+    public partial class UITemplate_SmartInspect : RootUI
     {
         /// <summary>
         /// Base LeftMenu dmg 버튼 클릭시 메서드

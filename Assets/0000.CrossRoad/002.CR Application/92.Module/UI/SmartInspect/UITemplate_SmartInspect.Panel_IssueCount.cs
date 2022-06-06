@@ -8,7 +8,7 @@ namespace Module.UI
     using Management;
     using View;
 
-    public partial class UITemplate_SmartInspect : AUI
+    public partial class UITemplate_SmartInspect : RootUI
     {
         private void Ins_Panel_OnSelectCount(Interactable _setter)
 		{

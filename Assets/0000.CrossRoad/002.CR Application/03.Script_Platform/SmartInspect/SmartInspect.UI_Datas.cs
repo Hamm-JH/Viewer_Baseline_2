@@ -428,54 +428,6 @@ namespace SmartInspect
 
     #endregion
 
-    #region BottomBar elements
-
-    [System.Serializable]
-    public class BottomBar
-    {
-        public List<GameObject> m_subPanels;
-
-        public List<RProcessMenu> m_btnMenu_bottomBar;
-
-        public ViewPort m_viewport;
-        public Orthographic m_orthographic;
-        public Zoom m_zoom;
-    }
-
-    [System.Serializable]
-    public class ViewPort
-    {
-        public GameObject root;
-        public GameObject btn_1ISO;
-        public GameObject btn_2Top;
-        public GameObject btn_3Side;
-        public GameObject btn_4Bottom;
-
-        public List<RProcessMenu> m_btnMenu_viewMode;
-    }
-
-    [System.Serializable]
-    public class Orthographic
-    {
-        public GameObject root;
-        public GameObject btn_1Orthographic;
-        public GameObject btn_2Perspective;
-
-        public List<RProcessMenu> m_btnMenu_orthoMode;
-    }
-
-    
-
-    [System.Serializable]
-    public class Zoom
-    {
-        public GameObject root;
-        public GameObject zoomIn;
-        public GameObject zoomOut;
-    }
-
-    #endregion
-
     #region General elements
 
 

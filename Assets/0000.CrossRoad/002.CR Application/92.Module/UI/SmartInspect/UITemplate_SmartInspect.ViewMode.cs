@@ -8,29 +8,20 @@ namespace Module.UI
 	using UnityEngine;
 	using View;
 
-    public partial class UITemplate_SmartInspect : AUI
+    public partial class UITemplate_SmartInspect : RootUI
     {
 		/// <summary>
 		/// 모두 보이기
 		/// </summary>
 		public void Event_View_Home()
 		{
-			ContentManager.Instance.SetCameraCenterPosition();
+			//ContentManager.Instance.SetCameraCenterPosition();
 
 			ModDmg_ResetBasePosition();
 			ModRcv_ResetBasePosition();
 			ModAdm_ResetBasePosition();
 
-			ContentManager.Instance.Reset_ModelObject();
-		}
-
-		public void Event_Toggle_ChildPanel(int index, GameObject ChildPanel)
-		{
-			// 자식 객체 토글
-			// 이 인스턴스가 가진 childPanel을 보내 토글 끄기 대상에서 제외한다.
-
-			TogglePanelList(index, ChildPanel);
-			//m_rootUI.TogglePanelList(index, ChildPanel);
+			//ContentManager.Instance.Reset_ModelObject();
 		}
 
 		private void Event_Toggle_ViewMode(GameObject ChildPanel)
@@ -48,12 +39,6 @@ namespace Module.UI
 				//	obj.SetActive(toggle);
 				//}
 			}
-		}
-
-		private void Event_Toggle_ViewMode(UIEventType _eventType)
-		{
-			MainManager.Instance.UpdateCameraMode(_eventType);
-			ContentManager.Instance.SetCameraCenterPosition(_eventType);
 		}
 	}
 }

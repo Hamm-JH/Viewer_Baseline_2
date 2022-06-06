@@ -9723,7 +9723,7 @@ GameObject:
   - component: {fileID: 358924770841719770}
   - component: {fileID: 4102326051510210323}
   m_Layer: 0
-  m_Name: BottomBar
+  m_Name: Element - BottomBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

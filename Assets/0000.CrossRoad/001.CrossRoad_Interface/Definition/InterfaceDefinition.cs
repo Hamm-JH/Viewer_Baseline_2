@@ -128,32 +128,9 @@ namespace Definition
     {
 		NotWork,
 
-		BtnBar_01_Home,
-		BtnBar_02_ViewPort,
-		BtnBar_03_OrthoView,
-		BtnBar_04_ShowAll,
-		BtnBar_05_Hide,
-		BtnBar_06_Isolate,
-		BtnBar_07_Setting,
-		BtnBar_08_SwitchBar,
-
-		BtnBar_11_ZoomIn,
-		BtnBar_12_ZoomOut,
-
-		ViewPort_01_ISO,
-		ViewPort_02_TOP,
-		ViewPort_03_SIDE,
-		ViewPort_04_BOTTOM,
-
-		OrthoMode_01_OrthoView,
-		OrthoMode_02_PerspectiveView,
-
-		Setting_01_IconSize,
-		Setting_02_ModelTransparency,
-		Setting_03_ZoomSensitivity,
-		Setting_04_FontSize,
-
 		Image_Enlarge_Center,
+
+		Toggle,
 	}
 
 	//----------------------------------------------------

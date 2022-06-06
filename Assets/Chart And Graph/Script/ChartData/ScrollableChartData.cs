@@ -221,6 +221,8 @@ namespace ChartAndGraph
                 data.MinY = point.y;
         }
 
+
+
         public virtual double GetMaxValue(int axis, bool dataValue)
         {
             if (dataValue == false)

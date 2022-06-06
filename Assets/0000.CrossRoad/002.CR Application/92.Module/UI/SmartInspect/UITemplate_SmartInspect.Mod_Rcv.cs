@@ -6,7 +6,7 @@ using View;
 
 namespace Module.UI
 {
-    public partial class UITemplate_SmartInspect : AUI
+    public partial class UITemplate_SmartInspect : RootUI
     {
         /// <summary>
         /// Mode Rcv 활성화
@@ -23,7 +23,7 @@ namespace Module.UI
             ModRcv_TogglePanel(5, false);   // TODO :: CHECK :: 5번 <- 1번 이관 예정
         }
 
-        private void ModRcv_ResetBasePosition()
+        public void ModRcv_ResetBasePosition()
         {
             if (!m_moduleElements.m_rcvElement.root.activeSelf) return;
 
@@ -31,14 +31,14 @@ namespace Module.UI
             m_moduleElements.m_rcvElement.m_issueListPanels.ForEach(x => x.ReturnBasePosition());
         }
 
-        private void ModRcv_ToggleIssueList()
+        public void ModRcv_ToggleIssueList()
         {
             if (!m_moduleElements.m_rcvElement.root.activeSelf) return;
 
             m_moduleElements.m_rcvElement.m_issueListPanels.ForEach(x => x.root.SetActive(!x.root.activeSelf));
         }
 
-        private void ModRcv_ToggleIssueList(bool isOn)
+        public void ModRcv_ToggleIssueList(bool isOn)
         {
             if (!m_moduleElements.m_rcvElement.root.activeSelf) return;
 

@@ -302,11 +302,8 @@ namespace Management.Events.Inputs
 			//}
 			else if(Platforms.IsSmartInspectPlatform(pCode))
             {
-				Debug.Log("111111");
-				Debug.Log($"***** Hello inspect platform");
 				m_clickEvent.Invoke(_obj);
-				//Module_WebAPI api = Content.SmartInspectManager.Instance.Module<Module.WebAPI.Module_WebAPI>(ModuleID.WebAPI);
-				//Module_Model model = Content.SmartInspectManager.Instance.Module<Module_Model>(ModuleID.Model);
+				Issues.WP_Setup_target(_obj.name);
 
 				Module_Interaction interaction = Content.SmartInspectManager.Instance.Module<Module_Interaction>(ModuleID.Interaction);
 
@@ -384,7 +381,6 @@ namespace Management.Events.Inputs
             {
 				if (Results.Count != 0)
                 {
-                    //Results.ForEach(x => Debug.Log($"ui name : {x.gameObject.name}"));
                     Results.ForEach(x =>
 					{
 						UIIssue_Selectable uiIssue;
@@ -399,15 +395,9 @@ namespace Management.Events.Inputs
 							// StartEvent_SelectIssue로 바로 리다이렉트하지 않고 여기서 손상정보 선택 이벤트 발생
 							ContentManager.Instance.OnSelect_Issue(uiIssue.IssueSelectable.gameObject);
 
-							//// waypoint UI 이벤트 발생
+							// waypoint UI 이벤트 발생
 							Module_Model model = ContentManager.Instance.Module<Module_Model>();
-							//List<Definition._Issue.Issue> dmgs = model.DmgData;
-							//List<Definition._Issue.Issue> rcvs = model.RcvData;
-							//List<Definition._Issue.Issue> all = model.AllIssues;
 
-							//EventStatement.State_DemoWebViewer state = EventManager.Instance._Statement.GetState_DemoWebViewer(0);
-
-							//Issues.WP_Setup_target(_dmgs: dmgs, _rcvs: rcvs, _all: all, state.IsDmgTab, partName);
 							Issues.WP_Setup_target(partName);
 
 							// 이 손상정보에 해당하는 GameObject 객체 선택
@@ -438,7 +428,52 @@ namespace Management.Events.Inputs
             }
 			else if(Platforms.IsSmartInspectPlatform(pCode))
             {
-				Debug.Log("11111");
+				if (Results.Count != 0)
+				{
+					Results.ForEach(x =>
+					{
+						UIIssue_Selectable uiIssue;
+						if (x.gameObject.transform.parent.TryGetComponent<UIIssue_Selectable>(out uiIssue))
+						{
+							Debug.Log($"ui name : {x.gameObject.name}, contains UIIssue");
+
+							string partName = uiIssue.IssueSelectable.Issue.CdBridgeParts;
+
+							Debug.Log($"part name : {partName}");
+
+							// StartEvent_SelectIssue로 바로 리다이렉트하지 않고 여기서 손상정보 선택 이벤트 발생
+							ContentManager.Instance.OnSelect_Issue(uiIssue.IssueSelectable.gameObject);
+
+							// waypoint UI 이벤트 발생
+							Module_Model model = ContentManager.Instance.Module<Module_Model>();
+
+							Issues.WP_Setup_target(partName);
+
+							// 이 손상정보에 해당하는 GameObject 객체 선택
+							GameObject _obj3D = model.ModelObjects.Find(x => x.name.Contains(partName));
+
+							// 객체 선택 이벤트 실행
+							EventManager.Instance.OnEvent(new EventData_API(
+								_eventType: InputEventType.API_SelectObject,
+								_obj: _obj3D,
+								_event: MainManager.Instance.cameraExecuteEvents.selectEvent
+								));
+
+							GameObject currObj = null;
+							GameObject selectedObj = null;
+							Debug.Log(222);
+							//GameObject selected = EventManager.Instance._SelectedObject;
+
+							//if(_Events.IsSameObjectSelected(_obj3D, _sEvents, out currObj, out selectedObj))
+							//{
+							//	Cameras.SetCameraDOTweenPosition(MainManager.Instance.MainCamera, currObj);
+							//	Cameras.SetCameraMode(CameraModes.OnlyRotate);
+							//}
+
+							//return;	// 한 번만 실행..
+						}
+					});
+				}
             }
 			else
             {
@@ -466,7 +501,6 @@ namespace Management.Events.Inputs
                 {
 					// 현재 탭 상태와 연계해서 waypoint 상태 초기화
 					Issues.WP_Setup();
-					//Issues.WP_Setup(_dmgs: dmgs, _rcvs: rcvs, _all: all, state.IsDmgTab);
 
 					// 직전 상태가 선택 성공 상태가 존재할 경우 이 상태를 제거한다.
 					if(_sEvents.ContainsKey(InputEventType.Input_clickSuccessUp))
@@ -476,11 +510,6 @@ namespace Management.Events.Inputs
                     }
 				}
 			}
-			//else if(Platforms.IsViewerPlatform(pCode))
-			//{
-			//	m_clickEvent.Invoke(null);
-			//	ContentManager.Instance.OnSelect_3D(null);
-			//}
 			else if(Platforms.IsSmartInspectPlatform(pCode))
             {
 				m_clickEvent.Invoke(null);
@@ -493,6 +522,7 @@ namespace Management.Events.Inputs
 					// 각 UI 개체 중에서 UITemplate_SmartInspect에 해당하는 개체가 있는지 확인한다. 존재하는 경우
 					if (Utilities.Objects.TryGetValue<UITemplate_SmartInspect>(value.gameObject, out ui))
 					{
+						Issues.WP_Setup();
 						ui.Input_Select3DObject(null);
 					}
 				}
