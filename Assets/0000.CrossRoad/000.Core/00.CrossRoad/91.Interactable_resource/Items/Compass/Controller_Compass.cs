@@ -50,12 +50,6 @@ namespace Items
         public List<Arrow> Arrows { get => m_arrows; set => m_arrows = value; }
         public float CompassPitch { get => m_compassPitch; set => m_compassPitch = value; }
 
-        // Start is called before the first frame update
-        void Start()
-        {
-            //AddCompass(testTrs);
-        }
-
         public void AddCompass(List<Transform> _targets, Module_Graphic _graphic)
         {
             //arrows = new List<Arrow>();
@@ -101,7 +95,7 @@ namespace Items
             UI_Compass compass;
             if(TryGetChildUICompass(arm.transform, out compass))
             {
-                Compass_EventType eType = _index == 0 ? Compass_EventType.Compass_FirstPosition : Compass_EventType.Compass_LastPosition;
+                Compass_EventType eType = _index == 0 ? Compass_EventType.Compass_Prev : Compass_EventType.Compass_Next;
                 Module_Interaction interaction = ContentManager.Instance.Module<Module_Interaction>();
 
                 AUI aui;

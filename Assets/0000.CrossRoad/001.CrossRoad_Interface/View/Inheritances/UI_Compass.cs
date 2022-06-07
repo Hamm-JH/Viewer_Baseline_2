@@ -46,7 +46,7 @@ namespace View
 
         #endregion
 
-        private AUI rootUI;
+        [SerializeField] private AUI rootUI;
         public AUI RootUI { get => rootUI; set => rootUI = value; }
 
 

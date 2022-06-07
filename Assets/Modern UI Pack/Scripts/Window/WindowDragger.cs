@@ -11,6 +11,7 @@ namespace Michsky.UI.ModernUIPack
 
         [Header("Settings")]
         public bool topOnClick = true;
+        public Vector2 center = new Vector2(50, 0);
 
         private Vector2 originalLocalPointerPosition;
         private Vector3 originalPanelLocalPosition;
@@ -88,8 +89,8 @@ namespace Michsky.UI.ModernUIPack
         {
             Vector3 pos = DragObjectInternal.localPosition;
 
-            Vector3 minPosition = DragAreaInternal.rect.min - DragObjectInternal.rect.min;
-            Vector3 maxPosition = DragAreaInternal.rect.max - DragObjectInternal.rect.max;
+            Vector3 minPosition = DragAreaInternal.rect.min - DragObjectInternal.rect.min + center;
+            Vector3 maxPosition = DragAreaInternal.rect.max - DragObjectInternal.rect.max + center;
 
             pos.x = Mathf.Clamp(DragObjectInternal.localPosition.x, minPosition.x, maxPosition.x);
             pos.y = Mathf.Clamp(DragObjectInternal.localPosition.y, minPosition.y, maxPosition.y);

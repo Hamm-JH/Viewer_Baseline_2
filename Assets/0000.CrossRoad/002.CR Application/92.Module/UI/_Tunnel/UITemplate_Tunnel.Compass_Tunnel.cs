@@ -18,11 +18,11 @@ namespace Module.UI
 
             Transform target = null;
 
-			if(_type == Compass_EventType.Compass_FirstPosition)
+			if(_type == Compass_EventType.Compass_Prev)
             {
                 target = tnPoses[0];
             }
-			else if(_type == Compass_EventType.Compass_LastPosition)
+			else if(_type == Compass_EventType.Compass_Next)
             {
                 target = tnPoses[1];
             }

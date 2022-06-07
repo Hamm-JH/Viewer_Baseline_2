@@ -175,6 +175,17 @@ namespace Module.UI
 		}
 
 		[System.Serializable]
+		public class Info
+        {
+			public GameObject m_infoPanel;
+			public TextMeshProUGUI m_infoText1;
+			public TextMeshProUGUI m_infoText2;
+			public TextMeshProUGUI m_infoText3;
+			public TextMeshProUGUI m_infoText4;
+			public TextMeshProUGUI m_infoText5;
+		}
+
+		[System.Serializable]
 		public class Resource
         {
 			[Header("State")]
@@ -190,8 +201,10 @@ namespace Module.UI
 			 */
 			[Header("elements")]
 			public List<Group_Element> m_groups;
-
 			public List<GameObject> m_defaultGroup;
+
+			[Header("Info panel")]
+			public Info m_info;
 
 			public void On_Group(int index)
             {

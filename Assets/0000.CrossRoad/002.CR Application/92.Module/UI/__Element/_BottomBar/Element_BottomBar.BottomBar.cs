@@ -58,8 +58,10 @@ namespace Module.UI
 
         private void Bar_7Info(Interactable _setter)
         {
-            _Children.Off();
-            _Resource.Toggle_Group(0, _setter.gameObject);
+            //_Children.Off();
+            //_Resource.Toggle_Group(0, _setter.gameObject);
+
+            _setter.ChildPanel.SetActive(!_setter.ChildPanel.activeSelf);
         }
 
         private void Bar_ZoomIn(Interactable _setter)

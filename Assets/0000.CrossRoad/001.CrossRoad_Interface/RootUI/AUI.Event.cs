@@ -37,6 +37,10 @@ namespace Module.UI
 				case Type type when type == typeof(Hover_EventType):
 					GetUIEventPacket((Hover_EventType)(object)_type, _value);
 					break;
+
+				case Type type when type == typeof(Compass_EventType):
+					GetUIEventPacket((Compass_EventType)(object)_type, _value);
+					break;
 			}
 		}
 
@@ -64,6 +68,10 @@ namespace Module.UI
 
 				case Type type when type == typeof(Hover_EventType):
 					GetUIEvent((Hover_EventType)(object)_type, _setter);
+					break;
+
+				case Type type when type == typeof(Compass_EventType):
+					GetUIEvent((Compass_EventType)(object)_type, _setter);
 					break;
             }
 		}
@@ -95,6 +103,10 @@ namespace Module.UI
 					GetUIEvent(_value, (Hover_EventType)(object)_type, _setter);
 					break;
 
+				case Type type when type == typeof(Compass_EventType):
+					GetUIEvent(_value, (Compass_EventType)(object)_type, _setter);
+					break;
+
 			}
 		}
 
@@ -107,6 +119,7 @@ namespace Module.UI
 		public abstract void GetUIEvent(Inspect_EventType _uType, Interactable _setter);
 		public virtual void GetUIEvent(BottomBar_EventType _type, Interactable _setter) { }
 		public virtual void GetUIEvent(Hover_EventType _type, Interactable _setter) { }
+		public virtual void GetUIEvent(Compass_EventType _type, Interactable _setter) { }
 
 		/// <summary>
 		/// 슬라이더 이벤트 분배
@@ -118,11 +131,18 @@ namespace Module.UI
 		public abstract void GetUIEvent(float _value, Inspect_EventType _uType, Interactable _setter);
 		public virtual void GetUIEvent(float _value, BottomBar_EventType _type, Interactable _setter) { }
 		public virtual void GetUIEvent(float _value, Hover_EventType _type, Interactable _setter) { }
+		public virtual void GetUIEvent(float _value, Compass_EventType _type, Interactable _setter) { }
 
+		/// <summary>
+		/// 외부 데이터 패킷전달, 이벤트 처리
+		/// </summary>
+		/// <param name="_type"> 이벤트 </param>
+		/// <param name="_value"> 패킷 </param>
 		public virtual void GetUIEventPacket(UIEventType _type, APacket _value) { }
 		public virtual void GetUIEventPacket(Inspect_EventType _type, APacket _value) { }
 		public virtual void GetUIEventPacket(BottomBar_EventType _type, APacket _value) { }
 		public virtual void GetUIEventPacket(Hover_EventType _type, APacket _value) { }
+		public virtual void GetUIEventPacket(Compass_EventType _type, APacket _value) { }
 
 		/// <summary>
 		/// 전달변수가 V인 이벤트 발생

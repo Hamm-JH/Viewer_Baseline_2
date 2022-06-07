@@ -196,8 +196,8 @@ namespace Definition
     {
 		NotWork,
 
-		Compass_FirstPosition,
-		Compass_LastPosition,
+		Compass_Next,
+		Compass_Prev,
     }
 
 	public enum ModuleID

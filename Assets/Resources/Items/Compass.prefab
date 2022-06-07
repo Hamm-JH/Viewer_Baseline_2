@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5021183551927219411}
+  - component: {fileID: 2140034378578118448}
   m_Layer: 5
   m_Name: Compass
   m_TagString: Untagged
@@ -37,6 +38,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 220}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &2140034378578118448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5021183551927219410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3c674917052644ca9b93584201bacd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_rootUI: {fileID: 0}
 --- !u!1001 &4320569990658721235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46,7 +60,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7345646630668738414, guid: a68e5581692f5de4f897761ea4448536, type: 3}
       propertyPath: m_Name
-      value: Compass Arm
+      value: Compass Arm next
       objectReference: {fileID: 0}
     - target: {fileID: 7345646630668738415, guid: a68e5581692f5de4f897761ea4448536, type: 3}
       propertyPath: m_Pivot.x
@@ -131,6 +145,18 @@ PrefabInstance:
     - target: {fileID: 7345646630668738415, guid: a68e5581692f5de4f897761ea4448536, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345646631618649424, guid: a68e5581692f5de4f897761ea4448536, type: 3}
+      propertyPath: m_Name
+      value: Arrow Button next
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345646631618649429, guid: a68e5581692f5de4f897761ea4448536, type: 3}
+      propertyPath: rootUI
+      value: 
+      objectReference: {fileID: 2140034378578118448}
+    - target: {fileID: 7345646631618649429, guid: a68e5581692f5de4f897761ea4448536, type: 3}
+      propertyPath: eType_compass
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a68e5581692f5de4f897761ea4448536, type: 3}
@@ -148,7 +174,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7345646630668738414, guid: a68e5581692f5de4f897761ea4448536, type: 3}
       propertyPath: m_Name
-      value: Compass Arm (1)
+      value: Compass Arm prev
       objectReference: {fileID: 0}
     - target: {fileID: 7345646630668738415, guid: a68e5581692f5de4f897761ea4448536, type: 3}
       propertyPath: m_Pivot.x
@@ -234,6 +260,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7345646631618649424, guid: a68e5581692f5de4f897761ea4448536, type: 3}
+      propertyPath: m_Name
+      value: Arrow Button prev
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345646631618649429, guid: a68e5581692f5de4f897761ea4448536, type: 3}
+      propertyPath: rootUI
+      value: 
+      objectReference: {fileID: 2140034378578118448}
+    - target: {fileID: 7345646631618649429, guid: a68e5581692f5de4f897761ea4448536, type: 3}
+      propertyPath: eType_compass
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345646631618649431, guid: a68e5581692f5de4f897761ea4448536, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a3cabd99b82a65144b249bbf3ad2450c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a68e5581692f5de4f897761ea4448536, type: 3}
 --- !u!224 &1722586923903183075 stripped

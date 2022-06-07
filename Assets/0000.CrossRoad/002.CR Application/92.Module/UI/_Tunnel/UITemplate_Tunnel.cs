@@ -209,12 +209,12 @@ namespace Module.UI
         //	//}
         //}
 
-        public void GetUIEvent(Compass_EventType _type, Interactable _setter)
+        public override void GetUIEvent(Compass_EventType _type, Interactable _setter)
         {
 			switch(_type)
             {
-				case Compass_EventType.Compass_FirstPosition:
-				case Compass_EventType.Compass_LastPosition:
+				case Compass_EventType.Compass_Prev:
+				case Compass_EventType.Compass_Next:
 					Compass_SetPosition(_type, _setter);
 					break;
             }
