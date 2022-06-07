@@ -56,7 +56,8 @@ namespace Module.Item
 			}
 			else if (_fCode == FunctionCode.Item_Compass)
 			{
-				if(Platforms.IsDemoWebViewer(pCode))
+				//if(Platforms.IsDemoWebViewer(pCode))
+				if(Platforms.IsTunnelPlatform(pCode))
                 {
 					Canvas canvas = ContentManager.Instance._Canvas;
 					Camera cam = MainManager.Instance.MainCamera;
@@ -64,17 +65,26 @@ namespace Module.Item
 
 					Module_Graphic graphic = ContentManager.Instance.Module<Module_Graphic>();
 
+					// 나침반 인스턴스 생성
 					GameObject uiCompassRoot = Instantiate<GameObject>(Resources.Load<GameObject>("Items/Compass"), canvas.transform);
 
+					// 아이템 관리자 생성
 					obj = Instantiate<GameObject>(ItemList.Load(_fCode));
-					m_compass = obj.GetComponent<Items.Controller_Compass>();
+					m_compass = obj.GetComponent<Items.Controller_Compass>();	// 할당
 
+					// 플레이 객체의 위치 할당
 					m_compass.Me = cam.transform;
+					// 나침반 root 할당
 					m_compass.CompassUIRoot = uiCompassRoot;
+					// 나침반 기울기 할당
 					m_compass.CompassPitch = 60;
 
-					StartCoroutine(Try_GetTrsTunnel(m_compass));
+					Module.UI.Element_Compass eCompass = uiCompassRoot.GetComponent<Module.UI.Element_Compass>();
 
+
+					StartCoroutine(Try_GetTrsTunnel(m_compass, eCompass));
+
+					// 아이템 모듈에 이 아이템 할당
 					m_itemList.Add(m_compass);
                 }
 				else
@@ -87,7 +97,7 @@ namespace Module.Item
 			obj.transform.SetParent(transform);
 		}
 
-		private IEnumerator Try_GetTrsTunnel(Items.Controller_Compass _compass)
+		private IEnumerator Try_GetTrsTunnel(Items.Controller_Compass _compass, Module.UI.Element_Compass eCompass)
         {
 			Module_Graphic graphic = ContentManager.Instance.Module<Module_Graphic>();
 
@@ -96,7 +106,7 @@ namespace Module.Item
 				List<Transform> trs = ContentManager.Instance.Module<Module_Model>().Trs_tunnel;
 				if (trs != null && trs.Count == 2)
                 {
-					_compass.AddCompass(trs, graphic);
+					_compass.AddCompass(trs, graphic, eCompass);
 					break;
                 }
 				yield return new WaitForEndOfFrame();

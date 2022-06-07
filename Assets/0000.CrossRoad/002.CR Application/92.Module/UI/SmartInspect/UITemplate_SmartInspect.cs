@@ -45,6 +45,11 @@ namespace Module.UI
             Elements.ForEach(x => x.GetUIEventPacket<Hover_EventType>(_type, _value));
         }
 
+        public override void GetUIEventPacket(BottomBar_EventType _type, APacket _value)
+        {
+            Elements.ForEach(x => x.GetUIEventPacket<BottomBar_EventType>(_type, _value));
+        }
+
         public override void GetUIEvent(float _value, UIEventType _uType, Interactable _setter)
         {
 

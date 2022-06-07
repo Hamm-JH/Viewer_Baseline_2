@@ -59,6 +59,7 @@ namespace View
         public void Init(Compass_EventType _eType, AUI _aui, Module_Graphic _graphic)
         {
             eType_compass = _eType;
+            // TODO :: 0607
             RootUI = _aui;
 
             // TODO :: CHECK :: Module_Graphic 활성화 1 : 색 지정

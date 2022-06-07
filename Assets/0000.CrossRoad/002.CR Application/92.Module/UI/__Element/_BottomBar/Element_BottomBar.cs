@@ -1,4 +1,6 @@
 using Definition;
+using Definition.Data;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +10,23 @@ namespace Module.UI
 {
     public partial class Element_BottomBar : AElement
     {
+        public override void GetUIEventPacket(BottomBar_EventType _type, APacket _value)
+        {
+            switch(_type)
+            {
+                case BottomBar_EventType.Info_Update:
+                    Info_Update(_value);
+                    break;
+
+                case BottomBar_EventType.Info_Delete:
+                    Info_Delete(_value);
+                    break;
+            }
+        }
+
+        
+
+
         #region Button event
         public override void GetUIEvent(UIEventType _uType, Interactable _setter)
         {

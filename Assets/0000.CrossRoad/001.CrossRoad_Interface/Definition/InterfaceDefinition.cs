@@ -177,6 +177,9 @@ namespace Definition
 		Setting_ModelTransparency = 71,
 		Setting_ZoomSensitivity = 72,
 		Setting_FontSize = 73,
+
+		Info_Update = 80,
+		Info_Delete = 81,
     }
 
 	/// <summary>

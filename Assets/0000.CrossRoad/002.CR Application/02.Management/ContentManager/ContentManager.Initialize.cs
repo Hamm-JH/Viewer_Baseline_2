@@ -204,6 +204,12 @@ namespace Management
 					model.OnAfterInitialize();
                 }
 
+				Module_Items item = Module<Module_Items>(ModuleID.Item);
+				if (item != null)
+				{
+					item.OnAfterInitialize();
+				}
+
 				// Interaction 모듈을 찾는다.
 				Module_Interaction interaction = Module<Module_Interaction>(ModuleID.Interaction);
 				if (interaction != null)

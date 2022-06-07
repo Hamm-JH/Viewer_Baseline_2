@@ -314,6 +314,8 @@ namespace Management.Events.Inputs
 					if(Utilities.Objects.TryGetValue<UITemplate_SmartInspect>(value.gameObject, out ui))
                     {
 						ui.Input_Select3DObject(_obj);
+						ui.GetUIEventPacket(BottomBar_EventType.Info_Update,
+							new Definition.Data.Packet_ObjectInfo(_obj));
                     }
                 }
 				//interaction.UiInstances
@@ -524,6 +526,8 @@ namespace Management.Events.Inputs
 					{
 						Issues.WP_Setup();
 						ui.Input_Select3DObject(null);
+						ui.GetUIEventPacket(BottomBar_EventType.Info_Delete,
+							new Definition.Data.Packet_ObjectInfo(null));
 					}
 				}
 			}

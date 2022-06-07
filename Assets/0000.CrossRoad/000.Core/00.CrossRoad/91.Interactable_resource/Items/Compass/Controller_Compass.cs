@@ -50,7 +50,12 @@ namespace Items
         public List<Arrow> Arrows { get => m_arrows; set => m_arrows = value; }
         public float CompassPitch { get => m_compassPitch; set => m_compassPitch = value; }
 
-        public void AddCompass(List<Transform> _targets, Module_Graphic _graphic)
+        /// <summary>
+        /// 나침반 생성
+        /// </summary>
+        /// <param name="_targets"></param>
+        /// <param name="_graphic"></param>
+        public void AddCompass(List<Transform> _targets, Module_Graphic _graphic, Element_Compass eCompass)
         {
             //arrows = new List<Arrow>();
             ClearCompass();
@@ -58,7 +63,7 @@ namespace Items
             int index = _targets.Count;
             for (int i = 0; i < index; i++)
             {
-                AddCompass(_targets[i], i, in _graphic);
+                AddCompass(_targets[i], i, in _graphic, eCompass);
             }
             //_targets.ForEach(x => AddCompass(x, in _graphic));
         }
@@ -80,7 +85,7 @@ namespace Items
             Arrows = new List<Arrow>();
         }
 
-        private void AddCompass(Transform _target, int _index, in Module_Graphic _graphic)
+        private void AddCompass(Transform _target, int _index, in Module_Graphic _graphic, Element_Compass eCompass)
         {
             PlatformCode pCode = MainManager.Instance.Platform;
 
@@ -96,19 +101,8 @@ namespace Items
             if(TryGetChildUICompass(arm.transform, out compass))
             {
                 Compass_EventType eType = _index == 0 ? Compass_EventType.Compass_Prev : Compass_EventType.Compass_Next;
-                Module_Interaction interaction = ContentManager.Instance.Module<Module_Interaction>();
 
-                AUI aui;
-                if(Platforms.IsDemoWebViewer(pCode))
-                {
-                    aui = interaction.UiInstances.First();
-                }
-                else
-                {
-                    aui = interaction.UiInstances.Last();
-                }
-
-                compass.Init(eType, aui, _graphic);
+                compass.Init(eType, eCompass, _graphic);
             }
 
             arrow.m_target = _target;
