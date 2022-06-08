@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +7,7 @@ namespace Module.UI
     using Definition;
     using Definition.Control;
     using Management;
+    using Module.Model;
     using Platform.Tunnel;
     using View;
 
@@ -14,62 +15,218 @@ namespace Module.UI
     {
         private void Compass_prev(Interactable _setter)
         {
-            // ø¿¡˜ »∏¿¸∏µÂ ∫Ø∞Ê
+            // Ïò§ÏßÅ ÌöåÏ†ÑÎ™®Îìú Î≥ÄÍ≤Ω
+            // index == -9 Ï≤´ ÏúÑÏπòÎ°ú
+            // index == -1 ÎåÄÍ∏∞ (Ï≤´ ÏúÑÏπòÏóê ÏûàÏúºÎØÄÎ°ú)
+            // index == max Ïù¥Ï†Ñ ÏúÑÏπòÎ°ú
+            // index < max Ïù¥Ï†Ñ ÏúÑÏπòÎ°ú
+            // else :: ÏóêÎü¨
 
-            GameObject obj = EventManager.Instance._SelectedObject;
+            Transform target = null;
             PlatformCode pCode = MainManager.Instance.Platform;
-            int segmentIndex = 0;
-            int totalCount = 0;
 
-            if(Platforms.IsTunnelPlatform(pCode))
+            if (Platforms.IsTunnelPlatform(pCode))
             {
-                Transform segment = obj.transform.parent.parent;
-                Transform root = segment.parent;
-                totalCount = root.childCount;
+                //Vector3 toPos;
+                //Quaternion toRot;
 
-                int _index = root.childCount;
-                for (int i = 0; i < _index; i++)
-                {
-                    if(root.GetChild(i) == segment)
-                    {
-                        segmentIndex = i;
-                        break;
-                    }
-                }
+                //Debug.Log($"index : {m_data.index}");
+                if (!TrySet_PrevIndexTarget(ref m_data.index, out target, out Vector3 toPos, out Quaternion toRot)) return;
 
-                // √≥¿Ω
-                if(segmentIndex == 0)
-                {
+                
+                //Debug.Log("----------------- prev");
+                //Debug.Log($"target : {target.name}");
 
-                }
-                // ∏∂¡ˆ∏∑
-                else if(segmentIndex == totalCount-1)
-                {
+                //Debug.Log($"index : {m_data.index}");
+                //Debug.Log($"toPos : {toPos}");
+                //Debug.Log($"toRot : {toRot}");
 
-                }
-                // √≥¿Ω ¿ßƒ° ∂«¥¬ ∏∂¡ˆ∏∑ ¿ßƒ°
-                else
-                {
+                //Debug.Log("-----------------");
+                
+                
 
-                }
-
-                // √£¿∫ ¿ßƒ° ±‚π›¿∏∑Œ ¿Ã¿¸¿Œ ∞ÊøÏ ¿Ã¿¸¿∏∑Œ (√÷¡æ ¿Ã¿¸¿Ã∏È ≥°)
-                // √£¿∫ ¿ßƒ° ±‚π›¿∏∑Œ ¿Ã»ƒ¿Œ ∞ÊøÏ ¿Ã»ƒ∑Œ (√÷¡æ ¿Ã»ƒ¿Ã∏È ≥°)
-            }
-            
-            int index = obj.transform.childCount;
-
-
-            if (obj != null)
-            {
-                Cameras.SetCameraDOTweenPosition(MainManager.Instance.MainCamera, obj);
+                //Cameras.SetCameraDOTweenPosition(MainManager.Instance.MainCamera, target.gameObject);
+                //Cameras.SetCameraDOTweenPosition_Compass(MainManager.Instance.MainCamera, target.gameObject);
+                Cameras.SetCameraDOTweenPosition_Compass(MainManager.Instance.MainCamera, toPos, toRot);
                 Cameras.SetCameraMode(CameraModes.OnlyRotate);
             }
         }
 
         private void Compass_next(Interactable _setter)
         {
+            Transform target = null;
+            PlatformCode pCode = MainManager.Instance.Platform;
+            
+            if (Platforms.IsTunnelPlatform(pCode))
+            {
+                //Debug.Log($"index : {m_data.index}");
+                if (!TrySet_NextIndexTarget(ref m_data.index, out target, out Vector3 toPos, out Quaternion toRot)) return;
 
+                //Debug.Log("----------------- next");
+                //Debug.Log($"target : {target.name}");
+
+                //Debug.Log($"index : {m_data.index}");
+                //Debug.Log($"toPos : {toPos}");
+                //Debug.Log($"toRot : {toRot}");
+
+                //Debug.Log("-----------------");
+
+
+                //Cameras.SetCameraDOTweenPosition(MainManager.Instance.MainCamera, target.gameObject);
+                Cameras.SetCameraDOTweenPosition_Compass(MainManager.Instance.MainCamera, toPos, toRot);
+                Cameras.SetCameraMode(CameraModes.OnlyRotate);
+            }
+        }
+
+        private bool TrySet_PrevIndexTarget(ref int _currentIndex, out Transform _target, out Vector3 _toPos, out Quaternion _toRot)
+        {
+            bool result = false;
+
+            _target = null;
+            _toPos = default(Vector3);
+            _toRot = default(Quaternion);
+
+            Module_Model module_Model = ContentManager.Instance.Module<Module_Model>();
+            GameObject rootObj = module_Model.Model;
+
+            Transform first = module_Model.Trs_tunnel[0];
+            Transform last = module_Model.Trs_tunnel[1];
+            int maxIndex = rootObj.transform.childCount;
+
+            //Debug.Log($"prev");
+
+
+            if (_currentIndex == -9)
+            {
+                _currentIndex = -1;
+                _target = first;
+                _toPos = _target.position;
+                _toRot = _target.rotation;
+                result = true;
+            }
+            else if (_currentIndex == -1)
+            {
+                // ÎåÄÍ∏∞
+                result = false;
+            }
+            else if (_currentIndex == 0)
+            {
+                _currentIndex = -1;
+                _target = first;
+                _toPos = _target.position;
+                _toRot = _target.rotation;
+                result = true;
+            }
+            else if (_currentIndex == maxIndex)
+            {
+                Debug.Log($"prev");
+                // Ïù¥Ï†Ñ Ïù∏Îç±Ïä§Î°ú Ïù¥Îèô
+                // Ïù¥Îèô Í∞úÏ≤¥ Ïû°ÎäîÍ≤å Îã§Î¶Ñ
+                _currentIndex--;
+
+                Transform from = rootObj.transform.GetChild(_currentIndex);
+                Transform to = rootObj.transform.GetChild(_currentIndex - 1);
+
+                _target = rootObj.transform.GetChild(_currentIndex);
+                _toPos = new Vector3(_target.position.x, _target.position.y + 2, _target.position.z);
+
+                Vector3 euler = from.rotation.eulerAngles;
+                _toRot = Quaternion.Euler(0, euler.y + 90, 0);
+                result = true;
+            }
+            else if (_currentIndex < maxIndex)
+            {
+                Debug.Log($"4");
+                // Ïù¥Ï†Ñ Ïù∏Îç±Ïä§Î°ú Ïù¥Îèô
+                _currentIndex--;
+
+                Transform from = rootObj.transform.GetChild(_currentIndex);
+                Transform to = _currentIndex - 1 < 0 ? first : rootObj.transform.GetChild(_currentIndex - 1);
+
+                _target = rootObj.transform.GetChild(_currentIndex);
+                _toPos = new Vector3(_target.position.x, _target.position.y + 2, _target.position.z);
+
+                Vector3 euler = from.rotation.eulerAngles;
+                _toRot = Quaternion.Euler(0, euler.y + 90, 0);
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+
+            return result;
+        }
+
+        private bool TrySet_NextIndexTarget(ref int _currentIndex, out Transform _target, out Vector3 _toPos, out Quaternion _toRot)
+        {
+            bool result = false;
+
+            _target = null;
+            _toPos = default(Vector3);
+            _toRot = default(Quaternion);
+
+            Module_Model module_Model = ContentManager.Instance.Module<Module_Model>();
+            GameObject rootObj = module_Model.Model;
+
+            Transform first = module_Model.Trs_tunnel[0];
+            Transform last = module_Model.Trs_tunnel[1];
+            int maxIndex = rootObj.transform.childCount;
+
+            if (_currentIndex == -9)
+            {
+                _currentIndex = maxIndex;
+                _target = last;
+                _toPos = _target.position;
+                _toRot = _target.rotation;
+                result = true;
+            }
+            else if (_currentIndex == -1)
+            {
+                _currentIndex++;
+
+                Transform from = rootObj.transform.GetChild(_currentIndex);
+                Transform to = rootObj.transform.GetChild(_currentIndex + 1);
+
+                _target = rootObj.transform.GetChild(_currentIndex);
+                _toPos = new Vector3(_target.position.x, _target.position.y + 2, _target.position.z);
+
+                Vector3 euler = from.rotation.eulerAngles;
+                _toRot = Quaternion.Euler(0, euler.y - 90, 0);
+                result = true;
+            }
+            else if (_currentIndex == maxIndex - 1)
+            {
+                _currentIndex++;
+                _target = last;
+                _toPos = _target.position;
+                _toRot = _target.rotation;
+                result = true;
+            }
+            else if (_currentIndex == maxIndex)
+            {
+                result = false;
+            }
+            else if (_currentIndex < maxIndex)
+            {
+                _currentIndex++;
+
+                Transform from = rootObj.transform.GetChild(_currentIndex);
+                Transform to = _currentIndex + 1 == maxIndex ? last : rootObj.transform.GetChild(_currentIndex + 1);
+
+                _target = rootObj.transform.GetChild(_currentIndex);
+                _toPos = new Vector3(_target.position.x, _target.position.y + 2, _target.position.z);
+
+                Vector3 euler = from.rotation.eulerAngles;
+                _toRot = Quaternion.Euler(0, euler.y - 90, 0);
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+
+            return result;
         }
     }
 }

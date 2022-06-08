@@ -77,7 +77,7 @@ namespace Module.Item
 					// 나침반 root 할당
 					m_compass.CompassUIRoot = uiCompassRoot;
 					// 나침반 기울기 할당
-					m_compass.CompassPitch = 60;
+					m_compass.CompassPitch = 70;
 
 					Module.UI.Element_Compass eCompass = uiCompassRoot.GetComponent<Module.UI.Element_Compass>();
 

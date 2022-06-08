@@ -151,6 +151,12 @@ namespace Definition
             _cam.transform.DORotateQuaternion(_toGameObject.transform.rotation, 1);
         }
 
+        public static void SetCameraDOTweenPosition_Compass(Camera _cam, Vector3 _toPosition, Quaternion _toRotation)
+        {
+            _cam.transform.DOMove(_toPosition, 1);
+            _cam.transform.DORotateQuaternion(_toRotation, 1);
+        }
+
         /// <summary>
         /// 카메라 이동 목적지를 세팅하는 Transform 변수 세팅
         /// </summary>

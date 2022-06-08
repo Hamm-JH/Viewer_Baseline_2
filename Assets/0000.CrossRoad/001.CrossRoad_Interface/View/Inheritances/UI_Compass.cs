@@ -62,11 +62,21 @@ namespace View
             // TODO :: 0607
             RootUI = _aui;
 
-            // TODO :: CHECK :: Module_Graphic 활성화 1 : 색 지정
-            m_uiColor.color_default = new Color(0x2b / 255f, 0x70 / 255f, 0xc6 / 255f, 1);
-            m_uiColor.color_hover = new Color(0x1a / 255f, 0x5f / 255f, 0xac / 255f, 0.8f);
-            m_uiColor.color_select = new Color(0x1a / 255f, 0x5f / 255f, 0xac / 255f, 1);
-            m_uiColor.color_deSelect = new Color(0xba / 255f, 0xba / 255f, 0xba / 255f, 1);
+            if(_eType == Compass_EventType.Compass_Prev)
+            {
+                // TODO :: CHECK :: Module_Graphic 활성화 1 : 색 지정
+                m_uiColor.color_default = new Color(0x2b / 255f, 0x70 / 255f, 0xc6 / 255f, 1);
+                m_uiColor.color_hover = new Color(0x1a / 255f, 0x5f / 255f, 0xac / 255f, 0.8f);
+                m_uiColor.color_select = new Color(0x1a / 255f, 0x5f / 255f, 0xac / 255f, 1);
+                m_uiColor.color_deSelect = new Color(0xba / 255f, 0xba / 255f, 0xba / 255f, 1);
+            }
+            else if(_eType == Compass_EventType.Compass_Next)
+            {
+                m_uiColor.color_default     = Color.black;
+                m_uiColor.color_hover       = Color.black;
+                m_uiColor.color_select      = Color.black;
+                m_uiColor.color_deSelect    = Color.black;
+            }
         }   
 
         // Start is called before the first frame update
