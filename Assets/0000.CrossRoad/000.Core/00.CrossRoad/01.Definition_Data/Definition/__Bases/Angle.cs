@@ -1,3 +1,4 @@
+using Definition.Control;
 using Management;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,8 +14,9 @@ namespace Definition
 
 			PlatformCode pCode = MainManager.Instance.Platform;
 
+			CameraModes camMode = MainManager.Instance.CurrentCameraMode;
 
-			switch(eventType)
+			switch (eventType)
 			{
 				case UIEventType.Viewport_ViewMode_ISO:
 					result = new Vector3(45, 45, 0);
@@ -23,7 +25,14 @@ namespace Definition
 				case UIEventType.Viewport_ViewMode_TOP:
 					if(Platforms.IsTunnelPlatform(pCode))
 					{
-						result = new Vector3(-90, 0, 0);
+						if (camMode == CameraModes.OnlyRotate)
+                        {
+							result = new Vector3(-90, 0, 0);
+                        }
+						else
+                        {
+							result = new Vector3(90, 0, -90);
+						}
 					}
 					else if(Platforms.IsBridgePlatform(pCode))
 					{
@@ -34,7 +43,14 @@ namespace Definition
 				case UIEventType.Viewport_ViewMode_BOTTOM:
 					if(Platforms.IsTunnelPlatform(pCode))
 					{
-						result = new Vector3(90, 0, 0);
+						if (camMode == CameraModes.OnlyRotate)
+                        {
+							result = new Vector3(90, 0, 0);
+                        }
+						else
+                        {
+							result = new Vector3(-90, 0, 90);
+						}
 					}
 					else if(Platforms.IsBridgePlatform(pCode))
 					{
