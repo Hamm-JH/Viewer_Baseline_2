@@ -51,8 +51,19 @@ namespace Test
         // 단일 복셀 처리
         [SerializeField] VoxelCache m_cache;
 
+        [SerializeField] Voxel[] octTree;
+
         #region Init
-        public void InitVoxel(string _name, Vector3 _center, Vector3 _scale, Mesh _mesh, Material _mat)
+
+        /// <summary>
+        /// 복셀을 생성한다.
+        /// </summary>
+        /// <param name="_name"></param>
+        /// <param name="_center"></param>
+        /// <param name="_scale"></param>
+        /// <param name="_mesh"></param>
+        /// <param name="_mat"></param>
+        public void InitVoxel(string _name, Vector3 _center, Vector3 _scale, Mesh _mesh, Material _mat, int _depthIndex)
         {
             m_cache = new VoxelCache();
 
@@ -75,6 +86,11 @@ namespace Test
             SetCenter(_center);
 
             m_cache.IsCollision = false;
+
+            if(_depthIndex > 0)
+            {
+                octTree = new Voxel[8];
+            }
         }
 
         private void SetMesh(MeshFilter _filter, Mesh _mesh)

@@ -19,17 +19,36 @@ namespace Test
             Center,
         }
 
+        /// <summary>
+        /// 배치형태
+        /// </summary>
         public PlacePosition _PlacePosition;
-        public Vector3 _scale;
 
+        /// <summary>
+        /// 루트 복셀 크기
+        /// </summary>
+        public Vector3 _rootScale;
+
+        /// <summary>
+        /// 베이스 Material
+        /// </summary>
         public Material m_mat;
+
+        /// <summary>
+        /// 베이스 메쉬
+        /// </summary>
         public Mesh m_mesh;
+
+        /// <summary>
+        /// 뎁스 인덱스
+        /// </summary>
+        public int m_depthIndex;
 
         public GameObject m_root;
 
         private void Start()
         {
-            m_mesh = InstantiateMesh(_scale, _PlacePosition);
+            m_mesh = InstantiateMesh(_rootScale, _PlacePosition);
 
             m_root = new GameObject("voxel root");
 
@@ -39,7 +58,7 @@ namespace Test
                 {
                     for (int z = 0; z < 12; z++)
                     {
-                        GameObject voxel = CreateVoxel(new int[3] { x, y, z }, _scale, m_mesh, m_mat);
+                        GameObject voxel = CreateVoxel(new int[3] { x, y, z }, _rootScale, m_mesh, m_mat);
                         voxel.transform.SetParent(m_root.transform);
                     }
                 }
@@ -61,7 +80,7 @@ namespace Test
 
             voxel.InitVoxel(
                 $"Voxel {_indexes[0]},{_indexes[1]},{_indexes[2]}",
-                center, _scale, mesh, _mat);
+                center, _scale, mesh, _mat, m_depthIndex);
 
             return obj;
         }
