@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scene/Test/DecalTest/DecalTest.unity
     guid: 06a896d469043b04ab3e347184cb50c9
+  - enabled: 1
+    path: Assets/01.Scene/_2 Viewer/Mapbox_Demo.unity
+    guid: 4ea126aa193eb39428356fe2e3e0f467
   m_configObjects: {}

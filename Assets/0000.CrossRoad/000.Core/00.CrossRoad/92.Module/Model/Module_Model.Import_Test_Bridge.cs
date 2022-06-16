@@ -22,8 +22,8 @@ namespace Module.Model
 		[SerializeField] GameObject m_bRootObj;
 		[SerializeField] GameObject m_bRoot3D;
         [SerializeField] GameObject m_bRoot2D;
-		[SerializeField] GameObject[] m_bridgeTopParts;
-		[SerializeField] GameObject[] m_bridgeBottomParts;
+		[SerializeField] public GameObject[] m_bridgeTopParts;
+		[SerializeField] public GameObject[] m_bridgeBottomParts;
 
 		public void InitializeObjectBridge(GameObject _root)
 		{

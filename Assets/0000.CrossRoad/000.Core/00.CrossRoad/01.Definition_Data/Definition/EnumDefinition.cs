@@ -57,6 +57,7 @@ namespace Definition
 
 		SmartInspectViewer = 0x03,
 
+		Mapbox_Demo,
 	}
 
 	//public enum ModuleID
