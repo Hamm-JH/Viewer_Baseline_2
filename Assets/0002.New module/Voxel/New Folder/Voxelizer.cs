@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,41 +6,26 @@ namespace Test
 {
     public class Voxelizer : MonoBehaviour
     {
-        public enum PlacePosition
-        {
-            /// <summary>
-            /// ø¯¡°¿ª πËƒ°±‚¡ÿ¿∏∑Œ ¿‚¥¬ πÊπ˝
-            /// </summary>
-            Original,
-
-            /// <summary>
-            /// ¡ﬂΩ…¡°¿ª πËƒ°±‚¡ÿ¿∏∑Œ ¿‚¥¬ πÊπ˝
-            /// </summary>
-            Center,
-        }
-
         /// <summary>
-        /// πËƒ°«¸≈¬
+        /// Î∞∞ÏπòÌòïÌÉú
         /// </summary>
         public PlacePosition _PlacePosition;
 
         /// <summary>
-        /// ∑Á∆Æ ∫πºø ≈©±‚
+        /// Î£®Ìä∏ Î≥µÏÖÄ ÌÅ¨Í∏∞
         /// </summary>
         public Vector3 _rootScale;
 
+
+        public Vector3 _InitializeIndex;
+
         /// <summary>
-        /// ∫£¿ÃΩ∫ Material
+        /// Î≤†Ïù¥Ïä§ Material
         /// </summary>
         public Material m_mat;
 
         /// <summary>
-        /// ∫£¿ÃΩ∫ ∏ﬁΩ¨
-        /// </summary>
-        public Mesh m_mesh;
-
-        /// <summary>
-        /// µ™Ω∫ ¿Œµ¶Ω∫
+        /// ÎéÅÏä§ Ïù∏Îç±Ïä§
         /// </summary>
         public int m_depthIndex;
 
@@ -48,24 +33,36 @@ namespace Test
 
         private void Start()
         {
-            m_mesh = InstantiateMesh(_rootScale, _PlacePosition);
+            ArrangeVoxels();
+        }
 
+        public void ArrangeVoxels()
+        {
             m_root = new GameObject("voxel root");
 
-            for (int x = 0; x < 12; x++)
+            for (int x = 0; x < _InitializeIndex.x; x++)
             {
-                for (int y = 0; y < 12; y++)
+                for (int y = 0; y < _InitializeIndex.y; y++)
                 {
-                    for (int z = 0; z < 12; z++)
+                    for (int z = 0; z < _InitializeIndex.z; z++)
                     {
-                        GameObject voxel = CreateVoxel(new int[3] { x, y, z }, _rootScale, m_mesh, m_mat);
+                        GameObject voxel = CreateVoxel(new int[3] { x, y, z }, _rootScale, m_mat, m_depthIndex);
                         voxel.transform.SetParent(m_root.transform);
                     }
                 }
             }
         }
 
-        public GameObject CreateVoxel(int[] _indexes, Vector3 _scale, Mesh _instantiatedMesh, Material _mat)
+        /// <summary>
+        /// 1. Init :: Î≥µÏÖÄÏùÑ ÏÉùÏÑ±ÌïúÎã§.
+        /// </summary>
+        /// <param name="_indexes"> Î∞∞Ïó¥ Ïù∏Îç±Ïä§ Î≤àÌò∏ </param>
+        /// <param name="_scale"> Î≥µÏÖÄ Í∏∞Î≥∏ ÌÅ¨Í∏∞ </param>
+        /// <param name="_iMesh"> ÏÉùÏÑ±Îêú Î©îÏâ¨ </param>
+        /// <param name="_mat"> Í∏∞Î≥∏ Ïû¨Ïßà </param>
+        /// <param name="_depthIndex"> ÎéÅÏä§ </param>
+        /// <returns></returns>
+        public GameObject CreateVoxel(int[] _indexes, Vector3 _scale, Material _mat, int _depthIndex)
         {
             Vector3 center = new Vector3(
                 _scale.x * _indexes[0],
@@ -73,60 +70,10 @@ namespace Test
                 _scale.z * _indexes[2]
                 );
 
-            GameObject obj = new GameObject();
+            GameObject _obj = VoxelUtil.CreateVoxel($"Voxel {_indexes[0]},{_indexes[1]},{_indexes[2]} // Depth {_depthIndex}",
+                center, _scale, _mat, _depthIndex);
 
-            Mesh mesh = Instantiate<Mesh>(_instantiatedMesh);
-            Voxel voxel = obj.AddComponent<Voxel>();
-
-            voxel.InitVoxel(
-                $"Voxel {_indexes[0]},{_indexes[1]},{_indexes[2]}",
-                center, _scale, mesh, _mat, m_depthIndex);
-
-            return obj;
-        }
-
-        // ∫πºø πËƒ°
-        public Mesh InstantiateMesh(Vector3 _scale, PlacePosition _place)
-        {
-            Vector3 pPos = new Vector3(
-                _place == PlacePosition.Center ? -(_scale.x / 2) : 0,
-                _place == PlacePosition.Center ? -(_scale.y / 2) : 0,
-                _place == PlacePosition.Center ? -(_scale.z / 2) : 0);
-
-            Mesh mesh = new Mesh();
-            List<Vector3> verts = new List<Vector3>();
-            verts.Add(new Vector3(pPos.x + 0        , pPos.y + 0        , pPos.z + 0));
-            verts.Add(new Vector3(pPos.x + _scale.x , pPos.y + 0        , pPos.z + 0));
-            verts.Add(new Vector3(pPos.x + 0        , pPos.y + 0        , pPos.z + _scale.z));
-            verts.Add(new Vector3(pPos.x + _scale.x , pPos.y + 0        , pPos.z + _scale.z));
-
-            verts.Add(new Vector3(pPos.x + 0        , pPos.y + _scale.y , pPos.z + 0));
-            verts.Add(new Vector3(pPos.x +_scale.x  , pPos.y + _scale.y , pPos.z + 0));
-            verts.Add(new Vector3(pPos.x + 0        , pPos.y + _scale.y , pPos.z + _scale.z));
-            verts.Add(new Vector3(pPos.x +_scale.x  , pPos.y + _scale.y , pPos.z + _scale.z));
-            mesh.vertices = verts.ToArray();
-
-            List<int> tris = new List<int>();
-            tris.AddRange(new List<int>() { 0, 1, 2 });
-            tris.AddRange(new List<int>() { 3, 2, 1 });
-
-            tris.AddRange(new List<int>() { 0, 4, 1 });
-            tris.AddRange(new List<int>() { 5, 1, 4 });
-
-            tris.AddRange(new List<int>() { 1, 5, 3 });
-            tris.AddRange(new List<int>() { 7, 3, 5 });
-
-            tris.AddRange(new List<int>() { 7, 6, 3 });
-            tris.AddRange(new List<int>() { 2, 3, 6 });
-
-            tris.AddRange(new List<int>() { 6, 4, 2 });
-            tris.AddRange(new List<int>() { 0, 2, 4 });
-
-            tris.AddRange(new List<int>() { 4, 6, 5 });
-            tris.AddRange(new List<int>() { 7, 5, 6 });
-            mesh.triangles = tris.ToArray();
-
-            return mesh;
+            return _obj;
         }
     }
 }
