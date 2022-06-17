@@ -61,11 +61,15 @@ namespace Test
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
-                absMap.UpdateMap(new Vector2d(37.556911, 126.894852), 15);
+                //absMap.UpdateMap(new Vector2d(37.556911, 126.894852), 15);
+                //absMap.UpdateMap(new Vector2d(37.847293, 126.766481), 15);
+                absMap.UpdateMap(new Vector2d(37.845823, 126.767088), 15);
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
-                absMap.UpdateMap(new Vector2d(37.556806, 126.895479), 15);
+                //absMap.UpdateMap(new Vector2d(37.556806, 126.895479), 15);
+                //absMap.UpdateMap(new Vector2d(37.848874, 126.765911), 15);
+                absMap.UpdateMap(new Vector2d(37.843780, 126.767954), 15);
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
@@ -98,7 +102,7 @@ namespace Test
             else if (Input.GetKeyDown(KeyCode.H))
             {
                 SetPhase1_SetStartEndPosition();
-                ContentManager.Instance.SetPhase1_StartEndPosition();
+                //ContentManager.Instance.SetPhase1_StartEndPosition();
                 //SetPhase2_SetCenterPositionRotation();
                 //SetPhase3_SetDemoObject();
             }
@@ -106,7 +110,7 @@ namespace Test
             {
                 //SetPhase1_SetStartEndPosition();
                 SetPhase2_SetCenterPositionRotation();
-                ContentManager.Instance.SetPhase2_CenterRotation();
+                //ContentManager.Instance.SetPhase2_CenterRotation();
                 //SetPhase3_SetDemoObject();
             }
             else if (Input.GetKeyDown(KeyCode.K))
@@ -114,7 +118,7 @@ namespace Test
                 //SetPhase1_SetStartEndPosition();
                 //SetPhase2_SetCenterPositionRotation();
                 SetPhase3_SetDemoObject();
-                ContentManager.Instance.SetPhase3_SetModelObject(phase1.Distance, phase2.CenterPoint.transform);
+                //ContentManager.Instance.SetPhase3_SetModelObject(phase1.Distance, phase2.CenterPoint.transform);
             }
             else if (Input.GetKeyDown(KeyCode.Z))
             {
@@ -142,8 +146,10 @@ namespace Test
         private void SetPhase1_SetStartEndPosition()
         {
             phase1.Points = new List<GameObject>();
-            phase1.Points.Add(SetScenePosition(37.556711, 126.893982, absMap, "object 1"));
-            phase1.Points.Add(SetScenePosition(37.547711, 126.888532, absMap, "object 2"));
+            //phase1.Points.Add(SetScenePosition(37.556711, 126.893982, absMap, "object 1"));
+            //phase1.Points.Add(SetScenePosition(37.547711, 126.888532, absMap, "object 2"));
+            phase1.Points.Add(SetScenePosition(37.845823, 126.767088, absMap, "object 1"));
+            phase1.Points.Add(SetScenePosition(37.843780, 126.767954, absMap, "object 2"));
         }
 
         private GameObject SetScenePosition(double lan, double lon, AbstractMap _map, string _name)
@@ -152,7 +158,7 @@ namespace Test
 
             Vector2d llpos = new Vector2d(lan, lon);
             Vector3 pos = Mapbox.Unity.Utilities.Conversions.GeoToWorldPosition(llpos.x, llpos.y, absMap.CenterMercator, absMap.WorldRelativeScale).ToVector3xz()
-                + new Vector3(0, 3, 0);
+                /*+ new Vector3(0, 3, 0)*/;
             obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             obj.transform.position = pos;
             obj.name = _name;
