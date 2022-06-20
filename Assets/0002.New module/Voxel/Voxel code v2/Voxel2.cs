@@ -10,14 +10,18 @@ namespace Test
         public class Controller
         {
             [SerializeField] int visualizeDepth;
-            private Controller controller;
 
 
             public int VisualizeDepth { get => visualizeDepth; set => visualizeDepth = value; }
 
             public Controller(Controller controller)
             {
-                this.controller = controller;
+                VisualizeDepth = controller.VisualizeDepth;    
+            }
+
+            public void Update(Controller controller)
+            {
+                VisualizeDepth = controller.VisualizeDepth;
             }
 
         }

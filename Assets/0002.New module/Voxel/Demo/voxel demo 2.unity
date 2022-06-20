@@ -539,6 +539,9 @@ MonoBehaviour:
   m_firstMax: {x: 0, y: 0, z: 0}
   depth: 3
   m_root: {fileID: 0}
+  m_rootVoxel: {fileID: 0}
+  m_controller:
+    visualizeDepth: 3
 --- !u!1 &1189811944
 GameObject:
   m_ObjectHideFlags: 0
