@@ -6,46 +6,33 @@ namespace Test
 {
     public class Voxel2 : MonoBehaviour
     {
-        [System.Serializable]
-        public class Controller
-        {
-            [SerializeField] int visualizeDepth;
-
-
-            public int VisualizeDepth { get => visualizeDepth; set => visualizeDepth = value; }
-
-            public Controller(Controller controller)
-            {
-                VisualizeDepth = controller.VisualizeDepth;    
-            }
-
-            public void Update(Controller controller)
-            {
-                VisualizeDepth = controller.VisualizeDepth;
-            }
-
-        }
-
+        /// <summary>
+        /// 8개의 꼭지점
+        /// </summary>
         public Vector3[] verts;
 
+        /// <summary>
+        /// 자식 복셀들
+        /// </summary>
         public Voxel2[] voxels;
 
+
         [SerializeField] int m_depth;
-        [SerializeField] Controller m_controller;
+        [SerializeField] VoxelController m_controller;
 
         public int Depth { get => m_depth; set => m_depth = value; }
 
-        public void InitVoxel(Vector3 _center, Vector3 _scale, int depth, Controller _controller)
+        public void InitVoxel(Vector3 center, Vector3 scale, int depth, int totalDepth, VoxelController _controller)
         {
+            m_controller = new VoxelController(_controller);
             Depth = depth;
-            m_controller = new Controller(_controller);
             
             verts = new Vector3[8];
 
             Vector3 _deltaVector = new Vector3(
-                _scale.x / 2,
-                _scale.y / 2,
-                _scale.z / 2);
+                scale.x / 2,
+                scale.y / 2,
+                scale.z / 2);
 
 
             for (int i = 0; i < 8; i++)
@@ -56,16 +43,16 @@ namespace Test
                     (i / 2) % 2 == 0 ? -1 : 1 );
 
                 verts[i] = new Vector3(
-                    _center.x + _deltaVector.x * _indexVector.x,
-                    _center.y + _deltaVector.y * _indexVector.y,
-                    _center.z + _deltaVector.z * _indexVector.z);
+                    center.x + _deltaVector.x * _indexVector.x,
+                    center.y + _deltaVector.y * _indexVector.y,
+                    center.z + _deltaVector.z * _indexVector.z);
             }
 
-            if (depth >= 0)
+            if (Depth > 0)
             {
                 voxels = new Voxel2[8];
 
-                Vector3 _childScale = _scale / 2;
+                Vector3 _childScale = scale / 2;
 
                 Vector3 __deltaVector = _childScale / 2;
 
@@ -77,19 +64,32 @@ namespace Test
                     (i / 2) % 2 == 0 ? -1 : 1);
 
                     Vector3 _newCenter = new Vector3(
-                        _center.x + __deltaVector.x * _indexVector.x,
-                        _center.y + __deltaVector.y * _indexVector.y,
-                        _center.z + __deltaVector.z * _indexVector.z
+                        center.x + __deltaVector.x * _indexVector.x,
+                        center.y + __deltaVector.y * _indexVector.y,
+                        center.z + __deltaVector.z * _indexVector.z
                         );
 
                     GameObject obj = new GameObject($"voxel {i}");
                     Voxel2 _vox = obj.AddComponent<Voxel2>();
 
                     voxels[i] = _vox;
-                    _vox.InitVoxel(_newCenter, _childScale, depth - 1, _controller);
+                    _vox.InitVoxel(_newCenter, _childScale, Depth - 1, totalDepth, _controller);
 
                     obj.transform.SetParent(transform);
                 }
+            }
+        }
+
+        public void UpdateVoxel(VoxelController _controller)
+        {
+            m_controller.Update(_controller);
+
+            if (voxels == null) return;
+
+            int index = voxels.Length;
+            for (int i = 0; i < index; i++)
+            {
+                voxels[i].UpdateVoxel(_controller);
             }
         }
 

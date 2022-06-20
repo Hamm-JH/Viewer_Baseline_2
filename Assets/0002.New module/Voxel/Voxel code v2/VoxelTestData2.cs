@@ -23,8 +23,16 @@ namespace Test
 
         private void Start()
         {
+            //GetCenter();
+            //GetBound();
+            //voxelizer2.ArrangeVoxels(Bound);
+        }
+
+        public void OnTest()
+        {
             GetCenter();
             GetBound();
+            voxelizer2.ArrangeVoxels(Bound);
         }
 
         private void GetCenter()
@@ -79,7 +87,7 @@ namespace Test
             //obj.transform.position = bound.center;
             //obj.transform.localScale = bound.size;
 
-            voxelizer2.ArrangeVoxels(Bound);
+            //voxelizer2.ArrangeVoxels(Bound);
         }
     }
 }
