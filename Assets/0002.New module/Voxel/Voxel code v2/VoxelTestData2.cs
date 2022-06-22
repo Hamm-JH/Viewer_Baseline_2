@@ -14,12 +14,15 @@ namespace Test
         [SerializeField] Vector3 center;
         [SerializeField] Bounds bound;
         [SerializeField] float boundOffset;
+        [SerializeField] List<Collider> colliders;
 
         [SerializeField] Voxelizer2 voxelizer2;
 
         public Vector3 Center { get => center; set => center = value; }
         public Bounds Bound { get => bound; set => bound = value; }
         public float BoundOffset { get => boundOffset; set => boundOffset = value; }
+
+        public List<Collider> Colliders { get => colliders; set => colliders = value; }
 
         private void Start()
         {
@@ -32,7 +35,7 @@ namespace Test
         {
             GetCenter();
             GetBound();
-            voxelizer2.ArrangeVoxels(Bound);
+            voxelizer2.ArrangeVoxels(Bound, this);
         }
 
         private void GetCenter()

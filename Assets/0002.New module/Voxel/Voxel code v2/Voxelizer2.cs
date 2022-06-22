@@ -9,21 +9,43 @@ namespace Test
     {
         [SerializeField] int visualizeDepth;
 
+        [SerializeField] bool isVisualize;
+        [SerializeField] bool visualizeCollision;
+        [SerializeField] bool visualizeNear;
+        [SerializeField] bool visualizeNearCollision;
+
         public int VisualizeDepth { get => visualizeDepth; set => visualizeDepth = value; }
+
+        public bool IsVisualize { get => isVisualize; set => isVisualize = value; }
+        public bool VisualizeCollision { get => visualizeCollision; set => visualizeCollision = value; }
+        public bool VisualizeNear { get => visualizeNear; set => visualizeNear = value; }
+        public bool VisualizeNearCollision { get => visualizeNearCollision; set => visualizeNearCollision = value; }
 
         public VoxelController()
         {
             VisualizeDepth = 0;
+            IsVisualize = false;
+            VisualizeCollision = false;
+            VisualizeNear = false;
+            VisualizeNearCollision = false;
         }
 
         public VoxelController(VoxelController controller)
         {
             VisualizeDepth = controller.VisualizeDepth;
+            IsVisualize = controller.IsVisualize;
+            VisualizeCollision = controller.VisualizeCollision;
+            VisualizeNear = controller.VisualizeNear;
+            VisualizeNearCollision = controller.VisualizeNearCollision;
         }
 
         public void Update(VoxelController controller)
         {
             VisualizeDepth = controller.VisualizeDepth;
+            IsVisualize = controller.IsVisualize;
+            VisualizeCollision = controller.VisualizeCollision;
+            VisualizeNear = controller.VisualizeNear;
+            VisualizeNearCollision = controller.VisualizeNearCollision;
         }
     }
 
@@ -60,18 +82,39 @@ namespace Test
         public VoxelController m_controller;
 
         /// <summary>
+        /// 복셀 테스트 데이터
+        /// </summary>
+        public VoxelTestData2 m_data;
+
+
+
+        /// <summary>
         /// Case 1 :: 시설물을 중심으로 root octree 하나를 만드는 방법
         /// </summary>
         /// <param name="_bound"></param>
-		public void ArrangeVoxels(Bounds _bound)
+		public void ArrangeVoxels(Bounds _bound, VoxelTestData2 _data)
         {
+            m_data = _data;
+
             m_root = new GameObject("root");
 
             // 첫 복셀은 이 경계를 기준으로 생성한다.
+            // 중앙 위치
             m_center = _bound.center;
+
+            // 루트 크기
             m_scale = _bound.size;
 
+            float max = _bound.size.x;
+            max = max < _bound.size.y ? _bound.size.y : max;
+            max = max < _bound.size.z ? _bound.size.z : max;
+
+            // 경계 크기 정육면체로 변경
+            m_scale = new Vector3(max, max, max);
+
             ArrangeVoxels();
+
+            //StartCoroutine(Routine_collSwitch(m_data));
         }
 
         /// <summary>
@@ -96,14 +139,38 @@ namespace Test
 
         private void ArrangeVoxels()
         {
-            GameObject obj = new GameObject("voxel 1");
+            GameObject obj = new GameObject("voxel 0");
             m_rootVoxel = obj.AddComponent<Voxel2>();
-            m_rootVoxel.InitVoxel(m_center, m_scale, m_depth, m_depth, m_controller);
+            m_rootVoxel.InitVoxel(m_center, m_scale, 0, m_depth, m_controller);
 
             obj.transform.SetParent(m_root.transform);
         }
 
+        private IEnumerator Routine_collSwitch(VoxelTestData2 _data)
+        {
+            List<Collider> colls = _data.Colliders;
 
+            int unitIndex = 0;
+            int unitCount = 100;
+
+            int index = colls.Count;
+            for (int i = 0; i < index; i++)
+            {
+                if (i / unitCount != unitIndex)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
+
+                colls[i].enabled = true;
+            }
+
+            for (int i = 0; i < index; i++)
+            {
+                colls[i].enabled = false;
+            }
+
+            yield break;
+        }
 
         private void OnValidate()
         {
