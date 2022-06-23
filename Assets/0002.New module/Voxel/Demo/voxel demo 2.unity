@@ -24766,15 +24766,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_root: {fileID: 0}
   m_rootVoxel: {fileID: 0}
-  m_depth: 6
+  m_depth: 7
   m_scale: {x: 0, y: 0, z: 0}
   m_center: {x: 0, y: 0, z: 0}
   m_controller:
-    visualizeDepth: 2
+    visualizeDepth: 7
     isVisualize: 1
     visualizeCollision: 1
     visualizeNear: 1
-    visualizeNearCollision: 0
+    visualizeNearCollision: 1
   m_data: {fileID: 0}
 --- !u!1 &1108830677 stripped
 GameObject:
@@ -33742,7 +33742,7 @@ MonoBehaviour:
   bound:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  boundOffset: 1
+  boundOffset: 2
   colliders:
   - {fileID: 376884315}
   - {fileID: 1260632405}

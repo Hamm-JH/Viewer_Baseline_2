@@ -293,6 +293,7 @@ namespace Test
 
             // Draw lines
             GL.Begin(GL.LINES);
+            
 
             Color colr = Color.white;
             if (m_controller.VisualizeNear && IsNear)
