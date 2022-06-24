@@ -10,6 +10,14 @@ namespace Test
     using Mapbox.Unity.Utilities;
     using Mapbox.Utils;
 
+    //[System.Serializable]
+    //public class Phase0_Resource
+    //{
+    //    public GameObject prefab;
+    //    public GameObject instanceObject;
+    //    public VoxelTestData2 instance_data;
+    //}
+
     [System.Serializable]
     public class Phase1_2Position
     {
@@ -33,9 +41,15 @@ namespace Test
     [System.Serializable]
     public class Phase3_Object
     {
-        [SerializeField] private GameObject demoGameObject;
-
-        public GameObject DemoGameObject { get => demoGameObject; set => demoGameObject = value; }
+        public GameObject prefab;
+        public GameObject instanceObject;
+        public VoxelTestData2 instance_data;
+    }
+    
+    [System.Serializable]
+    public class Phase4_Voxel
+    {
+        public Voxelizer2 voxelizer2;
     }
 
     /// <summary>
@@ -73,6 +87,7 @@ namespace Test
         public Phase1_2Position phase1;
         public Phase2_CenterRotation phase2;
         public Phase3_Object phase3;
+        public Phase4_Voxel phase4;
 
         public UnitMovementPosition uMPos_x;
         public UnitMovementPosition uMPos_y;
@@ -140,67 +155,38 @@ namespace Test
             // 특정 위치로 이동 (시점/종점)
             if (Input.GetKeyDown(KeyCode.A))
             {
-                //absMap.UpdateMap(new Vector2d(37.556911, 126.894852), 15);
-                //absMap.UpdateMap(new Vector2d(37.847293, 126.766481), 15);
                 absMap.UpdateMap(new Vector2d(37.845823, 126.767088), 15);
             }
             // 특정 위치로 이동 (시점/종점)
-            else if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.S))
             {
-                //absMap.UpdateMap(new Vector2d(37.556806, 126.895479), 15);
-                //absMap.UpdateMap(new Vector2d(37.848874, 126.765911), 15);
                 absMap.UpdateMap(new Vector2d(37.843780, 126.767954), 15);
             }
-            else if (Input.GetKeyDown(KeyCode.D))
-            {
-                // 경위도 -> 3D 위치검출
-                Vector3 pos = Mapbox.Unity.Utilities.Conversions.GeoToWorldGlobePosition(Lantitude, Longitude, 1);
-                Debug.Log($"base pos : {pos}");
-
-                // pos1, pos2
-                Vector3 pos1 = Mapbox.Unity.Utilities.Conversions.GeoToWorldGlobePosition(37.556711, 126.893982, 1);
-                Vector3 pos2 = Mapbox.Unity.Utilities.Conversions.GeoToWorldGlobePosition(37.547711, 126.888532, 1);
-
-                
-
-                Debug.Log($"pos1 : {pos1}");
-                Debug.Log($"pos2 : {pos2}");
-
-                test.transform.position = pos;
-            }
-            else if (Input.GetKeyDown(KeyCode.F))
-            {
-                double xTile = Mapbox.Unity.Utilities.Conversions.TileXToNWLongitude(37, 1);
-
-                Debug.Log($"xTile : {xTile}");
-            }
+            // 두 점(시종점)의 3D 위치 확인
             else if (Input.GetKeyDown(KeyCode.G))
             {
-                Vector2d llpos = new Vector2d(Lantitude, Longitude);
-                Vector2d pos = Mapbox.Unity.Utilities.Conversions.GeoToWorldPosition(llpos, new Vector2d(37.556911, 126.894852), 1);
-                var gg = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                gg.transform.position = new Vector3((float)pos.x, 0, (float)pos.y);
+                SetPhase1_SetStartEndPosition();
             }
+            // 배치 중심점, 각도 설정
             else if (Input.GetKeyDown(KeyCode.H))
             {
-                SetPhase1_SetStartEndPosition();
-                //ContentManager.Instance.SetPhase1_StartEndPosition();
-                //SetPhase2_SetCenterPositionRotation();
-                //SetPhase3_SetDemoObject();
+                SetPhase2_SetCenterPositionRotation();
             }
+            // 시설물 배치, 검출된 각도 설정
             else if (Input.GetKeyDown(KeyCode.J))
             {
-                //SetPhase1_SetStartEndPosition();
-                SetPhase2_SetCenterPositionRotation();
-                //ContentManager.Instance.SetPhase2_CenterRotation();
-                //SetPhase3_SetDemoObject();
+                SetPhase3_CreateResource();
+                SetPhase3_AfterPhase2_SetResource();
+                SetPhase3_SetDemoObject();
             }
+            // 시설물에 복셀 배치
             else if (Input.GetKeyDown(KeyCode.K))
             {
-                //SetPhase1_SetStartEndPosition();
-                //SetPhase2_SetCenterPositionRotation();
-                SetPhase3_SetDemoObject();
-                //ContentManager.Instance.SetPhase3_SetModelObject(phase1.Distance, phase2.CenterPoint.transform);
+                SetPhase4_SetVoxel();
+            }
+            else if (Input.GetKeyDown(KeyCode.L))
+            {
+                SetStartEndDistance();
             }
             else if (Input.GetKeyDown(KeyCode.Z))
             {
@@ -222,6 +208,40 @@ namespace Test
             }
 
 
+        }
+
+        private void __review()
+        {
+            //if (Input.GetKeyDown(KeyCode.D))
+            //{
+            //    // 경위도 -> 3D 위치검출
+            //    Vector3 pos = Mapbox.Unity.Utilities.Conversions.GeoToWorldGlobePosition(Lantitude, Longitude, 1);
+            //    Debug.Log($"base pos : {pos}");
+
+            //    // pos1, pos2
+            //    Vector3 pos1 = Mapbox.Unity.Utilities.Conversions.GeoToWorldGlobePosition(37.556711, 126.893982, 1);
+            //    Vector3 pos2 = Mapbox.Unity.Utilities.Conversions.GeoToWorldGlobePosition(37.547711, 126.888532, 1);
+
+
+
+            //    Debug.Log($"pos1 : {pos1}");
+            //    Debug.Log($"pos2 : {pos2}");
+
+            //    test.transform.position = pos;
+            //}
+            //else if (Input.GetKeyDown(KeyCode.F))
+            //{
+            //    double xTile = Mapbox.Unity.Utilities.Conversions.TileXToNWLongitude(37, 1);
+
+            //    Debug.Log($"xTile : {xTile}");
+            //}
+            //else if (Input.GetKeyDown(KeyCode.G))
+            //{
+            //    Vector2d llpos = new Vector2d(Lantitude, Longitude);
+            //    Vector2d pos = Mapbox.Unity.Utilities.Conversions.GeoToWorldPosition(llpos, new Vector2d(37.556911, 126.894852), 1);
+            //    var gg = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            //    gg.transform.position = new Vector3((float)pos.x, 0, (float)pos.y);
+            //}
         }
 
         /// <summary>
@@ -293,6 +313,8 @@ namespace Test
             return result;
         }
 
+        #region phase1 : 시종점의 위경도 -> 3D 위치 구한다.
+
         private void SetPhase1_SetStartEndPosition()
         {
             phase1.Points = new List<GameObject>();
@@ -317,21 +339,43 @@ namespace Test
             return obj;
         }
 
+        #endregion
+
+        #region phase2 : 지도상 시종점 사이의 중심 위치 // 배치 각도를 구한다.
+
         private void SetPhase2_SetCenterPositionRotation()
         {
             GameObject start = phase1.Points[0];
             GameObject end = phase1.Points[1];
 
+            // 중심점 계산
             Vector3 centerPos = (start.transform.position + end.transform.position) / 2;
 
             GameObject center = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             center.name = "center";
 
             center.transform.position = centerPos;
+            // 각도 계산
             center.transform.LookAt(start.transform);
 
+            // 중심점, 각도 할당
             phase2.CenterPoint = center;
             phase2.Rotation = center.transform.rotation;
+        }
+
+        #endregion
+
+        #region phase3 : 시설물 배치
+
+        private void SetPhase3_CreateResource()
+        {
+            phase3.instanceObject = Instantiate(phase3.prefab);
+            phase3.instance_data = phase3.instanceObject.GetComponent<VoxelTestData2>();
+        }
+
+        private void SetPhase3_AfterPhase2_SetResource()
+        {
+            phase3.instance_data.SetResource();
         }
 
         private void SetPhase3_SetDemoObject()
@@ -339,15 +383,61 @@ namespace Test
             phase1.Distance = Vector3.Distance(phase1.Points[0].transform.position, phase1.Points[1].transform.position);
             //float dist = Vector3.Distance(phase1.Points[0].transform.position, phase1.Points[1].transform.position);
 
-            GameObject demoObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            demoObj.name = "demo object";
-
-            demoObj.transform.position = phase2.CenterPoint.transform.position;
-            demoObj.transform.rotation = phase2.Rotation;
-            demoObj.transform.localScale = new Vector3(1, 1, phase1.Distance);
-
-            phase3.DemoGameObject = demoObj;
-
+            phase3.instanceObject.transform.position = phase1.Points[0].transform.position;
+            phase3.instanceObject.transform.rotation = phase2.Rotation;
+            phase3.instanceObject.transform.Rotate(new Vector3(0, 90, 0));
         }
+        #endregion
+
+        #region phase4 : octree 복셀 배치
+
+        private void SetPhase4_SetVoxel()
+        {
+            GameObject obj = new GameObject("voxelizer2");
+
+            phase4.voxelizer2 = obj.AddComponent<Voxelizer2>();
+
+            phase4.voxelizer2.Prepare();
+            phase4.voxelizer2.ArrangeVoxels(phase3.instance_data.Bound, phase2.CenterPoint.transform.position, phase3.instance_data);
+        }
+
+        #endregion
+
+        #region phse5 : 시종점간 거리 구하고 시각화
+
+        private void SetStartEndDistance()
+        {
+            Transform sTr = phase3.instance_data.start;
+            Transform eTr = phase3.instance_data.end;
+
+            // 시종점의 위경도 변환
+            Vector2d startLaLo = sTr.GetGeoPosition(absMap.CenterMercator, absMap.WorldRelativeScale);
+            Vector2d endLaLo = eTr.GetGeoPosition(absMap.CenterMercator, absMap.WorldRelativeScale);
+            //Vector2d sGP = Mapbox.Unity.Utilities.Conversions.
+
+            Vector2d diff = startLaLo - endLaLo;
+
+            // 위경도 기반의 거리계산
+            Vector2d diffMeter = Mapbox.Unity.Utilities.Conversions.LatLonToMeters(diff);
+
+            //Debug.Log($"diff meter : {diffMeter}");
+
+            // 위경도 기반 거리에서 실제 거리 계산
+            double diffDistance = Mathd.Sqrt(diffMeter.x * diffMeter.x + diffMeter.y * diffMeter.y);
+
+            //Debug.Log($"diff distance : {diffDistance}");
+
+            // 시점과 종점의 위경도를 구한다.
+            // 두 위경도차를 구한다.
+            // 위경도차의 x,y 거리값을 구한다.
+            // mathf.sqrt(x*x + y*y) 연산을 수행한다.
+
+            GameObject lineObj = new GameObject("simpleLine");
+            SimpleLiner sLiner = lineObj.AddComponent<SimpleLiner>();
+            sLiner.SetLine(sTr, eTr, absMap, diffDistance);
+            
+        }
+
+        #endregion
     }
 }

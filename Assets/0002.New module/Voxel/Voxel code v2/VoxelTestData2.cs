@@ -13,6 +13,7 @@ namespace Test
 
         [SerializeField] Vector3 center;
         [SerializeField] Bounds bound;
+        [SerializeField] GameObject bridge;
         [SerializeField] float boundOffset;
         [SerializeField] List<Collider> colliders;
 
@@ -31,16 +32,33 @@ namespace Test
             //voxelizer2.ArrangeVoxels(Bound);
         }
 
+        public void SetResource()
+        {
+            GetCenter();
+            GetBound();
+        }
+
+        public void OnArrange()
+        {
+            voxelizer2.ArrangeVoxels(Bound, bound.center, this);
+        }
+
         public void OnTest()
         {
             GetCenter();
             GetBound();
-            voxelizer2.ArrangeVoxels(Bound, this);
+            voxelizer2.ArrangeVoxels(Bound, bound.center, this);
         }
 
         private void GetCenter()
         {
             Center = (start.transform.position + end.transform.position) / 2;
+            //bridge.transform.position = -Center;
+        }
+
+        public void SetCenter()
+        {
+            bridge.transform.position = -Center;
         }
 
         private void GetBound()

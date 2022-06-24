@@ -23,11 +23,11 @@ namespace Test
 
         public VoxelController()
         {
-            VisualizeDepth = 0;
-            IsVisualize = false;
-            VisualizeCollision = false;
-            VisualizeNear = false;
-            VisualizeNearCollision = false;
+            VisualizeDepth = 4;
+            IsVisualize = true;
+            VisualizeCollision = true;
+            VisualizeNear = true;
+            VisualizeNearCollision = true;
         }
 
         public VoxelController(VoxelController controller)
@@ -86,13 +86,18 @@ namespace Test
         /// </summary>
         public VoxelTestData2 m_data;
 
-
+        public void Prepare()
+        {
+            m_controller = new VoxelController();
+            m_depth = 6;
+            
+        }
 
         /// <summary>
         /// Case 1 :: 시설물을 중심으로 root octree 하나를 만드는 방법
         /// </summary>
         /// <param name="_bound"></param>
-		public void ArrangeVoxels(Bounds _bound, VoxelTestData2 _data)
+		public void ArrangeVoxels(Bounds _bound, Vector3 center, VoxelTestData2 _data)
         {
             m_data = _data;
 
@@ -100,7 +105,8 @@ namespace Test
 
             // 첫 복셀은 이 경계를 기준으로 생성한다.
             // 중앙 위치
-            m_center = _bound.center;
+            m_center = center;
+            //m_center = _bound.center;
 
             // 루트 크기
             m_scale = _bound.size;
