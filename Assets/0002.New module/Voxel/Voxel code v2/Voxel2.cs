@@ -10,6 +10,7 @@ namespace Test
         public class Data
         {
             public Vector3 center;
+            public Quaternion rotation;
             public Vector3 scale;
             public int totalDepth;
         }
@@ -55,7 +56,7 @@ namespace Test
         public bool IsNear { get => m_bIsNear; set => m_bIsNear = value; }
         public bool IsNearCollision { get => m_bIsNearCollision; set => m_bIsNearCollision = value; }
 
-        public void InitVoxel(Vector3 center, Vector3 scale, int depth, int totalDepth, VoxelController _controller)
+        public void InitVoxel(Vector3 center, Quaternion rotation, Vector3 scale, int depth, int totalDepth, VoxelController _controller)
         {
             m_controller = new VoxelController(_controller);
             Depth = depth;
@@ -63,6 +64,7 @@ namespace Test
 
             m_data = new Data();
             m_data.center = center;
+            m_data.rotation = rotation;
             m_data.scale = scale;
             m_data.totalDepth = totalDepth;
 
@@ -77,7 +79,11 @@ namespace Test
                 scale.y / 2,
                 scale.z / 2);
 
-            
+            float angleY = rotation.eulerAngles.y;
+
+            Debug.Log($"cos y : {Mathf.Cos(angleY)}");
+            Debug.Log($"sin y : {Mathf.Sin(angleY)}");
+
             for (int i = 0; i < 8; i++)
             {
                 Vector3 _indexVector = new Vector3(
@@ -89,6 +95,8 @@ namespace Test
                     center.x + _deltaVector.x * _indexVector.x,
                     center.y + _deltaVector.y * _indexVector.y,
                     center.z + _deltaVector.z * _indexVector.z);
+
+                verts[i] = SetRotate(verts[i], m_data.center, angleY);
             }
             #endregion
 
@@ -175,6 +183,8 @@ namespace Test
 
                 Vector3 __deltaVector = _childScale / 2;
 
+                float angleY = m_data.rotation.eulerAngles.y;
+
                 for (int i = 0; i < 8; i++)
                 {
                     Vector3 _indexVector = new Vector3(
@@ -188,11 +198,13 @@ namespace Test
                         m_data.center.z + __deltaVector.z * _indexVector.z
                         );
 
+                    _newCenter = SetRotate(_newCenter, m_data.center, angleY);
+
                     GameObject obj = new GameObject($"{this.name}{i}");
                     Voxel2 _vox = obj.AddComponent<Voxel2>();
 
                     voxels[i] = _vox;
-                    _vox.InitVoxel(_newCenter, _childScale, Depth + 1, m_data.totalDepth, m_controller);
+                    _vox.InitVoxel(_newCenter, m_data.rotation, _childScale, Depth + 1, m_data.totalDepth, m_controller);
 
                     obj.transform.SetParent(transform);
                 }
@@ -250,6 +262,31 @@ namespace Test
             }
 
             yield break;
+        }
+
+        private Vector3 SetRotate(Vector3 target, Vector3 center, float angleY)
+        {
+            //return target;
+
+            //angleY += 90;
+            //angleY = 40;
+            //angleY = 3.44f;
+            angleY = 90 - angleY;
+
+            //Mathf.Deg2Rad
+            Vector3 result = default(Vector3);
+
+            float x = (target.x - center.x) * Mathf.Cos(angleY * Mathf.Deg2Rad)
+                    - (target.z - center.z) * Mathf.Sin(angleY * Mathf.Deg2Rad)
+                    + center.x;
+
+            float z = (target.x - center.x) * Mathf.Sin(angleY * Mathf.Deg2Rad)
+                    + (target.z - center.z) * Mathf.Cos(angleY * Mathf.Deg2Rad)
+                    + center.z;
+
+            result = new Vector3(x, target.y, z);
+
+            return result;
         }
 
         public void UpdateVoxel(VoxelController _controller)

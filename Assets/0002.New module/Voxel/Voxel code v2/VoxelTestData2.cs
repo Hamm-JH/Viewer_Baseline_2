@@ -40,14 +40,14 @@ namespace Test
 
         public void OnArrange()
         {
-            voxelizer2.ArrangeVoxels(Bound, bound.center, this);
+            voxelizer2.ArrangeVoxels(Bound, bound.center, Quaternion.identity, this);
         }
 
         public void OnTest()
         {
             GetCenter();
             GetBound();
-            voxelizer2.ArrangeVoxels(Bound, bound.center, this);
+            voxelizer2.ArrangeVoxels(Bound, bound.center, Quaternion.identity, this);
         }
 
         private void GetCenter()

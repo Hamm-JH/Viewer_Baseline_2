@@ -77,6 +77,11 @@ namespace Test
         public Vector3 m_center;
 
         /// <summary>
+        /// 복셀의 회전 각도
+        /// </summary>
+        public Quaternion m_rotation;
+
+        /// <summary>
         /// 컨트롤러
         /// </summary>
         public VoxelController m_controller;
@@ -97,7 +102,7 @@ namespace Test
         /// Case 1 :: 시설물을 중심으로 root octree 하나를 만드는 방법
         /// </summary>
         /// <param name="_bound"></param>
-		public void ArrangeVoxels(Bounds _bound, Vector3 center, VoxelTestData2 _data)
+		public void ArrangeVoxels(Bounds _bound, Vector3 center, Quaternion _rotation, VoxelTestData2 _data)
         {
             m_data = _data;
 
@@ -107,6 +112,8 @@ namespace Test
             // 중앙 위치
             m_center = center;
             //m_center = _bound.center;
+
+            m_rotation = _rotation;
 
             // 루트 크기
             m_scale = _bound.size;
@@ -147,7 +154,7 @@ namespace Test
         {
             GameObject obj = new GameObject("voxel 0");
             m_rootVoxel = obj.AddComponent<Voxel2>();
-            m_rootVoxel.InitVoxel(m_center, m_scale, 0, m_depth, m_controller);
+            m_rootVoxel.InitVoxel(m_center, m_rotation, m_scale, 0, m_depth, m_controller);
 
             obj.transform.SetParent(m_root.transform);
         }

@@ -395,10 +395,13 @@ namespace Test
         {
             GameObject obj = new GameObject("voxelizer2");
 
+            //phase3.instanceObject.transform.rotation;
+
             phase4.voxelizer2 = obj.AddComponent<Voxelizer2>();
 
             phase4.voxelizer2.Prepare();
-            phase4.voxelizer2.ArrangeVoxels(phase3.instance_data.Bound, phase2.CenterPoint.transform.position, phase3.instance_data);
+            phase4.voxelizer2.ArrangeVoxels(phase3.instance_data.Bound, phase2.CenterPoint.transform.position, 
+                phase3.instanceObject.transform.rotation, phase3.instance_data);
         }
 
         #endregion
