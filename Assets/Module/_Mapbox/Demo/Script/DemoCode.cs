@@ -7,16 +7,9 @@ namespace Test
     using Management;
     using Mapbox.Map;
     using Mapbox.Unity.Map;
+    using Mapbox.Unity.MeshGeneration.Data;
     using Mapbox.Unity.Utilities;
     using Mapbox.Utils;
-
-    //[System.Serializable]
-    //public class Phase0_Resource
-    //{
-    //    public GameObject prefab;
-    //    public GameObject instanceObject;
-    //    public VoxelTestData2 instance_data;
-    //}
 
     [System.Serializable]
     public class Phase1_2Position
@@ -71,6 +64,20 @@ namespace Test
 
     public class DemoCode : MonoBehaviour
     {
+        private static DemoCode instance;
+
+        public static DemoCode Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = FindObjectOfType<DemoCode>() as DemoCode;
+                }
+                return instance;
+            }
+        }
+
         public AbstractMap absMap;
 
         public GameObject test;
@@ -94,118 +101,139 @@ namespace Test
 
         private void Update()
         {
-
-            if (Input.GetKeyDown(KeyCode.Alpha0))
+            if(Input.GetMouseButtonDown(0))
             {
-                //Debug.Log(Vector2d.one);
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    Debug.Log($"hit point : {hit.point}");
+
+                    Vector2d latlon = Get3DToLatLon(hit.point);
+
+                    Debug.Log($"lat lon : {latlon.x}, {latlon.y}");
+                }
+            }
+
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha0))
+                {
+                    //Debug.Log(Vector2d.one);
                 
-                Vector2d start = new Vector2d(37.845823, 126.767088);
-                Vector2d end = new Vector2d(37.843780, 126.767954);
+                    Vector2d start = new Vector2d(37.845823, 126.767088);
+                    Vector2d end = new Vector2d(37.843780, 126.767954);
 
-                Vector2d unitVector = new Vector2d(start.x + 0.01f, start.y);
+                    Vector2d unitVector = new Vector2d(start.x + 0.01f, start.y);
 
-                //Vector2d start = Mapbox.Unity.Utilities.Conversions.LatLonToMeters(new Vector2d(37.845823, 126.767088));
-                //Vector2d end = Mapbox.Unity.Utilities.Conversions.LatLonToMeters(new Vector2d(37.843780, 126.767954));
+                    //Vector2d start = Mapbox.Unity.Utilities.Conversions.LatLonToMeters(new Vector2d(37.845823, 126.767088));
+                    //Vector2d end = Mapbox.Unity.Utilities.Conversions.LatLonToMeters(new Vector2d(37.843780, 126.767954));
 
-                Vector2d diff = start - end;
-                Vector2d diff2 = start - unitVector;
+                    Vector2d diff = start - end;
+                    Vector2d diff2 = start - unitVector;
 
-                //Debug.Log(start);
-                //Debug.Log(end);
-                //Debug.Log(diff);
-                //Debug.Log(diff2);
+                    //Debug.Log(start);
+                    //Debug.Log(end);
+                    //Debug.Log(diff);
+                    //Debug.Log(diff2);
 
-                Vector2d oneKilometer = Vector2d.one * 1000;
-                Vector2d oneKilometerToLatLon = Mapbox.Unity.Utilities.Conversions.MetersToLatLon(oneKilometer);
+                    Vector2d oneKilometer = Vector2d.one * 1000;
+                    Vector2d oneKilometerToLatLon = Mapbox.Unity.Utilities.Conversions.MetersToLatLon(oneKilometer);
 
-                Debug.Log($"v1 : {oneKilometer}");
-                Debug.Log($"v1 to lalo : {oneKilometerToLatLon}");
+                    Debug.Log($"v1 : {oneKilometer}");
+                    Debug.Log($"v1 to lalo : {oneKilometerToLatLon}");
 
-                Debug.Log($"meter x : {oneKilometer.x}");
-                Debug.Log($"meter y : {oneKilometer.y}");
+                    Debug.Log($"meter x : {oneKilometer.x}");
+                    Debug.Log($"meter y : {oneKilometer.y}");
 
-                Debug.Log($"lat x : {oneKilometerToLatLon.x}");
-                Debug.Log($"lon y : {oneKilometerToLatLon.y}");
+                    Debug.Log($"lat x : {oneKilometerToLatLon.x}");
+                    Debug.Log($"lon y : {oneKilometerToLatLon.y}");
 
-                //Debug.Log(Mapbox.Unity.Utilities.Conversions.MetersToLatLon(Vector2d.one));
+                    //Debug.Log(Mapbox.Unity.Utilities.Conversions.MetersToLatLon(Vector2d.one));
 
-                // 일정 위경도차가 얼마나 거리를 가지는가?
-                //Debug.Log(Mapbox.Unity.Utilities.Conversions.LatLonToMeters(diff2));
+                    // 일정 위경도차가 얼마나 거리를 가지는가?
+                    //Debug.Log(Mapbox.Unity.Utilities.Conversions.LatLonToMeters(diff2));
 
-                // 위경도에서 미터 추출
-                //Debug.Log(Mapbox.Unity.Utilities.Conversions.LatLonToMeters(diff));
-                //Debug.Log(Mapbox.Unity.Utilities.Conversions.LatLonToMeters(diff.x, 0));
-                //Debug.Log(Mapbox.Unity.Utilities.Conversions.LatLonToMeters(0, diff.y));
+                    // 위경도에서 미터 추출
+                    //Debug.Log(Mapbox.Unity.Utilities.Conversions.LatLonToMeters(diff));
+                    //Debug.Log(Mapbox.Unity.Utilities.Conversions.LatLonToMeters(diff.x, 0));
+                    //Debug.Log(Mapbox.Unity.Utilities.Conversions.LatLonToMeters(0, diff.y));
 
-                // 둘은 같다
-                //Debug.Log(Vector2d.Distance(Vector2d.zero, diff));
-                //Debug.Log(Vector2d.Distance(start, end));
+                    // 둘은 같다
+                    //Debug.Log(Vector2d.Distance(Vector2d.zero, diff));
+                    //Debug.Log(Vector2d.Distance(start, end));
 
-                //Mapbox.Unity.Utilities.VectorExtensions.
+                    //Mapbox.Unity.Utilities.VectorExtensions.
+                }
+                else if(Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    GetUnitDistance_Lon_X();
+                }
+                else if(Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    GetUnitDistance_Lat_Y();
+                }
             }
-            else if(Input.GetKeyDown(KeyCode.Alpha1))
+
             {
-                GetUnitDistance_Lon_X();
+                // 특정 위치로 이동 (시점/종점)
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    absMap.UpdateMap(new Vector2d(37.845823, 126.767088), 15);
+                }
+                // 특정 위치로 이동 (시점/종점)
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    absMap.UpdateMap(new Vector2d(37.843780, 126.767954), 15);
+                }
+                // 두 점(시종점)의 3D 위치 확인
+                else if (Input.GetKeyDown(KeyCode.G))
+                {
+                    SetPhase1_SetStartEndPosition();
+                }
+                // 배치 중심점, 각도 설정
+                else if (Input.GetKeyDown(KeyCode.H))
+                {
+                    SetPhase2_SetCenterPositionRotation();
+                }
+                // 시설물 배치, 검출된 각도 설정
+                else if (Input.GetKeyDown(KeyCode.J))
+                {
+                    SetPhase3_CreateResource();
+                    SetPhase3_AfterPhase2_SetResource();
+                    SetPhase3_SetDemoObject();
+                }
+                // 시설물에 복셀 배치
+                else if (Input.GetKeyDown(KeyCode.K))
+                {
+                    SetPhase4_SetVoxel();
+                }
+                else if (Input.GetKeyDown(KeyCode.L))
+                {
+                    SetStartEndDistance();
+                }
+                else if (Input.GetKeyDown(KeyCode.Z))
+                {
+                    SetPhase6_GetHeightFromLatLon();
+                }
             }
-            else if(Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                GetUnitDistance_Lat_Y();
-            }
+            //else if (Input.GetKeyDown(KeyCode.Z))
+            //{
+            //    // pos1, pos2
+            //    Vector3 pos1 = Mapbox.Unity.Utilities.Conversions.GeoToWorldGlobePosition(37.556711, 126.893982, 1);
 
-            // 특정 위치로 이동 (시점/종점)
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                absMap.UpdateMap(new Vector2d(37.845823, 126.767088), 15);
-            }
-            // 특정 위치로 이동 (시점/종점)
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                absMap.UpdateMap(new Vector2d(37.843780, 126.767954), 15);
-            }
-            // 두 점(시종점)의 3D 위치 확인
-            else if (Input.GetKeyDown(KeyCode.G))
-            {
-                SetPhase1_SetStartEndPosition();
-            }
-            // 배치 중심점, 각도 설정
-            else if (Input.GetKeyDown(KeyCode.H))
-            {
-                SetPhase2_SetCenterPositionRotation();
-            }
-            // 시설물 배치, 검출된 각도 설정
-            else if (Input.GetKeyDown(KeyCode.J))
-            {
-                SetPhase3_CreateResource();
-                SetPhase3_AfterPhase2_SetResource();
-                SetPhase3_SetDemoObject();
-            }
-            // 시설물에 복셀 배치
-            else if (Input.GetKeyDown(KeyCode.K))
-            {
-                SetPhase4_SetVoxel();
-            }
-            else if (Input.GetKeyDown(KeyCode.L))
-            {
-                SetStartEndDistance();
-            }
-            else if (Input.GetKeyDown(KeyCode.Z))
-            {
-                // pos1, pos2
-                Vector3 pos1 = Mapbox.Unity.Utilities.Conversions.GeoToWorldGlobePosition(37.556711, 126.893982, 1);
+            //    Debug.Log($"pos1 : {pos1}");
 
-                Debug.Log($"pos1 : {pos1}");
+            //    test.transform.position = pos1;
+            //}
+            //else if (Input.GetKeyDown(KeyCode.X))
+            //{
+            //    // pos1, pos2
+            //    Vector3 pos2 = Mapbox.Unity.Utilities.Conversions.GeoToWorldGlobePosition(37.547711, 126.888532, 1);
 
-                test.transform.position = pos1;
-            }
-            else if (Input.GetKeyDown(KeyCode.X))
-            {
-                // pos1, pos2
-                Vector3 pos2 = Mapbox.Unity.Utilities.Conversions.GeoToWorldGlobePosition(37.547711, 126.888532, 1);
+            //    Debug.Log($"pos2 : {pos2}");
 
-                Debug.Log($"pos2 : {pos2}");
-
-                test.transform.position = pos2;
-            }
+            //    test.transform.position = pos2;
+            //}
 
 
         }
@@ -304,14 +332,201 @@ namespace Test
             GameObject obj = SetScenePosition(uMPos_y.targetLatLon.x, uMPos_y.targetLatLon.y, absMap, "posY");
         }
 
-        private Vector3 GetLatLonToXZ(Vector2d _value )
+        // 3D - 위경도간 변환
+
+        #region LatLon -> 3D
+
+        public static Vector3 GetLatLonTo3D(Vector2d _value)
         {
             Vector3 result = default(Vector3);
 
-            result = Mapbox.Unity.Utilities.Conversions.GeoToWorldPosition(_value.x, _value.y, absMap.CenterMercator, absMap.WorldRelativeScale).ToVector3xz();
+            result = Mapbox.Unity.Utilities.Conversions.GeoToWorldPosition(_value.x, _value.y, Instance.absMap.CenterMercator, Instance.absMap.WorldRelativeScale).ToVector3xz();
 
             return result;
         }
+
+        #endregion
+
+        #region 3D -> LatLon 
+
+        public static Vector2d Get3DToLatLon(Vector3 point)
+        {
+            Vector2d v2d = point.GetGeoPosition(Instance.absMap.CenterMercator, Instance.absMap.WorldRelativeScale);
+
+            return v2d;
+        }
+
+        #endregion
+
+        // 위경도 상의 타일 연산
+
+        #region LatLon -> UnityTile
+
+        /// <summary>
+        /// 위경도 위치에서 타일 ID 구함
+        /// </summary>
+        public static UnwrappedTileId GetLatLonToTileId(double latitude, double longitude)
+        {
+            var tileIDWnWrapped = TileCover.CoordinateToTileId(new Vector2d(latitude, longitude), (int)Instance.absMap.Zoom);
+
+            return tileIDWnWrapped;
+        }
+
+        /// <summary>
+        /// 타일 ID 기반으로 유니티 타일 구함
+        /// </summary>
+        public static UnityTile GetTileIdToUnityTile(UnwrappedTileId tileID)
+        {
+            UnityTile tile = Instance.absMap.MapVisualizer.GetUnityTileFromUnwrappedTileId(tileID);
+
+            return tile;
+        }
+
+        /// <summary>
+        /// 위경도 위치의 타일 구함
+        /// </summary>
+        public static UnityTile GetLatLon_To_UnityTile(double latitude, double longitude)
+        {
+            UnwrappedTileId tileId = GetLatLonToTileId(latitude, longitude);
+
+            UnityTile tile = GetTileIdToUnityTile(tileId);
+
+            return tile;
+        }
+
+        #endregion
+
+        #region LatLon -> tileIndex
+
+        /// <summary>
+        /// latlon -> meter 변환
+        /// </summary>
+        public static Vector2d GetLatLonToMeters(double latitude, double longitude)
+        {
+            Vector2d latlon = new Vector2d(latitude, longitude);
+
+            Vector2d meter = Conversions.LatLonToMeters(latlon);
+
+            return meter;
+        }
+
+        /// <summary>
+        /// 타일 중앙 받아오기
+        /// </summary>
+        public static Vector2d GetTileCenter(UnityTile tile)
+        {
+            Vector2d center = tile.Rect.Center;
+
+            return center;
+        }
+
+        /// <summary>
+        /// 타일 위치점 기본 위치 구하기
+        /// </summary>
+        public static Vector2d GetTileBasePoint(UnityTile tile)
+        {
+            Vector2d _base = GetTileCenter(tile);
+
+            _base = _base - new Vector2d(tile.Rect.Size.x / 2, tile.Rect.Size.y / 2);
+
+            return _base;
+        }
+
+        /// <summary>
+        /// 타일 특정 위치의 상대 위치 구하기
+        /// </summary>
+        /// <returns> 타일 특정 위치의 상대 위치 </returns>
+        public static Vector2d GetTile_To_DiffPosition(double latitude, double longitude, UnityTile tile)
+        {
+            // lat lon to meters because the tiles rect is also in meters
+            Vector2d v2d = GetLatLonToMeters(latitude, longitude);
+
+            // get the origin of the tile in meters
+            Vector2d v2dBase = GetTileBasePoint(tile);
+
+            // offset between the tile origin and the lat lon point
+            Vector2d diff = v2d - v2dBase;
+
+            return diff;
+        }
+
+        /// <summary>
+        /// 타일 특정 위치의 인덱스 구하기
+        /// </summary>
+        /// <returns> 타일 특정 위치의 인덱스 </returns>
+        public static Vector2 GetTile_To_DiffIndex(double latitude, double longitude, UnityTile tile)
+        {
+            Vector2 index = default(Vector2);
+
+            Vector2d diff = GetTile_To_DiffPosition(latitude, longitude, tile);
+
+            // mapping the differences to (0-1)
+            index = new Vector2(
+                (float)(diff.x / tile.Rect.Size.x),
+                (float)(diff.y / tile.Rect.Size.y)
+                );
+
+            return index;
+        }
+
+        #endregion
+
+        #region LatLon -> Height
+
+        public static float GetDiffIndex_To_Height(Vector2 diffIndex, UnityTile tile)
+        {
+            float h = tile.QueryHeightData(diffIndex.x, diffIndex.y);
+
+            return h;
+        }
+
+        public static float GetLatLon_To_Height(double latitude, double longitude)
+        {
+            float height = 0f;
+
+            // get tile id
+            var tileIDUnWrapped = GetLatLonToTileId(latitude, longitude);
+
+            // get tile
+            UnityTile tile = GetTileIdToUnityTile(tileIDUnWrapped);
+
+            Vector2 diffIndex = GetTile_To_DiffIndex(latitude, longitude, tile);
+
+            height = GetDiffIndex_To_Height(diffIndex, tile);
+
+            return height;
+        }
+
+        public static float Get3D_To_Height(Vector3 point)
+        {
+            Vector2d latlon = Get3DToLatLon(point);
+
+            float height = GetLatLon_To_Height(latlon.x, latlon.y);
+
+            return height;
+        }
+
+        public static Vector3 GetLatLon_To_Location(double latitude, double longitude, AbstractMap map)
+        {
+            Vector3 location = default(Vector3);
+
+            var tileIDUnWrapped = GetLatLonToTileId(latitude, longitude);
+
+            // get tile
+            UnityTile tile = GetTileIdToUnityTile(tileIDUnWrapped);
+
+            Vector2 diffIndex = GetTile_To_DiffIndex(latitude, longitude, tile);
+
+            float height = GetDiffIndex_To_Height(diffIndex, tile);
+
+            location = Conversions.GeoToWorldPosition(latitude, longitude, map.CenterMercator, map.WorldRelativeScale).ToVector3xz();
+
+            location = new Vector3(location.x, -height, location.z);
+
+            return location;
+        }
+
+        #endregion
 
         #region phase1 : 시종점의 위경도 -> 3D 위치 구한다.
 
@@ -320,7 +535,7 @@ namespace Test
             phase1.Points = new List<GameObject>();
             //phase1.Points.Add(SetScenePosition(37.556711, 126.893982, absMap, "object 1"));
             //phase1.Points.Add(SetScenePosition(37.547711, 126.888532, absMap, "object 2"));
-            phase1.Points.Add(SetScenePosition(37.845823, 126.767088, absMap, "object 1"));
+            phase1.Points.Add(SetScenePosition(37.8455847, 126.7671465, absMap, "object 1"));
             phase1.Points.Add(SetScenePosition(37.843780, 126.767954, absMap, "object 2"));
         }
 
@@ -329,7 +544,7 @@ namespace Test
             GameObject obj;
 
             Vector2d llpos = new Vector2d(lan, lon);
-            Vector3 pos = GetLatLonToXZ(llpos);
+            Vector3 pos = GetLatLonTo3D(llpos);
             //Vector3 pos = Mapbox.Unity.Utilities.Conversions.GeoToWorldPosition(llpos.x, llpos.y, absMap.CenterMercator, absMap.WorldRelativeScale).ToVector3xz();
             /*+ new Vector3(0, 3, 0)*/
             obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -383,7 +598,13 @@ namespace Test
             phase1.Distance = Vector3.Distance(phase1.Points[0].transform.position, phase1.Points[1].transform.position);
             //float dist = Vector3.Distance(phase1.Points[0].transform.position, phase1.Points[1].transform.position);
 
-            phase3.instanceObject.transform.position = phase1.Points[0].transform.position;
+            Vector3 position = phase1.Points[0].transform.position;
+            float height = Get3D_To_Height(new Vector3(position.x, 0, position.z));
+
+            position = new Vector3(position.x, -2.4f, position.z);
+
+
+            phase3.instanceObject.transform.position = position;
             phase3.instanceObject.transform.rotation = phase2.Rotation;
             phase3.instanceObject.transform.Rotate(new Vector3(0, 90, 0));
         }
@@ -399,6 +620,7 @@ namespace Test
 
             phase4.voxelizer2 = obj.AddComponent<Voxelizer2>();
 
+            
             phase4.voxelizer2.Prepare();
             phase4.voxelizer2.ArrangeVoxels(phase3.instance_data.Bound, phase2.CenterPoint.transform.position, 
                 phase3.instanceObject.transform.rotation, phase3.instance_data);
@@ -412,6 +634,8 @@ namespace Test
         {
             Transform sTr = phase3.instance_data.start;
             Transform eTr = phase3.instance_data.end;
+
+            
 
             // 시종점의 위경도 변환
             Vector2d startLaLo = sTr.GetGeoPosition(absMap.CenterMercator, absMap.WorldRelativeScale);
@@ -439,6 +663,40 @@ namespace Test
             SimpleLiner sLiner = lineObj.AddComponent<SimpleLiner>();
             sLiner.SetLine(sTr, eTr, absMap, diffDistance);
             
+        }
+
+        #endregion
+
+        #region phase6 : 특정 지점의 고도 구하기
+
+        private void SetPhase6_GetHeightFromLatLon()
+        {
+            double lat = 37.845823;
+            double lon = 126.767088;
+
+            //// get tile ID
+            //// 시점 위치 id
+            //var tileIDUnWrapped = GetLatLonToTileId(lat, lon);
+
+            //// get tile
+            //UnityTile tile = GetTileIdToUnityTile(tileIDUnWrapped);
+
+            //Vector2 diffIndex = GetTile_To_DiffIndex(lat, lon, tile);
+
+            //// height in unity units
+            //var h = tile.QueryHeightData(diffIndex.x, diffIndex.y);
+            ////var h = tile.QueryHeightData(diffIndex.x, diffIndex.y);
+
+            //// lat lon to unity units
+            //Vector3 location = Conversions.GeoToWorldPosition(lat, lon, absMap.CenterMercator, absMap.WorldRelativeScale).ToVector3xz();
+            //// replace y in position
+            //location = new Vector3(location.x, -h, location.z);
+
+            Vector3 _location = GetLatLon_To_Location(lat, lon, absMap);
+
+            GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            obj.transform.localScale = new Vector3(1, 5, 1);
+            obj.transform.position = _location;
         }
 
         #endregion

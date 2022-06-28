@@ -47,14 +47,40 @@ namespace Test
         /// </summary>
         [SerializeField] bool m_bIsNearCollision;
 
+        /// <summary>
+        /// 모델이 지리정보 고도 아래에 존재하는가?
+        /// </summary>
+        [SerializeField] bool m_bIsGround;
+
         [SerializeField] VoxelController m_controller;
         [SerializeField] Data m_data;
 
         public int Depth { get => m_depth; set => m_depth = value; }
+
+        /// <summary>
+        /// 충돌이 발생했는가?
+        /// </summary>
         public bool IsCollision { get => m_bIsCollision; set => m_bIsCollision = value; }
+
+        /// <summary>
+        /// 비활성화?
+        /// </summary>
         public bool IsDisabled { get => m_bIsDisabled; set => m_bIsDisabled = value; }
+
+        /// <summary>
+        /// 근접했는가?
+        /// </summary>
         public bool IsNear { get => m_bIsNear; set => m_bIsNear = value; }
+
+        /// <summary>
+        /// 근접 충돌했는가?
+        /// </summary>
         public bool IsNearCollision { get => m_bIsNearCollision; set => m_bIsNearCollision = value; }
+
+        /// <summary>
+        /// 복셀이 지면 아래에 있는가?
+        /// </summary>
+        public bool IsGround { get => m_bIsGround; set => m_bIsGround = value; }
 
         public void InitVoxel(Vector3 center, Quaternion rotation, Vector3 scale, int depth, int totalDepth, VoxelController _controller)
         {
@@ -71,6 +97,16 @@ namespace Test
             var coll = gameObject.AddComponent<BoxCollider>();
             coll.center = center;
             coll.size = scale;
+
+            float groundHeight = DemoCode.Get3D_To_Height(m_data.center);
+            if (groundHeight <= 0)
+            {
+                IsGround = true;
+            }
+            else
+            {
+                IsGround = false;
+            }
 
             #region 점 배치
             verts = new Vector3[8];
@@ -99,39 +135,6 @@ namespace Test
                 verts[i] = SetRotate(verts[i], m_data.center, angleY);
             }
             #endregion
-
-            //#region 자식 복셀 배치
-            //if (Depth > 0)
-            //{
-            //    voxels = new Voxel2[8];
-
-            //    Vector3 _childScale = scale / 2;
-
-            //    Vector3 __deltaVector = _childScale / 2;
-
-            //    for (int i = 0; i < 8; i++)
-            //    {
-            //        Vector3 _indexVector = new Vector3(
-            //        i % 2 == 0 ? -1 : 1,
-            //        i / 4 == 0 ? -1 : 1,
-            //        (i / 2) % 2 == 0 ? -1 : 1);
-
-            //        Vector3 _newCenter = new Vector3(
-            //            center.x + __deltaVector.x * _indexVector.x,
-            //            center.y + __deltaVector.y * _indexVector.y,
-            //            center.z + __deltaVector.z * _indexVector.z
-            //            );
-
-            //        GameObject obj = new GameObject($"{this.name}{i}");
-            //        Voxel2 _vox = obj.AddComponent<Voxel2>();
-
-            //        voxels[i] = _vox;
-            //        _vox.InitVoxel(_newCenter, _childScale, Depth - 1, totalDepth, _controller);
-
-            //        obj.transform.SetParent(transform);
-            //    }
-            //}
-            //#endregion
         }
 
         public void CreateChildren()
@@ -167,6 +170,8 @@ namespace Test
             //    }
             //}
             // frame 하나 보내고 충돌상태 확인
+
+            //if (!IsGround) return;
 
             StartCoroutine(CreateChildrenVoxel());
         }
