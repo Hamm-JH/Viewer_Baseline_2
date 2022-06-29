@@ -8,6 +8,21 @@ namespace Test
 {
     public class VoxelTestData2 : MonoBehaviour
     {
+        private static VoxelTestData2 instance;
+        
+        public static VoxelTestData2 Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = FindObjectOfType<VoxelTestData2>() as VoxelTestData2;
+                }
+
+                return instance;
+            }
+        }
+
         public Transform start;
         public Transform end;
 
@@ -16,6 +31,7 @@ namespace Test
         [SerializeField] GameObject bridge;
         [SerializeField] float boundOffset;
         [SerializeField] List<Collider> colliders;
+        //[SerializeField] List<float[]> vertexes;
 
         [SerializeField] Voxelizer2 voxelizer2;
 
@@ -24,6 +40,7 @@ namespace Test
         public float BoundOffset { get => boundOffset; set => boundOffset = value; }
 
         public List<Collider> Colliders { get => colliders; set => colliders = value; }
+        //public List<float[]> Vertexes { get => vertexes; set => vertexes = value; }
 
         private void Start()
         {
@@ -64,6 +81,7 @@ namespace Test
         private void GetBound()
         {
             Transform[] trs = transform.GetComponentsInChildren<Transform>();
+            //Vertexes = new List<float[]>();
             List<Transform> _trs = trs.ToList().FindAll(t => t.GetComponent<MeshRenderer>() != null);
 
 
@@ -73,6 +91,12 @@ namespace Test
             int index = _trs.Count;
             for (int i = 0; i < index; i++)
             {
+                //MeshFilter ft;
+                //if (trs[i].TryGetComponent<MeshFilter>(out ft))
+                //{
+                //    Vertexes.AddRange(GetVertices(ft.sharedMesh));
+                //}
+
                 MeshRenderer render;
                 if (trs[i].TryGetComponent<MeshRenderer>(out render))
                 {
@@ -99,6 +123,8 @@ namespace Test
                 }
             }
 
+            //Debug.Log($"mesh vertices : {Vertexes.Count}");
+
             Bounds bound = new Bounds();
             bound.center = (min + max) / 2;
             bound.size = max - min + new Vector3(BoundOffset, BoundOffset, BoundOffset);
@@ -109,6 +135,18 @@ namespace Test
             //obj.transform.localScale = bound.size;
 
             //voxelizer2.ArrangeVoxels(Bound);
+        }
+
+        private List<float[]> GetVertices(Mesh mesh)
+        {
+            List<float[]> vertices = new List<float[]>();
+
+            foreach(Vector3 vc in mesh.vertices)
+            {
+                vertices.Add(new float[] { vc.x, vc.y, vc.z });
+            }
+
+            return vertices;
         }
     }
 }

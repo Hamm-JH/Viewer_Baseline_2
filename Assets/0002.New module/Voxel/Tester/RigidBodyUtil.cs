@@ -13,9 +13,9 @@ namespace Test
             Voxel2 vox;
             if (collision.collider.TryGetComponent<Voxel2>(out vox))
             {
-                if (!vox.IsCollision)
+                if (!vox.m_state.IsCollision)
                 {
-                    vox.IsCollision = true;
+                    vox.m_state.IsCollision = true;
 
                     // 자식 노드 시행
                     vox.CreateChildren();
@@ -30,7 +30,7 @@ namespace Test
             Voxel2 vox;
             if (collision.collider.TryGetComponent<Voxel2>(out vox))
             {
-                vox.IsCollision = false;
+                vox.m_state.IsCollision = false;
             }
         }
 
@@ -41,9 +41,9 @@ namespace Test
             Voxel2 vox;
             if (other.transform.TryGetComponent<Voxel2>(out vox))
             {
-                if (!vox.IsCollision)
+                if (!vox.m_state.IsCollision)
                 {
-                    vox.IsCollision = true;
+                    vox.m_state.IsCollision = true;
 
                     // 자식 노드 시행
                     vox.CreateChildren();
@@ -58,7 +58,7 @@ namespace Test
             Voxel2 vox;
             if (other.transform.TryGetComponent<Voxel2>(out vox))
             {
-                vox.IsCollision = false;
+                vox.m_state.IsCollision = false;
             }
         }
     }

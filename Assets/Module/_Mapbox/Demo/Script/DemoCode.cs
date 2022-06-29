@@ -545,10 +545,9 @@ namespace Test
 
             Vector2d llpos = new Vector2d(lan, lon);
             Vector3 pos = GetLatLonTo3D(llpos);
-            //Vector3 pos = Mapbox.Unity.Utilities.Conversions.GeoToWorldPosition(llpos.x, llpos.y, absMap.CenterMercator, absMap.WorldRelativeScale).ToVector3xz();
-            /*+ new Vector3(0, 3, 0)*/
-            obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            obj.transform.position = pos;
+
+            obj = new GameObject();// GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            obj.transform.position = new Vector3(pos.x, -2.4f, pos.z);
             obj.name = _name;
 
             return obj;
@@ -566,10 +565,10 @@ namespace Test
             // 중심점 계산
             Vector3 centerPos = (start.transform.position + end.transform.position) / 2;
 
-            GameObject center = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            GameObject center = new GameObject();// GameObject.CreatePrimitive(PrimitiveType.Sphere);
             center.name = "center";
 
-            center.transform.position = centerPos;
+            center.transform.position = new Vector3(centerPos.x, -2.4f, centerPos.z);
             // 각도 계산
             center.transform.LookAt(start.transform);
 
@@ -621,7 +620,11 @@ namespace Test
             phase4.voxelizer2 = obj.AddComponent<Voxelizer2>();
 
             
-            phase4.voxelizer2.Prepare();
+            phase4.voxelizer2.Prepare(
+                depth: 7, 
+                minVDepth: 0, 
+                maxVDepth: 5);
+
             phase4.voxelizer2.ArrangeVoxels(phase3.instance_data.Bound, phase2.CenterPoint.transform.position, 
                 phase3.instanceObject.transform.rotation, phase3.instance_data);
         }

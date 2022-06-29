@@ -7,45 +7,52 @@ namespace Test
     [System.Serializable]
     public class VoxelController
     {
-        [SerializeField] int visualizeDepth;
+        [SerializeField] int min_vDepth;
+        [SerializeField] int max_vDepth;
 
         [SerializeField] bool isVisualize;
         [SerializeField] bool visualizeCollision;
         [SerializeField] bool visualizeNear;
         [SerializeField] bool visualizeNearCollision;
 
-        public int VisualizeDepth { get => visualizeDepth; set => visualizeDepth = value; }
-
         public bool IsVisualize { get => isVisualize; set => isVisualize = value; }
         public bool VisualizeCollision { get => visualizeCollision; set => visualizeCollision = value; }
         public bool VisualizeNear { get => visualizeNear; set => visualizeNear = value; }
         public bool VisualizeNearCollision { get => visualizeNearCollision; set => visualizeNearCollision = value; }
+        public int Min_vDepth { get => min_vDepth; set => min_vDepth = value; }
+        public int Max_vDepth { get => max_vDepth; set => max_vDepth = value; }
 
         public VoxelController()
         {
-            VisualizeDepth = 4;
             IsVisualize = true;
             VisualizeCollision = true;
             VisualizeNear = true;
             VisualizeNearCollision = true;
+
+            Min_vDepth = 0;
+            Max_vDepth = 5;
         }
 
         public VoxelController(VoxelController controller)
         {
-            VisualizeDepth = controller.VisualizeDepth;
             IsVisualize = controller.IsVisualize;
             VisualizeCollision = controller.VisualizeCollision;
             VisualizeNear = controller.VisualizeNear;
             VisualizeNearCollision = controller.VisualizeNearCollision;
+
+            Min_vDepth = controller.Min_vDepth;
+            Max_vDepth = controller.Max_vDepth;
         }
 
         public void Update(VoxelController controller)
         {
-            VisualizeDepth = controller.VisualizeDepth;
             IsVisualize = controller.IsVisualize;
             VisualizeCollision = controller.VisualizeCollision;
             VisualizeNear = controller.VisualizeNear;
             VisualizeNearCollision = controller.VisualizeNearCollision;
+
+            Min_vDepth = controller.Min_vDepth;
+            Max_vDepth = controller.Max_vDepth;
         }
     }
 
@@ -91,10 +98,12 @@ namespace Test
         /// </summary>
         public VoxelTestData2 m_data;
 
-        public void Prepare()
+        public void Prepare(int depth, int minVDepth, int maxVDepth)
         {
             m_controller = new VoxelController();
-            m_depth = 6;
+            m_controller.Min_vDepth = minVDepth;
+            m_controller.Max_vDepth = maxVDepth;
+            m_depth = depth;
             
         }
 
