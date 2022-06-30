@@ -45,6 +45,36 @@ namespace Test
         public Voxelizer2 voxelizer2;
     }
 
+    [System.Serializable]
+    public class Phase7_VoxelList
+    {
+        /// <summary>
+        /// 근접 복셀
+        /// </summary>
+        [SerializeField]
+        public List<Voxel2> nearVoxels;
+
+        /// <summary>
+        /// 충돌 복셀
+        /// </summary>
+        [SerializeField]
+        public List<Voxel2> nearCollisionVoxels;
+
+        public void CreateList(Voxelizer2 _voxelizer)
+        {
+            int depth = _voxelizer.m_depth;
+
+            nearVoxels = new List<Voxel2>(depth); //new List<Voxel2>[depth];
+            nearCollisionVoxels = new List<Voxel2>();
+
+            //for (int i = 0; i < depth; i++)
+            //{
+            //    //nearVoxels[i] = new List<Voxel2>();
+            //    //nearCollisionVoxels[i] = new List<Voxel2>();
+            //}
+        }
+    }
+
     /// <summary>
     /// 위/경도상의 단위 이동 위치를 관리하는 클래스
     /// </summary>
@@ -95,6 +125,7 @@ namespace Test
         public Phase2_CenterRotation phase2;
         public Phase3_Object phase3;
         public Phase4_Voxel phase4;
+        public Phase7_VoxelList phase7;
 
         public UnitMovementPosition uMPos_x;
         public UnitMovementPosition uMPos_y;
@@ -176,12 +207,12 @@ namespace Test
 
             {
                 // 특정 위치로 이동 (시점/종점)
-                if (Input.GetKeyDown(KeyCode.A))
+                if (Input.GetKeyDown(KeyCode.T))
                 {
                     absMap.UpdateMap(new Vector2d(37.845823, 126.767088), 15);
                 }
                 // 특정 위치로 이동 (시점/종점)
-                if (Input.GetKeyDown(KeyCode.S))
+                if (Input.GetKeyDown(KeyCode.Y))
                 {
                     absMap.UpdateMap(new Vector2d(37.843780, 126.767954), 15);
                 }
@@ -214,6 +245,10 @@ namespace Test
                 else if (Input.GetKeyDown(KeyCode.Z))
                 {
                     SetPhase6_GetHeightFromLatLon();
+                }
+                else if (Input.GetKeyDown(KeyCode.X))
+                {
+                    SetPhase7_SetVoxelList();
                 }
             }
             //else if (Input.GetKeyDown(KeyCode.Z))
@@ -631,7 +666,7 @@ namespace Test
 
         #endregion
 
-        #region phse5 : 시종점간 거리 구하고 시각화
+        #region phase5 : 시종점간 거리 구하고 시각화
 
         private void SetStartEndDistance()
         {
@@ -700,6 +735,16 @@ namespace Test
             GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
             obj.transform.localScale = new Vector3(1, 5, 1);
             obj.transform.position = _location;
+        }
+
+        #endregion
+
+        #region phase7 : 복셀에서 이동 가능 복셀 리스트 구하기
+
+        private void SetPhase7_SetVoxelList()
+        {
+            phase7.CreateList(phase4.voxelizer2);
+            phase4.voxelizer2.m_rootVoxel.SetVoxelList(ref phase7.nearVoxels, ref phase7.nearCollisionVoxels);
         }
 
         #endregion

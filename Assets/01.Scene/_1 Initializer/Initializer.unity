@@ -1003,7 +1003,7 @@ MonoBehaviour:
     m_imageURL: 
     m_historyURL: 
     m_keyCode: 
-  m_templateIndex: 0
+  m_templateIndex: 4
   _templateDatas:
   - m_platform: 49
     m_graphic: 2

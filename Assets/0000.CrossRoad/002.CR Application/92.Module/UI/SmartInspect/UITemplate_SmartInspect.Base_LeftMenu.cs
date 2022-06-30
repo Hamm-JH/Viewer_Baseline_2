@@ -83,8 +83,9 @@ namespace Module.UI
         private void LeftMenu_SetTogglePanel(int index)
         {
             LeftMenu_AllOnOffPanel(false);
+            General_AllOnOffPanel(false);
 
-            switch(index)
+            switch (index)
             {
                 case 0:
                     m_moduleElements.m_dmgElement.root.SetActive(true);
@@ -107,6 +108,11 @@ namespace Module.UI
         private void LeftMenu_AllOnOffPanel(bool isOn)
         {
             m_moduleElements.m_mElements.ForEach(x => x.SetActive(isOn));
+        }
+
+        private void General_AllOnOffPanel(bool isOn)
+        {
+            m_general.m_generalPanels.ForEach(x => x.SetActive(isOn));
         }
 
         #endregion

@@ -37,16 +37,18 @@ namespace Module.UI
         private void Bar_5Pan(Interactable _setter)
         {
             _Children.Off();
-            _Resource.Toggle_Group(0, _setter.gameObject);
+            //_Resource.Toggle_Group(0, _setter.gameObject);
 
             // 카메라 모드 변경
             if (MainManager.Instance.CurrentCameraMode == Definition.Control.CameraModes.BIM_Panning)
             {
                 MainManager.Instance.CurrentCameraMode = Definition.Control.CameraModes.BIM_ISO;
+                _Resource.Off_Group(0);
             }
             else
             {
                 MainManager.Instance.CurrentCameraMode = Definition.Control.CameraModes.BIM_Panning;
+                _Resource.On_Group(0, _setter.gameObject);
             }
         }
 

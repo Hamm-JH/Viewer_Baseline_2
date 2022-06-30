@@ -168,32 +168,6 @@ namespace Test
             obj.transform.SetParent(m_root.transform);
         }
 
-        private IEnumerator Routine_collSwitch(VoxelTestData2 _data)
-        {
-            List<Collider> colls = _data.Colliders;
-
-            int unitIndex = 0;
-            int unitCount = 100;
-
-            int index = colls.Count;
-            for (int i = 0; i < index; i++)
-            {
-                if (i / unitCount != unitIndex)
-                {
-                    yield return new WaitForEndOfFrame();
-                }
-
-                colls[i].enabled = true;
-            }
-
-            for (int i = 0; i < index; i++)
-            {
-                colls[i].enabled = false;
-            }
-
-            yield break;
-        }
-
         private void OnValidate()
         {
             UpdateVoxels();

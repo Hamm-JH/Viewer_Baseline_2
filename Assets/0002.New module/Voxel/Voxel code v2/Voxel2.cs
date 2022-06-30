@@ -383,6 +383,27 @@ namespace Test
             }
         }
 
+        public void SetVoxelList(ref List<Voxel2> near, ref List<Voxel2> nearCollision)
+        {
+            if (m_state.IsNear)
+            {
+                near.Add(this);
+                //near[Depth].Add(this);
+            }
+            
+            if (m_state.IsNearCollision)
+            {
+                nearCollision.Add(this);
+            }
+
+            if (voxels == null) return;
+
+            for (int i = 0; i < voxels.Length; i++)
+            {
+                voxels[i].SetVoxelList(ref near, ref nearCollision);
+            }
+        }
+
         private void OnRenderObject()
         {
             if (m_controller == null)
