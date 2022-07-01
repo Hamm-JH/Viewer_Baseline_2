@@ -48,7 +48,7 @@ namespace Module.UI
                 //Cameras.SetCameraDOTweenPosition(MainManager.Instance.MainCamera, target.gameObject);
                 //Cameras.SetCameraDOTweenPosition_Compass(MainManager.Instance.MainCamera, target.gameObject);
                 Cameras.SetCameraDOTweenPosition_Compass(MainManager.Instance.MainCamera, toPos, toRot);
-                Cameras.SetCameraMode(CameraModes.OnlyRotate);
+                Cameras.SetCameraMode(CameraModes.TunnelInside_Rotate);
             }
         }
 
@@ -74,7 +74,7 @@ namespace Module.UI
 
                 //Cameras.SetCameraDOTweenPosition(MainManager.Instance.MainCamera, target.gameObject);
                 Cameras.SetCameraDOTweenPosition_Compass(MainManager.Instance.MainCamera, toPos, toRot);
-                Cameras.SetCameraMode(CameraModes.OnlyRotate);
+                Cameras.SetCameraMode(CameraModes.TunnelInside_Rotate);
             }
         }
 

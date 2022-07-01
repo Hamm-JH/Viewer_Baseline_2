@@ -40,5 +40,23 @@ namespace Module.UI
 				//}
 			}
 		}
+
+		private void Event_Toggle_FacInfo()
+        {
+			switch(m_eventBase.m_index)
+            {
+				case 0:
+					MDmg_LBar_3ToggleSInfo();
+					break;
+
+				case 1:
+					MRcv_LBar_3StatusInfo();
+					break;
+
+				case 2:
+					MAdm_LBar_3ToggleInfo();
+					break;
+            }
+        }
 	}
 }

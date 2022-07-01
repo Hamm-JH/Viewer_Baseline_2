@@ -18,11 +18,12 @@ namespace Module.UI
         /// </summary>
         private void LeftMenu_SetDmg()
         {
+            m_eventBase.m_index = LeftMenu_StatusChange(0);
             // dmg 상태변경
-            int currIndex = LeftMenu_StatusChange(0);
+            //int currIndex = LeftMenu_StatusChange(0);
             
             // dmg panel 켠다.
-            LeftMenu_SetTogglePanel(currIndex);
+            LeftMenu_SetTogglePanel(m_eventBase.m_index);
 
             // dmg button 상태 활성화
             //LeftMenu_SetToggleButton(currIndex);
@@ -40,10 +41,10 @@ namespace Module.UI
         private void LeftMenu_SetRcv()
         {
             // rcv 상태변경
-            int currIndex = LeftMenu_StatusChange(1);
+            m_eventBase.m_index = LeftMenu_StatusChange(1);
             
             // rcv panel 켠다.
-            LeftMenu_SetTogglePanel(currIndex);
+            LeftMenu_SetTogglePanel(m_eventBase.m_index);
 
             // rcv button 상태 활성화
             //LeftMenu_SetToggleButton(currIndex);
@@ -59,10 +60,10 @@ namespace Module.UI
         /// </summary>
         private void LeftMenu_SetSetting()
         {
-            int currIndex = LeftMenu_StatusChange(2);
+            m_eventBase.m_index = LeftMenu_StatusChange(2);
 
             // adm panel 켠다
-            LeftMenu_SetTogglePanel(currIndex);
+            LeftMenu_SetTogglePanel(m_eventBase.m_index);
             //LeftMenu_SetToggleButton(currIndex);
 
             ContentManager.Instance.Module<Module_WebAPI>().ChangeTab("ALL");
@@ -189,7 +190,7 @@ namespace Module.UI
             SetLeftMenu_Images(currIndex);
 
             // 이벤트 상태 업데이트
-            m_eventBase.m_index = currIndex;
+            //m_eventBase.m_index = currIndex;
             return currIndex;
         }
 

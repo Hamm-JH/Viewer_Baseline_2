@@ -131,6 +131,9 @@ namespace Definition
 		Image_Enlarge_Center,
 
 		Toggle,
+
+		Toggle_FacInfo,
+
 	}
 
 	//----------------------------------------------------

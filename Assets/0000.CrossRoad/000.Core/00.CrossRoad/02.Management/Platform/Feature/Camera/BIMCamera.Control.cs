@@ -93,7 +93,7 @@ namespace Platform.Feature.Camera
                 {
                     OnPanning(targetPosition, delta, panSpeed, targetOffset, maxOffsetDistance);
                 }
-                else if(CamMode == CameraModes.OnlyRotate)
+                else if(CamMode == CameraModes.TunnelInside_Rotate)
                 {
                     OnSelfRotate(delta, freeSpeed);
                 }
@@ -111,7 +111,7 @@ namespace Platform.Feature.Camera
                     OnPanning(targetPosition, delta, panSpeed, targetOffset, maxOffsetDistance);
 				}
                 // 제자리 회전만 하겠다.
-                else if(CamMode == CameraModes.OnlyRotate)
+                else if(CamMode == CameraModes.TunnelInside_Rotate)
                 {
 
                 }
@@ -184,6 +184,8 @@ namespace Platform.Feature.Camera
 
         private void InFocus(Vector3 mousePos, float delta)
 		{
+            if (CamMode == CameraModes.TunnelInside_Rotate) return;
+
             float scroll = delta;
 
             UnityEngine.Camera cam = this.GetComponent<UnityEngine.Camera>();

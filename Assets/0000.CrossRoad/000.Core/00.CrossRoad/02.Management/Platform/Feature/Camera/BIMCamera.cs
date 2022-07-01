@@ -18,7 +18,7 @@ namespace Platform.Feature.Camera
 				|| _mode == CameraModes.BIM_Top
 				|| _mode == CameraModes.BIM_Side
 				|| _mode == CameraModes.BIM_Bottom
-				|| _mode == CameraModes.OnlyRotate
+				|| _mode == CameraModes.TunnelInside_Rotate
 				|| _mode == CameraModes.BIM_Panning)
 			{
 				this.enabled = true;

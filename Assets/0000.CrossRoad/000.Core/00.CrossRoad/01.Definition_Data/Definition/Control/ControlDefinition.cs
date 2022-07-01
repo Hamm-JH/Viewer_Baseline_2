@@ -35,6 +35,6 @@ namespace Definition.Control
 		BIM_RIGHT = 0x37,		// BIM 측우면 뷰 모드
 		BIM_Panning = 0x38,		// BIM 패닝
 
-		OnlyRotate = 0x40,		// 제자리에서 회전만 수행
+		TunnelInside_Rotate = 0x40,		// 제자리에서 회전만 수행
 	}
 }

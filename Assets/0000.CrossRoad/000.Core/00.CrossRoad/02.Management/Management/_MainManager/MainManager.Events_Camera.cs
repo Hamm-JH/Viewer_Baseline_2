@@ -24,6 +24,8 @@ namespace Management
 		public void UpdateCameraMode(CameraModes _mode)
         {
 			_core.SetCameraMode(_mode);
+
+			ContentManager.Instance.Update_CameraMode(_mode);
         }
 
 		public void SetCameraPosition(Bounds centerBounds, Canvas rootCanvas, 

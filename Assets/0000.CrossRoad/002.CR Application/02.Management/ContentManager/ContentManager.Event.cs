@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Management
 {
+    using Definition.Control;
     using Management.Content;
     using Management.Events;
     using UnityEngine.Events;
@@ -245,6 +246,21 @@ namespace Management
 			MainManager.Instance.MainCamera.orthographic = _isOrthogonal;
 		}
 
-		
+		/// <summary>
+		/// 컨텐츠 관리자에서 카메라 모드 업데이트시 동기화 코드
+		/// </summary>
+		/// <param name="mode"> 카메라 모드 </param>
+		public void Update_CameraMode(CameraModes mode)
+        {
+			PlatformCode pCode = MainManager.Instance.Platform;
+
+			if (Platforms.IsTunnelPlatform(pCode))
+            {
+				if (mode == CameraModes.TunnelInside_Rotate)
+                {
+					ContentManager.Instance.Function_ToggleOrthoView(false);
+                }
+			}
+        }
 	}
 }

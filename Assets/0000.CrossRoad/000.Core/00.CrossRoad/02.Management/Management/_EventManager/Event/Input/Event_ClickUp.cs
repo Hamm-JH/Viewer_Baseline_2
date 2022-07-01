@@ -254,7 +254,7 @@ namespace Management.Events.Inputs
 					if(_Events.IsSameObjectSelected(Elements, _sEvents, out currObj, out selectedObj))
                     {
 						Cameras.SetCameraDOTweenPosition(MainManager.Instance.MainCamera, currObj);
-						Cameras.SetCameraMode(CameraModes.OnlyRotate);	
+						Cameras.SetCameraMode(CameraModes.TunnelInside_Rotate);	
                     }
 
 					m_clickEvent.Invoke(_obj);

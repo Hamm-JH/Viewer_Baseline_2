@@ -25,7 +25,7 @@ namespace Definition
 				case UIEventType.Viewport_ViewMode_TOP:
 					if(Platforms.IsTunnelPlatform(pCode))
 					{
-						if (camMode == CameraModes.OnlyRotate)
+						if (camMode == CameraModes.TunnelInside_Rotate)
                         {
 							result = new Vector3(-90, 0, 0);
                         }
@@ -43,7 +43,7 @@ namespace Definition
 				case UIEventType.Viewport_ViewMode_BOTTOM:
 					if(Platforms.IsTunnelPlatform(pCode))
 					{
-						if (camMode == CameraModes.OnlyRotate)
+						if (camMode == CameraModes.TunnelInside_Rotate)
                         {
 							result = new Vector3(90, 0, 0);
                         }

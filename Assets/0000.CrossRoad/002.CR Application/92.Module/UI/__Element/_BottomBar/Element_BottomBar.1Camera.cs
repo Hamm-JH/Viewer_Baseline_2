@@ -57,7 +57,7 @@ namespace Module.UI
 
                 if (obj != null)
                 {
-                    MainManager.Instance.CurrentCameraMode = Definition.Control.CameraModes.OnlyRotate;
+                    MainManager.Instance.CurrentCameraMode = Definition.Control.CameraModes.TunnelInside_Rotate;
                     Cameras.SetCameraDOTweenPosition(MainManager.Instance.MainCamera, obj);
                 }
 

@@ -9,6 +9,7 @@ using System;
 using static AdminViewer.UI.Ad_Panel;
 using Issue;
 using System.Linq;
+using TMPro;
 
 public class GraphChartFeed : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class GraphChartFeed : MonoBehaviour
     public GraphTemplate m_gTemplate;
     public HorizontalAxis m_horizontalAxis;
 
+    public TextMeshProUGUI m_text;
     public int m_currYear;
     public int m_currIssueIndex;
 
@@ -787,12 +789,30 @@ public class GraphChartFeed : MonoBehaviour
                 yearIndex = 3;
                 break;
         }
-        
+
+        SetYearText(_year, m_gTemplate);
+
         //SetDateTimePanel_Year1(_year, _issueIndex);
         SetDateTimePanel_Year(
                     _year: _year,
                     _issueIndex: _issueIndex,
                     _yearIndex: yearIndex);
+    }
+
+    private void SetYearText(int _year, GraphTemplate _template)
+    {
+        switch (_template)
+        {
+            case GraphTemplate.Year1:
+                m_text.text = $"{_year.ToString()}년 이력";
+                break;
+
+            case GraphTemplate.Year5:
+            case GraphTemplate.Year10:
+            case GraphTemplate.Year50:
+                m_text.text = "이력";
+                break;
+        }
     }
 
     /// <summary>

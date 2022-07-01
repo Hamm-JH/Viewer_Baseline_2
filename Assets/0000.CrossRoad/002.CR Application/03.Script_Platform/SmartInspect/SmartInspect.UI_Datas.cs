@@ -6,6 +6,7 @@ namespace SmartInspect
 {
     using TMPro;
     using UnityEngine.UI;
+    using View;
 
     /// <summary>
     /// 단일 프로세스 메뉴
@@ -49,6 +50,11 @@ namespace SmartInspect
         /// 부재별 손상정보 패널
         /// </summary>
         public GameObject m_dmgCount;
+
+        /// <summary>
+        /// 리스트 정보 초기화시 필요 함수 키를 가진 인스턴스 
+        /// </summary>
+        public UI_Selectable m_listResetTrigger;
 
         /// <summary>
         /// 부재별 손상정보 리스트 패널
@@ -95,6 +101,11 @@ namespace SmartInspect
         /// 부재별 보수정보 패널
         /// </summary>
         public GameObject m_rcvCount;
+
+        /// <summary>
+        /// 리스트 정보 초기화시 필요 함수 키를 가진 인스턴스 
+        /// </summary>
+        public UI_Selectable m_listResetTrigger;
 
         /// <summary>
         /// 부재별 보수 리스트 패널

@@ -242,6 +242,12 @@ namespace Module.UI
                         Event_Toggle_ViewMode(_setter.ChildPanel);
                     }
                     break;
+
+                case Inspect_EventType.Toggle_FacInfo:
+                    {
+                        Event_Toggle_FacInfo();
+                    }
+                    break;
             }
         }
     }
