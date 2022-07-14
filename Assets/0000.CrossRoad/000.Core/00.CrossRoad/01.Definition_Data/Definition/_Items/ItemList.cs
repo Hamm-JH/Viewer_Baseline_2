@@ -6,10 +6,14 @@ namespace Definition
 {
 	/// <summary>
 	/// KEY_ITEM :: Prefab 아이템 리스트
-	/// TODO :: 0309 Module_UI 코드와 코드뎁스 정비 (같이 item을 로드하는 관계인데 AUI는 모듈에 속해있는 문제)
 	/// </summary>
 	public static class ItemList
 	{
+		/// <summary>
+		/// Item으로 분류된 Prefab 객체를 생선, 반환한다.
+		/// </summary>
+		/// <param name="_fCode">Item 기능 코드</param>
+		/// <returns>생성된 Item 객체 반환</returns>
 		public static GameObject Load(FunctionCode _fCode)
 		{
 			GameObject result = null;

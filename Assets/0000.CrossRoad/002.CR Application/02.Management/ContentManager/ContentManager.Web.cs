@@ -15,8 +15,6 @@ namespace Management
 
 	public partial class ContentManager : IManager<ContentManager>
 	{
-		//[SerializeField] WebManager legacyWeb;
-
 		/// <summary>
 		/// 3D 객체 선택시 이벤트 발생
 		/// </summary>
@@ -50,14 +48,14 @@ namespace Management
 			// 선택 객체가 어떤 객체인지 이름을 알아야 함(이건 이미 있음)
 		}
 
-		public UseCase AppUseCase { get; internal set; }
+		//public UseCase AppUseCase { get; internal set; }
 		//public SceneStatus ViewSceneStatus { get; internal set; }
 		public Transform SelectedObject { get; internal set; }
-		//public Issue_Selectable CacheIssueEntity { get; internal set; }
+		
+		/// <summary>
+		/// 6면 정보
+		/// </summary>
 		public string DcMemberSurface { get; internal set; }
-
-		public Material PinModeSkyboxMaterial { get; internal set; }
-		public Material DefaultSkyboxMaterial { get; internal set; }
 
 		/// <summary>
 		/// 이슈 초기화
@@ -71,14 +69,11 @@ namespace Management
 			_API.InitializeModelIssue();
 		}
 
-		// 캠 위치 초기화
+		/// <summary>
+		/// 카메라 위치 초기화
+		/// </summary>
+		/// <exception cref="NotImplementedException"></exception>
 		internal void InitCamPosition()
-		{
-			throw new NotImplementedException();
-		}
-
-		// 손상정보 초기화?
-		internal void SetIssueObject()
 		{
 			throw new NotImplementedException();
 		}
@@ -86,7 +81,7 @@ namespace Management
 		/// <summary>
 		/// 웹에서 3D 객체 선택
 		/// </summary>
-		/// <param name="transform"></param>
+		/// <param name="transform">선택된 3D 객체</param>
 		internal void Select3DObject(GameObject _obj)
 		{
 			EventManager.Instance.OnEvent(new EventData_API(
@@ -97,11 +92,10 @@ namespace Management
 		}
 
 		/// <summary>
-		/// 웹에서 점검정보 선택
+		/// 웹에서 손상정보 선택
 		/// </summary>
-		/// <param name="transform"></param>
-		/// <param name="v"> ? </param>
-		internal void SelectIssue(GameObject _obj, bool _v)
+		/// <param name="transform">선택된 손상정보</param>
+		internal void SelectIssue(GameObject _obj)
 		{
 			EventManager.Instance.OnEvent(new EventData_API(
 				InputEventType.API_SelectIssue,
@@ -110,12 +104,12 @@ namespace Management
 				));
 		}
 		
-		// 카메라 각도 변경
-
-		// int 코드 필요
-		// string 코드 필요
-		// vector3 베이스 각도 필요
-
+		/// <summary>
+		/// 카메라 각도 변경
+		/// </summary>
+		/// <param name="_obj">선택된 객체</param>
+		/// <param name="_vCode">주시 각도</param>
+		/// <param name="_baseAngle">기본 각도</param>
 		internal void SetCameraMode(GameObject _obj, ViewRotations _vCode, Vector3 _baseAngle)
 		{
 			UIEventType uType = Parsers.OnParse(_vCode);
@@ -137,56 +131,32 @@ namespace Management
 		{
 			Debug.Log($"정보창 UI폭 변경 :: 값 : {width}");
 		}
-
-		// 작업정보 세팅
-		internal void SetIssueCode(string issueCode, string issueIndex)
-		{
-			throw new NotImplementedException();
-		}
-
-		// 작업정보 Material 세팅
+		
+		/// <summary>
+		/// 작업정보 Material 설정
+		/// </summary>
+		/// <param name="_render"></param>
+		/// <param name="_issueType"></param>
+		/// <param name="_issueCode"></param>
 		internal void SetIssueMaterial(MeshRenderer _render, IssueType _issueType, IssueCodes _issueCode)
 		{
 
 		}
 
-		// 9면큐브 스위치
-		internal void SwitchGuideCubeOnOff(bool v)
-		{
-			throw new NotImplementedException();
-		}
-
-		// 특정 면 대상으로 카메라 위치변환
-		internal void ChangeCameraDirection(string side, Bounds nB, Vector3 eulerAngles, bool isEtc)
-		{
-			throw new NotImplementedException();
-		}
-
-		// 점검정보 On/Off
+		/// <summary>
+		/// 손상정보 On/Off
+		/// </summary>
+		/// <param name="_option">손상정보 표시 옵션</param>
 		internal void Toggle_Issues(IssueVisualizeOption _option)
 		{
 
 		}
 
-		// 카메라 모드 변경
-		internal void SetCameraMode(int v)
-		{
-			
-		}
-
-		// 카메라 줌
-		internal void ZoomCamera(Vector3 centerVector, float maxValue, bool v1, bool v2)
-		{
-			throw new NotImplementedException();
-		}
-
-		internal List<string> RequestAvailableSurface()
-		{
-			List<string> result = new List<string> { "Top", "Bottom", "Left", "Right", "Front", "Back" };
-
-			return result;
-		}
-
+		/// <summary>
+		/// 선택 면에 존재하는 손상정보 반환
+		/// </summary>
+		/// <param name="shapeCode">면 정보</param>
+		/// <returns>손상 정보 리스트 반환</returns>
 		internal List<string> GetTargetIssues(string shapeCode)
 		{
 			List<string> result = new List<string> { "Crack,1", "Spalling,3" };

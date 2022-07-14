@@ -39,8 +39,17 @@ namespace Module.UI
             _Children.Off();
             //_Resource.Toggle_Group(0, _setter.gameObject);
 
+            Definition.Control.CameraModes cMode = MainManager.Instance.CurrentCameraMode;
+
+            // 그냥 회전모드일때
+            if (cMode == Definition.Control.CameraModes.TunnelInside_Rotate)
+            {
+                _Resource.Off_Group(0);
+                return;
+            }
+
             // 카메라 모드 변경
-            if (MainManager.Instance.CurrentCameraMode == Definition.Control.CameraModes.BIM_Panning)
+            if (cMode == Definition.Control.CameraModes.BIM_Panning)
             {
                 MainManager.Instance.CurrentCameraMode = Definition.Control.CameraModes.BIM_ISO;
                 _Resource.Off_Group(0);

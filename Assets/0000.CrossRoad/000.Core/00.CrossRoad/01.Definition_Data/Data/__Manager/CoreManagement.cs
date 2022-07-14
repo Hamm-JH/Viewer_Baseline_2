@@ -24,8 +24,10 @@ namespace Definition.Data
 		/// </summary>
 		[SerializeField] GameObject m_rootInput;
 
+		/// <summary>
+		/// 카메라 주시 지점 표시객체
+		/// </summary>
 		[SerializeField] GameObject m_cameraPoint;
-
 		
 		public GameObject CameraPoint { get => m_cameraPoint; }
 
@@ -41,18 +43,27 @@ namespace Definition.Data
 		[SerializeField] GraphicCode m_graphicMode;
 		[SerializeField] CameraModes m_cameraMode;
 
+		/// <summary>
+		/// 런타임 중의 플랫폼 코드
+		/// </summary>
 		public PlatformCode _Platforms
 		{ 
 			get => m_platform;
 			set => m_platform=value;
 		}
 
+		/// <summary>
+		/// 런타임 중의 그래픽 코드
+		/// </summary>
 		public GraphicCode GraphicMode 
 		{ 
 			get => m_graphicMode; 
 			set => m_graphicMode=value; 
 		}
 
+		/// <summary>
+		/// 런타임 중의 카메라 모드
+		/// </summary>
 		public CameraModes CameraMode 
 		{ 
 			get => m_cameraMode;
@@ -68,10 +79,24 @@ namespace Definition.Data
 		#endregion
 
 		[Header("Dimension")]
+		/// <summary>
+		/// 치수선 Material
+		/// </summary>
 		public Material m_dimLineMat;
+
+		/// <summary>
+		/// 외곽선 Material
+		/// </summary>
 		public Material m_outlineMat;
+
+		/// <summary>
+		/// 포워드 렌더링 설정 데이터
+		/// </summary>
 		public ForwardRendererData m_renderSetting;
 
+		/// <summary>
+		/// 외곽선 Material
+		/// </summary>
 		public Material OutlineMat { get => m_outlineMat; set => m_outlineMat=value; }
 
 	}

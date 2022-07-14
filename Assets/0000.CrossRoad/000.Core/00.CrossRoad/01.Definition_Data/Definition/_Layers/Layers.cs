@@ -196,6 +196,10 @@ namespace Definition
 			return mask;
 		}
 
+		/// <summary>
+		/// Layer의 상태를 ALL로 변경한다
+		/// </summary>
+		/// <returns>ALL : -1</returns>
 		public static int SetAll()
 		{
 			return -1;

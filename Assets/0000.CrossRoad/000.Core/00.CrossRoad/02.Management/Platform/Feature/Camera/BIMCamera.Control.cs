@@ -38,6 +38,12 @@ namespace Platform.Feature.Camera
         void Start()
         {
             if (target != null) transform.LookAt(target);
+
+            GameObject go = new GameObject("check point");
+
+            go.transform.SetParent(MainManager.Instance.transform);
+            target = go.transform;
+
         }
 
         /// <summary>

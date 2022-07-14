@@ -7,10 +7,8 @@ using UnityEngine;
 /// </summary>
 namespace Definition.Control
 {
-
-
 	/// <summary>
-	/// (모델? 컨트롤? 뷰?) 카메라 회전 모드 정의
+	/// 카메라 회전 모드 정의
 	/// </summary>
 	public enum CameraModes
 	{

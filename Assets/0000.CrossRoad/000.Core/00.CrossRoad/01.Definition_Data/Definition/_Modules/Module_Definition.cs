@@ -4,7 +4,9 @@ using UnityEngine;
 
 namespace Definition
 {
-
+	/// <summary>
+	/// 모듈 코드 : 모듈의 세부 상태 코드
+	/// </summary>
 	public enum ModuleCode
 	{
 		// 기본 상태는 베이스로 깔림
@@ -27,7 +29,7 @@ namespace Definition
 	}
 
 	/// <summary>
-	/// 모듈 상태코드
+	/// 관리자 뷰어 : 모듈 상태코드
 	/// </summary>
 	public enum ModuleStatus
 	{

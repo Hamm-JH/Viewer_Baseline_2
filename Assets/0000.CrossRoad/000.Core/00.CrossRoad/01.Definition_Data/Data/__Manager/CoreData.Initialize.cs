@@ -6,12 +6,12 @@ namespace Definition.Data
 {
 	using UnityEngine.Events;
 
-	// 템플릿
 	public partial class CoreData : IData
 	{
 		/// <summary>
 		/// 데이터를 초기화하고, 초기화가 완료된 데이터를 반환한다.
 		/// </summary>
+		/// <param name="action">초기화 완료시 콜백 액션</param>
 		public IEnumerator Initialize(UnityAction<CoreData> action)
 		{
 			SetURL(out m_url, out m_baseURL, 
@@ -24,6 +24,19 @@ namespace Definition.Data
 			yield break;
 		}
 
+		/// <summary>
+		/// 서버와 통신하기 위한 URL을 설정한다.
+		/// </summary>
+		/// <param name="_url">입력받은 전체 URL 주소</param>
+		/// <param name="_baseURL">URL 주소에서 분리한 기본 주소</param>
+		/// <param name="_modelURI">OUT : 모델 요청 URI</param>
+		/// <param name="_addressURI">OUT : 주소 API 요청 URI</param>
+		/// <param name="_issueDmgURI">OUT : 손상 정보 API 요청 URI</param>
+		/// <param name="_issueRcvURI">OUT : 보수 정보 API 요청 URI</param>
+		/// <param name="_imageURL">OUT : 이미지 API 요청 URI</param>
+		/// <param name="_historyURL">OUT : 손상 이력정보 API 요청 URI</param>
+		/// <param name="_keyCode">OUT : 키 코드 문자열</param>
+		/// <exception cref="Definition.Exceptions.PlatformNotDefinedException"></exception>
 		private void SetURL(out string _url, out string _baseURL, 
 			out string _modelURI, out string _addressURI,
 			out string _issueDmgURI, out string _issueRcvURI, out string _imageURL, out string _historyURL,

@@ -9,6 +9,9 @@ using UnityEngine;
 
 namespace Definition._Issue
 {
+	/// <summary>
+	/// 손상 코드분류
+	/// </summary>
 	public enum IssueCodes
 	{
 		Null = -1,          // 손상 없음
@@ -82,13 +85,44 @@ namespace Definition._Issue
 		/// </summary>
 		public string Date { get => m_date; set => m_date=value; }
 
+		/// <summary>
+		/// 손상 정보 코드
+		/// </summary>
 		public string IssueOrderCode { get => m_issueOrderCode; set => m_issueOrderCode=value; }
+
+		/// <summary>
+		/// 시설물 코드
+		/// </summary>
 		public string CdBridge { get => m_cdBridge; set => m_cdBridge=value; }
+
+		/// <summary>
+		/// 손상 발생 부재코드
+		/// </summary>
 		public string CdBridgeParts { get => m_cdBridgeParts; set => m_cdBridgeParts=value; }
+
+		/// <summary>
+		/// 등록자 이름
+		/// </summary>
 		public string NmUser { get => m_nmUser; set => m_nmUser=value; }
+
+		/// <summary>
+		/// 손상 6면 : 부재에서 손상이 위치한 6면중 하나 (상,하,좌,우,전,후)
+		/// </summary>
 		public string DcMemberSurface { get => m_dcMemberSurface; set => m_dcMemberSurface=value; }
+
+		/// <summary>
+		/// 보수 유무 Y : 보수됨, N : 보수 안됨
+		/// </summary>
 		public string YnRecover { get => m_ynRecover; set => m_ynRecover=value; }
+
+		/// <summary>
+		/// 손상정보 상태
+		/// </summary>
 		public string IssueStatus { get => m_issueStatus; set => m_issueStatus=value; }
+
+		/// <summary>
+		/// 문자열 : 손상코드 -> 문자열 코드를 받으면 실제 손상코드로 보간한다.
+		/// </summary>
 		public string _IssueCode 
 		{ 
 			get => m__issueCode; 
@@ -107,6 +141,10 @@ namespace Definition._Issue
 				}
 			}
 		}
+
+		/// <summary>
+		/// 손상 6면의 특정 면에서 손상이 위치한 특정 위치 (1 ~ 9 // 왼쪽 위에서 오른쪽 아래로 좌측 상단, 중앙 상단, 우측 상단, 좌측 중앙, 중앙 중단, 우측 우단, 좌측 하단, 중앙 하단, 우측 하단 순)
+		/// </summary>
 		public string _DcLocation 
 		{ 
 			get => m__dcLocation; 
@@ -119,6 +157,10 @@ namespace Definition._Issue
 				}
 			}
 		}
+
+		/// <summary>
+		/// 문자열 : 손상정보의 위치 -> 문자열 코드를 받으면 실제 벡터정보로 보간한다.
+		/// </summary>
 		public string _PositionVector 
 		{ 
 			get => m__positionVector; 
@@ -138,6 +180,9 @@ namespace Definition._Issue
 			}
 		}
 
+		/// <summary>
+		/// 문자열 : 손상정보의 각도 -> 문자열 코드를 받으면 실제 오일러 각도정보로 보간한다.
+		/// </summary>
 		public string _RotationVector
         {
 			get => m__rotationVector;
@@ -163,22 +208,74 @@ namespace Definition._Issue
             }
         }
 
+		/// <summary>
+		/// 손상 정보의 가로폭
+		/// </summary>
 		public string Width { get => m_width; set => m_width=value; }
+
+		/// <summary>
+		/// 손상 정보의 세로폭
+		/// </summary>
 		public string Height { get => m_height; set => m_height=value; }
+
+		/// <summary>
+		/// 손상 정보의 깊이
+		/// </summary>
 		public string Depth { get => m_depth; set => m_depth=value; }
+
+		/// <summary>
+		/// 손상 상태의 손상 세부설명
+		/// </summary>
 		public string DmgDescription { get => m_dcRemark; set => m_dcRemark=value; }
+
+		/// <summary>
+		/// 보수 상태의 손상 세부설명
+		/// </summary>
 		public string RcvDescription { get => m_dcRecover; set => m_dcRecover=value; }
 
+		/// <summary>
+		/// 손상 발생일
+		/// </summary>
 		public string DateDmg { get => m_dateDmg; set => m_dateDmg=value; }
+
+		/// <summary>
+		/// 보수정보 시작일
+		/// </summary>
 		public string DateRcvStart { get => m_dateRcvStart; set => m_dateRcvStart=value; }
+
+		/// <summary>
+		/// 보수정보 완료일
+		/// </summary>
 		public string DateRcvEnd { get => m_dateRcvEnd; set => m_dateRcvEnd=value; }
 
+		/// <summary>
+		/// 파일 그룹
+		/// </summary>
 		public string Fgroup { get => m_fgroup; set => m_fgroup=value; }
+
+		/// <summary>
+		/// 이미지 리스트 클래스 정본
+		/// </summary>
 		public List<ImgIndex> Imgs { get => m_imgs; set => m_imgs=value; }
 
+		/// <summary>
+		/// 손상 6면의 특정 면에서 손상이 위치한 특정 위치 (1 ~ 9 // 왼쪽 위에서 오른쪽 아래로 좌측 상단, 중앙 상단, 우측 상단, 좌측 중앙, 중앙 중단, 우측 우단, 좌측 하단, 중앙 하단, 우측 하단 순)
+		/// </summary>
 		public int DcLocation { get => m_dcLocation; set => m_dcLocation=value; }
+
+		/// <summary>
+		/// 손상 정보의 위치 벡터
+		/// </summary>
 		public Vector3 PositionVector { get => m_positionVector; set => m_positionVector = value; }
+
+		/// <summary>
+		/// 손상 정보의 오일러 각도
+		/// </summary>
 		public Vector3 RotationVector { get => m_rotationVector; set => m_rotationVector = value; }
+
+		/// <summary>
+		/// 손상 정보의 손상 코드분륜
+		/// </summary>
 		public IssueCodes IssueCode { get => m_issueCode; set => m_issueCode=value; }
 
 		/// <summary>
@@ -328,7 +425,11 @@ namespace Definition._Issue
         }
 
         
-
+		/// <summary>
+		/// 발생된 정보를 손상정보로 변환한다.
+		/// </summary>
+		/// <param name="_date">손상정보 발생일</param>
+		/// <param name="_token">변환 대상 문자열 토큰정보</param>
         public void SetDmg(string _date, JToken _token)
 		{
 			Date = _date;
@@ -336,6 +437,10 @@ namespace Definition._Issue
 			SetDmg(_token);
 		}
 
+		/// <summary>
+		/// 발생된 정보를 손상정보로 변환한다.
+		/// </summary>
+		/// <param name="_token">변환 대상 문자열 토큰정보</param>
 		public void SetDmg(JToken _token)
 		{
 			string kIssueOrderCode = "";
@@ -451,6 +556,11 @@ namespace Definition._Issue
 			//}
 		}
 
+		/// <summary>
+		/// 발생된 정보를 보수정보로 변환한다.
+		/// </summary>
+		/// <param name="_date">보수정보 발생일</param>
+		/// <param name="_token">변환 대상 문자열 토큰정보</param>
 		public void SetRcv(string _date, JToken _token)
 		{
 			Date = _date;
@@ -458,6 +568,10 @@ namespace Definition._Issue
 			SetRcv(_token);
 		}
 
+		/// <summary>
+		/// 발생된 정보를 보수정보로 변환한다.
+		/// </summary>
+		/// <param name="_token">변환 대상 문자열 토큰정보</param>
 		public void SetRcv(JToken _token)
 		{
 			string kIssueOrderCode = "";

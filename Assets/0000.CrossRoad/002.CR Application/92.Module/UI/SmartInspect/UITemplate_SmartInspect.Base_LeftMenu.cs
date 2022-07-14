@@ -30,6 +30,8 @@ namespace Module.UI
 
             ContentManager.Instance.Module<Module_WebAPI>().ChangeTab("DMG");
 
+            m_moduleElements.m_dmgElement.m_listResetTrigger.OnSelect();
+
             // Dmg 모드 활성화 실행
             ModDmg_Active();
         }
@@ -50,6 +52,8 @@ namespace Module.UI
             //LeftMenu_SetToggleButton(currIndex);
 
             ContentManager.Instance.Module<Module_WebAPI>().ChangeTab("RCV");
+
+            m_moduleElements.m_rcvElement.m_listResetTrigger.OnSelect();
 
             // rcv 모드 활성화 실행
             ModRcv_Active();

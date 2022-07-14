@@ -9,6 +9,7 @@ namespace Management.Content
 
     public class SmartInspectManager : ContentManager
     {
+        public GameObject CenterPoint;
 
         /// <summary>
         /// UI 또는 외부의 특정 영역에서 읽기/쓰기를 수행하는 설정정보들을 모아둠.

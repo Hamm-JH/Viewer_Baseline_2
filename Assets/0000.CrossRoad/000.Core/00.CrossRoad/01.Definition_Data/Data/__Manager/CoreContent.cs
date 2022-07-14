@@ -7,7 +7,7 @@ namespace Definition.Data
 	using Management;
 
 	/// <summary>
-	/// 주관리자에서 컨텐츠 관리용
+	/// 주관리자에서 컨텐츠 관리용 클래스
 	/// </summary>
 	[System.Serializable]
 	public class CoreContent : IData

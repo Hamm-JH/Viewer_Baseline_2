@@ -14,6 +14,11 @@ namespace Module.WebAPI
 	/// </summary>
 	public partial class Module_WebAPI : AModule
     {
+        /// <summary>
+        /// 웹으로 API콜
+        /// </summary>
+        /// <param name="_requestCode">요청 코드</param>
+        /// <param name="arguments">요청 추가 인자</param>
         public void SendRequest(SendRequestCode _requestCode, params object[] arguments)
         {
             switch (_requestCode)

@@ -25,7 +25,7 @@ namespace Definition.Data
 		/// <summary>
 		/// 카메라모드 세팅
 		/// </summary>
-		/// <param name="_eventType"></param>
+		/// <param name="_eventType">UI 이벤트 형식</param>
 		public void SetCameraMode(UIEventType _eventType)
 		{
 			// 현재 카메라 모드
@@ -52,11 +52,22 @@ namespace Definition.Data
 			CameraMode = _modes;
 		}
 
+		/// <summary>
+		/// 카메라모드 설정
+		/// </summary>
+		/// <param name="_mode">카메라모드</param>
 		public void SetCameraMode(CameraModes _mode)
         {
 			CameraMode = _mode;
         }
 
+		/// <summary>
+		/// 카메라 위치 변경
+		/// </summary>
+		/// <param name="centerBounds">주시 지점의 경계</param>
+		/// <param name="rootCanvas">추가 UI 컨트롤을 위한 캔버스</param>
+		/// <param name="eventType">UI 이벤트 형식</param>
+		/// <param name="_baseAngle">기본 회전 각도</param>
 		public void SetCameraPosition(Bounds centerBounds, Canvas rootCanvas, UIEventType eventType, 
 			Vector3 _baseAngle = default(Vector3))
 		{

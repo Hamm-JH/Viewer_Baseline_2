@@ -211,7 +211,7 @@ namespace Module.WebAPI
             else if (objIssue)
             {
                 // 점검정보 선택 이벤트를 전달
-                ContentManager.Instance.SelectIssue(objIssue, true);
+                ContentManager.Instance.SelectIssue(objIssue);
                 Debug.Log($"[Receive.SelectIssue] : objectName {objIssue.name}");
             }
 
@@ -228,7 +228,7 @@ namespace Module.WebAPI
 
             if (issue)
             {
-                ContentManager.Instance.SelectIssue(issue, false);
+                ContentManager.Instance.SelectIssue(issue);
             }
         }
 

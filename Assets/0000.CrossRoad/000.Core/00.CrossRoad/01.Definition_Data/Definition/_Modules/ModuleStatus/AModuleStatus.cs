@@ -9,10 +9,8 @@ namespace Definition
 	public class AModuleStatus
 	{
 		/// <summary>
-		/// 관리 모드에서 임시 캐싱용 객체
+		/// 관리 모드에서 임시 캐싱용 객체 리스트
 		/// </summary>
-		//public GameObject m_cacheObject;
-
 		public List<GameObject> m_cacheObjects;
 
 		/// <summary>
@@ -59,14 +57,9 @@ namespace Definition
 		}
 
 		/// <summary>
-		/// 현재 선택된 객체를 캐싱한다.
+		/// 선택된 상태의 객체 리스트를 캐싱한다.
 		/// </summary>
-		/// <param name="_selected"></param>
-		//public void CachingObject(GameObject _selected)
-		//{
-		//	m_cacheObject = _selected;
-		//}
-
+		/// <param name="_selecteds">선택된 객체끼리 모여있는 리스트</param>
 		public void CachingObjects(List<GameObject> _selecteds)
         {
 			m_cacheObjects = _selecteds;
@@ -85,15 +78,10 @@ namespace Definition
         {
 			return m_cacheObjects;
         }
-
+		
 		/// <summary>
-		/// 캐시를 지운다.
+		/// 캐시 리스트 정리
 		/// </summary>
-		//public void RemoveCache()
-		//{
-		//	m_cacheObject = null;
-		//}
-
 		public void RemoveCaches()
         {
 			m_cacheObjects = null;

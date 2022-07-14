@@ -4,11 +4,14 @@ using UnityEngine;
 
 namespace Definition
 {
+	/// <summary>
+	/// 손상 정보의 분류
+	/// </summary>
 	public enum IssueType
 	{
 		Null,
-		damage,
-		recover
+		damage,	// 손상
+		recover	// 보수
 	}
 
 	/// <summary>
@@ -16,16 +19,16 @@ namespace Definition
 	/// </summary>
 	public enum WebType
 	{
-		Address = 0x10,
+		Address = 0x10,			// 주소 API 호출
 
-		Issue_Dmg = 0x11,
-		Issue_Rcv = 0x12,
+		Issue_Dmg = 0x11,		// 손상 API 호출
+		Issue_Rcv = 0x12,		// 보수 API 호출
 
-		Image_main = 0x21,
-		Image_single = 0x22,
+		Image_main = 0x21,		// 주 이미지 API 호출
+		Image_single = 0x22,	// 단일 이미지 API 호출
 
-		history = 0x31,
-		imageHistory = 0x32,
+		history = 0x31,			// 이력정보 API 호출
+		imageHistory = 0x32,	// 이력 정보 단위의 API 호출
 	}
 
 	/// <summary>
@@ -68,6 +71,9 @@ namespace Definition
 
     }
 
+	/// <summary>
+	/// Scene 표시 상태코드
+	/// </summary>
 	public enum SceneStatus
 	{
 		EnvironmentVariablesSetting = 0,        // 환경변수 세팅
@@ -77,37 +83,29 @@ namespace Definition
 
 		Register = 4,                           // 손상/보강 등록 상태
 		Register_PinMode = 5,                   // 손상/보강 핀 등록 상태
-		Default = 6,
-		Modified = 7,
-		Delete = 8,
+		Default = 6,							// 기본 상태
+		Modified = 7,							// 상태 변환중의 상태
+		Delete = 8,								// 특정 요소 제거중인 상태
 	}
 
-	
 
-	public enum UseCase
-	{
-		NotDefined = -1,
-		Bridge = 0,
-		Tunnel = 1
-	}
-
+	/// <summary>
+	/// 카메라 보는 방향각도 코드
+	/// </summary>
 	public enum ViewRotations
 	{
 		Null = -1,
-		Top = 0,
-		Bottom = 1,
-		Front = 2,
-		Back = 3,
-		Left = 4,
-		Right = 5,
+		Top = 0,		// 상
+		Bottom = 1,		// 하
+		Front = 2,		// 전
+		Back = 3,		// 후
+		Left = 4,		// 좌
+		Right = 5,		// 우
 	}
 
-	public enum BoolValue
-	{
-		True,
-		False
-	}
-
+	/// <summary>
+	/// 손상 표시정보 옵션
+	/// </summary>
 	public enum IssueVisualizeOption
 	{
 		All_ON,

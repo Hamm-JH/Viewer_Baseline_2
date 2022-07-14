@@ -8,6 +8,11 @@ namespace Definition
 {
 	public static class Angle
 	{
+		/// <summary>
+		/// UIEventType에 따라 각도를 변경한다.
+		/// </summary>
+		/// <param name="eventType">UIEventType</param>
+		/// <returns>Euler 각도값 반환</returns>
 		public static Vector3 Set(UIEventType eventType)
 		{
 			Vector3 result = default(Vector3);

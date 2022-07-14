@@ -16,6 +16,10 @@ namespace Management
 	{
 		#region 0-1 데이터 입력 단계
 
+		/// <summary>
+		/// 데이터셋 요청
+		/// </summary>
+		/// <param name="action">데이터셋 요청 처리시 콜백 액션</param>
 		private void RequestDataset(UnityAction<CoreData> action)
 		{
 			StartCoroutine(_templateDatas[m_templateIndex].Initialize(action));
@@ -26,6 +30,10 @@ namespace Management
 
 		#region 0-2 데이터 입력 완료시 실행
 
+		/// <summary>
+		/// 시스템 인스턴스 데이터 할당
+		/// </summary>
+		/// <param name="_finishedData">설정 완료된 데이터</param>
 		private void SetSystemInstance(CoreData _finishedData)
 		{
 			//UD_Manager.instance.DoDestroy();
@@ -53,6 +61,10 @@ namespace Management
 
 		#region 1 입력 초기화
 
+		/// <summary>
+		/// 코어 데이터 초기화
+		/// </summary>
+		/// <param name="_data">미리 세팅되어있는 코어 데이터 프리셋</param>
 		private void InitCoreData(CoreData _data)
 		{
 			_core._Platforms = _data.Platform;
@@ -62,6 +74,7 @@ namespace Management
 		/// <summary>
 		/// 입력 인스턴스 할당코드 모음
 		/// </summary>
+		/// <param name="_pCode">플랫폼 코드</param>
 		public void InitInputResource(PlatformCode _pCode)
 		{
 			// TODO :: 2ND :: ★ 빌드의 입력장치가 정해졌을때 장치입력을 받는 인스턴스를 생성하도록 개편
@@ -85,6 +98,11 @@ namespace Management
             }
 		}
 
+		/// <summary>
+		/// 단일 입력 리소스 생성
+		/// </summary>
+		/// <typeparam name="T"> 입력 클래스 </typeparam>
+		/// <param name="name"> 입력 클래스 이름 </param>
 		private void InitSingleInputResource<T>(string name) where T : IInput
 		{
 			GameObject obj = new GameObject(name);  // 입력 신규객체 생성
@@ -117,6 +135,10 @@ namespace Management
 			_core.CameraMode = _mode;
 		}
 
+		/// <summary>
+		/// 서브 카메라 자원 초기화 실행
+		/// </summary>
+		/// <param name="subCamera">서브 카메라 객체</param>
 		public void InitSubCameraResource(Camera subCamera)
 		{
 			//cameraExecuteEvents;
@@ -149,6 +171,13 @@ namespace Management
 			component.SetData(_data.CameraData);
 		}
 
+		/// <summary>
+		/// 카메라 설정 
+		/// </summary>
+		/// <typeparam name="T">카메라 클래스</typeparam>
+		/// <param name="_core">코어 관리 클래스</param>
+		/// <param name="_data">코어 데이터</param>
+		/// <param name="_camEvents">카메라 입력 이벤트</param>
 		private void SetCamera<T>(CoreManagement _core, CoreData _data, Events.CameraEvents _camEvents) where T : ICamera
 		{
 			T component = null;

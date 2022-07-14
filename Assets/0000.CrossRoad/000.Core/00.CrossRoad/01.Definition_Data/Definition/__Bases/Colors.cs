@@ -9,9 +9,9 @@ namespace Definition
 		/// <summary>
 		/// 기존의 색을 유지하고, 투명도만 조정한다.
 		/// </summary>
-		/// <param name="type"></param>
-		/// <param name="_tgColor"></param>
-		/// <param name="_alpha"></param>
+		/// <param name="type">색상 타입</param>
+		/// <param name="_tgColor">전처리된 색상</param>
+		/// <param name="_alpha">반투명도 값</param>
 		/// <returns></returns>
 		public static Color Set(ColorType type, Color _tgColor, float _alpha)
         {
@@ -25,8 +25,8 @@ namespace Definition
 		/// <summary>
 		/// 설정된 색을 사용한다.
 		/// </summary>
-		/// <param name="type"></param>
-		/// <param name="_alpha"></param>
+		/// <param name="type">색상 타입</param>
+		/// <param name="_alpha">반투명도 값</param>
 		/// <returns></returns>
 		public static Color Set(ColorType type, float _alpha)
 		{

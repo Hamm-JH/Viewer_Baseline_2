@@ -19,8 +19,9 @@ namespace Definition.Data
 		/// <summary>
 		/// 입력 리소스를 입력 root 아래에 할당
 		/// </summary>
-		/// <param name="_source"> GameObject </param>
-		/// <param name="_code"> Code::Input </param>
+		/// <param name="_source"> 입력 인스턴스가 배치된 GameObject </param>
+		/// <param name="_code"> 입력 인터페이스 코드 </param>
+		/// <param name="_events">입력 발생시 실행되는 이벤트 집합 클래스</param>
 		public void SetInputResource(GameObject _source, IInput _code, Management.Events.InputEvents _events)
 		{
 			if (m_rootInput == null)

@@ -10,6 +10,9 @@ namespace Definition
 
     public static partial class Issues
     {
+        /// <summary>
+        /// 손상 표시 형태
+        /// </summary>
         public enum ResourceType
         {
             Cube,
@@ -17,6 +20,14 @@ namespace Definition
             UltimateDecal
         }
 
+        /// <summary>
+        /// 손상정보 생성
+        /// </summary>
+        /// <param name="_index">1 : 손상 데칼 사용 0 : 사용하지 않음</param>
+        /// <param name="_webT">웹 요청코드 분류</param>
+        /// <param name="_issue">가공된 손상정보</param>
+        /// <returns>생성된 손상 객체</returns>
+        /// <exception cref="System.Exception">손상 인덱스 정보 불일치시 오류 발생</exception>
         public static GameObject CreateIssue(int _index, WebType _webT, _Issue.Issue _issue)
         {
             if(_index == 0)
@@ -34,6 +45,12 @@ namespace Definition
             }
         }
 
+        /// <summary>
+        /// 큐브 형태의 손상정보를 생성한다.
+        /// </summary>
+        /// <param name="_webT">웹 요청코드 분류</param>
+        /// <param name="_issue">가공된 손상정보</param>
+        /// <returns>생성된 손상 객체</returns>
         private static GameObject CreateIssue_Cube(WebType _webT, _Issue.Issue _issue)
         {
             ResourceType rType = ResourceType.Cube;
@@ -59,6 +76,13 @@ namespace Definition
             return obj;
         }
 
+        /// <summary>
+        /// 데칼 형태의 손상정보를 생성한다.
+        /// </summary>
+        /// <param name="_webT">웹 요청코드 분류</param>
+        /// <param name="_issue">가공된 손상정보</param>
+        /// <returns>생성된 손상 객체</returns>
+        /// <exception cref="System.Exception">필요한 프리팹 객체가 없을시 오류 발생</exception>
         private static GameObject CreateIssue_EasyDecal(WebType _webT, _Issue.Issue _issue)
         {
             ResourceType rType = ResourceType.EasyDecal;
@@ -115,6 +139,13 @@ namespace Definition
             return obj;
         }
 
+        /// <summary>
+        /// 데칼 중에 UltimateDecal을 사용해서 손상정보를 생성한다.
+        /// </summary>
+        /// <param name="_webT">웹 요청코드 분류</param>
+        /// <param name="_issue">가공된 손상정보</param>
+        /// <returns>생성된 손상정보</returns>
+        /// <exception cref="System.Exception">필요한 프리팹 객체가 없을시 오류 발생</exception>
         private static GameObject CreateIssue_UltimateDecal(WebType _webT, _Issue.Issue _issue)
         {
             ResourceType rType = ResourceType.UltimateDecal;
@@ -147,6 +178,13 @@ namespace Definition
             return obj;
         }
 
+        /// <summary>
+        /// 주어진 정보에서 Material 타입을 반환한다.
+        /// </summary>
+        /// <param name="_rType">리소스 형태 정보</param>
+        /// <param name="_wType">웹 요청코드 분류</param>
+        /// <returns>Material 타입</returns>
+        /// <exception cref="System.Exception">조건에 맞는 코드 없을시 오류 발생</exception>
         private static MaterialType GetMaterialType(ResourceType _rType, WebType _wType)
         {
             MaterialType mType;
@@ -210,6 +248,11 @@ namespace Definition
             return mType;
         }
 
+        /// <summary>
+        /// 주어진 정보에서 Texture 타입을 반환한다.
+        /// </summary>
+        /// <param name="_iCode">손상정보 타입</param>
+        /// <returns>텍스처 타입</returns>
         private static TextureType GetTextureType(_Issue.IssueCodes _iCode)
         {
             TextureType tType;

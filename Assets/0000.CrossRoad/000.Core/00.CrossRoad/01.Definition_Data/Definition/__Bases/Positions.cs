@@ -6,6 +6,12 @@ namespace Definition
 {
 	public static class Positions
 	{
+		/// <summary>
+		/// UIEventType에 따라 객체에서 z축으로 이동하는 거리를 결정한다.
+		/// </summary>
+		/// <param name="_obj">목표 객체</param>
+		/// <param name="_eType">UIEventType</param>
+		/// <returns>이동 거리 반환</returns>
 		public static Vector3 SetLocal(GameObject _obj, UIEventType _eType)
 		{
 			Vector3 result = default(Vector3);

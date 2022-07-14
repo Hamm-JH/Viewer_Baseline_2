@@ -42,6 +42,11 @@ namespace Definition
             }
         }
 
+        /// <summary>
+        /// 카메라 중심을 맞춘다.
+        /// </summary>
+        /// <param name="_cam">타겟 카메라</param>
+        /// <param name="_camCode">주 카메라 모드</param>
         public static void SetCameraCenter(Camera _cam, ICamera _camCode)
 		{
             Bounds _b = ContentManager.Instance._CenterBounds;
@@ -59,6 +64,12 @@ namespace Definition
             SetCameraCenterPosition(_cam, bForKeymap, _canvas, _uType);
 		}
 
+        /// <summary>
+        /// 주어진 변수의 상태에 따라 필요한 카메라 모드를 가져온다.
+        /// </summary>
+        /// <param name="_uType">카메라 모드 설정에 필요한 UIEventType</param>
+        /// <param name="_camCode">카메라 모드</param>
+        /// <returns>카메라 모드 열거변수</returns>
         public static CameraModes GetCameraMode(UIEventType _uType, ICamera _camCode)
 		{
             CameraModes _modes = _camCode.CamMode;
@@ -84,6 +95,14 @@ namespace Definition
             return _modes;
 		}
 
+        /// <summary>
+        /// 카메라 중심 위치를 설정한다.
+        /// </summary>
+        /// <param name="_cam">목표 카메라 인스턴스</param>
+        /// <param name="_cBounds">중심 경계</param>
+        /// <param name="_canvas">업데이트할 캔버스</param>
+        /// <param name="_uType">UIEventType</param>
+        /// <param name="_baseAngle">기본 회전각도</param>
         public static void SetCameraCenterPosition(Camera _cam, Bounds _cBounds, Canvas _canvas, UIEventType _uType,
             Vector3 _baseAngle = default(Vector3))
 		{
@@ -123,6 +142,12 @@ namespace Definition
         }
 
         #region Set Camera DOTween Position
+
+        /// <summary>
+        /// 카메라의 위치 변경을 일정 시간동안 서서히 이동한다.
+        /// </summary>
+        /// <param name="_cam">목표 카메라</param>
+        /// <param name="_toGameObject">이동 목표 객체</param>
         public static void SetCameraDOTweenPosition(Camera _cam, GameObject _toGameObject)
         {
             GameObject currObject = _cam.gameObject;
@@ -143,6 +168,11 @@ namespace Definition
             _cam.transform.DORotateQuaternion(m_toTransform.rotation, 1);
         }
 
+        /// <summary>
+        /// 나침반의 버튼 선택시 카메라의 위치 변경을 일정 시간동안 서서히 이동한다.
+        /// </summary>
+        /// <param name="_cam">목표 카메라</param>
+        /// <param name="_toGameObject">이동 목표 객체</param>
         public static void SetCameraDOTweenPosition_Compass(Camera _cam, GameObject _toGameObject)
         {
             GameObject currObject = _cam.gameObject;
@@ -151,6 +181,12 @@ namespace Definition
             _cam.transform.DORotateQuaternion(_toGameObject.transform.rotation, 1);
         }
 
+        /// <summary>
+        /// 나침반의 버튼 선택시 카메라의 위치 변경을 일정 시간동안 서서히 이동한다.
+        /// </summary>
+        /// <param name="_cam">목표 카메라</param>
+        /// <param name="_toPosition">목표 위치</param>
+        /// <param name="_toRotation">목표 회전각도</param>
         public static void SetCameraDOTweenPosition_Compass(Camera _cam, Vector3 _toPosition, Quaternion _toRotation)
         {
             _cam.transform.DOMove(_toPosition, 1);
@@ -232,6 +268,9 @@ namespace Definition
             // to_Transform 각도는 목표 
         }
 
+        /// <summary>
+        /// 이동 위치를 세팅할 보이지 않는 객체를 생성한다.
+        /// </summary>
         private static void InitToTransform()
         {
             GameObject obj = new GameObject("__CameraMover__");
@@ -242,7 +281,10 @@ namespace Definition
 
         #region Set CameraMode
 
-        // 카메라 모드를 변경한다.
+        /// <summary>
+        /// 카메라 모드를 변경한다.
+        /// </summary>
+        /// <param name="_mode">카메라 모드</param>
         public static void SetCameraMode(CameraModes _mode)
         {
             PlatformCode pCode = MainManager.Instance.Platform;

@@ -8,18 +8,46 @@ namespace Definition
 
     public static class Materials
     {
+        /// <summary>
+        /// 일반 Material
+        /// </summary>
         static Material MAT_DEFAULT;
+        
+        /// <summary>
+        /// 반투명 Material
+        /// </summary>
         static Material MAT_TRANSPARENT;
 
+        /// <summary>
+        /// 기본 손상 Material
+        /// </summary>
         static Material MAT_ISSUE;
+
+        /// <summary>
+        /// 손상 상태 Material 
+        /// </summary>
         static Material MAT_DAMAGE;
+
+        /// <summary>
+        /// 보수 상태 Material
+        /// </summary>
         static Material MAT_RECOVER;
 
+        /// <summary>
+        /// Material 초기화
+        /// </summary>
+        /// <param name="type">Material 타입</param>
         public static void Init(MaterialType type)
         {
             Set(type);
         }
 
+        /// <summary>
+        /// Material을 할당한다.
+        /// </summary>
+        /// <param name="type">Material 타입</param>
+        /// <returns>할당 완료된 Material 반환</returns>
+        /// <exception cref="System.Exception">필요한 리소스를 찾을 수 없음</exception>
         public static Material Set(MaterialType type)
         {
             Material result = Resources.Load<Material>("3D/DefaultMat");
@@ -192,6 +220,14 @@ namespace Definition
             return result;
         }
 
+        /// <summary>
+        /// 메시 렌더러를 받아와서 Material을 할당한다.
+        /// </summary>
+        /// <param name="_render">할당 대상 메시 렌더러</param>
+        /// <param name="_gCode">그래픽 코드</param>
+        /// <param name="_colorType">색상 타입</param>
+        /// <param name="_trans">반투명값</param>
+        /// <param name="isOnSelect">이 렌더러가 객체 선택 상태의 대상인가?</param>
         static public void Set(MeshRenderer _render, GraphicCode _gCode, ColorType _colorType, float _trans, bool isOnSelect)
         {
             Material mat = _render.material;
@@ -237,6 +273,10 @@ namespace Definition
             //_render.material.SetColor(colrKey, Colors.Set(_colorType, _trans));
         }
 
+        /// <summary>
+        /// 대상 렌더러의 렌더링 상태를 불투명 상태로 변경
+        /// </summary>
+        /// <param name="render">대상 렌더러</param>
         public static void ToOpaqueMode(MeshRenderer render)
         {
             //UnityEditor.Rendering.Universal.ShaderGUI.SimpleLitGUI
@@ -299,6 +339,10 @@ namespace Definition
             }
         }
 
+        /// <summary>
+        /// 대상 렌더러의 렌더링 상태를 반투명 상태로 변경
+        /// </summary>
+        /// <param name="render">대상 렌더러</param>
         public static void ToFadeMode(MeshRenderer render)
         {
             {
