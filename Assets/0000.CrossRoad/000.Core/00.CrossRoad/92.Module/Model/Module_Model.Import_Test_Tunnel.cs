@@ -42,11 +42,20 @@ namespace Module.Model
             }
         }
 
+		/// <summary>
+		/// 터널 객체 생성
+		/// </summary>
+		/// <param name="_root"></param>
 		public void InitializeObjectTunnel(GameObject _root)
 		{
 			StartCoroutine(ModelInitialize(_root));
 		}
 
+		/// <summary>
+		/// 모델 생성
+		/// </summary>
+		/// <param name="root">루트 객체</param>
+		/// <returns></returns>
 		private IEnumerator ModelInitialize(GameObject root)
 		{
 			Segments = new List<GameObject>();
@@ -374,6 +383,10 @@ namespace Module.Model
 
 		#region 1-2. 모델 메시관리 (삭제)
 
+		/// <summary>
+		/// 서브메시 관리
+		/// </summary>
+		/// <param name="segments"></param>
 		private void ControlSubMesh(List<GameObject> segments)
 		{
 			int index = segments.Count;
@@ -384,6 +397,10 @@ namespace Module.Model
 			}
 		}
 
+		/// <summary>
+		/// 세그먼트 단위로 서브메시 생성
+		/// </summary>
+		/// <param name="segment"></param>
 		private void ControlSubMesh_perSegment(Transform segment)
 		{
 			int index = segment.childCount;
@@ -394,6 +411,10 @@ namespace Module.Model
 			}
 		}
 
+		/// <summary>
+		/// 라인 단위로 서브메시 생성
+		/// </summary>
+		/// <param name="line"></param>
 		private void ControlSubMesh_perLine(Transform line)
 		{
 			int index = line.childCount;
@@ -404,6 +425,10 @@ namespace Module.Model
 			}
 		}
 
+		/// <summary>
+		/// 단일 부재 단위로 서브메시 생성
+		/// </summary>
+		/// <param name="obj"></param>
 		private void ControlSubMesh_perObject(Transform obj)
 		{
 			// 서브메쉬가 정의된 객체인지 확인하는 변수
@@ -525,6 +550,11 @@ namespace Module.Model
 
 		//----------------------------------------
 
+		/// <summary>
+		/// 메시 병합
+		/// </summary>
+		/// <param name="meshes">메시 배열</param>
+		/// <returns></returns>
 		public Mesh CombineMeshes(MeshFilter[] meshes)
 		{
 			// Key : shared mesh instance ID, Value : arguments to combine meshes

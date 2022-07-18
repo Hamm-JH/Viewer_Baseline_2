@@ -56,6 +56,9 @@ namespace Module.Model
 
         #region Delete Issue
 
+		/// <summary>
+		/// 손상 정보 삭제
+		/// </summary>
         public void DeleteIssues()
 		{
 			DmgData.Clear();
@@ -70,6 +73,11 @@ namespace Module.Model
 
 		#region Get Issue
 
+		/// <summary>
+		/// 손상정보 리스트 가져오기
+		/// </summary>
+		/// <param name="_webT">웹 분류</param>
+		/// <param name="_issues">손상정보 리스트</param>
 		public void GetIssue(WebType _webT, List<Issue> _issues)
 		{
 			if (m_allIssues == null) m_allIssues = new List<Issue>();
@@ -106,6 +114,10 @@ namespace Module.Model
 			CollectAllIssues(IssueObjs, _iObjs);
 		}
 
+		/// <summary>
+		/// 루트 손상정보 가져오기
+		/// </summary>
+		/// <param name="_root">루트 손상정보 객체</param>
 		private void InitRootIssue(out GameObject _root)
 		{
 			GameObject obj = new GameObject("root issue");
@@ -115,6 +127,11 @@ namespace Module.Model
 			_root = obj;
 		}
 
+		/// <summary>
+		/// 손상정보 생성
+		/// </summary>
+		/// <param name="_webT">웹 분류</param>
+		/// <param name="_issues">손상정보 리스트</param>
 		private void InitIssues(WebType _webT, List<Issue> _issues)
 		{
 			_issues.ForEach(x =>
@@ -136,11 +153,20 @@ namespace Module.Model
 			});
 		}
 
+		/// <summary>
+		/// 루트 객체 안에서 손상정보 리스트 생성
+		/// </summary>
+		/// <param name="_issues"></param>
 		private void SetIssuesInRoot(List<GameObject> _issues)
 		{
 			_issues.ForEach(x => x.transform.SetParent(RootIssue.transform));
 		}
 
+		/// <summary>
+		/// 모든 손상정보 리스트를 수집
+		/// </summary>
+		/// <param name="_target">손상정보 리스트</param>
+		/// <param name="_iObjs"></param>
 		private void CollectAllIssues(List<GameObject> _target, List<GameObject> _iObjs)
 		{
 			_iObjs.ForEach(x => _target.Add(x));

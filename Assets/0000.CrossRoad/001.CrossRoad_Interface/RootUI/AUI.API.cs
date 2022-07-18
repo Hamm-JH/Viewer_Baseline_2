@@ -14,24 +14,19 @@ namespace Module.UI
     public abstract partial class AUI : AModule
     {
 		
+		/// <summary>
+		/// 주소정보 가져오기
+		/// </summary>
+		/// <param name="_data">가져온 데이터</param>
 		public abstract void API_GetAddress(AAPI _data);
-		//      {
-		//	// 다시 언박싱
-		//	DAddress data = (DAddress)_data;
 
-		//	//TitData.oName.text = data.nmTunnel;
-		//	//BotData.adrName.text = data.nmAddress;
-		//	SetTitleText(data.nmTunnel);
-		//	SetAddressText(data.nmAddress);
-
-		//	//string _fid = data.mp_fid;
-		//	//string _ftype = data.mp_ftype;
-		//	//string _fgroup = data.mp_filename;
-
-		//	//string argument = string.Format("fid={0}&ftype={1}&fgroup={2}", _fid, _ftype, _fgroup);
-		//	GetTexture(data.mp_fid, data.mp_ftype, data.mp_fgroup, GetMainPicture);
-		//}
-
+		/// <summary>
+		/// 텍스처 요청 API
+		/// </summary>
+		/// <param name="_fid">요청 키</param>
+		/// <param name="_ftype">요청 키</param>
+		/// <param name="_fgroup">요청 그룹</param>
+		/// <param name="_callback">콜백 이벤트</param>
 		public void API_RequestTexture(string _fid, string _ftype, string _fgroup, UnityAction<Texture2D> _callback)
 		{
 			string argument = string.Format("fid={0}&ftype={1}&fgroup={2}", _fid, _ftype, _fgroup);
@@ -39,6 +34,10 @@ namespace Module.UI
 			ContentManager.Instance._API.RequestMainPicture(argument, _callback);
 		}
 
+		/// <summary>
+		/// 이력정보 요청
+		/// </summary>
+		/// <param name="_action">콜백</param>
 		public void API_requestHistoryData(UnityAction<DataTable> _action)
         {
 			//Module_Model model = ContentManager.Instance.Module<Module_Model>();

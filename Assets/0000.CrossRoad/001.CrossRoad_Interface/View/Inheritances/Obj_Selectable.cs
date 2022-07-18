@@ -67,11 +67,19 @@ namespace View
 		//==========================================================================================
 		//==========================================================================================
 
+		/// <summary>
+		/// 값 변경시 실행
+		/// </summary>
+		/// <param name="_value"></param>
+		/// <exception cref="System.NotImplementedException"></exception>
 		public override void OnChangeValue(float _value)
 		{
 			throw new System.NotImplementedException();
 		}
 
+		/// <summary>
+		/// 선택 해제
+		/// </summary>
 		public override void OnDeselect()
 		{
 			if (!IsInteractable) return;
@@ -104,6 +112,13 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// 선택 해제
+		/// </summary>
+		/// <typeparam name="T1"></typeparam>
+		/// <typeparam name="T2"></typeparam>
+		/// <param name="t1"></param>
+		/// <param name="t2"></param>
 		public override void OnDeselect<T1, T2>(T1 t1, T2 t2)
 		{
 			if (!IsInteractable) return;
@@ -140,6 +155,12 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// 불투명 선택 해제
+		/// </summary>
+		/// <param name="_pCode"></param>
+		/// <param name="_uiType"></param>
+		/// <param name="_value"></param>
 		private void OnDeselect_ModelTransparency(PlatformCode _pCode, UIEventType _uiType, float _value)
 		{
 			if (!IsInteractable) return;
@@ -175,8 +196,12 @@ namespace View
 			}
 		}
 
-		
-
+		/// <summary>
+		/// 모델 선택 해제
+		/// </summary>
+		/// <param name="_pCode"></param>
+		/// <param name="_uiType"></param>
+		/// <param name="_isHide"></param>
 		private void OnDeselect_3dModel(PlatformCode _pCode, UIEventType _uiType, bool _isHide)
 		{
 			if (!IsInteractable) return;

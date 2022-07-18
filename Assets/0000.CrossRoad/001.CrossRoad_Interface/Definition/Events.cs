@@ -10,6 +10,14 @@ namespace Definition
 
     public static class _Events
     {
+        /// <summary>
+        /// 동일한 객체가 선택되었는가?
+        /// </summary>
+        /// <param name="_currElement">현재 상호작용 가능한 객체</param>
+        /// <param name="_sEvents">현재 이벤트 상태</param>
+        /// <param name="_currObj">현재 객체</param>
+        /// <param name="_selectedObj">선택된 객체</param>
+        /// <returns>true : 맞다</returns>
         public static bool IsSameObjectSelected(List<IInteractable> _currElement, Dictionary<InputEventType, AEventData> _sEvents,
             out GameObject _currObj, out GameObject _selectedObj)
         {

@@ -26,6 +26,11 @@ namespace Module
 		/// </summary>
         public List<FunctionCode> Functions { get; set; }
 
+		/// <summary>
+		/// 모듈 생성 시작
+		/// </summary>
+		/// <param name="_id"></param>
+		/// <param name="_code"></param>
 		void OnCreate(ModuleID _id, FunctionCode _code);
 	}
 }

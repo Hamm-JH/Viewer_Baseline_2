@@ -83,6 +83,11 @@ namespace Platform.Feature._Input
 
 		#region 키 체크
 
+		/// <summary>
+		/// 키 데이터 확인
+		/// </summary>
+		/// <param name="_kCode"></param>
+		/// <returns></returns>
 		private KeyData CheckKeyData(KeyCode _kCode)
 		{
 			if (Input.GetKeyDown(_kCode))

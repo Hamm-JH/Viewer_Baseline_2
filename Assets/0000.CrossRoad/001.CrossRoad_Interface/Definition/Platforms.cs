@@ -6,6 +6,10 @@ namespace Definition
 {
 	public static class Platforms
 	{
+		/// <summary>
+		/// Á¤ÀÇµÇÁö ¾ÊÀº ÇÃ·§ÆûÀÎ°¡?
+		/// </summary>
+		/// <param name="_pCode"></param>
 		public static bool IsNotDefinition(PlatformCode _pCode)
 		{
 			switch(_pCode)
@@ -17,6 +21,11 @@ namespace Definition
 			return false;
 		}
 
+		/// <summary>
+		/// ¸ÞÀÌÄ¿ ÇÃ·§ÆûÀÎ°¡?
+		/// </summary>
+		/// <param name="_pCode"></param>
+		/// <returns></returns>
 		public static bool IsMakerPlatform(PlatformCode _pCode)
 		{
 			switch(_pCode)
@@ -28,6 +37,11 @@ namespace Definition
 			return false;
 		}
 
+		/// <summary>
+		/// ºä¾î ÇÃ·§ÆûÀÎ°¡?
+		/// </summary>
+		/// <param name="_pCode"></param>
+		/// <returns></returns>
 		public static bool IsViewerPlatform(PlatformCode _pCode)
 		{
 			switch(_pCode)
@@ -42,6 +56,11 @@ namespace Definition
 			return false;
 		}
 
+		/// <summary>
+		/// ÅÍ³Î ÇÃ·§ÆûÀÎ°¡?
+		/// </summary>
+		/// <param name="_pCode"></param>
+		/// <returns></returns>
 		public static bool IsTunnelPlatform(PlatformCode _pCode)
 		{
 			switch(_pCode)
@@ -55,6 +74,11 @@ namespace Definition
 			return false;
 		}
 
+		/// <summary>
+		/// ±³·® ÇÃ·§ÆûÀÎ°¡?
+		/// </summary>
+		/// <param name="_pCode"></param>
+		/// <returns></returns>
 		public static bool IsBridgePlatform(PlatformCode _pCode)
 		{
 			switch(_pCode)
@@ -68,6 +92,11 @@ namespace Definition
 			return false;
 		}
 
+		/// <summary>
+		/// ½º¸¶Æ® ÀÎ½ºÆåÆ® ÇÃ·§ÆûÀÎ°¡?
+		/// </summary>
+		/// <param name="_pCode"></param>
+		/// <returns></returns>
 		public static bool IsSmartInspectPlatform(PlatformCode _pCode)
 		{
 			switch(_pCode)
@@ -83,6 +112,11 @@ namespace Definition
 			return false;
 		}
 
+		/// <summary>
+		/// µ¥¸ð À¥ºä¾î ÇÃ·§ÆûÀÎ°¡?
+		/// </summary>
+		/// <param name="_pCode"></param>
+		/// <returns></returns>
 		public static bool IsDemoWebViewer(PlatformCode _pCode)
         {
 			switch(_pCode)
@@ -95,6 +129,11 @@ namespace Definition
 			return false;
         }
 
+		/// <summary>
+		/// µ¥¸ð °ü¸®ÀÚ ÇÃ·§ÆûÀÎ°¡?
+		/// </summary>
+		/// <param name="_pCode"></param>
+		/// <returns></returns>
 		public static bool IsDemoAdminViewer(PlatformCode _pCode)
 		{
 			switch(_pCode)
@@ -107,6 +146,11 @@ namespace Definition
 			return false;
 		}
 
+		/// <summary>
+		/// PC ÇÃ·§ÆûÀÎ°¡?
+		/// </summary>
+		/// <param name="_pCode"></param>
+		/// <returns></returns>
 		public static bool IsPCPlatform(PlatformCode _pCode)
 		{
 			switch(_pCode)
@@ -126,6 +170,11 @@ namespace Definition
 			return false;
 		}
 
+		/// <summary>
+		/// ¸ð¹ÙÀÏ ÇÃ·§ÆûÀÎ°¡?
+		/// </summary>
+		/// <param name="_pCode"></param>
+		/// <returns></returns>
 		public static bool IsMobilePlatform(PlatformCode _pCode)
 		{
 			switch(_pCode)

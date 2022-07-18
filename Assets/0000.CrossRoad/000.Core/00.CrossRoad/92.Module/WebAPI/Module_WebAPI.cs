@@ -31,6 +31,9 @@ namespace Module.WebAPI
 			InitializeModelIssue();
 		}
 
+		/// <summary>
+		/// 모델 손상정보 초기화
+		/// </summary>
 		public void InitializeModelIssue()
 		{
 			CoreData data = MainManager.Instance.Data;
@@ -73,6 +76,10 @@ namespace Module.WebAPI
 
 		// Admin Viewer API... ----------------------------------------------------------------------
 
+		/// <summary>
+		/// 주소정보 요청
+		/// </summary>
+		/// <param name="action"></param>
 		public void RequestAddressData(UnityAction<AAPI> action)
 		{
 			CoreData data = MainManager.Instance.Data;
@@ -82,6 +89,11 @@ namespace Module.WebAPI
 			RequestData(addressURI, WebType.Address, action, GetData);
 		}
 
+		/// <summary>
+		/// 주 이미지 요청
+		/// </summary>
+		/// <param name="_imgArgument"></param>
+		/// <param name="_action"></param>
 		public void RequestMainPicture(string _imgArgument, UnityAction<Texture2D> _action)
 		{
 			CoreData data = MainManager.Instance.Data;
@@ -95,6 +107,12 @@ namespace Module.WebAPI
 			
 		}
 
+		/// <summary>
+		/// 단일 이미지정보 요청
+		/// </summary>
+		/// <param name="_imgArgument"></param>
+		/// <param name="_rImage"></param>
+		/// <param name="_action"></param>
 		public void RequestSinglePicture(string _imgArgument, RawImage _rImage, UnityAction<RawImage, Texture2D> _action)
 		{
 			CoreData data = MainManager.Instance.Data;
@@ -120,6 +138,11 @@ namespace Module.WebAPI
 			RequestData(historyURI, WebType.history, _action, GetData);
 		}
 
+		/// <summary>
+		/// 이미지 이력정보 요청
+		/// </summary>
+		/// <param name="_imgQuery"></param>
+		/// <param name="_action"></param>
 		public void RequestImageHistoryData(string _imgQuery, UnityAction<string> _action)
 		{
 			CoreData data = MainManager.Instance.Data;

@@ -6,6 +6,11 @@ namespace Utilities
 {
 	public static class ReturnMaterial
 	{
+		/// <summary>
+		/// Material 할당
+		/// </summary>
+		/// <param name="source">렌더러</param>
+		/// <param name="objType">객체 타입</param>
 		public static void SetMaterials(MeshRenderer source, Definition.TunnelObjectType objType)
 		{
 			Material[] setter = SetMaterialByType(objType);
@@ -13,6 +18,11 @@ namespace Utilities
 			source.materials = setter;
 		}
 
+		/// <summary>
+		/// 받은 타입으로 Material 배열 생성
+		/// </summary>
+		/// <param name="objType">객체 타입</param>
+		/// <returns></returns>
 		private static Material[] SetMaterialByType(Definition.TunnelObjectType objType)
 		{
 			List<Material> result = new List<Material>();

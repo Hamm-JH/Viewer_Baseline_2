@@ -49,6 +49,9 @@ namespace View
 			[SerializeField] RectTransform thisRect;
 			public bool m_isEnlarged = false;
 
+			/// <summary>
+			/// 이미지 확장
+			/// </summary>
 			public void EnlargeImage()
             {
 				// 축소 단계
@@ -66,11 +69,17 @@ namespace View
 				}
             }
 
+			/// <summary>
+			/// 이미지 위치 변경
+			/// </summary>
 			private void RepositionImage()
             {
 				thisRect.localPosition = new Vector2(148, 94);
             }
 
+			/// <summary>
+			/// 확대
+			/// </summary>
 			private void Enlarge()
             {
 				thisRect.position = new Vector2(1600, 900);
@@ -172,11 +181,17 @@ namespace View
 
         #region Button
 
+		/// <summary>
+		/// 선택 해제
+		/// </summary>
         public override void OnDeselect()
 		{
 			Debug.Log($"OnDeselect : {this.name}");
 		}
 
+		/// <summary>
+		/// 선택 해제
+		/// </summary>
 		public override void OnSelect()
 		{
 			if(eventType == UIEventType.Null)
@@ -193,11 +208,17 @@ namespace View
 			m_EventCodes.OnSelect(m_rootUI, this);
 		}
 
+		/// <summary>
+		/// 선택 해제
+		/// </summary>
 		public override void OnDeselect<T1, T2>(T1 t1, T2 t2)
 		{
 
 		}
 
+		/// <summary>
+		/// 상태 토글
+		/// </summary>
 		private void Toggle_Status()
         {
 			if (!m_resource.m_useResource) return;
@@ -249,6 +270,10 @@ namespace View
 			Toggle_btnColor(true);
         }
 
+		/// <summary>
+		/// 버튼색 토글
+		/// </summary>
+		/// <param name="isOn"></param>
 		public void Toggle_btnColor(bool isOn)
         {
 			if (!m_resource.m_useResource) return;

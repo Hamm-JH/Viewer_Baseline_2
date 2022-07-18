@@ -16,6 +16,11 @@ namespace Module.WebAPI
 	public partial class Module_WebAPI : AModule
 	{
 		#region GetData
+		/// <summary>
+		/// 데이터 수신
+		/// </summary>
+		/// <param name="_data"></param>
+		/// <param name="_webT"></param>
 		private void GetData(string _data, WebType _webT)
 		{
 			switch (_webT)
@@ -30,6 +35,12 @@ namespace Module.WebAPI
 			}
 		}
 
+		/// <summary>
+		/// 데이터 수신
+		/// </summary>
+		/// <param name="_data"></param>
+		/// <param name="_webT"></param>
+		/// <param name="_callback"></param>
 		private void GetData(string _data, WebType _webT, UnityAction<string> _callback)
 		{
 			switch(_webT)
@@ -40,6 +51,12 @@ namespace Module.WebAPI
 			}
 		}
 
+		/// <summary>
+		/// 데이터 수신
+		/// </summary>
+		/// <param name="_data"></param>
+		/// <param name="_webT"></param>
+		/// <param name="_callback"></param>
 		private void GetData(string _data, WebType _webT, UnityAction<AAPI> _callback)
 		{
 			switch(_webT)
@@ -50,6 +67,12 @@ namespace Module.WebAPI
 			}
 		}
 
+		/// <summary>
+		/// 데이터 수신
+		/// </summary>
+		/// <param name="_texture"></param>
+		/// <param name="_webT"></param>
+		/// <param name="_callback"></param>
 		private void GetData(Texture2D _texture, WebType _webT, UnityAction<Texture2D> _callback)
 		{
 			switch(_webT)
@@ -60,6 +83,13 @@ namespace Module.WebAPI
 			}
 		}
 
+		/// <summary>
+		/// 데이터 수신
+		/// </summary>
+		/// <param name="_rImage"></param>
+		/// <param name="_texture"></param>
+		/// <param name="_webT"></param>
+		/// <param name="_callback"></param>
 		private void GetData(RawImage _rImage, Texture2D _texture, WebType _webT, UnityAction<RawImage, Texture2D> _callback)
 		{
 			switch(_webT)
@@ -70,6 +100,12 @@ namespace Module.WebAPI
 			}
 		}
 
+		/// <summary>
+		/// 데이터 수신
+		/// </summary>
+		/// <param name="_data"></param>
+		/// <param name="_webT"></param>
+		/// <param name="_callback"></param>
 		private void GetData(string _data, WebType _webT, UnityAction<DataTable> _callback)
 		{
 			switch(_webT)
@@ -82,6 +118,11 @@ namespace Module.WebAPI
 		
 		#endregion
 
+		/// <summary>
+		/// 주소 데이터 수신
+		/// </summary>
+		/// <param name="_data"></param>
+		/// <param name="_callback"></param>
 		private void GetData_Address(string _data, UnityAction<AAPI> _callback)
 		{
 			// 데이터 세팅 인스턴스
@@ -152,6 +193,10 @@ namespace Module.WebAPI
 			_callback.Invoke((AAPI)data);
 		}
 
+		/// <summary>
+		/// 손상 데이터 수신
+		/// </summary>
+		/// <param name="_data"></param>
 		private void GetData_Dmg(string _data)
 		{
 			List<Issue> dmgDatas = new List<Issue>();
@@ -186,6 +231,10 @@ namespace Module.WebAPI
             }
 		}
 
+		/// <summary>
+		/// 보수 데이터 수신
+		/// </summary>
+		/// <param name="_data"></param>
 		private void GetData_Rcv(string _data)
 		{
 			List<Issue> rcvDatas = new List<Issue>();
@@ -221,11 +270,21 @@ namespace Module.WebAPI
             }
 		}
 
+		/// <summary>
+		/// 주 이미지 할당
+		/// </summary>
+		/// <param name="_texture"></param>
+		/// <param name="_callback"></param>
 		private void GetImage_main(Texture2D _texture, UnityAction<Texture2D> _callback)
 		{
 			_callback.Invoke(_texture);
 		}
 
+		/// <summary>
+		/// 이력정보 할당
+		/// </summary>
+		/// <param name="_data"></param>
+		/// <param name="_callback"></param>
 		private void GetData_history(string _data, UnityAction<DataTable> _callback)
 		{
 			DataTable result = new DataTable();

@@ -9,6 +9,9 @@ namespace Module.Item
 
 	public partial class Module_Items : AModule
 	{
+		/// <summary>
+		/// 아이템 리스트
+		/// </summary>
 		[SerializeField] List<AItem> m_itemList;
 
 

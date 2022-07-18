@@ -6,6 +6,13 @@ namespace Utilities
 {
     public static class Objects
     {
+        /// <summary>
+        /// 타입에 맞는 객체 검출 시도
+        /// </summary>
+        /// <typeparam name="T">타입 T</typeparam>
+        /// <param name="_obj">목표 객체</param>
+        /// <param name="_value">검출된 타입 T</param>
+        /// <returns>true : 검출 완료</returns>
         public static bool TryGetValue<T>(GameObject _obj, out T _value) where T : class
         {
             bool result = false;

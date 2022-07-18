@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Utilities
 {
+	/// <summary>
+	/// 教臂畔 贸府等 MonoInstance
+	/// </summary>
+	/// <typeparam name="T">鸥涝 T</typeparam>
 	public class MonoInstance<T> : MonoBehaviour where T : class
 	{
 		private static T instance;

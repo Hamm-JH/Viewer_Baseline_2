@@ -24,27 +24,49 @@ namespace View
 
         public override List<GameObject> Targets => throw new System.NotImplementedException();
 
+        /// <summary>
+        /// 값 변경 대응
+        /// </summary>
+        /// <param name="_value"></param>
         public override void OnChangeValue(float _value)
         {
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// 선택 해제시 실행
+        /// </summary>
         public override void OnDeselect()
         {
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// 선택 해제
+        /// </summary>
+        /// <typeparam name="T1"></typeparam>
+        /// <typeparam name="T2"></typeparam>
+        /// <param name="t1"></param>
+        /// <param name="t2"></param>
         public override void OnDeselect<T1, T2>(T1 t1, T2 t2)
         {
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// 선택 해제
+        /// </summary>
         public override void OnSelect()
         {
             throw new System.NotImplementedException();
         }
         #endregion
 
+        /// <summary>
+        /// 상호작용 되능 손상정보 객체 수집
+        /// </summary>
+        /// <param name="_selectable"></param>
+        /// <param name="_hoveringItem"></param>
         public void GetIssueSelectable(Issue_Selectable _selectable, Item_waypoint._IssueWayPoint _hoveringItem)
         {
             IssueSelectable = _selectable;
@@ -52,6 +74,10 @@ namespace View
         }
 
         // Hover start
+        /// <summary>
+        /// 호버링 - 포인터 진입
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnPointerEnter(PointerEventData eventData)
         {
             //Debug.Log($"{this.name} OnPointerEnter");
@@ -62,6 +88,10 @@ namespace View
         }
 
         // Hover end
+        /// <summary>
+        /// 호버링 - 호버링 종료
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnPointerExit(PointerEventData eventData)
         {
             if(IssueSelectable != null)

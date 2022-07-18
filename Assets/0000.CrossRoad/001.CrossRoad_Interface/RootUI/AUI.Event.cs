@@ -116,9 +116,33 @@ namespace Module.UI
 		/// <param name="_uType"></param>
 		/// <param name="_setter"></param>
 		public abstract void GetUIEvent(UIEventType _uType, Interactable _setter);
+
+		/// <summary>
+		/// 개별 UI 요소에서 받은 이벤트를 UI 패널 레벨에서 분배처리
+		/// </summary>
+		/// <param name="_uType"></param>
+		/// <param name="_setter"></param>
 		public abstract void GetUIEvent(Inspect_EventType _uType, Interactable _setter);
+
+		/// <summary>
+		/// 개별 UI 요소에서 받은 이벤트를 UI 패널 레벨에서 분배처리
+		/// </summary>
+		/// <param name="_type"></param>
+		/// <param name="_setter"></param>
 		public virtual void GetUIEvent(BottomBar_EventType _type, Interactable _setter) { }
+		
+		/// <summary>
+		/// 개별 UI 요소에서 받은 이벤트를 UI 패널 레벨에서 분배처리
+		/// </summary>
+		/// <param name="_type"></param>
+		/// <param name="_setter"></param>
 		public virtual void GetUIEvent(Hover_EventType _type, Interactable _setter) { }
+		
+		/// <summary>
+		/// 개별 UI 요소에서 받은 이벤트를 UI 패널 레벨에서 분배처리
+		/// </summary>
+		/// <param name="_type"></param>
+		/// <param name="_setter"></param>
 		public virtual void GetUIEvent(Compass_EventType _type, Interactable _setter) { }
 
 		/// <summary>
@@ -128,9 +152,37 @@ namespace Module.UI
 		/// <param name="_uType"></param>
 		/// <param name="_setter"></param>
 		public abstract void GetUIEvent(float _value, UIEventType _uType, Interactable _setter);
+		
+		/// <summary>
+		/// 슬라이더 이벤트 분배
+		/// </summary>
+		/// <param name="_value"></param>
+		/// <param name="_uType"></param>
+		/// <param name="_setter"></param>
 		public abstract void GetUIEvent(float _value, Inspect_EventType _uType, Interactable _setter);
+
+		/// <summary>
+		/// 슬라이더 이벤트 분배
+		/// </summary>
+		/// <param name="_value"></param>
+		/// <param name="_type"></param>
+		/// <param name="_setter"></param>
 		public virtual void GetUIEvent(float _value, BottomBar_EventType _type, Interactable _setter) { }
+
+		/// <summary>
+		/// 슬라이더 이벤트 분배
+		/// </summary>
+		/// <param name="_value"></param>
+		/// <param name="_type"></param>
+		/// <param name="_setter"></param>
 		public virtual void GetUIEvent(float _value, Hover_EventType _type, Interactable _setter) { }
+
+		/// <summary>
+		/// 슬라이더 이벤트 분배
+		/// </summary>
+		/// <param name="_value"></param>
+		/// <param name="_type"></param>
+		/// <param name="_setter"></param>
 		public virtual void GetUIEvent(float _value, Compass_EventType _type, Interactable _setter) { }
 
 		/// <summary>
@@ -139,9 +191,33 @@ namespace Module.UI
 		/// <param name="_type"> 이벤트 </param>
 		/// <param name="_value"> 패킷 </param>
 		public virtual void GetUIEventPacket(UIEventType _type, APacket _value) { }
+		
+		/// <summary>
+		/// 외부 데이터 패킷전달, 이벤트 처리
+		/// </summary>
+		/// <param name="_type"></param>
+		/// <param name="_value"></param>
 		public virtual void GetUIEventPacket(Inspect_EventType _type, APacket _value) { }
+
+		/// <summary>
+		/// 외부 데이터 패킷전달, 이벤트 처리
+		/// </summary>
+		/// <param name="_type"></param>
+		/// <param name="_value"></param>
 		public virtual void GetUIEventPacket(BottomBar_EventType _type, APacket _value) { }
+
+		/// <summary>
+		/// 외부 데이터 패킷전달, 이벤트 처리
+		/// </summary>
+		/// <param name="_type"></param>
+		/// <param name="_value"></param>
 		public virtual void GetUIEventPacket(Hover_EventType _type, APacket _value) { }
+
+		/// <summary>
+		/// 외부 데이터 패킷전달, 이벤트 처리
+		/// </summary>
+		/// <param name="_type"></param>
+		/// <param name="_value"></param>
 		public virtual void GetUIEventPacket(Compass_EventType _type, APacket _value) { }
 
 		/// <summary>

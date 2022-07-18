@@ -53,6 +53,12 @@ namespace Module
 			}
 		}
 
+		/// <summary>
+		/// 모듈 가져오기
+		/// </summary>
+		/// <param name="_id">모듈 분류</param>
+		/// <param name="_modules">모듈 리스트</param>
+		/// <returns>모듈 객체</returns>
 		private static AModule GetModule(ModuleID _id, List<AModule> _modules)
         {
 			foreach(AModule module in _modules)
@@ -66,6 +72,13 @@ namespace Module
 			throw new System.Exception($"Module code not creatable :: id : {_id.ToString()}");
 		}
 
+		/// <summary>
+		/// 모듈이 존재하는지 확인
+		/// </summary>
+		/// <param name="_id">모듈 분류</param>
+		/// <param name="_modules"></param>
+		/// <returns></returns>
+		/// <exception cref="System.Exception"></exception>
 		private static bool IsInModule(ModuleID _id, List<AModule> _modules)
         {
 			bool result = false;
@@ -101,6 +114,12 @@ namespace Module
 			return result;
         }
 
+		/// <summary>
+		/// 모듈이 존재하는지 확인
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="_modules"></param>
+		/// <returns></returns>
 		private static bool IsInModule<T>(List<AModule> _modules) where T : class
 		{
 			bool result = false;
@@ -132,6 +151,13 @@ namespace Module
 			return mod;
 		}
 
+		/// <summary>
+		/// 모듈 할당
+		/// </summary>
+		/// <param name="_obj">모듈 할당할 객체</param>
+		/// <param name="_module">모듈 분류</param>
+		/// <returns></returns>
+		/// <exception cref="System.Exception"></exception>
 		private static AModule SetModule(GameObject _obj, ModuleID _module)
 		{
 			AModule mod = null;
@@ -184,6 +210,12 @@ namespace Module
 			return FunctionCode.Null;
 		}
 
+		/// <summary>
+		/// ㅇ모듈에 맞는 기능을 반환한다.
+		/// </summary>
+		/// <param name="_module"></param>
+		/// <param name="_function"></param>
+		/// <returns></returns>
 		public static FunctionCode Match_Single(ModuleID _module, FunctionCode _function)
         {
 			if(IsMatch(_module, _function))

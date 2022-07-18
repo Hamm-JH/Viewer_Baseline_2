@@ -68,6 +68,9 @@ namespace Items
             //_targets.ForEach(x => AddCompass(x, in _graphic));
         }
 
+        /// <summary>
+        /// 나침반 초기화
+        /// </summary>
         private void ClearCompass()
         {
             int index = CompassUIRoot.transform.childCount;
@@ -85,6 +88,13 @@ namespace Items
             Arrows = new List<Arrow>();
         }
 
+        /// <summary>
+        /// 나침반침 추가
+        /// </summary>
+        /// <param name="_target">목표 객체</param>
+        /// <param name="_index">나침반 인덱스</param>
+        /// <param name="_graphic">그래픽 모듈</param>
+        /// <param name="eCompass">나침반 요소</param>
         private void AddCompass(Transform _target, int _index, in Module_Graphic _graphic, Element_Compass eCompass)
         {
             PlatformCode pCode = MainManager.Instance.Platform;
@@ -112,6 +122,12 @@ namespace Items
             Arrows.Add(arrow);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_source"></param>
+        /// <param name="_target"></param>
+        /// <returns></returns>
         private bool TryGetChildUICompass(Transform _source, out UI_Compass _target)
         {
             _target = null;
@@ -201,14 +217,11 @@ namespace Items
             }
         }
 
-
-
-
-
-
-
-
-
+        /// <summary>
+        /// 상태 업데이트
+        /// </summary>
+        /// <param name="_mList">모듈 리스트</param>
+        /// <exception cref="System.NotImplementedException"></exception>
         public override void UpdateState(List<ModuleCode> _mList)
         {
             throw new System.NotImplementedException();

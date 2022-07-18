@@ -32,17 +32,32 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// 값 변경
+		/// </summary>
+		/// <param name="_value"></param>
+		/// <exception cref="System.NotImplementedException"></exception>
         public override void OnChangeValue(float _value)
 		{
 			throw new System.NotImplementedException();
 		}
 
+		/// <summary>
+		/// 선택 해제
+		/// </summary>
 		public override void OnDeselect()
 		{
 			Debug.Log("Issue OnDeselect");
 
 		}
 
+		/// <summary>
+		/// 선택 해제
+		/// </summary>
+		/// <typeparam name="T1"></typeparam>
+		/// <typeparam name="T2"></typeparam>
+		/// <param name="t1"></param>
+		/// <param name="t2"></param>
 		public override void OnDeselect<T1, T2>(T1 t1, T2 t2)
 		{
 			if (!IsInteractable) return;
@@ -65,7 +80,12 @@ namespace View
 			}
 		}
 
-		// 점검정보의 크기를 변경
+		/// <summary>
+		/// 점검정보의 크기 변경
+		/// </summary>
+		/// <param name="_platform"></param>
+		/// <param name="_uiType"></param>
+		/// <param name="_value"></param>
 		private void OnDeselect_IssueScale(PlatformCode _platform, UIEventType _uiType, float _value)
 		{
 			if (!IsInteractable) return;
@@ -77,6 +97,9 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// 객체 선택
+		/// </summary>
 		public override void OnSelect()
 		{
 			// 이슈정보 선택 처리
@@ -86,13 +109,21 @@ namespace View
 
 
 
-
+		/// <summary>
+		/// 렌더 스위칭
+		/// </summary>
+		/// <param name="isOn"></param>
 		public void SwitchRender(bool isOn)
 		{
 			this.GetComponent<MeshRenderer>().enabled = isOn;
 			this.GetComponent<Collider>().enabled = isOn;
 		}
 
+		/// <summary>
+		/// 손상코드 할당
+		/// </summary>
+		/// <param name="issueCode"></param>
+		/// <param name="issueIndex"></param>
 		public void SetIssueCode(string issueCode, string issueIndex)
 		{
 			Issue.IssueCode = (IssueCodes)Enum.Parse(typeof(IssueCodes), issueCode);
@@ -126,6 +157,10 @@ namespace View
 			}
 		}
 
+		/// <summary>
+		/// 재질 할당
+		/// </summary>
+		/// <param name="mat"></param>
 		public void SetMaterial(Material mat)
 		{
 			transform.GetComponent<MeshRenderer>().material = mat;

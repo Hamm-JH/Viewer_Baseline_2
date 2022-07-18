@@ -34,11 +34,22 @@ namespace Module.Model
 			StartCoroutine(Processing(_task));
 		}
 
+		/// <summary>
+		/// GLTF 불러오기 진행
+		/// </summary>
+		/// <param name="step">GLTF 파일 임포트 분류</param>
+		/// <param name="completed">완료 코드</param>
+		/// <param name="total">전체 인덱스</param>
 		private void OnProgress(GltfImportStep step, int completed, int total)
 		{
 			Debug.LogFormat("{0}: {1}/{2}", step, completed, total);
 		}
 
+		/// <summary>
+		/// GLTF 모델 처리
+		/// </summary>
+		/// <param name="task">GLTF 가져오기 작업</param>
+		/// <returns></returns>
 		private IEnumerator Processing(GltfImportTask task)
 		{
 			yield return new WaitForEndOfFrame();

@@ -6,6 +6,9 @@ namespace Definition.Exceptions
 {
     using System;
 
+    /// <summary>
+    /// 범용 예외
+    /// </summary>
     public class Exceptions : Exception
     {
         protected string m_Message;

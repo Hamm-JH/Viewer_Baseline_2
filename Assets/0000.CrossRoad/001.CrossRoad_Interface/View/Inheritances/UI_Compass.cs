@@ -22,22 +22,34 @@ namespace View
         public override List<GameObject> Targets => throw new System.NotImplementedException();
 
 
+        /// <summary>
+        /// 값 변경시 실행
+        /// </summary>
+        /// <param name="_value"></param>
         public override void OnChangeValue(float _value)
         {
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+		/// 선택 해제
+		/// </summary>
         public override void OnDeselect()
         {
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+		/// 선택 해제
+		/// </summary>
         public override void OnDeselect<T1, T2>(T1 t1, T2 t2)
         {
             throw new System.NotImplementedException();
         }
 
-
+        /// <summary>
+		/// 선택 해제
+		/// </summary>
         public override void OnSelect()
         {
             //Debug.Log($"I am {gameObject.name} click");
@@ -95,18 +107,29 @@ namespace View
             OnSwitchColor_buttonState();
         }
 
+        /// <summary>
+        /// 객체 호버링 진입
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnPointerEnter(PointerEventData eventData)
         {
             //Debug.Log($"I am {gameObject.name} enter");
             m_btn.image.color = m_uiColor.color_hover;
         }
 
+        /// <summary>
+        /// 객체 호버링 종료 개치
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnPointerExit(PointerEventData eventData)
         {
             //Debug.Log($"I am {gameObject.name} exit");
             OnSwitchColor_buttonState();
         }
 
+        /// <summary>
+        /// 버튼 상태에 따라 색상 변경
+        /// </summary>
         private void OnSwitchColor_buttonState()
         {
             if (m_btn == null) return;

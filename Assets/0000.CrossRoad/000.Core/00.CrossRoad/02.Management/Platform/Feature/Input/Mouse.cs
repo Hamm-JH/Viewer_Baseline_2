@@ -208,12 +208,23 @@ namespace Platform.Feature._Input
 
 		#endregion
 
+		/// <summary>
+		/// 클릭 이벤트
+		/// </summary>
+		/// <param name="type">입력 이벤트 분류</param>
+		/// <param name="btn">마우스 버튼</param>
+		/// <param name="pos">포인터 위치</param>
 		private void SetClickEvent(InputEventType type, int btn, Vector3 pos)
 		{
 			//Debug.Log($"type : {type.ToString()}, pos : {pos}");
 			m_InputEvents.clickEvent.Invoke(type, btn, pos);
 		}
 
+		/// <summary>
+		/// 호버 이벤트
+		/// </summary>
+		/// <param name="type">입력 이벤트 분류</param>
+		/// <param name="pos">마우스 위치</param>
 		private void SetHoverEvent(InputEventType type, Vector3 pos)
         {
 			m_InputEvents.hoverEvent.Invoke(type, pos);

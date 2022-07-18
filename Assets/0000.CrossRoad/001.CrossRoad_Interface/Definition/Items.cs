@@ -67,6 +67,12 @@ namespace Definition
             return result;
         }
 
+        /// <summary>
+        /// POI객체를 EasyDecal 모드로 생성
+        /// </summary>
+        /// <param name="_hit">충돌한 객체</param>
+        /// <param name="_isDecal">데칼 포함여부</param>
+        /// <returns></returns>
         private static GameObject CreateCachePin_EasyDecal(RaycastHit _hit, bool _isDecal)
         {
             GameObject result = null;
@@ -86,6 +92,12 @@ namespace Definition
             return result;
         }
 
+        /// <summary>
+        /// POI 객체를 UltimateDecal 모드로 생성
+        /// </summary>
+        /// <param name="_hit">충돌한 객체</param>
+        /// <param name="_isDecal">데칼 포함여부</param>
+        /// <returns></returns>
         private static GameObject CreateCachePin_UltimateDecal(RaycastHit _hit, bool _isDecal)
         {
             GameObject result = null;
@@ -105,6 +117,12 @@ namespace Definition
             return result;
         }
 
+        /// <summary>
+        /// POI 객체를 일반 정육면체 형태로 생성
+        /// </summary>
+        /// <param name="_hit">충돌한 객체</param>
+        /// <param name="_isDecal">데칼 포함여부</param>
+        /// <returns></returns>
         private static GameObject CreateCachePin_Cube(RaycastHit _hit, bool _isDecal)
         {
             GameObject result = null;
@@ -118,6 +136,12 @@ namespace Definition
             return result;
         }
 
+        /// <summary>
+        /// POI 객체를 이동한다.
+        /// </summary>
+        /// <param name="_obj">선택된 객체</param>
+        /// <param name="_hit">마우스 클릭 위치</param>
+        /// <param name="_isDecal">데칼 요소인가?</param>
         public static void MoveCachePin(GameObject _obj, RaycastHit _hit, bool _isDecal)
         {
             if(_isDecal)

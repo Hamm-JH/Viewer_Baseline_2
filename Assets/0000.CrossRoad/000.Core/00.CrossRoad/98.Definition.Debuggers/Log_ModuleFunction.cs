@@ -7,6 +7,11 @@ namespace Definition.Debuggers
 {
     public class Log_ModuleFunction : Debuggers
     {
+        /// <summary>
+        /// 모듈 분류, 함수 분류 로그
+        /// </summary>
+        /// <param name="_id"></param>
+        /// <param name="_code"></param>
         public static void Log(ModuleID _id, FunctionCode _code)
         {
             StringBuilder str = new StringBuilder();

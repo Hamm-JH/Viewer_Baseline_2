@@ -6,6 +6,9 @@ namespace Utilities
 {
     using TMPro;
 
+    /// <summary>
+    /// ∆–≥Œ≈©±‚ ∏¬√„ ∞¥√º
+    /// </summary>
     public class PanelSizeFitter : MonoBehaviour
     {
         public RectTransform m_thisRect;
@@ -17,13 +20,5 @@ namespace Utilities
             Vector2 delta = m_thisRect.sizeDelta;
             m_thisRect.sizeDelta = new Vector2(delta.x, m_childRect.sizeDelta.y);
         }
-
-        // Update is called once per frame
-        //void Update()
-        //{
-        //    Vector2 delta = m_thisRect.sizeDelta;
-        //    m_thisRect.sizeDelta = new Vector2(delta.x, m_childRect.sizeDelta.y);
-        //    //Debug.Log(m_childRect.sizeDelta.y);
-        //}
     }
 }

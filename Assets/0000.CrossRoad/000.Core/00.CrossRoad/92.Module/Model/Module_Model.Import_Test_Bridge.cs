@@ -25,6 +25,10 @@ namespace Module.Model
 		[SerializeField] public GameObject[] m_bridgeTopParts;
 		[SerializeField] public GameObject[] m_bridgeBottomParts;
 
+        /// <summary>
+        /// 교량 객체 생성
+        /// </summary>
+        /// <param name="_root">루트 객체</param>
 		public void InitializeObjectBridge(GameObject _root)
 		{
 			m_bRootObj = _root.transform.GetChild(0).gameObject;
@@ -61,7 +65,11 @@ namespace Module.Model
 
         bool routineCheck3D;
 
-
+        /// <summary>
+        /// 시설물 모델 생성
+        /// </summary>
+        /// <param name="_root3DObject"></param>
+        /// <returns></returns>
         private IEnumerator Initialize3DObject(GameObject _root3DObject)
 		{
 			//manager.RootObject.transform.parent.position = new Vector3(0, 0, 0);
@@ -104,6 +112,10 @@ namespace Module.Model
 			yield break;
 		}
 
+        /// <summary>
+        /// Material, Collider 생성
+        /// </summary>
+        /// <param name="_root3DObject"></param>
 		private void SetObjectsMaterialNCollider(GameObject _root3DObject)
 		{
             Materials.Init(MaterialType.Default);
@@ -211,6 +223,9 @@ namespace Module.Model
 
 		}
 
+        /// <summary>
+        /// 생성 완료 확인
+        /// </summary>
         private void InitializeCheck()
         {
             bool result =
@@ -249,6 +264,11 @@ namespace Module.Model
 
 
 #pragma warning disable CS1998 // 이 비동기 메서드에는 'await' 연산자가 없으며 메서드가 동시에 실행됩니다.
+        
+        /// <summary>
+        /// 치수선 객체 생성
+        /// </summary>
+        /// <param name="root2D"></param>
         private async void Initialize2DObject(GameObject root2D)
 #pragma warning restore CS1998 // 이 비동기 메서드에는 'await' 연산자가 없으며 메서드가 동시에 실행됩니다.
         {
@@ -452,6 +472,11 @@ namespace Module.Model
             yield break;
         }
 
+        /// <summary>
+        /// 텍스트 메시 회전
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
         private Vector3 GetTextMeshRotation(Transform target)
         {
             string parentName = target.parent.name.Substring(0, 2);
@@ -493,6 +518,11 @@ namespace Module.Model
             return new Vector3(0, 0, 0);
         }
 
+        /// <summary>
+        /// 텍스트 메시 배치
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
         private Vector3 GetTextMeshPosition(Transform target)
         {
             string parentName = target.parent.name.Substring(0, 2);
@@ -618,6 +648,11 @@ namespace Module.Model
             return new Vector3(0, 0, 0);
         }
 
+        /// <summary>
+        /// 텍스트 충돌체 크기 가져오기
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
         private Vector3 GetTextColliderSize(Transform target)
         {
             Vector3 result = default(Vector3);

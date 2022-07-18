@@ -6,6 +6,12 @@ namespace Utilities
 {
 	public static class NameParameter
 	{
+		/// <summary>
+		/// ∞¥√º∏Ì¿∏∑Œ ≈Õ≥Œ ∞¥√º ≈∏¿‘ ∫Ø∞Ê
+		/// </summary>
+		/// <param name="name">∞¥√º∏Ì</param>
+		/// <param name="index">¿Œµ¶Ω∫</param>
+		/// <returns>≈Õ≥Œ ∞¥√º ≈∏¿‘</returns>
 		public static Definition.TunnelObjectType GetMatParameter(string name, int index)
 		{
 			Definition.TunnelObjectType result = Definition.TunnelObjectType.Null;

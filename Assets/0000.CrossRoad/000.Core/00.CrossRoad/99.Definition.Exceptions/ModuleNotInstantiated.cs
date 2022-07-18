@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Definition.Exceptions
 {
+    /// <summary>
+    /// 생성되지 않은 인스턴스 접근
+    /// </summary>
     public class ModuleNotInstantiated : Exceptions
     {
         public ModuleNotInstantiated()

@@ -9,6 +9,9 @@ namespace Module.UI
 	using UnityEngine.UI;
 	using View;
 
+	/// <summary>
+	/// 테스트용 UI 클래스
+	/// </summary>
 	public class PCViewer1 : AUI
 	{
 		[SerializeField] Text m_segment;

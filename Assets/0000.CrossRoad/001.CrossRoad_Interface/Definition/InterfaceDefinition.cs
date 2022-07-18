@@ -124,6 +124,9 @@ namespace Definition
 		Ins_MAdm_TL_NextYear = 0x35c,
 	}
 
+	/// <summary>
+	/// 인스펙트 뷰어 이벤트 타입
+	/// </summary>
 	public enum Inspect_EventType
     {
 		NotWork,
@@ -198,6 +201,9 @@ namespace Definition
 
 	//----------------------------------------------------
 
+	/// <summary>
+	/// 나침반 이벤트 분류
+	/// </summary>
 	public enum Compass_EventType
     {
 		NotWork,
@@ -206,6 +212,9 @@ namespace Definition
 		Compass_Prev,
     }
 
+	/// <summary>
+	/// 모듈 ID 분류
+	/// </summary>
 	public enum ModuleID
 	{
 		NotDef = -1,
@@ -240,6 +249,9 @@ namespace Definition
 		Item = 0x60,
 	}
 
+	/// <summary>
+	/// 함수 코드 분류
+	/// </summary>
 	public enum FunctionCode
 	{
 		Null = -1,

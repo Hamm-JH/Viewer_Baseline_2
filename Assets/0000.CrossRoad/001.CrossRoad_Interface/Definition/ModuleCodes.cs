@@ -8,6 +8,10 @@ namespace Definition
     public static class ModuleCodes
     {
         
+        /// <summary>
+        /// 씬의 상태가 작업 큐인가
+        /// </summary>
+        /// <returns></returns>
         public static bool IsWorkQueueProcess()
         {
             bool result = false;

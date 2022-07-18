@@ -16,6 +16,10 @@ namespace Module.WebAPI
 
 	public partial class Module_WebAPI : AModule
 	{
+        /// <summary>
+        /// 요청 수신
+        /// </summary>
+        /// <param name="argument"></param>
         public void ReceiveRequest(string argument)
         {
 
@@ -97,6 +101,12 @@ namespace Module.WebAPI
 		#region Functions
 
 		#region 3DObject
+
+        /// <summary>
+        /// 3D 객체 검색
+        /// </summary>
+        /// <param name="_name">객체명</param>
+        /// <param name="_obj">검색된 객체</param>
 		private void Find_3DObject(string _name, out GameObject _obj)
         {
             _obj = ContentManager.Instance._ModelObjects.Find(
@@ -106,6 +116,11 @@ namespace Module.WebAPI
 
 		#region IssueObject
 
+        /// <summary>
+        /// 손상정보 검색
+        /// </summary>
+        /// <param name="_code">손상정보 코드</param>
+        /// <param name="_obj">검색된 객체</param>
 		private void Find_IssueObject(string _code, out GameObject _obj)
         {
             _obj = ContentManager.Instance._IssueObjects.Find(x => x.name == _code);
@@ -124,6 +139,9 @@ namespace Module.WebAPI
 
 		#region ResetIssue
 
+        /// <summary>
+        /// 손상정보 초기화
+        /// </summary>
 		private void Func_ResetIssue()
         {
             //ContentManager.Instance.InitCamPosition();
@@ -136,6 +154,10 @@ namespace Module.WebAPI
 
         #region ChangeTab
 
+        /// <summary>
+        /// 탭 상태 변경
+        /// </summary>
+        /// <param name="_value"></param>
         public void ChangeTab(string _value)
         {
             GameObject selected = EventManager.Instance._SelectedObject;
@@ -190,6 +212,10 @@ namespace Module.WebAPI
 
         #region SelectObject
 
+        /// <summary>
+        /// 3D 모델 선택
+        /// </summary>
+        /// <param name="_name"></param>
         private void Func_SelectObject(string _name)
         {
             GameObject obj3D;
@@ -221,6 +247,10 @@ namespace Module.WebAPI
 
 		#region SelectIssue
 
+        /// <summary>
+        /// 손상정보 선택
+        /// </summary>
+        /// <param name="_name"></param>
 		private void Func_SelectIssue(string _name)
         {
             GameObject issue;
@@ -232,6 +262,10 @@ namespace Module.WebAPI
             }
         }
 
+        /// <summary>
+        /// 6면 정보 수신
+        /// </summary>
+        /// <param name="_code"></param>
         private void Func_Receive_SelectObject6Shape(string _code)
         {
             // 현재 선택된 객체 가져오기
@@ -249,6 +283,10 @@ namespace Module.WebAPI
             Send6ShapeRequest(_code);
         }
 
+        /// <summary>
+        /// 선택된 6면 정보 전달
+        /// </summary>
+        /// <param name="_code"></param>
         private void Send6ShapeRequest(string _code)
 		{
             ViewRotations vCode = ViewRotations.Null;
@@ -268,6 +306,9 @@ namespace Module.WebAPI
 
         #region InformationWidthChange
 
+        /// <summary>
+        /// 정보창 폭 변경
+        /// </summary>
         private void Func_InformationWidthChange()
         {
             //float width = _value;
@@ -277,6 +318,10 @@ namespace Module.WebAPI
             Debug.Log($"[Receive.InformationWidthChange] : width {0}");
         }
 
+        /// <summary>
+        /// 정보창 폭 변경
+        /// </summary>
+        /// <param name="_value"></param>
         private void Func_InformationWidthChange(float _value)
         {
             float width = _value;
@@ -290,6 +335,9 @@ namespace Module.WebAPI
 
 		#region PinMode
 
+        /// <summary>
+        /// PinMode 변경
+        /// </summary>
 		private void Func_ChangePinMode()
         {
             var moduleList = EventManager.Instance._ModuleList;
@@ -362,6 +410,9 @@ namespace Module.WebAPI
 
 		#region InitializeRegisterMode
 
+        /// <summary>
+        /// 손상정보 등록모드 진입
+        /// </summary>
 		private void Func_InitializeRegisterMode()
         {
             GameObject obj = ContentManager.Instance._SelectedObj;
@@ -386,6 +437,10 @@ namespace Module.WebAPI
 			}
         }
 
+        /// <summary>
+        /// 등록모드 시작
+        /// </summary>
+        /// <param name="_obj">선택된 객체</param>
         private IEnumerator InitRequestMode(GameObject _obj)
         {
             // 카메라 뷰 Orthogonal
@@ -450,6 +505,9 @@ namespace Module.WebAPI
 
         #region FinishRegisterMode
 
+        /// <summary>
+        /// 등록모드 종료
+        /// </summary>
         private void Func_FinishRegisterMode()
         {
             var moduleList = EventManager.Instance._ModuleList;
@@ -466,6 +524,9 @@ namespace Module.WebAPI
             }
         }
 
+        /// <summary>
+        /// 등록모드 종료
+        /// </summary>
         private IEnumerator FinishRequestMode()
         {
             ContentManager.Instance.Function_ToggleOrthoView(false);

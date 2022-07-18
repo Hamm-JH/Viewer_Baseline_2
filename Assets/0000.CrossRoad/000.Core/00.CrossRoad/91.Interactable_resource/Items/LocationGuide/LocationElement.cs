@@ -19,6 +19,10 @@ namespace Items
 
 		public int Index { get => m_index; }
 
+		/// <summary>
+		/// 큐브 크기 조정
+		/// </summary>
+		/// <param name="_scale">크기 벡터</param>
 		public void SetCubeScale(Vector3 _scale)
 		{
 			float scX = _scale.x >= 1.13f ? 0.33f : 0.32f;

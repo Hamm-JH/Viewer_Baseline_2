@@ -61,6 +61,10 @@ namespace Module.Model
 			}
 		}
 
+		/// <summary>
+		/// 초기화 완료후 실행
+		/// </summary>
+		/// <exception cref="Definition.Exceptions.PlatformNotDefinedException"></exception>
 		public void OnAfterInitialize()
         {
 			PlatformCode pCode = MainManager.Instance.Platform;

@@ -18,10 +18,11 @@ namespace Module.Graphic
 		void Start()
 		{
 			OnCreate(ModuleID.Graphic, FunctionCode.Graphic);
-
-			
 		}
 
+		/// <summary>
+		/// 초기화 시작
+		/// </summary>
 		public override void OnStart()
 		{
 			Debug.LogWarning($"{this.GetType().ToString()} OnStart");

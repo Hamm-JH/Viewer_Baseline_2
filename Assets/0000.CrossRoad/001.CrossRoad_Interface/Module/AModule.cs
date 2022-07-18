@@ -12,17 +12,21 @@ namespace Module
 		//protected FunctionCode m_currentFunction;
         private List<FunctionCode> m_functions;
 
+		/// <summary>
+		/// 모듈 ID
+		/// </summary>
         public ModuleID ID { get => id; set => id = value; }
-        //public FunctionCode Function { get => m_currentFunction; set => m_currentFunction=value; }
 
+		/// <summary>
+		/// 기능 리스트
+		/// </summary>
         public List<FunctionCode> Functions { get => m_functions; set => m_functions = value; }
 
         /// <summary>
-        /// 
+        /// 모듈 생성
         /// </summary>
-        /// <param name="_id"></param>
-        /// <param name="_code"></param>
-
+        /// <param name="_id">모듈 분류</param>
+        /// <param name="_code">기능 코드</param>
         public void OnCreate(ModuleID _id, FunctionCode _code)
 		{
 			id = _id;

@@ -9,11 +9,20 @@ namespace Module.Model
 	
 	public partial class Module_Model : AModule
 	{
+		/// <summary>
+		/// 모델 가져오기
+		/// </summary>
+		/// <param name="URI">GLTF 모델을 가져올 URI/param>
 		private void InImport(string URI)
 		{
 			StartImport(URI, OnComplete);
 		}
 
+		/// <summary>
+		/// 모델 할당 완료시
+		/// </summary>
+		/// <param name="_model">생성된 모델</param>
+		/// <exception cref="Definition.Exceptions.PlatformNotDefinedException">정의되지 않은 플랫폼 분류</exception>
 		private void OnComplete(GameObject _model)
 		{
 			Model = _model;
@@ -53,6 +62,10 @@ namespace Module.Model
 			ContentManager.Instance.CheckInitModuleComplete(ID);
 		}
 
+		/// <summary>
+		/// 자식 객체 할당
+		/// </summary>
+		/// <param name="children"></param>
 		private void SetChildren(Transform[] children)
 		{
 			SetChildren_Material(children);
@@ -60,6 +73,10 @@ namespace Module.Model
 			SetChildren_Bounds(children);
 		}
 
+		/// <summary>
+		/// 자식 객체의 Material 할당
+		/// </summary>
+		/// <param name="children"></param>
 		private void SetChildren_Material(Transform[] children)
 		{
 			Material mat = Materials.Set(MaterialType.Default1);
@@ -74,6 +91,10 @@ namespace Module.Model
 			}
 		}
 
+		/// <summary>
+		/// 자식 객체의 경계 설정
+		/// </summary>
+		/// <param name="children"></param>
 		private void SetChildren_Bounds(Transform[] children)
 		{
 			float? minX = null;

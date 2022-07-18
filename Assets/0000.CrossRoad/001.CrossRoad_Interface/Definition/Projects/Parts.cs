@@ -11,6 +11,11 @@ namespace Definition.Projects
 	/// </summary>
     public static class Parts
     {
+		/// <summary>
+		/// 부재명 받아오기
+		/// </summary>
+		/// <param name="_value">객체명</param>
+		/// <returns>가공된 부재명</returns>
 		public static string GetPartName(string _value)
 		{
 			string result = _value;

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Definition.Exceptions
 {
+    /// <summary>
+    /// 정의되지 않은 플랫폼 분류 예외
+    /// </summary>
     public class PlatformNotDefinedException : Exceptions
     {
         public PlatformNotDefinedException()

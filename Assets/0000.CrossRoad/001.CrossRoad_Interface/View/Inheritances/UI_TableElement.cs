@@ -49,11 +49,23 @@ namespace View
 		{
 		}
 
+		/// <summary>
+		/// 선택 해제
+		/// </summary>
+		/// <exception cref="System.NotImplementedException"></exception>
 		public override void OnDeselect()
 		{
 			throw new System.NotImplementedException();
 		}
 
+		/// <summary>
+		/// 선택 해제
+		/// </summary>
+		/// <typeparam name="T1"></typeparam>
+		/// <typeparam name="T2"></typeparam>
+		/// <param name="t1"></param>
+		/// <param name="t2"></param>
+		/// <exception cref="System.NotImplementedException"></exception>
 		public override void OnDeselect<T1, T2>(T1 t1, T2 t2)
 		{
 			throw new System.NotImplementedException();

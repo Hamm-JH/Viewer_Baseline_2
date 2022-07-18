@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Definition.Exceptions
 {
+    /// <summary>
+    /// 할당되지 않은 이미지
+    /// </summary>
     public class ImagesNotAssigned : Exceptions
     {
         public ImagesNotAssigned()

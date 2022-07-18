@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Definition.Exceptions
 {
+    /// <summary>
+    /// 정의되지 않은 그래픽 코드
+    /// </summary>
     public class GraphicCodeNotDefined : Exceptions
     {
         public GraphicCodeNotDefined()

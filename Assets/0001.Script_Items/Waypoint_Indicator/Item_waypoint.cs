@@ -46,6 +46,10 @@ namespace Items
                 return result;
             }
 
+            /// <summary>
+            /// 색 할당
+            /// </summary>
+            /// <param name="_color">색상</param>
             public void SetColor(Color _color)
             {
                 mainColor = _color;
@@ -75,6 +79,10 @@ namespace Items
                 //}
             }
 
+            /// <summary>
+            /// 선택가능한 손상정보 
+            /// </summary>
+            /// <param name="_selectable">선택가능 손상정보</param>
             public void SetIssueSelectable(Issue_Selectable _selectable)
             {
                 // MainIcon에만 Issue_Selectable을 할당한다.
@@ -82,6 +90,10 @@ namespace Items
                 mainIcon_waypoint.AddOnIssueSelectable(_selectable, this);
             }
 
+            /// <summary>
+            /// 호버링 시작
+            /// </summary>
+            /// <param name="_isDmg">true : 손상정보, false : 보수정보</param>
             public void OnHover(bool _isDmg)
             {
                 if(IsLookup)
@@ -99,6 +111,10 @@ namespace Items
                 }   
             }
 
+            /// <summary>
+            /// 호버링 종료
+            /// </summary>
+            /// <param name="_isDmg">true : 손상정보, false : 보수정보</param>
             public void OffHover(bool _isDmg)
             {
                 if(IsLookup)
@@ -116,6 +132,10 @@ namespace Items
                 }
             }
 
+            /// <summary>
+            /// 룩업시 색상 변경
+            /// </summary>
+            /// <param name="_isLookup">true 룩업중임</param>
             public void Lookup(bool _isLookup)
             {
                 // 보이지 않고있을 경우
@@ -129,18 +149,30 @@ namespace Items
                 }
             }
 
+            /// <summary>
+            /// 메인 토글
+            /// </summary>
+            /// <param name="_isOn">true : On</param>
             public void ToggleMain(bool _isOn)
             {
                 mainIcon_waypoint.gameObject.SetActive(_isOn);
                 isMain = _isOn;
             }
 
+            /// <summary>
+            /// 이펙트 토글
+            /// </summary>
+            /// <param name="_isOn">true : on</param>
             public void ToggleFx(bool _isOn)
             {
                 effect_waypoint.gameObject.SetActive(_isOn);
                 isEffect = _isOn;
             }
 
+            /// <summary>
+            /// 크기 조정
+            /// </summary>
+            /// <param name="_value">변경할 크기</param>
             public void SetScale(float _value)
             {
                 mainIcon_waypoint.onScreenSpriteSize = _value * 0.14f;
@@ -188,6 +220,10 @@ namespace Items
             }
         }
 
+        /// <summary>
+        /// 색 할당
+        /// </summary>
+        /// <param name="_color"></param>
         public void SetColor(Color _color)
         {
             if(IssueWayPoint.IsNotNull())
@@ -196,6 +232,10 @@ namespace Items
             }
         }
 
+        /// <summary>
+        /// 카메라 절두체에 객체 존재하는지 확인
+        /// </summary>
+        /// <returns></returns>
         private bool CheckObjectsInCameraFrustum()
         {
             Vector3 screenPoint = cam.WorldToViewportPoint(gameObject.transform.position);
@@ -204,6 +244,10 @@ namespace Items
             return onScreen;
         }
 
+        /// <summary>
+        /// 카메라가 바라보는 중인가
+        /// </summary>
+        /// <returns></returns>
         private bool IsCameraCanLookUp()
         {
             // true로 시작함
@@ -322,6 +366,10 @@ namespace Items
             return result;
         }
 
+        /// <summary>
+        /// 객체가 현재 활성 상태인가
+        /// </summary>
+        /// <returns></returns>
         private bool IsObjectActiveSelf()
         {
             bool result = false;

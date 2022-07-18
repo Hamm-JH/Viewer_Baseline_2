@@ -26,6 +26,10 @@ namespace Items
 			UpdateState(EventManager.Instance._ModuleList);
 		}
 
+		/// <summary>
+		/// 상태 업데이트
+		/// </summary>
+		/// <param name="_mList"></param>
 		public override void UpdateState(List<Definition.ModuleCode> _mList)
 		{
 			// 이 아이템은 PinMode일때 동작함

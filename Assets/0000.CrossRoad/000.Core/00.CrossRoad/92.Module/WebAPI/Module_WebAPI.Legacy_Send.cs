@@ -71,7 +71,13 @@ namespace Module.WebAPI
 
         }
 
-
+        /// <summary>
+        /// 코드 제한시 예외처리
+        /// </summary>
+        /// <param name="_codeName"></param>
+        /// <param name="_limit"></param>
+        /// <param name="_arguments"></param>
+        /// <exception cref="System.Exception"></exception>
         private void LimitArgument(string _codeName, int _limit, object[] _arguments)
         {
             if (_arguments.Length < _limit)

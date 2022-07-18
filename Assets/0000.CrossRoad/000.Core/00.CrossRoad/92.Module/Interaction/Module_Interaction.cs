@@ -35,6 +35,9 @@ namespace Module.Interaction
 			InitCanvas();
 		}
 
+		/// <summary>
+		/// 캔버스 시작
+		/// </summary>
 		private void InitCanvas()
 		{
 			if(RootCanvas == null)
@@ -88,6 +91,12 @@ namespace Module.Interaction
 			ContentManager.Instance.CheckInitModuleComplete(ID);
 		}
 
+		/// <summary>
+		/// UI 템플릿 가져오기 시도
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="_t"></param>
+		/// <returns></returns>
 		public bool TryGetUITempalte<T>(out T _t) where T : AUI
         {
 			bool result = false;
@@ -112,6 +121,9 @@ namespace Module.Interaction
 			UiInstances.ForEach(x => x.OnModuleComplete());
 		}
 
+		/// <summary>
+		/// 상태 이벤트 재처리
+		/// </summary>
 		public void ReInvokeStatusEvent()
 		{
 			UiInstances.ForEach(x => x.ReInvokeEvent());

@@ -11,16 +11,28 @@ namespace Module.Item
 
     public partial class Module_Items : AModule
 	{
+		/// <summary>
+		/// 함수코드 리스트 기반 객체 생성
+		/// </summary>
+		/// <param name="_fCodes">함수 분류 리스트</param>
 		public void CreateItems(List<FunctionCode> _fCodes)
         {
 			_fCodes.ForEach(x => CreateItem(x));
         }
 
+		/// <summary>
+		/// 아이템 리스트 기반 객체 생성
+		/// </summary>
+		/// <param name="_fCodes">함수 분류 리스트</param>
 		public void CreateItems_After(List<FunctionCode> _fCodes)
         {
 			_fCodes.ForEach(x => CreateItem_After(x));
         }
 
+		/// <summary>
+		/// 아이템 생성
+		/// </summary>
+		/// <param name="_fCode"></param>
 		public void CreateItem(FunctionCode _fCode)
 		{
 			GameObject obj = null;
@@ -43,6 +55,10 @@ namespace Module.Item
 			obj.transform.SetParent(transform);
 		}
 
+		/// <summary>
+		/// 아이템 생성
+		/// </summary>
+		/// <param name="_fCode"></param>
 		public void CreateItem_After(FunctionCode _fCode)
         {
 			GameObject obj = null;
@@ -97,6 +113,12 @@ namespace Module.Item
 			obj.transform.SetParent(transform);
 		}
 
+		/// <summary>
+		/// 터널 에서 나침반 객체 생성
+		/// </summary>
+		/// <param name="_compass"></param>
+		/// <param name="eCompass"></param>
+		/// <returns></returns>
 		private IEnumerator Try_GetTrsTunnel(Items.Controller_Compass _compass, Module.UI.Element_Compass eCompass)
         {
 			Module_Graphic graphic = ContentManager.Instance.Module<Module_Graphic>();
