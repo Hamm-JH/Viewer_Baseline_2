@@ -15,6 +15,12 @@ namespace Management.Events
 	[System.Serializable]
 	public class InputEvents : IEvents
 	{
+		/// <summary>
+		/// 입력 이벤트 생성자
+		/// </summary>
+		/// <param name="_mouse">마우스 입력 이벤트 데이터</param>
+		/// <param name="_keyboard">키보드 입력 이벤트 데이터</param>
+		/// <param name="_touchpad">터치패드 입력 이벤트 데이터</param>
 		public InputEvents(Mouse.Data _mouse, Keyboard.Data _keyboard, Touchpad.Data _touchpad)
 		{
 			this.clickEvent = new UnityEvent<InputEventType, int, Vector3>();

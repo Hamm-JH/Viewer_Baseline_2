@@ -13,8 +13,11 @@ namespace Module.UI
 	[System.Serializable]
 	public abstract partial class AUI : AModule
 	{
-		//public Dictionary<T, Interactable> AllEvents;
-
+		/// <summary>
+		/// UI 생성
+		/// </summary>
+		/// <param name="_id">모듈 ID 분류</param>
+		/// <param name="_code">함수코드 분류</param>
 		public new void OnCreate(ModuleID _id, FunctionCode _code)
 		{
 			base.OnCreate(_id, _code);

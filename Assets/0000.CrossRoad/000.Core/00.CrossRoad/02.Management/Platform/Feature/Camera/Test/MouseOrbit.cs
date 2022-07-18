@@ -13,14 +13,11 @@ public class MouseOrbit : MonoBehaviour
     [SerializeField] private Vector3 targetOffset = Vector3.zero;
     [SerializeField] private Vector3 targetPosition;
 
-
     // Use this for initialization
     void Start()
     {
         if (target != null) transform.LookAt(target);
     }
-
-
 
     void Update()
     {
@@ -77,4 +74,4 @@ public class MouseOrbit : MonoBehaviour
 
         }
     }
-}// CLASS ```
+}

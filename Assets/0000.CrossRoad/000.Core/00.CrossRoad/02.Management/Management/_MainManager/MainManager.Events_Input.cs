@@ -87,14 +87,29 @@ namespace Management
         }
 
         #region Actions
+        /// <summary>
+        /// 클릭시 실행 이벤트
+        /// </summary>
         public UnityAction<InputEventType, int, Vector3> onClickAction;
 
+        /// <summary>
+        /// 드래그시 실행 이벤트
+        /// </summary>
         public UnityAction<InputEventType, int, Vector2> onDragAction;
 
+        /// <summary>
+        /// 포커스시 실행 이벤트
+        /// </summary>
         public UnityAction<InputEventType, Vector3, float> onFocusAction;
 
+        /// <summary>
+        /// 호버링시 실행 이벤트
+        /// </summary>
         public UnityAction<InputEventType, Vector3> onHoverAction;
 
+        /// <summary>
+        /// 키보드 입력 실행 이벤트
+        /// </summary>
         public UnityAction<InputEventType, List<KeyData>> onKeyAction;
         #endregion
 
@@ -204,6 +219,11 @@ namespace Management
 
         #region OnHover actions
 
+        /// <summary>
+        /// 호버링
+        /// </summary>
+        /// <param name="type">입력 분류</param>
+        /// <param name="_hoverPos">호버링 위치</param>
         public void OnHover(InputEventType type, Vector3 _hoverPos)
         {
             if (main.Content == null) return;

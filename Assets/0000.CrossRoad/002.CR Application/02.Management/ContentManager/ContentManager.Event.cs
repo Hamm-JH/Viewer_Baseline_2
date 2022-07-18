@@ -13,19 +13,20 @@ namespace Management
 
     public partial class ContentManager : IManager<ContentManager>
 	{
-        
+        /// <summary>
+		/// 신규 모듈을 생성한다.
+		/// </summary>
+		/// <param name="mCode">신규 모듈코드</param>
 		public void CreateNewModule(ModuleCode mCode)
 		{
 			EventManager.Instance._Statement.CreateNewModule(mCode);
 		}
 
-		public ModuleStatus GetModuleStatus(ModuleCode mCode)
-		{
-			AModuleStatus mstatus = EventManager.Instance._Statement.GetModuleStatus(mCode);
-
-			return mstatus.m_moduleStatus;
-		}
-
+		/// <summary>
+		/// 모듈 상태를 할당한다.
+		/// </summary>
+		/// <param name="_mCode">모듈의 세부상태 코드</param>
+		/// <param name="_mStatus">모듈 상태코드</param>
 		public void SetModuleStatus(ModuleCode _mCode, ModuleStatus _mStatus)
 		{
 			EventManager.Instance._Statement.SetModuleStatus(_mCode, _mStatus);
@@ -101,6 +102,10 @@ namespace Management
 			}
 		}
 
+		/// <summary>
+		/// 모델 반투명값 변경
+		/// </summary>
+		/// <param name="_value">alpha 값 0 ~ 1</param>
 		public void Set_Model_Transparency(float _value)
 		{
 			_value = 0.1f + _value * 0.9f;
@@ -119,6 +124,11 @@ namespace Management
 			}
 		}
 
+		/// <summary>
+		/// 손상정보 크기 변경
+		/// </summary>
+		/// <param name="_value">scale값</param>
+		/// <exception cref="Definition.Exceptions.PlatformNotDefinedException">정의되지 않은 플랫폼 접근</exception>
 		public void Set_Issue_Scale(float _value)
 		{
 			_value = 0.2f + _value * 0.8f;
@@ -222,6 +232,11 @@ namespace Management
 			EventManager.Instance._Statement.Destroy_CachePin();
 		}
 
+		/// <summary>
+		/// 모델 객체 토글 이벤트 실행
+		/// </summary>
+		/// <param name="_eventType">이벤트 분류</param>
+		/// <param name="_toggleType">토글 여부 분류</param>
 		public void Toggle_ModelObject(UIEventType _eventType, ToggleType _toggleType)
 		{
 			EventManager.Instance.OnEvent(new Events.EventData_UI(
@@ -235,12 +250,16 @@ namespace Management
 		/// <summary>
 		/// 가져온 UI 인스턴스의 특정 레벨의 child 패널을 모두 끈다.
 		/// </summary>
-		/// <param name="index"></param>
+		/// <param name="index">토글 대상 패널의 인덱스</param>
 		public void Toggle_ChildTabs(int index)
 		{
 			_Interaction.UiInstances.ForEach(x => x.TogglePanelList(index, null));
 		}
 
+		/// <summary>
+		/// 카메라 뷰 ortho - perspective view 모드 토글
+		/// </summary>
+		/// <param name="_isOrthogonal">true : orthogonal 모드 변경 / false : perspective 모드 변경</param>
 		public void Function_ToggleOrthoView(bool _isOrthogonal)
 		{
 			MainManager.Instance.MainCamera.orthographic = _isOrthogonal;

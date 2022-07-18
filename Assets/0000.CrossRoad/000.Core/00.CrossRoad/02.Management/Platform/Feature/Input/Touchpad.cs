@@ -75,6 +75,9 @@ namespace Platform.Feature._Input
             TouchpadCheck();
         }
 
+        /// <summary>
+        /// 터치패드 입력 업데이트
+        /// </summary>
         private void TouchpadCheck()
         {
             //DebugTouches();
@@ -105,6 +108,9 @@ namespace Platform.Feature._Input
             }
         }
 
+        /// <summary>
+        /// 터치 디버깅
+        /// </summary>
         private void DebugTouches()
         {
             string str = "";
@@ -129,6 +135,10 @@ namespace Platform.Feature._Input
             }
         }
 
+        /// <summary>
+        /// 단일 터치 
+        /// </summary>
+        /// <param name="_touch">터치 데이터</param>
         private void GetSingleTouch(Touch _touch)
         {
             if(_touch.phase == TouchPhase.Began)
@@ -199,6 +209,10 @@ namespace Platform.Feature._Input
             }
         }
 
+        /// <summary>
+        /// 멀티 터치
+        /// </summary>
+        /// <param name="_touches">터치 데이터 배열</param>
         private void GetMultiTouch(Touch[] _touches)
         {
             // 일단 싱글터치 이벤트 막고보기
@@ -259,6 +273,13 @@ namespace Platform.Feature._Input
             }
         }
 
+        /// <summary>
+        /// 멀티 터치 상황에서 터치 위치 수집
+        /// </summary>
+        /// <param name="_touches">터치 배열</param>
+        /// <param name="_tIndex">검출 대상 터치번호</param>
+        /// <param name="_tPos">out : 터치 위치</param>
+        /// <returns>true : 터치 위치 수집 완료</returns>
         private bool InMulti_GetTouchPos(Touch[] _touches, int _tIndex, out Vector2 _tPos)
         {
             bool result = false;
@@ -278,6 +299,10 @@ namespace Platform.Feature._Input
             return result;
         }
 
+        /// <summary>
+        /// 디버깅 시작
+        /// </summary>
+        /// <param name="value">변수</param>
         private void OnDebug(string value)
         {
             if(isDebug)
@@ -288,17 +313,28 @@ namespace Platform.Feature._Input
 
         #region Single Touch
 
+        /// <summary>
+        /// 단일 터치 리셋
+        /// </summary>
+        /// <param name="isOn">true : 참</param>
         private void ResetSingleTouch(bool isOn)
         {
             _SetOnClick(isOn);
             _ResetDeltaDistance();
         }
 
+        /// <summary>
+        /// 클릭 상태 리셋시 초기화 변수 할당
+        /// </summary>
+        /// <param name="_isActive">초기화 변수</param>
         private void _SetOnClick(bool _isActive)
         {
             onClick = _isActive;
         }
 
+        /// <summary>
+        /// 터치패드 확장 거리변수 초기화
+        /// </summary>
         private void _ResetDeltaDistance()
         {
             deltaDistance = default(Vector2);
@@ -308,11 +344,20 @@ namespace Platform.Feature._Input
 
         #region Multiple Touch
 
+        /// <summary>
+        /// 멀티 터치 세팅 변경
+        /// </summary>
+        /// <param name="_isActive">true : 활성화</param>
         private void _SetOnMulti(bool _isActive)
         {
             onMulti = _isActive;
         }
 
+        /// <summary>
+        /// 멀티 터치 종료단계
+        /// </summary>
+        /// <param name="_touches">터치 배열</param>
+        /// <returns>true : 참</returns>
         private bool InMulti_IsTouchEndPhase(Touch[] _touches)
         {
             bool result = false;
@@ -346,6 +391,12 @@ namespace Platform.Feature._Input
             m_InputEvents.clickEvent.Invoke(_type, _btn, _pos);
         }
 
+        /// <summary>
+        /// 터치 드래그 이벤트
+        /// </summary>
+        /// <param name="_type">입력 이벤트 타입</param>
+        /// <param name="_btnIndex">버튼 인덱스</param>
+        /// <param name="_delta">드래그 정도</param>
         private void SetDragEvent(InputEventType _type, int _btnIndex, Vector2 _delta)
         {
             //OnDebug($"OnDrag event Invoked : {_type.ToString()} \n" +
@@ -355,6 +406,12 @@ namespace Platform.Feature._Input
             m_InputEvents.dragEvent.Invoke(_type, _btnIndex, _delta);
         }
 
+        /// <summary>
+        /// 터치 포커스 이벤트
+        /// </summary>
+        /// <param name="_type">입력 이벤트 타입</param>
+        /// <param name="_tPos">포커스 중심점</param>
+        /// <param name="_tDelta">포커스 정도</param>
         private void SetFocusEvent(InputEventType _type, Vector2 _tPos, float _tDelta)
         {
             //OnDebug($"OnFocus event Invoked : {_type.ToString()}\n" +

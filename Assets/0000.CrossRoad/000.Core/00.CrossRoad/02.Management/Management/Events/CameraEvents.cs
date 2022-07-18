@@ -15,6 +15,10 @@ namespace Management.Events
 	[System.Serializable]
 	public class CameraEvents : IEvents
 	{
+		/// <summary>
+		/// 카메라 이벤트 생성자
+		/// </summary>
+		/// <param name="_camera">카메라 정보</param>
 		public CameraEvents(ICamera.Data _camera)
 		{
 			this.selectEvent = new UnityEvent<GameObject>();
@@ -40,7 +44,6 @@ namespace Management.Events
 		/// // Definition.ObjectType :: 객체유형 (Object, UI)
 		/// </summary>
 		public UnityEvent<Vector3> clickEvent;
-		//public UnityEvent<Definition.ObjectType, GameObject> clickEvent;
 
 		/// <summary>
 		/// Main // 드래그 이벤트

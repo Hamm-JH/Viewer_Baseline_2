@@ -11,16 +11,25 @@ namespace Management
 	/// </summary>
 	public partial class EventManager : IManager<EventManager>
 	{
+		/// <summary>
+		/// 이벤트 관리자 생성
+		/// </summary>
 		public override void OnCreate()
 		{
 			Debug.Log("OnCreate");
 		}
 
+		/// <summary>
+		/// 이벤트 관리자 제거
+		/// </summary>
 		public override void OnDismiss()
 		{
 			Debug.Log("OnDismiss");
 		}
 
+		/// <summary>
+		/// 이벤트 관리자 업데이트
+		/// </summary>
 		public override void OnUpdate()
 		{
 			Debug.Log("OnUpdate");
@@ -54,6 +63,14 @@ namespace Management
 			}
 		}
 
+		/// <summary>
+		/// 지정된 이벤트 제거
+		/// </summary>
+		/// <typeparam name="K">이벤트 분류 키</typeparam>
+		/// <typeparam name="V">이벤트 데이터 값</typeparam>
+		/// <param name="_key">이벤트 분류</param>
+		/// <param name="_eData">이벤트 데이터</param>
+		/// <param name="_event">이벤트 상태관리 변수</param>
 		public void DeleteEvent<K, V>(K _key, V _eData, Dictionary<K, V> _event) where V : AEventData
         {
 			_event.Remove(_key);

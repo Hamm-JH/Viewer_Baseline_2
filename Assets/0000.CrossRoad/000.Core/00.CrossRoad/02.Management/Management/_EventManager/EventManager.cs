@@ -24,12 +24,15 @@ namespace Management
 		/// </summary>
 		[SerializeField] Dictionary<InputEventType, AEventData> m_EventStates;
 
-		/// <summary>
-		/// clickDown에서 clickUp 타이밍 동안 드래깅용 객체
-		/// </summary>
-		//[SerializeField] GameObject cacheDownObj;
+        /// <summary>
+        /// clickDown에서 clickUp 타이밍 동안 드래깅용 객체
+        /// </summary>
+        [SerializeField] GameObject cacheDownObj;
 
-		public Dictionary<InputEventType, AEventData> EventStates { get => m_EventStates; set => m_EventStates=value; }
+		/// <summary>
+		/// 현재 이벤트 상태 정리
+		/// </summary>
+        public Dictionary<InputEventType, AEventData> EventStates { get => m_EventStates; set => m_EventStates=value; }
 
 		public EventStatement _Statement => m_eStatus;
 
@@ -41,7 +44,9 @@ namespace Management
 			}
 		}
 
-		//private GameObject m_selectedObject;
+		/// <summary>
+		/// 이벤트 진행에 의해서 현재 선택된 객체
+		/// </summary>
 		public GameObject _SelectedObject
 		{
 			get
@@ -71,12 +76,18 @@ namespace Management
             //}
 		}
 
+		/// <summary>
+		/// 데모 웹 뷰어에서 POI 등록 단계에서 이전 단계에서 선택된 객체를 저장
+		/// </summary>
 		public GameObject _CacheObject
 		{
 			get => m_eStatus.CacheObject;
 			set => m_eStatus.CacheObject = value;
 		}
 
+		/// <summary>
+		/// 손상정보 등록 위치를 저장하는 POI
+		/// </summary>
 		public GameObject _CachePin
 		{
 			get => m_eStatus.CachePin;
@@ -92,6 +103,10 @@ namespace Management
 			EventStates.Add(InputEventType.Statement, m_eStatus);
 		}
 
+		/// <summary>
+		/// 이벤트 후처리
+		/// </summary>
+		/// <param name="currEvent">현재 이벤트 정보</param>
 		public void OnEvent(AEventData currEvent)
 		{
 			// 선택된 이벤트 상태가 없는 경우, 아무 동작을 수행하지 않는 더미 인스턴스를 생성한다.
@@ -140,7 +155,11 @@ namespace Management
 			return result;
 		}
 
-
+		/// <summary>
+		/// 이벤트 후처리
+		/// </summary>
+		/// <param name="_sEvents">현재 이벤트 상태</param>
+		/// <param name="_curr">현재 발생한 이벤트</param>
 		private void DoEvent(Dictionary<InputEventType, AEventData> _sEvents, AEventData _curr)
 		{
 			// 이전 이벤트 상태가 아무것도 없는 상태였다면?

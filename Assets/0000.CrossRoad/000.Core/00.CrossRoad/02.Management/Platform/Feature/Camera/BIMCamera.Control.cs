@@ -188,6 +188,11 @@ namespace Platform.Feature.Camera
             targetOffset = newTargetOffset;
         }
 
+        /// <summary>
+        /// 포커스
+        /// </summary>
+        /// <param name="mousePos">마우스 위치</param>
+        /// <param name="delta">포커스 정도</param>
         private void InFocus(Vector3 mousePos, float delta)
 		{
             if (CamMode == CameraModes.TunnelInside_Rotate) return;

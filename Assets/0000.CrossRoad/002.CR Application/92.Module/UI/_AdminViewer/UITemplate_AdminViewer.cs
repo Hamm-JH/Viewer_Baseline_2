@@ -104,6 +104,10 @@ namespace Module.UI
 			ChangeModuleStatus(ModuleStatus.Administration_view1);
 		}
 
+		/// <summary>
+		/// 시설물의 주소 정보를 받는다.
+		/// </summary>
+		/// <param name="_data">웹에서 받아온 주소정보</param>
 		private void GetAddressData(AAPI _data)
 		{
 			// 다시 언박싱
@@ -122,6 +126,13 @@ namespace Module.UI
 			GetTexture(data.mp_fid, data.mp_ftype, data.mp_fgroup, GetMainPicture);
 		}
 
+		/// <summary>
+		/// 텍스처 받아옴
+		/// </summary>
+		/// <param name="_fid">이미지 요청 키 fid</param>
+		/// <param name="_ftype">이미지 요청 키 ftype</param>
+		/// <param name="_fgroup">이미지 요청 키 fgruop</param>
+		/// <param name="_callback">이미지 생성 완료시 실행 이벤트</param>
 		private void GetTexture(string _fid, string _ftype, string _fgroup, UnityAction<Texture2D> _callback)
 		{
 			string argument = string.Format("fid={0}&ftype={1}&fgroup={2}", _fid, _ftype, _fgroup);
@@ -129,11 +140,18 @@ namespace Module.UI
 			ContentManager.Instance._API.RequestMainPicture(argument, _callback);
 		}
 
+		/// <summary>
+		/// 시설물의 주 이미지 할당
+		/// </summary>
+		/// <param name="_image">주 이미지</param>
 		private void GetMainPicture(Texture2D _image)
 		{
 			items.mainPicture.texture = _image;
 		}
 
+		/// <summary>
+		/// 현재 선택된 객체가 없지만 다음 단계 진입을 위해 랜덤하게 선택 객체를 할당해야 하는 경우
+		/// </summary>
 		public void SetObject_IfNotSet()
 		{
 			GameObject obj = ContentManager.Instance._SelectedObj;
@@ -174,17 +192,29 @@ namespace Module.UI
 		
 
 		#region ** not implemented
+
+		/// <summary>
+		/// 터널의 객체정보를 할당한다
+		/// </summary>
+		/// <param name="selected">선택된 객체</param>
 		public override void SetObjectData_Tunnel(GameObject selected)
 		{
-			throw new System.NotImplementedException();
 		}
 
+		/// <summary>
+		/// 패널리스트 토글
+		/// </summary>
+		/// <param name="_index">패널 인덱스</param>
+		/// <param name="_exclusive">토글 예외 객체</param>
 		public override void TogglePanelList(int _index, GameObject _exclusive)
 		{
 			Debug.LogWarning("TogglePanelList");
 		}
 		#endregion
 
+		/// <summary>
+		/// 이벤트 재실행
+		/// </summary>
 		public override void ReInvokeEvent()
 		{
 			UIEventType uType = UIEventType.Null;
@@ -214,16 +244,31 @@ namespace Module.UI
 			GetUIEvent(uType, null);
 		}
 
+		/// <summary>
+		/// UIEvent를 받아옴
+		/// </summary>
+		/// <param name="_value">실수형 이벤트 값</param>
+		/// <param name="_uType">UI 이벤트 분류</param>
+		/// <param name="_setter">상호작용 가능 UI 인스턴스</param>
 		public override void GetUIEvent(float _value, UIEventType _uType, Interactable _setter)
 		{
-			throw new System.NotImplementedException();
 		}
 
+		/// <summary>
+		/// UIEvent를 받아옴
+		/// </summary>
+		/// <param name="_value">실수형 이벤트 값</param>
+		/// <param name="_uType">UI 이벤트 분류</param>
+		/// <param name="_setter">상호작용 가능 인스턴스</param>
         public override void GetUIEvent(float _value, Inspect_EventType _uType, Interactable _setter)
         {
-            throw new System.NotImplementedException();
         }
 
+		/// <summary>
+		/// UIEvent를 받아옴
+		/// </summary>
+		/// <param name="_uType">UI 이벤트 분류</param>
+		/// <param name="_setter">상호작용 가능 인스턴스</param>
         public override void GetUIEvent(UIEventType _uType, Interactable _setter)
 		{
 			//Debug.Log($"Type : {_uType.ToString()}");
@@ -328,16 +373,27 @@ namespace Module.UI
 			}
 		}
 
-        public override void GetUIEvent(Inspect_EventType _uType, Interactable _setter)
+		/// <summary>
+		/// UIEvent를 받아옴
+		/// </summary>
+		/// <param name="_uType">UI 이벤트 분류</param>
+		/// <param name="_setter">상호작용 가능 인스턴스</param>
+		public override void GetUIEvent(Inspect_EventType _uType, Interactable _setter)
         {
-            throw new System.NotImplementedException();
         }
 
+		/// <summary>
+		/// 키맵 중심 위치를 지정한다.
+		/// </summary>
         public void SetKeymapCenterPosition()
 		{
 			ContentManager.Instance.Function_SetCameraCenterPosition();
 		}
 
+		/// <summary>
+		/// 이미지 패널을 연다
+		/// </summary>
+		/// <param name="_setter">상호작용 가능 인스턴스</param>
 		private void OpenImagePanel(Interactable _setter)
 		{
 			// 이미지 할당자를 
@@ -353,6 +409,10 @@ namespace Module.UI
 			Panels.image_code.OpenImagePanel(issue);
 		}
 
+		/// <summary>
+		/// 주소 API를 할당
+		/// </summary>
+		/// <param name="_data">데이터 API</param>
         public override void API_GetAddress(AAPI _data)
         {
             throw new System.NotImplementedException();

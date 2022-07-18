@@ -6,6 +6,6 @@ namespace Management
 {
 	public partial class MainManager : IManager<MainManager>
 	{
-
+		// 생성용 템플릿
 	}
 }

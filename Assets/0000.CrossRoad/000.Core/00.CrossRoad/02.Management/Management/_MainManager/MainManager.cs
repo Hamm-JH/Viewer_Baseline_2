@@ -59,42 +59,66 @@ namespace Management
 			get => _data.ModelURI;
 		}
 
+		/// <summary>
+		/// 플랫폼 코드
+		/// </summary>
 		public PlatformCode Platform
 		{
 			get => _core._Platforms;
 		}
 
+		/// <summary>
+		/// 그래픽 코드
+		/// </summary>
 		public GraphicCode Graphic
         {
 			get => _core.GraphicMode;
         }
 
+		/// <summary>
+		/// 현재 카메라모드
+		/// </summary>
 		public CameraModes CurrentCameraMode
         {
 			get => _core.CameraMode;
 			set => _core.CameraMode = value;
         }
 
+		/// <summary>
+		/// 컨텐츠 관리자
+		/// </summary>
 		public ContentManager Content
 		{
 			get => _content.Content;
 		}
 
+		/// <summary>
+		/// 코어에서 관리하는 데이터`
+		/// </summary>
 		public CoreData Data
 		{
 			get => _data;
 		}
 		
+		/// <summary>
+		/// 치수선 라인 재질
+		/// </summary>
 		public Material DimLineMat
 		{
 			get => _core.m_dimLineMat;
 		}
 
+		/// <summary>
+		/// 외곽선 라인 재질
+		/// </summary>
 		public Material OutlineMat
 		{
 			get => _core.m_outlineMat;
 		}
 
+		/// <summary>
+		/// 포워드 렌더링 설정
+		/// </summary>
 		public ForwardRendererData RenderSetting
         {
 			get => _core.m_renderSetting;

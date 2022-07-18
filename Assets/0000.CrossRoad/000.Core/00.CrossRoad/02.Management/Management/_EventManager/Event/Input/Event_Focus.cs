@@ -14,12 +14,19 @@ namespace Management.Events.Inputs
 
 	public class Event_Focus : EventData_Input
 	{
-		//private Camera m_camera;
-		//private GraphicRaycaster m_grRaycaster;
 		private Vector3 m_focus;
 		private float m_focusDelta;
 		UnityEvent<Vector3, float> m_focusEvent;
 
+		/// <summary>
+		/// 포커스 이벤트 
+		/// </summary>
+		/// <param name="_eventType">이벤트 분류</param>
+		/// <param name="_focus">포커스 위치</param>
+		/// <param name="_delta">포커스 정도</param>
+		/// <param name="_camera">카메라</param>
+		/// <param name="_grRaycaster">그래픽 레이캐스터</param>
+		/// <param name="_event">포커스 이벤트</param>
 		public Event_Focus(InputEventType _eventType,
 			Vector3 _focus, float _delta,
 			Camera _camera, GraphicRaycaster _grRaycaster,
@@ -35,6 +42,20 @@ namespace Management.Events.Inputs
 			m_focusEvent = _event;
 		}
 
+		/// <summary>
+		/// 이벤트 전처리
+		/// </summary>
+		/// <param name="_mList">모듈 리스트</param>
+		public override void OnProcess(List<ModuleCode> _mList)
+		{
+			StatusCode = Status.Update;
+		}
+
+		/// <summary>
+		/// 이벤트 후처리
+		/// </summary>
+		/// <param name="_sEvents">현재 이벤트 리스트</param>
+		/// <exception cref="Definition.Exceptions.PlatformNotDefinedException">정의되지 않은 플랫폼 코드 접근</exception>
 		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			m_selected3D = null;
@@ -84,11 +105,6 @@ namespace Management.Events.Inputs
 					ContentManager.Instance.Input_KeymapFocus(m_focus, _delta);
                 }
 			}
-		}
-
-		public override void OnProcess(List<ModuleCode> _mList)
-		{
-			StatusCode = Status.Update;
 		}
 	}
 }

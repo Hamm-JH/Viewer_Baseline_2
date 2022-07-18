@@ -11,11 +11,18 @@ namespace Management.Events.Inputs
 
 	public class Event_Drag : EventData_Input
 	{
-		//private Camera m_camera;
-		//private GraphicRaycaster m_grRaycaster;
 		private Vector2 m_delta;
 		UnityEvent<int, Vector2> m_dragEvent;
 
+		/// <summary>
+		/// 드래그 이벤트 생성자
+		/// </summary>
+		/// <param name="_eventType">이벤트 분류</param>
+		/// <param name="_btn">마우스 버튼</param>
+		/// <param name="_delta">드래그 정도</param>
+		/// <param name="_camera">카메라</param>
+		/// <param name="_grRaycaster">그래픽 레이캐스터</param>
+		/// <param name="_event">드래그 이벤트 리스트</param>
 		public Event_Drag(InputEventType _eventType,
 			int _btn, Vector2 _delta,
 			Camera _camera, GraphicRaycaster _grRaycaster,
@@ -31,6 +38,10 @@ namespace Management.Events.Inputs
 			m_dragEvent = _event;
 		}
 
+		/// <summary>
+		/// 이벤트 후처리
+		/// </summary>
+		/// <param name="_sEvents"></param>
 		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			if (this.BtnIndex == 0)
@@ -81,6 +92,10 @@ namespace Management.Events.Inputs
 			}
 		}
 
+		/// <summary>
+		/// 드래그 실행 
+		/// </summary>
+		/// <param name="_sEvents">현재 이벤트</param>
 		private void OnDrag(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			PlatformCode pCode = MainManager.Instance.Platform;
@@ -98,6 +113,10 @@ namespace Management.Events.Inputs
 
 		}
 
+		/// <summary>
+		/// 이벤트 전처리
+		/// </summary>
+		/// <param name="_mList"></param>
 		public override void OnProcess(List<ModuleCode> _mList)
 		{
 			StatusCode = Status.Update;

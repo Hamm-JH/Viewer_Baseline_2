@@ -9,6 +9,9 @@ namespace Management.Events
 	[System.Serializable]
 	public class EventStatement : AEventData
 	{
+		/// <summary>
+		/// 웹 뷰어에 한정해서 사용하는 웹뷰어 웹 우측 탭 상태 업데이트 클래스
+		/// </summary>
 		[System.Serializable]
 		public class State_DemoWebViewer
         {
@@ -68,12 +71,18 @@ namespace Management.Events
 		/// </summary>
 		public State_DemoWebViewer State_demoWebViewer { get => m_state_demoWebViewer; set => m_state_demoWebViewer = value; }
 
+		/// <summary>
+		/// 데모 웹 뷰어에서 POI 등록 단계에서 이전 단계에서 선택된 객체를 저장
+		/// </summary>
 		public GameObject CacheObject
 		{
 			get => m_pinModeObj;
 			set => m_pinModeObj = value;
 		}
 
+		/// <summary>
+		/// 손상정보 등록 위치를 저장하는 POI
+		/// </summary>
 		public GameObject CachePin
 		{
 			get => m_pinModePin;
@@ -89,16 +98,27 @@ namespace Management.Events
 			m_state_demoWebViewer = new State_DemoWebViewer();
 		}
 
+		/// <summary>
+		/// 이벤트 전처리
+		/// </summary>
+		/// <param name="_mList">모듈 리스트</param>
 		public override void OnProcess(List<ModuleCode> _mList)
 		{
 			Debug.Log("OnProcess Empty");
 		}
 
+		/// <summary>
+		/// 이벤트 후처리
+		/// </summary>
+		/// <param name="_sEvents">현재 이벤트 상태</param>
 		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			throw new System.NotImplementedException();
 		}
 
+		/// <summary>
+		/// 임시로 선택 객체를 저장하고 잇는 캐시 객체의 정보를 지운다.
+		/// </summary>
 		public void Destroy_CacheObject()
 		{
 			// 여기 저장된 대상은 모델 객체임
@@ -106,6 +126,9 @@ namespace Management.Events
 			CacheObject = null;
 		}
 
+		/// <summary>
+		/// 임시로 손상 위치를 저장하고 있는 POI 객체의 정보를 지운다.
+		/// </summary>
 		public void Destroy_CachePin()
 		{
 			// 여기 저장된 대상은 Cache Pin 객체
@@ -187,8 +210,12 @@ namespace Management.Events
 
 			return result;
 		}
-		//public void IsContainsModule(ModuleCode, )
 
+		/// <summary>
+		/// 웹 뷰어의 현재 상태를 반환
+		/// </summary>
+		/// <param name="_index">옵션 인덱스</param>
+		/// <returns>웹 뷰어의 현재 상태</returns>
 		public State_DemoWebViewer GetState_DemoWebViewer(int _index)
         {
 			return State_demoWebViewer;

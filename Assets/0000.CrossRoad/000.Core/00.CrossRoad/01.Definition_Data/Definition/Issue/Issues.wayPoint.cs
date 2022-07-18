@@ -23,7 +23,7 @@ namespace Definition
         }
 
         /// <summary>
-        /// WayPoint 인스턴스의 표시 목표에 한정해서 아이콘 상태 업데이튼
+        /// WayPoint 인스턴스의 표시 목표에 한정해서 아이콘 상태 업데이트
         /// </summary>
         /// <param name="_targetName">목표 객체명</param>
         public static void WP_Setup_target(string _targetName)

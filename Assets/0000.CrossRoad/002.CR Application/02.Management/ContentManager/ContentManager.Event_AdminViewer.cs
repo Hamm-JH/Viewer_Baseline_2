@@ -12,11 +12,18 @@ namespace Management
 
 	public partial class ContentManager : IManager<ContentManager>
 	{
+		/// <summary>
+		/// 키맵 UI 초기화
+		/// </summary>
+		/// <param name="_kmPanel">키맵 패널</param>
 		public void Ad_InitUI(RectTransform _kmPanel)
 		{
 			m_container.m_keymap.m_keymapPanel = _kmPanel;
 		}
 
+		/// <summary>
+		/// 엑셀 출력
+		/// </summary>
 		public void Functin_PrintExcel()
 		{
 			Ad_Capture capture = m_container.m_capture;
@@ -24,16 +31,26 @@ namespace Management
 			_API.DownloadReport(capture);
 		}
 
+		/// <summary>
+		/// 서브패널 생성
+		/// </summary>
 		public void Function_S5b1_SetSubPanel()
 		{
 			m_container.m_capture.s5b1_panel.SetSubPanel_s5b1();
 		}
 
+		/// <summary>
+		/// 서브 이력 테이블 패널 생성
+		/// </summary>
+		/// <param name="_dataTable">배치할 데이터테이블</param>
 		public void Function_S5b2_SetSubHistoryTable(DataTable _dataTable)
 		{
 			m_container.m_capture.s5b2_panel.SetSubHistoryTable(_dataTable);
 		}
 
+		/// <summary>
+		/// 카메라 중심 위치 할당
+		/// </summary>
 		public void Function_SetCameraCenterPosition()
 		{
 			//Cameras.SetCameraCenter(m_container.m_keymap.m_keymapCamera,
@@ -42,6 +59,10 @@ namespace Management
 				m_container.m_keymap.m_keymapCamera.gameObject.GetComponent<BIMCamera>());
 		}
 
+		/// <summary>
+		/// 카메라 중심 위치 할당
+		/// </summary>
+		/// <param name="_cam">카메라</param>
         public void Function_SetCameraCenterPosition(Camera _cam)
         {
             //Cameras.SetCameraCenter(m_container.m_keymap.m_keymapCamera,
@@ -50,11 +71,19 @@ namespace Management
                 _cam.gameObject.GetComponent<BIMCamera>());
         }
 
+		/// <summary>
+		/// 키맵에서 객체 선택
+		/// </summary>
+		/// <param name="_obj">선택 객체</param>
         public void Input_SelectObjectOnKeymap(GameObject _obj)
 		{
 			m_container.m_keymap.m_keymapCamera.gameObject.GetComponent<BIMCamera>().OnSelect(_obj);
 		}
 
+		/// <summary>
+		/// 키맵 클릭
+		/// </summary>
+		/// <param name="_pos">마우스 선택 위치</param>
 		public void Input_KeymapClick(Vector3 _pos)
 		{
 			Camera cam = m_container.m_keymap.m_keymapCamera;
@@ -95,50 +124,36 @@ namespace Management
 			Vector2 cameraViewRect = new Vector2(cam.pixelWidth, cam.pixelHeight);
 			Vector2 translatedClickCamPosition = _normalizeClickPosition * cameraViewRect;
 
-			//EventManager.Instance.OnEvent(new Events.EventData_Input(
-			//		_eventType: InputEventType.Input_clickSuccessUp,
-			//		_btn: 0,
-			//		_mousePos: translatedClickCamPosition,
-			//		_camera: cam,
-			//		_graphicRaycaster: _GrRaycaster,
-			//		_event: MainManager.Instance.cameraExecuteEvents.selectEvent
-			//		));
-
 			RaycastHit hit;
 			Ray ray = cam.ScreenPointToRay(translatedClickCamPosition);
 			//Physics.Raycast(ray, out hit);
 
 			if (Physics.Raycast(ray, out hit))
 			{
-				//Debug.Log("Hello");
-				//Debug.Log(hit.collider.name);
-
-				//Debug.Log(hit.collider.transform);
-
 				EventManager.Instance.OnEvent(new EventData_API(
 					InputEventType.API_SelectObject,
 					hit.collider.gameObject,
 					MainManager.Instance.cameraExecuteEvents.selectEvent
 				));
-
-				//clickedTransform = hit.collider.transform;
-
-				//Manager.EventClassifier.Instance.OnEvent<KeymapElement>(Control.Status.Click, gameObject.GetComponent<KeymapElement>(), eventData);
-
-				//Manager.EventClassifier.Instance.OnEvent<MP2_DmgListElement>(Control.Status.Click, gameObject.GetComponent<MP2_DmgListElement>(), eventData);
 			}
-			else
-			{
-				//clickedTransform = null;
-
-			}
+			else { }
 		}
 
+		/// <summary>
+		/// 키맵 내부에서 드래깅
+		/// </summary>
+		/// <param name="_btn">마우스 버튼</param>
+		/// <param name="_delta">드래그 정도</param>
 		public void Input_KeymapDrag(int _btn, Vector2 _delta)
 		{
 			m_container.m_keymap.m_keymapCamera.gameObject.GetComponent<BIMCamera>().OnDrag(_btn, _delta);
 		}
 
+		/// <summary>
+		/// 키맵 포커스 시작
+		/// </summary>
+		/// <param name="_point">포커스 위치</param>
+		/// <param name="_delta">포커스 거리</param>
 		public void Input_KeymapFocus(Vector3 _point, float _delta)
 		{
 			m_container.m_keymap.m_keymapCamera.gameObject.GetComponent<BIMCamera>().OnFocus(_point, _delta);

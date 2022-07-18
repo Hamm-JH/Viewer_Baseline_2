@@ -75,6 +75,13 @@ namespace TDLN.CameraControllers
             }
         }
 
+        /// <summary>
+        /// 각도의 회전범위를 제한한다.
+        /// </summary>
+        /// <param name="angle">각도 회전수치</param>
+        /// <param name="min">최소 회전각도</param>
+        /// <param name="max">최대 회전각도</param>
+        /// <returns></returns>
         static float ClampAngle(float angle, float min, float max)
         {
             if (angle < -360)

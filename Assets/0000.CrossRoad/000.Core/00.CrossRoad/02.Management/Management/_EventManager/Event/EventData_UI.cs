@@ -11,6 +11,13 @@ namespace Management.Events
 	{
 		private List<GameObject> m_modelObj;
 
+		/// <summary>
+		/// UI 이벤트 생성자
+		/// </summary>
+		/// <param name="_eventType">이벤트 분류</param>
+		/// <param name="_uiEvent">UI 이벤트 분류</param>
+		/// <param name="_toggle">UI 토글여부 분류</param>
+		/// <param name="_modelObj">모델 객체 리스트</param>
 		public EventData_UI(InputEventType _eventType,
 			UIEventType _uiEvent, ToggleType _toggle, List<GameObject> _modelObj)
 		{
@@ -20,6 +27,33 @@ namespace Management.Events
 			m_modelObj = _modelObj;
 		}
 
+		/// <summary>
+		/// 이벤트 전처리
+		/// </summary>
+		/// <param name="_mList">모듈 리스트</param>
+		public override void OnProcess(List<ModuleCode> _mList)
+		{
+			if (EventType != InputEventType.UI_Invoke)
+			{
+				StatusCode = Status.Skip;
+				return;
+			}
+
+			switch (UiEventType)
+			{
+				case UIEventType.Mode_Hide:
+				case UIEventType.Mode_Hide_Off:
+				case UIEventType.Mode_Isolate:
+				case UIEventType.Mode_Isolate_Off:
+					StatusCode = Status.Update;
+					break;
+			}
+		}
+
+		/// <summary>
+		/// 이벤트 후처리
+		/// </summary>
+		/// <param name="_sEvents">현재 이벤트 상태</param>
 		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			switch(UiEventType)
@@ -68,25 +102,6 @@ namespace Management.Events
 							}
 						}
 					}
-					break;
-			}
-		}
-
-		public override void OnProcess(List<ModuleCode> _mList)
-		{
-			if (EventType != InputEventType.UI_Invoke)
-			{
-				StatusCode = Status.Skip;
-				return;
-			}
-
-			switch (UiEventType)
-			{
-				case UIEventType.Mode_Hide:
-				case UIEventType.Mode_Hide_Off:
-				case UIEventType.Mode_Isolate:
-				case UIEventType.Mode_Isolate_Off:
-					StatusCode = Status.Update;
 					break;
 			}
 		}

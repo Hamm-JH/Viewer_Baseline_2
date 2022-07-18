@@ -25,8 +25,6 @@ namespace Management.Events
 		//public IInteractable Element { get => m_element; set => m_element=value; }
 		public List<IInteractable> Elements { get => m_elements; set => m_elements=value; }
 
-		public List<GameObject> objects;
-
 		/// <summary>
 		/// 발생한 이벤트의 형식
 		/// </summary>
@@ -44,8 +42,19 @@ namespace Management.Events
 		protected RaycastHit m_hit = default(RaycastHit);
 		protected List<RaycastResult> m_results = new List<RaycastResult>();
 
+		/// <summary>
+		/// 선택된 객체
+		/// </summary>
 		public GameObject Selected3D { get => m_selected3D; set => m_selected3D=value; }
+
+		/// <summary>
+		/// 3d ray에 맞은 객체 관리
+		/// </summary>
 		public RaycastHit Hit { get => m_hit; set => m_hit=value; }
+
+		/// <summary>
+		/// UI ray에 맞은 객체 리스트 관리
+		/// </summary>
 		public List<RaycastResult> Results { get => m_results; set => m_results=value; }
 
 		//----------------------------------------------------------------------------------------------
@@ -54,37 +63,32 @@ namespace Management.Events
 		protected UIEventType m_uiEventType;
 		protected ToggleType m_toggleType;
 
+		/// <summary>
+		/// UI 이벤트 분류
+		/// </summary>
 		public UIEventType UiEventType { get => m_uiEventType; set => m_uiEventType=value; }
+		
+		/// <summary>
+		/// UI 토글 여부 분류
+		/// </summary>
 		public ToggleType ToggleType { get => m_toggleType; set => m_toggleType=value; }
 		
-
-
 		/// <summary>
 		/// 이벤트 전처리 메서드
 		/// </summary>
+		/// <param name="_mList">이벤트 전처리</param>
 		public abstract void OnProcess(List<ModuleCode> _mList);
 
 		/// <summary>
 		/// 이벤트 후처리 메서드
 		/// </summary>
-		/// <param name="_sEvents"></param>
+		/// <param name="_sEvents">현재 이벤트 상태</param>
 		public abstract void DoEvent(Dictionary<InputEventType, AEventData> _sEvents);
-		
-		public static bool IsEqual(AEventData A, AEventData B)
-		{
-			if(A.Elements.Last().Target == B.Elements.Last().Target)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
 
 		/// <summary>
 		/// AdminViewer 키맵 선택 이벤트
 		/// </summary>
+		/// <param name="_hits">UI 선택된 객체 리스트</param>
 		protected bool IsClickOnKeymap(List<RaycastResult> _hits)
 		{
 			bool result = false;
@@ -102,54 +106,5 @@ namespace Management.Events
 
 			return result;
 		}
-
-		/// <summary>
-		/// 이벤트를 추가한다.
-		/// </summary>
-		/// <typeparam name="K"></typeparam>
-		/// <typeparam name="V"></typeparam>
-		/// <param name="_key"> InputEventType </param>
-		/// <param name="_eData"> EventData </param>
-		/// <param name="_event"> [InputEventType, EventData] </param>
-		/// <param name="isMultiple"> 다중선택? </param>
-		public void AddEvent<K, V>(K _key, V _eData, Dictionary<K, V> _event, bool isMultiple = false) where V : AEventData
-		{
-			if (_event.ContainsKey(_key))
-			{
-				if (isMultiple)
-				{
-					_eData.Elements.ForEach(x => _event[_key].Elements.Add(x));
-				}
-				else
-				{
-					_event[_key] = _eData;
-				}
-			}
-			else
-			{
-				_event.Add(_key, _eData);
-			}
-		}
-
-		#region Check Module Method
-
-		/// <summary>
-		/// 모듈코드에서 PinMode가 존재하는가
-		/// </summary>
-		/// <param name="_mList"></param>
-		/// <returns></returns>
-		protected bool IsInPinMode(List<ModuleCode> _mList)
-		{
-			bool result = false;
-
-			if (_mList.Contains(ModuleCode.Work_Pinmode))
-			{
-				result = true;
-			}
-
-			return result;
-		}
-
-		#endregion
-	}
+    }
 }

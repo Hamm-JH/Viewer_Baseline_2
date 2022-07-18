@@ -19,6 +19,12 @@ namespace Management.Events.Inputs
         bool m_isPassAPI;
 #pragma warning restore IDE0044 // 읽기 전용 한정자 추가
 
+		/// <summary>
+		/// 선택 이벤트 생성자
+		/// </summary>
+		/// <param name="_eventType">이벤트 분류</param>
+		/// <param name="_obj">선택된 객체</param>
+		/// <param name="_event">유니티 이벤트</param>
         public Event_SelectObject(InputEventType _eventType,
 			GameObject _obj, UnityEvent<GameObject> _event)
 		{
@@ -31,6 +37,10 @@ namespace Management.Events.Inputs
 			m_isPassAPI = true;
 		}
 
+		/// <summary>
+		/// 이벤트 전처리 메서드
+		/// </summary>
+		/// <param name="_mList">모듈 리스트</param>
 		public override void OnProcess(List<ModuleCode> _mList)
 		{
 			Status _success = Status.Pass;
@@ -43,6 +53,10 @@ namespace Management.Events.Inputs
 			}
 		}
 
+		/// <summary>
+		/// 이벤트 후처리 메서드
+		/// </summary>
+		/// <param name="_sEvents">현재 이벤트 상태 변수</param>
 		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			PlatformCode pCode = MainManager.Instance.Platform;
@@ -103,6 +117,11 @@ namespace Management.Events.Inputs
 
         #region DemoWebViewer - Issue - select3DObject
 
+		/// <summary>
+		/// 웹뷰어 - 객체 선택
+		/// </summary>
+		/// <param name="_obj">선택된 객체</param>
+		/// <param name="_sEvents">현재 이벤트 상태</param>
 		private void StartEvent_DemoWebViewer_SelectObject(GameObject _obj, Dictionary<InputEventType, AEventData> _sEvents)
         {
 			Obj_Selectable oObj;
@@ -128,6 +147,11 @@ namespace Management.Events.Inputs
 
 		}
 
+		/// <summary>
+		/// 웹뷰어 - 손상정보 선택
+		/// </summary>
+		/// <param name="_obj">선택된 손상정보</param>
+		/// <param name="_sEvents">현재 이벤트 상태</param>
 		private void StartEvent_DemoWebViewer_SelectIssue(GameObject _obj, Dictionary<InputEventType, AEventData> _sEvents)
         {
 			Issue_Selectable iObj;
@@ -177,6 +201,12 @@ namespace Management.Events.Inputs
 
         #region Keymap
 
+		/// <summary>
+		/// 키맵 선택
+		/// </summary>
+		/// <param name="_obj"></param>
+		/// <param name="_sEvents"></param>
+		/// <exception cref="Definition.Exceptions.PlatformNotDefinedException"></exception>
         private void StartEvent_KeymapSelectObject(GameObject _obj, Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			PlatformCode pCode = MainManager.Instance.Platform;

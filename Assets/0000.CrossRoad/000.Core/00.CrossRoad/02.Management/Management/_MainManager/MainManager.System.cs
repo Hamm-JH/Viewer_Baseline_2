@@ -52,6 +52,11 @@ namespace Management
 			Debug.Log("OnUpdate");
 		}
 
+		/// <summary>
+		/// 컨텐츠 관리자를 할당
+		/// </summary>
+		/// <param name="content">컨텐츠 관리자</param>
+		/// <param name="callback">할당 완료 이벤트</param>
 		public void SetContentManager(ContentManager content, UnityAction<CoreManagement, CoreData> callback)
 		{
 			_content.Content = content;

@@ -12,20 +12,20 @@ namespace Management.Events.Inputs
 
 	public class Event_ClickDown : EventData_Input
 	{
-		//private Camera m_camera;
-		//private GraphicRaycaster m_grRaycaster;
 		private Vector3 m_clickPosition;
 		private UnityEvent<GameObject> m_clickEvent;
 
 		private GameObject m_cacheObject;
 
-		//public Camera Camera { get => m_camera; set => m_camera=value; }
-		//public GraphicRaycaster GrRaycaster { get => m_grRaycaster; set => m_grRaycaster=value; }
-		//public Vector3 ClickPosition { get => m_clickPosition; set => m_clickPosition=value; }
-		//public UnityAction<GameObject> ClickEvent { get => m_clickEvent; set => m_clickEvent=value; }
-
-		public GameObject CacheObject { get => m_cacheObject; set => m_cacheObject=value; }
-
+		/// <summary>
+		/// 클릭 다운 이벤트 생성자
+		/// </summary>
+		/// <param name="_eType">이벤트 분류</param>
+		/// <param name="_btn">버튼 인덱스</param>
+		/// <param name="_mousePos">마우스 위치</param>
+		/// <param name="_camera">카메라</param>
+		/// <param name="_grRaycaster">그래픽 레이캐스터</param>
+		/// <param name="_event"></param>
 		public Event_ClickDown(InputEventType _eType,
 			int _btn, Vector3 _mousePos,
 			Camera _camera, GraphicRaycaster _grRaycaster,
@@ -73,7 +73,11 @@ namespace Management.Events.Inputs
 			Elements = null;
 			StatusCode = _fail;
 		}
-
+		
+		/// <summary>
+		/// 이벤트 후처리
+		/// </summary>
+		/// <param name="_sEvents">현재 이벤트 상태</param>
 		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			if (_sEvents.ContainsKey(InputEventType.Input_clickDown))
@@ -86,39 +90,16 @@ namespace Management.Events.Inputs
 			}
 		}
 
+		/// <summary>
+		/// 선택 객체를 임시 캐싱 객체에 할당한다.
+		/// </summary>
+		/// <param name="_obj">선택 객체</param>
 		private void CachingObject(GameObject _obj)
 		{
 			m_cacheObject = _obj;
 		}
 
 		#region Click - 객체 선택 TODO 상위 개체로 메서드 집단 이동 준비
-
-		/// <summary>
-		/// UI를 건드렸을 경우를 제외한, 3D 객체 선택상태인지 확인한다.
-		/// </summary>
-		/// <param name="_mousePos"></param>
-		/// <param name="obj"></param>
-		/// <param name="_hit"></param>
-		//private void Get_Collect3DObject(Vector3 _mousePos, out GameObject obj, out RaycastHit _hit, out List<RaycastResult> _results)
-		//{
-		//	obj = null;
-
-		//	//RaycastHit _hit = default(RaycastHit);
-		//	GameObject _selected3D = Get_GameObject3D(_mousePos, out _hit);
-		//	_results = Get_GameObjectUI(_mousePos);
-
-		//	if (_results.Count != 0)
-		//	{
-
-		//	}
-		//	else
-		//	{
-		//		if (_selected3D != null)
-		//		{
-		//			obj = _selected3D;
-		//		}
-		//	}
-		//}
 
 		/// <summary>
 		/// 3D 객체를 마우스 위치에서 가져옴

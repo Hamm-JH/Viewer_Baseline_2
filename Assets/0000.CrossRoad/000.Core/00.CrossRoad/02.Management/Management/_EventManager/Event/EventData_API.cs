@@ -16,6 +16,12 @@ namespace Management.Events
 		GameObject m_obj;
 		UnityEvent<GameObject> m_clickEvent;
 
+		/// <summary>
+		/// API 이벤트 생성자
+		/// </summary>
+		/// <param name="_eventType">입력 이벤트 분류</param>
+		/// <param name="_obj">선택된 3D 객체</param>
+		/// <param name="_event">객체 선택 이벤트</param>
 		public EventData_API(InputEventType _eventType, GameObject _obj,
 			UnityEvent<GameObject> _event)
 		{
@@ -24,6 +30,10 @@ namespace Management.Events
 			m_clickEvent = _event;
 		}
 
+		/// <summary>
+		/// 이벤트 전처리
+		/// </summary>
+		/// <param name="_mList">모듈 리스트</param>
 		public override void OnProcess(List<ModuleCode> _mList)
 		{
 			switch(EventType)
@@ -45,6 +55,10 @@ namespace Management.Events
 			}
 		}
 
+		/// <summary>
+		/// 이벤트 후처리
+		/// </summary>
+		/// <param name="_sEvents">현재 이벤트 리스트</param>
 		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			switch(EventType)

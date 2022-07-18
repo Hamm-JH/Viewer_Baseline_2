@@ -11,6 +11,10 @@ namespace Management
 	/// </summary>
 	public partial class MainManager : IManager<MainManager>
 	{
+		/// <summary>
+		/// 외곽선 On/Off
+		/// </summary>
+		/// <param name="isOn">true : On</param>
 		public void Graphic_ToggleOutline(bool isOn)
 		{
 			ForwardRendererData rSetting = RenderSetting;
@@ -18,12 +22,5 @@ namespace Management
 			rSetting.rendererFeatures[0].SetActive(isOn);
 		}
 
-		public void Graphic_ToggleOutline()
-		{
-			ForwardRendererData rSetting = RenderSetting;
-			
-			rSetting.rendererFeatures[0].SetActive(!rSetting.rendererFeatures[0].isActive);
-			//Debug.Log($"{rSetting.rendererFeatures[0].name}");	// NewOutlineFeature
-		}
 	}
 }

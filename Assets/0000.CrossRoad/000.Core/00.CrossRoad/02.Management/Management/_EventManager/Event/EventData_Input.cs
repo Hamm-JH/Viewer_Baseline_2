@@ -23,15 +23,26 @@ namespace Management.Events
 		public int BtnIndex { get => m_btn; set => m_btn=value; }
 
 
+		/// <summary>
+		/// 발생한 이벤트에 대해 전처리 시행
+		/// </summary>
+		/// <param name="_mList"></param>
 		public override void OnProcess(List<ModuleCode> _mList) { }
 
+		/// <summary>
+		/// 발생한 이벤트의 후처리 시행
+		/// </summary>
+		/// <param name="_sEvents"></param>
 		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents) { }
 
+		/// <summary>
+		/// 클릭 입력이 어떤 대상에 대한 클릭인지 확인한다.
+		/// </summary>
+		/// <param name="_success">이벤트 완료코드</param>
 		protected void Func_Input_clickSuccessUp(Status _success)
 		{
 			Obj_Selectable sObj;
 			Issue_Selectable iObj;
-			//IItem item;
 
 
 			if (Selected3D.TryGetComponent<Obj_Selectable>(out sObj))
@@ -94,11 +105,7 @@ namespace Management.Events
                 {
 					Elements.Add(sObj);
 				}
-				//else if(Platforms.IsSmartInspectPlatform(_pCode))
-				//{
-				//	//m_clickEvent.RemoveListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-				//	//m_clickEvent.AddListener(ContentManager.Instance.Get_SelectedData_UpdateUI);
-				//}
+
 				StatusCode = _success;
 				return;
 			}
@@ -113,26 +120,6 @@ namespace Management.Events
 				StatusCode = _success;
 				return;
 			}
-			//// 다른 어떤 아이템을 선택한 경우
-			//else if(Selected3D.TryGetComponent<IItem>(out item))
-            //{
-			//	if(_Items.IsLocationElement(Selected3D))
-            //    {
-			//		// 캐시 객체가 있는지 확인한다.
-			//		if(EventManager.Instance._CachePin == null)
-            //        {
-			//			// 선택 객체의 위치 ?
-			//			//m_hit.point
-			//
-			//			//GameObject obj = _Items.CreateCachePin(m_hit);
-			//			EventManager.Instance._CachePin = _Items.CreateCachePin(m_hit);
-			//		}
-			//		else
-            //        {
-			//			_Items.MoveCachePin(EventManager.Instance._CachePin, m_hit);
-            //        }
-            //    }
-            //}
 		}
 
 		#region Click - 객체 선택
@@ -163,8 +150,6 @@ namespace Management.Events
 				}
 			}
 		}
-
-		
 
 		/// <summary>
 		/// 3D 객체를 마우스 위치에서 가져옴

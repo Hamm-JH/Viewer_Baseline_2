@@ -9,11 +9,17 @@ namespace Management.Events.Inputs
 {
 	public class Event_Key : EventData_Input
 	{
-		//private Camera m_camera;
-		//private GraphicRaycaster m_grRaycaster;
 		public List<KeyData> m_keys;
 		UnityEvent<List<KeyData>> m_keyEvent;
 
+		/// <summary>
+		/// 키보드 입력 이벤트 생성자
+		/// </summary>
+		/// <param name="_eventType">이벤트 분류</param>
+		/// <param name="_kData">키보드 리스트</param>
+		/// <param name="_camera">카메라</param>
+		/// <param name="_grRaycaster">그래픽 레이캐스터</param>
+		/// <param name="_event">키보드 리스트를 필요로 하는 이벤트</param>
 		public Event_Key(InputEventType _eventType,
 			List<KeyData> _kData,
 			Camera _camera, GraphicRaycaster _grRaycaster,
@@ -28,6 +34,27 @@ namespace Management.Events.Inputs
 			m_keyEvent = _event;
 		}
 
+		/// <summary>
+		/// 이벤트 전처리
+		/// </summary>
+		/// <param name="_mList">모듈 리스트</param>
+		public override void OnProcess(List<ModuleCode> _mList)
+		{
+			if (m_keys != null && m_keys.Count != 0)
+			{
+				StatusCode = Status.Update;
+			}
+			// KeyData 리스트가 null인 경우
+			else
+			{
+				StatusCode = Status.Update;
+			}
+		}
+
+		/// <summary>
+		/// 이벤트 후처리
+		/// </summary>
+		/// <param name="_sEvents">현재 이벤트 리스트</param>
 		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			// 현재 입력된 키가 1개 이상일 경우
@@ -53,19 +80,6 @@ namespace Management.Events.Inputs
 			}
 
 			m_keyEvent.Invoke(m_keys);
-		}
-
-		public override void OnProcess(List<ModuleCode> _mList)
-		{
-			if (m_keys != null && m_keys.Count != 0)
-			{
-				StatusCode = Status.Update;
-			}
-			// KeyData 리스트가 null인 경우
-			else
-			{
-				StatusCode = Status.Update;
-			}
 		}
 	}
 }

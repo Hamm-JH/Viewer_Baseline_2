@@ -10,6 +10,12 @@ namespace Management
 {
 	public partial class MainManager : IManager<MainManager>
 	{
+		/// <summary>
+		/// 플랫폼 코드에 따라 씬을 생성한다.
+		/// </summary>
+		/// <param name="_pCode">플랫폼 코드</param>
+		/// <exception cref="Definition.Exceptions.PlatformNotDefinedException">지정되지 않은 플랫폼 코드</exception>
+		/// <exception cref="Definition.Exceptions.SceneNotExisted">생성하고자 하는 Scene이 존재하지 않음</exception>
 		public void Load_Scene(PlatformCode _pCode)
 		{
 			Definition.SceneName sceneName = SceneName.NotDef;

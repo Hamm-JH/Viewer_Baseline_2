@@ -13,7 +13,9 @@ namespace Module.WebAPI
 		[DllImport("__Internal")]
 		private static extern void UnityRequest(string argument);
 
-
+		/// <summary>
+		/// 에디터 레벨에서 입력 수신
+		/// </summary>
 		private void CheckReceiveInput()
 		{
 			#region ResetIssue

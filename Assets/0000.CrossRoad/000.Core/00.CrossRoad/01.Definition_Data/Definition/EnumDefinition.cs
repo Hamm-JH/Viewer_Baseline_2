@@ -12,22 +12,25 @@ namespace Definition
 	{
 		NotDef = -1,
 
-		WebGL_Template1 = 0x10,
-		WebGL_Template2 = 0x11,
-		WebGL_AdminViewer_Tunnel = 0x12,
-		WebGL_AdminViewer_Bridge = 0x13,
+		WebGL_Template1 = 0x10,				// 웹 템플릿(기준코드)
+		WebGL_Template2 = 0x11,             // 웹 템플릿(기준코드)
+		WebGL_AdminViewer_Tunnel = 0x12,	// 명지대 터널 관리자뷰어
+		WebGL_AdminViewer_Bridge = 0x13,	// 명지대 교량 관리자뷰어
 
-		Mobile_Template1 = 0x20,
-		Mobile_Template2 = 0x21,
+		Mobile_Template1 = 0x20,			// 모바일 템플릿(기준코드)
+		Mobile_Template2 = 0x21,            // 모바일 템플릿(기준코드)
 
-		PC_Maker1 = 0x30,
-		PC_Viewer_Tunnel = 0x31,
-		PC_Viewer_Bridge = 0x32,
+		PC_Maker1 = 0x30,					// 메이커 템플릿(기준코드)
+		PC_Viewer_Tunnel = 0x31,            // 명지대 터널 메이커(미작업)
+		PC_Viewer_Bridge = 0x32,			// 명지대 교량 메이커(미작업)
 
-		WebGL_SmartInspect_Tunnel = 0x101,
-		WebGL_SmartInspect_Bridge = 0x102,
+		WebGL_SmartInspect_Tunnel = 0x101,	// 스마트 인스펙트 터널 뷰어
+		WebGL_SmartInspect_Bridge = 0x102,	// 스마트 인스펙트 교량 뷰어
 	}
 
+	/// <summary>
+	/// 그래픽 코드
+	/// </summary>
 	public enum GraphicCode
 	{
 		NotDef = -1,
@@ -59,63 +62,6 @@ namespace Definition
 
 		Mapbox_Demo,
 	}
-
-	//public enum ModuleID
-	//{
-	//	NotDef = -1,
-	//	/// <summary>
-	//	/// Code :: 모델
-	//	/// </summary>
-	//	Model = 0x10,
-
-	//	/// <summary>
-	//	/// Code :: 상호작용 ???
-	//	/// </summary>
-	//	Interaction = 0x20,
-
-	//	/// <summary>
-	//	/// Code :: 웹 상호작용
-	//	/// </summary>
-	//	WebAPI = 0x30,
-
-	//	/// <summary>
-	//	/// Code :: 그래픽
-	//	/// </summary>
-	//	Graphic = 0x50,
-
-	//	/// <summary>
-	//	/// Code :: UI 속성
-	//	/// </summary>
-	//	Prop_UI = 0x50,
-
-	//	/// <summary>
-	//	/// Item :: 한정목적용 Prefab 관리
-	//	/// </summary>
-	//	Item = 0x60,
-	//}
-
-	//public enum FunctionCode
-	//{
-	//	Null = -1,
-
-	//	Model_Import = 0x11,
-	//	Model_Export = 0x12,
-
-	//	Interaction_3D = 0x21,
-	//	Interaction_UI = 0x22,
-		
-	//	API = 0x30,
-	//	API_Front = 0x31,
-	//	API_Back = 0x32,
-
-	//	Select_DefaultMove = 0x41,
-	//	Select_SelectObject = 0x42,
-	//	Select_DrawPoint = 0x43,
-
-	//	Graphic = 0x51,
-
-	//	Item_LocationGuide = 0x61,
-	//}
 
 	/// <summary>
 	/// MainManager :: 주 관리자에서 이벤트 변수에 접근할 때 사용하는 코드
@@ -181,6 +127,9 @@ namespace Definition
 
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public enum ManagerActionIndex
 	{
 		NotDef = -1,
@@ -223,28 +172,20 @@ namespace Definition
 		Error = 0x90,
 	}
 
-	
-
-	//public enum UniqueUIEventType
-	//{
-	//	NotDef = 0x00,
-
-	//	SetChild_Highlight
-	//}
-
 	/// <summary>
 	/// 객체의 토글 방식
 	/// </summary>
 	public enum ToggleType
 	{
 		ALL = 0x00,
-		Hide = 0x01,
-		//Hide_Off = 0x02,
+		Hide = 0x01,		// 지정된 대상 숨김
 
-		Isolate = 0x11,
-		//Isolate_Off = 0x12,
+		Isolate = 0x11,		// 지정된 대상 이외 숨김
 	}
 
+	/// <summary>
+	/// 색상 타입
+	/// </summary>
 	public enum ColorType
 	{
 		White = 0x01,
@@ -266,8 +207,9 @@ namespace Definition
 		UI_rein = 0x302,
 	}
 	
-	// Definition types
-
+	/// <summary>
+	/// Material 타입
+	/// </summary>
 	public enum MaterialType
 	{
 		Default = 0x01,
@@ -290,6 +232,9 @@ namespace Definition
 		ObjDefault1 = 0x99,
 	}
 
+	/// <summary>
+	/// 손상정보에 붙일 텍스처 타입 (기존 분류에서 가져옴)
+	/// </summary>
 	public enum TextureType
 	{
 		crack = 0x01,
@@ -299,12 +244,18 @@ namespace Definition
 		segul = 0x05,
 	}
 
+	/// <summary>
+	/// 아이템 프리팹 분류
+	/// </summary>
 	public enum PrefabType
 	{
 		UltimateDecal = 0x10,
 		EasyDecal = 0x11,
 	}
 
+	/// <summary>
+	/// Unity 레이어 분류
+	/// </summary>
 	public enum LayerNames
 	{
 		Default = 0,
@@ -314,8 +265,6 @@ namespace Definition
 		UI = 5,
 		DecalPoint = 6
 	}
-
-	//----- Test
 
 	/// <summary>
 	/// 객체의 타입 (Material 할당용)

@@ -48,8 +48,6 @@ namespace Management.Events.Inputs
             }
         }
 
-		//public Camera m_camera;
-		//public GraphicRaycaster m_grRaycaster;
 		public Vector3 m_clickPosition;
 		UnityEvent<GameObject> m_clickEvent;
 
@@ -58,6 +56,15 @@ namespace Management.Events.Inputs
 		/// </summary>
 		LocationElementData locData = null;
 
+		/// <summary>
+		/// 클릭 이벤트 생성자
+		/// </summary>
+		/// <param name="_eventType">이벤트 분류</param>
+		/// <param name="_btn">마우스 버튼</param>
+		/// <param name="_mousePos">마우스 위치</param>
+		/// <param name="_camera">카메라</param>
+		/// <param name="_graphicRaycaster">그래픽 레이캐스터</param>
+		/// <param name="_event">클릭 이벤트</param>
 		public Event_ClickUp(InputEventType _eventType,
 			int _btn, Vector3 _mousePos,
 			Camera _camera, GraphicRaycaster _graphicRaycaster,
@@ -72,14 +79,21 @@ namespace Management.Events.Inputs
 			m_clickEvent = _event;
 		}
 
+		/// <summary>
+		/// 클릭 이벤트 생성자
+		/// </summary>
+		/// <param name="_eventType">이벤트 분류</param>
+		/// <param name="_obj">선택 객체</param>
 		public Event_ClickUp(InputEventType _eventType, GameObject _obj)
         {
 			m_selected3D = _obj;
 			Func_Input_clickSuccessUp(Status.Skip);	// Elements 업데이트
-
-
         }
 
+		/// <summary>
+		/// 이벤트 전처리
+		/// </summary>
+		/// <param name="_mList">모듈 리스트</param>
 		public override void OnProcess(List<ModuleCode> _mList)
 		{
 			Status _success = Status.Pass;
@@ -168,6 +182,10 @@ namespace Management.Events.Inputs
             }
 		}
 
+		/// <summary>
+		/// 이벤트 후처리
+		/// </summary>
+		/// <param name="_sEvents"></param>
 		public override void DoEvent(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 
@@ -215,6 +233,12 @@ namespace Management.Events.Inputs
 			}
 		}
 
+		/// <summary>
+		/// 객체 선택 이벤트
+		/// </summary>
+		/// <param name="_obj">선택된 객체</param>
+		/// <param name="_sEvents">현재 이벤트</param>
+		/// <exception cref="Definition.Exceptions.PlatformNotDefinedException">정의되지 않은 플랫폼 코드</exception>
 		public void StartEvent_SelectObject(GameObject _obj, Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			PlatformCode pCode = MainManager.Instance.Platform;
@@ -326,6 +350,12 @@ namespace Management.Events.Inputs
             }
 		}
 
+		/// <summary>
+		/// 손상정보 선택 이벤트
+		/// </summary>
+		/// <param name="_obj">선택된 손상정보</param>
+		/// <param name="_sEvents">현재 이벤트</param>
+		/// <exception cref="Definition.Exceptions.PlatformNotDefinedException">정의되지 않은 플랫폼 코드</exception>
 		public void StartEvent_SelectIssue(GameObject _obj, Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			PlatformCode pCode = MainManager.Instance.Platform;
@@ -356,6 +386,12 @@ namespace Management.Events.Inputs
             }
 		}
 
+		/// <summary>
+		/// UI 선택 이벤트
+		/// </summary>
+		/// <param name="_sEvents">현재 이벤트</param>
+		/// <param name="_results">선택된 UI 리스트</param>
+		/// <exception cref="Definition.Exceptions.PlatformNotDefinedException">정의되지 않은 플랫폼 코드</exception>
 		public void StartEvent_SelectUI(Dictionary<InputEventType, AEventData> _sEvents, List<RaycastResult> _results)
 		{
 			PlatformCode pCode = MainManager.Instance.Platform;
@@ -483,6 +519,11 @@ namespace Management.Events.Inputs
             }
 		}
 
+		/// <summary>
+		/// 빈칸 선택 이벤트
+		/// </summary>
+		/// <param name="_sEvents">현재 이벤트</param>
+		/// <exception cref="Definition.Exceptions.PlatformNotDefinedException">정의되지 않은 플랫폼 코드</exception>
 		public void StartEvent_SelectNull(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			PlatformCode pCode = MainManager.Instance.Platform;

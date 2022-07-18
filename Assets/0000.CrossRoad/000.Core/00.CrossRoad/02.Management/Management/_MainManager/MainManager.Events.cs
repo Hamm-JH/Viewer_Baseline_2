@@ -10,8 +10,6 @@ namespace Management
 
 	public partial class MainManager : IManager<MainManager>
 	{
-		// MainManager.Events_Input에 존재하는 이벤트에 관련된 이벤트 연산 메서드
-
 		/// <summary>
 		/// 주관리자 시작시 이벤트 초기화
 		/// </summary>

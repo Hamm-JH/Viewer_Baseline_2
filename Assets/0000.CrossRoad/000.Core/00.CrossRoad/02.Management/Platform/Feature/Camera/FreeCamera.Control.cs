@@ -19,6 +19,10 @@ namespace Platform.Feature.Camera
             public float y;
             public float z;
 
+            /// <summary>
+            /// 자유시점 카메라 위치 할당
+            /// </summary>
+            /// <param name="t">목표 객체</param>
             public void SetFromTransform(Transform t)
             {
                 pitch = t.eulerAngles.x;
@@ -29,6 +33,10 @@ namespace Platform.Feature.Camera
                 z = t.position.z;
             }
 
+            /// <summary>
+            /// 위치 이동
+            /// </summary>
+            /// <param name="translation">이동 대상위치</param>
             public void Translate(Vector3 translation)
             {
                 Vector3 rotatedTranslation = Quaternion.Euler(pitch, yaw, roll) * translation;
@@ -38,6 +46,12 @@ namespace Platform.Feature.Camera
                 z += rotatedTranslation.z;
             }
 
+            /// <summary>
+            /// 카메라 위치 러프이동
+            /// </summary>
+            /// <param name="target">목표 객체</param>
+            /// <param name="positionLerpPct">러프 이동 위치</param>
+            /// <param name="rotationLerpPct">러프 회전 각도</param>
             public void LerpTowards(CameraState target, float positionLerpPct, float rotationLerpPct)
             {
                 yaw = Mathf.Lerp(yaw, target.yaw, rotationLerpPct);
@@ -49,6 +63,10 @@ namespace Platform.Feature.Camera
                 z = Mathf.Lerp(z, target.z, positionLerpPct);
             }
 
+            /// <summary>
+            /// 위치 업데이트
+            /// </summary>
+            /// <param name="t">목표 객체</param>
             public void UpdateTransform(Transform t)
             {
                 t.eulerAngles = new Vector3(pitch, yaw, roll);
@@ -187,6 +205,10 @@ namespace Platform.Feature.Camera
 
         }
 
+        /// <summary>
+        /// 부스트 이동시 이동값 변경
+        /// </summary>
+        /// <returns>변경된 이동값</returns>
         float GetBoostFactor()
         {
             return Input.mouseScrollDelta.y * 0.2f;
@@ -194,11 +216,19 @@ namespace Platform.Feature.Camera
 
 		#endregion
 
+        /// <summary>
+        /// 우측 마우스 버튼 클릭했는가?
+        /// </summary>
+        /// <returns></returns>
 		bool IsRightMouseButtonDown()
         {
             return Input.GetMouseButtonDown(1);
         }
 
+        /// <summary>
+        /// 우측 마우스 버튼 클릭 끝냈는가?
+        /// </summary>
+        /// <returns></returns>
         bool IsRightMouseButtonUp()
         {
             return Input.GetMouseButtonUp(1);

@@ -65,10 +65,21 @@ namespace Platform.Feature.Camera
 		/// <param name="_mode"></param>
 		protected abstract void ChangeCameraMode(CameraModes _mode);
 
+		/// <summary>
+		/// 데이터 할당
+		/// </summary>
+		/// <param name="_camData">카메라 데이터</param>
 		public abstract void SetData(Data _camData);
 
+		/// <summary>
+		/// 객체 오프셋 값을 초기화
+		/// </summary>
 		public virtual void ResetData_targetOffset() { }
 
+		/// <summary>
+		/// 데이터의 최대 오프셋 값 할당
+		/// </summary>
+		/// <param name="_value">할당 변수</param>
 		public virtual void SetData_MaxOffset(float _value) { }
 
 		#region Actions

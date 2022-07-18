@@ -157,8 +157,8 @@ namespace Management
 		/// <summary>
 		/// Click + 다중 선택 조건 확인
 		/// </summary>
-		/// <param name="_sEvents"></param>
-		/// <returns></returns>
+		/// <param name="_sEvents">현재 이벤트 상태</param>
+		/// <returns>true : 참</returns>
 		private bool isMultiCondition(Dictionary<InputEventType, AEventData> _sEvents)
 		{
 			bool result = false;
@@ -186,11 +186,21 @@ namespace Management
 			return result;
 		}
 
+		/// <summary>
+		/// 다중 선택 이벤트 실행
+		/// </summary>
+		/// <param name="_sEvents">현재 이벤트 상태</param>
+		/// <param name="_currEvent">현재 이벤트</param>
 		private void DoMultiConditionEvent(Dictionary<InputEventType, AEventData> _sEvents, AEventData _currEvent)
         {
 
         }
 
+		/// <summary>
+		/// 단일 선택 이벤트 실행
+		/// </summary>
+		/// <param name="_sEvents">현재 이벤트 상태</param>
+		/// <param name="_currEvent">현재 이벤트</param>
 		private void DoSingleConditionEvent(Dictionary<InputEventType, AEventData> _sEvents, AEventData _currEvent)
         {
 

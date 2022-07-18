@@ -16,11 +16,19 @@ namespace Management
 		/// </summary>
 		public Events.CameraEvents cameraExecuteEvents;
 
+		/// <summary>
+		/// 카메라 모드 업데이트
+		/// </summary>
+		/// <param name="_eventType">이벤트 분류</param>
 		public void UpdateCameraMode(UIEventType _eventType)
 		{
 			_core.SetCameraMode(_eventType);
 		}
 
+		/// <summary>
+		/// 카메라 모드 업데이트
+		/// </summary>
+		/// <param name="_mode">카메라 모드 분류</param>
 		public void UpdateCameraMode(CameraModes _mode)
         {
 			_core.SetCameraMode(_mode);
@@ -28,6 +36,12 @@ namespace Management
 			ContentManager.Instance.Update_CameraMode(_mode);
         }
 
+		/// <summary>
+		/// 카메라 위치 할당
+		/// </summary>
+		/// <param name="centerBounds">목표 경계값</param>
+		/// <param name="rootCanvas">루트 캔버스 </param>
+		/// <param name="eventType">이벤트 분류</param>
 		public void SetCameraPosition(Bounds centerBounds, Canvas rootCanvas, 
 			UIEventType eventType = UIEventType.Viewport_ViewMode_ISO)
 		{
@@ -36,6 +50,13 @@ namespace Management
 			_core.SetCameraPosition(centerBounds, rootCanvas, eventType);
 		}
 
+		/// <summary>
+		/// 카메라 위치 할당
+		/// </summary>
+		/// <param name="_center">중심점</param>
+		/// <param name="_canvas">캔버스</param>
+		/// <param name="_eType">이벤트 분류</param>
+		/// <param name="_baseAngle">기본 회전각도</param>
 		public void SetCameraPosition(Bounds _center, Canvas _canvas, UIEventType _eType = UIEventType.Viewport_ViewMode_ISO,
 			Vector3 _baseAngle = default(Vector3))
 		{
