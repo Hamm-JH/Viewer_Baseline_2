@@ -757,10 +757,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_eStatus:
-    objects: []
     m_moduleList: 
     m_pinModeObj: {fileID: 0}
     m_pinModePin: {fileID: 0}
+  cacheDownObj: {fileID: 0}
 --- !u!1 &868928089
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,7 +989,7 @@ MonoBehaviour:
     m_imageURL: 
     m_historyURL: 
     m_keyCode: 
-  m_templateIndex: 4
+  m_templateIndex: 1
   _templateDatas:
   - m_platform: 49
     m_graphic: 2
