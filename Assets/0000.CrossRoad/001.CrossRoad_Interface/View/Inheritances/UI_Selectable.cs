@@ -89,10 +89,19 @@ namespace View
 		[System.Serializable]
 		public class Resource
         {
+			public Image m_imgBack;
+			public Image m_imgIcon;
+
 			public bool m_useResource;
+			public bool m_useColor;
+			public bool m_useSprite;
 			public Color m_onDefault = Color.white;
 			public Color m_onSelect = Color.white;
-        }
+			public Sprite m_defBackSprite;
+			public Sprite m_selBackSprite;
+			public Sprite m_defIconSprite;
+			public Sprite m_selIconSprite;
+		}
 
 
 		public override GameObject Target
@@ -199,13 +208,30 @@ namespace View
 				Debug.LogError($"{this.name} needs event");
 				return;
             }
-			//Debug.Log(this.name);
+			Debug.Log(this.name);
 
 			m_rootUI.GetUIEvent(eventType, this);
 			m_rootUI.GetUIEvent(Inspect_eventType, this);
-			Toggle_Status();
 
-			m_EventCodes.OnSelect(m_rootUI, this);
+			if (m_EventCodes.Bottom == BottomBar_EventType.Btn7_Info)
+            {
+				if (EventManager.Instance._SelectedObject != null)
+                {
+					Toggle_Status();
+
+					m_EventCodes.OnSelect(m_rootUI, this);
+                }
+				else
+                {
+					// TODO2022 객체 선택해달라는 말 필요
+                }
+            }
+			else
+            {
+				Toggle_Status();
+
+				m_EventCodes.OnSelect(m_rootUI, this);
+			}
 		}
 
 		/// <summary>
@@ -222,6 +248,8 @@ namespace View
 		private void Toggle_Status()
         {
 			if (!m_resource.m_useResource) return;
+
+			Debug.Log("Hello");
 
 			//Data.m_resourceListElement;
 
@@ -248,23 +276,52 @@ namespace View
 				});
 			}
 
+			switch(m_EventCodes.Bottom)
+            {
+				// 하단 인포 버튼만 적용
+				case BottomBar_EventType.Btn6_Setting:
+					//if (m_resource.m_useColor) { }
+					if (m_resource.m_useSprite)
+					{
+						if (ChildPanel.activeSelf)
+						{
+							m_resource.m_imgBack.sprite = m_resource.m_defBackSprite;
+							m_resource.m_imgIcon.sprite = m_resource.m_defIconSprite;
+						}
+						else
+						{
+							m_resource.m_imgBack.sprite = m_resource.m_selBackSprite;
+							m_resource.m_imgIcon.sprite = m_resource.m_selIconSprite;
+						}
+					}
+					break;
 
-
-			//if (Data.m_issueListElement != null)
-            //{
-			//	Data.m_issueListElement._CountData.m_elements.ForEach(x =>
-			//	{
-			//		x.m_data.m_dmgWork.btns_ui.ForEach(x =>
-			//		{
-			//			x.Toggle_btnColor(false);
-			//		});
-			//
-			//		x.m_data.m_rcvWork.btns_ui.ForEach(x =>
-			//		{
-			//			x.Toggle_btnColor(false);
-			//		});
-			//	});
-            //}
+				case BottomBar_EventType.Btn7_Info:
+					//if (m_resource.m_useColor) { }
+					if (m_resource.m_useSprite)
+                    {
+						Debug.Log(EventManager.Instance._SelectedObject);
+						if (EventManager.Instance._SelectedObject != null)
+                        {
+							if (ChildPanel.activeSelf)
+							{
+								m_resource.m_imgBack.sprite = m_resource.m_defBackSprite;
+								m_resource.m_imgIcon.sprite = m_resource.m_defIconSprite;
+							}
+							else
+							{
+								m_resource.m_imgBack.sprite = m_resource.m_selBackSprite;
+								m_resource.m_imgIcon.sprite = m_resource.m_selIconSprite;
+							}
+                        }
+						else
+                        {
+							m_resource.m_imgBack.sprite = m_resource.m_defBackSprite;
+							m_resource.m_imgIcon.sprite = m_resource.m_defIconSprite;
+						}
+                    }
+					break;
+            }
 
 
 			Toggle_btnColor(true);

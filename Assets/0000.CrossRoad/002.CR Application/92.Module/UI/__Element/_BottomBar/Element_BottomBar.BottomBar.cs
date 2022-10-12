@@ -64,7 +64,7 @@ namespace Module.UI
         private void Bar_6Setting(Interactable _setter)
         {
             _Children.Toggle(_setter.ChildPanel);
-            _Resource.Toggle_Group(0, _setter.gameObject);
+            //_Resource.Toggle_Group(0, _setter.gameObject);
         }
 
         private void Bar_7Info(Interactable _setter)

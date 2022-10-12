@@ -137,6 +137,15 @@ namespace Definition
 	}
 
 	/// <summary>
+	/// 클릭 상태가 단일인지 멀티인지 확인
+	/// </summary>
+	public enum InputStatus
+    {
+		Single,
+		Multi,
+    }
+
+	/// <summary>
 	/// 이벤트 상태코드 결과
 	/// </summary>
 	public enum Status

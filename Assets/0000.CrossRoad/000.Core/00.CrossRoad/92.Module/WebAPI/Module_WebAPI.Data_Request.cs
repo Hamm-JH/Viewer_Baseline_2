@@ -105,6 +105,7 @@ namespace Module.WebAPI
 
 				if(wr.result == UnityWebRequest.Result.Success)
 				{
+					Debug.Log($"request api :: {_uri}");
 					_action.Invoke(wr.downloadHandler.text, _webT);
 				}
 				else

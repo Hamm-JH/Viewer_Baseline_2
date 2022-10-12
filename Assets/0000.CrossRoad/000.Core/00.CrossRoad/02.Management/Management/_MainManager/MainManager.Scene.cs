@@ -23,9 +23,9 @@ namespace Management
 			
 			if(Platforms.IsDemoWebViewer(_pCode))
             {
-				//sceneName = SceneName.Viewer;
-				sceneName = SceneName.Mapbox_Demo;
-			}
+                sceneName = SceneName.Viewer;
+                //sceneName = SceneName.Mapbox_Demo;
+            }
 			else if(Platforms.IsDemoAdminViewer(_pCode))
 			{
 				sceneName = SceneName.AdminViewer;

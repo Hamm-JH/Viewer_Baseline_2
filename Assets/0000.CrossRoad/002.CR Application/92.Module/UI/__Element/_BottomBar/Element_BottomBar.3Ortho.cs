@@ -13,6 +13,7 @@ namespace Module.UI
         private void Ortho_1Orthogonal(Interactable _setter)
         {
             ContentManager.Instance.Function_ToggleOrthoView(true);
+            _Resource.Toggle_Group(3, _setter.gameObject);
 
             _Children.Off();
         }
@@ -20,6 +21,7 @@ namespace Module.UI
         private void Ortho_2Perspective(Interactable _setter)
         {
             ContentManager.Instance.Function_ToggleOrthoView(false);
+            _Resource.Toggle_Group(3, _setter.gameObject);
 
             _Children.Off();
         }

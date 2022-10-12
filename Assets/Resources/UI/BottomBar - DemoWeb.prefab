@@ -217,18 +217,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7925094868258488058}
     m_Modifications:
-    - target: {fileID: 655989648174055261, guid: 250c6592dc7d65f4ab9882acdf12c9b4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1408305132903744601, guid: 250c6592dc7d65f4ab9882acdf12c9b4, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2411148848147832387, guid: 250c6592dc7d65f4ab9882acdf12c9b4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4102326051510210322, guid: 250c6592dc7d65f4ab9882acdf12c9b4, type: 3}
       propertyPath: m_Name
       value: BottomBar element
@@ -237,6 +225,10 @@ PrefabInstance:
       propertyPath: m_rootUI
       value: 
       objectReference: {fileID: 1423811980195587369}
+    - target: {fileID: 5176484644525089845, guid: 250c6592dc7d65f4ab9882acdf12c9b4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7660170575499641785, guid: 250c6592dc7d65f4ab9882acdf12c9b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -319,6 +311,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7660170575499641785, guid: 250c6592dc7d65f4ab9882acdf12c9b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7982428389713795981, guid: 250c6592dc7d65f4ab9882acdf12c9b4, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -63,10 +63,12 @@ namespace Definition.Data
 				//_url = "http://wesmart.synology.me:45001/unity/UnityWeb/?cdTunnel=20211202-00000265&cdTunnelSub=20211202-00000266";
 				//Debug.LogError("Debugging mode");
 #if UNITY_EDITOR
-				_url = "http://wesmart.synology.me:55001/unity/UnityWeb/?cdTunnel=20211202-00000265&cdTunnelSub=20211202-00000266";
+				//_url = "http://wesmart.synology.me:55001/unity/UnityWeb/?cdTunnel=20211202-00000265&cdTunnelSub=20211202-00000266";
 				//_url = "http://wesmart.synology.me:45001/unity/UnityWeb/?cdTunnel=20211202-00000265&cdTunnelSub=20211202-00000266";
 				//_url = "http://wesmart.synology.me:45001/unity/UnityWeb/?cdTunnel=20211202-00000283&cdTunnelSub=20211202-00000284";
-
+				
+				_url = "http://dudoWeb.iptime.org:45001/unity/UnityWeb/?cdTunnel=20211202-00000265&cdTunnelSub=20211202-00000266";
+				// TODO :: 처리 예정
 
 #else
 
@@ -83,7 +85,10 @@ namespace Definition.Data
 #if UNITY_EDITOR
 				//_url = "http://wesmart.synology.me:45000/unity/UnityWeb/?cdBridge=20211102-00000051&cdBridgeSub=20211102-00000052";
 				//_url = "http://wesmart.synology.me:55000/unity/UnityWeb/?cdBridge=20211102-00000051&cdBridgeSub=20211102-00000052";
-				_url = "http://wesmart.synology.me:55000/unity/UnityWeb/?cdBridge=20211102-00000026&cdBridgeSub=20211102-00000027";
+				//_url = "http://wesmart.synology.me:55000/unity/UnityWeb/?cdBridge=20211102-00000026&cdBridgeSub=20211102-00000027";
+				
+				//_url = "http://dudoWeb.iptime.org:45000/unity/UnityWeb/?cdBridge=20211102-00000026&cdBridgeSub=20211102-00000027";
+				_url = "http://dudoWeb.iptime.org:45000/unity/UnityWeb/?cdBridge=20210623-00000133&cdBridgeSub=20210623-00000134";
 #else
 						_url = Application.absoluteURL;
 #endif

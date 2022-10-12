@@ -22,12 +22,15 @@ namespace Management
 		{
 			if(isMultiCondition(_sEvents))
             {
-				DoMultiConditionEvent(_sEvents, _currEvent);
+				// 현재 입력 상태값 멀티로 할당
+				_currEvent.inputStatus = InputStatus.Multi;
 			}
 			else
             {
-				DoSingleConditionEvent(_sEvents, _currEvent);
+				// 현재 입력 상태값 싱글로 할당
+				_currEvent.inputStatus = InputStatus.Single;
 			}
+
 
 			switch (_currEvent.EventType)
 			{
@@ -185,26 +188,6 @@ namespace Management
 
 			return result;
 		}
-
-		/// <summary>
-		/// 다중 선택 이벤트 실행
-		/// </summary>
-		/// <param name="_sEvents">현재 이벤트 상태</param>
-		/// <param name="_currEvent">현재 이벤트</param>
-		private void DoMultiConditionEvent(Dictionary<InputEventType, AEventData> _sEvents, AEventData _currEvent)
-        {
-
-        }
-
-		/// <summary>
-		/// 단일 선택 이벤트 실행
-		/// </summary>
-		/// <param name="_sEvents">현재 이벤트 상태</param>
-		/// <param name="_currEvent">현재 이벤트</param>
-		private void DoSingleConditionEvent(Dictionary<InputEventType, AEventData> _sEvents, AEventData _currEvent)
-        {
-
-        }
 
 		/// <summary>
 		/// 선택 해제 이벤트 실행구간

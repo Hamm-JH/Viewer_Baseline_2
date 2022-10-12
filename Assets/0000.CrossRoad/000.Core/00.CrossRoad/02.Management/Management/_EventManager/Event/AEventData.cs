@@ -20,6 +20,11 @@ namespace Management.Events
 		private Status status;
 
 		/// <summary>
+		/// 입력 상태 싱글인지 멀티인지 확인
+		/// </summary>
+		public InputStatus inputStatus = InputStatus.Single;
+
+		/// <summary>
 		/// 상호작용 가능한 요소
 		/// </summary>
 		//public IInteractable Element { get => m_element; set => m_element=value; }
