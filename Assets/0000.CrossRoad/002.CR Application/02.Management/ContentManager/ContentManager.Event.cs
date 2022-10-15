@@ -278,6 +278,11 @@ namespace Management
 				if (mode == CameraModes.TunnelInside_Rotate)
                 {
 					ContentManager.Instance.Function_ToggleOrthoView(false);
+					ToggleCompass(true);
+                }
+				else
+                {
+					ToggleCompass(false);
                 }
 			}
         }

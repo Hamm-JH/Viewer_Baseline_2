@@ -279,6 +279,7 @@ namespace Management.Events.Inputs
                     {
 						Cameras.SetCameraDOTweenPosition(MainManager.Instance.MainCamera, currObj);
 						Cameras.SetCameraMode(CameraModes.TunnelInside_Rotate);	
+						
                     }
 
 					m_clickEvent.Invoke(_obj);

@@ -17,6 +17,11 @@ namespace Module.Item
 
 		Items.Controller_LocationGuide m_guide;
 		Items.Controller_Compass m_compass;
+
+		public Items.Controller_Compass Compass
+        {
+			get { return m_compass; }
+        }
 		
 	}
 }

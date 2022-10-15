@@ -6,14 +6,17 @@ namespace Management
 {
 	using Definition;
 	using Items;
+    using Module.Item;
 
-	public partial class ContentManager : IManager<ContentManager>
+    public partial class ContentManager : IManager<ContentManager>
 	{
 		// 테스트 코드의 LocGuide 코드 가져오기
 
 		public GameObject target;
 
 		public GameObject guide;
+
+		public GameObject compass;
 
 		//public ViewRotations vRot;
 		public UIEventType uType;
@@ -77,5 +80,31 @@ namespace Management
 			_lg.SetCubeLine(setScale);
 
 		}
-	}
+
+		/// <summary>
+		/// compass 토글
+		/// </summary>
+		/// <param name="_isOn"></param>
+		public void ToggleCompass(bool _isOn)
+        {
+			if (compass == null)
+            {
+				compass = Module<Module_Items>().Compass.CompassUIRoot;
+            }
+
+			compass.SetActive(_isOn);
+        }
+
+        //private void Update()
+        //{
+        //    if (Input.GetKeyDown(KeyCode.A))
+        //    {
+		//		ToggleCompass(true);
+        //    }
+		//	else if (Input.GetKeyDown(KeyCode.S))
+        //    {
+		//		ToggleCompass(false);
+        //    }
+        //}
+    }
 }

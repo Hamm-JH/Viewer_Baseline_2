@@ -13,6 +13,11 @@ namespace Module.UI
 
     public partial class Element_Compass : AElement
     {
+        public void Compass_Toggle(bool _isOn)
+        {
+            gameObject.SetActive(_isOn);
+        }
+
         private void Compass_prev(Interactable _setter)
         {
             // 오직 회전모드 변경

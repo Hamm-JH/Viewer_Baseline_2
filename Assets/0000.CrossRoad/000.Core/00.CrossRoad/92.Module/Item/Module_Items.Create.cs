@@ -45,6 +45,8 @@ namespace Module.Item
 
 				// 관리를 위해 아이템리스트 업데이트
 				m_itemList.Add(m_guide);
+
+				//obj.SetActive(false);
 			}
 			else if(_fCode == FunctionCode.Item_Compass)
             {
@@ -134,7 +136,13 @@ namespace Module.Item
 				yield return new WaitForEndOfFrame();
             }
 
-			yield break;
+            eCompass.Compass_Toggle(false);
+            //Debug.Log("bbbbb" + eCompass.name);
+
+            //eCompass
+            //_compass.gameObject.SetActive(false);
+
+            yield break;
         }
 	}
 }

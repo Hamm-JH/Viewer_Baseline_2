@@ -757,6 +757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_eStatus:
+    inputStatus: 0
     m_moduleList: 
     m_pinModeObj: {fileID: 0}
     m_pinModePin: {fileID: 0}
@@ -989,7 +990,7 @@ MonoBehaviour:
     m_imageURL: 
     m_historyURL: 
     m_keyCode: 
-  m_templateIndex: 1
+  m_templateIndex: 0
   _templateDatas:
   - m_platform: 49
     m_graphic: 2
