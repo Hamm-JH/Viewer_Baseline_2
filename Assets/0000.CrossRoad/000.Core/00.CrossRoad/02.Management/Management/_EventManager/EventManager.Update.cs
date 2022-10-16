@@ -68,11 +68,13 @@ namespace Management
 							{
 								AddEvent<InputEventType, AEventData>(_currEvent.EventType, _currEvent, _sEvents, true);
 
-								// 다중 객체의 OnSelect 시행
-								// TODO :: 1ST :: ★ 일단 단일 객체 이벤트로 대체
-								_sEvents[InputEventType.Input_clickSuccessUp].Elements.ForEach(x => x.OnSelect());
-								_sEvents[InputEventType.Input_clickSuccessUp].DoEvent(_sEvents);
-							}
+                                // 다중 객체의 OnSelect 시행
+                                // TODO :: 1ST :: ★ 일단 단일 객체 이벤트로 대체
+                                _sEvents[InputEventType.Input_clickSuccessUp].Elements.ForEach(x => x.OnSelect());
+
+								// TODO :: 221016
+                                //_sEvents[InputEventType.Input_clickSuccessUp].DoEvent(_sEvents);
+                            }
 							// 빈 공간을 누른 경우
 							else
 							{
